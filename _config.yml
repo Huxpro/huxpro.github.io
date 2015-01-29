@@ -5,9 +5,11 @@ email: huxpro@gmail.com
 description: "Write your site description here. It will be used as your sites meta description as well!"
 baseurl: ""
 url: "http://yourdomain.com"
-twitter_username: SBootstrap
-github_username:  davidtmiller
-facebook_username:  IronSummitMedia
+twitter_username: huxpro
+github_username:  huxpro
+facebook_username:  huxpro
+weibo_username: huxpro
+zhihu_username: huxpro
 
 # Build settings
 markdown: kramdown
