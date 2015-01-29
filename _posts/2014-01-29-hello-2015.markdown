@@ -1,0 +1,68 @@
+---
+layout:     post
+title:      "Hello 2015"
+subtitle:   " \"Hello World\""
+date:       2015-01-29 12:00:00
+author:     "Hux"
+header-img: "img/post-bg-2015.jpg"
+---
+
+> Yeah It's on.  
+
+**Hux 的 Blog 就这么正式开通了。**
+
+在 2015 年里，Hux 总算有个地方可以好好写点东西了。
+
+
+其实作为一个 ITer，当然早就有写 Blog 的想法了。**但是既然作为一个 ITer**，而且还算个 Programmer…… Blog 这种轮子要是挂在大众博客程序上就太没意思了吧喂！
+CSDN 什么的太丑，Lofter 也一般，Tumblr 说不准什么时候就被墙了…… WordPress 一觉得没劲二也懒得折腾……结果最后就一直连个写 Blog 的地都没有。
+
+后来喜欢上知乎，就是因为能稍微写点东西。可是在知乎上写东西是答题呀……常常还是被答案限制住，水平又不够没得开知乎专栏，唉＝＝。
+
+
+进入 2015 年，觉得这么快一年又过去了，需要总结下自己，也正好需要 redesign 简历。简历里想放点文章/作品链接啊什么的，但发觉之前的[个人网站](http://huangxuan.me)形式不适用，**想来想去还是 Blog 的形式最适用……罢罢罢，花一天搞一个吧！**
+
+（PS：话说我之前还是有个网站的是吧，风格比较像作品集……想改但是又没想好怎么改……所以就先放着吧＝ ＝ 这个网站导航的中的 Portfolio 就是指向那个网站的）
+
+---
+
+正好之前就有关注过 [GitHub Pages](https://pages.github.com/) + [Jekyll](http://jekyllrb.com/) 快速建 Blog 的技术方案，觉得超适合。
+
+优点非常明显：
+
+* 利用 GitHub Pages 的域名和免费无限空间，不用自己折腾主机
+* 非常熟悉的 Git Flow ，Git Commit 即 Blog Post
+	* 前端最爱啊，自从换 Mac 后，Terminal + zsh + git 玩起来太爽了
+* Markdown 写作环境
+	* 这就是 Jekyll 的魔法了，习惯了 Markdown 排版后也是离不开
+* Jekyll 的自定制还是相当容易的，基本就是个模版引擎
+
+最大的缺点其实就是：
+
+* GitHub 现在国内访问起来太慢了……（有空看看要不要迁移到国内主机）
+
+
+---
+
+配置的过程中也没遇到什么坑，基本就是 Git 的流程，相当顺手
+
+大的 Jekyll 框架上直接 clone 了一个 Theme（但是这个 Theme 没有 tag 标签支持，等文章多了要自己写一下）
+
+本地调试环境需要 `gem install jekyll`，结果 rubygem 的源居然被墙了……后来手动改成了我大淘宝的镜像源才成功
+
+Theme 的 CSS 是基于 Bootstrap 定制的，看得不爽的地方直接在 less 里改就好了（平时更多用 scss ），**不过其实我一直觉得 Bootstrap 在移动端的体验做得相当一般，比我在阿里参与的团队内部 CSS 框架差多了……**
+
+最后就进入了耗时反而最长的**做图、写字**阶段了。也算是进入了**写博客**的正轨，结果折腾折腾着大半夜就过去了。
+
+
+
+大约就是这样，结尾就不要 Hello 2015 了，来试试 Markdown 的魔法：
+
+### *"Goodbye 2014"*  
+
+
+
+
+ 
+
+

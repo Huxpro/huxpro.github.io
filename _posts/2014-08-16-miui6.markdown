@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "「知乎」如何评价 MIUI 6 ？"
-date:       2014-09-18 12:00:00
+title:      "「知乎」如何评价 MIUI 6？"
+date:       2014-08-16 12:00:00
 author:     "Hux"
-header-img: "img/post-bg-05.jpg"
+header-img: "img/post-bg-miui6.jpg"
 ---
 
 <div>
@@ -50,4 +50,6 @@ header-img: "img/post-bg-05.jpg"
     <br>
     <br>它们这么做，对现有公司发展来说，
     <br><b>简直是一点错都没有。</b>
+    <br>
+    <br>
 </div>
