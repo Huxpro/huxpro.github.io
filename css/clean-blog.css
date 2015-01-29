@@ -1,6 +1,7 @@
 body {
   font-family: 'Lora', 'Times New Roman', serif;
-  font-size: 20px;
+  font-size: 16px;
+  /*// Hux mpdify to 16px (Mobile First), and increase to 20px while 768+ width*/
   color: #404040;
 }
 p {
@@ -59,6 +60,7 @@ hr.small {
   letter-spacing: 1px;
 }
 @media only screen and (min-width: 768px) {
+  body{font-size:20px;}
   .navbar-custom {
     background: transparent;
     border-bottom: 1px solid transparent;
@@ -135,7 +137,7 @@ hr.small {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-  margin-bottom: 50px;
+  margin-bottom: 20px;  /* origin-value: 50px, modify by Hux */
 }
 .intro-header .site-heading,
 .intro-header .post-heading,
@@ -260,6 +262,7 @@ hr.small {
 }
 footer {
   padding: 50px 0 65px;
+  font-size: 20px;
 }
 footer .list-inline {
   margin: 0;
@@ -395,3 +398,14 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #0085a1;
 }
+
+/* Hux Optimize UserExperience */
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
+  background-color: inherit;
+}
+
+.navbar-default .navbar-toggle:active{
+  background-color: #ddd;
+}
+

@@ -5,7 +5,8 @@
 
 body {
 	.serif;
-	font-size: 20px;
+	font-size: 16px;
+	// Hux mpdify to 16px (Mobile First), and increase to 20px while 768+ width
 	color: @gray-dark;
 }
 
@@ -80,6 +81,9 @@ hr.small {
 		}
 	}
 	@media only screen and (min-width: 768px) {
+		body{
+			font-size: 20px;
+		}
 		background: transparent;
 		border-bottom: 1px solid transparent;
 		.navbar-brand {
