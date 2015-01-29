@@ -1,9 +1,9 @@
 # Site settings
-title: Clean Blog
+title: Hux Blog
 header-img: img/home-bg.jpg
 email: your-email@yourdomain.com
 description: "Write your site description here. It will be used as your sites meta description as well!"
-baseurl: "/startbootstrap-clean-blog-jekyll"
+baseurl: "/huxpro.github.io"
 url: "http://yourdomain.com"
 twitter_username: SBootstrap
 github_username:  davidtmiller
