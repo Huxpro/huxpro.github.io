@@ -3,7 +3,7 @@ layout:     post
 title:      "JavaScript Function && This "
 subtitle:   ""
 date:       2014-08-24 12:00:00
-author:     "Start Bootstrap"
+author:     "Hux"
 header-img: "img/post-bg-04.jpg"
 ---
 
