@@ -11,13 +11,15 @@ p {
 p a {
   text-decoration: underline;
 }
-h1,
+h1{
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /*font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
   font-weight: 800;
 }
 a {
@@ -177,7 +179,7 @@ hr.small {
   }
 }
 .intro-header .post-heading h1 {
-  font-size: 35px;
+  font-size: 30px;
 }
 .intro-header .post-heading .subheading,
 .intro-header .post-heading .meta {
@@ -186,7 +188,7 @@ hr.small {
 }
 .intro-header .post-heading .subheading {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   margin: 10px 0 30px;
   font-weight: 600;
 }
@@ -194,7 +196,7 @@ hr.small {
   font-family: 'Lora', 'Times New Roman', serif;
   font-style: italic;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 18px;
 }
 .intro-header .post-heading .meta a {
   color: white;
@@ -206,6 +208,9 @@ hr.small {
   .intro-header .post-heading .subheading {
     font-size: 30px;
   }
+  .intro-header .post-heading .meta{
+    font-size: 20px;
+  }
 }
 .post-preview > a {
   color: #404040;
@@ -216,7 +221,8 @@ hr.small {
   color: #0085a1;
 }
 .post-preview > a > .post-title {
-  font-size: 30px;
+  font-size: 20px;
+  line-height: 1.3;
   margin-top: 30px;
   margin-bottom: 10px;
 }
@@ -224,10 +230,11 @@ hr.small {
   margin: 0;
   font-weight: 300;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 .post-preview > .post-meta {
   color: #808080;
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'Times New Roman';
   font-style: italic;
   margin-top: 0;
@@ -243,7 +250,14 @@ hr.small {
 }
 @media only screen and (min-width: 768px) {
   .post-preview > a > .post-title {
-    font-size: 36px;
+    font-size: 26px;
+    line-height: 1.3
+  }
+  .post-preview > a > .post-subtitle {
+    font-size: 16px;
+  }
+  .post-preview > .post-meta {
+    font-size: 18px;
   }
 }
 .section-heading {
