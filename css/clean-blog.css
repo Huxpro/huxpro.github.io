@@ -3,9 +3,9 @@ body {
   font-size: 16px;
   /*// Hux mpdify to 16px (Mobile First), and increase to 20px while 768+ width*/
   color: #404040;
+  font: normal 16px/1.70 "Helvetica Neue",Arial,"Hiragino Sans GB","STHeiti","Microsoft YaHei","WenQuanYi Micro Hei",SimSun,sans-serif;
 }
 p {
-  line-height: 1.5;
   margin: 30px 0;
 }
 p a {
@@ -30,9 +30,6 @@ a:focus {
 a img:hover,
 a img:focus {
   cursor: zoom-in;
-}
-article {
-  line-height: 1.5;
 }
 blockquote {
   color: #808080;
@@ -63,7 +60,7 @@ hr.small {
   letter-spacing: 1px;
 }
 @media only screen and (min-width: 768px) {
-  body{font-size:20px;}
+  body{font-size:17px;}
   .navbar-custom {
     background: transparent;
     border-bottom: 1px solid transparent;
@@ -231,6 +228,7 @@ hr.small {
 .post-preview > .post-meta {
   color: #808080;
   font-size: 18px;
+  font-family: 'Times New Roman';
   font-style: italic;
   margin-top: 0;
 }
