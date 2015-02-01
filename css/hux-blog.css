@@ -1,9 +1,12 @@
+/*!
+ * Hux Blog v1.0.0 (http://huxpro.github.io)
+ * Copyright 2015 Hux
+ */
+
 body {
-  font-family: 'Lora', 'Times New Roman', serif;
+  font: normal 16px/1.7 "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   font-size: 16px;
-  /*// Hux mpdify to 16px (Mobile First), and increase to 20px while 768+ width*/
   color: #404040;
-  font: normal 16px/1.70 "Helvetica Neue",Arial,"Hiragino Sans GB","STHeiti","Microsoft YaHei","WenQuanYi Micro Hei",SimSun,sans-serif;
 }
 p {
   margin: 30px 0;
@@ -11,17 +14,18 @@ p {
 p a {
   text-decoration: underline;
 }
-h1{
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  /*font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+  font: normal 16px/1.7 "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  line-height: 1.1;
   font-weight: 800;
+}
+h1 {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 a {
   color: #404040;
@@ -52,7 +56,7 @@ hr.small {
   left: 0;
   width: 100%;
   z-index: 3;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: normal 16px/1.7 "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
 }
 .navbar-custom .navbar-brand {
   font-weight: 800;
@@ -64,10 +68,12 @@ hr.small {
   letter-spacing: 1px;
 }
 @media only screen and (min-width: 768px) {
-  body{font-size:17px;}
   .navbar-custom {
     background: transparent;
     border-bottom: 1px solid transparent;
+  }
+  .navbar-custom body {
+    font-size: 20px;
   }
   .navbar-custom .navbar-brand {
     color: white;
@@ -141,7 +147,8 @@ hr.small {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-  margin-bottom: 20px;  /* origin-value: 50px, modify by Hux */
+  margin-bottom: 20px;
+  /* origin-value: 50px, modify by Hux */
 }
 .intro-header .site-heading,
 .intro-header .post-heading,
@@ -167,10 +174,10 @@ hr.small {
 }
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading {
+  font: normal 16px/1.7 "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   font-size: 24px;
   line-height: 1.1,
 			display: block;
-  /*font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
   font-weight: 300;
   margin: 10px 0 0;
 }
@@ -189,10 +196,9 @@ hr.small {
   display: block;
 }
 .intro-header .post-heading .subheading {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: normal 16px/1.7 "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   font-size: 20px;
   margin: 10px 0 30px;
-  font-weight: 600;
 }
 .intro-header .post-heading .meta {
   font-family: 'Lora', 'Times New Roman', serif;
@@ -210,7 +216,7 @@ hr.small {
   .intro-header .post-heading .subheading {
     font-size: 30px;
   }
-  .intro-header .post-heading .meta{
+  .intro-header .post-heading .meta {
     font-size: 20px;
   }
 }
@@ -229,15 +235,15 @@ hr.small {
   margin-bottom: 10px;
 }
 .post-preview > a > .post-subtitle {
+  font-size: 14px;
   margin: 0;
   font-weight: 300;
   margin-bottom: 10px;
-  font-size: 14px;
 }
 .post-preview > .post-meta {
+  font-family: 'Lora', 'Times New Roman', serif;
   color: #808080;
   font-size: 16px;
-  font-family: 'Times New Roman';
   font-style: italic;
   margin-top: 0;
 }
@@ -253,12 +259,12 @@ hr.small {
 @media only screen and (min-width: 768px) {
   .post-preview > a > .post-title {
     font-size: 26px;
-    line-height: 1.3
+    line-height: 1.3;
   }
   .post-preview > a > .post-subtitle {
     font-size: 16px;
   }
-  .post-preview > .post-meta {
+  .post-preview .post-meta {
     font-size: 18px;
   }
 }
@@ -278,8 +284,8 @@ hr.small {
   border-bottom-left-radius: 5px;
 }
 footer {
-  padding: 50px 0 65px;
   font-size: 20px;
+  padding: 50px 0 65px;
 }
 footer .list-inline {
   margin: 0;
@@ -341,7 +347,7 @@ form .row:first-child .floating-label-form-group {
   border-top: 1px solid #eeeeee;
 }
 .btn {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: normal 16px/1.7 "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 800;
@@ -364,7 +370,7 @@ form .row:first-child .floating-label-form-group {
 }
 .pager li > a,
 .pager li > span {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: normal 16px/1.7 "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 800;
@@ -415,14 +421,11 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #0085a1;
 }
-
 /* Hux Optimize UserExperience */
-
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
   background-color: inherit;
 }
-
-.navbar-default .navbar-toggle:active{
+.navbar-default .navbar-toggle:active {
   background-color: #ddd;
 }
-

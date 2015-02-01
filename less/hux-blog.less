@@ -4,7 +4,7 @@
 // Global Components
 
 body {
-	.serif;
+	.sans-serif;
 	font-size: 16px;
 	// Hux mpdify to 16px (Mobile First), and increase to 20px while 768+ width
 	color: @gray-dark;
@@ -13,7 +13,6 @@ body {
 // -- Typography
 
 p {
-	line-height: 1.5;
 	margin: 30px 0;
 	a {
 		text-decoration: underline;
@@ -27,7 +26,11 @@ h4,
 h5,
 h6 {
 	.sans-serif;
+	line-height: 1.1;
 	font-weight: 800;
+}
+h1{
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -48,6 +51,7 @@ a img {
 blockquote {
 	color: @gray;
 	font-style: italic;
+	font-size: 0.95em;
 }
 
 hr.small {
@@ -166,7 +170,7 @@ hr.small {
 	background-attachment: scroll;
 	.background-cover;
 	// NOTE: Background images are set within the HTML using inline CSS!
-	margin-bottom: 50px;
+	margin-bottom: 20px;  /* origin-value: 50px, modify by Hux */
 	.site-heading,
 	.post-heading,
 	.page-heading {
@@ -184,10 +188,10 @@ hr.small {
 			font-size: 50px;
 		}
 		.subheading {
+			.sans-serif;
 			font-size: 24px;
 			line-height: 1.1,
 			display: block;
-			.sans-serif;
 			font-weight: 300;
 			margin: 10px 0 0;
 		}
@@ -199,7 +203,7 @@ hr.small {
 	}
 	.post-heading {
 		h1 {
-			font-size: 35px;
+			font-size: 30px;
 		}
 		.subheading,
 		.meta {
@@ -208,15 +212,14 @@ hr.small {
 		}
 		.subheading {
 			.sans-serif;
-			font-size: 24px;
+			font-size: 20px;
 			margin: 10px 0 30px;
-			font-weight: 600;
 		}
 		.meta {
 			.serif;
 			font-style: italic;
 			font-weight: 300;
-			font-size: 20px;
+			font-size: 18px;
 			a {
 				color: white;
 			}
@@ -228,11 +231,14 @@ hr.small {
 			.subheading {
 				font-size: 30px;
 			}
+			.meta {
+				font-size: 20px;
+			}
 		}
 	}
 }
 
-// Post Preview Pages
+// Post Preview Pages (Home Page)
 
 .post-preview {
 	> a {
@@ -243,19 +249,22 @@ hr.small {
 			color: @brand-primary;
 		}
 		> .post-title {
-			font-size: 30px;
+			font-size: 20px;
+			line-height: 1.3;
 			margin-top: 30px;
 			margin-bottom: 10px;
 		}
 		> .post-subtitle {
+			font-size: 14px;
 			margin: 0;
 			font-weight: 300;
 			margin-bottom: 10px;
 		}
 	}
 	> .post-meta {
+		.serif;
 		color: @gray;
-		font-size: 18px;
+		font-size: 16px;
 		font-style: italic;
 		margin-top: 0;
 		> a {
@@ -271,8 +280,15 @@ hr.small {
 	@media only screen and (min-width: 768px) {
 		> a {
 			> .post-title {
-				font-size: 36px;
+				font-size: 26px;
+				line-height: 1.3
 			}
+			> .post-subtitle{
+				font-size: 16px;
+			}
+		}
+		.post-meta{
+			font-size: 18px;
 		}
 	}
 }
@@ -297,6 +313,7 @@ hr.small {
 }
 
 footer {
+	font-size: 20px;
 	padding: 50px 0 65px;
 	.list-inline {
 		margin: 0;
@@ -465,3 +482,17 @@ img::-moz-selection {
 body {
 	webkit-tap-highlight-color: @brand-primary;
 }
+
+
+
+/* Hux Optimize UserExperience */
+
+.navbar-default .navbar-toggle {
+	&:focus, &:hover{
+		background-color: inherit;
+	}
+  	&:active{
+  		background-color: #ddd;
+  	}
+}
+
