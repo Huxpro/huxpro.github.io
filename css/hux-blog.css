@@ -38,6 +38,9 @@ a img:hover,
 a img:focus {
   cursor: zoom-in;
 }
+article {
+  overflow-x: hidden;
+}
 blockquote {
   color: #808080;
   font-style: italic;
