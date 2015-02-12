@@ -12,11 +12,6 @@ layout: default
                     <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
                     <hr class="small">
                     <span class="subheading">{{ page.description }}</span>
-                    <div id='tag_cloud' class="tags">
-						{% for tag in site.tags %}
-						<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
-						{% endfor %}
-					</div>
                 </div>
             </div>
         </div>
@@ -28,6 +23,11 @@ layout: default
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 			<!-- {{content}} -->
+			<div id='tag_cloud' class="tags">
+				{% for tag in site.tags %}
+				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+				{% endfor %}
+			</div>
 			
 			{% for tag in site.tags %}
 			<div class="one-tag-list">
