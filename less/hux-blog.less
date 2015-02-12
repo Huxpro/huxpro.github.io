@@ -217,8 +217,10 @@ hr.small {
 		}
 		.subheading {
 			.sans-serif;
-			font-size: 20px;
+			font-size: 17px;
+			font-weight: normal;
 			margin: 10px 0 30px;
+			margin-top: -5px;
 		}
 		.meta {
 			.serif;
@@ -486,6 +488,48 @@ img::-moz-selection {
 
 body {
 	webkit-tap-highlight-color: @brand-primary;
+}
+
+/* Hux add tags support */
+.tags{
+	margin-bottom: -5px;
+	a,.tag{
+		display: inline-block;
+		border: 1px solid rgba(255,255,255,0.8);
+		border-radius: 999em;
+		padding: 0 10px;
+		color: rgba(255,255,255,1);
+		line-height: 24px;
+		font-size: 12px;
+		text-decoration: none;
+		margin-right: 2px;
+		margin-bottom: 5px;
+		&:hover, &:active{
+			color:white;
+			border-color: white;
+			background-color: rgba(255,255,255,0.4);
+			text-decoration: none;
+
+		}
+		@media only screen and (min-width: 768px) {
+			margin-right: 5px;
+		}
+	}
+}
+.one-tag-list{
+	margin-top: 50px;
+	&:first-child{
+		margin-top: 0px;
+	}
+	hr:last-of-type{
+		display: none;
+	}
+}
+.listing-seperator{
+	color:#0085a1;
+	border-bottom: 1.5px solid #0085a1;
+	padding: 6px 3px;
+	margin-bottom: 10px;
 }
 
 

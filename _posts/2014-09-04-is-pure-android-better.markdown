@@ -5,6 +5,9 @@ subtitle:   ""
 date:       2014-09-04 12:00:00
 author:     "Hux"
 header-img: "img/post-bg-android.jpg"
+tags:
+    - 知乎
+    - Android
 ---
 
 <p>哎呀～不要站队嘛。其实这是一个很有意思的题目，让我们一点点来看

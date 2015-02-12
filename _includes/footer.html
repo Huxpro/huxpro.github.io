@@ -85,3 +85,18 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
+
+<!-- TODO: async load -->
+<script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script> 
+<script language="javascript">
+$.fn.tagcloud.defaults = {
+    //size: {start: 1, end: 1, unit: 'em'},
+    color: {start: '#0085a1', end: '#ffffff'},
+
+};
+
+$(function () {
+    $('#tag_cloud a').tagcloud();
+});
+</script>
+
