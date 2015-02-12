@@ -1,3 +1,8 @@
+/*!
+ * Hux Blog v1.0.0 (http://huxpro.github.io)
+ * Copyright 2015 Hux
+ */
+
 body {
   font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;
@@ -460,30 +465,16 @@ body {
     margin-right: 5px;
   }
 }
-.tag {
-  display: inline-block;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 999em;
-  padding: 0 10px;
-  color: #ffffff;
-  line-height: 24px;
-  font-size: 12px;
-  text-decoration: none;
-  margin: 0 1px;
-  margin-bottom: 6px;
-}
-@media only screen and (min-width: 768px) {
-  .tag {
-    margin-right: 5px;
-  }
-}
 #tag_cloud {
   margin-bottom: 40px;
 }
 #tag_cloud a,
 #tag_cloud .tag {
+  font-size: 14px;
   border: none;
-  line-height: 26px;
+  line-height: 28px;
+  margin: 0 2px;
+  margin-bottom: 8px;
 }
 #tag_cloud a:hover,
 #tag_cloud .tag:hover,
