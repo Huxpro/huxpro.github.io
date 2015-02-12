@@ -28,10 +28,10 @@ layout: default
 				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
 				{% endfor %}
 			</div>
-			
+
 			{% for tag in site.tags %}
 			<div class="one-tag-list">
-			  	<h3 class="listing-seperator" id="{{ tag[0] }}">{{ tag[0] }}</h3>
+			  	<span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">{{ tag[0] }}</span>
 				{% for post in tag[1] %}
 				  <!-- <li class="listing-item">
 				  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>

@@ -1,3 +1,8 @@
+/*!
+ * Hux Blog v1.0.0 (http://huxpro.github.io)
+ * Copyright 2015 Hux
+ */
+
 body {
   font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;
@@ -460,30 +465,56 @@ body {
     margin-right: 5px;
   }
 }
+.tag {
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 999em;
+  padding: 0 10px;
+  color: #ffffff;
+  line-height: 24px;
+  font-size: 12px;
+  text-decoration: none;
+  margin: 0 1px;
+  margin-bottom: 5px;
+}
+@media only screen and (min-width: 768px) {
+  .tag {
+    margin-right: 5px;
+  }
+}
+#tag_cloud {
+  margin-bottom: 40px;
+}
 #tag_cloud a,
 #tag_cloud .tag {
-  padding: 0px;
+  border: none;
+  line-height: 26px;
 }
 #tag_cloud a:hover,
 #tag_cloud .tag:hover,
 #tag_cloud a:active,
 #tag_cloud .tag:active {
-  color: #0085a1 !important;
+  background-color: #0085a1 !important;
 }
-.one-tag-list {
-  margin-top: 50px;
+@media only screen and (min-width: 768px) {
+  #tag_cloud {
+    margin-bottom: 55px;
+  }
 }
 .one-tag-list:first-child {
   margin-top: 0px;
 }
-.one-tag-list hr:last-of-type {
-  display: none;
-}
 .listing-seperator {
   color: #0085a1;
-  border-bottom: 1.5px solid #0085a1;
-  padding: 6px 3px;
-  margin-bottom: 10px;
+  font-size: 17px !important;
+}
+.listing-seperator::before {
+  margin-right: 5px;
+}
+@media only screen and (min-width: 768px) {
+  .listing-seperator {
+    font-size: 20px !important;
+  }
 }
 /* Hux Optimize UserExperience */
 .navbar-default .navbar-toggle:focus,
