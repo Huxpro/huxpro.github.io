@@ -230,7 +230,7 @@ header{
 	text-align: center;
 	height: 520px;
 	min-width: 100%;
-	padding: 3em 0px !important;
+	padding: 5em 0px !important;
 	margin-bottom: 50px !important;
 	position: relative;
 }
@@ -314,6 +314,7 @@ header .tri img{
 
 	.main{
 		width: 100%;
+		padding-bottom: 0px;
 	}
 	html{
 		font-size: 90%;
