@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Hello 2015"
-subtitle:   " \"Hello World\""
+subtitle:   " \"Hello World, Hello Blog\""
 date:       2015-01-29 12:00:00
 author:     "Hux"
 header-img: "img/post-bg-2015.jpg"
@@ -9,35 +9,41 @@ tags:
     - 生活
 ---
 
-> Yeah It's on.  
+> **Yeah It's on. Hux 的 Blog 就这么正式开通了。**
 
-**Hux 的 Blog 就这么正式开通了。**
+
+
+* [跳过废话，直接看技术实现](#build) 
+
+
 
 在 2015 年里，Hux 总算有个地方可以好好写点东西了。
 
 
-其实作为一个 ITer，当然早就有写 Blog 的想法了。**但是既然作为一个 ITer**，而且还算个 Programmer…… Blog 这种轮子要是挂在大众博客程序上就太没意思了吧喂！
-CSDN 什么的太丑，Lofter 也一般，Tumblr 说不准什么时候就被墙了…… WordPress 一觉得没劲二也懒得折腾……结果最后就一直连个写 Blog 的地都没有。
+其实作为一个 ITer，当然早就有写 Blog 的想法了。**但是既然作为一个 ITer，而且还算个程序员……** Blog 这种轮子要是挂在大众博客程序上就太没意思了……CSDN 什么的太丑，Lofter 也一般，Tumblr 说不准什么时候就被墙了…… WordPress 一觉得没劲二也懒得折腾……结果最后就一直连个写 Blog 的地都没有。
 
-后来喜欢上知乎，就是因为能稍微写点东西。可是在知乎上写东西是答题呀……常常还是被答案限制住，水平又不够没得开知乎专栏，诶。
+后来喜欢上知乎，就是因为能稍微写点东西。可是在知乎上写东西是答题呀……常常还是被答案限制住，又没够开知乎专栏，诶。
 
 
-转眼进入 2015 年，感叹这么快一年又过去了，需要总结下自己，也正好需要 redesign 一下简历。这次的简历里除了作品链接还想放点文章什么的，于是之前[个人网站](http://huangxuan.me)的作品集形式就不适用，**想来想去还是 Blog 最适合……罢罢罢，花一天搞一个吧！**
+转眼进入 2015 年，感叹这么快一年又过去了，需要总结下自己，也正好需要 redesign 一下简历。这次的简历里除了作品链接还想放点文章什么的，于是之前[个人网站](http://huangxuan.me)的作品集形式就不适用，**想来想去还是 Blog 最适合……**罢罢罢，花一天搞一个吧！
 
 （PS：之前的个人网站是去年春节搞得了，也是为了增强简历，还没有想好怎么 Update ，所以就先放着吧。这个网站导航的中的 Portfolio 就是指向那个网站的）
 
-接下来说说 Build Blog 的过程～。
 
+
+<p id = "build"></p>
 ---
+接下来说说 Building Blog 的技术细节。
 
 正好之前就有关注过 [GitHub Pages](https://pages.github.com/) + [Jekyll](http://jekyllrb.com/) 快速建 Blog 的技术方案，觉得超适合。
 
 优点非常明显：
 
 * 利用 GitHub Pages 的域名和免费无限空间，不用自己折腾主机
-* 非常熟悉的 Git Flow ，Git Commit 即 Blog Post
-	* 前端最爱啊，自从换 Mac 后，Terminal + zsh + git 玩起来太爽了
-* Markdown 写作环境
+	* 如果需要自定义域名，也只需要简单加个 DNS 就好了 
+* 非常熟悉的 Git Flow ，**Git Commit 即 Blog Post**
+	* 前端最爱啊，自从换 Mac 后，Terminal(Z-Shell) + Git 玩起来太爽了
+* **Markdown** 写作环境
 	* 这就是 Jekyll 的魔法了，习惯了 Markdown 排版后也是离不开
 * Jekyll 的自定制还是相当容易的，基本就是个模版引擎
 	* 比如后来自己补上了对标签 (Tags) 的支持

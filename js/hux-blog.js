@@ -11,9 +11,10 @@ $(function() {
 
 
 // make all images responsive
-$(function() {
-	$("img").addClass("img-responsive");
-});
+// unuse by Hux
+// $(function() {
+// 	$("img").addClass("img-responsive");
+// });
 
 // responsive tables
 $(document).ready(function() {

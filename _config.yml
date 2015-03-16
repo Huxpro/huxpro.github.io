@@ -15,5 +15,5 @@ zhihu_username: huxpro
 markdown: kramdown
 highlighter: pygments
 permalink: pretty
-paginate: 5
+paginate: 8
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
