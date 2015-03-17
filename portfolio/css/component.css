@@ -81,6 +81,7 @@
 	padding: 0 0 0.5em 0;
 	font-weight: normal;
 	margin: 0 1em;
+	font-size: 1.5em;
 }
 
 /* The triangle */
@@ -127,6 +128,7 @@
 
 .cbp_tmicon-phone:before {
 	content: "\e004";
+	font-family: 'huxico';
 }
 
 .cbp_tmicon-screen:before {
@@ -162,7 +164,7 @@
 	.cbp_tmtimeline > li .cbp_tmtime {
 		width: 100%;
 		position: relative;
-		padding: 0 0 20px 0;
+		padding: 0 0 14px 0;
 	}
 
 	.cbp_tmtimeline > li .cbp_tmtime span {
@@ -225,6 +227,17 @@ footer .tri img{
 footer a:hover{
 	color: rgb(255, 255, 0);
 }*/
+.cbp_tmlabel .hux_ul{
+	border:none;
+	padding:0;
+	margin:0;
+	margin-left: 5px;
+}
+.cbp_tmlabel .hux_ul li{
+	padding:0;
+	margin: 0;
+	list-style-type: disc;
+}
 header{
 	background: #6ca8fb;
 	text-align: center;
@@ -251,8 +264,19 @@ header .tri{
 	width: 100%;
 	height: 35px;
 }
-header .tri img{
-	width: 74px;
+header .tri:after{
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-bottom-color: white;
+	border-width: 37px;
+	border-bottom-width: 31px;
+	bottom: 0px;
+	left: 50%;
+	margin-left: -37px;
 }
 
 .cbp_tmlabel img{
