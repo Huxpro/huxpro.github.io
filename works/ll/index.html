@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Lighten Design">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="IE=10" >
+    <title>L.esson</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Lighten">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <!-- iOS icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/touch/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/touch/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/touch/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/touch/apple-touch-icon-57x57-precomposed.png">
+
+    <!-- Generic Icon -->
+    <link rel="shortcut icon" href="images/touch/touch-icon-57x57.png">
+
+    <!-- Chrome Add to Homescreen -->
+    <link rel="shortcut icon" sizes="196x196" href="images/touch/touch-icon-196x196.png">
+
+    <!-- SEO: If mobile URL is different from desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <!-- build:css styles/components/main.min.css -->
+    <link rel="stylesheet" href="styles/h5bp.css">
+    <link rel="stylesheet" href="styles/lighten.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <header class="app-bar promote-layer">
+      <div class="app-bar-container">
+        <button class="menu"><img src="images/hamburger.svg" alt="menu"></button>
+        <h1 class="logo">L.esson</h1>
+        <section class="app-bar-actions">
+        <!-- Put App Bar Buttons Here -->
+        </section>
+      </div>
+    </header>
+
+    <nav class="navdrawer-container promote-layer">
+      <h4></h4>
+      <ul>
+        <li class="all_btn"><a href="#">全部课程</a></li>
+        <li class="my_btn"><a href="#">我的课程</a></li>
+        <li><a href="#">关于</a></li>
+      </ul>
+    </nav>
+
+    <div id="welcome"> 
+        <form id="login">
+          <p>
+            直接输入学号即可开始使用，系统会自动为您完成注册
+          </p>
+           <input type="number" placeholder="请输入你的学号">
+           <button> 登陆 </button>
+        </form>
+    </div>
+
+    <main>
+      <ul id="lessonList"></ul>
+      <div class="FAB">
+        +
+      </div>
+    </main>
+
+    <!-- build:js scripts/main.min.js -->
+    <script type="text/template" data-name="lesson" id="lesson-template">
+     
+      <li class="card <%= (model.get('choosed')) ? 'choosed' : '' %>" data-cid = "<%= model.cid %>" > 
+        <h3><%= model.get("name") %></h3>
+        <p class='teacher'><%= model.get("teacher") %></p>
+        <p><%= model.get("credit") %></p>
+        <p><%= model.get("room") %></p>
+      </li>
+     
+    </script>
+    <script src="scripts/jquery-2.1.1.min.js"></script> 
+    <script src="scripts/underscore-min.js"></script> 
+    <!-- <script src="scripts/backbone-min.js"></script>  -->
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
+    
+    
+    
+    <script src="scripts/lighten.js"></script>
+    <script src="scripts/main.js"></script> 
+
+    <!--
+    <script src='scripts/fastclick.js'></script>
+    <script type="text/javascript">
+    //   document.addEventListener('DOMContentLoaded', function(e) {
+    //       FastClick.attach(document.body);
+    //   }, false);
+    </script>
+    -->
+    <!-- 这里 fastClick 有 Bug -->
+    
+    <!-- endbuild -->
+
+    
+  </body>
+</html>

@@ -1,0 +1,184 @@
+* {
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+body{
+	background: #E5E5E5;
+	height: 100%;
+}
+
+#lessonList {
+	padding: 0px;
+	max-width: 864px;
+	margin: 0 auto;
+}
+.card {
+	position: static;
+	width: 100%;
+	margin: 20px auto;
+	max-width: 500px;
+	background: white;
+	color: rgb(58, 58, 58);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	list-style: none;	
+}
+.card,.FAB {
+	-moz-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -moz-transition: all .2s cubic-bezier(.4,0,.2,1);
+    -webkit-transition: all .2s cubic-bezier(.4,0,.2,1);
+    transition: all .2s cubic-bezier(.4,0,.2,1);
+}
+.card.choosed {
+	color: white ;
+	background-color: rgb(0,185,209);
+}
+.card.choosed h3, .card.choosed p{
+	color: rgb(239, 251, 65) !important;
+}
+
+.card h3{
+    font-size: 26px;
+    font-weight: 100;
+    margin: 0.2em 0;
+    padding: 0px;
+    color: rgb(68,68,68);
+}
+
+.card p{	
+    margin-bottom: 0.1em;
+    padding-right: 16px;
+    display: inline-block;
+	color:#aaa;
+}
+.card p.teacher{
+	color:rgb(0,185,209);
+}
+
+.FAB{
+	position: fixed;
+	cursor: pointer;
+	z-index: 3;
+	top: 52px;
+	right: 8%;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+	background-color: rgb(238,255,68);
+	color: rgb(119,127,32);
+	line-height: 56px;
+	font-size: 24px;
+	text-align: center;
+}
+
+#welcome{
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: rgba(0, 0, 0, 0.74);
+}
+
+#welcome form{
+    width: 300px;
+
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -150px;
+    background: white;
+    border-radius: 2px;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.20);
+}
+
+#welcome input{
+    display: block;
+	
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 120px;
+    border: 0px;
+    border-bottom: 1px solid rgb(149, 149, 213);
+    padding: 10px 0;
+    color: rgb(149, 149, 213);
+    overflow: hidden;
+    outline: none;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+#welcome button{
+    display: block;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    margin: 0 auto;
+    border: none;
+    outline: none;
+    background: rgb(149, 149, 213);
+    font-size: 18px;
+    color: white;
+    padding: 20px 40px;
+    font-family: inherit;
+    letter-spacing: 3px;
+}
+
+#welcome p{
+    color: rgb(149, 149, 213);
+	
+    width: 100%;
+    padding: 15%;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+}
+@media all and (min-device-width: 1024px) {	
+	.card:hover{
+		box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.20);
+	}
+}
+@media all and (max-width: 1200px) {
+	.FAB{
+		top: 30px;
+	}
+}
+@media all and (max-width: 720px) {
+	main{
+   		padding: 0px;
+
+	}
+	#lessonList {
+		padding-top: 58px;
+		margin: 0px;
+		background: white;
+	}
+	.card{
+		color: rgb(58, 58, 58);
+		padding: 12px 24px;
+		margin: 0px auto;
+	
+		border-bottom: 1px solid #eee;
+	}
+	.card h3{
+	    font-size: 16px;
+	}
+
+	.card p{	
+	    font-size: 12px;
+	}
+	.FAB{
+		top: auto;
+		bottom: 16px;
+		right: 16px;
+	}
+
+}
