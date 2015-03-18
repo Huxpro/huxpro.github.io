@@ -513,6 +513,22 @@ body {
 .navbar-default .navbar-toggle:active {
   background-color: #ddd;
 }
+/* Hux customize Style for navBar button */
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  padding: 14px 11px;
+  margin-top: 4px;
+  margin-right: 10px;
+  margin-bottom: 4px;
+  border-radius: 50%;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  width: 18px;
+  border-radius: 0px;
+}
+.navbar-default .navbar-toggle .icon-bar + .icon-bar {
+  margin-top: 3px;
+}
 /* Hux customize Style for Duoshuo */
 .comment #ds-thread {
   margin-top: 20px;
