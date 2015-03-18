@@ -42,7 +42,7 @@ a {
 a:hover {
 
 	/*color: #000;*/
-
+	text-decoration: none;
 }
 
 
@@ -57,7 +57,7 @@ a:hover {
 
 	margin: 0 auto;
 
-	padding: 0 1.875em 3.125em 1.875em;
+	padding: 0 1.375em 3.125em 1.375em;
 
 }
 

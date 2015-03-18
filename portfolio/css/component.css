@@ -303,37 +303,45 @@ header .tri:after{
 }*/
 .cbp_tmlabel ul li.skill{
 	overflow: auto;
+	padding-top: 1em;
+	padding-bottom: 0.2em;
 }
 .cbp_tmlabel ul li.skill span{
     display: block;
     float: left;
-    font-size: 1.5em;
+    font-size: 1.3em;
     width: 2em;
     height: 2em;
     text-align: center;
-    line-height: 2em;
-    border: 0.1em solid white;
+    line-height: 2.1em;
+    /*border: 0.1em solid white;*/
     margin-right: 0.5em;
+    background: white;
+    border-radius: 50%;
+    color:#6ca8fb;
 }
 .cbp_tmlabel ul li.skill span.link{
 	float: right;
-	font-size: 1em;
-	line-height: 3em;
-	width: 3em;
-	height: 3em;
-	border-radius: 2em;
+	font-size: 0.8em;
+	line-height: 4.1em;
+	width: 4em;
+	height: 4em;
+	border-radius: 50%;
 	background: white;
+	box-shadow: rgba(0, 0, 0, 0.258824) 0px 2px 5px 0px;
+	margin-top: -0.6em;
+	font-weight: 900;
 }
-.cbp_tmlabel ul li.skill span.link a{
-	color: #6ca8fb;
-	width: 3em;
-	height: 3em;
-	line-height: 3em;
+.cbp_tmlabel ul li.skill span.link:active{
+	background: #eee;
+}
+.cbp_tmlabel ul li.skill span.link a {
 	display: block;
+	width: 100%;
+	height: 100%;
+
 }
-.cbp_tmlabel ul li.skill span.link:hover a{
-	color: #BBB6BC;
-}
+
 @media screen and (max-width: 400px) {
 
 	.main{
