@@ -1,13 +1,9 @@
-/*!
- * Hux Blog v1.0.0 (http://huxpro.github.io)
- * Copyright 2015 Hux
- */
-
 body {
   font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;
   font-size: 16px;
   color: #404040;
+  overflow-x: hidden;
 }
 p {
   margin: 30px 0;
