@@ -9,51 +9,48 @@ tags:
     - 生活
 ---
 
-> **Yeah It's on. Hux 的 Blog 就这么正式开通了。**
+> **“Yeah It's on. ”**
+
+
+Hux 的 Blog 就这么开通了。
+
+[跳过废话，直接看技术实现 ](#build) 
 
 
 
-* [跳过废话，直接看技术实现](#build) 
+2015 年，Hux 总算有个地方可以好好写点东西了。
 
 
+作为一个 ITer，其实早就有写 Blog 的想法了。**但是既然作为一个 ITer，而且还算个程序员……** Blog 这种轮子要是挂在大众博客程序上就太没意思了。一是觉得大部分 Blog 服务都太丑，二是觉得不能随便定制不好玩（可是又懒）……结果就一直连个写 Blog 的地儿都没有。
 
-在 2015 年里，Hux 总算有个地方可以好好写点东西了。
+后来喜欢在知乎上扯扯，也是因为能稍微写点东西。可是没够开专栏，所以还是常常被问题限制住。
 
-
-其实作为一个 ITer，当然早就有写 Blog 的想法了。**但是既然作为一个 ITer，而且还算个程序员……** Blog 这种轮子要是挂在大众博客程序上就太没意思了……CSDN 什么的太丑，Lofter 也一般，Tumblr 说不准什么时候就被墙了…… WordPress 一觉得没劲二也懒得折腾……结果最后就一直连个写 Blog 的地都没有。
-
-后来喜欢上知乎，就是因为能稍微写点东西。可是在知乎上写东西是答题呀……常常还是被答案限制住，又没够开知乎专栏，诶。
-
-
-转眼进入 2015 年，感叹这么快一年又过去了，需要总结下自己，也正好需要 redesign 一下简历。这次的简历里除了作品链接还想放点文章什么的，于是之前[个人网站](http://huangxuan.me)的作品集形式就不适用，**想来想去还是 Blog 最适合……**罢罢罢，花一天搞一个吧！
-
-（PS：之前的个人网站是去年春节搞得了，也是为了增强简历，还没有想好怎么 Update ，所以就先放着吧。这个网站导航的中的 Portfolio 就是指向那个网站的）
+转眼进入 2015 ，觉得还是有很多话想要说，很多经历和感悟可以写，也想丰富下自己的个站（之前的[个人网站](http://huangxuan.me/portfolio)是作品集形式的，现在集成进来了。），**想来想去还是弄个 Blog 最适合……**罢罢罢，花一天搞一个吧！  
+（搭起来是只用了一天，后来经常 update 样式功能就不提了）
 
 
 
 <p id = "build"></p>
 ---
-接下来说说 Building Blog 的技术细节。
+那么接下来就说说 Building Blog 的技术细节。
 
-正好之前就有关注过 [GitHub Pages](https://pages.github.com/) + [Jekyll](http://jekyllrb.com/) 快速建 Blog 的技术方案，觉得超适合。
+正好之前就有关注过 [GitHub Pages](https://pages.github.com/) + [Jekyll](http://jekyllrb.com/) 快速建 Blog 的技术方案，觉得非常适合。
 
 优点非常明显：
 
 * 利用 GitHub Pages 的域名和免费无限空间，不用自己折腾主机
-	* 如果需要自定义域名，也只需要简单加个 DNS 就好了 
+	* 如果需要自定义域名，也只需要简单改改 DNS 加个 CNAME 就好了 
 * 非常熟悉的 Git Flow ，**Git Commit 即 Blog Post**
 	* 前端最爱啊，自从换 Mac 后，Terminal(Z-Shell) + Git 玩起来太爽了
 * **Markdown** 写作环境
 	* 这就是 Jekyll 的魔法了，习惯了 Markdown 排版后也是离不开
 * Jekyll 的自定制还是相当容易的，基本就是个模版引擎
-	* 比如后来自己补上了对标签 (Tags) 的支持
-
 
 
 之前觉得最大的缺点就是 GitHub 在国内访问起来太慢，所以第二天一起床就想着迁移到 GitCafe (Chinese GitHub Copy) 上，结果还是巨慢。
 
-**我可是个前端好吗！** 果断开 Chrome DevTool 查了下网络请求，原来是 **pending（挂起）在了 Google Fonts** 上，页面渲染一直被阻塞到请求超时为止，难怪这么慢。
-于是只好忍痛把 Web Fonts 去了（反正超时后看到的也是 Fallback 后的字体），果然一下就快了起来，而且 GitHub 和 GitCafe 并没有感受到明显的速度差异。
+**我可是个前端好吗！** 果断开 Chrome DevTool 查了下网络请求，原来是 **pending 在了 Google Fonts** 上，页面渲染一直被阻塞到请求超时为止，难怪这么慢。
+于是只好忍痛把 Web Fonts 去了（反正超时后看到的也是 Fallback ），果然一下就快了起来，而且 GitHub 和 GitCafe 对比并没有感受到明显的速度差异。
 
 [这是 gitcafe.io 上的镜像地址](http://huxpro.gitcafe.io)
 
@@ -65,9 +62,9 @@ tags:
 
 本地调试环境需要 `gem install jekyll`，结果 rubygem 的源居然被墙了……后来手动改成了我大淘宝的镜像源才成功
 
-Theme 的 CSS 是基于 Bootstrap 定制的，看得不爽的地方直接在 Less 里改就好了（平时更习惯 Scss ），**不过其实我一直觉得 Bootstrap 在移动端的体验做得相当一般，比我在阿里参与的团队内部 CSS 框架差多了……**
+Theme 的 CSS 是基于 Bootstrap 定制的，看得不爽的地方直接在 Less 里改就好了（平时更习惯 Scss ），**不过其实我一直觉得 Bootstrap 在移动端的体验做得相当一般，比我在阿里参与的团队内部 CSS 框架差多了……**所以就经常要为了体验补 CSS
 
-最后就进入了耗时反而最长的**做图、写字**阶段了。也算是进入了**写博客**的正轨，折腾折腾着大半夜就过去了。
+最后就进入了耗时反而最长的**做图、写字**阶段了。也算是进入了**写博客**的正轨，因为是类似 Hack Day 的方式去搭这个站的，所以折腾折腾着大半夜就过去了。
 
 第二天考虑中文字体的渲染，fork 了 [Type is Beautiful](http://www.typeisbeautiful.com/) 的 `font` CSS，调整了字号，适配了 Win 的渣渲染，中英文混排效果好多了。
 
