@@ -43,6 +43,7 @@ blockquote {
   color: #808080;
   font-style: italic;
   font-size: 0.95em;
+  margin: 20px 0 20px;
 }
 blockquote p {
   margin: 0;
