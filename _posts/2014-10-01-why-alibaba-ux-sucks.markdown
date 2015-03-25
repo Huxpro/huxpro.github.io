@@ -10,6 +10,9 @@ tags:
     - 阿里巴巴
 ---
 
+> 这篇文章转载自[我在知乎上的回答](http://www.zhihu.com/question/25657351/answer/31278511)
+
+
 <div >
     <br>
     <br><b>一言以蔽之，优先级。</b>

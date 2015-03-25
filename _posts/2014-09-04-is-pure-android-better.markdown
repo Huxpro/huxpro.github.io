@@ -10,6 +10,9 @@ tags:
     - Android
 ---
 
+> 这篇文章转载自[我在知乎上的回答](http://www.zhihu.com/question/25104721/answer/30108886)
+
+
 <p>哎呀～不要站队嘛。其实这是一个很有意思的题目，让我们一点点来看
     <br>
     <br>哦对，谢妖～。本人是Nexus 5用户，系统当然是Pure Android KitKat啦（臭谷粉！点Down！喂喂喂我还没给结论呢）
