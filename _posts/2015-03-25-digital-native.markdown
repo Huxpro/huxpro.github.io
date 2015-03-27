@@ -113,7 +113,7 @@ Kant 给你发了一个红包
 >    
 >  **Digital Immigrant，数字移民**：指代更早的一代人，已经情愿或者不情愿地适应了这个数字世界，并且将各类数字工具运用到生活当中。（Digital immigrants are their antithesis, being the folks born earlier who, either reluctantly or enthusiastically, have adapted to the digital world and incorporated its tools into their lives.）
 
-定义如此，但其实边界模糊。而真正重要的：**或许是在这个飞速发展的世界，只有保持小孩般的好奇与初心，才能不被时代轻易的抛弃。**
+定义如此，但其实边界模糊。而真正重要的是：**或许在这个飞速发展的世界里，只有保持小孩般的好奇与初心，才能不被时代轻易的抛弃。**
 
 ---
 
