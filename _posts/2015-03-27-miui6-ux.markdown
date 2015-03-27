@@ -1,0 +1,23 @@
+---
+layout:     post
+title:      "「预告」Deeper MIUI ，聊聊设计语言与交互体系"
+subtitle:   "除了好看好用，我们还能聊些什么 "
+date:       2015-03-27 16:00:00
+author:     "Hux"
+header-img: "img/Blog-Pic.jpg"
+tags:
+    - MIUI
+    - Android
+    - UX Design
+---
+
+明天起笔。
+
+有什么对此文的期待或者提问都可以给我留言，我会一一回复～
+
+晚安。  
+「多少个夜就这样开着灯到另一个夜。」
+
+<br>
+from 即将上床的 Hux
+
