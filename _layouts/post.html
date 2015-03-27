@@ -51,6 +51,12 @@ layout: default
                     .ds-share{
                         text-align: right;
                     }
+                    /* 移动端暂时不显示 */
+                    @media only screen and (max-width: 700px) {
+                        .ds-share {
+                            display: none;
+                        }
+                    }
                 </style>
                 <div class="ds-share" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-images="{{ site.url }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" data-content="| Hux Blog，@Hux黄玄 的个人博客" data-url="{{site.url}}{{page.url}}">
                     <div class="ds-share-inline">
@@ -65,10 +71,11 @@ layout: default
                       <div class="ds-share-icons-more">
                       </div>
                     </div>
-                 </div>
+                <hr>
+                </div>
                 <!-- 多少 Share end-->
 
-                <hr>
+                
 
                 <ul class="pager">
                     {% if page.previous.url %}
