@@ -466,6 +466,9 @@ body {
     margin-right: 5px;
   }
 }
+#tag-heading {
+  padding: 50px 0;
+}
 #tag_cloud {
   margin-bottom: 40px;
 }
@@ -501,8 +504,44 @@ body {
 @media only screen and (min-width: 768px) {
   .listing-seperator {
     font-size: 20px !important;
+    line-height: 1.5 !important;
+    margin-top: 5px;
   }
 }
+.one-tag-list .post-preview {
+  position: relative;
+}
+.one-tag-list .post-preview > a .post-title {
+  font-size: 15px;
+  margin-top: 20px;
+}
+.one-tag-list .post-preview > a .post-subtitle {
+  font-size: 12px;
+}
+.one-tag-list .post-preview > .post-meta {
+  position: absolute;
+  right: 5px;
+  bottom: 0px;
+  margin: 0px;
+  font-size: 12px;
+  line-height: 12px;
+}
+@media only screen and (min-width: 768px) {
+  .one-tag-list .post-preview {
+    margin-left: 20px;
+  }
+  .one-tag-list .post-preview > a > .post-title {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+  .one-tag-list .post-preview > a > .post-subtitle {
+    font-size: 14px;
+  }
+  .one-tag-list .post-preview .post-meta {
+    font-size: 18px;
+  }
+}
+/* Tags support End*/
 /* Hux Optimize UserExperience */
 .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle:hover {
@@ -526,37 +565,6 @@ body {
 }
 .navbar-default .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 3px;
-}
-/* Hux customize Style for Posts in One-Tag-List */
-.one-tag-list .post-preview {
-  position: relative;
-}
-.one-tag-list .post-preview > a .post-title {
-  font-size: 15px;
-  margin-top: 20px;
-}
-.one-tag-list .post-preview > a .post-subtitle {
-  font-size: 12px;
-}
-.one-tag-list .post-preview > .post-meta {
-  position: absolute;
-  right: 5px;
-  bottom: 0px;
-  margin: 0px;
-  font-size: 12px;
-  line-height: 12px;
-}
-@media only screen and (min-width: 768px) {
-  .one-tag-list .post-preview > a > .post-title {
-    font-size: 26px;
-    line-height: 1.3;
-  }
-  .one-tag-list .post-preview > a > .post-subtitle {
-    font-size: 16px;
-  }
-  .one-tag-list .post-preview .post-meta {
-    font-size: 18px;
-  }
 }
 /* Hux customize Style for Duoshuo */
 .comment #ds-thread {

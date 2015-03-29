@@ -523,6 +523,9 @@ body {
 	}
 }
 
+#tag-heading{
+	padding:50px 0;
+}
 // tag_cloud
 #tag_cloud{
 	margin-bottom: 40px;
@@ -558,9 +561,51 @@ body {
 	}
 	@media only screen and (min-width: 768px) {
 		font-size: 20px !important;
+		line-height: 1.5 !important;
+		margin-top: 5px;
 	}
 }
 
+// Customize Style for Posts in One-Tag-List 
+.one-tag-list{
+	.post-preview {
+		position: relative;
+		> a {
+			.post-title{
+				font-size: 15px;
+				margin-top: 20px;
+			}
+			.post-subtitle{
+				font-size: 12px;
+			}
+		}
+		> .post-meta{
+			position: absolute;
+			right: 5px;
+			bottom: 0px;
+			margin: 0px;
+			font-size: 12px;
+			line-height: 12px;
+		}
+		@media only screen and (min-width: 768px) {
+			margin-left: 20px;
+			> a {
+				> .post-title {
+					font-size: 18px;
+					line-height: 1.3
+				}
+				> .post-subtitle{
+					font-size: 14px;
+				}
+			}
+			.post-meta{
+				font-size: 18px;
+			}
+		}
+	}
+}
+
+/* Tags support End*/
 
 
 /* Hux Optimize UserExperience */
@@ -592,45 +637,6 @@ body {
 	}
 }
 
-/* Hux customize Style for Posts in One-Tag-List */
-
-.one-tag-list{
-	.post-preview {
-		position: relative;
-		> a {
-			.post-title{
-				font-size: 15px;
-				margin-top: 20px;
-			}
-			.post-subtitle{
-				font-size: 12px;
-			}
-		}
-		> .post-meta{
-			position: absolute;
-			right: 5px;
-			bottom: 0px;
-			margin: 0px;
-			font-size: 12px;
-			line-height: 12px;
-		}
-		@media only screen and (min-width: 768px) {
-			> a {
-				> .post-title {
-					font-size: 26px;
-					line-height: 1.3
-				}
-				> .post-subtitle{
-					font-size: 16px;
-				}
-			}
-			.post-meta{
-				font-size: 18px;
-			}
-		}
-	}
-
-}
 
 /* Hux customize Style for Duoshuo */
 .comment{
