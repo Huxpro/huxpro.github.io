@@ -10,6 +10,7 @@ p {
 }
 p a {
   text-decoration: underline;
+  color: #01A7CA;
 }
 h1,
 h2,
@@ -153,8 +154,14 @@ hr.small {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-  margin-bottom: 20px;
-  /* origin-value: 50px, modify by Hux */
+  margin-bottom: 0px;
+  /* 0 on mobile, modify by Hux */
+}
+@media only screen and (min-width: 768px) {
+  .intro-header {
+    margin-bottom: 20px;
+    /* response on desktop */
+  }
 }
 .intro-header .site-heading,
 .intro-header .post-heading,
@@ -472,7 +479,7 @@ body {
   }
 }
 #tag_cloud {
-  margin-bottom: 40px;
+  margin: 20px 0 25px 0;
 }
 #tag_cloud a,
 #tag_cloud .tag {

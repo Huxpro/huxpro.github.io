@@ -19,6 +19,7 @@ p {
 	margin: 30px 0;
 	a {
 		text-decoration: underline;
+		color:#01A7CA;
 	}
 }
 
@@ -180,7 +181,10 @@ hr.small {
 	background-attachment: scroll;
 	.background-cover;
 	// NOTE: Background images are set within the HTML using inline CSS!
-	margin-bottom: 20px;  /* origin-value: 50px, modify by Hux */
+	margin-bottom: 0px;  /* 0 on mobile, modify by Hux */
+	@media only screen and (min-width: 768px) {
+		margin-bottom: 20px;  /* response on desktop */
+	}
 	.site-heading,
 	.post-heading,
 	.page-heading {
@@ -531,7 +535,7 @@ body {
 }
 // tag_cloud
 #tag_cloud{
-	margin-bottom: 40px;
+	margin:20px 0 25px 0;
 	a,.tag{
 		font-size: 14px;
 		border: none;
