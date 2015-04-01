@@ -10,7 +10,11 @@ p {
 }
 p a {
   text-decoration: underline;
-  color: #01A7CA;
+  color: #019cbd;
+}
+ul.active-list a {
+  text-decoration: underline;
+  color: #019cbd;
 }
 h1,
 h2,

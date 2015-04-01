@@ -61,7 +61,9 @@ tags:
     <br>
     <br>
     <br>
-    <br><b>破 200 赞，感谢下对时尚业颇有研究的女友对我的影响<a data-hash="8ffb556cbebb0cfe22aa194ff89b635d" href="http://www.zhihu.com/people/8ffb556cbebb0cfe22aa194ff89b635d" class="member_mention" data-editable="true" data-title="@肖玉" data-tip="p$b$8ffb556cbebb0cfe22aa194ff89b635d"> @肖玉</a></b>
+    <p>
+    <b>破 200 赞，感谢下对时尚业颇有研究的女友对我的影响<a data-hash="8ffb556cbebb0cfe22aa194ff89b635d" href="http://www.zhihu.com/people/8ffb556cbebb0cfe22aa194ff89b635d" class="member_mention" data-editable="true" data-title="@肖玉" data-tip="p$b$8ffb556cbebb0cfe22aa194ff89b635d"> @肖玉</a></b>
+    </p>
 </div>
 
 
