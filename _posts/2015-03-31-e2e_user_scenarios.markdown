@@ -18,7 +18,7 @@ There is not a very clear definition of E2E in wiki.<sup>[[1]](#ref1)</sup> In d
 
 E2E is usually used in Logistics, Computer Networking and Software Testing. For example, End-to-end testing is a methodology used to test whether the flow of an application is performing as designed from start to finish. The entire application is tested in a real-world scenario.
 
-So in my view, the most essential part of E2E is that **we must focus on the entire process, including every behavior in a use case.**
+So in my view, the most essential part of E2E is that **we must focus on the entire process, including every parts in a use case.**
 
 
 ### User Scenarios! 
