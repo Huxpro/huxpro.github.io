@@ -35,8 +35,8 @@ tags:
     <br>
     <br>所以群里好像约定俗成般的，从来就没有出现过滴滴的红包。<b>而由于红包返现利滚利带来的超强用户粘性，大家连叫车也都开始只用快的了。</b>
     <br>
-   <img src="/img/in-post/post-kuaidi-1.jpg">
-    <br>结果好景不长，微信突然就玩了这么一手，直接把快的打车屏蔽了。
+    <img src="/img/in-post/post-kuaidi-1.jpg">
+    结果好景不长，微信突然就玩了这么一手，直接把快的打车屏蔽了。
     <br>当天大家就发现了，还讨论了下对策……<b>比如什么「先分享到微博，然后把链接复制出来，再发到旺旺群」……</b>
     <br>
     <br>嗯。我 TM 也觉得挺拼的。。
@@ -53,7 +53,7 @@ tags:
     <br>唉其实我就是想说：<b>这也就一天……用户习惯就被彻底干翻过来了。 就算是盟友…也没救。</b>
     <br>
     <img src="/img/in-post/post-kuaidi-2.jpg">
-    <br>所以我今天还是打着滴滴回来的……分享红包的一瞬间，心里突然一阵小惆怅。就回来写下了这段答案。
+    所以我今天还是打着滴滴回来的……分享红包的一瞬间，心里突然一阵小惆怅。就回来写下了这段答案。
     <br>
     <br>说了半天，好像也没说到什么干货…权当故事听吧。
     <br>其实你要问我这有没有违反互联网平等开放法则什么的。我觉得上面 <a data-hash="8f7d284bb1a97deaa4533a6190206ecb" href="http://www.zhihu.com/people/8f7d284bb1a97deaa4533a6190206ecb" class="member_mention" data-editable="true" data-title="@覃浩tommy" data-tip="p$b$8f7d284bb1a97deaa4533a6190206ecb">@覃浩tommy</a><a data-hash="43d639a3d763d3dad948e0bc4c645eec" href="http://www.zhihu.com/people/43d639a3d763d3dad948e0bc4c645eec" class="member_mention" data-editable="true" data-title="@赛门" data-tip="p$b$43d639a3d763d3dad948e0bc4c645eec">@赛门</a> 都说得挺好的，两种思路而已，大家可以自行选择。
@@ -63,7 +63,7 @@ tags:
     <br><b><u>所以大厂们你们就使劲撕逼吧，需要打到用户脸时，多给糖多给枣就好了。</u></b>
     <br>
     <br>
-    <br>哦对了，今天微信宣布朋友圈内禁止分享未备案网页了。
+    <br>哦对了，今天微信宣布朋友圈内限制分享未备案网页了。
     <br><b>枣呢 ！？！？</b>
     <br>
     <br>
