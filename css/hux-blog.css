@@ -555,6 +555,12 @@ body {
   }
 }
 /* Tags support End*/
+/* Hux make all img responsible in post-container */
+.post-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 /* Hux Optimize UserExperience */
 .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle:hover {
