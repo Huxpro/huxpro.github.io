@@ -11,30 +11,30 @@ tags:
     - Linux
 ---
 
-> This document is not complete and will be updated anytime.
+> This document is not completed and will be updated anytime.
 
 
 ## Catagory
 
-1. Unix
-	1. Bell Labs
-	2. Xenix
-	3. BSD
-	4. FreeBSD & Apple
-		1. NeXTStep
-		2. Darwin
-	5. POSIX
-2. Unix-like
-	1. Single Unix Specification
-	2. Apple iOS
-	3. XNU Kernel
-3. Linux
-	1. Linux Kernel
-	2. GNU Project
-	3. Android
-	4. Android Kernel
-	5. Chrome OS
-	6. Chromium OS
+1. [Unix](#unix)
+	1. [Bell Labs](#bell-labs)
+	2. [Xenix](#xenix)
+	3. [BSD](#bsd)
+	4. [FreeBSD & Apple](#freebsd--apple)
+	5. [NeXTStep](#nextstep)
+	6. [Darwin](#darwin)
+	7. [POSIX](#posix)
+2. [Unix-like](#unix-like)
+	1. [Single Unix Specification](#single-unix-specification)
+	2. [Apple iOS](#apple-ios)
+	3. [XNU Kernel](#xnu-kernel)
+3. [Linux](#linux)
+	1. [Linux Kernel](#linux-kernel)
+	2. [GNU Project](#gnu-project)
+	3. [Android](#android)
+	4. [Android Kernel](#android-kernel)
+	5. [Chrome OS](#chrome-os)
+	6. [Chromium OS](#chromium-os)
 
 ---
 
@@ -63,9 +63,15 @@ AT&T licensed Unix to outside parties(第三方) from the late 1970s, leading to
 	- BSD 后来发展出了众多开源后代，包括 FreeBSD, OpenBSD, NetBSD 等等……很多闭源的 vendor Unix 也都从 BSD 衍生而来。
 
 - #### FreeBSD & Apple
-FreeBSD 不但是 Open Source BSD 中占有率最高的，还直接影响了 Apple Inc : NeXT Computer 的团队在 FreeBSD 上衍生出了 NEXTSTEP 操作系统，这货后来在 Apple 时期演化成了 **Darwin** ，这个“达尔文”居然还是个开源系统，而且是 the Core of **Mac OS X** and **iOS**.
-	- NeXTSTEP, an **object-oriented**, multitasking OS. Low-level C but High-level OC language and runtime the first time, combined with an **OO aplication layer** and including several "kits".
-	- [Darwin](http://en.wikipedia.org/wiki/Darwin_(operating_system\)), the core set of components upon which Mac OS X and iOS based, mostly POSIX compatible, but has never, by itself, been certified as being compatible with any version of **POSIX**. (OS X, since Leopard, has been certified as compatible with the Single UNIX Specification version 3)(**所以说 Mac OS X 是正统 Unix 而非 Unix-like**)
+FreeBSD 不但是 Open Source BSD 中占有率最高的，还直接影响了 Apple Inc : NeXT Computer 的团队在 FreeBSD 上衍生出了 NeXTSTEP 操作系统，这货后来在 Apple 时期演化成了 **Darwin** ，这个“达尔文”居然还是个开源系统，而且是 the Core of **Mac OS X** and **iOS**.
+
+- #### NeXTSTEP
+An **object-oriented**, multitasking OS. Low-level C but High-level OC language and runtime the first time, combined with an **OO aplication layer** and including several "kits".    
+大家都知道 NeXT 是 Steve Jobs 被 forced out of Apple 后和 a few of his coworkers 创办的，所以 **NeXTSTEP 绝对是证明 Jobs 实力的作品。** 
+
+- #### Darwin
+[Darwin](http://en.wikipedia.org/wiki/Darwin_(operating_system\)), the core set of components upon which Mac OS X and iOS based, mostly POSIX compatible, but has never, by itself, been certified as being compatible with any version of **POSIX**. (OS X, since Leopard, has been certified as compatible with the Single UNIX Specification version 3)  
+**所以说 Mac OS X 算是很正统 Unix 的了**
 
 - #### POSIX
 可移植操作系统接口, Portable Operating System Interface, is a family of standards specified by the IEEE from maintaining compatibility between OS, defines the API along with Command Line Shells and utility interfaces, for software comaptibility with variants of Unix and other OS.
@@ -165,7 +171,7 @@ Anyway, there eventually comes to the **GNU/Linux**
 
 Android is a mobile OS based on **Linux Kernel**, so it's definitely **Unix-like**.  
 
-##### Linux is under GPL so Android has to be open source 
+**Linux is under GPL so Android has to be open source**. 
 Android's source code is released by Google under open source licenses, although most Android devices ultimately ship with a combination of open source and proprietary software, including proprietary software developed and licensed by Google *(GMS are all proprietary)*  
 
 #### Android Kernel

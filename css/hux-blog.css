@@ -60,7 +60,13 @@ hr.small {
 }
 .post-container ul,
 .post-container ol {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+}
+.post-container ol ol,
+.post-container ol ul,
+.post-container ul ol,
+.post-container ul ul {
+  margin-bottom: 5px;
 }
 .post-container li p {
   margin: 0;
