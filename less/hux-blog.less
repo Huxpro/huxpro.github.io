@@ -17,16 +17,6 @@ body {
 
 p {
 	margin: 30px 0;
-	a {
-		text-decoration: underline;
-		color:#019CBD
-	}
-}
-ul.active-list{
-	a {
-		text-decoration: underline;
-		color:#019CBD
-	}
 }
 
 h1,
@@ -78,19 +68,30 @@ hr.small {
 	border-color: white;
 }
 // add by Hux
-ul,ol{
-	margin-bottom: 30px;
-}
-li{
-	p{
-		margin: 0;
-		margin-bottom: 5px;
+.post-container{
+	a{
+		color:#337ab7; 
+		// different to @brand-primary
+		&:hover,
+		&:focus {
+			color: @brand-primary;
+		}
 	}
-	h1,h2,h3,h4,h5,h6{
-		line-height: 2;
-		margin-top: 20px;
+	ul,ol{
+		margin-bottom: 30px;
+	}
+	li{
+		p{
+			margin: 0;
+			margin-bottom: 5px;
+		}
+		h1,h2,h3,h4,h5,h6{
+			line-height: 2;
+			margin-top: 20px;
+		}
 	}
 }
+
 
 
 // Navigation
@@ -472,7 +473,10 @@ form .row:first-child .floating-label-form-group {
 				padding: 15px 25px;
 			}
 		}
-
+		
+		> a {
+			color: @gray-dark;
+		}
 		> a:hover,
 		> a:focus {
 			color: white;

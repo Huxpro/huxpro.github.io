@@ -8,14 +8,6 @@ body {
 p {
   margin: 30px 0;
 }
-p a {
-  text-decoration: underline;
-  color: #019cbd;
-}
-ul.active-list a {
-  text-decoration: underline;
-  color: #019cbd;
-}
 h1,
 h2,
 h3,
@@ -59,20 +51,27 @@ hr.small {
   border-width: 4px;
   border-color: white;
 }
-ul,
-ol {
+.post-container a {
+  color: #337ab7;
+}
+.post-container a:hover,
+.post-container a:focus {
+  color: #0085a1;
+}
+.post-container ul,
+.post-container ol {
   margin-bottom: 30px;
 }
-li p {
+.post-container li p {
   margin: 0;
   margin-bottom: 5px;
 }
-li h1,
-li h2,
-li h3,
-li h4,
-li h5,
-li h6 {
+.post-container li h1,
+.post-container li h2,
+.post-container li h3,
+.post-container li h4,
+.post-container li h5,
+.post-container li h6 {
   line-height: 2;
   margin-top: 20px;
 }
@@ -426,6 +425,9 @@ form .row:first-child .floating-label-form-group {
     font-size: 14px;
     padding: 15px 25px;
   }
+}
+.pager li > a {
+  color: #404040;
 }
 .pager li > a:hover,
 .pager li > a:focus {
