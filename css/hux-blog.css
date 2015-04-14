@@ -59,6 +59,23 @@ hr.small {
   border-width: 4px;
   border-color: white;
 }
+ul,
+ol {
+  margin-bottom: 30px;
+}
+li p {
+  margin: 0;
+  margin-bottom: 5px;
+}
+li h1,
+li h2,
+li h3,
+li h4,
+li h5,
+li h6 {
+  line-height: 2;
+  margin-top: 20px;
+}
 .navbar-custom {
   background: white;
   position: absolute;
