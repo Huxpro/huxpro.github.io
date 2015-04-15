@@ -33,8 +33,9 @@ tags:
 	2. [GNU Project](#gnu-project)
 	3. [Android](#android)
 	4. [Android Kernel](#android-kernel)
-	5. [Chrome OS](#chrome-os)
-	6. [Chromium OS](#chromium-os)
+	5. [Android ROM](#android-rom)
+	6. [Chrome OS](#chrome-os)
+	7. [Chromium OS](#chromium-os)
 
 ---
 
@@ -126,9 +127,9 @@ XNU, the acronym(首字母缩写) for ***X is Not Unix***, which is the **Comput
 ![Unix_timeline](http://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Unix_timeline.en.svg/800px-Unix_timeline.en.svg.png)
 
 
-#### [Linux Kernel](http://en.wikipedia.org/wiki/Linux_kernel)
+#### Linux Kernel
 
-严格来讲，术语 Linux 只表示操作系统内核本身，比如说 Android is Based on Linux (Kernel). Linus 编写的也只是这一部分，一个免费的 Unix-like Kernel，并不属于 GNU Project 的一部分。
+严格来讲，术语 Linux 只表示 [Linux Kernel](http://en.wikipedia.org/wiki/Linux_kernel) 操作系统内核本身，比如说 Android is Based on Linux (Kernel). Linus 编写的也只是这一部分，一个免费的 Unix-like Kernel，并不属于 GNU Project 的一部分。
 
 但通常把 Linux 作为 Linux Kernel 与大量配合使用的 GNU Project Software Kit (包括 Bash, Lib, Compiler, 以及后期的 GUI etc) 所组合成的 OS 的统称。（包括各类 Distribution 发行版）
 
@@ -182,9 +183,33 @@ Android's kernel is based on one of the Linux kernel's long-term support (LTS) b
 
 Android Kernel 大概是 Linux Kernel 最得意的分支了，Android 也是 Linux 最流行的发行版。不过，也有一些 Google 工程师认为 Android is not Linux in the traditional Unix-like Linux distribution sense. 总之这类东西就算有各种协议也还是很难说清楚，在我理解里 Android Kernel 大概就是 fork Linux Kernel 之后改动和定制比较深的例子。
 
-顺嘴一句，其实各类 Android ROM 也好，fork Android 之流的 YunOS、FireOS 也好，改了多少东西，碰到多深的 codebase ……**其实 ROM 和 Distribution OS 的界限是很模糊的**，为什么 Android 就不可以是移动时代的 Linux ，为什么 Devlik/ART 就不能是移动时代的 GCC 呢？
 
+#### Android ROM
 
+既然提到 Android 就不得不提提 Android ROM 
+
+ROM 的本义实际上是只读内存：  
+
+**Read-only memory** (ROM) is a class of storage medium used in computers and other electronic devices. Data stored in ROM can only be modified slowly, with difficulty, or not at all, so it is **mainly used to distribute firmware (固件)** (software that is very closely tied to specific hardware, and unlikely to need frequent updates).
+
+ROM 在发展的过程中不断进化，从只读演变成了可编程可擦除，并最终演化成了 Flash  
+
+* PROM (Programmable read-only memory)
+* EPROM (Erasable programmable read-only memory)
+* EEPROM (Electrically erasable programmable read-only memory)
+	* Flash memory (闪存) 
+
+Flash 的出现是历史性的，它不但可以作为 ROM 使用，又因其极高的读写速度和稳定性，先后发展成为U盘（USB flash drives）、移动设备主要内置存储，和虐机械硬盘几条街的固态硬盘（SSD），可以说这货基本统一了高端存储市场的技术规格。
+
+所以我们平时习惯说的 ROM 其实还是来源于老单片机时代，那时的 ROM 真的是写了就很难（需要上电复位）、甚至无法修改，所以那时往 ROM 里烧下去的程序就被称作 firmware ，固件。久而久之，虽然技术发展了，固件仍然指代那些不常需要更新的软件，而 ROM 这个词也就这么沿用下来了。
+
+所以在 wiki 里是没有 Android ROM 这个词条的，只有 [List of custom Android firmwares](http://en.wikipedia.org/wiki/List_of_custom_Android_firmwares)
+
+> A custom firmware, also known as a custom ROM, ROM, or custom OS, is an aftermarket distribution of the Android operating system. They are based on the Android Open Source Project (AOSP), hence most are open-sourced releases, unlike proprietary modifications by device manufacturers.
+
+各类 Android ROM 在 Android 词类下也都是属于 **Forks and distributions** 一类的。
+
+所以我说，其实各类 Android ROM 也好，fork Android 之流的 YunOS、FireOS 也好，改了多少东西，碰到多深的 codebase ……**其实 ROM 和 Distribution OS 的界限是很模糊的**，为什么 Android 就不可以是移动时代的 Linux ，为什么 Devlik/ART 就不能是移动时代的 GCC 呢？
 
 #### Chrome OS
 
