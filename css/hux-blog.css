@@ -586,6 +586,8 @@ body {
   max-width: 100%;
   height: auto;
   margin: 1.5em auto 1.6em auto;
+}
+.post-container img.shadow {
   box-shadow: rgba(0, 0, 0, 0.258824) 0px 2px 5px 0px;
 }
 /* Hux Optimize UserExperience */

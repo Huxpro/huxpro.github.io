@@ -1,11 +1,12 @@
 ---
 layout:     post
-title:      "Digital Native, 数字原住民"
+title:      "数字时代随想录（一）：Digital native 数字原住民"
 subtitle:   " 两岁的侄女天天叫着手机手机 "
 date:       2015-03-25 
 author:     "Hux"
 header-img: "img/post-bg-digital-native.jpg"
 tags:
+    - 数字时代随想录
     - 生活
     - 职业病
     - UX Design
@@ -13,17 +14,17 @@ tags:
 
 > 那是一种与生俱来的天赋，就好像矮人天生擅长舞锤，而精灵则拥有魔法庇护。那些数字时代的原住民们，天生具备着一种操纵数字世界的领悟。
 
-### 前言
+## 前言
 
 从 2010 年 iPhone 4 横空出世席卷中国，到时隔不到半月的 Apple 2015 发布会。短短几年里，身边就几乎再也看不到“非智能手机”的身影了。
 
 想想发布那时（2010.6.8），博主应该还是一个高一小屁孩，等着暑假快点到来。虽然父上大人用着 iPhone 3GS ，不过那时我对 Apple 可没啥感觉，还用着后来被 Apple 干翻的 Nokia （5320），抱着算是被 Apple 干翻的 IBM ，偶尔玩玩后来被 Apple 干翻的 Adobe Flash……  
-虽然不是含着着金 iPhone 出生的一代，但好歹也算是摸着电脑长大的一代人，估摸着也算是 **Digital Native** 了。你说这词是什么意思？别急，我们慢慢说。
+虽然不是含着着金 iPhone 出生的一代，但好歹也算是摸着电脑长大的一代人，估摸着也算是 **Digital native** 了。你说这词是什么意思？别急，我们慢慢说。
 
 
 ---
 
-### 正文
+## 正文
 
 今年暑假回了两个老家，也看望了不少长辈。  
 长辈们的手机果然都进行了可以想见的升级，除了爷爷奶奶辈外，清一色的 iPhone 或者 Android 4.2+ ，呃，没有 WP。
@@ -91,7 +92,7 @@ Kant 给你发了一个红包
 **接着高潮就来了，阿布非常淡定的伸出小手，把推送给我顶 ↑↑↑↑ 回去了！！**  
 卧槽你们一定不能体会我当时有多惊讶。
 
-**隐喻啊！从上面掉下来的东西，不 想 要 的 话 就可以划回去好吗。** 小孩子对数字世界交互隐喻的理解，真是完爆了不知道多少 Digital Immigrant (下文会解释) 。
+**隐喻啊！从上面掉下来的东西，不 想 要 的 话 就可以划回去好吗。** 小孩子对数字世界交互隐喻的理解，真是完爆了不知道多少 Digital immigrant (下文会解释) 。
 
 
 ####  III. 世界观的树立
@@ -108,17 +109,17 @@ Kant 给你发了一个红包
 所以世界观也是一个很顽固的东西，已经建立起来的部分很难摧毁，新的东西也就没有太多立足之处 —— 这也算是解释了为什么小孩子学习数字设备如此之快，而越是大龄就相对越难接受（当然这其实与不同年龄大脑的生命活动有关系，这里只是比喻的说法）
 
 说到这里，我们终于可以回归最初的问题：  
-什么是 Digital Native ？还有与之对应的 Digital Immigrant ?
+什么是 Digital native ？还有与之对应的 Digital immigrant ?
 
-> **Digital Native，数字原住民**： 指代从出生开始就习惯有互联网、无线技术的一代人 （logically there's a whole generation of individuals for whom concepts such as the Internet and wireless technology are just humdrum, because they've never lived in a world where they didn't exist. These are the so-called digital natives）
+> **Digital native，数字原住民**： 指代从出生开始就习惯有互联网、无线技术的一代人 （logically there's a whole generation of individuals for whom concepts such as the Internet and wireless technology are just humdrum, because they've never lived in a world where they didn't exist. These are the so-called digital natives）
 >    
->  **Digital Immigrant，数字移民**：指代更早的一代人，已经情愿或者不情愿地适应了这个数字世界，并且将各类数字工具运用到生活当中。（Digital immigrants are their antithesis, being the folks born earlier who, either reluctantly or enthusiastically, have adapted to the digital world and incorporated its tools into their lives.）
+>  **Digital immigrant，数字移民**：指代更早的一代人，已经情愿或者不情愿地适应了这个数字世界，并且将各类数字工具运用到生活当中。（Digital immigrants are their antithesis, being the folks born earlier who, either reluctantly or enthusiastically, have adapted to the digital world and incorporated its tools into their lives.）
 
 定义如此，但其实边界模糊。而真正重要的是：**或许在这个飞速发展的世界里，只有保持小孩般的好奇与初心，才能不被时代轻易的抛弃。**
 
 ---
 
-### 结语
+## 结语
 
 我一度欣喜阿布是不是将来要成为计算机或者交互领域的大师，可是转念一想**我更愿意相信这一代小孩子都将具备如此神力**。就好像世界如果重新建立了秩序，那么最先适应秩序的一定是在新秩序下诞生的孩子们。因为他们对世界的认知里没有任何过去，也就没有任何 boundary 。
 
