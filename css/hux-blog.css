@@ -51,6 +51,10 @@ hr.small {
   border-width: 4px;
   border-color: white;
 }
+pre code {
+  display: block;
+  width: 480px;
+}
 .post-container a {
   color: #337ab7;
 }
