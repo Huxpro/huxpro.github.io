@@ -51,9 +51,11 @@ hr.small {
   border-width: 4px;
   border-color: white;
 }
-pre code {
-  display: block;
-  width: 480px;
+@media screen and (max-width: 500px) {
+  pre code {
+    display: block;
+    width: 500px;
+  }
 }
 .post-container a {
   color: #337ab7;
