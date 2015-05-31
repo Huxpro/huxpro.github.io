@@ -14,12 +14,12 @@ tags:
 
 > This document is not completed and will be updated anytime.
 
-## Catagory
+## Catalog
 
 
 1.  [Foreword](#foreword)
 2.  [CommonJS & Node](#commonjs--node)
-3.  [History](#node)
+3.  [History](#history)
 4.  [RequireJS & AMD](#requirejs--amd)
 5.  [SeaJS & CMD](#seajs--cmd)
 6.  [AMD vs CMD](#amd-vs-cmd)
@@ -79,7 +79,10 @@ CommonJS 前身叫 ServerJS ，**后来希望能更加 COMMON，成为通吃各�
 
 
 
+
 ## History
+
+<!--<h2 id="history"> History </h2>-->
 
 > 此段落参考自玉伯的 [前端模块化开发那点历史](https://github.com/seajs/seajs/issues/588)
 
@@ -96,9 +99,9 @@ CommonJS 前身叫 ServerJS ，**后来希望能更加 COMMON，成为通吃各�
 补一嘴：阿里 KISSY 的 KMD 其实跟 AMD 非常类似，只是用 `add`和`use` 两个源自于 YUI Modules 的函数名替换了 `define` 和 `require` ，但其原理更接近 RequireJS ，与 YUI Modules 的 `Y` 沙箱 Attach 机制并不相同 
 
 
-## RequireJS & AMD (Async Module Definition)
+## RequireJS & AMD 
 
-[AMD](http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition) 是 RequireJS 在推广过程中对模块定义的规范化产出。
+[AMD (Async Module Definition)](http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition) 是 RequireJS 在推广过程中对模块定义的规范化产出。
 
 > RequireJS is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments
 
@@ -214,9 +217,9 @@ if(status){
 }
 ```
 
-## SeaJS & CMD (Common Module Definition)
+## SeaJS & CMD 
 
-CMD 是 [SeaJS](http://seajs.org/docs/) 在推广过程中对模块定义的规范化产出，是 Modules/2.0 流派的支持者，因此 SeaJS 的模块写法尽可能与 Modules/1.x 规范保持一致。
+CMD (Common Module Definition) 是 [SeaJS](http://seajs.org/docs/) 在推广过程中对模块定义的规范化产出，是 Modules/2.0 流派的支持者，因此 SeaJS 的模块写法尽可能与 Modules/1.x 规范保持一致。
 
 不过目前国外的该流派都死得差不多了，RequireJS 目前成为浏览器端模块的事实标准，国内最有名气的就是玉伯的 Sea.js ，不过对国际的推广力度不够。
 
