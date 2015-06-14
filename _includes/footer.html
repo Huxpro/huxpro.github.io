@@ -89,14 +89,18 @@
 <!-- TODO: async load -->
 <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script> 
 <script language="javascript">
-$.fn.tagcloud.defaults = {
-    //size: {start: 1, end: 1, unit: 'em'},
-    color: {start: '#bbbbee', end: '#0085a1'},
-
-};
-
-$(function () {
-    $('#tag_cloud a').tagcloud();
-});
+    $.fn.tagcloud.defaults = {
+        //size: {start: 1, end: 1, unit: 'em'},
+        color: {start: '#bbbbee', end: '#0085a1'},
+    };
+    $(function () {
+        $('#tag_cloud a').tagcloud();
+    });
 </script>
+
+<!-- Highlight.js -->
+<script src="http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js"></script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+<script>hljs.initHighlightingOnLoad();</script>
+
 

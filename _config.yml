@@ -12,7 +12,11 @@ weibo_username: huxpro
 zhihu_username: huxpro
 
 # Build settings
-markdown: kramdown
+markdown: kramdown 
+
+# markdown: redcarpet
+# redcarpet can auto highlight code, but the lack of header-id make the catalog impossible 
+
 highlighter: pygments
 permalink: pretty
 paginate: 20
