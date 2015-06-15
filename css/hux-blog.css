@@ -221,9 +221,9 @@ hr.small {
 .intro-header .page-heading .subheading {
   font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;
-  font-size: 24px;
-  line-height: 1.1,
-			display: block;
+  font-size: 18px;
+  line-height: 1.1;
+  display: block;
   font-weight: 300;
   margin: 10px 0 0;
 }
