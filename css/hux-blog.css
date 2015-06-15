@@ -514,7 +514,7 @@ body {
   }
 }
 #tag_cloud {
-  margin: 20px 0 25px 0;
+  margin: 20px 0 15px 0;
 }
 #tag_cloud a,
 #tag_cloud .tag {
@@ -532,7 +532,15 @@ body {
 }
 @media only screen and (min-width: 768px) {
   #tag_cloud {
-    margin-bottom: 55px;
+    margin-bottom: 25px;
+  }
+}
+.tag-comments {
+  font-size: 10px;
+}
+@media only screen and (min-width: 768px) {
+  .tag-comments {
+    font-size: 14px;
   }
 }
 .one-tag-list:first-child {
