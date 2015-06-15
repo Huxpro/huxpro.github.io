@@ -7,10 +7,10 @@ author:     "Hux"
 header-img: "img/post-bg-os-metro.jpg"
 tags:
     - hUX 随想录
-    - OS
     - UX Design
     - Windows
     - Metro
+    - OS
 ---
 
 

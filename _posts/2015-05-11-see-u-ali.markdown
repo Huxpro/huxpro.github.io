@@ -6,8 +6,8 @@ date:       2015-05-11
 author:     "Hux"
 header-img: "img/post-bg-see-u-ali.jpg"
 tags:
-    - Alibaba
     - 生活
+    - 阿里巴巴
 ---
 
 
