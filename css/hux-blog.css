@@ -536,7 +536,7 @@ body {
   }
 }
 .tag-comments {
-  font-size: 10px;
+  font-size: 12px;
 }
 @media only screen and (min-width: 768px) {
   .tag-comments {
