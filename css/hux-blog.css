@@ -22,6 +22,9 @@ h6 {
 h1 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+h4 {
+  font-size: 20px;
+}
 a {
   color: #404040;
 }
@@ -221,7 +224,7 @@ hr.small {
 .intro-header .page-heading .subheading {
   font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.1;
   display: block;
   font-weight: 300;
