@@ -128,7 +128,7 @@ var duoshuoQuery = {short_name:"huxblog"};
     }
 </script>
 
-<!-- anchor-js -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
     async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
         anchors.options = {
@@ -139,3 +139,14 @@ var duoshuoQuery = {short_name:"huxblog"};
         anchors.add().remove('.intro-header h1').remove('.subheading');
     })
 </script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute; 
+            left: -0.75em; 
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
