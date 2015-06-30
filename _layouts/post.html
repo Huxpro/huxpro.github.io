@@ -23,10 +23,10 @@ layout: default
                         {% endfor %}
                     </div>
                     <h1>{{ page.title }}</h1>
-                    {% comment %} 
-                        always create a h2 for keeping the margin , Hux 
+                    {% comment %}
+                        always create a h2 for keeping the margin , Hux
                     {% endcomment %}
-                    {% comment %} if page.subtitle {% endcomment %} 
+                    {% comment %} if page.subtitle {% endcomment %}
                     <h2 class="subheading">{{ page.subtitle }}</h2>
                     {% comment %} endif {% endcomment %}
                     <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
@@ -41,11 +41,11 @@ layout: default
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                
+
 				{{ content }}
-                
+
                 <hr>
-                
+
                 <!-- 多说 Share start -->
                 <style>
                     .ds-share{
@@ -54,19 +54,23 @@ layout: default
                     /* 移动端暂时不显示 */
                     @media only screen and (max-width: 700px) {
                         .ds-share {
-                            display: none;
+
                         }
                     }
                 </style>
-                <div class="ds-share" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-images="{{ site.url }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" data-content="| Hux Blog，@Hux黄玄 的个人博客" data-url="{{site.url}}{{page.url}}">
+
+                <div class="ds-share"
+                    data-thread-key="{{page.id}}" data-title="{{page.title}}"
+                    data-images="{{ site.url }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}"
+                    data-content="{{ content | strip_html | truncate:80 }} | Hux Blog，@Hux黄玄 的个人博客"
+                    data-url="{{site.url}}{{page.url}}">
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
-                        
-                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
                         <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
                         <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
                         <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
-                        <li><a class="ds-qzone flat" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
                       </ul>
                       <div class="ds-share-icons-more">
                       </div>
@@ -75,7 +79,6 @@ layout: default
                 </div>
                 <!-- 多少 Share end-->
 
-                
 
                 <ul class="pager">
                     {% if page.previous.url %}
@@ -89,7 +92,7 @@ layout: default
                     </li>
                     {% endif %}
                 </ul>
-           
+
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-url="{{site.url}}{{page.url}}"></div>
@@ -110,7 +113,7 @@ var duoshuoQuery = {short_name:"huxblog"};
         ds.type = 'text/javascript';ds.async = true;
         ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
         ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] 
+        (document.getElementsByTagName('head')[0]
          || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 </script>
@@ -143,8 +146,8 @@ var duoshuoQuery = {short_name:"huxblog"};
     /* place left on bigger screen */
     @media all and (min-width: 800px) {
         .anchorjs-link{
-            position: absolute; 
-            left: -0.75em; 
+            position: absolute;
+            left: -0.75em;
             font-size: 1.1em;
             margin-top : -0.1em;
         }
