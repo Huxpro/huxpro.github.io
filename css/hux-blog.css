@@ -48,6 +48,10 @@ blockquote {
 blockquote p {
   margin: 0;
 }
+.table th,
+.table td {
+  border: 1px solid #eee !important;
+}
 hr.small {
   max-width: 100px;
   margin: 15px auto;
