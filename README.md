@@ -17,7 +17,7 @@
 
 ### Support
 
-- Feel free to fork. Please keep the copyright link in the footer
+- **Feel free to fork. Please keep the copyright link in the footer**
 - Expect Star if you like/fork it
 - Any problem, just open an issue here
 
