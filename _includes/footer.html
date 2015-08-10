@@ -24,10 +24,10 @@
                         </a>
                     </li>
                     {% endif %}
-                    --> 
+                    -->
 
                     <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
-                    
+
                     {% if site.zhihu_username %}
                     <li>
                         <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
@@ -71,7 +71,11 @@
                     </li>
                     {% endif %}
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}</p>
+                <p class="copyright text-muted">
+                    Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }} |
+                    Theme by <a href="https://huangxuan.me">Hux</a> |
+                    <a href="https://github.com/Huxpro/huxpro.github.io">Fork me</a>
+                </p>
             </div>
         </div>
     </div>
@@ -87,7 +91,7 @@
 <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
 
 <!-- TODO: only load in tag.html -->
-<script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script> 
+<script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
 <script language="javascript">
     $.fn.tagcloud.defaults = {
         //size: {start: 1, end: 1, unit: 'em'},
@@ -117,6 +121,3 @@
     })
 </script>
 <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
-
-
-

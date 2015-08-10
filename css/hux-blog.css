@@ -1,3 +1,8 @@
+/*!
+ * Hux Blog v1.0.0 (http://huxpro.github.io)
+ * Copyright 2015 Hux
+ */
+
 body {
   font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;
@@ -365,6 +370,13 @@ footer .copyright {
   font-size: 14px;
   text-align: center;
   margin-bottom: 0;
+}
+footer .copyright a {
+  color: #337ab7;
+}
+footer .copyright a:hover,
+footer .copyright a:focus {
+  color: #0085a1;
 }
 .floating-label-form-group {
   font-size: 14px;

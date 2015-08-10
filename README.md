@@ -1,4 +1,4 @@
-#Hux Blog 
+#Hux Blog
 
 ###[View Live Hux Blog &rarr;](http://huxpro.github.io)
 
@@ -17,9 +17,9 @@
 
 ### Support
 
-- Expect Star when forked
+- Feel free to fork. Please keep the copyright link in the footer
+- Expect Star if you like/fork it
 - Any problem, just open an issue here
-
 
 
 ### Thanks

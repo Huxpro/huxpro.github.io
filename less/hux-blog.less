@@ -392,6 +392,14 @@ footer {
 		font-size: 14px;
 		text-align: center;
 		margin-bottom: 0;
+		a{
+			color:#337ab7;
+			// different to @brand-primary
+			&:hover,
+			&:focus {
+				color: @brand-primary;
+			}
+		}
 	}
 }
 
