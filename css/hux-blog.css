@@ -55,6 +55,7 @@ blockquote p {
     color: #337ab7;
     border-color: #337ab7;
     padding: 0em 0.4em;
+    background: white;
   }
 }
 .table th,
