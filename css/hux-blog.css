@@ -247,6 +247,9 @@ hr.small {
     padding: 150px 0;
   }
 }
+.intro-header .site-heading {
+  padding: 95px 0 70px;
+}
 .intro-header .site-heading,
 .intro-header .page-heading {
   text-align: center;
@@ -260,7 +263,7 @@ hr.small {
 .intro-header .page-heading .subheading {
   font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.1;
   display: block;
   font-weight: 300;
@@ -568,7 +571,7 @@ body {
   }
 }
 #tag-heading {
-  padding: 70px 0 55px;
+  padding: 70px 0 60px;
 }
 @media only screen and (min-width: 768px) {
   #tag-heading {
