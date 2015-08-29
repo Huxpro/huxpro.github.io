@@ -63,7 +63,7 @@ blockquote {
 	}
 }
 
-@media screen and (max-width: 768px){ 
+@media screen and (max-width: 768px){
 	select{
 		-webkit-appearance:none;
 		margin-top:15px;
@@ -123,8 +123,23 @@ hr.small {
 
 // Navigation
 
+// materialize, mobile only
+@media only screen and (max-width: 767px) {
+	.navbar-default .navbar-collapse{
+		border: none;
+		background: white;
+		border-radius: 3px;
+		width: 160px;
+		float: right;
+		margin: 0px;
+		box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
+	}
+}
+
 .navbar-custom {
-	background: white;
+	// materialize
+	background: none;
+	border:none;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -133,6 +148,11 @@ hr.small {
 	.sans-serif;
 	.navbar-brand {
 		font-weight: 800;
+		// materialize
+		color: white;
+		&:hover{
+			color: rgba(255, 255, 255, 0.8);
+		}
 	}
 	.nav {
 		li {
@@ -237,7 +257,7 @@ hr.small {
 	.site-heading,
 	.post-heading,
 	.page-heading {
-		padding: 100px 0 50px;
+		padding: 85px 0 55px;
 		color: white;
 		@media only screen and (min-width: 768px) {
 			padding: 150px 0;
@@ -602,8 +622,9 @@ body {
 }
 
 #tag-heading{
+	padding: 70px 0 55px;
 	@media only screen and (min-width: 768px) {
-		padding:50px 0;
+		padding:55px 0;
 	}
 
 }
@@ -713,7 +734,7 @@ body {
 		background-color: inherit;
 	}
   	&:active{
-  		background-color: #ddd;
+  		background-color: rgba(255, 255, 255, 0.25);
   	}
 }
 
@@ -729,6 +750,8 @@ body {
 	.icon-bar{
 		width: 18px;
 		border-radius: 0px;
+		// materialize
+		background-color: white;
 	}
 	.icon-bar+.icon-bar{
 		margin-top: 3px;
