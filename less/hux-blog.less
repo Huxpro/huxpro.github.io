@@ -128,7 +128,7 @@ hr.small {
 	.navbar-default .navbar-collapse{
 		border: none;
 		background: white;
-		border-radius: 3px;
+		border-radius: 2px;
 		width: 160px;
 		float: right;
 		margin: 0px;
@@ -150,6 +150,8 @@ hr.small {
 		font-weight: 800;
 		// materialize
 		color: white;
+		height: 56px;
+		line-height: 24px;
 		&:hover{
 			color: rgba(255, 255, 255, 0.8);
 		}
@@ -161,6 +163,9 @@ hr.small {
 				font-size: 12px;
 				font-weight: 800;
 				letter-spacing: 1px;
+				&:active{
+					background: rgba(0,0,0,0.12)
+				}
 			}
 		}
 	}
@@ -173,6 +178,7 @@ hr.small {
 		.navbar-brand {
 			color: white;
 			padding: 20px;
+			line-height: 20px;
 			&:hover,
 			&:focus {
 				color: @white-faded;
@@ -742,7 +748,7 @@ body {
 
 .navbar-default .navbar-toggle{
 	border-color: transparent;
-	padding:14px 11px;
+	padding:17px 14px;
 	margin-top: 4px;
 	margin-right: 10px;
 	margin-bottom: 4px;
