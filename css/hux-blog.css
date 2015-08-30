@@ -130,7 +130,7 @@ hr.small {
   font-weight: 800;
   color: white;
   height: 56px;
-  line-height: 26px;
+  line-height: 25px;
 }
 .navbar-custom .navbar-brand:hover {
   color: rgba(255, 255, 255, 0.8);
@@ -249,6 +249,11 @@ hr.small {
 }
 .intro-header .site-heading {
   padding: 95px 0 70px;
+}
+@media only screen and (min-width: 768px) {
+  .intro-header .site-heading {
+    padding: 150px 0;
+  }
 }
 .intro-header .site-heading,
 .intro-header .page-heading {
