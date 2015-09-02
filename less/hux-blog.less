@@ -85,6 +85,10 @@ hr.small {
 	border-color: white;
 }
 // add by Hux
+pre code{
+	// sometimes you should use vendor-feature.
+	-webkit-overflow-scrolling: touch;
+}
 @media screen and (max-width: 500px){
 	pre code{
 		display: block;
@@ -650,6 +654,7 @@ body {
 		line-height: 28px;
 		margin: 0 2px;
 		margin-bottom: 8px;
+		background: #D6D6D6;
 		&:hover, &:active{
 			background-color: #0085a1 !important;
 		}
