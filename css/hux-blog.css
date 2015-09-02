@@ -68,7 +68,7 @@ hr.small {
   border-width: 4px;
   border-color: white;
 }
-pre code {
+pre {
   -webkit-overflow-scrolling: touch;
 }
 @media screen and (max-width: 500px) {
