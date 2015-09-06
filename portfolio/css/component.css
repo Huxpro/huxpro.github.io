@@ -14,7 +14,7 @@
 	padding: 0;
 	list-style: none;
 	position: relative;
-} 
+}
 
 /* The line */
 .cbp_tmtimeline:before {
@@ -43,6 +43,7 @@
 .cbp_tmtimeline > li .cbp_tmtime span {
 	display: block;
 	text-align: right;
+	line-height: 1;
 }
 
 .cbp_tmtimeline > li .cbp_tmtime span:first-child {
@@ -76,7 +77,7 @@
 	background: #6cbfee;
 }
 
-.cbp_tmtimeline > li .cbp_tmlabel h2 { 
+.cbp_tmtimeline > li .cbp_tmlabel h2 {
 	margin-top: 0px;
 	padding: 0 0 0.5em 0;
 	font-weight: normal;
@@ -196,7 +197,7 @@
 		float: right;
 		left: auto;
 		margin: -55px 5px 0 0px;
-	}	
+	}
 }
 
 /******* Hux Branch *****/
@@ -204,7 +205,7 @@ html{
 	font-size: 90%;
 }
 body{
-	font-family: "Hiragino Sans GB","Microsoft Yahei", "黑体",sans-serif;
+
 }
 /*footer{
 	background: #6ca8fb;
@@ -250,8 +251,8 @@ header{
 header p{
 	text-align: center;
 	color: white;
-	font-size: 1.05em;
-	line-height: 2em;
+	font-size: 1.25em;
+	line-height: 1.6em;
 	letter-spacing: 1px;
 	margin: 2em;
 }
@@ -353,6 +354,7 @@ header .tri:after{
 		font-size: 90%;
 	}
 	header p{
+		font-size: 1.05em;
 		letter-spacing: 0px;
 		margin: 1.5em;
 	}
