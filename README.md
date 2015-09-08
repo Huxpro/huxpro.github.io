@@ -48,10 +48,9 @@ weibo_username: huxpro      # and the links in footer will auto-updated.
 # Build settings
 # paginate: 10              # nums of posts in one page
 
-# Duoshuo settings  
-# Please set your own DuoShuo account.
-useDuoshuo: true    # Comment and Share
-useShare: true      # use Comment only. seeing the Share component is depend on Comment so we can NOT use share only.
+# Duoshuo settings          # Please set your own DuoShuo account.
+useDuoshuo: true            # Comment and Share
+useShare: true              # use Comment only. seeing the Share component is depend on Comment so we can NOT use share only.
 
 ```
 
@@ -74,7 +73,7 @@ tags:
     - Life
 ---
 
-``` 
+```
 
 #### Advanced
 
