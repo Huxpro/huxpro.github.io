@@ -1,29 +1,39 @@
 # Site settings
-title: Hux Blog 
+title: Hux Blog
 header-img: img/home-bg.jpg
 email: huxpro@gmail.com
 description: "一生想做浪漫极客。@Hux黄玄的博客主页、个人网站, 知乎@黄玄／阿里@鬼栈／Front-End／UX Unicorn／Web &amp; Mobile Lover／Motion Design "
 baseurl: ""
 url: "http://huxpro.github.io"
-twitter_username: huxpro
+RSS: false
+#twitter_username: huxpro
 github_username:  huxpro
 facebook_username:  huxpro
 weibo_username: huxpro
 zhihu_username: huxpro
 
 # Build settings
-markdown: kramdown 
-
-# markdown: redcarpet
-# redcarpet can auto highlight code, but the lack of header-id make the catalog impossible 
-
 highlighter: pygments
 permalink: pretty
 paginate: 20
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 
-# use Github Flavored Markdown !important
+# Markdown settings
+# redcarpet can auto highlight code, but the lack of header-id make the catalog impossible, so I switch to kramdown
+markdown: kramdown
 # document: http://jekyllrb.com/docs/configuration/#kramdown
-
+# use Github Flavored Markdown !important
 kramdown:
   input: GFM
+
+# Duoshuo settings
+# Please set your own DuoShuo account.
+useDuoshuo: true    # Comment and Share
+useShare: true      # use Comment only. seeing the Share component is depend on Comment so we can NOT use share only.
+
+
+# Todo: Analysis settings
+# Please set your own analysis account
+useBaiduAnalysis: true
+useTencentAnalysis: true
+useGoogleAnalysis: true

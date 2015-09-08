@@ -6,8 +6,8 @@ header-img: "img/about-bg.jpg"
 ---
 
 <!-- Language Selector -->
-<select onchange= "onLanChange(this.options[this.options.selectedIndex].value)">   
-    <option value="0" selected> 中文 Chinese </option> 
+<select onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
+    <option value="0" selected> 中文 Chinese </option>
     <option value="1"> 英语 English </option>
 </select>
 
@@ -41,7 +41,7 @@ header-img: "img/about-bg.jpg"
         <li><a href="{{site.baseUrl}}/attach/2015_Hux_UX & PD_en.pdf"> 2015_Hux_UX & PD_en </a></li>
     </ul>
 
-    一些期待成为的角色: 
+    一些期待成为的角色:
     <ul>
         <li> UX Unicorn </li>
         <li> Product Engineer </li>
@@ -62,7 +62,7 @@ header-img: "img/about-bg.jpg"
     <p>Programmer, JavaScript Engineer Intern of <a href="http://m.wepiao.com/index.html">Wechat Movie</a>, previous worked in <a href="http://alitrip.com" target="_blank">Alibaba Trip</a> as Front End Engineer for one year, looking for opportunities abroad.</p>
 
     <p>Designer, offered as UI/UX Designer Intern by Alibaba Group, Microsoft Bing etc. Experienced in Motion Graphic Design, also familer with Layout and Typography.</p>
-    
+
     <p>Product Design and Program Management is also attractive and comfortable to me.</p>
 
     <p>My Chinese name is <b>Huang Xuan</b>, you can call me English name <b>Hux</b> for short.</p>
@@ -75,7 +75,7 @@ header-img: "img/about-bg.jpg"
         <li><a href="{{site.baseUrl}}/attach/2015_Hux_UX & PD_en.pdf"> 2015_Hux_UX & PD_en </a></li>
     </ul>
 
-    My dream position include: 
+    My dream position include:
     <ul>
         <li> UX Unicorn </li>
         <li> Product Engineer </li>
@@ -103,6 +103,7 @@ header-img: "img/about-bg.jpg"
 </script>
 
 
+{% if site.useDuoshuo %}
 <!-- 多说评论框 start -->
     <div class="comment">
         <div class="ds-thread" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-url="{{site.url}}/about/"></div>
@@ -122,3 +123,4 @@ var duoshuoQuery = {short_name:"huxblog"};
     })();
 </script>
 <!-- 多说公共JS代码 end -->
+{% endif %}

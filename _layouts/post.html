@@ -46,27 +46,17 @@ layout: default
 
                 <hr>
 
+                {% if site.useDuoshuo && site.useShare %}
                 <!-- 多说 Share start -->
-                <style>
-                    .ds-share{
-                        text-align: right;
-                    }
-                    /* 移动端暂时不显示 */
-                    @media only screen and (max-width: 700px) {
-                        .ds-share {
-
-                        }
-                    }
                 </style>
-
                 <div class="ds-share"
+                    style="text-align: right"
                     data-thread-key="{{page.id}}" data-title="{{page.title}}"
                     data-images="{{ site.url }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}"
                     data-content="{{ content | strip_html | truncate:80 }} | Hux Blog，@Hux黄玄 的个人博客"
                     data-url="{{site.url}}{{page.url}}">
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
-
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
                         <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
                         <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
@@ -78,6 +68,7 @@ layout: default
                 <hr>
                 </div>
                 <!-- 多少 Share end-->
+                {% endif %}
 
 
                 <ul class="pager">
@@ -93,18 +84,21 @@ layout: default
                     {% endif %}
                 </ul>
 
+
+                {% if site.useDuoshuo %}
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-url="{{site.url}}{{page.url}}"></div>
                 </div>
                 <!-- 多说评论框 end -->
+                {% endif %}
             </div>
         </div>
     </div>
 </article>
 
 
-
+{% if site.useDuoshuo %}
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"huxblog"};
@@ -118,6 +112,7 @@ var duoshuoQuery = {short_name:"huxblog"};
     })();
 </script>
 <!-- 多说公共JS代码 end -->
+{% endif %}
 
 <!-- async load function -->
 <script>

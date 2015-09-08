@@ -48,6 +48,7 @@
 
 .cbp_tmtimeline > li .cbp_tmtime span:first-child {
 	font-size: 1em;
+	line-height: 1.4;
 	color: #bdd0db;
 }
 
