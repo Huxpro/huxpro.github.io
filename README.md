@@ -5,7 +5,7 @@
 ![](http://pic3.zhimg.com/4b3c678f7c23067a1975bbc20f6711ea_b.jpg)
 
 
-### Feature
+## Feature
 
 - Full-feature **tag** support
 - UX optimize for mobile used (bunch of `webkit-vender-something`)
@@ -16,7 +16,7 @@
 - Use Baidu, Tencent analyze (TODO: support GA)
 
 
-### Support
+## Support
 
 - **Feel free to fork. Appreciated if you keep the copyright link in the footer**
 - Expect Star if you like/fork this theme
@@ -85,6 +85,6 @@ There are a number of tasks it performs like minification of the JavaScript, com
 
 
 
-### Thanks
+## Thanks
 
 Forked from [IronSummitMedia/startbootstrap-clean-blog-jekyll](https://github.com/IronSummitMedia/startbootstrap-clean-blog-jekyll)
