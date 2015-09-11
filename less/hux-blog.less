@@ -1,8 +1,8 @@
 @import "variables.less";
 @import "mixins.less";
+@import "sidebar.less";
 
 // Global Components
-
 
 body {
 	.sans-serif;
@@ -167,6 +167,7 @@ pre,.table-responsive{
 				font-size: 12px;
 				font-weight: 800;
 				letter-spacing: 1px;
+				// only highlight in mobile
 				&:active{
 					background: rgba(0,0,0,0.12)
 				}
@@ -196,6 +197,9 @@ pre,.table-responsive{
 					&:hover,
 					&:focus {
 						color: @white-faded;
+					}
+					&:active{
+						background: none;
 					}
 				}
 			}

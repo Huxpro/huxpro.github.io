@@ -1,3 +1,22 @@
+.sidebar-container {
+  padding-left: 5%;
+}
+.sidebar-container h5 {
+  padding-bottom: 1em;
+}
+.sidebar-container a {
+  color: #bfbfbf;
+  font-size: 15px;
+}
+.sidebar-container .tags a {
+  color: #bfbfbf;
+  border-color: #bfbfbf;
+}
+.sidebar-container .tags a:hover,
+.sidebar-container .tags a:active {
+  color: #0085a1;
+  border-color: #0085a1;
+}
 body {
   font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;

@@ -39,3 +39,15 @@ useShare: true      # use Comment only. seeing the Share component is depend on 
 useBaiduAnalysis: true
 useTencentAnalysis: true
 useGoogleAnalysis: true
+
+
+# Use Sidebar
+sidebar: true
+
+# Friends
+friends: [
+    {
+        title: "天镶的博客",
+        href: "http://lingyu.wang/"
+    }
+]

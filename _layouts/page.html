@@ -20,8 +20,32 @@ layout: default
 <!-- Main Content -->
 <div class="container">
 	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+        <!-- <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container"> -->
+        <!-- Main -->
+		<div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 			{{ content }}
+		</div>
+        <!-- SideBar -->
+        <div class="col-lg-3 col-md-10 sidebar-container">
+            <!-- feature tags -->
+            <hr>
+            <h5> FEATURE TAGS </h5>
+            <div class="tags">
+				{% for tag in site.tags %}
+                    {% if tag[1].size > 1 %}
+        				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                            {{ tag[0] }}
+                        </a>
+                    {% endif %}
+				{% endfor %}
+			</div>
+            <!-- Friends Blog -->
+            <hr>
+            <h5> FRIENDS </h5>
+
+            {% for friend in site.friends %}
+                    <a href="{{friend.href}}">{{friend.title}}</a>
+            {% endfor %}
 		</div>
 	</div>
 </div>
