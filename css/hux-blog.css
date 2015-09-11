@@ -1,12 +1,32 @@
+/*!
+ * Hux Blog v1.0.0 (http://huxpro.github.io)
+ * Copyright 2015 Hux
+ */
+
+@media (min-width: 1200px) {
+  .post-container,
+  .sidebar-container {
+    padding-right: 5%;
+  }
+}
 .sidebar-container {
-  padding-left: 5%;
+  color: #bfbfbf;
+  font-size: 14px;
 }
 .sidebar-container h5 {
+  color: #808080;
   padding-bottom: 1em;
 }
-.sidebar-container a {
+.sidebar-container h5 a {
+  color: #808080;
+}
+.sidebar-container h5 a:hover {
+  color: #0085a1;
+  text-decoration: none;
+}
+.sidebar-container a,
+.sidebar-container li a {
   color: #bfbfbf;
-  font-size: 15px;
 }
 .sidebar-container .tags a {
   color: #bfbfbf;
@@ -16,6 +36,17 @@
 .sidebar-container .tags a:active {
   color: #0085a1;
   border-color: #0085a1;
+}
+.sidebar-container .short-about img {
+  width: 80%;
+  display: block;
+  border-radius: 5px;
+}
+.sidebar-container .short-about p {
+  margin: 20px 0;
+}
+.sidebar-container .short-about .list-inline > li {
+  padding-left: 0px;
 }
 body {
   font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
@@ -191,6 +222,9 @@ pre,
   .navbar-custom .nav li a:hover,
   .navbar-custom .nav li a:focus {
     color: rgba(255, 255, 255, 0.8);
+  }
+  .navbar-custom .nav li a:active {
+    background: none;
   }
 }
 @media only screen and (min-width: 1170px) {
