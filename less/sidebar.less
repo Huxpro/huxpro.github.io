@@ -1,0 +1,56 @@
+@import "variables.less";
+
+// Sidebar Components
+
+// Large Screen
+@media (min-width: 1200px){
+    .post-container, .sidebar-container{
+        padding-right: 5%;
+    }
+}
+
+.sidebar-container{
+    color: @gray-l;
+    font-size: 14px;
+    h5{
+        color: @gray;
+        padding-bottom: 1em;
+        a{
+            color: @gray;
+            &:hover{
+                color: @brand-primary;
+                text-decoration: none;
+            }
+        }
+    }
+    a, li a{
+        color: @gray-l;
+    }
+    .tags{
+        a{
+            color: @gray-l;
+            border-color: @gray-l;
+            &:hover, &:active{
+                color: @brand-primary;
+                border-color: @brand-primary;
+            }
+        }
+    }
+    .short-about{
+        img{
+            width: 80%;
+            display: block;
+            border-radius: 5px;
+        }
+        p{
+            margin: 20px 0;
+        }
+        .list-inline>li{
+            padding-left: 0px;
+            a{
+            }
+        }
+    }
+}
+
+// Friends
