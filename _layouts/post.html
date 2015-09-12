@@ -114,6 +114,8 @@ var duoshuoQuery = {short_name:"huxblog"};
 <!-- 多说公共JS代码 end -->
 {% endif %}
 
+
+{% if site.anchorjs %}
 <!-- async load function -->
 <script>
     function async(u, c) {
@@ -125,7 +127,6 @@ var duoshuoQuery = {short_name:"huxblog"};
       s.parentNode.insertBefore(o, s);
     }
 </script>
-
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
     async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
@@ -148,3 +149,4 @@ var duoshuoQuery = {short_name:"huxblog"};
         }
     }
 </style>
+{% endif %}
