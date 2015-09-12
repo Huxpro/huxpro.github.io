@@ -1,1 +1,1 @@
-git push origin master; git push gitcafe master:gitcafe-pages
+git push origin master --tags; git push gitcafe master:gitcafe-pages --tags
