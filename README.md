@@ -2,25 +2,28 @@
 
 ###[View Live Hux Blog &rarr;](http://huxpro.github.io)
 
-![](http://pic3.zhimg.com/4b3c678f7c23067a1975bbc20f6711ea_b.jpg)
+![](http://huangxuan.me/img/blog-desktop.jpg)
 
+## New Feature (V1.1）
+
+- We now support a clean and gorgeous **[SideBar](#sidebar)** for displaying more info
+- **[Friends](#friends)** is also added as a common feature of a blog theme
 
 ## Feature
 
-- Full-feature **tag** support
+- Full-feature **Tag** support
 - UX optimize for mobile used (bunch of `webkit-vender-something`)
 - Typographic optimize for Chinese (font-family, size, weight..)
 - Network optimze for China network environment (drop google webfont, use local CDN)
-- Using Github Flavored Markdown
-- Use duoshuo as the Disqus-like third party discussion system
-- Use Baidu, Tencent analyze (TODO: support GA)
-
+- Using [Github Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/)
+- Use [DuoShuo](http://duoshuo.com/) as the Disqus-like third party discussion system
+- Use Baidu, Tencent/QQ analysis *(TODO: support GA)*
 
 ## Support
 
-- **Feel free to fork. Appreciated if you keep the copyright link in the footer**
-- Expect Star if you like/fork this theme
-- Any problem or request, just open an issue here, I will help U.
+- **Feel free to fork. Appreciated if you keep the theme author link in the footer**
+- Expect Star if you like or fork this theme ;)
+- Any problem or requirement, just open an issue here and I will help you.
 - 如果有需要，可以更新一篇中文文档 ;)
 
 
@@ -54,12 +57,12 @@ useShare: true              # use Comment only. seeing the Share component is de
 
 ```
 
-You can check more options in the jekyll official site, or directly dive into code.
+There are more options you can check out in the [Jekyll - Official Site](http://jekyllrb.com/), or you can directly dive into code to find more.
 
 
 #### Write Posts
 
-Free free to checkout markdown files in `_posts`, and you will quickly realized how to post article with markdown and this theme:
+Free free to checkout Markdown files in the `_posts/`, you will quickly realized how to post your articles with magic Markdown plus this theme:
 
 ```
 ---
@@ -77,14 +80,54 @@ tags:
 
 #### Advanced
 
-If you wanna change code yourself, a Grunt environment is also included. (Thanks to Clean Blog.)
+If you wanna change code yourself, a [Grunt](gruntjs.com) environment is also included. (Thanks to Clean Blog.)
 
 There are a number of tasks it performs like minification of the JavaScript, compiling of the LESS files, adding banners to keep the Apache 2.0 license intact, and watching for changes. Run the grunt default task by entering grunt into your command line which will build the files. You can use grunt watch if you are working on the JavaScript or the LESS.
 
-**Try to understand code in `_include`, `_layouts`, then you can modify jekyll template to do more creative customization.**
+**Try to understand code in `_include/`, `_layouts/`, then you can modify Jekyll [Liquid](https://github.com/Shopify/liquid/wiki) template directly to do more creative customization.**
 
+#### SideBar
+
+![](http://huangxuan.me/img/blog-sidebar.jpg)
+
+Seeing more information may be necessary for you to display, from V1.1, a clean, gorgeous **SideBar** is added for you, which provide more area for displaying possible modules including *Feature Tags*, *Short About Me*, *Friends* etc. You can enable *(it is default enable)* this feature by simply config:
+
+```
+# Sidebar settings
+sidebar: true
+sidebar-feature-tags: true
+sidebar-about-description: "your description here"
+sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
+```
+
+We default support *Feature Tags*, *Short About Me*, *Friends* these three modules and you can add your own. The Sidebar is naturally responsive and would be push to bottom in a small screen (<768px), the *Short About Me* would be also hidden in small screen.
+
+you can disable *Feature Tags* by removing `sidebar-feature-tags` and disable *Short About Me* by removing `sidebar-about-description` plus `sidebar-avatar`. More detail of *Friends* are talking below.
+
+
+#### Friends
+
+Friends is very common feature of blog seeing the SEO, so I add it in V1.1 release to help that. One of the awesome point of *Friends* is that it can live without enable sidebar. The *Friends* would display in the bottom auto when `sidebar` set to false.
+
+
+You can just add your friends information in `_config.yml` with a familiar JSON syntax and everything is done, very easy:
+
+```
+# Friends
+friends: [
+    {
+        title: "Foo Blog",
+        href: "http://foo.github.io/"
+    },
+    {
+        title: "Bar Blog",
+        href: "http://bar.github.io"
+    }
+]
+```
 
 
 ## Thanks
 
-Forked from [IronSummitMedia/startbootstrap-clean-blog-jekyll](https://github.com/IronSummitMedia/startbootstrap-clean-blog-jekyll)
+This theme is forked from [IronSummitMedia/startbootstrap-clean-blog-jekyll](https://github.com/IronSummitMedia/startbootstrap-clean-blog-jekyll)  
+Thanks Jekyll and Github Pages!
