@@ -18,23 +18,20 @@
   padding-bottom: 1em;
 }
 .sidebar-container h5 a {
-  color: #808080;
-}
-.sidebar-container h5 a:hover {
-  color: #0085a1;
   text-decoration: none;
 }
-.sidebar-container a,
-.sidebar-container li a {
-  color: #bfbfbf;
+.sidebar-container a {
+  color: #bfbfbf !important;
+}
+.sidebar-container a:hover,
+.sidebar-container a:active {
+  color: #0085a1 !important;
 }
 .sidebar-container .tags a {
-  color: #bfbfbf;
   border-color: #bfbfbf;
 }
 .sidebar-container .tags a:hover,
 .sidebar-container .tags a:active {
-  color: #0085a1;
   border-color: #0085a1;
 }
 .sidebar-container .short-about img {

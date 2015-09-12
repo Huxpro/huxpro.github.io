@@ -22,22 +22,19 @@
         color: @gray;
         padding-bottom: 1em;
         a{
-            color: @gray;
-            &:hover{
-                color: @brand-primary;
-                text-decoration: none;
-            }
+            text-decoration: none;
         }
     }
-    a, li a{
-        color: @gray-l;
+    a{
+        color: @gray-l !important;
+        &:hover, &:active{
+            color: @brand-primary !important;
+        }
     }
     .tags{
         a{
-            color: @gray-l;
             border-color: @gray-l;
             &:hover, &:active{
-                color: @brand-primary;
                 border-color: @brand-primary;
             }
         }
@@ -53,8 +50,6 @@
         }
         .list-inline>li{
             padding-left: 0px;
-            a{
-            }
         }
     }
 }
