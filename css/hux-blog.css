@@ -1,11 +1,11 @@
-/*!
- * Hux Blog v1.0.0 (http://huxpro.github.io)
- * Copyright 2015 Hux
- */
-
 @media (min-width: 1200px) {
   .post-container,
   .sidebar-container {
+    padding-right: 5%;
+  }
+}
+@media (min-width: 768px) {
+  .post-container {
     padding-right: 5%;
   }
 }

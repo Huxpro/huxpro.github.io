@@ -39,14 +39,25 @@ layout: default
         {% else %}
             <!-- USE SIDEBAR -->
             <!-- Main -->
-    		<div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-10 col-sm-offset-1
+                post-container
+            ">
     			{{ content }}
     		</div>
             <!-- SideBar -->
-            <div class="col-lg-3 col-lg-offset-0 col-md-10 col-md-offset-1 sidebar-container">
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-10 col-sm-offset-1
+                sidebar-container
+            ">
                 <!-- Feature Tags -->
-                <section class="visible-lg">
-                    <hr><h5><a href="/tags/">FEATURE TAGS</a></h5>
+                <section >
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURE TAGS</a></h5>
                     <div class="tags">
         				{% for tag in site.tags %}
                             {% if tag[1].size > 1 %}
@@ -58,16 +69,15 @@ layout: default
         			</div>
                 </section>
                 <!-- Short About -->
-                <section class="visible-lg">
+                <section class="visible-md visible-lg">
                     <hr><h5><a href="/about/">ABOUT ME</a></h5>
                     <div class="short-about">
                         {% if site.sidebar-avatar %}
                             <img src="{{site.sidebar-avatar}}" />
                         {% endif %}
-                        <p>
-                            写写代码，做做设计，看看产品。
-                            世界那么大，多玩玩看看。
-                        </p>
+                        {% if site.sidebar-about-description %}
+                            <p>{{site.sidebar-about-description}}</p>
+                        {% endif %}
                         <!-- SNS Link -->
                         <ul class="list-inline">
                             {% if site.RSS %}
@@ -135,7 +145,7 @@ layout: default
                 </section>
                 <!-- Friends Blog -->
                 {% if site.friends %}
-                <hr class="visible-lg">
+                <hr>
                 <h5>FRIENDS</h5>
                 <ul class="list-inline">
                     {% for friend in site.friends %}
