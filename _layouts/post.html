@@ -92,6 +92,21 @@ layout: default
                 </div>
                 <!-- 多说评论框 end -->
                 {% endif %}
+
+                <!-- friends -->
+                {% if site.friends %}
+                <div class="sidebar-container">
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline" style="
+                        margin-bottom: 0;
+                    ">
+                        {% for friend in site.friends %}
+                            <li><a href="{{friend.href}}">{{friend.title}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -135,7 +150,7 @@ var duoshuoQuery = {short_name:"huxblog"};
           placement: 'right',
           icon: '#'
         };
-        anchors.add().remove('.intro-header h1').remove('.subheading');
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
 <style>
