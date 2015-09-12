@@ -56,9 +56,11 @@ friends: [
     {
         title: "天镶的博客",
         href: "http://lingyu.wang/"
-    },
-    {
+    },{
         title: "Luke的自留地",
         href: "http://hmqk1995.github.io"
+    },{
+        title: "SmdCn's Blog",
+        href: "http://blog.smdcn.net"
     }
 ]
