@@ -90,7 +90,7 @@ There are a number of tasks it performs like minification of the JavaScript, com
 
 ![](http://huangxuan.me/img/blog-sidebar.jpg)
 
-Seeing more information may be necessary for you to display, from V1.1, a clean, gorgeous **SideBar** is added for you, which provide more area for displaying possible modules including *Feature Tags*, *Short About Me*, *Friends* etc. You can enable *(it is default enable)* this feature by simply config:
+Seeing more information may be necessary for you to display, from V1.1, a clean, gorgeous **SideBar** is added for you, which provide more area for displaying possible modules including *Featured Tags*, *Short About Me*, *Friends* etc. You can enable *(it is default enable)* this feature by simply config:
 
 ```
 # Sidebar settings
@@ -100,9 +100,9 @@ sidebar-about-description: "your description here"
 sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
 ```
 
-We default support *Feature Tags*, *Short About Me*, *Friends* these three modules and you can add your own. The Sidebar is naturally responsive and would be push to bottom in a small screen (<768px), the *Short About Me* would be also hidden in small screen.
+We default support *Featured Tags*, *Short About Me*, *Friends* these three modules and you can add your own. The Sidebar is naturally responsive and would be push to bottom in a small screen (<768px), the *Short About Me* would be also hidden in small screen.
 
-you can disable *Feature Tags* by removing `sidebar-feature-tags` and disable *Short About Me* by removing `sidebar-about-description` plus `sidebar-avatar`. More detail of *Friends* are talking below.
+you can disable *Featured Tags* by removing `sidebar-featured-tags` and disable *Short About Me* by removing `sidebar-about-description` plus `sidebar-avatar`. More detail of *Friends* are talking below.
 
 
 #### Friends
