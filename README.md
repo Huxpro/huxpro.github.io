@@ -12,9 +12,9 @@
 ## Feature
 
 - Full-feature **Tag** support
-- UX optimize for mobile used (bunch of `webkit-vender-something`)
-- Typographic optimize for Chinese (font-family, size, weight..)
-- Network optimze for China network environment (drop google webfont, use local CDN)
+- UX optimization for mobile used (bunch of `webkit-vender-something`)
+- Typographic optimization for Chinese (font-family, size, weight..)
+- Network optimizaition for China network environment (drop google webfont, use local CDN)
 - Using [Github Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/)
 - Use [DuoShuo](http://duoshuo.com/) as the Disqus-like third party discussion system
 - Use Baidu, Tencent/QQ analysis *(TODO: support GA)*
@@ -62,7 +62,7 @@ There are more options you can check out in the [Jekyll - Official Site](http://
 
 #### Write Posts
 
-Free free to checkout Markdown files in the `_posts/`, you will quickly realized how to post your articles with magic Markdown plus this theme:
+Feel free to checkout Markdown files in the `_posts/`, you will quickly realized how to post your articles with magic Markdown plus this theme:
 
 ```
 ---
@@ -102,12 +102,12 @@ sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
 
 We default support *Featured Tags*, *Short About Me*, *Friends* these three modules and you can add your own. The Sidebar is naturally responsive and would be push to bottom in a small screen (<768px), the *Short About Me* would be also hidden in small screen.
 
-you can disable *Featured Tags* by removing `sidebar-featured-tags` and disable *Short About Me* by removing `sidebar-about-description` plus `sidebar-avatar`. More detail of *Friends* are talking below.
+you can disable *Featured Tags* by removing `sidebar-featured-tags` and disable *Short About Me* by removing `sidebar-about-description` plus `sidebar-avatar`. More details of *Friends* are talking below.
 
 
 #### Friends
 
-Friends is very common feature of blog seeing the SEO, so I add it in V1.1 release to help that. One of the awesome point of *Friends* is that it can live without enable sidebar. The *Friends* would display in the bottom auto when `sidebar` set to false.
+Friends is a very common feature of blog seeing the SEO, so I add it in V1.1 release to help that. One of the awesome point of *Friends* is that it can live without enable sidebar. The *Friends* would display in the bottom auto when `sidebar` set to false.
 
 
 You can just add your friends information in `_config.yml` with a familiar JSON syntax and everything is done, very easy:
