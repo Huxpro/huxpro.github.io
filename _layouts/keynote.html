@@ -125,9 +125,19 @@ layout: default
 <script>
     var $header = document.getElementsByTagName("header")[0];
     function resize(){
-        // leave a 1% blank to imply that there has content below.
-        $header.style.height = (window.innerHeight * 0.99) + 'px';
+        /*
+         * leave 10+% blank to both
+         * - told/imply users that there has more content below
+         * - let user can scroll in mobile device, seeing the keynote-view is unscrollable
+         */
+        $header.style.height = (window.innerHeight * 0.87) + 'px';
     }
+    document.addEventListener('DOMContentLoaded', function(){
+        resize();
+    })
+    window.addEventListener('load', function(){
+        resize();
+    })
     window.addEventListener('resize', function(){
         resize();
     })
