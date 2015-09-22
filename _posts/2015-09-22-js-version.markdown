@@ -12,11 +12,6 @@ tags:
 ---
 
 
-本文译自 [ES5, ES6, ES2016, ES.Next: What's going on with JavaScript versioning?](http://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)   
-译者 [Hux](http://huangxuan.me)，转载请注明
-
----
-
 JavaScript 有着很奇怪的命名史。
 
 1995 年，它作为网景浏览器（Netscape Navigator）的一部分首次发布，网景给这个新语言命名为 LiveScript。一年后，为了搭上当时媒体热炒 Java 的顺风车，临时改名为了 JavaScript *（当然，Java 和 JavaScript 的关系，就和雷锋和雷锋塔一样 —— 并没有什么关系）*
@@ -54,7 +49,9 @@ JavaScript 有着很奇怪的命名史。
 
 在这整个 Blog 中，我将把目前的 ECMAScript 版本称作 ES6（因为这是大部分开发者最习以为常的），把明年的规范称作 ES2016（因为，与 ES6/ES2015 不同，这个名字将在整个标准化过程中沿用）并且将那些还没有成为 ECMAScript 定稿或草案的未来语言概念称为 ECMAScript 提案或者 JavaScript 提案。我将尽我所能在任何可能引起困惑的场合沿用这篇文章。
 
-### 一些资源
+#### 一些资源
+
+  
 
 * TC39 的 [Github 仓库](https://github.com/tc39/ecma262)上可以看到所有目前公开的提案
 * 如果你还不熟悉 ES6，Babel 有一个[很不错的特性概览](https://babeljs.io/docs/learn-es2015/)
@@ -62,3 +59,9 @@ JavaScript 有着很奇怪的命名史。
 
 <img class="shadow" width="320" src="/img/in-post/post-js-version/keep-calm-and-learn-javascript.png" />
 <small class="img-hint">来学 JavaScript 吧！</small>
+
+#### 著作权声明
+
+本文译自 [ES5, ES6, ES2016, ES.Next: What's going on with JavaScript versioning?](http://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)   
+译者 [黄玄](http://weibo.com/huxpro)，首次发布于 [Hux Blog](http://huangxuan.me)，转载请保留以上链接
+
