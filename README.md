@@ -4,10 +4,16 @@
 
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
+
+## New Feature (V1.2）
+
+- Brand new **[Keynote Layout](#keynote-layout)** is provided for easily posting beautiful HTML presentations you have created with this blog
+
+
 ## New Feature (V1.1）
 
 - We now support a clean and gorgeous **[SideBar](#sidebar)** for displaying more info
-- **[Friends](#friends)** is also added as a common feature of a blog theme
+- **[Friends](#friends)** is also added as a common feature of blog help you do SEO
 
 ## Feature
 
@@ -29,13 +35,13 @@
 
 ## Document
 
-#### Environment
+### Environment
 
 If you have jekyll installed, simply run `jekyll serve` in Command Line
 and preview the themes in your browser. You can use `jekyll serve --watch` to watch for changes in the source files as well.
 
 
-#### Get Started
+### Get Started
 
 You can easily get started by modifying `_config.yml`:
 
@@ -60,7 +66,7 @@ useShare: true              # use Comment only. seeing the Share component is de
 There are more options you can check out in the [Jekyll - Official Site](http://jekyllrb.com/), or you can directly dive into code to find more.
 
 
-#### Write Posts
+### Write Posts
 
 Feel free to checkout Markdown files in the `_posts/`, you will quickly realized how to post your articles with magic Markdown plus this theme:
 
@@ -78,7 +84,7 @@ tags:
 
 ```
 
-#### Advanced
+### Advanced
 
 If you wanna change code yourself, a [Grunt](gruntjs.com) environment is also included. (Thanks to Clean Blog.)
 
@@ -86,7 +92,7 @@ There are a number of tasks it performs like minification of the JavaScript, com
 
 **Try to understand code in `_include/`, `_layouts/`, then you can modify Jekyll [Liquid](https://github.com/Shopify/liquid/wiki) template directly to do more creative customization.**
 
-#### SideBar
+### SideBar
 
 ![](http://huangxuan.me/img/blog-sidebar.jpg)
 
@@ -105,7 +111,7 @@ We default support *Featured Tags*, *Short About Me*, *Friends* these three modu
 you can disable *Featured Tags* by removing `sidebar-featured-tags` and disable *Short About Me* by removing `sidebar-about-description` plus `sidebar-avatar`. More details of *Friends* are talking below.
 
 
-#### Friends
+### Friends
 
 Friends is a very common feature of blog seeing the SEO, so I add it in V1.1 release to help that. One of the awesome point of *Friends* is that it can live without enable sidebar. The *Friends* would display in the bottom auto when `sidebar` set to false.
 
@@ -126,6 +132,24 @@ friends: [
 ]
 ```
 
+
+### Keynote Layout
+
+![](http://huangxuan.me/img/blog-keynote)
+
+There is a increasing tendency to use Open Web technology to create keynotes, presentations, like Reveal.js, Impress.js, Slides, Prezi etc. I consider a modern blog should have abilities to post these HTML based presentation easily also abilities to play it directly.
+
+Under the hood, a `iframe` is used to include webpage from outer source, so the only things left is to give a url in the **front-matter**:
+
+```
+---
+layout:     keynote
+iframe:     "http://huangxuan.me/js-module-7day/"
+---
+
+```
+
+The iframe will be automatically resized to adapt different form factor and the device orientation. A Padding is left to imply user there has more content below, also ensure there is a area user can scrolled in mobile device seeing all most keynote framework prevent the browser default scroll behavior.
 
 ## Thanks
 
