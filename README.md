@@ -149,7 +149,7 @@ iframe:     "http://huangxuan.me/js-module-7day/"
 
 ```
 
-The iframe will be automatically resized to adapt different form factor and the device orientation. A Padding is left to imply user there has more content below, also ensure there is a area user can scrolled in mobile device seeing all most keynote framework prevent the browser default scroll behavior.
+The iframe will be automatically resized to adapt different form factor and the device orientation. A Padding is left to imply user there has more content below, also ensure there is a area user can scrolled in mobile device seeing most of the keynote framework prevent the browser default scroll behavior.
 
 ## Thanks
 
