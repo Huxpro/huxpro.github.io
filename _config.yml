@@ -1,19 +1,19 @@
 # Site settings
-title: Hux Blog
+title: Eric Blog
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
+email: changhuiyuan@gmail.com
 description: "一生想做浪漫极客。@Hux黄玄的博客主页、个人网站, 知乎@黄玄／阿里@鬼栈／Front-End／UX Unicorn／Web &amp; Mobile Lover／Motion Design "
 baseurl: ""
-url: "http://huxpro.github.io"
+url: "http://ChoingHyun.github.io"
 
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-#twitter_username:  huxpro
-facebook_username:  huxpro
+weibo_username:     changhuiyuan1992
+zhihu_username:     men-eric
+github_username:    ChoingHyun
+#twitter_username:  changhuiyuan1992
+facebook_username:  changhuiyuan1992
 
 
 # Build settings
