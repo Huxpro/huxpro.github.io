@@ -54,13 +54,7 @@ sidebar-avatar: /img/avatar-hux.jpeg     # use absolute URL.
 # Friends
 friends: [
     {
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
-    },{
-        title: "Luke的自留地",
-        href: "http://hmqk1995.github.io"
-    },{
-        title: "SmdCn's Blog",
-        href: "http://blog.smdcn.net"
-    }
+        title: "刘兴的博客",
+        href: "http://pangjiuzala.github.io/"
+    } 
 ]
