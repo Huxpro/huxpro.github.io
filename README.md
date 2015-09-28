@@ -38,7 +38,7 @@
 * [Environment](#environment)
 * [Get Started](#get-started)
 * [Write Posts](#write-posts)
-* [Header Image](#header-image])
+* [Header Image](#header-image)
 * [Advanced](#advanced)
 * [SideBar](#sidebar)
 * [Friends](#friends)
