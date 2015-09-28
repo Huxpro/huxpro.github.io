@@ -35,6 +35,15 @@
 
 ## Document
 
+* [Environment](#environment)
+* [Get Started](#get-started)
+* [Write Posts](#write-posts)
+* [Header Image](#header-image])
+* [Advanced](#advanced)
+* [SideBar](#sidebar)
+* [Friends](#friends)
+* [Keynote Layout](#keynote-layout)
+
 ### Environment
 
 If you have jekyll installed, simply run `jekyll serve` in Command Line
@@ -83,6 +92,17 @@ tags:
 ---
 
 ```
+
+### Header Image
+
+Change header images of any pages or any posts is pretty easy as mentioned above. But, thanks to [issue #6 (in Chinese)](https://github.com/Huxpro/huxpro.github.io/issues/6) asked, **how to make it looks great?**
+
+**Well...it is actually a design issue**, not a coding stuff. It is better that you have basic design knowledge, but not is ok, let me told you how to make it well-designed:
+
+Seeing the title text above image is **white**, the image should be **dark** to emphasize the contract. so we can easily add a **black overlay with fews of opacity**, which is depends on the brightness of the original images you used. you can process it in Photoshop, Sketch etc.
+
+In technical views, it can be done with CSS. However, the opacity of the black overlay is really hard to assigned, **every image has different brightness so the  degree it should be adjusted is different so it is impossible to hard code it.**
+
 
 ### Advanced
 
