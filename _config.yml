@@ -1,19 +1,19 @@
 # Site settings
-title: Hux Blog
+title: Eric Blog
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
+email: changhuiyuan@gmail.com
 description: "一生想做浪漫极客。@Hux黄玄的博客主页、个人网站, 知乎@黄玄／阿里@鬼栈／Front-End／UX Unicorn／Web &amp; Mobile Lover／Motion Design "
 baseurl: ""
-url: "http://huxpro.github.io"
+url: "http://ChoingHyun.github.io"
 
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-#twitter_username:  huxpro
-facebook_username:  huxpro
+weibo_username:     changhuiyuan1992
+zhihu_username:     men-eric
+github_username:    ChoingHyun
+#twitter_username:  changhuiyuan1992
+facebook_username:  changhuiyuan1992
 
 
 # Build settings
@@ -48,19 +48,13 @@ useGoogleAnalysis: true     # TODO
 # Sidebar settings
 sidebar: true
 sidebar-featured-tags: true
-sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，多玩玩看看。"
-sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
+sidebar-about-description: "世界那么大，多去看看。"
+sidebar-avatar: /img/avatar-hux.jpeg     # use absolute URL.
 
 # Friends
 friends: [
     {
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
-    },{
-        title: "Luke的自留地",
-        href: "http://hmqk1995.github.io"
-    },{
-        title: "SmdCn's Blog",
-        href: "http://blog.smdcn.net"
-    }
+        title: "刘兴的博客",
+        href: "http://pangjiuzala.github.io/"
+    } 
 ]
