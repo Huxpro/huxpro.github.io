@@ -27,8 +27,8 @@
 
 ## Support
 
-- **Feel free to fork. Appreciated if you keep the theme author link in the footer**
-- Expect Star if you like or fork this theme ;)
+- **Feel free to fork. Appreciated if you keep the author & fork link in the footer**
+- Give it a **Star** if you like or fork this theme ;)
 - Any problem or requirement, just open an issue here and I will help you.
 - 如果有需要，可以更新一篇中文文档 ;)
 
