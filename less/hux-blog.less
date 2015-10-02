@@ -156,7 +156,6 @@ pre,.table-responsive{
 	}
 	// HuxBlog-Navbar using genuine Material Design Animation
 	#huxblog_navbar{
-		overflow: hidden; // to solve container-mask-tags issue.
 		opacity: 0;
 		transform: scaleX(0);
 		transform-origin: top right;
@@ -165,6 +164,7 @@ pre,.table-responsive{
 		-webkit-transform-origin: top right;
 		-webkit-transition: all 0.25s cubic-bezier(0.23,1,0.32,1);
 		.navbar-collapse{
+			height: 0px; // to solve container-mask-tags issue.
 			transform: scaleY(0);
 			transform-origin: top right;
 			transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);

@@ -176,7 +176,6 @@ pre,
     margin: 0px;
   }
   #huxblog_navbar {
-    overflow: hidden;
     opacity: 0;
     transform: scaleX(0);
     transform-origin: top right;
@@ -186,6 +185,7 @@ pre,
     -webkit-transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
   }
   #huxblog_navbar .navbar-collapse {
+    height: 0px;
     transform: scaleY(0);
     transform-origin: top right;
     transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
