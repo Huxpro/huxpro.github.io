@@ -13,6 +13,11 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
         <div id="huxblog_navbar">
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -35,15 +40,26 @@
     // Drop Bootstarp low-performance Navbar
     // Use customize navbar with high-quality material design animation
     // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
     var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar')
+    var $navbar = document.querySelector('#huxblog_navbar');
+    
     $toggle.addEventListener('click', handleMagic)
-    $toggle.addEventListener('touchstart', handleMagic)
     function handleMagic(e){
         if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
             $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $navbar.style.height = "0px"
+                }
+            },400)
         }else{
+        // OPEN
             $navbar.className += " in";
+            $navbar.style.height = "auto"
         }
     }
 </script>

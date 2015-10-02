@@ -93,6 +93,7 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
 
+
 <!-- async load function -->
 <script>
     function async(u, c) {
@@ -107,7 +108,7 @@
 
 <!-- Highlight.js -->
 <script>
-    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js",function(){
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
         hljs.initHighlightingOnLoad();
     })
     // only load tagcloud.js in tag.html
@@ -122,3 +123,11 @@
     }
 </script>
 <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
