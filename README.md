@@ -8,20 +8,20 @@
 
 ## Features
 
-### New Feature (V1.3）
+### New Feature (V1.3)
 
-- Big Improvement to the **Navigation Menu**: dropping the old, stuttering, low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse),  replaced with an own wrote, [jank free](http://jankfree.org/) navbar menu in a pretty high-performance implementation of [Google Material Design](https://www.google.com/design/spec/material-design/introduction.html).
+- Big Improvement to the **Navigation Menu** *(especially in Android)*:  Dropping the old, stuttering, low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse),  replaced with an own wrote, [jank free](http://jankfree.org/) navbar menu in a pretty high-performance implementation of [Google Material Design](https://www.google.com/design/spec/material-design/introduction.html).
 
 
 ![](http://huangxuan.me/img/blog-md-navbar.gif)
 
 
-### New Feature (V1.2）
+### New Feature (V1.2)
 
 - Brand new **[Keynote Layout](#keynote-layout)** is provided for easily posting beautiful HTML presentations you have created with this blog
 
 
-### New Feature (V1.1）
+### New Feature (V1.1)
 
 - We now support a clean and gorgeous **[SideBar](#sidebar)** for displaying more info
 - **[Friends](#friends)** is also added as a common feature of blog help you do SEO
