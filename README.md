@@ -5,17 +5,27 @@
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
 
-## New Feature (V1.2）
+
+## Features
+
+### New Feature (V1.3）
+
+- Big Improvement to the **Navigation Menu**. Drop the old low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse), replaced with an own wrote navbar component in a very high-performance [Material Design](https://www.google.com/design/spec/material-design/introduction.html) implementation.
+
+<video src="/attach/blog-md-navbar.mp4" controls="controls">I am not sure if video is support by github.</video>
+
+
+### New Feature (V1.2）
 
 - Brand new **[Keynote Layout](#keynote-layout)** is provided for easily posting beautiful HTML presentations you have created with this blog
 
 
-## New Feature (V1.1）
+### New Feature (V1.1）
 
 - We now support a clean and gorgeous **[SideBar](#sidebar)** for displaying more info
 - **[Friends](#friends)** is also added as a common feature of blog help you do SEO
 
-## Feature
+### V1.0
 
 - Full-feature **Tag** support
 - UX optimization for mobile used (bunch of `webkit-vender-something`)
@@ -170,6 +180,7 @@ iframe:     "http://huangxuan.me/js-module-7day/"
 ```
 
 The iframe will be automatically resized to adapt different form factor and the device orientation. A Padding is left to imply user there has more content below, also ensure there is a area user can scrolled in mobile device seeing most of the keynote framework prevent the browser default scroll behavior.
+
 
 ## Thanks
 
