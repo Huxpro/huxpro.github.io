@@ -168,11 +168,46 @@ pre,
   .navbar-default .navbar-collapse {
     border: none;
     background: white;
+    box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.239216) 0px 1px 4px;
     border-radius: 2px;
-    width: 160px;
+    width: 170px;
     float: right;
     margin: 0px;
-    box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
+  }
+  #huxblog_navbar {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: top right;
+    transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transform: scaleX(0);
+    -webkit-transform-origin: top right;
+    -webkit-transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  #huxblog_navbar .navbar-collapse {
+    transform: scaleY(0);
+    transform-origin: top right;
+    transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transform: scaleY(0);
+    -webkit-transform-origin: top right;
+    -webkit-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  #huxblog_navbar li {
+    opacity: 0;
+    transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 205ms;
+    -webkit-transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 205ms;
+  }
+  #huxblog_navbar.in {
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+    opacity: 1;
+  }
+  #huxblog_navbar.in .navbar-collapse {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+  }
+  #huxblog_navbar.in li {
+    opacity: 1;
   }
 }
 .navbar-custom {
@@ -197,7 +232,8 @@ pre,
 }
 .navbar-custom .nav li a {
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 28px;
   font-weight: 800;
   letter-spacing: 1px;
 }
