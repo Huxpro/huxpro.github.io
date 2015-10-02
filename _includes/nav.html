@@ -32,15 +32,18 @@
     <!-- /.container -->
 </nav>
 <script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
     var $toggle = document.querySelector('.navbar-toggle');
     var $navbar = document.querySelector('#huxblog_navbar')
-    $toggle.addEventListener('click', function(e){
-        console.log($navbar.className);
-        console.log($navbar.className.indexOf('in'));
+    $toggle.addEventListener('click', handleMagic)
+    $toggle.addEventListener('touchstart', handleMagic)
+    function handleMagic(e){
         if ($navbar.className.indexOf('in') > 0) {
             $navbar.className = " ";
         }else{
             $navbar.className += " in";
         }
-    })
+    }
 </script>
