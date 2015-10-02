@@ -10,9 +10,10 @@
 
 ### New Feature (V1.3）
 
-- Big Improvement to the **Navigation Menu**. Drop the old low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse), replaced with an own wrote navbar component in a very high-performance [Material Design](https://www.google.com/design/spec/material-design/introduction.html) implementation.
+- Big Improvement to the **Navigation Menu**: dropping the old, stuttering, low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse),  replaced with an own wrote, [jank free](http://jankfree.org/) navbar menu in a pretty high-performance implementation of [Google Material Design](https://www.google.com/design/spec/material-design/introduction.html).
 
-<video src="/attach/blog-md-navbar.mp4" controls="controls">I am not sure if video is support by github.</video>
+
+![](http://huangxuan.me/img/blog-md-navbar.gif)
 
 
 ### New Feature (V1.2）
