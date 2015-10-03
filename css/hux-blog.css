@@ -184,6 +184,10 @@ pre,
     -webkit-transform-origin: top right;
     -webkit-transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
   }
+  #huxblog_navbar a {
+    font-size: 13px;
+    line-height: 28px;
+  }
   #huxblog_navbar .navbar-collapse {
     height: 0px;
     transform: scaleY(0);
@@ -233,8 +237,8 @@ pre,
 }
 .navbar-custom .nav li a {
   text-transform: uppercase;
-  font-size: 13px;
-  line-height: 28px;
+  font-size: 12px;
+  line-height: 20px;
   font-weight: 800;
   letter-spacing: 1px;
 }
