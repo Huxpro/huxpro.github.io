@@ -8,6 +8,11 @@
 
 ## Features
 
+### New Feature (V1.3.1)
+
+- Support **PingFang (苹方)**, the new Chinese font presented by [OS X El Capitan](http://www.apple.com/cn/osx/whats-new/)
+
+
 ### New Feature (V1.3)
 
 - Big Improvement to the **Navigation Menu** *(especially in Android)*:  Dropping the old, stuttering, low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse),  replaced with an own wrote, [jank free](http://jankfree.org/) navbar menu in a pretty high-performance implementation of [Google Material Design](https://www.google.com/design/spec/material-design/introduction.html).
@@ -28,8 +33,8 @@
 ### V1.0
 
 - Full-feature **Tag** support
-- **Mobile first** user experience optimization 
-- **Typographic optimization** for Chinese Fonts 
+- **Mobile first** user experience optimization
+- **Typographic optimization** for Chinese Fonts
 - **Network optimizaition** for China, dropping Google webfont, using local CDN
 - Using [Github Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/)
 - Using Baidu, Tencent/QQ analysis *(TODO: support GA)*
