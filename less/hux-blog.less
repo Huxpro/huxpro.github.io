@@ -111,6 +111,7 @@ pre,.table-responsive{
 	}
 }
 
+// In the post.
 .post-container{
 	a{
 		color:#337ab7;
@@ -120,8 +121,39 @@ pre,.table-responsive{
 			color: @brand-primary;
 		}
 	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin: 30px 0 10px;
+	}
+	h5{
+		font-size: 18px;
+		font-weight: 200;
+		color:gray;
+		& + p{
+			margin-top: 0px;
+		}
+	}
+	h6{
+		font-size: 15px;
+		font-weight: 200;
+		color: gray;
+	}
 	ul,ol{
 		margin-bottom: 40px;
+		@media screen and (max-width: 768px){
+			&{
+				padding-left: 30px;
+			}
+		}
+		@media screen and (max-width: 500px){
+			&{
+				padding-left: 20px;
+			}
+		}
 	}
 	ol ol, ol ul, ul ol, ul ul{
 		margin-bottom: 5px

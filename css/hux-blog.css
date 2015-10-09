@@ -149,9 +149,42 @@ pre,
 .post-container a:focus {
   color: #0085a1;
 }
+.post-container h1,
+.post-container h2,
+.post-container h3,
+.post-container h4,
+.post-container h5,
+.post-container h6 {
+  margin: 30px 0 10px;
+}
+.post-container h5 {
+  font-size: 18px;
+  font-weight: 200;
+  color: gray;
+}
+.post-container h5 + p {
+  margin-top: 0px;
+}
+.post-container h6 {
+  font-size: 15px;
+  font-weight: 200;
+  color: gray;
+}
 .post-container ul,
 .post-container ol {
   margin-bottom: 40px;
+}
+@media screen and (max-width: 768px) {
+  .post-container ul,
+  .post-container ol {
+    padding-left: 30px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .post-container ul,
+  .post-container ol {
+    padding-left: 20px;
+  }
 }
 .post-container ol ol,
 .post-container ol ul,
