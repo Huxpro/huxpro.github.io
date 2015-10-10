@@ -64,8 +64,8 @@
 * [Advanced](#advanced)
 * [SideBar](#sidebar)
 * [Mini About Me](#mini-about-me)
-* [Friends](#friends)
 * [Featured Tags](#featured-tags)
+* [Friends](#friends)
 * [Keynote Layout](#keynote-layout)
 * [SEO Title](#seo-title)
 
@@ -173,9 +173,8 @@ featured-tags: true
 featured-condition-size: 1     # A tag will be featured if the size of it is more than this condition value
 ```
 
-The only one thing need to be paid attention to is the `featured-condition-size`: A tag will be featured if the size of it is more than this condition value.
-
-Internally, a condition template `{% if tag[1].size > {{site.featured-condition-size}} %}` is used to filter all tags.
+The only one thing need to be paid attention to is the `featured-condition-size`: A tag will be featured if the size of it is more than this condition value.  
+Internally, a condition template `{% if tag[1].size > {{site.featured-condition-size}} %}` is used to do the filter.
 
 ### Friends
 
@@ -213,14 +212,13 @@ Under the hood, a `iframe` is used to include webpage from outer source, so the 
 layout:     keynote
 iframe:     "http://huangxuan.me/js-module-7day/"
 ---
-
 ```
 
-The iframe will be automatically resized to adapt different form factors also the device orientation. A padding is left to imply user there has more content below, also ensure there is a area user can scrolled in mobile device seeing most of the keynote framework prevent the browser default scroll behavior.
+The iframe will be automatically resized to adapt different form factors also the device orientation. A padding is left to imply user that there has more content below, also to ensure that there is a area for user to scroll down in mobile device seeing most of the keynote framework prevent the browser default scroll behavior.
 
 ### SEO Title
 
-In the old version, site setting `title` is not only used for displayed in Home Page and Navbar, but also used to generate the `<title>` in HTML.  
+Before V1.4, site setting `title` is not only used for displayed in Home Page and Navbar, but also used to generate the `<title>` in HTML.
 It's possible that you want the two things different. For me, my site-title is **“Hux Blog”** but I want the title shows in search engine is **“黄玄的博客 | Hux Blog”** which is multi-language.
 
 So, the SEO Title is introduced to solve this problem, you can set `SEOTitle` different from `title`, and it would be only used to generate HTML `<title>` and setting DuoShuo Sharing.
