@@ -40,7 +40,10 @@ layout: default
 <article>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
 				{{ content }}
 
@@ -93,21 +96,26 @@ layout: default
                 <!-- 多说评论框 end -->
                 {% endif %}
 
-                <!-- friends -->
-                {% if site.friends %}
-                <div class="sidebar-container">
-                    <hr>
-                    <h5>FRIENDS</h5>
-                    <ul class="list-inline" style="
-                        margin-bottom: 0;
-                    ">
-                        {% for friend in site.friends %}
-                            <li><a href="{{friend.href}}">{{friend.title}}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
+
             </div>
+
+            <!-- friends & sidebar -->
+            {% if site.friends %}
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline" style="
+                    margin-bottom: 0;
+                ">
+                    {% for friend in site.friends %}
+                        <li><a href="{{friend.href}}">{{friend.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
         </div>
     </div>
 </article>
