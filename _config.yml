@@ -21,7 +21,7 @@ facebook_username:  huxpro
 # Build settings
 highlighter: pygments
 permalink: pretty
-paginate: 20
+paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 anchorjs: true      # if you want to customize anchor. check out line:129 of `post.html`
 
@@ -36,8 +36,10 @@ kramdown:
 
 # Duoshuo settings
 # please set your own DuoShuo account in `post.html` and `about.html`
+# seeing the Share component is depend on Comment so we can NOT use share only.
 useDuoshuo: true    # use both Comment and Share
-useShare: true      # use Comment only. seeing the Share component is depend on Comment so we can NOT use share only.
+useShare: true      # set to false if you want to use Comment only
+
 
 
 # Todo: Analysis settings
@@ -48,10 +50,13 @@ useGoogleAnalysis: true     # TODO
 
 
 # Sidebar settings
-sidebar: true
-sidebar-featured-tags: true
+sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，多玩玩看看。"
 sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value 
 
 # Friends
 friends: [
