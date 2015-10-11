@@ -49,7 +49,11 @@ layout: default
 <article>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+
+            <!-- Post Container -->
+            <div class="post-container
+                col-lg-8 col-lg-offset-2 
+                col-md-10 col-md-offset-1 ">
 
 				{{ content }}
 
@@ -101,20 +105,39 @@ layout: default
                 </div>
                 <!-- 多说评论框 end -->
                 {% endif %}
+            </div>
 
-                <!-- friends -->
-                {% if site.friends %}
-                <div class="sidebar-container">
-                    <hr>
-                    <h5>FRIENDS</h5>
-                    <ul class="list-inline" style="
-                        margin-bottom: 0;
-                    ">
-                        {% for friend in site.friends %}
-                            <li><a href="{{friend.href}}">{{friend.title}}</a></li>
+            <!-- Sidebar Container -->
+            <div class="sidebar-container
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1 ">
+
+                <!-- Featured Tags -->
+                {% if site.featured-tags %}
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        {% for tag in site.tags %}
+                            {% if tag[1].size > {{site.featured-condition-size}} %}
+                                <a href="/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                                    {{ tag[0] }}
+                                </a>
+                            {% endif %}
                         {% endfor %}
-                    </ul>
-                </div>
+                    </div>
+                </section>
+                {% endif %}
+
+                <!-- Friends Blog -->
+                {% if site.friends %}
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    {% for friend in site.friends %}
+                        <li><a href="{{friend.href}}">{{friend.title}}</a></li>
+                    {% endfor %}
+                </ul>
                 {% endif %}
             </div>
         </div>
