@@ -69,5 +69,8 @@ friends: [
     },{
         title: "SmdCn's Blog",
         href: "http://blog.smdcn.net"
+    },{
+        title: "解旻的博客",
+        href: "http://xieminis.me/"
     }
 ]
