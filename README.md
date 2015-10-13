@@ -53,9 +53,9 @@
 
 ## Support
 
-- **Feel free to fork. Appreciated if you keep the Author & Github link in the footer**
-- Give it a **Star** if you like, fork or just clone to use this theme ;)
-- Any problem or requirement, just open an issue here and I will help you.
+- **Feel free to fork. I'll Appreciate it if you keep the Author & Github link footer**
+- Give it a **Star** if you like, fork or just clone to use ;)
+- If any problem or requirement, just open an issue here and I will help you.
 - 如果有需要，我可以更新一篇中文文档 ;)
 
 
@@ -208,8 +208,8 @@ The iframe will be automatically resized to adapt different form factors also th
 
 This theme is using [DuoShuo](http://duoshuo.com) as the Disqus-like third party discussion system seeing the network issue, if you wanna switch to Disqus and feel difficult to do that, please let me know and I will support it officially.
 
-First, you need sign up and got your own duoshuo account. **Repeat, do NOT use mine!** (may be I will clean up someday!)   
-It is deathly simple to sign up and you will get the full power of duoshuo management system, please give it a try!
+First, you need to sign up and get your own duoshuo account. **Repeat, DO NOT use mine!** (maybe I will clean it up someday!)   
+It is deathly simple to sign up and you will get the full power of duoshuo management system. Please give it a try!
 
 Second, from V1.5, you can easily complete your comment configuration by just adding your **duoshuo short name** *(the second-level domain of your duoshuo account which is unique)* into `_config.yml`:
 
@@ -217,14 +217,15 @@ Second, from V1.5, you can easily complete your comment configuration by just ad
 duoshuo_username: huxblog		# write down your own
 ```
 
-**To the old version user**, it's better that you pull the new version, or you have to replace code in `post.html`, `keynote.html` and `about.html`
+**To the old version user**, it's better that you pull the new version, otherwise you have to replace code in `post.html`, `keynote.html` and `about.html`
 
-Advanced, if you wanna use comment only without sharing, you can set `duoshuo_share` to false. Unable the whole thing is also easy, just comment it.
+Furthermore, if you only wanna use comment without sharing, you can set `duoshuo_share: false`.   
+Disabling the whole thing is also easy, and just comment out the code.
 
 
 #### Analytics
 
-From V1.5, we support Google Analytics and Baidu Tongji officially with a death simple config:
+From V1.5, we support Google Analytics and Baidu Tongji officially with a deathly simple config:
 
 ```
 # Baidu Analytics
