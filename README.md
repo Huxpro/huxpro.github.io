@@ -9,41 +9,45 @@
 ## Features
 
 
-#### New Feature (V1.4)
+##### New Feature (V1.5)
+
+- **[Comment](#comment)** and **[Analytics](#analytics)** is configurable now! We also add **Google Analytics support** and drop tencents. Both documents is updated.
+
+##### New Feature (V1.4)
 
 - **[Featured Tags](#featured-tags)** is now independent of [SideBar](#sidebar). Both documents is updated.
 - New **[SEO Title](#seo-title)** for SEO usage which is differ from the site title
 
-#### New Feature (V1.3.1)
+##### New Feature (V1.3.1)
 
 - Support **PingFang (苹方)**, the new Chinese font presented by [OS X El Capitan](http://www.apple.com/cn/osx/whats-new/)
 
 
-#### New Feature (V1.3)
+##### New Feature (V1.3)
 
 - Big Improvement to the **Navigation Menu** *(especially in Android)*:  Dropping the old, stuttering, low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse),  replaced with an own wrote, [jank free](http://jankfree.org/) navbar menu in a pretty high-performance implementation of [Google Material Design](https://www.google.com/design/spec/material-design/introduction.html).
 
 <img src="http://huangxuan.me/img/blog-md-navbar.gif" width="320" />
 
 
-#### New Feature (V1.2)
+##### New Feature (V1.2)
 
 - Brand new **[Keynote Layout](#keynote-layout)** is provided for easily posting beautiful HTML presentations you have created with this blog
 
 
-#### New Feature (V1.1)
+##### New Feature (V1.1)
 
 - We now support a clean and gorgeous **[SideBar](#sidebar)** for displaying more info
 - **[Friends](#friends)** is also added as a common feature of blog help you do SEO
 
-#### V1.0
+##### V1.0
 
 - Full-feature **Tag** support
 - **Mobile first** user experience optimization
 - **Typographic optimization** for Chinese Fonts
 - **Network optimizaition** for China, dropping Google webfont, using local CDN
 - Using [Github Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/)
-- Using Baidu, Tencent/QQ analysis *(TODO: support GA)*
+- Using Baidu, Tencent/QQ analytics *(TODO: support GA)*
 - Using [DuoShuo](http://duoshuo.com/) as the Disqus-like third party discussion system
 
 
@@ -57,25 +61,31 @@
 
 ## Document
 
-* [Environment](#environment)
-* [Get Started](#get-started)
-* [Write Posts](#write-posts)
-* [Header Image](#header-image)
-* [Advanced](#advanced)
-* [SideBar](#sidebar)
-* [Mini About Me](#mini-about-me)
-* [Featured Tags](#featured-tags)
-* [Friends](#friends)
-* [Keynote Layout](#keynote-layout)
-* [SEO Title](#seo-title)
+* Get Started
+	* [Environment](#environment)
+	* [Get Started](#get-started)
+	* [Write Posts](#write-posts)
+* Components
+	* [SideBar](#sidebar)
+	* [Mini About Me](#mini-about-me)
+	* [Featured Tags](#featured-tags)
+	* [Friends](#friends)
+	* [Keynote Layout](#keynote-layout)
+* Comment & Analysis
+	* [Comment](#comment)
+	* [Analytics](#analytics) 
+* Advanced
+	* [Customization](#customization)
+	* [Header Image](#header-image)
+	* [SEO Title](#seo-title)
 
-### Environment
+#### Environment
 
 If you have jekyll installed, simply run `jekyll serve` in Command Line
 and preview the themes in your browser. You can use `jekyll serve --watch` to watch for changes in the source files as well.
 
 
-### Get Started
+#### Get Started
 
 You can easily get started by modifying `_config.yml`:
 
@@ -87,20 +97,16 @@ description: "Cool Blog"    # ...
 
 # SNS settings      
 github_username: huxpro     # modify this account to yours
-weibo_username: huxpro      # and the links in footer woule be auto-updated.
+weibo_username: huxpro      # the footer woule be auto-updated.
 
 # Build settings
 # paginate: 10              # nums of posts in one page
-
-# Duoshuo settings          # Please set your own DuoShuo account.
-useDuoshuo: true            # use both Comment and Share
-useShare: true              # set to false if you want to use Comment only 
 ```
 
 There are more options you can check out in the [Jekyll - Official Site](http://jekyllrb.com/), or you can directly dive into code to find more.
 
 
-### Write Posts
+#### Write Posts
 
 Feel free to checkout Markdown files in the `_posts/`, you will quickly realized how to post your articles with magical markdown plus this nice theme.
 
@@ -120,26 +126,7 @@ tags:
 
 ```
 
-### Header Image
-
-Change header images of any pages or any posts is pretty easy as mentioned above. But, thanks to [issue #6 (in Chinese)](https://github.com/Huxpro/huxpro.github.io/issues/6) asked, **how to make it looks great?**
-
-**Well...it is actually a design issue**, not a coding stuff. It is better that you have basic design knowledge, but not is ok, let me told you how to make it well-designed:
-
-Seeing the title text above image is **white**, the image should be **dark** to emphasize the contract. so we can easily add a **black overlay with fews of opacity**, which is depends on the brightness of the original images you used. you can process it in Photoshop, Sketch etc.
-
-In technical views, it can be done with CSS. However, the opacity of the black overlay is really hard to assigned, **every image has different brightness so the  degree it should be adjusted is different so it is impossible to hard code it.**
-
-
-### Advanced
-
-If you wanna change code yourself, a [Grunt](gruntjs.com) environment is also included. (Thanks to Clean Blog.)
-
-There are a number of tasks it performs like minification of the JavaScript, compiling of the LESS files, adding banners to keep the Apache 2.0 license intact, and watching for changes. Run the grunt default task by entering `grunt ` into your command line which will build the files. You can use `grunt watch` if you are working on the JavaScript or the LESS.
-
-**Try to understand code in `_include/` and `_layouts/`, then you can modify Jekyll [Liquid](https://github.com/Shopify/liquid/wiki) template directly to do more creative customization.**
-
-### SideBar
+#### SideBar
 
 ![](http://huangxuan.me/img/blog-sidebar.jpg)
 
@@ -155,13 +142,13 @@ sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
 We default support *[Featured Tags](#featured-tags)*, *[Mini About Me](#mini-about-me)* and *[Friends](#friends)* these three modules and you can add your own. The sidebar is naturally responsive and would be push to bottom in a small screen size (`<= 992px`, according to [Bootstarp Grid System](http://getbootstrap.com/css/#grid))  
 More details of these three separate modules are talking below.
 
-### Mini About Me
+#### Mini About Me
 
 Mini-About-Me module display all your SNS buttons also your avatar and the description if you set `sidebar-avatar` and `sidebar-about-description` which is very useful and common for a sidebar so it is default with your sidebar.
 
 It is really nice-looking and well-designed. It would be hidden in a small screen seeing the sidebar would be push to bottom and there is already a footer including SNS feature which is similar.
 
-### Featured Tags
+#### Featured Tags
 
 Considering the Featured-Tags feature in [Medium](http://medium.com) is pretty cool, so I add it in my blog theme also.   
 This module is independent of sidebar from V1.4, so it can definitely live without enable sidebar, which would be displayed in the bottom when `sidebar` set to false, and it is not only displayed in home page but also every post page bottom.
@@ -176,7 +163,7 @@ featured-condition-size: 1     # A tag will be featured if the size of it is mor
 The only one thing need to be paid attention to is the `featured-condition-size`: A tag will be featured if the size of it is more than this condition value.  
 Internally, a condition template `{% if tag[1].size > {{site.featured-condition-size}} %}` is used to do the filter.
 
-### Friends
+#### Friends
 
 Friends is a very common feature of a blog seeing the SEO, so I add it in V1.1 release to help that.   
 Friends can also live without enable sidebar, also be displayed in the bottom when sidebar unable, and be displayed in every post page bottom.
@@ -199,7 +186,7 @@ friends: [
 ```
 
 
-### Keynote Layout
+#### Keynote Layout
 
 ![](http://huangxuan.me/img/blog-keynote.jpg)
 
@@ -216,7 +203,63 @@ iframe:     "http://huangxuan.me/js-module-7day/"
 
 The iframe will be automatically resized to adapt different form factors also the device orientation. A padding is left to imply user that there has more content below, also to ensure that there is a area for user to scroll down in mobile device seeing most of the keynote framework prevent the browser default scroll behavior.
 
-### SEO Title
+
+#### Comment
+
+This theme is using [DuoShuo](http://duoshuo.com) as the Disqus-like third party discussion system seeing the network issue, if you wanna switch to Disqus and feel difficult to do that, please let me know and I will support it officially.
+
+First, you need sign up and got your own duoshuo account. **Repeat, do NOT use mine!** (may be I will clean up someday!)   
+It is deathly simple to sign up and you will get the full power of duoshuo management system, please give it a try!
+
+Second, from V1.5, you can easily complete your comment configuration by just adding your **duoshuo short name** *(the second-level domain of your duoshuo account which is unique)* into `_config.yml`:
+
+```
+duoshuo_username: huxblog		# write down your own
+```
+
+**To the old version user**, it's better that you pull the new version, or you have to replace code in `post.html`, `keynote.html` and `about.html`
+
+Advanced, if you wanna use comment only without sharing, you can set `duoshuo_share` to false. Unable the whole thing is also easy, just comment it.
+
+
+#### Analytics
+
+From V1.5, we support Google Analytics and Baidu Tongji officially with a death simple config:
+
+```
+# Baidu Analytics
+ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
+
+# Google Analytics
+ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+ga_domain: huangxuan.me
+```
+
+Just checkout the code offered by Google/Baidu, and copy paste here, all the rest is already done for you.
+
+
+
+#### Customization
+
+If you wanna do more customization and change code yourself, a [Grunt](gruntjs.com) environment is also included. (Thanks to Clean Blog.)
+
+There are a number of tasks it performs like minification of the JavaScript, compiling of the LESS files, adding banners to keep the Apache 2.0 license intact, and watching for changes. Run the grunt default task by entering `grunt ` into your command line which will build the files. You can use `grunt watch` if you are working on the JavaScript or the LESS.
+
+**Try to understand code in `_include/` and `_layouts/`, then you can modify Jekyll [Liquid](https://github.com/Shopify/liquid/wiki) template directly to do more creative customization.**
+
+
+#### Header Image
+
+Change header images of any pages or any posts is pretty easy as mentioned above. But, thanks to [issue #6 (in Chinese)](https://github.com/Huxpro/huxpro.github.io/issues/6) asked, **how to make it looks great?**
+
+**Well...it is actually a design issue**, not a coding stuff. It is better that you have basic design knowledge, but not is ok, let me told you how to make it well-designed:
+
+Seeing the title text above image is **white**, the image should be **dark** to emphasize the contract. so we can easily add a **black overlay with fews of opacity**, which is depends on the brightness of the original images you used. you can process it in Photoshop, Sketch etc.
+
+In technical views, it can be done with CSS. However, the opacity of the black overlay is really hard to assigned, **every image has different brightness so the  degree it should be adjusted is different so it is impossible to hard code it.**
+
+
+#### SEO Title
 
 Before V1.4, site setting `title` is not only used for displayed in Home Page and Navbar, but also used to generate the `<title>` in HTML.
 It's possible that you want the two things different. For me, my site-title is **“Hux Blog”** but I want the title shows in search engine is **“黄玄的博客 | Hux Blog”** which is multi-language.

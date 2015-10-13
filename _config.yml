@@ -40,17 +40,17 @@ kramdown:
 
 
 # Duoshuo settings
-# to the old version user, please set your own DuoShuo account in `post.html`, `keynote.html` and `about.html`
 duoshuo_username: huxblog
+# Share component is depend on Comment so we can NOT use share only.
 duoshuo_share: true                     # set to false if you want to use Comment without Sharing
-# seeing the Share component is depend on Comment so we can NOT use share only.
+
 
 
 
 # Analytics settings
-# Baidu Analytics `head.html`
+# Baidu Analytics
 ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
-# Google Analytics `footer.html`
+# Google Analytics
 ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
 ga_domain: huangxuan.me
 
