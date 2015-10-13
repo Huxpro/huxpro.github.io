@@ -51,15 +51,16 @@ layout: default
 
                 <hr>
 
-                {% if site.useDuoshuo && site.useShare %}
+                {% if site.duoshuo_share && site.duoshuo_username %}
                 <!-- 多说 Share start -->
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="{{page.id}}" data-title="{{page.title}}"
+                    data-thread-key="{{page.id}}"
+                    data-title="{{page.title}}"
+                    data-url="{{site.url}}{{page.url}}"
                     data-images="{{ site.url }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}"
-                    data-content="{{ content | strip_html | truncate:80 }} | {{ site.SEOTitle }} "
-                    data-url="{{site.url}}{{page.url}}">
+                    data-content="{{ content | strip_html | truncate:80 }} | {{ site.SEOTitle }} " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -72,7 +73,7 @@ layout: default
                     </div>
                 <hr>
                 </div>
-                <!-- 多少 Share end-->
+                <!-- 多说 Share end-->
                 {% endif %}
 
 
@@ -90,13 +91,18 @@ layout: default
                 </ul>
 
 
-                {% if site.useDuoshuo %}
+                {% if site.duoshuo_username %}
                 <!-- 多说评论框 start -->
                 <div class="comment">
-                    <div class="ds-thread" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-url="{{site.url}}{{page.url}}"></div>
+                    <div class="ds-thread"
+                        data-thread-key="{{page.id}}"
+                        data-title="{{page.title}}"
+                        data-url="{{site.url}}{{page.url}}" >
+                    </div>
                 </div>
                 <!-- 多说评论框 end -->
                 {% endif %}
+
             </div>
 
     <!-- Sidebar Container -->
@@ -137,11 +143,16 @@ layout: default
     </div>
 </article>
 
+{% if site.duoshuo_username %}
+<!-- Duoshuo hacking -->
+<input id="dsUser" type="hidden" value="{{site.duoshuo_username}}"  />
 
-{% if site.useDuoshuo %}
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"huxblog"};
+    // dynamic User hacking by Hux
+    var _user = document.getElementById('dsUser').value;
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
     (function() {
         var ds = document.createElement('script');
         ds.type = 'text/javascript';ds.async = true;

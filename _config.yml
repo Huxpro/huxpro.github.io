@@ -5,8 +5,9 @@ header-img: img/home-bg.jpg
 email: huxpro@gmail.com
 description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
 keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, 前端, 设计, 产品, 肖玉, Lynn, 肖玉的男朋友"
+url: "http://huangxuan.me"
 baseurl: ""
-url: "http://huxpro.github.io"
+
 
 
 # SNS settings
@@ -18,12 +19,15 @@ github_username:    huxpro
 facebook_username:  huxpro
 
 
+
 # Build settings
 highlighter: pygments
 permalink: pretty
 paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
-anchorjs: true      # if you want to customize anchor. check out line:129 of `post.html`
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
 
 # Markdown settings
 # replace redcarpet to kramdown,
@@ -31,22 +35,25 @@ anchorjs: true      # if you want to customize anchor. check out line:129 of `po
 # document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
 kramdown:
-  input: GFM        # use Github Flavored Markdown !important
+  input: GFM                            # use Github Flavored Markdown !important
+
 
 
 # Duoshuo settings
-# please set your own DuoShuo account in `post.html` and `about.html`
+# to the old version user, please set your own DuoShuo account in `post.html`, `keynote.html` and `about.html`
+duoshuo_username: huxblog
+duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 # seeing the Share component is depend on Comment so we can NOT use share only.
-useDuoshuo: true    # use both Comment and Share
-useShare: true      # set to false if you want to use Comment only
 
 
 
-# Todo: Analysis settings
-# Please set your own analysis account in `head.html`(Baidu) and `default.html`(QQ)
-useBaiduAnalysis: true
-useTencentAnalysis: true
-useGoogleAnalysis: true     # TODO
+# Analytics settings
+# Baidu Analytics `head.html`
+ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
+# Google Analytics `footer.html`
+ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+ga_domain: huangxuan.me
+
 
 
 # Sidebar settings
@@ -54,9 +61,13 @@ sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，多玩玩看看。"
 sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
 
+
+
 # Featured Tags
 featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value 
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+
 
 # Friends
 friends: [

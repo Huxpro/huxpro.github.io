@@ -52,14 +52,14 @@ layout: default
 
             <!-- Post Container -->
             <div class="post-container
-                col-lg-8 col-lg-offset-2 
+                col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1 ">
 
 				{{ content }}
 
                 <hr>
 
-                {% if site.useDuoshuo && site.useShare %}
+                {% if site.duoshuo_share && site.duoshuo_username %}
                 <!-- 多说 Share start -->
                 </style>
                 <div class="ds-share"
@@ -167,10 +167,16 @@ layout: default
     resize();
 </script>
 
-{% if site.useDuoshuo %}
+{% if site.duoshuo_username %}
+<!-- Duoshuo hacking -->
+<input id="dsUser" type="hidden" value="{{site.duoshuo_username}}"  />
+
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"huxblog"};
+    // dynamic User hacking by Hux
+    var _user = document.getElementById('dsUser').value;
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
     (function() {
         var ds = document.createElement('script');
         ds.type = 'text/javascript';ds.async = true;

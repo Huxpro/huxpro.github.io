@@ -85,7 +85,6 @@ header-img: "img/about-bg.jpg"
     </ul>
 </div>
 
-
 <!-- Handle Language Change -->
 <script type="text/javascript">
     var $zh = document.querySelector(".zh");
@@ -103,16 +102,26 @@ header-img: "img/about-bg.jpg"
 </script>
 
 
-{% if site.useDuoshuo %}
+
+{% if site.duoshuo_username %}
 <!-- 多说评论框 start -->
     <div class="comment">
-        <div class="ds-thread" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-url="{{site.url}}/about/"></div>
+        <div class="ds-thread"
+        data-thread-key="{{site.duoshuo_username}}/about"
+        data-title="{{page.title}}"
+        data-url="{{site.url}}/about/"></div>
     </div>
 <!-- 多说评论框 end -->
 
+<!-- Duoshuo hacking -->
+<input id="dsUser" type="hidden" value="{{site.duoshuo_username}}"  />
+
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"huxblog"};
+    // dynamic User hacking by Hux
+    var _user = document.getElementById('dsUser').value;
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
     (function() {
         var ds = document.createElement('script');
         ds.type = 'text/javascript';ds.async = true;
