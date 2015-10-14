@@ -14,5 +14,8 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/Huxpro/huxpro.github.io"
+    },
+    "scripts": {
+        "preview": "cd _site; python -m SimpleHTTPServer"
     }
 }
