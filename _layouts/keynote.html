@@ -98,10 +98,14 @@ layout: default
                 </ul>
 
 
-                {% if site.useDuoshuo %}
+                {% if site.duoshuo_username %}
                 <!-- 多说评论框 start -->
                 <div class="comment">
-                    <div class="ds-thread" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-url="{{site.url}}{{page.url}}"></div>
+                    <div class="ds-thread"
+                        data-thread-key="{{page.id}}"
+                        data-title="{{page.title}}"
+                        data-url="{{site.url}}{{page.url}}" >
+                    </div>
                 </div>
                 <!-- 多说评论框 end -->
                 {% endif %}
