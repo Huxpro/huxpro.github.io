@@ -107,7 +107,12 @@ header-img: "img/about-bg.jpg"
 <!-- 多说评论框 start -->
     <div class="comment">
         <div class="ds-thread"
-        data-thread-key="{{site.duoshuo_username}}/about"
+        {% if site.duoshuo_username == "huxblog" %}
+            data-thread-id="1187623191091085319"
+        {% else %}
+            data-thread-key="{{site.duoshuo_username}}/about"
+        {% endif %}
+
         data-title="{{page.title}}"
         data-url="{{site.url}}/about/"></div>
     </div>
