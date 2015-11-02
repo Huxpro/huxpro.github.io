@@ -133,16 +133,12 @@
 </script>
 
 
-{% if site.ga_track_id %}
-<!-- GA hacking -->
-<input id="gaId" type="hidden" value="{{site.ga_track_id}}"  />
-<input id="gaDomain" type="hidden" value="{{site.ga_domain}}"  />
-
 <!-- Google Analytics -->
+{% if site.ga_track_id %}
 <script>
-    // dynamic User hacking by Hux
-    var _gaId = document.getElementById('gaId').value;
-    var _gaDomain = document.getElementById('gaDomain').value;
+    // dynamic User by Hux
+    var _gaId = '{{ site.ga_track_id }}';
+    var _gaDomain = '{{ site.ga_domain }}';
 
     // Originial
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -156,14 +152,11 @@
 {% endif %}
 
 
-{% if site.ba_track_id %}
-<!-- BT hacking -->
-<input id="baId" type="hidden" value="{{site.ba_track_id}}"  />
-
 <!-- Baidu Tongji -->
+{% if site.ba_track_id %}
 <script>
-    // dynamic User hacking by Hux
-    var _baId = document.getElementById('baId').value;
+    // dynamic User by Hux
+    var _baId = '{{ site.ba_track_id }}';
 
     // Originial
     var _hmt = _hmt || [];

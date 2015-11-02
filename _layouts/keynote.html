@@ -172,13 +172,11 @@ layout: default
 </script>
 
 {% if site.duoshuo_username %}
-<!-- Duoshuo hacking -->
-<input id="dsUser" type="hidden" value="{{site.duoshuo_username}}"  />
-
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-    // dynamic User hacking by Hux
-    var _user = document.getElementById('dsUser').value;
+    // dynamic User by Hux
+    var _user = '{{site.duoshuo_username}}';
+    
     // duoshuo comment query.
     var duoshuoQuery = {short_name: _user };
     (function() {

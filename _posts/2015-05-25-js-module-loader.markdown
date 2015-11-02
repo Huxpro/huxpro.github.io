@@ -46,7 +46,7 @@ CommonJS 本质上只是一套规范（API 定义），而 Node.js 采用并实�
 
 让我们看看 Node 中的实现：
 
-```javascript
+```
 // 由于 Node 原生支持模块的作用域，并不需要额外的 wrapper
 // "as though the module was wrapped in a function"
 
