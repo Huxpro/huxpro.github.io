@@ -65,9 +65,9 @@ layout: default
                 <div class="ds-share"
                     style="text-align: right"
                     data-thread-key="{{page.id}}" data-title="{{page.title}}"
-                    data-images="{{ site.url }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}"
+                    data-images="{{ site.url }}{{site.baseurl}}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}"
                     data-content="{{ content | strip_html | truncate:80 }} | Hux Blog，@Hux黄玄 的个人博客"
-                    data-url="{{site.url}}{{page.url}}">
+                    data-url="{{site.url}}{{site.baseurl}}{{page.url}}">
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -104,7 +104,7 @@ layout: default
                     <div class="ds-thread"
                         data-thread-key="{{page.id}}"
                         data-title="{{page.title}}"
-                        data-url="{{site.url}}{{page.url}}" >
+                        data-url="{{site.url}}{{site.baseurl}}{{page.url}}" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
@@ -176,7 +176,7 @@ layout: default
 <script type="text/javascript">
     // dynamic User by Hux
     var _user = '{{site.duoshuo_username}}';
-    
+
     // duoshuo comment query.
     var duoshuoQuery = {short_name: _user };
     (function() {
