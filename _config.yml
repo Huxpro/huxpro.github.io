@@ -45,6 +45,8 @@ duoshuo_username: huxblog
 duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
 
+# Disqus settings
+disqus_username: rpsh
 
 
 # Analytics settings
