@@ -13,8 +13,9 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 # SNS settings
 RSS: false
-weibo_username:     四四四毛
-zhihu_username:     四四四毛
+weibo_username:     deadmao
+douban_username:    itcc
+zhihu_username:     sisisimao
 #github_username:    sisisimao
 #twitter_username:  sisisimao
 #facebook_username: sisisimao
@@ -59,8 +60,8 @@ ga_domain: huangxuan.me
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，多玩玩看看。"
-sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
+sidebar-about-description: "怕什么真理无穷，进一寸有一寸欢喜。"
+sidebar-avatar: /img/avatar.jpg     # use absolute URL.
 
 
 
