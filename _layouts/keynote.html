@@ -154,6 +154,61 @@ layout: default
                     {% endfor %}
                 </ul>
                 {% endif %}
+
+                <!-- Search Page -->
+                {% if site.search %}
+                <hr>
+                <h5><a href="/search/">Search</a></h5>
+                <div class="search">
+                    {% if site.custom-search %}
+                    <!-- 自定义搜索 -->
+                        <form class="search-form" action="/search/">
+                            <input type="search" name="q" class="search-input" placeholder="{{ site.search-placeholder }}">
+                        </form>
+                    {% else %}
+                    <!-- 直接跳转搜索引擎 -->
+                        {% if site.search-engine == 'google' %}
+                            <form id="search-form" target="_blank" method="get" class="search-form" action="https://www.google.com/search">
+                                <input type="search" name="q" class="search-input" placeholder="{{ site.search-placeholder }}">
+                                <input type="hidden" name="sitesearch" value="{{ site.url }}">
+                                <script>
+                                if(navigator.userAgent.match(/(iPod|iPhone|iPad)/i)) {
+                                    /* fix iOS 系统禁止新窗口提交表单 */
+                                    document.getElementById('search-form').removeAttribute('target');
+                                }
+                                </script>
+                            </form>
+                        {% else %}
+                            <form id="search-form" target="_blank" method="get" class="search-form" action="https://www.baidu.com/baidu">
+                                <input type="search" name="word" class="search-input" placeholder="{{ site.search-placeholder }}">
+                                <input type="hidden" name="si" value="{{ site.url }}">
+                                <input type="hidden" name="tn" value="bds">
+                                <input type="hidden" name="cl" value="3">
+                                <input type="hidden" name="ct" value="2097152">
+                                <script>
+                                    var siInput = document.getElementsByName('si')[0];
+                                    var searchInput = document.getElementsByName('word')[0];
+                                    var searchForm = document.getElementById('search-form');
+
+                                    siInput.value = siInput.value.replace('http://','');
+
+                                    searchForm.addEventListener('submit',function(e){
+                                        if(navigator.userAgent.match(/(iPod|iPhone|iPad)/i)) {
+                                            /* fix iOS 系统禁止新窗口提交表单 */
+                                             searchForm.removeAttribute('target');
+                                        }
+                                        searchInput.value += ' '+siInput.value;
+
+                                        setTimeout(function(){
+                                            searchInput.value = searchInput.value.replace(' '+siInput.value, '');
+                                        },1)
+                                    }, false)
+                                </script>
+                            </form>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                {% endif %} 
             </div>
         </div>
     </div>

@@ -87,3 +87,18 @@ friends: [
         href: "http://xieminis.me/"
     }
 ]
+
+# Site Search 
+search: true                            # whether or not using Search
+search-engine: google                   # google or baidu
+search-placeholder: '善用搜索..'         # placeholder of search input
+
+# Custom Search
+# Get google custom search id->  http://cse.google.com
+# Get baidu custom search id->  http://zn.baidu.com
+#custom-search: true                    # whether or not using custom search
+
+# If both google-search-id and baidu-search-id has been set,
+# the site search will fallback to Baidu when the visitor can't access Google
+#google-search-id: "001480698505182148536:zupx25rxeuc"
+#baidu-search-id: "3051926431285584476"
