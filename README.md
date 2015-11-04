@@ -223,6 +223,13 @@ Furthermore, if you only wanna use comment without sharing, you can set `duoshuo
 Disabling the whole thing is also easy, and just comment out the code.
 
 
+Another type of comment widget: [Disqus](https://disqus.com/)
+
+```
+disqus_username: huxblog		# write down your own
+```
+
+
 #### Analytics
 
 From V1.5, we support Google Analytics and Baidu Tongji officially with a deathly simple config:

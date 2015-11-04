@@ -46,7 +46,7 @@ duoshuo_share: true                     # set to false if you want to use Commen
 
 
 # Disqus settings
-disqus_username: rpsh
+# disqus_username: rpsh
 
 
 # Analytics settings
