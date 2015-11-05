@@ -16,6 +16,7 @@
         "url": "https://github.com/Huxpro/huxpro.github.io"
     },
     "scripts": {
-        "preview": "cd _site; python -m SimpleHTTPServer"
+        "preview": "cd _site; python -m SimpleHTTPServer 8020",
+        "watch": "grunt watch & npm run preview & jekyll serve -w;"
     }
 }

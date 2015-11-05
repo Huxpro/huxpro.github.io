@@ -771,7 +771,7 @@ body {
 	}
 }
 
-.one-tag-list{
+.t{
 	//margin-top: 50px;
 	&:first-child{
 		margin-top: 0px;
@@ -782,24 +782,28 @@ body {
 }
 .listing-seperator{
 	color:#0085a1;
-	font-size: 17px !important;
+	font-size: 21px !important;
 	&::before{
 		margin-right: 5px;
 	}
 	@media only screen and (min-width: 768px) {
 		font-size: 20px !important;
-		line-height: 1.5 !important;
-		margin-top: 5px;
+		line-height: 2 !important;
 	}
 }
 
 // Customize Style for Posts in One-Tag-List
 .one-tag-list{
+	.tag-text{
+		font-weight: 200;
+		.sans-serif;
+	}
 	.post-preview {
 		position: relative;
 		> a {
 			.post-title{
-				font-size: 15px;
+				font-size: 16px;
+				font-weight: 500;
 				margin-top: 20px;
 			}
 			.post-subtitle{

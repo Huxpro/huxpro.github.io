@@ -786,12 +786,12 @@ body {
     font-size: 14px;
   }
 }
-.one-tag-list:first-child {
+.t:first-child {
   margin-top: 0px;
 }
 .listing-seperator {
   color: #0085a1;
-  font-size: 17px !important;
+  font-size: 21px !important;
 }
 .listing-seperator::before {
   margin-right: 5px;
@@ -799,15 +799,24 @@ body {
 @media only screen and (min-width: 768px) {
   .listing-seperator {
     font-size: 20px !important;
-    line-height: 1.5 !important;
-    margin-top: 5px;
+    line-height: 2 !important;
   }
+}
+.one-tag-list .tag-text {
+  font-weight: 200;
+  /* Hux learn from
+     *     TypeIsBeautiful,
+     *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
+     */
+  font-family: "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  line-height: 1.7;
 }
 .one-tag-list .post-preview {
   position: relative;
 }
 .one-tag-list .post-preview > a .post-title {
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 500;
   margin-top: 20px;
 }
 .one-tag-list .post-preview > a .post-subtitle {
