@@ -433,7 +433,8 @@ pre,
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading h1,
   .intro-header .page-heading h1 {
-    font-size: 80px;
+    font-size: 50px;
+    margin-bottom: 30px;
   }
 }
 .intro-header .post-heading h1 {
