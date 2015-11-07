@@ -870,7 +870,7 @@ body {
   margin-top: 3px;
 }
 /* Hux customize Style for Duoshuo */
-.comment #ds-thread {
+.comment {
   margin-top: 20px;
 }
 .comment #ds-thread #ds-reset a.ds-like-thread-button {

@@ -105,17 +105,17 @@ header-img: "img/about-bg.jpg"
 
 {% if site.duoshuo_username %}
 <!-- 多说评论框 start -->
-    <div class="comment">
-        <div class="ds-thread"
-        {% if site.duoshuo_username == "huxblog" %}
-            data-thread-id="1187623191091085319"
-        {% else %}
-            data-thread-key="{{site.duoshuo_username}}/about"
-        {% endif %}
+<div class="comment">
+    <div class="ds-thread"
+    {% if site.duoshuo_username == "huxblog" %}
+        data-thread-id="1187623191091085319"
+    {% else %}
+        data-thread-key="{{site.duoshuo_username}}/about"
+    {% endif %}
 
-        data-title="{{page.title}}"
-        data-url="{{site.url}}/about/"></div>
-    </div>
+    data-title="{{page.title}}"
+    data-url="{{site.url}}/about/"></div>
+</div>
 <!-- 多说评论框 end -->
 
 <!-- Duoshuo hacking -->
@@ -153,7 +153,7 @@ header-img: "img/about-bg.jpg"
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "{{site.disqus_username}}";
-    var disqus_identifier = "{{page.id}}";
+    var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";
     var disqus_url = "{{site.url}}{{page.url}}";
 
     (function() {
