@@ -8,6 +8,9 @@
 
 ## Features
 
+##### New Feature (V1.5.1)
+
+- **[Comment](#comment)** support [**Disqus**](http://disqus.com) officially.
 
 ##### New Feature (V1.5)
 
@@ -206,28 +209,22 @@ The iframe will be automatically resized to adapt different form factors also th
 
 #### Comment
 
-This theme is using [DuoShuo](http://duoshuo.com) as the Disqus-like third party discussion system seeing the network issue, if you wanna switch to Disqus and feel difficult to do that, please let me know and I will support it officially.
+This theme support both [Disqus](http://disqus.com) and [Duoshuo](http://duoshuo.com) as the third party discussion system.
 
-First, you need to sign up and get your own duoshuo account. **Repeat, DO NOT use mine!** (maybe I will clean it up someday!)   
-It is deathly simple to sign up and you will get the full power of duoshuo management system. Please give it a try!
+First, you need to sign up and get your own account. **Repeat, DO NOT use mine!** (I have set Trusted Domains) It is deathly simple to sign up and you will get the full power of management system. Please give it a try!
 
-Second, from V1.5, you can easily complete your comment configuration by just adding your **duoshuo short name** *(the second-level domain of your duoshuo account which is unique)* into `_config.yml`:
-
-```
-duoshuo_username: huxblog		# write down your own
-```
-
-**To the old version user**, it's better that you pull the new version, otherwise you have to replace code in `post.html`, `keynote.html` and `about.html`
-
-Furthermore, if you only wanna use comment without sharing, you can set `duoshuo_share: false`.   
-Disabling the whole thing is also easy, and just comment out the code.
-
-
-Another type of comment widget: [Disqus](https://disqus.com/)
+Second, from V1.5, you can easily complete your comment configuration by just adding your **short name** into `_config.yml`:
 
 ```
-disqus_username: huxblog		# write down your own
+duoshuo_username: _your_duoshuo_short_name_
+# OR
+disqus_username: _your_disqus_short_name_
 ```
+
+**To the old version user**, it's better that you pull the new version, otherwise you have to replace code in `post.html`, `keynote.html` and `about.html` by yourselves.
+
+Furthermore, Duoshuo support Sharing. if you only wanna use Duoshuo comment without sharing, you can set `duoshuo_share: false`. You can use Duoshuo Sharing and Disqus Comments together also.
+
 
 
 #### Analytics
