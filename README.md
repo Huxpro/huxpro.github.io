@@ -10,7 +10,7 @@
 
 ##### New Feature (V1.5.1)
 
-- **[Comment](#comment)** support [**Disqus**](http://disqus.com) officially.
+- **[Comment](#comment)** support [**Disqus**](http://disqus.com) officially, thanks to @rpsh.
 
 ##### New Feature (V1.5)
 
