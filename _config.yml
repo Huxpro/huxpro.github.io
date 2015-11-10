@@ -8,7 +8,7 @@ description: "怕什么真理无穷，进一寸有一寸欢喜。"
 keyword: "simao, sisisimao, 四毛, 元学科, 开智, 四毛的博客, 四毛的网志，个人网站, 互联网, 设计, 产品, 写作, 阅读"
 url: "http://sisisimao.github.io"       # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
-
+gems: [jekyll-paginate]
 
 
 # SNS settings
@@ -76,8 +76,5 @@ friends: [
     {
         title: "阳志平",
         href: "http://www.yangzhiping.com/"
-    },{
-        title: "Luke的自留地",
-        href: "http://hmqk1995.github.io"
     }
 ]
