@@ -3,7 +3,6 @@ layout:     post
 title:      "《数学－牛津通识读本》阅读笔记"
 subtitle:   ""
 date:       2015-02-28
-author:     "四四四毛"
 header-img: "img/in-post/2015-02-28-maths-note/bg.jpg"
 tags:
     - 元学科

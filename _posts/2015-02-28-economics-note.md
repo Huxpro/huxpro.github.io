@@ -3,7 +3,6 @@ layout:     post
 title:      "《经济学原理：微观经济学》阅读笔记"
 subtitle:   ""
 date:       2015-02-28
-author:     "四四四毛"
 header-img: "img/in-post/2015-02-28-economics-note/bg.jpg"
 tags:
     - 元学科

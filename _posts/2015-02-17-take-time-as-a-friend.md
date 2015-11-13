@@ -3,7 +3,6 @@ layout:     post
 title:      "把时间当做朋友"
 subtitle:   "如何治疗“时间恐慌症”"
 date:       2015-02-17
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 随笔

@@ -39,10 +39,16 @@ anchorjs: true                          # if you want to customize anchor. check
 #kramdown:
 #  input: GFM                            # use Github Flavored Markdown !important
 
-markdown: redcarpet
-redcarpet:
-    extensions: [ "fenced_code_blocks", "hard_wrap","autolink", "tables", "strikethrough", "superscript", "with_toc_data", "highlight", "prettify","no_intra_emphasis"]
+#markdown: redcarpet
+#redcarpet:
+#    extensions: [ "fenced_code_blocks", "hard_wrap","autolink", "tables", "strikethrough", "superscript", "with_toc_data", "highlight", "prettify","no_intra_emphasis"]
 
+markdown: rdiscount
+rdiscount:
+  extensions:
+    - autolink      # greedily urlify links
+    - footnotes     # footnotes
+    - smart         # typographic substitutions with SmartyPants
 
 # Duoshuo settings
 duoshuo_username: sisisimao

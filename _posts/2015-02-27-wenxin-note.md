@@ -3,7 +3,6 @@ layout:     post
 title:      "《文心书话》阅读笔记"
 subtitle:   ""
 date:       2015-02-27
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 写作

@@ -3,7 +3,6 @@ layout:     post
 title:      "当我谈跑步时我谈些什么"
 subtitle:   "如果你对跑步、写作或村上春树这个人中任一项有兴趣，请读这本书"
 date:       2015-02-13
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 随笔

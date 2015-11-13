@@ -3,7 +3,6 @@ layout:     post
 title:      "降级论"
 subtitle:   "一个微软高级工程师，辞职去一个养猪场做开放平台经理，会发生什么？"
 date:       2015-02-11
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 随笔

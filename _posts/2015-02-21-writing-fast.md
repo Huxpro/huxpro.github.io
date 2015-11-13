@@ -3,7 +3,6 @@ layout:     post
 title:      "快速写作模式谈"
 subtitle:   "有拖延症？使用快速写作法吧"
 date:       2015-02-21
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 随笔

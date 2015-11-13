@@ -27,7 +27,7 @@ layout: default
                         always create a h2 for keeping the margin , Hux
                     {% endcomment %}
                     {% comment %} if page.subtitle {% endcomment %}
-                    <h2 class="subheading">{{ page.subtitle }}</h2>
+                    <h3 class="subheading">{{ page.subtitle }}</h3>
                     {% comment %} endif {% endcomment %}
                     <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
                 </div>
@@ -166,17 +166,17 @@ layout: default
 
 
 {% if site.anchorjs %}
-<!-- async load function -->
+<!-- async load function-->
 <script>
     function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+      //var d = document, t = 'script',
+      //    o = d.createElement(t),
+      //    s = d.getElementsByTagName(t)[0];
+      //o.src = u;
+      //if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      //s.parentNode.insertBefore(o, s);
     }
-</script>
+</script> 
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
     async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){

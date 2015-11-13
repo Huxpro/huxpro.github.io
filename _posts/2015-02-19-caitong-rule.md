@@ -3,7 +3,6 @@ layout:     post
 title:      "采铜法则"
 subtitle:   "给任务排优先级太难？请使用采铜法则"
 date:       2015-02-19
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 随笔

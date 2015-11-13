@@ -3,7 +3,6 @@ layout:     post
 title:      "有些话说不得"
 subtitle:   ""
 date:       2009-12-26
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 随笔

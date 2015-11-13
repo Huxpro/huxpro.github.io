@@ -3,7 +3,6 @@ layout:     post
 title:      "皇帝的新衣"
 subtitle:   ""
 date:       2010-04-02
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 随笔

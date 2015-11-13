@@ -3,13 +3,10 @@ layout:     post
 title:      "不想长大"
 subtitle:   ""
 date:       2009-07-12
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 随笔
 ---
-
-
 
 路旁的树枝已经长出新的嫩芽
 清晨的露珠映照的世界纯静而又明亮

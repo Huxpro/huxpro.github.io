@@ -3,7 +3,6 @@ layout:     post
 title:      "不能说的话"
 subtitle:   "硅谷创业教父Paul Graham的人生智慧"
 date:       2015-01-31
-author:     "四四四毛"
 header-img: "img/in-post/paul-graham-bg.jpg"
 tags:
     - 随笔

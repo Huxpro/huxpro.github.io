@@ -3,7 +3,6 @@ layout:     post
 title:      "查理·芒格的多元思维模型"
 subtitle:   "巴菲特黄金搭档查理·芒格的智慧何来"
 date:       2015-01-27
-author:     "四四四毛"
 header-img: "img/in-post/2015-01-27-charlie-munger/bg.jpg"
 tags:
     - 元学科

@@ -3,7 +3,6 @@ layout:     post
 title:      "快速写作试验阶段总结"
 subtitle:   ""
 date:       2015-02-22
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 写作

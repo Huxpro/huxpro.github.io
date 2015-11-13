@@ -3,7 +3,6 @@ layout:     post
 title:      "阅读的故事"
 subtitle:   "当你对阅读不抱目的，便能享受到阅读的乐趣，并把它变成生活不可缺少的一部分。"
 date:       2015-01-12
-author:     "四四四毛"
 header-img: "img/in-post/2015-01-12-read-story/bg.jpg"
 tags:
     - 随笔

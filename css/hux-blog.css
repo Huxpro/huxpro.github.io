@@ -46,6 +46,7 @@
 .sidebar-container .short-about .list-inline > li {
   padding-left: 0px;
 }
+
 body {
   /* Hux learn from
      *     TypeIsBeautiful,
@@ -93,8 +94,7 @@ article {
   overflow-x: hidden;
 }
 blockquote {
-  color: #808080;
-  font-style: italic;
+  background-color: #f9f9f9;
   font-size: 0.95em;
   margin: 20px 0 20px;
 }

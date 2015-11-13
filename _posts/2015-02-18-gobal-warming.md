@@ -3,7 +3,6 @@ layout:     post
 title:      "好一个大千世界"
 subtitle:   "你真的知道全球变暖是怎么回事吗？"
 date:       2015-02-18
-author:     "四四四毛"
 header-img: "img/in-post/write-practice-bg.jpg"
 tags:
     - 随笔
