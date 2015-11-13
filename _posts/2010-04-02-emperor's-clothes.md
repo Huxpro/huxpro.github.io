@@ -3,12 +3,10 @@ layout:     post
 title:      "皇帝的新衣"
 subtitle:   ""
 date:       2010-04-02
-header-img: "img/in-post/write-practice-bg.jpg"
+header-img: "img/in-post/2010-04-02-emperor-clothes/bg.jpg"
 tags:
     - 随笔
 ---
-
-
 
 有这么一个故事。
 
