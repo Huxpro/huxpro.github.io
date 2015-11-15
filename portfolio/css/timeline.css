@@ -34,10 +34,12 @@ a:hover {
 } /* Made with http://icomoon.io/ */
 
 .cbp_tmtimeline {
-	margin: 30px 0 0 0;
 	padding: 0;
 	list-style: none;
 	position: relative;
+	max-width: 600px;
+	margin: 0 auto;
+	margin-top: -120px;
 }
 
 /* The line */
@@ -50,64 +52,47 @@ a:hover {
 	background: #afdcf8;
 	left: 20%;
 	margin-left: -10px;
+	display: none;
 }
 
 .cbp_tmtimeline > li {
 	position: relative;
+	box-sizing: border-box;
+	display: inline-block;
+	vertical-align: top;
 }
 
 /* The date/time */
-.cbp_tmtimeline > li .cbp_tmtime {
-	display: block;
-	width: 25%;
-	padding-right: 100px;
-	position: absolute;
-}
-
-.cbp_tmtimeline > li .cbp_tmtime span {
-	display: block;
-	text-align: right;
-	line-height: 1;
-}
-
-.cbp_tmtimeline > li .cbp_tmtime span:first-child {
-	font-size: 1em;
-	line-height: 1.4;
-	color: #bdd0db;
-}
-
-.cbp_tmtimeline > li .cbp_tmtime span:last-child {
-	font-size: 2.9em;
-	color: #3594cb;
-}
-
-.cbp_tmtimeline > li:nth-child(odd) .cbp_tmtime span:last-child {
-	color: #6cbfee;
+.cbp_tmlabel time {
+	font-size: 1.0em;
+	float: right;
+	line-height: 50px;
+	margin-right: 1em;
+	color: #a5a7aa;
 }
 
 /* Right content */
 .cbp_tmtimeline > li .cbp_tmlabel {
-	margin: 0 0 15px 25%;
-	background: #3594cb;
-	color: #fff;
-	padding: 1em 0;
-	font-size: 16px;
+	background: white;
+	color: rgb(78, 78, 78);
+	font-size: 1em;
 	font-weight: normal;
 	line-height: 1.4;
 	position: relative;
-	border-radius: 5px;
+	border-radius: 3px;
+	border: 1px solid #edeeee;
+	margin: 0 5px;
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel {
-	background: #6cbfee;
 }
 
 .cbp_tmtimeline > li .cbp_tmlabel h2 {
-	margin-top: 0px;
-	padding: 0 0 0.5em 0;
-	font-weight: normal;
+	font-weight: bold;
+	font-size: 1.0em;
+	color: #6ca8fb;
 	margin: 0 1em;
-	font-size: 1.5em;
+	line-height: 50px;
 }
 
 /* The triangle */
@@ -122,10 +107,12 @@ a:hover {
 	border-right-color: #3594cb;
 	border-width: 10px;
 	top: 10px;
+	display: none;
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
-	border-right-color: #6cbfee;
+	border-right-color: #FFFFFF;
+	display: no;
 }
 
 /* The icons */
@@ -175,14 +162,13 @@ a:hover {
 }
 
 /* Example Media Queries */
-@media screen and (max-width: 65.375em) {
 
 	.cbp_tmtimeline > li .cbp_tmtime span:last-child {
 		font-size: 1.5em;
 	}
-}
 
-@media screen and (max-width: 47.2em) {
+
+
 	.cbp_tmtimeline:before {
 		display: none;
 	}
@@ -199,7 +185,7 @@ a:hover {
 
 	.cbp_tmtimeline > li .cbp_tmlabel {
 		margin: 0 0 30px 0;
-		padding: 1em 0;
+		padding: 0em 0;
 		font-weight: 400;
 		font-size: 95%;
 	}
@@ -231,27 +217,27 @@ html{
 }
 body{
 
+background: #fafafa;
 }
 
 .cbp_tmlabel .hux_ul{
 	border:none;
 	padding:0;
 	margin:0;
-	margin-left: 15px;
 }
 .cbp_tmlabel .hux_ul li{
 	padding:0;
 	margin: 0;
-	list-style-type: disc;
+	list-style: none;
 }
 header{
 	background: #6ca8fb;
 	text-align: center;
-	height: 520px;
+	height: 620px;
 	min-width: 100%;
 	padding: 5em 0px !important;
-	margin-bottom: 50px !important;
 	position: relative;
+	border-bottom: 1px solid #edeeee;
 }
 header h1 {
     font-size: 70px;
@@ -319,22 +305,19 @@ header .tri:after{
 }*/
 .cbp_tmlabel ul li.skill{
 	overflow: auto;
-	padding-top: 1em;
-	padding-bottom: 0.4em;
+	margin-top: 9px;
+	border-top: 1px solid #eeefef;
 }
 .cbp_tmlabel ul li.skill span{
     display: block;
     float: left;
-    font-size: 1.3em;
-    width: 2em;
-    height: 2em;
+    font-size: 1.3rem;
+    width: 40px;
+    height: 40px;
     text-align: center;
     line-height: 2.0em;
-    /*border: 0.1em solid white;*/
     margin-right: 0.4em;
-    background: white;
-    border-radius: 50%;
-    color:#6ca8fb;
+    color: #a5a7aa;
 }
 .cbp_tmlabel ul li.skill span:before{
     line-height: 2.1em;
@@ -342,24 +325,26 @@ header .tri:after{
 .cbp_tmlabel ul li.skill span.link{
 	float: right;
 	font-size: 0.8em;
-	line-height: 4.6em;
-	width: 4.5em;
-	height: 4.5em;
-	border-radius: 50%;
+	line-height: 30px;
+	width: auto;
+	padding: 0 20px;
+	box-sizing: border-box;
+	height: 32px;
+	border-radius: 3px;
 	background: white;
-	box-shadow: rgba(0, 0, 0, 0.258824) 0px 2px 5px 0px;
-	margin-top: -0.8em;
-	font-weight: 900;
-	margin-right: 5px;
+	border: 1px solid #D5D6D8;
+	margin: 4px 0px;
 }
 .cbp_tmlabel ul li.skill span.link:active{
 	background: #eee;
 }
 .cbp_tmlabel ul li.skill span.link a {
-	color:#6ca8fb;
+	color: #a5a7aa;
 	display: block;
 	width: 100%;
 	height: 100%;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 @media screen and (max-width: 400px) {
