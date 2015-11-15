@@ -1,3 +1,27 @@
+/**
+ *  Portfolio.css
+ */
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+body, html {
+	font-size: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+a:hover {
+	/*color: #000;*/
+	text-decoration: none;
+}
+
+.main, .container > header {
+	width: 90%;
+	max-width: 69em;
+	margin: 0 auto;
+	padding: 0 1.375em 3.125em 1.375em;
+}
+
 @font-face {
 	font-family: 'huxico';
 	src:url('../fonts/huxico.eot');
@@ -66,9 +90,9 @@
 	margin: 0 0 15px 25%;
 	background: #3594cb;
 	color: #fff;
-	padding: 1em;
-	font-size: 1.2em;
-	font-weight: 300;
+	padding: 1em 0;
+	font-size: 16px;
+	font-weight: normal;
 	line-height: 1.4;
 	position: relative;
 	border-radius: 5px;
@@ -208,32 +232,12 @@ html{
 body{
 
 }
-/*footer{
-	background: #6ca8fb;
-	text-align: center;
-	width: 100%;
-	min-width: 100%;
-	padding: 3em 0px !important;
-	position: relative;
-	color: white;
-}*/
-/*footer .tri{
-	position: absolute;
-	top: -35px;
-	width: 100%;
-	height: 35px;
-}
-footer .tri img{
-	width: 74px;
-}
-footer a:hover{
-	color: rgb(255, 255, 0);
-}*/
+
 .cbp_tmlabel .hux_ul{
 	border:none;
 	padding:0;
 	margin:0;
-	margin-left: 5px;
+	margin-left: 15px;
 }
 .cbp_tmlabel .hux_ul li{
 	padding:0;
@@ -249,13 +253,23 @@ header{
 	margin-bottom: 50px !important;
 	position: relative;
 }
+header h1 {
+    font-size: 70px;
+    color: white;
+    font-weight: 100;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    line-height: 1;
+    letter-spacing: 0.1em;
+}
 header p{
 	text-align: center;
 	color: white;
-	font-size: 1.25em;
+	font-size: 16px;
 	line-height: 1.6em;
 	letter-spacing: 1px;
-	margin: 2em;
+	font-weight: 300;
+	margin: 1.7em;
 }
 header img{
 	width: 190px;
@@ -292,9 +306,9 @@ header .tri:after{
     border-top: 1px solid rgba(255,255,255,0.4);
 }
 .cbp_tmlabel ul{
-    padding: 0.5em 0;
+    padding: 0em 0;
     margin: 0 1.5em;
-    border-top: 1px solid rgba(255,255,255,0.4);
+    /* border-top: 1px solid rgba(255,255,255,0.4); */
     list-style: none;
 }
 .cbp_tmlabel ul li{
@@ -315,12 +329,15 @@ header .tri:after{
     width: 2em;
     height: 2em;
     text-align: center;
-    line-height: 2.1em;
+    line-height: 2.0em;
     /*border: 0.1em solid white;*/
     margin-right: 0.4em;
     background: white;
     border-radius: 50%;
     color:#6ca8fb;
+}
+.cbp_tmlabel ul li.skill span:before{
+    line-height: 2.1em;
 }
 .cbp_tmlabel ul li.skill span.link{
 	float: right;
@@ -339,10 +356,10 @@ header .tri:after{
 	background: #eee;
 }
 .cbp_tmlabel ul li.skill span.link a {
+	color:#6ca8fb;
 	display: block;
 	width: 100%;
 	height: 100%;
-
 }
 
 @media screen and (max-width: 400px) {

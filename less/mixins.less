@@ -23,13 +23,15 @@
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
      */
 	font-family:
-        // 优先指定英文
-        //"SF UI Display",        // OSX ^10.11
+        // System Font            // https://www.webkit.org/blog/3709/using-the-system-font-in-web-content/
+        -apple-system,            // OSX ^10.11 & iOS ^9  San Francisco & 苹方
+
+        // English First
         "Helvetica Neue",         // OSX
         "Arial",                  // Win "Helvetica"
         //" Segoe UI",            // Win ^8
 
-        // 指定 Fallback 中文
+        // Chinese Fallback
         "PingFang SC",            // OSX ^10.11 & iOS ^9  苹方（华康信凭黑）
         "Hiragino Sans GB",       // OSX ^10.6            冬青黑体
         "STHeiti",                // OSX <10.6  & iOS <9  华文黑体
@@ -38,7 +40,7 @@
         "Source Han Sans SC",     // SourceHan - begin    思源黑体
         "Noto Sans CJK SC",
         "Source Han Sans CN",
-        "Noto Sans SC", 
+        "Noto Sans SC",
         "Source Han Sans TC",
         "Noto Sans CJK TC",       // SourceHan - end
         "WenQuanYi Micro Hei",    // Linux                文泉驿微米黑
