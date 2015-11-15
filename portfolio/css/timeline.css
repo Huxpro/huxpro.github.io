@@ -42,19 +42,6 @@ a:hover {
 	margin-top: -120px;
 }
 
-/* The line */
-.cbp_tmtimeline:before {
-	content: '';
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	width: 10px;
-	background: #afdcf8;
-	left: 20%;
-	margin-left: -10px;
-	display: none;
-}
-
 .cbp_tmtimeline > li {
 	position: relative;
 	box-sizing: border-box;
@@ -71,20 +58,17 @@ a:hover {
 	color: #a5a7aa;
 }
 
-/* Right content */
+/* The card */
 .cbp_tmtimeline > li .cbp_tmlabel {
 	background: white;
 	color: rgb(78, 78, 78);
-	font-size: 1em;
-	font-weight: normal;
-	line-height: 1.4;
+	/* line-height: 1.4; */
 	position: relative;
 	border-radius: 3px;
 	border: 1px solid #edeeee;
-	margin: 0 5px;
-}
-
-.cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel {
+	margin: 0 0 30px 0;
+	font-weight: 400;
+	font-size: 95%;
 }
 
 .cbp_tmtimeline > li .cbp_tmlabel h2 {
@@ -93,21 +77,6 @@ a:hover {
 	color: #6ca8fb;
 	margin: 0 1em;
 	line-height: 50px;
-}
-
-/* The triangle */
-.cbp_tmtimeline > li .cbp_tmlabel:after {
-	right: 100%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-right-color: #3594cb;
-	border-width: 10px;
-	top: 10px;
-	display: none;
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
@@ -161,63 +130,13 @@ a:hover {
 	content: "\e003";
 }
 
-/* Example Media Queries */
-
-	.cbp_tmtimeline > li .cbp_tmtime span:last-child {
-		font-size: 1.5em;
-	}
-
-
-
-	.cbp_tmtimeline:before {
-		display: none;
-	}
-
-	.cbp_tmtimeline > li .cbp_tmtime {
-		width: 100%;
-		position: relative;
-		padding: 0 0 14px 0;
-	}
-
-	.cbp_tmtimeline > li .cbp_tmtime span {
-		text-align: left;
-	}
-
-	.cbp_tmtimeline > li .cbp_tmlabel {
-		margin: 0 0 30px 0;
-		padding: 0em 0;
-		font-weight: 400;
-		font-size: 95%;
-	}
-
-	.cbp_tmtimeline > li .cbp_tmlabel:after {
-		right: auto;
-		left: 20px;
-		border-right-color: transparent;
-		border-bottom-color: #3594cb;
-		top: -20px;
-	}
-
-	.cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
-		border-right-color: transparent;
-		border-bottom-color: #6cbfee;
-	}
-
-	.cbp_tmtimeline > li .cbp_tmicon {
-		position: relative;
-		float: right;
-		left: auto;
-		margin: -55px 5px 0 0px;
-	}
-}
 
 /******* Hux Branch *****/
 html{
 	font-size: 90%;
 }
 body{
-
-background: #fafafa;
+	background: #fafafa;
 }
 
 .cbp_tmlabel .hux_ul{
@@ -260,31 +179,12 @@ header p{
 header img{
 	width: 190px;
 }
-header .tri{
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-	height: 35px;
-}
-header .tri:after{
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-bottom-color: white;
-	border-width: 37px;
-	border-bottom-width: 31px;
-	bottom: 0px;
-	left: 50%;
-	margin-left: -37px;
-}
 
 .cbp_tmlabel img{
 	width: 100%;
 	margin-bottom: 1em;
 }
+
 .cbp_tmlabel p{
     padding: 1em 0;
 	/*text-indent: 2em;*/
@@ -294,7 +194,6 @@ header .tri:after{
 .cbp_tmlabel ul{
     padding: 0em 0;
     margin: 0 1.5em;
-    /* border-top: 1px solid rgba(255,255,255,0.4); */
     list-style: none;
 }
 .cbp_tmlabel ul li{
@@ -348,7 +247,6 @@ header .tri:after{
 }
 
 @media screen and (max-width: 400px) {
-
 	.main{
 		width: 100%;
 		padding-bottom: 0px;
