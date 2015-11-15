@@ -10,16 +10,19 @@ body, html {
 	margin: 0;
 }
 
-a:hover {
+.main a{
+	color:#0085a1;
+}
+.main a:hover {
 	/*color: #000;*/
-	text-decoration: none;
+	/*text-decoration: none;*/
 }
 
 .main, .container > header {
 	width: 90%;
 	max-width: 69em;
 	margin: 0 auto;
-	padding: 0 1.375em 3.125em 1.375em;
+	padding: 0 1.375em;
 }
 
 @font-face {
@@ -52,8 +55,10 @@ a:hover {
 /* The date/time */
 .cbp_tmlabel time {
 	font-size: 1.0em;
-	float: right;
-	line-height: 50px;
+	position: absolute;
+	top: 0px;
+	line-height: 64px;
+	right: 5px;
 	margin-right: 1em;
 	color: #a5a7aa;
 }
@@ -73,10 +78,11 @@ a:hover {
 
 .cbp_tmtimeline > li .cbp_tmlabel h2 {
 	font-weight: bold;
-	font-size: 1.0em;
-	color: #6ca8fb;
-	margin: 0 1em;
-	line-height: 50px;
+	font-size: 15px;
+	padding: 14px 20px;
+	margin: 0;
+	height: 64px;
+	line-height: 36px;
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
@@ -115,6 +121,7 @@ a:hover {
 
 .cbp_tmicon-screen:before {
 	content: "\e005";
+	font-family: 'huxico';
 }
 
 .cbp_tmicon-html:before {
@@ -124,12 +131,22 @@ a:hover {
 
 .cbp_tmicon-video:before {
 	content: "\e002";
+	font-family: 'huxico';
 }
 
 .cbp_tmicon-font:before {
 	content: "\e003";
+	font-family: 'huxico';
 }
 
+.cbp_tmicon-vue:before {
+	content: "";
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: url("../images/vue-logo.png") 50% 50% no-repeat;
+    background-size: 20px;
+}
 
 /******* Hux Branch *****/
 html{
@@ -214,12 +231,12 @@ header img{
     width: 40px;
     height: 40px;
     text-align: center;
-    line-height: 2.0em;
+    line-height: 40px;
     margin-right: 0.4em;
     color: #a5a7aa;
 }
 .cbp_tmlabel ul li.skill span:before{
-    line-height: 2.1em;
+    line-height: 40px;
 }
 .cbp_tmlabel ul li.skill span.link{
 	float: right;
