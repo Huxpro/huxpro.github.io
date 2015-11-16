@@ -136,11 +136,11 @@ pre,
 .table-responsive {
   -webkit-overflow-scrolling: touch;
 }
-@media screen and (max-width: 500px) {
-  pre code {
-    display: block;
-    width: 500px;
-  }
+pre code {
+  display: block;
+  width: auto;
+  white-space: pre;
+  word-wrap: normal;
 }
 .post-container a {
   color: #337ab7;

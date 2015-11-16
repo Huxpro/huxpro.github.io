@@ -104,12 +104,13 @@ pre,.table-responsive{
 	// sometimes you should use vendor-feature.
 	-webkit-overflow-scrolling: touch;
 }
-@media screen and (max-width: 500px){
-	pre code{
-		display: block;
-		width: 500px;
-	}
+pre code{
+	display: block;
+	width: auto;
+	white-space: pre;	// save it but no-wrap;
+	word-wrap: normal;	// no-wrap
 }
+
 
 // In the post.
 .post-container{
