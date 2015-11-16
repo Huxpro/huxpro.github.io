@@ -1,5 +1,5 @@
 /**
- *  Portfolio.css
+ *  Timeline.css
  */
 
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
@@ -155,17 +155,6 @@ html{
 body{
 	background: #fafafa;
 }
-
-.cbp_tmlabel .hux_ul{
-	border:none;
-	padding:0;
-	margin:0;
-}
-.cbp_tmlabel .hux_ul li{
-	padding:0;
-	margin: 0;
-	list-style: none;
-}
 header{
 	background: #6ca8fb;
 	text-align: center;
@@ -197,6 +186,17 @@ header img{
 	width: 190px;
 }
 
+.cbp_tmlabel .hux_ul{
+	border:none;
+	padding:0;
+	margin:0;
+}
+.cbp_tmlabel .hux_ul li{
+	padding:0;
+	margin: 0;
+	list-style: none;
+}
+
 .cbp_tmlabel img{
 	width: 100%;
 	margin-bottom: 1em;
@@ -216,9 +216,6 @@ header img{
 .cbp_tmlabel ul li{
     padding: 0.5em 0;
 }
-/*.cbp_tmlabel ul li:nth-child(1){
-	text-indent: 2em;
-}*/
 .cbp_tmlabel ul li.skill{
 	overflow: auto;
 	margin-top: 9px;
