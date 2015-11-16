@@ -6,6 +6,19 @@
 
 
 
+## Boilerplate beta
+
+Want to clone a boilerplate instead of my buzz blog? Here comes this!
+
+```
+$ git clone -b boilerplate git@github.com:Huxpro/huxpro.github.io.git <your-repo>
+```
+
+This git commands will only pull the `boilerplate` branch to <your-repo> as the `boilerplate` branch, you can delete `.git` and redo `git init` to build your own site based on this boilerplate.
+
+[The boilerplate can be previewed here &rarr;](http://huangxuan.me/huxblog-boilerplate/)
+
+
 ## Features
 
 ##### New Feature (V1.5.1)
@@ -76,7 +89,7 @@
 	* [Keynote Layout](#keynote-layout)
 * Comment & Analysis
 	* [Comment](#comment)
-	* [Analytics](#analytics) 
+	* [Analytics](#analytics)
 * Advanced
 	* [Customization](#customization)
 	* [Header Image](#header-image)
