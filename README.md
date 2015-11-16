@@ -6,17 +6,15 @@
 
 
 
-## Boilerplate beta
+## Boilerplate (beta)
 
 Want to clone a boilerplate instead of my buzz blog? Here comes this!
 
 ```
-$ git clone -b boilerplate git@github.com:Huxpro/huxpro.github.io.git <your-repo>
+$ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 ```
 
-This git commands will only pull the `boilerplate` branch to <your-repo> as the `boilerplate` branch, you can delete `.git` and redo `git init` to build your own site based on this boilerplate.
-
-[The boilerplate can be previewed here &rarr;](http://huangxuan.me/huxblog-boilerplate/)
+[preview here &rarr;](http://huangxuan.me/huxblog-boilerplate/)
 
 
 ## Features
