@@ -8,7 +8,7 @@
 
 ## Boilerplate (beta)
 
-Want to clone a boilerplate instead of my buzz blog? Here comes this!
+Want to clone a boilerplate instead of my buzz blog? Here comes this!  
 
 ```
 $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
@@ -17,7 +17,15 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 **[View Boilerplate Here &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
 
 
+
+
 ## Features
+
+##### New Feature (V1.5.2)
+
+- Annoyed to delete my blog post after clone or pull? **Boilerplate** comes to help you get started quickly and easily merge update. 
+- `-apple-system` is added in font rule, which display beautiful new font **San Francisco** in iOS 9 by default. 
+- Fixed [issue#15](https://github.com/Huxpro/huxpro.github.io/issues/15) about code wrap.
 
 ##### New Feature (V1.5.1)
 
