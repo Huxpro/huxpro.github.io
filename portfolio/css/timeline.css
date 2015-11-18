@@ -139,13 +139,41 @@ body, html {
 	font-family: 'huxico';
 }
 
-.cbp_tmicon-vue:before {
+/** Venders Logo **/
+.i-vue:before {
 	content: "";
     display: block;
     width: 40px;
     height: 40px;
-    background: url("../images/vue-logo.png") 50% 50% no-repeat;
+    background: url("../images/logo-vue.png") 50% 50% no-repeat;
     background-size: 20px;
+}
+
+.i-kissy:before {
+	content: "";
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: url("../images/logo-kissy.png") 50% 50% no-repeat;
+	background-size: 20px;
+}
+
+.i-jquery:before {
+	content: "";
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: url("../images/logo-jquery.png") 50% 50% no-repeat;
+	background-size: 20px;
+}
+
+.i-react:before {
+	content: "";
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: url("../images/logo-react.png") 50% 50% no-repeat;
+	background-size: 22px;
 }
 
 /******* Hux Branch *****/
@@ -200,6 +228,8 @@ header img{
 .cbp_tmlabel img{
 	width: 100%;
 	margin-bottom: 1em;
+	border-top: 1px solid #eeefef;
+	border-bottom: 1px solid #eeefef;
 }
 
 .cbp_tmlabel p{
@@ -229,8 +259,11 @@ header img{
     height: 40px;
     text-align: center;
     line-height: 40px;
-    margin-right: 0.4em;
+    margin-right: 8px;
     color: #a5a7aa;
+}
+.cbp_tmlabel ul li.skill span:nth-child(1){
+	margin-left: -7px;
 }
 .cbp_tmlabel ul li.skill span:before{
     line-height: 40px;
@@ -240,7 +273,8 @@ header img{
 	font-size: 0.8em;
 	line-height: 30px;
 	width: auto;
-	padding: 0 20px;
+	padding: 0 11px;
+	min-width: 70px;
 	box-sizing: border-box;
 	height: 32px;
 	border-radius: 3px;
@@ -272,5 +306,8 @@ header img{
 		font-size: 1.05em;
 		letter-spacing: 0px;
 		margin: 1.5em;
+	}
+	.cbp_tmlabel ul li.skill span{
+	    margin-right: 2px;
 	}
 }
