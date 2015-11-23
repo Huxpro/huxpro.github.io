@@ -52,14 +52,15 @@ body {
      *     TypeIsBeautiful,
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
      */
-  font-family: "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  font-family: Helvetica, Arial, "Hiragino Sans GB", sans-serif;
+  color: #2f2f2f;
+  font-size: 18px;
+  font-weight: normal;
   line-height: 1.7;
-  font-size: 16px;
-  color: #404040;
   overflow-x: hidden;
 }
 p {
-  margin: 30px 0;
+  margin: 25px 0 0 0;
 }
 h1,
 h2,
@@ -71,13 +72,21 @@ h6 {
      *     TypeIsBeautiful,
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
      */
-  font-family: "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
-  line-height: 1.7;
+  font-family: Helvetica, Arial, "Hiragino Sans GB", sans-serif;
   line-height: 1.1;
   font-weight: bold;
 }
-h4 {
-  font-size: 21px;
+h1{
+  font-size: 32px;
+}
+h2{
+  font-size: 28px;
+}
+h3,h4 {
+  font-size: 24px;
+}
+h5,h6 {
+  font-size: 20px;
 }
 a {
   color: #404040;
