@@ -318,7 +318,7 @@ header img{
 		letter-spacing: 0px;
 		margin: 1.5em;
 	}
-	.cbp_tmlabel ul li.skill span{
+	.cbp_tmlabel ul li.skill>span, .cbp_tmlabel ul li.skill>a{
 	    margin-right: 2px;
 	}
 }
