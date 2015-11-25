@@ -50,6 +50,7 @@ body, html {
 	box-sizing: border-box;
 	display: inline-block;
 	vertical-align: top;
+	width: 100%;
 }
 
 /* The date/time */
@@ -61,6 +62,11 @@ body, html {
 	right: 5px;
 	margin-right: 1em;
 	color: #a5a7aa;
+}
+
+/* The Duoshuo */
+.cbp_tmlabel .comment{
+	padding: 0 1.5em 0.5em;
 }
 
 /* The card */

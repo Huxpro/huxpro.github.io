@@ -902,6 +902,12 @@ body {
 .comment #ds-thread #ds-reset .ds-gradient-bg {
   background: none;
 }
+.comment #ds-thread #ds-reset .ds-post-options {
+  border-bottom: 1px solid #ccc;
+}
+.comment #ds-thread #ds-reset .ds-post-button {
+  border-bottom: 1px solid #ccc;
+}
 #ds-smilies-tooltip ul.ds-smilies-tabs li a {
   background: white !important;
 }
