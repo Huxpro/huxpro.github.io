@@ -130,18 +130,18 @@ header-img: "img/about-bg.jpg"
             $zh.style.display = "none";
             $fr.style.display = "none";
         // zh by default
-        }else if(_hash == "#zh"){
+        }else if(_hash == "#fr"){
             // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 0;
-            $fr.style.display = "none";
-            $zh.style.display = "block";
+            $select.selectedIndex = 2;
+            $fr.style.display = "block";
+            $zh.style.display = "none";
             $en.style.display = "none";
         }else{
             // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 2;
-            $zh.style.display = "none";
+            $select.selectedIndex = 0;
+            $zh.style.display = "block";
             $en.style.display = "none";
-            $fr.style.display = "block";
+            $fr.style.display = "none";
         }
     }
 
