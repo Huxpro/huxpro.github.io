@@ -133,9 +133,9 @@ header-img: "img/about-bg.jpg"
         }else if(_hash == "#fr"){
             // not trigger onChange, otherwise cause a loop call.
             $select.selectedIndex = 0;
+            $fr.style.display = "block";
             $zh.style.display = "none";
             $en.style.display = "none";
-            $fr.style.display = "block";
         }else{
             // not trigger onChange, otherwise cause a loop call.
             $select.selectedIndex = 2;
