@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "我们在积累什么？"
-subtitle:   "推迟收获，是成功者的一大品质。”
+subtitle:   "推迟收获，是成功者的一大品质。"
 date:       2015-12-02 16:56:00
-author:     “YUX”
+author:     "YUX"
 header-img: "img/post-bg-2015.jpg"
 tags:
 	- 杂谈
