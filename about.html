@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "About"
-description: "Hey, this is Hux."
+description: "Hey, this is YUX."
 header-img: "img/about-bg.jpg"
 ---
 
@@ -9,6 +9,7 @@ header-img: "img/about-bg.jpg"
 <select onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
     <option value="0" selected> 中文 Chinese </option>
     <option value="1"> 英语 English </option>
+    <option value="2"> 法语 Français </option>
 </select>
 
 <!-- Chinese Version -->
@@ -79,11 +80,41 @@ header-img: "img/about-bg.jpg"
     </ul>
 </div>
 
+<!-- French Version -->
+<div class="fr">
+    <blockquote>
+        FFFFFFF
+    </blockquote>
+
+    <p>Student, major in New Media Art of <a href="https://en.wikipedia.org/wiki/Communication_University_of_China">Communication University of China</a>, which is a interdisciplinary subject of technology and art, and now Senior.</p>
+
+    <p>Programmer, Senior Front-End Engineer of <a href="http://m.wepiao.com/index.html">Wechat Movie</a>, previous worked in <a href="http://alitrip.com" target="_blank">Alibaba Trip</a> as Front-End Engineer Intern for one year, looking for opportunities abroad.</p>
+
+    <p>Designer, offered as UI/UX Designer Intern by Alibaba Group, Microsoft Bing etc. Experienced in Motion Graphic Design, also familer with Layout and Typography.</p>
+
+    <p>Product Design and Product Management is also attractive and comfortable to me.</p>
+
+    <p>
+    You can call me English name <b>Hux</b>,<br>
+    And my Chinese name is <b>Huang Xuan</b>
+    </p>
+
+    <hr>
+    Some of my projects is put on my <a href="/portfolio"> Portfolio 👉 </a>
+    <br>
+    Interested in more details? Checkout my resumes:
+    <ul>
+        <li><a href="{{site.baseUrl}}/attach/2016_Hux_en_SE.pdf"> 2016_Hux_en_Sr.SE </a></li>
+        <li><a href="{{site.baseUrl}}/attach/2016_Hux_en_PD.pdf"> 2016_Hux_en_PD&UX </a></li>
+    </ul>
+</div>
+
 <!-- Handle Language Change -->
 <script type="text/javascript">
     // get nodes
     var $zh = document.querySelector(".zh");
     var $en = document.querySelector(".en");
+    var $fr = document.querySelector(".fr");
     var $select = document.querySelector("select");
 
     // bind hashchange event
@@ -97,12 +128,20 @@ header-img: "img/about-bg.jpg"
             $select.selectedIndex = 1;
             $en.style.display = "block";
             $zh.style.display = "none";
+            $fr.style.display = "none";
         // zh by default
+        }else if(_hash == "#fr"){
+            // not trigger onChange, otherwise cause a loop call.
+            $select.selectedIndex = 2;
+            $fr.style.display = "block";
+            $zh.style.display = "none";
+            $en.style.display = "none";
         }else{
             // not trigger onChange, otherwise cause a loop call.
             $select.selectedIndex = 0;
             $zh.style.display = "block";
             $en.style.display = "none";
+            $fr.style.display = "none";
         }
     }
 
@@ -110,8 +149,10 @@ header-img: "img/about-bg.jpg"
     function onLanChange(index){
         if(index == 0){
             window.location.hash = "#zh"
-        }else{
+        }else if(index == 1){
             window.location.hash = "#en"
+        }else{
+            window.location.hash = "#fr"
         }
     }
 
