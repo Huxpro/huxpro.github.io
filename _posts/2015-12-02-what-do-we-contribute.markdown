@@ -6,16 +6,18 @@ date:       2015-12-02 16:56:00
 author:     "YUX"
 header-img: "img/post-bg-2015.jpg"
 tags:
-	- 杂谈
-	- 生活
+    - 杂谈
+    - 生活
 ---
 
 [坚持每天输出千字是一种怎样的体验？](http://www.zhihu.com/question/31783718)这个问题很久之前就出现在知乎上，在我眼前也闪过不下十次，但始终没有真正点进去浏览，就像大部分问题一样没有留下任何印记，而直到有一天，在[V2EX](https://v2ex.com/)上看到有人讲述用[七牛](https://portal.qiniu.com/signup?code=3llo7rn63bsya)做图床的文章，我点进连接的博客才发现[陈素封](http://cnfeat.com/)这位千字文的践行者，随即看到了他写千字文的感悟与经验，这应该是这个想法在我脑海里萌生的时刻。
 要知道在这之前我也见过不少博客，用[GitHub Page](https://pages.github.com/)， [WordPress](https://wordpress.com/)，[Flask](http://flask.pocoo.org/)，放到[SAE](http://sae.sina.com.cn/)，[GAE](https://cloud.google.com/appengine)，[DigitalOcean](https://www.digitalocean.com/?refcode=7f7d2441b8df)，香港的空间和VPS，每天去想办法让博客变得功能更全速度更快，做CDN做静态缓存，当然手上也我这一大把域名，但可笑的是无一例外，所有的博客上都只有一篇文章—-Hello World! 就像很久以前我玩安卓手机，整天刷机刷更省电的ROM要最快的开机一样，从一开始就忘了做事的初衷，我也思考过其中原因，无非是不知道写什么，写了也没人看，写了也没用。真正改变我这个想法的还是陈素封那篇[《写就是写本身的报酬》](http://cnfeat.com/blog/2015/09/15/what-i-give-is-what-i-get/)，而这句话是源自柴静的一篇[博文](http://www.yijingwenhua.cn/s/blog_48b0d37b010002ed.html)。
+
 > 今天下午临时定下要出差。
 > 已抵浙江，刚刚安顿。明天一早出发，不便多写。
 > 但会在工作之余尽量写。
 > 写不是义务，写本身就是写的报酬。
+
 我发觉生活中有很多的事情的失败就像我多次准备提笔写博一样—-难。没错，是难。但真实难阻挡我么？我真的夜夜挑灯伏案冥思苦想？真的努力挤压时间而得不偿失么？真的有那么难，难到我日日神伤，精疲力竭而无力坚持么？并不是。
 我为什么会失败—-因为我从未失败，因为我从未开始。
 失败是什么？是热血，是”[幻想自己是屠龙的勇士，登塔的先锋。左手有剑，右手有光，没有没脑的燃烧自己，敌人的骑军来了，我说你们何人堪与之战，我的女人在等我。](http://www.zhihu.com/question/22921426/answer/23330366)”如此之后若是败了，那便败了。
