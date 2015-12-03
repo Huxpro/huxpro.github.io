@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "《经济学原理：微观经济学》阅读笔记"
+title:      "《经济学原理：微观经济学》笔记"
 subtitle:   ""
 date:       2015-02-28
 header-img: "img/in-post/2015-02-28-economics/bg.jpg"
