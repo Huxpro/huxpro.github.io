@@ -1,0 +1,12 @@
+---
+layout:     post
+title:      "first paiting"
+subtitle:   " \"Hello World, Hello paiting\""
+date:       2015-12-11 12:00:00
+author:     "niaoniao"
+header-img: "img/post-bg-p1.jpg"
+tags:
+    - 画画
+---
+
+买了数位板后，第一件作品
