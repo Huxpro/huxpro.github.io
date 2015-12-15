@@ -18,8 +18,9 @@
     },
     "scripts": {
         "preview": "cd _site; python -m SimpleHTTPServer 8020",
-        "watch"  : "grunt watch & npm run preview & jekyll serve -w;",
-        "boil"   : "git push boilerplate boilerplate:master;",
-        "push"   : "git push origin master --tag;"
+        "watch"  : "grunt watch & npm run preview & jekyll serve -w",
+        "boil"   : "git push boilerplate boilerplate:master",
+        "push"   : "git push origin master --tag",
+        "cafe"   : "git merge master; git push gitcafe gitcafe-pages:gitcafe-pages --tag"
     }
 }
