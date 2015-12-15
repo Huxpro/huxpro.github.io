@@ -84,12 +84,15 @@ Force Touch API 为我们添加了两个新东西：
 
 可喜可贺的是，故事还没有结束。[Touch Events v2 draft spec（触摸事件第二版草案）](https://w3c.github.io/touch-events/) 中正式添加了 `force` 属性。3D Touch 也得以在 iPhone 6s 与 6s+ 中通过 TouchEvent 访问到。不过，笔者也要在这里提醒大家，由于没有 `webkitmouseforcechange` 这样给力的事件，在手机上我们只能通过 **轮询 TouchEvent 的做法** 来不断检测压力值的改变……非常坑爹
 
-[@Marcel Freinbichler](https://twitter.com/fr3ino) 第一个在 Twitter 上晒出了自己的 [Demo](http://freinbichler.me/apps/3dtouch)。在 6s 或 new Macbook 的 Safari（目前仅 Safari 支持）上访问就可以看到圆圈会随着压力放大。墙内的小伙伴可以访问 [Forcify](http://huangxuan.me/forcify)，体验 3D/Force Touch 带来的的奇妙体验。
+[@Marcel Freinbichler](https://twitter.com/fr3ino) 第一个在 Twitter 上晒出了自己的 [Demo](http://freinbichler.me/apps/3dtouch)。在 6s 或 new Macbook 的 Safari（目前仅 Safari 支持）上访问就可以看到圆圈会随着压力放大。墙内的小伙伴可以直接试试下面这个圆圈，体验下 3D/Force Touch 带来的的奇妙体验。
 
-<img width="320" src="/img/in-post/forcify.jpg" alt="forcify" />
+<iframe src="http://huangxuan.me/forcify/" style="
+    width:100%;
+    height:500px;
+    border: 0;
+"></iframe>
 
-
-如果你不巧用不支持 3D/Force Touch 的设备打开了 [Forcify](http://huangxuan.me/forcify) 发现尼玛用力按下去之后居然圆圈也有反映！？
+如果你不巧在用不支持 3D/Force Touch 的设备，发现尼玛用力按下去之后居然圆圈也有反映！？
 
 放心，这真的不是你的设备突然习得了“感应压力”这项技能，而是因为 [Forcify](http://huangxuan.me/forcify) 是一个用于在所有设备上 polyfill 3D/Force Touch API 的 JS 库……它不但封装了 OSX/iOS 两个平台之间 API 的差异，还使用"长按"来模拟了 `force` 值的变化……
 
