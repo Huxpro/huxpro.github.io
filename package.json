@@ -19,6 +19,7 @@
     "scripts": {
         "preview": "cd _site; python -m SimpleHTTPServer 8020",
         "watch"  : "grunt watch & npm run preview & jekyll serve -w;",
-        "boil"   : "git push boilerplate boilerplate:master;"
+        "boil"   : "git push boilerplate boilerplate:master;",
+        "push"   : "git push origin master --tag;"
     }
 }
