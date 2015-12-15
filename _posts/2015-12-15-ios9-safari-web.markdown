@@ -17,7 +17,7 @@ tags:
 
 > **注！** 该译文存在大量英文术语，笔者将默认读者知晓 ES6、viewport、native app、webview 等常用前端术语，并不对这些已知术语进行汉语翻译
 > 对于新发布或较新的产品名称与技术术语，诸如 Apple Pen、Split View 等专有名词，笔者将在文中使用其英文名，但会尝试对部分名词进行汉语标注
-> 另外，出于对 wiki 式阅读的偏爱，笔者为您添加了很多额外的链接，方便您查阅这些名词的文档或出处
+> 另外，出于对 wiki 式阅读的偏爱，笔者为您添加了很多额外的链接，方便您查阅文档或出处
 
 
 ### 简而言之
@@ -67,9 +67,9 @@ tags:
 
 从 web 设计与开发的角度来说，新的 iPhone 6s 与 6s Plus 与之前的版本并没有太多差别。不过，有一个特性注定会吸引我们的目光：**3D Touch**
 
-我们无法确定 Apple 是不是只是重命名了一下 “Force Touch”（用于 Apple Watch 和最新的 MacBook）或者它的确是一个为 iPhone 定制的似曾相识却不同的东西。3D Touch 允许操作系统和应用侦测每一个手指与屏幕接触时的压力。从用户体验的角度来说，最大的变化莫过于当你用点力去触碰或者拖拽屏幕时，操作系统将会触发诸如 peek，pop 这些新机制。那么问题来了：**我们是否能够在网站中使用这个新玩意呢？让我们一点点来看：**
+我们无法确定 Apple 是不是只是重命名了一下 “Force Touch”（用于 Apple Watch、TrackPad 2 与最新的 MacBook 上）或者 3D Touch 的确是一个为 iPhone 定制的似曾相识却不同的东西。3D Touch 允许操作系统和应用侦测每一个手指与屏幕接触时的压力。从用户体验的角度来说，最大的变化莫过于当你用点力去触碰或者拖拽屏幕时，操作系统将会触发诸如 peek，pop 这些新机制。那么问题来了：**我们是否能够在网站中使用这个新玩意呢？让我们一点点来看：**
 
-iOS 9 搭载的 Safari 包含了一些用于 “Force Touch” 的新 API，但它们其实并不是那个用于 iPhone 6s 3D Touch 的 API。你可以理解为这些 API 就是 MacBook 版 Safari 里为 Force Touch 准备的那些 API ，所以它理所当然得存在了 iOS 版里而已。（一套 codebase）
+iOS 9 搭载的 Safari 包含了一些用于 “Force Touch” 的新 API，但它们其实并不是那个用于 iPhone 6s 3D Touch 的 API。你可以理解为这些 API 就是 MacBook 版 Safari 里为 Force Touch 准备的那些 API ，因为共享一套 codebase，所以它理所当然得存在了 iOS 版里而已。
 
 Force Touch API 为我们添加了两个新东西：
 
@@ -79,17 +79,17 @@ Force Touch API 为我们添加了两个新东西：
 ![Force Events](http://www.mobilexweb.com/wp-content/uploads/2015/09/foceevents.png)
 
 
-相信你可能已经从它们的名字中意识到了，这些事件都是基于鼠标而非触摸的，毕竟它们是为 MacBook 设计的。并且，TouchEvent 也并没有包含 `webkitForce` 这个属性，它仅仅存在于 MouseEvent 里。在 iOS Safari 里，你确实可以找到 `onwebkitmouseforce` 这一系列事件处理器，但是很可惜它们并不会被触发，click 返回的 MouseEvent 也永远只能得到一个 `webkitForce: 0`
+相信你已经从它们的名字中意识到了，这些事件都是基于鼠标而非触摸的，毕竟它们是为 MacBook 设计的。并且，TouchEvent 也并没有包含 `webkitForce` 这个属性，它仅仅存在于 MouseEvent 里。在 iOS Safari 里，你确实可以找到 `onwebkitmouseforce` 这一系列事件处理器，但是很可惜它们并不会被触发，click 返回的 MouseEvent 也永远只能得到一个 `webkitForce: 0`
 
 
-可喜可贺的是，故事还没有结束。[Touch Events v2 draft spec（触摸事件第二版草案）](https://w3c.github.io/touch-events/) 中正式添加了 `force` 属性。3D Touch 也得以在 iPhone 6s 与 6s+ 中通过 TouchEvent 访问到。不过，笔者也要在这里提醒大家，由于没有 `webkitmouseforcechange` 这样给力的事件，在手机上我们只能通过 **轮询 TouchEvent 的做法** 来不断检测压力值的改变……
+可喜可贺的是，故事还没有结束。[Touch Events v2 draft spec（触摸事件第二版草案）](https://w3c.github.io/touch-events/) 中正式添加了 `force` 属性。3D Touch 也得以在 iPhone 6s 与 6s+ 中通过 TouchEvent 访问到。不过，笔者也要在这里提醒大家，由于没有 `webkitmouseforcechange` 这样给力的事件，在手机上我们只能通过 **轮询 TouchEvent 的做法** 来不断检测压力值的改变……非常坑爹
 
-[@Marcel Freinbichler](https://twitter.com/fr3ino) 第一个在 Twitter 上晒出了自己的 [Demo](http://freinbichler.me/apps/3dtouch)。墙内的小伙伴可以在 6s 或 new Macbook 的 Safari（目前仅 Safari 支持）上访问 [Forcify](http://huangxuan.me/forcify)，体验 3D/Force Touch 令人心醉的体验。
+[@Marcel Freinbichler](https://twitter.com/fr3ino) 第一个在 Twitter 上晒出了自己的 [Demo](http://freinbichler.me/apps/3dtouch)。在 6s 或 new Macbook 的 Safari（目前仅 Safari 支持）上访问就可以看到圆圈会随着压力放大。墙内的小伙伴可以访问 [Forcify](http://huangxuan.me/forcify)，体验 3D/Force Touch 带来的的奇妙体验。
 
 <img width="320" src="/img/in-post/forcify.jpg" alt="forcify" />
 
 
-如果你不巧用不支持 3D/Force Touch 的设备打开了 [Forcify](http://huangxuan.me/forcify) 发现尼玛我用力按下去之后居然也有反映！？
+如果你不巧用不支持 3D/Force Touch 的设备打开了 [Forcify](http://huangxuan.me/forcify) 发现尼玛用力按下去之后居然圆圈也有反映！？
 
 放心，这真的不是你的设备突然习得了“感应压力”这项技能，而是因为 [Forcify](http://huangxuan.me/forcify) 是一个用于在所有设备上 polyfill 3D/Force Touch API 的 JS 库……它不但封装了 OSX/iOS 两个平台之间 API 的差异，还使用"长按"来模拟了 `force` 值的变化……
 
