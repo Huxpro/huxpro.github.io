@@ -12,6 +12,7 @@ tags:
 ---
 
 > 这篇文章转载自[我在知乎上的回答](https://www.zhihu.com/question/21921588/answer/69680480)
+> 这篇文章也被刊登于[优秀网页设计](http://www.uisdc.com/head-first-front-end)等多个网站上
 
 
 <div>
@@ -73,10 +74,14 @@ p { color: red;}
     <br>
     <br>在了解一些基础的 JavaScript 概念（变量、函数、基本类型）后，我们可以直接去学习 jQuery，你不用知道它具体是什么（它是一个 JavaScript 代码库），你只要知道它可以显著地降低你编写交互的难度就好了：
     <br>
-    <div class="highlight"><pre><code class="language-text">$('.className').click(function(){
+
+```
+$('.className').click(function(){
     alert("Hello jQuery")
 })
-</code></pre></div>通过 jQuery，我们可以继续使用在 CSS 中学到的“选择器”
+```
+
+通过 jQuery，我们可以继续使用在 CSS 中学到的“选择器”
     <br>
     <br>对于没有编程基础的人来说，想要完全掌握它们两并不容易。作为设计师，很多时候我们可以先不必深究它们的原理，而是尝试直接应用它！这样成就感会来得很快，并且你可以通过实际应用更加理解 JavaScript 是用来做什么的。
     <br>
