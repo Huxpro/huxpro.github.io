@@ -47,14 +47,14 @@ tags:
 * 更好的 ES6 支持：classes（类）, computed properties（可计算属性）, template literals（模版字符串）等
 * Backdrop CSS filters（背景滤镜）
 * CSS @supports 与 CSS Supports JavaScript API 
-* CSS4 伪选择器
+* CSS Level4 伪选择器
 * 用于支持分页内容的 CSS Scroll Snapping
 * WKWebView 现在可以访问本地文件了
 * 我们仍然需要等待 Push Notification，camera access，Service Workers 这些现代 web API 的到来
 
 ###### 新的操作系统
 
-* 新一代 Apple TV 的 **tvOS**： 没有浏览器，也没有 webview。JavaScript、XHR 和 DOM 可以通过一个叫做 TVML 的标记语言来使用
+* 新一代 Apple TV 的 **tvOS**： 没有浏览器，也没有 webview。但是 JavaScript、XHR 和 DOM 可以通过一个叫做 TVML 的标记语言来使用
 * Apple Watch 的 **watchOS**：完全没有任何浏览器和 webview
 
 
@@ -111,7 +111,7 @@ Force Touch API 为我们添加了两个新东西：
 
 ##### iPad 上的多任务处理
 
-自 iOS 9 起，iPad 允许两个应用在同一时刻并肩执行，有三种方式：**Slide Over**，**Split View** 与 **Picture-in-Picture**。不过，每一种方式都有其硬件需求，比如说 Slide Over 需要 iPad Air, iPad Mini 2 以上的设备，而 Split View 由于对内存的要求目前只支持 iPad Air 2 与 iPadro。
+自 iOS 9 起，iPad 允许两个应用在同一时刻并肩执行，有三种方式：**Slide Over**，**Split View** 与 **Picture-in-Picture**。不过，每一种方式都有其硬件需求，比如说 Slide Over 需要 iPad Air, iPad Mini 2 以上的设备，而 Split View 由于对内存的要求目前只支持 iPad Air 2 与 iPad Pro。
 
 ###### Slide Over（滑过来！）
 
@@ -301,11 +301,11 @@ if (CSS.supports("-webkit-scroll-snap-type", "mandatory")) {}
 ##### 一些细微的改进
 
 * ECMAScript 6 的更完善支持：classed、computed properties、template literial 与 week sets
-* 新的 CSS 4 伪类/元素选择器：`:not`、`:matches`、`:any-link`、`:placeholder-shown`、`:read-write`、`:read-only`
+* 新的 CSS Level4 伪类/元素选择器：`:not`、`:matches`、`:any-link`、`:placeholder-shown`、`:read-write`、`:read-only`
 * Native app 现在可以通过 extension 来向 Safari 的 Shared Links（分享链接）窗口上注入信息
 * 大量无前缀 CSS 属性的支持（终于），比如 transition、animation、@keyframes、flex 与 columns
 * Mac OS El Capitán 上的 Safari 9 提供了一个全新设计的 Web Inspector（Web 检查器）。幸运的是，iOS 9 的远程调试完全兼容 Mac OS 上的 Safari 8，所以你倒是不用急着升级你的 Mac OS
-* 并不确定有没有人真的会去用它，但是 iOS 9 通过 `-apple-font` 加入了一些 Dynamic Fonts（动态字体），并且它们现在应用的是 Apple 的新字体：San Francisco
+* iOS 9 通过 `-apple-font` 加入了一些 Dynamic Fonts（动态字体），并且它们现在应用的是 Apple 的新字体：San Francisco，笔者的博客就已经用上它啦
 * scrollingElement 现在可用了
 * `<input type=file>` 现在允许你从 iCloud Drive 与已安装的第三方应用，比如 Google Drive 中选择文件
 
