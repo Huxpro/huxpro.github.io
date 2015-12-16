@@ -21,6 +21,6 @@
         "watch"  : "grunt watch & npm run preview & jekyll serve -w",
         "boil"   : "git push boilerplate boilerplate:master",
         "push"   : "git push origin master --tag",
-        "cafe"   : "git merge master; git push gitcafe gitcafe-pages:gitcafe-pages --tag"
+        "cafe"   : "git co gitcafe-pages; git merge master; git push gitcafe gitcafe-pages:gitcafe-pages --tag; git co master;"
     }
 }
