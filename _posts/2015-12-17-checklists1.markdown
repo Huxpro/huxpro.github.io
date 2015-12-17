@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:      "Checklists"
+title:      "Checklist our life"
 subtitle:   " \程序化生活\""
 date:       2015-12-17 12:00:00
 author:     "niaoniao"
-header-img: "img/post-bg-p1.jpg"
+header-img: "img/post-bg-2015.jpg"
 tags:
     - 工具
 ---
