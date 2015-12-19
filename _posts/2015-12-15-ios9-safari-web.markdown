@@ -251,7 +251,7 @@ video.webkitSetPresentationMode(
 
 iOS 7 与最近的 Mac OS 使用 Backdrop filter（背景滤镜）来模糊背景（指 native 开发），而在网站上实现这个却并不容易。
 
-iOS 9 上的 Safari 现在支持了来自 Filter Effect v2 spec（滤镜特效第二版规范）的 **backdrop-filter**。比如说，我们可以使用一个半透明的背景并且对其背后的
+iOS 9 上的 Safari 现在支持了来自 Filter Effect v2 spec（滤镜特效第二版规范）的 **backdrop-filter**。比如说，我们可以使用一个半透明的背景并且对其背后的背景使用滤镜：
 
 ```
 header {
@@ -318,7 +318,7 @@ if (CSS.supports("-webkit-scroll-snap-type", "mandatory")) {}
 
 Bug 通常都要在几周之后才会显露出来，我也会持续跟进并更新这篇文章。目前为止，我的发现如下：
 
-* 对于 Home Screen webapps（添加至主屏的 web 应用），`apple-mobile-web-app-status-bar-style` 这个 meta 标签不起作用了！所以你现在不能再像过去一样使用 `black-translucent` 让你的 webapp 渲染在状态栏的后面了。
+* 对于 Home Screen webapps（添加至主屏的 web 应用），`apple-mobile-web-app-status-bar-style` 这个 meta 标签不起作用了！所以你现在不能再像过去一样使用 `black-translucent` 让你的 webapp 渲染在状态栏的后面了。（iOS 9.2 fixed 了这个 bug）
 * Speech Synthesis API （语音综合 API）不再工作了
 
 
