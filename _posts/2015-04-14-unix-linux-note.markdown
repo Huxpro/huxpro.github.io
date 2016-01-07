@@ -166,7 +166,8 @@ Anyway, there eventually comes to the **GNU/Linux**
 	* GPL 强制后续版本必须是自由软件，而 BSD 的后续可以选择继续开源或者封闭	
 * [Apache License](http://en.wikipedia.org/wiki/Apache_License)
 
-![Public License](http://dl2.iteye.com/upload/attachment/0047/4142/d770c85a-49b7-3c7f-8ae2-cbb6451e00d8.png)
+
+![Public License](/img/in-post/open-source-license.png)
 
 #### Android
 
