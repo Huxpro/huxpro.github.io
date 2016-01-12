@@ -308,6 +308,7 @@ header img{
 	font-weight: bold;
 	/*reset before*/
 	background: none !important;
+	text-decoration: none;
 }
 
 @media screen and (max-width: 400px) {
