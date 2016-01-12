@@ -257,7 +257,8 @@ header img{
 	margin-top: 9px;
 	border-top: 1px solid #eeefef;
 }
-.cbp_tmlabel ul li.skill>span, .cbp_tmlabel ul li.skill>a{
+.cbp_tmlabel ul li.skill>span,
+.cbp_tmlabel ul li.skill>a{
     display: block;
     float: left;
     font-size: 1.3rem;
@@ -293,6 +294,8 @@ header img{
 	border: 1px solid #D5D6D8;
 	margin: 4px 0px;
 }
+
+.cbp_tmlabel ul li.skill span.link:hover,
 .cbp_tmlabel ul li.skill span.link:active{
 	background: #eee;
 }
@@ -303,6 +306,8 @@ header img{
 	height: 100%;
 	font-size: 14px;
 	font-weight: bold;
+	/*reset before*/
+	background: none !important;
 }
 
 @media screen and (max-width: 400px) {
