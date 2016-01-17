@@ -71,6 +71,11 @@
         e.stopPropagation();
     })
 
+    $collapse.addEventListener('touchstart', function(e){
+        // stop propagating event to document.
+        e.stopPropagation();
+    })
+
     document.addEventListener('touchstart', function(e){
         __HuxNav__.close();
     })
