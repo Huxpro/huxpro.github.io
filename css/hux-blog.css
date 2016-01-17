@@ -211,24 +211,39 @@ pre code {
   margin-top: 20px;
 }
 @media only screen and (max-width: 767px) {
+  /**
+	 * Layout
+	 * Since V1.6 we use absolute positioning to prevent to expand container-fluid
+	 * which would cover tags. A absolute positioning make a new layer.
+	 */
   .navbar-default .navbar-collapse {
+    position: absolute;
+    right: 0;
     border: none;
     background: white;
     box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
     box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.239216) 0px 1px 4px;
     border-radius: 2px;
     width: 170px;
-    float: right;
-    margin: 0px;
   }
+  /**
+	 * Animation
+	 * HuxBlog-Navbar using genuine Material Design Animation
+	 */
   #huxblog_navbar {
+    /**
+		 * Sharable code and 'out' function
+		 */
     opacity: 0;
     transform: scaleX(0);
     transform-origin: top right;
-    transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 200ms cubic-bezier(0.47, 0, 0.4, 0.99) 0ms;
     -webkit-transform: scaleX(0);
     -webkit-transform-origin: top right;
-    -webkit-transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 200ms cubic-bezier(0.47, 0, 0.4, 0.99) 0ms;
+    /**
+		 *'In' Animation
+		 */
   }
   #huxblog_navbar a {
     font-size: 13px;
@@ -238,27 +253,33 @@ pre code {
     height: 0px;
     transform: scaleY(0);
     transform-origin: top right;
-    transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 400ms cubic-bezier(0.32, 1, 0.23, 1) 0ms;
     -webkit-transform: scaleY(0);
     -webkit-transform-origin: top right;
-    -webkit-transition: -webkit-transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: -webkit-transform 400ms cubic-bezier(0.32, 1, 0.23, 1) 0ms;
   }
   #huxblog_navbar li {
     opacity: 0;
-    transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 205ms;
-    -webkit-transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 205ms;
+    transition: opacity 100ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    -webkit-transition: opacity 100ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   }
   #huxblog_navbar.in {
     transform: scaleX(1);
     -webkit-transform: scaleX(1);
     opacity: 1;
+    transition: all 250ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    -webkit-transition: all 250ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   }
   #huxblog_navbar.in .navbar-collapse {
     transform: scaleY(1);
     -webkit-transform: scaleY(1);
+    transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: -webkit-transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
   }
   #huxblog_navbar.in li {
     opacity: 1;
+    transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 205ms;
+    -webkit-transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 205ms;
   }
 }
 .navbar-custom {
