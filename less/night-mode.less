@@ -1,0 +1,184 @@
+@import "variables.less";
+@import "mixins.less";
+@import "sidebar.less";
+
+body {
+  color: @white;
+  background-color: @black;
+}
+
+a {
+  color: @gray-deep-dark;
+  &:hover,
+  &:focus {
+    color: @night-brand-primary;
+  }
+}
+
+blockquote {
+  color: @gray-light;
+}
+
+hr {
+  border: 1px dashed #7B0011;
+}
+
+.post-container {
+  a {
+    color: #4aa9ff;
+    // different to @night-brand-primary
+    &:hover,
+    &:focus {
+      color: @night-brand-primary;
+    }
+  }
+}
+
+.navbar-custom {
+
+  @media only screen and (min-width: 1170px) {
+
+    &.is-fixed {
+
+      .navbar-brand {
+        &:hover,
+        &:focus {
+          color: @night-brand-primary;
+        }
+      }
+      .nav {
+        li {
+          a {
+            &:hover,
+            &:focus {
+              color: @night-brand-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.post-preview {
+  > a {
+    color: @white;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: @night-brand-primary;
+    }
+  }
+  > .post-meta {
+    > a {
+      &:hover,
+      &:focus {
+        color: @night-brand-primary;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.post-content-preview {
+  color: #b7b7b7;
+  &:hover {
+    color: @night-brand-primary;
+  }
+}
+
+footer {
+  .copyright {
+    color: @white;
+    a {
+      &:hover,
+      &:focus {
+        color: @night-brand-primary;
+      }
+    }
+  }
+}
+
+.floating-label-form-group-with-focus {
+  label {
+    color: @night-brand-primary;
+  }
+}
+
+form .row:first-child .floating-label-form-group {
+  border-top: 1px dashed #500505;
+}
+
+.btn-default {
+  &:hover,
+  &:focus {
+    background-color: @night-brand-primary;
+    border: 1px solid @night-brand-primary;
+  }
+}
+
+.pager {
+  > a:hover,
+  > a:focus {
+    background-color: @night-brand-primary;
+    border: 1px solid @night-brand-primary;
+  }
+}
+
+::-moz-selection {
+  background: @night-brand-primary;
+}
+
+::selection {
+  background: @night-brand-primary;
+}
+
+// tag_cloud
+#tag_cloud {
+  a, .tag {
+    &:hover, &:active {
+      background-color: #00d1ff !important;
+    }
+  }
+}
+
+.listing-seperator {
+  color: @night-brand-primary;
+}
+
+// Container of Sidebar, also Friends
+.sidebar-container {
+  color: @white;
+  h5 {
+    color: @white;
+    a {
+      color: @white !important;
+    }
+  }
+  a {
+    color: @gray-dark !important;
+    &:hover, &:active {
+      color: @night-brand-primary !important;
+    }
+  }
+  .tags {
+    a {
+      &:hover, &:active {
+        border-color: @night-brand-primary;
+      }
+    }
+  }
+
+}
+
+h2#hot {
+  color: #7b0011
+}
+
+#scrollUp {
+  color: #aaaaaa
+}
+
+#scrollUp:hover {
+  color: #f2f2f2
+}

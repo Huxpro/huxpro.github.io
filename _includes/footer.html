@@ -93,6 +93,8 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
 
+<!-- Amaze UI -->
+<script src="{{ "/js/amazeUI.min.js " | prepend: site.baseurl }}"></script>
 
 <!-- async load function -->
 <script>
@@ -131,6 +133,68 @@
         if($nav) FastClick.attach($nav);
     })
 </script>
+
+{% if site.nightMode %}
+<script>
+    var cssPath = {{ "/css/ " | prepend: site.baseurl }};
+    /* Night Mode */
+    $(function () {
+
+        /* Amaze UI cookie API */
+        var store = $.AMUI.store;
+
+        var loadMode = function (mode, text) {
+            theme.attr('href', cssPath + mode);
+            button.text(text);
+            if (store.enabled) {
+                store.set('mode', mode);
+                store.set('text', text);
+            }
+        };
+
+        var button = $('#night-mode');
+        var theme = $('#theme');
+
+        theme.mode = 'daily-mode.min.css';
+        button.btnText = 'Night Mode';
+
+        /* Amaze UI cookie API */
+
+        if (store.enabled) {
+            var localMode = store.get('mode');
+            var localText = store.get('text');
+            if (localMode && localText) {
+                theme.mode = localMode;
+                button.btnText = localText;
+            }
+        }
+        loadMode(theme.mode, button.btnText);
+
+        button.css('color', 'rgb(24, 149, 255)');
+        button.hover(function () {
+            button.css('cursor', 'pointer');
+            button.css('color', 'rgb(24, 149, 155)');
+        }, function () {
+            button.css('color', 'rgb(24, 149, 255)');
+        });
+
+        var opposite = {
+            'night-mode.min.css': 'daily-mode.min.css',
+            'daily-mode.min.css': 'night-mode.min.css',
+            'Night Mode': 'Daily Mode',
+            'Daily Mode': 'Night Mode'
+        };
+
+        button.click(function () {
+            theme.toggle(0, function () {
+                theme.mode = opposite[theme.mode];
+                button.btnText = opposite[button.btnText];
+                loadMode(theme.mode, button.btnText);
+            })
+        })
+    });
+</script>
+{% endif %}
 
 
 <!-- Google Analytics -->

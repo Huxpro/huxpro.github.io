@@ -1,0 +1,178 @@
+@import "variables.less";
+@import "mixins.less";
+@import "sidebar.less";
+
+body {
+  color: @gray-dark;
+}
+
+a {
+  color: @gray-dark;
+  &:hover,
+  &:focus {
+    color: @brand-primary;
+  }
+}
+
+blockquote {
+  color: @gray;
+}
+
+.post-container {
+  a {
+    color: #337ab7;
+    // different to @brand-primary
+    &:hover,
+    &:focus {
+      color: @brand-primary;
+    }
+  }
+}
+
+.navbar-custom {
+
+  @media only screen and (min-width: 1170px) {
+
+    &.is-fixed {
+
+      .navbar-brand {
+        &:hover,
+        &:focus {
+          color: @brand-primary;
+        }
+      }
+      .nav {
+        li {
+          a {
+            &:hover,
+            &:focus {
+              color: @brand-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.post-preview {
+  > a {
+    color: @gray-dark;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: @brand-primary;
+    }
+  }
+  > .post-meta {
+    > a {
+      &:hover,
+      &:focus {
+        color: @brand-primary;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.post-content-preview {
+  color: #a3a3a3;
+  &:hover {
+    color: @brand-primary;
+  }
+}
+
+footer {
+  .copyright {
+    a {
+      &:hover,
+      &:focus {
+        color: @brand-primary;
+      }
+    }
+  }
+}
+
+.floating-label-form-group-with-focus {
+  label {
+    color: @brand-primary;
+  }
+}
+
+form .row:first-child .floating-label-form-group {
+  border-top: 1px solid @gray-light;
+}
+
+.btn-default {
+  &:hover,
+  &:focus {
+    background-color: @brand-primary;
+    border: 1px solid @brand-primary;
+  }
+}
+
+.pager {
+  > a:hover,
+  > a:focus {
+    background-color: @brand-primary;
+    border: 1px solid @brand-primary;
+  }
+}
+
+::-moz-selection {
+  background: @brand-primary;
+}
+
+::selection {
+  background: @brand-primary;
+}
+
+// tag_cloud
+#tag_cloud {
+  a, .tag {
+    &:hover, &:active {
+      background-color: #0085a1 !important;
+    }
+  }
+}
+
+.listing-seperator {
+  color: #0085a1;
+}
+
+// Container of Sidebar, also Friends
+.sidebar-container {
+  color: @gray-l;
+  h5 {
+    color: @gray;
+    a {
+      color: @gray !important;
+    }
+  }
+  a {
+    color: @gray-l !important;
+    &:hover, &:active {
+      color: @brand-primary !important;
+    }
+  }
+  .tags {
+    a {
+      &:hover, &:active {
+        border-color: @brand-primary;
+      }
+    }
+  }
+
+}
+
+h2#hot {
+  color: #d3001a
+}
+
+#scrollUp {
+  color: #505050
+}
+
+#scrollUp:hover {
+  color: #000
+}
