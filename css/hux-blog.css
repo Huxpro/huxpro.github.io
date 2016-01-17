@@ -39,9 +39,11 @@
   width: 80%;
   display: block;
   border-radius: 5px;
+  margin-bottom: 20px;
 }
 .sidebar-container .short-about p {
-  margin: 20px 0;
+  margin-top: 0px;
+  margin-bottom: 20px;
 }
 .sidebar-container .short-about .list-inline > li {
   padding-left: 0px;
