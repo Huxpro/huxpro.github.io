@@ -144,6 +144,9 @@ pre code {
   white-space: pre;
   word-wrap: normal;
 }
+.postlist-container {
+  margin-bottom: 15px;
+}
 .post-container a {
   color: #337ab7;
 }
@@ -209,6 +212,23 @@ pre code {
 .post-container li h6 {
   line-height: 2;
   margin-top: 20px;
+}
+.post-container .pager li {
+  width: 48%;
+}
+.post-container .pager li.next {
+  float: right;
+}
+.post-container .pager li.previous {
+  float: left;
+}
+.post-container .pager li > a {
+  width: 100%;
+}
+.post-container .pager li > a > span {
+  color: #808080;
+  font-weight: normal;
+  letter-spacing: 0.5px;
 }
 @media only screen and (max-width: 767px) {
   /**
@@ -709,6 +729,10 @@ form .row:first-child .floating-label-form-group {
   background-color: #0085a1;
   border: 1px solid #0085a1;
 }
+.pager li > a:hover > span,
+.pager li > a:focus > span {
+  color: white;
+}
 .pager .disabled > a,
 .pager .disabled > a:hover,
 .pager .disabled > a:focus,
@@ -927,6 +951,13 @@ img::-moz-selection {
 }
 .comment #ds-thread #ds-reset .ds-post-button {
   border-bottom: 1px solid #ccc;
+}
+.comment #ds-thread #ds-reset .ds-post-button {
+  background: white;
+  box-shadow: none;
+}
+.comment #ds-thread #ds-reset .ds-post-button:hover {
+  background: #eeeeee;
 }
 #ds-smilies-tooltip ul.ds-smilies-tabs li a {
   background: white !important;

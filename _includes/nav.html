@@ -67,22 +67,17 @@
     })
 
     /**
-     * Stop 'touchstart' from $collapse propagating to document 
-     */
-    $collapse.addEventListener('touchstart', function(e){
-        e.stopPropagation();
-    })
-
-    /**
      * Since Fastclick is used to delegate 'touchstart' globally
      * to hack 300ms delay in iOS by performing a fake 'click',
      * Using 'e.stopPropagation' to stop 'touchstart' event from 
-     * $toggle will break global delegation.
+     * $toggle/$collapse will break global delegation.
      * 
      * Instead, we use a 'e.target' filter to prevent handler
      * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
      */
-    document.addEventListener('touchstart', function(e){
+    document.addEventListener('click', function(e){
         if(e.target == $toggle) return;
         if(e.target.className == 'icon-bar') return;
         __HuxNav__.close();

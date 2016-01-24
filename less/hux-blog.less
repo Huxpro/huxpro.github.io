@@ -111,6 +111,10 @@ pre code{
 	word-wrap: normal;	// no-wrap
 }
 
+// In the list of posts
+.postlist-container{
+	margin-bottom: 15px;
+}
 
 // In the post.
 .post-container{
@@ -170,6 +174,20 @@ pre code{
 		h1,h2,h3,h4,h5,h6{
 			line-height: 2;
 			margin-top: 20px;
+		}
+	}
+	// V1.6 Hux display title by default.
+	.pager li{
+		width: 48%;
+		&.next{ float: right};
+		&.previous{ float: left};
+		> a {
+			width: 100%;
+			> span{
+				color: @gray;
+				font-weight: normal;
+				letter-spacing: 0.5px;
+			}
 		}
 	}
 }
@@ -660,7 +678,6 @@ form .row:first-child .floating-label-form-group {
 // Pager Styling
 
 .pager {
-
 	margin: 20px 0 0 !important;
 	padding:0px !important;
 
@@ -689,6 +706,11 @@ form .row:first-child .floating-label-form-group {
 			color: white;
 			background-color: @brand-primary;
 			border: 1px solid @brand-primary;
+
+			// V1.6 display title
+			> span{
+				color: white;
+			}
 		}
 	}
 
@@ -930,6 +952,14 @@ img::-moz-selection {
 			}
 			.ds-post-button{
 				border-bottom: 1px solid #ccc;
+			}
+			//v1.6 flatten button
+			.ds-post-button{
+				background: white;
+				box-shadow: none;
+				&:hover{
+					background: @gray-light;
+				}
 			}
 		}
 	}
