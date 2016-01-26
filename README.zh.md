@@ -207,11 +207,11 @@ ga_domain: huangxuan.me			# 默认的是 auto, 这里我是自定义了的域名
 
 #### Customization
 
-如果你喜欢折腾，你可以去自定义我的这个模板的code，[Grunt](gruntjs.com)的环境已经搭好了。（非常感谢Clean Blog这个模板）
+如果你喜欢折腾，你可以去自定义我的这个模板的 code，[Grunt](gruntjs.com)已经为你准备好了。（感谢 Clean Blog）
 
--There are a number of tasks it performs like minification of the JavaScript, compiling of the LESS files, adding banners to keep the Apache 2.0 license intact, and watching for changes. Run the grunt default task by entering `grunt ` into your command line which will build the files. You can use `grunt watch` if you are working on the JavaScript or the LESS.-(Hux 帮忙翻译一下吧，前端完全不会的人没有发言权。)
+JavaScript 的压缩混淆、Less 的编译、Apache 2.0 许可通告的添加与 watch 代码改动，这些任务都揽括其中。简单的在命令行中输入 `grunt` 就可以执行默认任务来帮你构建文件了。如果你想搞一搞 JavaScript 或 Less 的话，`grunt watch` 会帮助到你的。
 
-**尽量去理解在`_include/` 和 `_layouts/`文件夹下的代码，这里是整个界面布局的地方。看懂了后，可以使用Jekyll [Liquid](https://github.com/Shopify/liquid/wiki)的语法直接修改或者往里面添加代码，来完成你的自定义界面。**
+**如果你可以理解 `_include/` 和 `_layouts/`文件夹下的代码（这里是整个界面布局的地方），你就可以使用 Jekyll 使用的模版引擎 [Liquid](https://github.com/Shopify/liquid/wiki)的语法直接修改/添加代码，来进行更有创意的自定义界面啦！**
 
 #### Header Image
 
