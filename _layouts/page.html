@@ -22,8 +22,8 @@ layout: default
 	<div class="row">
         {% if site.sidebar == false %}
 <!-- NO SIDEBAR -->
-    <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+    <!-- PostList Container -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 postlist-container">
                 {{ content }}
             </div>
     <!-- Sidebar Container -->
@@ -63,13 +63,13 @@ layout: default
         {% else %}
 
 <!-- USE SIDEBAR -->
-    <!-- Post Container -->
+    <!-- PostList Container -->
     		<div class="
                 col-lg-8 col-lg-offset-1
                 col-md-8 col-md-offset-1
                 col-sm-12
                 col-xs-12
-                post-container
+                postlist-container
             ">
     			{{ content }}
     		</div>
