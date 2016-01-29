@@ -5,9 +5,10 @@
  */
 
 // Tooltip Init
-$(function() {
-    $("[data-toggle='tooltip']").tooltip();
-});
+// Unuse by Hux since V1.6: Titles now display by default so there is no need for tooltip
+// $(function() {
+//     $("[data-toggle='tooltip']").tooltip();
+// });
 
 
 // make all images responsive

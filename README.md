@@ -17,7 +17,9 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 **[View Boilerplate Here &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
 
 
+## Translation
 
+ - ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese (Simplified)**: 感谢 [@BrucZhaoR](https://github.com/BruceZhaoR) 的 [中文翻译 &rarr;](https://github.com/Huxpro/huxpro.github.io/blob/master/README.zh.md)
 
 ## Features
 
@@ -69,16 +71,15 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 - **Typographic optimization** for Chinese Fonts
 - **Network optimizaition** for China, dropping Google webfont, using local CDN
 - Using [Github Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/)
-- Using Baidu, Tencent/QQ analytics *(TODO: support GA)*
+- Using Baidu, Tencent/QQ analytics
 - Using [DuoShuo](http://duoshuo.com/) as the Disqus-like third party discussion system
 
 
 ## Support
 
-- **Feel free to fork. I'll Appreciate it if you keep the Author & Github link footer**
+- **Feel free to fork. I'll Appreciate it if you keep the Author & Github link at footer**
 - Give it a **Star** if you like, fork or just clone to use ;)
 - If any problem or requirement, just open an issue here and I will help you.
-- 如果有需要，我可以更新一篇中文文档 ;)
 
 
 ## Document
