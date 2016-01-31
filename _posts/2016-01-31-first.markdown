@@ -17,13 +17,15 @@ tags:
  
 大学的时候就想建站，但一直找不到方向。
 
-很早买了一个域名**“[`TnT.moe`](http://tnt.moe#//apple_ref/doc/uid/TP40015145-CH13-SW1)”**，用得最多的是通过QQ邮箱弄成域名邮箱。
+很早买了一个域名 **“[`TnT.moe`](http://tnt.moe#//apple_ref/doc/uid/TP40015145-CH13-SW1)”** ，然后用得最多的，是通过QQ邮箱成立的域名邮箱，真的很好用诶。
 
-以前最成功的一次是通过[`CnFeat`](http://cnfeat.com/blog/2014/05/10/how-to-build-a-blog/)的教程来操作，最后fork了程序，然后自己傻乎乎地又在Github那生成页面，导致那个完全不能用。
+以前最成功的一次是通过 [`CnFeat`](http://cnfeat.com/blog/2014/05/10/how-to-build-a-blog/) 的教程来操作，fork了完代码库后，自己傻乎乎地又在Github那生成页面，就是一个页面的。
 
-今天通过[`Hux`](http://huangxuan.me/)的模板，算是真搭成功了吧！
+今天通过 [`Hux`](http://huangxuan.me/) 的模板，算是真搭成功了吧！
 
-fork完仓库一定要认真读`README.zh.md`，之前不知道就完全靠自己猜测摸索。
+通过摸索也学习到很多。fork完仓库一定要认真读 `README.zh.md` 。
+
+#####补点小贴士。
 
 * 换图片直接修照片名覆盖。
 * _config.yml 里能改能多东西
