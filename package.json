@@ -1,14 +1,14 @@
 {
-    "name": "hux-blog",
-    "title": "Hux Blog",
-    "author": "Hux <huxpro@gmail.com>",
+    "name": "joc-blog",
+    "title": "Joc Blog",
+    "author": "Joc <joc2422@gmail.com>",
     "version": "1.0.0",
-    "homepage": "http://huxpro.github.io",
+    "homepage": "http://tnt.moe",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Huxpro/huxpro.github.io"
+        "url": "https://github.com/joc2422/joc2422.github.io"
     },
-    "bugs": "https://github.com/Huxpro/huxpro.github.io/issues",
+    "bugs": "https://github.com/joc2422/joc2422.github.io/issues",
     "devDependencies": {
         "grunt": "~0.4.5",
         "grunt-contrib-less": "~0.11.4",
