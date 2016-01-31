@@ -1,0 +1,38 @@
+---
+layout:     post
+title:      "第一篇正式文章"
+subtitle:   "算是真正意义上的建博成功吧。"
+date:       2016-01-31 12:00:00
+author:     "Joc"
+header-img: "img/home-bg-o.jpg"
+tags:
+    - 知乎
+   
+    
+---
+
+
+
+赶在2016年的1月末，成功搭起了一个小微博。
+ 
+大学的时候就想建站，但一直找不到方向。
+
+很早买了一个域名**“[`TnT.moe`](http://tnt.moe#//apple_ref/doc/uid/TP40015145-CH13-SW1)”**，用得最多的是通过QQ邮箱弄成域名邮箱。
+
+以前最成功的一次是通过[`CnFeat`](http://cnfeat.com/blog/2014/05/10/how-to-build-a-blog/)的教程来操作，最后fork了程序，然后自己傻乎乎地又在Github那生成页面，导致那个完全不能用。
+
+今天通过[`Hux`](http://huangxuan.me/)的模板，算是真搭成功了吧！
+
+fork完仓库一定要认真读`README.zh.md`，之前不知道就完全靠自己猜测摸索。
+
+* 换图片直接修照片名覆盖。
+* _config.yml 里能改能多东西
+* about.html 单独页面。里面应该都能改。
+* index.html 文件里改。
+* ico 网址前端小图标制作  http://ico.storyren.com/
+* 多说评论系统 http://jocblog.duoshuo.com/admin/tools/
+* post
+    - 里面文章可以全部删除，不过保险起见可以先备份。
+    - 学写法。
+    
+以后有空补详细的。
