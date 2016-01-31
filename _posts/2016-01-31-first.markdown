@@ -24,7 +24,7 @@ tags:
 
 今天通过 [Hux](http://huangxuan.me/) 的模板，算是真搭成功了吧！
 
-通过摸索也学习到很多。fork完仓库一定要认真读 `README.zh.md` 。
+通过摸索也学习到很多。fork完仓库一定要认真读 [README.zh.md]() 。
 
 #####补点小贴士。
 
