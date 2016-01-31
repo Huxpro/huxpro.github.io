@@ -20,9 +20,9 @@ tags:
 
 很早买了一个域名 **“[`TnT.moe`](http://tnt.moe#//apple_ref/doc/uid/TP40015145-CH13-SW1)”** ，然后用得最多的，是通过QQ邮箱成立的域名邮箱，真的很好用诶。
 
-以前最成功的一次是通过 [`CnFeat`](http://cnfeat.com/blog/2014/05/10/how-to-build-a-blog/) 的教程来操作，fork了完代码库后，自己傻乎乎地又在Github那生成页面，就是一个页面的。
+以前最成功的一次是通过 [CnFeat](http://cnfeat.com/blog/2014/05/10/how-to-build-a-blog/) 的教程来操作，fork了完代码库后，自己傻乎乎地又在Github那生成页面，就是一个页面的。
 
-今天通过 [`Hux`](http://huangxuan.me/) 的模板，算是真搭成功了吧！
+今天通过 [Hux](http://huangxuan.me/) 的模板，算是真搭成功了吧！
 
 通过摸索也学习到很多。fork完仓库一定要认真读 `README.zh.md` 。
 
