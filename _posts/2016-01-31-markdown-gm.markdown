@@ -7,9 +7,9 @@ author:     "Joc"
 header-img: "img/home-bg-o.jpg"
 tags:
     - 知乎
-    - 前端开发
+   
     - jest
-    - UX Design
+    
 ---
 
 
