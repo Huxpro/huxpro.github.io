@@ -3,7 +3,7 @@ title: Joc Blog
 SEOTitle: 乔克的博客 | Joc Blog
 header-img: img/home-bg.jpg
 email: joc2422@gmail.com
-description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
+description: "与你一起发现更大的世界。"
 keyword: "Joc Blog, 博客, 个人网站"
 url: "http://tnt.moe"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
@@ -75,25 +75,25 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
+        title: "黄玄",
+        href: "http://huangxuan.me/"
     },{
-        title: "Luke的自留地",
-        href: "http://hmqk1995.github.io"
+        title: "暂无",
+        href: "http://tnt.moe/"
     },{
-        title: "Ebn's Blog",
-        href: "http://ebnbin.com/"
+        title: "暂无",
+        href: "http://tnt.moe/"
     },{
-        title: "SmdCn's Blog",
-        href: "http://blog.smdcn.net"
+        title: "暂无",
+        href: "http://tnt.moe/"
     },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
+        title: "暂无",
+        href: "http://tnt.moe/"
     },{
-        title: "DHong Say",
-        href: "http://dhong.co"
+        title: "暂无",
+        href: "http://tnt.moe/"
     },{
-        title: "尹峰以为",
-        href: "http://ingf.github.io/"
+        title: "暂无",
+        href: "http://tnt.moe/"
     }
 ]
