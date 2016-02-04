@@ -105,29 +105,32 @@ JSX 是一种类似 HTML 的语法，但它实际上会被编译成 JavaScript�
 
 Angular 2 延续了 Angular 1 试图让 HTML 更加强大的老路子。所以即使是像循环或者条件判断这样的简单任务你也不得不使用 Angular 2 的独特语法来完成。例如，Angular 2 通过两种语法同时提供了单向数据绑定与双向数据绑定，可不幸的是它们实在差得有点多：
 
-```javascript
-    {{myVar}} //One-way binding
-    ngModel="myVar" //Two-way binding
+{% raw %}
 
-    {{myVar}}        //单向数据绑定
-    ngModel="myVar"  //双向数据绑定
+```javascript
+{{myVar}}        //单向数据绑定
+ngModel="myVar"  //双向数据绑定
 ```
+
+{% endraw %}
 
 在 React 中，数据绑定语法不取决于数据流的单双向（数据绑定的单双向是在其他地方处理的，不得不说我觉得理应如此）。不管是单向还是双向数据流，绑定语法都是这样的：
 
 ```javascript
-    {myVar}
+{myVar}
 ```
 
 Angular 2 的内联母版（inline master templates）使用了这样的语法：
 
+{% raw %}
 ```html
-    <ul>
-      <li *ngFor="#hero of heroes">
-        {{hero.name}}
-      </li>
-    </ul>
+<ul>
+  <li *ngFor="#hero of heroes">
+    {{hero.name}}
+  </li>
+</ul>
 ```
+{% endraw %}
 
 上面这个代码片段遍历了一组 hero，而我比较关心的几点是：
 
@@ -138,11 +141,11 @@ Angular 2 的内联母版（inline master templates）使用了这样的语法�
 相比上面 Angular 2 的语法，React 的语法可是纯净的 JavaScript （不过我得承认下面的属性 `key` 是个 React 的私货）
 
 ```html
-    <ul>
-      { heroes.map(hero =>
-        <li key={hero.id}>{hero.name}</li>
-      )}
-    </ul>
+<ul>
+  { heroes.map(hero =>
+    <li key={hero.id}>{hero.name}</li>
+  )}
+</ul>
 ```
 
 鉴于 JS 原生支持循环，React JSX 利用 JS 的力量来做到这类事情简直易如反掌，配合 `map`、`filter` 能做的还远不止此。
@@ -156,11 +159,11 @@ Angular 2 的内联母版（inline master templates）使用了这样的语法�
 React 因为语法和概念的简约而与众不同。我们不妨品味下当今流行的 JS 框架/库都是如何实现遍历的：
 
 ```javascript
-    Ember: {{# each}}
-    Angular 1: ng-repeat
-    Angular 2: ngFor
-    Knockout: data-bind="foreach"
-    React: 直接用 JS 就好啦 :)
+Ember: {{# each}}
+Angular 1: ng-repeat
+Angular 2: ngFor
+Knockout: data-bind="foreach"
+React: 直接用 JS 就好啦 :)
 ```
 
 除了 React，所有其它框架都用自己的专有语法重新发明了一个我们在 JavaScript 常见得不能再常见的东西：**循环**。这大概就是 React 的美妙之处，利用 JavaScript 的力量来处理标签，而不是什么奇怪的新语法。
@@ -168,13 +171,13 @@ React 因为语法和概念的简约而与众不同。我们不妨品味下当�
 Angular 2 中的奇怪语法还有点击事件的绑定：
 
 ```javascript
-    (click)="onSelect(hero)"
+(click)="onSelect(hero)"
 ```
 
 相反，React 再一次使用了普通的 JavaScript：
 
 ```javascript
-    onClick={this.onSelect.bind(this, hero)}
+onClick={this.onSelect.bind(this, hero)}
 ```
 
 并且，鉴于 React 内建了一个模拟的事件机制（Angular 2 也有），你并不需要去担心使用内联语法声明事件处理器所暗含的性能问题。
