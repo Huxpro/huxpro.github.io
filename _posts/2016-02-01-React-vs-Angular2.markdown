@@ -2,7 +2,7 @@
 layout:     post
 title:      "React vs Angular 2：冰与火之歌「译」"
 subtitle:   "React versus Angular 2: There Will Be Blood"
-date:       2016-02-03 12:00:00
+date:       2016-02-01 12:00:00
 author:     "Hux"
 header-img: "img/post-bg-re-vs-ng2.jpg"
 header-mask: 0.3
@@ -105,23 +105,29 @@ JSX 是一种类似 HTML 的语法，但它实际上会被编译成 JavaScript�
 
 Angular 2 延续了 Angular 1 试图让 HTML 更加强大的老路子。所以即使是像循环或者条件判断这样的简单任务你也不得不使用 Angular 2 的独特语法来完成。例如，Angular 2 通过两种语法同时提供了单向数据绑定与双向数据绑定，可不幸的是它们实在差得有点多：
 
+```javascript
     {{myVar}} //One-way binding
     ngModel="myVar" //Two-way binding
 
     {{myVar}}        //单向数据绑定
     ngModel="myVar"  //双向数据绑定
+```
 
 在 React 中，数据绑定语法不取决于数据流的单双向（数据绑定的单双向是在其他地方处理的，不得不说我觉得理应如此）。不管是单向还是双向数据流，绑定语法都是这样的：
 
+```javascript
     {myVar}
+```
 
 Angular 2 的内联母版（inline master templates）使用了这样的语法：
 
+```html
     <ul>
       <li *ngFor="#hero of heroes">
         {{hero.name}}
       </li>
     </ul>
+```
 
 上面这个代码片段遍历了一组 hero，而我比较关心的几点是：
 
@@ -129,40 +135,47 @@ Angular 2 的内联母版（inline master templates）使用了这样的语法�
 - `hero` 前的英镑符号（`#`）用于声明一个局部模版变量。这个概念感觉非常鸡肋（如果你偏好不使用 `#`，你也可以使用 `var-` 前缀写法）
 -  为 HTML 加入了循环语义的HTML 特性（attribute）`ngFor` 是 Angular 特有的东西
 
-相比上面 Angular 2 的语法，React 的语法可是纯净的 JavaScript （不过我得承认下面的属性 `key` 是个 React 的私货） 
+相比上面 Angular 2 的语法，React 的语法可是纯净的 JavaScript （不过我得承认下面的属性 `key` 是个 React 的私货）
 
+```html
     <ul>
       { heroes.map(hero =>
         <li key={hero.id}>{hero.name}</li>
       )}
     </ul>
+```
 
 鉴于 JS 原生支持循环，React JSX 利用 JS 的力量来做到这类事情简直易如反掌，配合 `map`、`filter` 能做的还远不止此。
 
 去看看 [Angular 2 速查表](https://angular.io/docs/ts/latest/guide/cheatsheet.html)？那不是 HTML，也不是 JavaScript……这叫 **Angular**。
 
-> **读懂 Angular：**学一大堆 Angular 特有的语法
-> 
+> **读懂 Angular：** 学一大堆 Angular 特有的语法
+>
 > 读懂 React： 学 JavaScript
 
 React 因为语法和概念的简约而与众不同。我们不妨品味下当今流行的 JS 框架/库都是如何实现遍历的：
 
-    
+```javascript
     Ember: {{# each}}
     Angular 1: ng-repeat
     Angular 2: ngFor
-    Knockout: data-bind=”foreach”
+    Knockout: data-bind="foreach"
     React: 直接用 JS 就好啦 :)
+```
 
 除了 React，所有其它框架都用自己的专有语法重新发明了一个我们在 JavaScript 常见得不能再常见的东西：**循环**。这大概就是 React 的美妙之处，利用 JavaScript 的力量来处理标签，而不是什么奇怪的新语法。
 
 Angular 2 中的奇怪语法还有点击事件的绑定：
 
-    (click)=”onSelect(hero)"
+```javascript
+    (click)="onSelect(hero)"
+```
 
 相反，React 再一次使用了普通的 JavaScript：
 
+```javascript
     onClick={this.onSelect.bind(this, hero)}
+```
 
 并且，鉴于 React 内建了一个模拟的事件机制（Angular 2 也有），你并不需要去担心使用内联语法声明事件处理器所暗含的性能问题。
 
@@ -195,7 +208,8 @@ JSX 具备的代码自动补全、编译时检查与丰富的错误提示已经�
 
 不过，我承认关于框架大小的担忧可能被夸大了：
 
-> 大型应用往往至少有几百 KB 的代码，经常还更多，不管它们是不是使用了框架。开发者需要做很多的抽象来构建一个复杂的软件。无论这些抽象是来自框架的还是自己手写的，它都会对应用的加载性能造成负面影响。  <br />
+> 大型应用往往至少有几百 KB 的代码，经常还更多，不管它们是不是使用了框架。开发者需要做很多的抽象来构建一个复杂的软件。无论这些抽象是来自框架的还是自己手写的，它都会对应用的加载性能造成负面影响。  
+>
 >  就算你完全杜绝框架的使用，许多应用仍然是几百 KB 的 JavaScript 在那。 — Tom Dale [JavaScript Frameworks and Mobile Performance](http://tomdale.net/2015/11/javascript-frameworks-and-mobile-performance/)
 
 Tom 的观点是对的。像 Angular、Ember 这样的框架之所以更大是因为它们自带了更多的功能。
@@ -214,7 +228,7 @@ React 作为一个专注、可组合并且目的单一的工具，已经被[全�
 
 #### 谢幕之战
 
-Angular 2 相比第一代有着长足的进步。新的组件模型比第一代的指令（directives）容易掌握许多；新增了对于同构／服务器端渲染的支持；使用虚拟 DOM 提供了 3-10 倍的性能提升。这些改进使得 Angular 2 与 React 旗鼓相当。不可否认，它功能齐全、观点鲜明，能够显著减少 “JavaScript 疲劳” 。
+Angular 2 相比第一代有着长足的进步。新的组件模型比第一代的指令（directives）易学许多；新增了对于同构／服务器端渲染的支持；使用虚拟 DOM 提供了 3-10 倍的性能提升。这些改进使得 Angular 2 与 React 旗鼓相当。不可否认，它功能齐全、观点鲜明，能够显著减少 “JavaScript 疲劳” 。
 
 不过，Angular 2 的大小和语法都让我望而却步。Angular 致力的 HTML 中心设计比 React 的 JavaScript 中心模型要复杂太多。在 React 中，你并不需要学习 `ng-什么什么` 这种框架特有的 HTML 补丁（shim），你只要写 JavaScript 就好了。这才是我相信的未来。
 
@@ -222,8 +236,3 @@ Angular 2 相比第一代有着长足的进步。新的组件模型比第一代�
 
 本文译自 [Angular 2 versus React: There Will Be Blood](https://medium.freecodecamp.com/angular-2-versus-react-there-will-be-blood-66595faafd51#.v4y4euy1r)，其实[之前有人翻译过](http://www.w3ctech.com/topic/1675?from=timeline&isappinstalled=0)，但是翻得水平有一点不忍直视，我们不希望浪费这篇好文章。  
 本文由 [@李凌豪](https://www.zhihu.com/people/li-ling-hao) [@黄玄](https://www.zhihu.com/people/huxpro) 联合翻译，首次发布于[前端外刊评论 · 知乎专栏](http://zhuanlan.zhihu.com/FrontendMagazine)，转载请保留原文链接 ;)
-
-
-
-
-
