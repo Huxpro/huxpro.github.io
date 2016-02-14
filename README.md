@@ -5,6 +5,16 @@
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
 
+### "Page Build Warning" email
+
+These days, some of you must receive a "Page Build Warning" email from github after you commit happily. **Don't Worried!** It just that github changes its build environment.
+
+In this mail, github told us:
+
+> You are attempting to use the 'pygments' highlighter, which is currently unsupported on GitHub Pages. Your site will use 'rouge' for highlighting instead. To suppress this warning, change the 'highlighter' value to 'rouge' in your '_config.yml'.
+
+So, just edit `_config.yml`, find `highlighter: pygments`, change it to `highlighter: rouge` and the warning will be gone.
+
 
 ## Boilerplate (beta)
 
@@ -25,8 +35,8 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 
 ##### New Feature (V1.5.2)
 
-- Annoyed to delete my blog post after clone or pull? **Boilerplate** comes to help you get started quickly and easily merge update. 
-- `-apple-system` is added in font rule, which display beautiful new font **San Francisco** in iOS 9 by default. 
+- Annoyed to delete my blog post after clone or pull? **Boilerplate** comes to help you get started quickly and easily merge update.
+- `-apple-system` is added in font rule, which display beautiful new font **San Francisco** in iOS 9 by default.
 - Fixed [issue#15](https://github.com/Huxpro/huxpro.github.io/issues/15) about code wrap.
 
 ##### New Feature (V1.5.1)
