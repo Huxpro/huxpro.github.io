@@ -2,13 +2,32 @@
 
 ### [我的博客在这里 &rarr;](http://huxpro.github.io)
 
-### [在这里预览模板 &rarr;](http://huangxuan.me/huxblog-boilerplate/)
+
+### 关于收到"Page Build Warning"的email
+
+由于jekyll升级到3.0.x,对原来的pygments代码高亮不再支持，现只支持一种-rouge，所以你需要在 `_config.yml`文件中修改`highlighter: rouge`.另外还需要在`_config.yml`文件中加上`gems: [jekyll-paginate]`.
+
+同时,你需要更新你的本地jekyll环境.
+
+使用`jekyll server`的同学需要这样：
+
+1. `gem update jekyll` # 更新jekyll
+2. `gem update github-pages` #更新依赖的包
+
+使用`bundle exec jekyll server`的同学在更新jekyll后，需要输入`bundle update`来更新依赖的包.
+
+参考文档：[using jekyll with pages](https://help.github.com/articles/using-jekyll-with-pages/) & [Upgrading from 2.x to 3.x](http://jekyllrb.com/docs/upgrading/2-to-3/)
+
+
+## 关于模板(beta)
 
 我的博客仓库——`huxpro.github.io`，是经常修改的，而且还会有人乱提交代码，因此给大家做了一个稳定版的模板。大家可以直接fork模板——`huxblog-boilerplate`,要改的地方我都说明了。或者可以直接下载zip到本地自己去修改。
 
 ```
 $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 ```
+
+**[在这里预览模板 &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
 
 ## 各版本特性
 
