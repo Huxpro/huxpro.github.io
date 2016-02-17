@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "哇哈哈哈"
+title:      "老二"
 subtitle:   "笨笨笨笨笨~"
 date:       2015-04-15
 author:     "Hux"
