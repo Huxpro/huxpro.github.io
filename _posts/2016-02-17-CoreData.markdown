@@ -54,8 +54,6 @@ _[官方文档地址](https://developer.apple.com/library/ios/documentation/Coco
 
 	谓词：
 	
-	
-![](/Users/zhangcheng/Desktop/b3a53a1ae8c24332da3c4644da861adb.jpg)
 
 <http://www.baidu.com>
 
