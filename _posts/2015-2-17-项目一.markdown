@@ -5,14 +5,3 @@ subtitle:   "副标题一"
 date:       2016-2-17 12:00:00
 author:     "未久夕多"
 header-img: "img/home-bg-o.jpg"
-tags:
-    - 知乎
-    - 前端开发
-    - UX Design
----
-
-
-
-
-
-
