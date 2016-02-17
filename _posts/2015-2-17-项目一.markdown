@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "hUX 随想录（二）：操作系统的浪漫主义 —— Metro 篇"
+title:      "哇哈哈哈"
 subtitle:   "信息、载体、抽象、UI 设计乱谈"
 date:       2015-04-15
 author:     "Hux"
