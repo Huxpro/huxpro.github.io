@@ -17,84 +17,303 @@ tags:
 
 
 ## Core Data
-_[官方文档地址](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreData/index.html#//apple_ref/doc/uid/TP40001075)_
+@(soufun技术组)
+
+[官方文档地址](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreData/index.html#//apple_ref/doc/uid/TP40001075)
+
 
 ---
 
 ### 问
 * 底层的持久化存储方式可以是SQLite数据库，也可以是XML文档，甚至可以直接以内存作为持久化存储设备？
 * 多线程使用Core Data
-* f
+* 怎样使用Core Data
+* 
  
 
 ### 1. Core Data 简介及理论基础
 
+官方声称使用Core Data能减少50%-70%的代码量，但相信用过的人应该都心里明白，Core Data使用起来还是比较麻烦的，这也是为什么有不少的第三方类库来代替/二次包装Core Data。
 #### 1.1 关于CoreData
+Core Data 是一个模型层的技术。Core Data 帮助你建立代表程序状态的模型层。Core Data 也是一种持久化技术，它能将模型对象的状态持久化到磁盘，但它最重要的特点是：Core Data 不仅是一个加载、保存数据的框架，它还能和内存中的数据很好的共事。
 
 #### 1.2 先熟悉几个概念
 * 实体
-
 	Core Data的核心，必须是NSManagedObject类或其子类的实例
 * NSManagedObjectContext
-
-	托管上下文：Core Data的核心对象。
+	托管上下文：Core Data的核心对象。应用对实体所做的任何增、删、查、改操作都必须通过该对象来完成。
 * NSManagerObjectModel
-
 	托管model：该对象负责管理整个应用的所有实体以及实体之间的关联关系。当开发者使用Xcode的图形界面设计了实体与实体的关联关系之后，需要使用该对象来加载、管理应用的托管对象模型
 * NSPeristentStoreCoordinator
-
 	持久化存储协调器：负责管理底层的存储文件，例如SQLite数据库等。
 * NSEntityDescription
-
 	实体描述：该对象代表了关于某个实体的描述信息，从某种程度来说，该对象相当于实体的抽象。实体描述定义了该实体的名字、实体的实现类，并用一个集合定义了该实体包含的所有属性。
 * NSFetchRequest
-
 	抓取请求：该对象封装了查询实体的请求，包括程序需要查询哪些实体、查询条件、排序规则等。抓取请求定义了本次查询的实体的名字、抓取请求的查询条件，通过NSPredicate来表示，并用一个NSArray集合定义了所有的排序规则。
-* NSPredicate
 
-	谓词：
-	
+![](http://img.my.csdn.net/uploads/201302/01/1359708878_8041.png)
 
-<http://www.baidu.com>
 
-[百度](http://www.baidu.com)
-	
 #### 1.3 Core Data 操作步骤
+
+```
+初始化NSManagedObjectModel对象，加载模型文件，读取app中的所有实体信息
+初始化NSPersistentStoreCoordinator对象，添加持久化库(这里采取SQLite数据库)
+初始化NSManagedObjectContext对象，拿到这个上下文对象操作实体，进行CRUD操作
+```
+
 * 创建NSManagedObiectModel对象来加载管理应用的托管对象模型。
 * 以NSManagedObiectModel对象为基础，根据实际需要创建NSPeristentStoreCoordinator对象，该对象确定Core Data底层数据的存储形式。
 * 以NSManagedObiectModel对象为基础，创建NSMannagedObjectContext，该对象是Core Data进行持久化访问的核心对象。
 * 对于普通的增、删、改操作，需要分别先创建实体、删除实体、修改实体，然后调用NSMannagedObjectContext对象的save:方法将这些修改保存到底层存储设备。
 * 如果要执行查询，则需要先创建NSFetchRequest对象，再调用NSMannagedObjectContext的executeFetchRequest:error：方法执行查询，该方法返回所有匹配条件的实体组成的NSArray。
 
+![图片](http://upload-images.jianshu.io/upload_images/678612-c25f9928a676015c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+	
+
+
+常见解决办法
+
+
+![](http://img.objccn.io/issue-4/stack-simple.png)
+
 #### 1.4 Core Data  注意事项
 * 应用切后台、中断应用时，应save数据。
-* 
 
 
 ### 2. 使用Core Data
 
-#### 2.1 创建托管对象模型
+单一context的设置。你需要一个persistent store coordinator (PSC，持久化存储协调器)管理与磁盘上数据库文件的对话。所以那个PSC知道你需要模型的数据库的结构。这个模型是由所有定义包含在项目里面的模型合并而成的，告诉CoreData数据库的结构是怎样的。这个PSC通过属性设置给了MOC。需要记住的第一条规则就是：如果你调用MOC的saveContext方法，PSC将会把数据写入磁盘。
+![](http://lynchwong.com/img/CoreDataMultiContext/first.png)
 
 
-#### 2.2 dd
-> dd
-> 
-> ddd
- 	
-    
-> dd
-> 
+### 3.Core Data 数据迁移
+<http://objccn.io/issue-4-7/>
+
+
 
 ### 4.多线程操作Core Data
 NSManagedObjectContext是多线程不安全的，多个线程使用同一个context进行读写操作，会出现问题。
 
+
+#### 4.1 iOS5之前
 * 每个为每个线程创建单独的上下文对象，这样，多个上下文对象之间的数据可能会不一致，需要注册对通知
 NSManagedObjectContextDidSaveNotification的监听，并且通过方法mergeChangesFromContextDidSaveNotification:合并其他上下文对象修改的数据。（可以保持一个上下文对象在内存中同步所有的操作，其他线程中的上下文操作完就释放了）
-* 另一种方法就是通过加锁来实现程序中仅存在的上下文对象同时只能进行一个操作。
-* 使用GCD,gcd操作队列的顺序性保证同时只有一个操作上下文对象。
 
+* 稍微复杂的应用就有可能出现同时处理多份数据的情况，这就需要用到多线程Core Data。在 iOS 5之前，官方推荐的是使用「Thread Confinement」，就是每个线程使用独立的MOC(managed object context)，然后共享一个PSC(persistent store coordinator)。同时在线程之间传递数据时，要传递objectID，而不是object，因为前者是线程安全的，后者不是。
+
+* 如果A线程里，对PSC执行了CUD(create, update, delete)操作，其他线程如何感知呢？这就需要通过监听事件来实现。比如在线程A中监听「NSManagedObjectContextDidSaveNotification」事件，如果线程B中执行了CUD操作，线程A就能感知到，并触发响应的action，虽然可以通过noti userinfo来获取managed objects，但因为它们是关联到另一个MOC，所以无法直接操作它们，解决方法就是调用「mergeChangesFromContextDidSaveNotification:」方法。
+
+![Alt text](./屏幕快照 2016-01-21 上午1.01.53.png)
+![](http://lynchwong.com/img/CoreDataMultiContext/second.png)
+
+
+> Marcus Zarra：尽管NSPersistentStoreCoordinator也不是线程安全的，但是NSManagedObjectContext知道在使用的时候如何加锁。然而，我们可以尽可能的多的将NSManagedObjectContext对象使用同一个NSPersistentStoreCoordinator而不必担心冲突。
+
+
+
+```
+dispatch_async(_backgroundQueue, ^{
+   // create context for background
+   NSManagedObjectContext *tmpContext = [[NSManagedObjectContext alloc] init];
+   tmpContext.persistentStoreCoordinator = _persistentStoreCoordinator;
+
+   // something that takes long
+
+   NSError *error;
+   if (![tmpContext save:&error])
+   {
+      // handle error
+   }
+});
+```
+
+```
+- (void)_setupCoreDataStack
+{
+   // setup managed object model
+   NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Database" withExtension:@"momd"];
+   _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+
+   // setup persistent store coordinator
+   NSURL *storeURL = [NSURL fileURLWithPath:[[NSString cachesPath] stringByAppendingPathComponent:@"Database.db"]];
+
+   NSError *error = nil;
+   _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
+
+   if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&amp;error]) 
+   {
+       // handle error
+   }
+
+   // create MOC
+   _managedObjectContext = [[NSManagedObjectContext alloc] init];
+   [_managedObjectContext setPersistentStoreCoordinator:_persistentStoreCoordinator];
+
+   // subscribe to change notifications
+   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_mocDidSaveNotification:) name:NSManagedObjectContextDidSaveNotification object:nil];
+}
+```
+
+```
+- (void)_mocDidSaveNotification:(NSNotification *)notification
+{
+   NSManagedObjectContext *savedContext = [notification object];
+
+   // ignore change notifications for the main MOC
+   if (_managedObjectContext == savedContext)
+   {
+      return;
+   }
+
+   if (_managedObjectContext.persistentStoreCoordinator != savedContext.persistentStoreCoordinator)
+   {
+      // that's another database
+      return;
+   }
+
+   dispatch_sync(dispatch_get_main_queue(), ^{
+      [_managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+   });
+}
+```
+通过第一个if判断我们需要避免合并自己的改变。如果我们同一个App里面有多个CoreData数据库，我们需要避免合并其他数据库的改变。我在自己的App里面遇到过这个问题，所以我回检查PSC。最后我们通过提供的mergeChangesFromContextDidSaveNotification: 方法来合并改变。所有的改变都在notification的字典里面，这个方法知道如何将这些改变整合到MOC里面。
+
+在Contexts之间传递Managed Objects
+你从一个MOC获取的managed object是被严格禁止传递给另外一个MOC的。有一个简单的方法通过managed object的ObjectID来排序它的镜像。这个ObjectID是线程安全的，你总是可以从NSManagedObject的实例中获取然后在你想要传递给的MOC上调用objectWithID:。第二个MOC将会检索这个managed objects的拷贝来工作。
+```
+NSManagedObjectID *userID = user.objectID;
+
+// make a temporary MOC
+dispatch_async(_backgroundQueue, ^{
+   // create context for background
+   NSManagedObjectContext *tmpContext = [[NSManagedObjectContext alloc] init];
+   tmpContext.persistentStoreCoordinator = _persistentStoreCoordinator;
+
+   // user for background
+   TwitterUser *localUser = [tmpContext objectWithID:userID];
+
+   // background work
+});
+```
+
+
+#### 4.2 iOS5之后(Parent/Child Contexts)
+
+这种方式实现起来和维护起来都有点麻烦，所以iOS 5中就出现了更加方便和灵活的实现，也就是「Nested MOC」
+
+```
+[[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+```
+* NSConfinementConcurrencyType(iOS9弃用)
+这个是默认项，每个线程一个独立的Context，主要是为了兼容之前的设计。
+* NSPrivateQueueConcurrencyType
+创建一个private queue(使用GCD)，这样就不会阻塞主线程。
+* NSMainQueueConcurrencyType
+创建一个main queue，使用主线程，会阻塞。
+
+![ddd](http://lynchwong.com/img/CoreDataMultiContext/third.png)
+* 每当child MOC执行save操作时，parent都会得知这些改变，在这种情形下，fetched results controllers也会知悉这些改变。然后这些数据还没有被持久化，因为background MOCs并不知道PSC。为了将数据写入磁盘你需要在main queue MOC上执行额外的saveContext:操作。
+
+
+*Asynchronous Saving(异步执行save操作)
+ ![](http://lynchwong.com/img/CoreDataMultiContext/four.png)
+
+
+### 5搜房使用Core Data 与XMPP使用Core Data
+* 使用GCD,gcd操作队列的顺序性保证同时只有一个操作上下文对象。
+* 单一数据库文件
+* 单一MOC
+* 子线程操作MOC
+* 使用GCD保证单线程
+* 同步查找操作
+* 异步增删改操作
+
+```
+storageQueue = dispatch_queue_create(class_getName([self class]), NULL);
+```
+
+```
+- (void)executeBlock:(dispatch_block_t)block
+{
+	// By design this method should not be invoked from the storageQueue.
+	// 
+	// If you remove the assert statement below, you are destroying the sole purpose for this class,
+	// which is to optimize the disk IO by buffering save operations.
+	// 
+	NSAssert(dispatch_get_specific((__bridge void *)self) != maybe_bridge(storageQueue), @"Invoked on incorrect queue");
+	// 
+	// For a full discussion of this method, please see XMPPCoreDataStorageProtocol.h
+	//
+	// dispatch_Sync
+	//          ^
+	
+//	OSAtomicIncrement32(&pendingRequests);
+	dispatch_sync(storageQueue, ^{
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+		
+		block();
+		
+		// Since this is a synchronous request, we want to return as quickly as possible.
+		// So we delay the maybeSave operation til later.
+		
+        if (IOS9DEVICE) {
+            [self maybeSave:OSAtomicDecrement32(&pendingRequests)];
+        } else {
+            
+            dispatch_async(storageQueue, ^{
+                NSAutoreleasePool *innerPool = [[NSAutoreleasePool alloc] init];
+                
+                [self maybeSave:OSAtomicDecrement32(&pendingRequests)];
+                
+                [innerPool drain];
+            });
+        }
+		
+		[pool drain];
+	});
+}
+```
+```
+- (void)scheduleBlock:(dispatch_block_t)block
+{
+	// By design this method should not be invoked from the storageQueue.
+	// 
+	// If you remove the assert statement below, you are destroying the sole purpose for this class,
+	// which is to optimize the disk IO by buffering save operations.
+	// 
+	NSAssert(dispatch_get_specific((__bridge void *)self) != maybe_bridge(storageQueue), @"Invoked on incorrect queue");
+	// 
+	// For a full discussion of this method, please see XMPPCoreDataStorageProtocol.h
+	// 
+	// dispatch_Async
+	//          ^
+	
+	OSAtomicIncrement32(&pendingRequests);
+	dispatch_async(storageQueue, ^{
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+		
+		block();
+		
+		[self maybeSave:OSAtomicDecrement32(&pendingRequests)];
+		[pool drain];
+	});
+}
+```
+
+XMPP
+
+不同点
+![不同点](http://upload-images.jianshu.io/upload_images/1414945-a0319522b25a22aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![注册观察者](http://upload-images.jianshu.io/upload_images/1414945-71a5967a8b3d0b67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![合并](http://upload-images.jianshu.io/upload_images/1414945-45c30f772bd52923.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 ### 3. 参考
 * <http://www.jianshu.com/p/435cfee3112c>
-
+* <http://limboy.me/ios/2013/06/16/ios-multi-thread-core-data.html>
+* <http://lynchwong.com/2015/06/09/CoreData多线程处理/>
+* <http://lynchwong.com/2015/06/09/CoreData%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%84%E7%90%86/>
+* [Marcus Zarra](https://twitter.com/mzarra)
