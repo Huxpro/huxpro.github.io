@@ -11,23 +11,25 @@ tags:
     - UX Design
 ---
 
+
+
 > 什么是Core Data？怎么使用？
 
 
-##Core Data
+## Core Data
 _[官方文档地址](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreData/index.html#//apple_ref/doc/uid/TP40001075)_
 
 ---
 
-###问
+### 问
 * 底层的持久化存储方式可以是SQLite数据库，也可以是XML文档，甚至可以直接以内存作为持久化存储设备？
 * 多线程使用Core Data
 * f
  
 
-###1. Core Data 简介及理论基础
-####1.1 关于CoreData
-####1.2 先熟悉几个概念
+### 1. Core Data 简介及理论基础
+#### 1.1 关于CoreData
+#### 1.2 先熟悉几个概念
 * 实体
 
 	Core Data的核心，必须是NSManagedObject类或其子类的实例
@@ -57,23 +59,23 @@ _[官方文档地址](https://developer.apple.com/library/ios/documentation/Coco
 
 [百度](http://www.baidu.com)
 	
-####1.3 Core Data 操作步骤
+#### 1.3 Core Data 操作步骤
 * 创建NSManagedObiectModel对象来加载管理应用的托管对象模型。
 * 以NSManagedObiectModel对象为基础，根据实际需要创建NSPeristentStoreCoordinator对象，该对象确定Core Data底层数据的存储形式。
 * 以NSManagedObiectModel对象为基础，创建NSMannagedObjectContext，该对象是Core Data进行持久化访问的核心对象。
 * 对于普通的增、删、改操作，需要分别先创建实体、删除实体、修改实体，然后调用NSMannagedObjectContext对象的save:方法将这些修改保存到底层存储设备。
 * 如果要执行查询，则需要先创建NSFetchRequest对象，再调用NSMannagedObjectContext的executeFetchRequest:error：方法执行查询，该方法返回所有匹配条件的实体组成的NSArray。
 
-####1.4 Core Data  注意事项
+#### 1.4 Core Data  注意事项
 * 应用切后台、中断应用时，应save数据。
 * 
 
 
-###2. 使用Core Data
-####2.1 创建托管对象模型
+### 2. 使用Core Data
+#### 2.1 创建托管对象模型
 
 
-####2.2 dd
+#### 2.2 dd
 > dd
 > 
 > ddd
@@ -82,13 +84,13 @@ _[官方文档地址](https://developer.apple.com/library/ios/documentation/Coco
 > dd
 > 
 
-###4.多线程操作Core Data
+### 4.多线程操作Core Data
 NSManagedObjectContext是多线程不安全的，多个线程使用同一个context进行读写操作，会出现问题。
 * 每个为每个线程创建单独的上下文对象，这样，多个上下文对象之间的数据可能会不一致，需要注册对通知NSManagedObjectContextDidSaveNotification的监听，并且通过方法mergeChangesFromContextDidSaveNotification:合并其他上下文对象修改的数据。（可以保持一个上下文对象在内存中同步所有的操作，其他线程中的上下文操作完就释放了）
 * 另一种方法就是通过加锁来实现程序中仅存在的上下文对象同时只能进行一个操作。
 * 使用GCD,gcd操作队列的顺序性保证同时只有一个操作上下文对象。
 
 
-###3. 参考
+### 3. 参考
 * <http://www.jianshu.com/p/435cfee3112c>
 
