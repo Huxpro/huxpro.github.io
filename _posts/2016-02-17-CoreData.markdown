@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Core Data 知识梳理"
+title:      "Core Data知识梳理"
 subtitle:   "Core Data"
 date:       2016-02-18 00:00:00
 author:     "未久夕多"
@@ -86,10 +86,13 @@ _[官方文档地址](https://developer.apple.com/library/ios/documentation/Coco
 > 
 
 ### 4.多线程操作Core Data
-NSManagedObjectContext是多线程不安全的，多个线程使用同一个context进行读写操作，会出现问题。
-* 每个为每个线程创建单独的上下文对象，这样，多个上下文对象之间的数据可能会不一致，需要注册对通知NSManagedObjectContextDidSaveNotification的监听，并且通过方法mergeChangesFromContextDidSaveNotification:合并其他上下文对象修改的数据。（可以保持一个上下文对象在内存中同步所有的操作，其他线程中的上下文操作完就释放了）
+NSManagedObjectContext是多线程不安全的，多个线程使用同一个context进行读写操作，会出现问题。
+
+* 每个为每个线程创建单独的上下文对象，这样，多个上下文对象之间的数据可能会不一致，需要注册对通知
+NSManagedObjectContextDidSaveNotification的监听，并且通过方法mergeChangesFromContextDidSaveNotification:合并其他上下文对象修改的数据。（可以保持一个上下文对象在内存中同步所有的操作，其他线程中的上下文操作完就释放了）
 * 另一种方法就是通过加锁来实现程序中仅存在的上下文对象同时只能进行一个操作。
-* 使用GCD,gcd操作队列的顺序性保证同时只有一个操作上下文对象。
+* 使用GCD,gcd操作队列的顺序性保证同时只有一个操作上下文对象。
+
 
 
 ### 3. 参考
