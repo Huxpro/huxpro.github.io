@@ -2,7 +2,7 @@
 layout:     post
 title:      "Core Data知识梳理"
 subtitle:   "Core Data"
-date:       2016-02-18 12:00:00
+date:       2016-2-18 12:00:00
 author:     "未久夕多"
 header-img: "img/home-bg-o.jpg"
 tags:
