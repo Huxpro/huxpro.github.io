@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "哇哈哈哈"
-subtitle:   "信息、载体、抽象、UI 设计乱谈"
+subtitle:   "笨笨笨笨笨~"
 date:       2015-04-15
 author:     "Hux"
 header-img: "img/post-bg-os-metro.jpg"
