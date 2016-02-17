@@ -104,7 +104,7 @@ NSManagedObjectContextDidSaveNotification的监听，并且通过方法mergeChan
 
 * 如果A线程里，对PSC执行了CUD(create, update, delete)操作，其他线程如何感知呢？这就需要通过监听事件来实现。比如在线程A中监听「NSManagedObjectContextDidSaveNotification」事件，如果线程B中执行了CUD操作，线程A就能感知到，并触发响应的action，虽然可以通过noti userinfo来获取managed objects，但因为它们是关联到另一个MOC，所以无法直接操作它们，解决方法就是调用「mergeChangesFromContextDidSaveNotification:」方法。
 
-![Alt text](./屏幕快照 2016-01-21 上午1.01.53.png)
+![屏幕快照 2016-02-18 上午1.03.19.png](http://upload-images.jianshu.io/upload_images/1414945-83cc6808bc793d61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](http://lynchwong.com/img/CoreDataMultiContext/second.png)
 
 
