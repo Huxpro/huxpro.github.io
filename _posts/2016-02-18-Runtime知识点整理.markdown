@@ -23,3 +23,5 @@ tags:
 [Objective-C Runtime 运行时之五：协议与分类](http://southpeak.github.io/blog/2014/11/08/objective-c-runtime-yun-xing-shi-zhi-wu-:xie-yi-yu-fen-lei/)
 
 [Objective-C Runtime 运行时之六：拾遗](http://southpeak.github.io/blog/2014/11/09/objective-c-runtime-yun-xing-shi-zhi-liu-:shi-yi/)
+
+[Objective-C Runtime](http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/)
