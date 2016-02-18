@@ -107,7 +107,7 @@ ADR(a<sub>i</sub>)=ADR(a<sub>1</sub>)+(i-1)k, ADR(a<sub>i</sub>)为第一个元�
 ### 什么是栈？
 * 栈是限定在一端进行插入和删除运算的线性表。
 	* 允许插入与删除的一端称为<b>栈顶</b>, 不允许插入与删除的另一端称为<b>栈底</b>。
-	* 栈按照<b><font color=red>”先进后出“（FILO）</font></b>或<b><font color=red>”后进先出“（LIFO）</font></b>组织数据
+	* 栈按照<b>”先进后出“（FILO）</b>或<b>”后进先出“（LIFO）</b>组织数据
 	* 栈具有记忆作用。
 	* 用top表示栈顶位置，用bottom表示栈底。
 
