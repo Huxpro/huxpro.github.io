@@ -71,32 +71,32 @@ header-img: "img/about-bg.jpg"
 
 <!-- Handle Language Change -->
 <!--<script type="text/javascript">-->
-    // get nodes
+    <!--// get nodes-->
 <!--    var $zh = document.querySelector(".zh");-->
 <!--    var $en = document.querySelector(".en");-->
 <!--    var $select = document.querySelector("select");-->
 
-    // bind hashchange event
+    <!--// bind hashchange event-->
 <!--    window.addEventListener('hashchange', _render);-->
 
-    // handle render
+    <!--// handle render-->
 <!--    function _render(){-->
 <!--        var _hash = window.location.hash;-->
-        // en
+        <!--// en-->
 <!--        if(_hash == "#en"){-->
 <!--            $select.selectedIndex = 1;-->
 <!--            $en.style.display = "block";-->
 <!--            $zh.style.display = "none";-->
-        // zh by default
+        <!--// zh by default-->
 <!--        }else{-->
-            // not trigger onChange, otherwise cause a loop call.
+            <!--// not trigger onChange, otherwise cause a loop call.-->
 <!--            $select.selectedIndex = 0;-->
 <!--            $zh.style.display = "block";-->
 <!--            $en.style.display = "none";-->
 <!--        }-->
 <!--    }-->
 
-    // handle select change
+    <!--// handle select change-->
 <!--    function onLanChange(index){-->
 <!--        if(index == 0){-->
 <!--            window.location.hash = "#zh"-->
@@ -128,10 +128,10 @@ header-img: "img/about-bg.jpg"
 
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <!--<script type="text/javascript">-->
-    // dynamic User hacking by Hux
+    <!--// dynamic User hacking by Hux-->
 <!--    var _user = '{{site.duoshuo_username}}';-->
 
-    // duoshuo comment query.
+    <!--// duoshuo comment query.-->
 <!--    var duoshuoQuery = {short_name: _user };-->
 <!--    (function() {-->
 <!--        var ds = document.createElement('script');-->
@@ -157,7 +157,7 @@ header-img: "img/about-bg.jpg"
 
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <!--<script type="text/javascript">-->
-    /* * * CONFIGURATION VARIABLES * * */
+    <!--/* * * CONFIGURATION VARIABLES * * */-->
 <!--    var disqus_shortname = "{{site.disqus_username}}";-->
 <!--    var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";-->
 <!--    var disqus_url = "{{site.url}}{{page.url}}";-->
