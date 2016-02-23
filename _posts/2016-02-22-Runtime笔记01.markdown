@@ -1,0 +1,21 @@
+---
+layout:     post
+title:      "Runtime笔记01"
+subtitle:   "Runtime"
+date:       2016-02-18
+author:     "未久夕多"
+header-img: "img/home-bg-o.jpg"
+tags:
+    - 运行时
+    - 协议
+    - 消息
+    - 转发
+---
+
+
+> Runtime 的一些知识
+
+## Runtime 基础知识和基本原理
+
+## Runtime 重要知识点
+
