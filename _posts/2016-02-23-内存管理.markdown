@@ -2,7 +2,7 @@
 layout:     post
 title:      "内存管理整理"
 subtitle:   "内存管理"
-date:       2016-02-18
+date:       2016-02-23
 author:     "未久夕多"
 header-img: "img/home-bg-o.jpg"
 tags:
