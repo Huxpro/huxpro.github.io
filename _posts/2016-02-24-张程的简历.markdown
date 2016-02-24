@@ -1,0 +1,79 @@
+---
+layout:     post
+title:      "我的简历"
+subtitle:   "个人简历"
+date:       2016-02-24
+author:     "未久夕多"
+header-img: "img/home-bg-o.jpg"
+tags:
+    - 工作日程
+---
+
+
+## 联系方式
+* 手机： 1531147****
+* Email：974897435@qq.com
+
+## 个人信息
+* 张程/男/1991
+* 本科/中国计量大学
+* 工作年限：2年
+* 技术博客：[https://zcseven7.github.io/](https://zcseven7.github.io/)
+* Github:[https://github.com/zcseven7](https://github.com/zcseven7)
+* 期望职位：iOS工程师
+* 期望城市：北京
+
+## 工作日常
+* 2年iOS开发经验，1.5年带队经验 
+* 负责搜房多款app开发工作。 
+* 具有出色项目沟通、项目解调、进度掌控能力。 
+* 对于项目框架构建，有一定见解
+* 精通Cocoa/UIKit Framework等框架，灵活使用各种设计模式 
+* 精通Http网络协议，xml/json数据解析 
+* 熟练使用Instrument调试工具解决性能问题。 
+* 熟练掌握Charles、Reveal等工具 
+* 使用CocosPod 打理第三方库,并熟练掌握masonry、AFNetworking、SDWebimage、MagicalRecord等第三方 
+* 熟练使用Core Data等方式进行数据持久化 
+* 熟悉Core Text，实现过图文混排相关模块开发
+* 对项目严格执行review，纯代码开发
+
+## 项目经验
+### [北京搜房网络技术有限公司](http://www1.fang.com/) （2014年4月~至今）
+#### [搜房办公系统](http://work.fang.com/v2/mobile/download.jsp)
+* 负责OA框架重构
+* 天下聊bug修改及相关优化
+* 每期任务分配及进度评估
+
+#### [搜房网房天下](https://itunes.apple.com/cn/app/soufun/id413993350?8&ls=1)
+* 2014年4月进入搜房控股研发部，开始房天下家居、装修帮App、房天下App 等多款项目的开发工作。 
+* 2014年9月带队，负责业主圈(论坛)、我的搜房、查房价、我的钱等模块开发；年后主做业主圈(论坛)，帮你找房。 
+* 负责聊天、富文本编辑、登录服务、相机相册等控件或功能的维护工作。 
+
+	-
+	
+	#### 项目概览 
+	##### 业主圈（例） 
+	* 支持展示点击、变色的富文本，图片，链接帖
+	* 支持点赞评论及取消操作。
+	* 话题、圈子、附近等相关列表 
+	* 发帖，支持带圈子及话题 
+	* 加入圈子进行权限设置，支持同意、拒绝、踢出成员操作
+
+	##### 帮你找房/找房雷达（例）
+	* 用户选择基本信息并发送找房需求
+	* 实时接收应答经纪人应答，点击应答进入聊天页回复
+	* 详情关联列表页，实时展示应答经纪人头像
+	* 根据用户基本信息进入地图页，筛选出相关房源
+	
+	-
+
+#### [房天下家居](https://itunes.apple.com/cn/app/fang-tian-xia-jia-ju/id834843753?mt=8)/[装修帮](https://itunes.apple.com/cn/app/zhuang-xiu-bang-sou-fang-wang/id704307925?mt=8)
+* 两个项目的注册相关页（我要装修、找设计师、设计师注册、工长注册等页面）
+* 找案例、找工长等列表页面
+* 推送声音开关
+
+## 个人整理
+* [ZCcoretext](https://github.com/zcseven7/ZCcoretext)
+* [Core Data部分知识整理](https://zcseven7.github.io/2016/02/17/CoreData/)
+
+> “任何傻瓜都能写出计算机可以理解的代码。好的程序员能写出人能读懂的代码”
