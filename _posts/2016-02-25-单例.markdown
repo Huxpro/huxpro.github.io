@@ -1,0 +1,275 @@
+---
+layout:     post
+title:      "单例"
+subtitle:   "单例及单例模式"
+date:       2016-02-25
+author:     "未久夕多"
+header-img: "img/home-bg-o.jpg"
+tags:
+    - 单例
+---
+
+
+> 今天面试再次被虐，问道单例的一些细节，还是对知识深究的不够。被虐虐也好，虐着虐着就会慢慢变好吧。
+
+## 单例是什么
+* 单例模式的意图就是使得类中的一个对象称为系统中的唯一实例
+* 提供了对类的对象所提供的资源的全局访问点
+
+## 为什么使用单例
+
+## 实现单例模式的条件
+* 实现单例模式有三个条件：
+	1. 类的构造方法是私有的
+	2. 类提供一个类方法用于产生对象
+	3. 类中有一个私有的自己对象
+* 针对于这三个条件，OC中都是可以做到的
+	1. 类的构造方法是私有的<br>我们只需要重写allocWithZone方法，让初始化操作只执行一次
+	2. 类提供一个类方法产生对象<br>这个可以直接定义一个类方法
+	3. 类中有一个私有的自己对象<br>我们可以在.m文件中定义一个属性即可
+
+## 使用单例的场景
+* 类只能有一个实例，并且必须从一个为人数值的访问点对其访问。
+* 这个唯一的实例只能通过子类化进行拓展，并且拓展的对象不会破坏客户端代码。
+
+
+	--
+	* 应用场景及注意点
+		* 某个类经常被使用（节约系统资源）
+		* 定义工具类
+		* 共享数据
+	* 注意点
+		* 不要继承单例类
+			* 先创建子类永远是子类对象
+			* 先创建父类永远是父类对象
+	* 单例模式
+		* 懒汉模式：第一次用到单例对象的时候再创建
+		* 饿汉模式：一进入程序就创建一个单例对象
+
+## 怎样使用单例
+
+### 一种官方写法
+```
+static AccountManager *DefaultManager = nil;  
+   
++ (AccountManager *)defaultManager {  
+    if (!DefaultManager) DefaultManager = [[self allocWithZone:NULL] init];  
+    return DefaultManager;  
+}
+```
+iOS4 之后
+
+```
++ (AccountManager *)sharedManager  
+{  
+        static AccountManager *sharedAccountManagerInstance = nil;  
+        static dispatch_once_t predicate;  
+        dispatch_once(&predicate, ^{  
+                sharedAccountManagerInstance = [[self alloc] init];   
+        });  
+    return sharedAccountManagerInstance;  
+} 
+```
+改写法具有以下几个特性：<br>
+1. 线程安全<br>
+2. 满足静态分析器的要求<br>
+3. 兼容了ARC
+
+dispatch_once_t *predicate对象必须是全局或者静态对象
+
+### 首先单例模式在ARC\MRC环境下的写法有所不同，需要编写2套不同的代码
+
+* 可以用宏判断是否为ARC环境
+
+	```
+#if _has_feature(objc_arc)
+#else
+//MRC
+#endif
+	```
+	
+### 单例模式- ARC -方法一
+
+```
+static id _instance;
+//重写allocWithZone:方法，在这里创建唯一的实例(注意线程安全)
++ (instancetype)allocWithZone:(struct _NSZone *)zone
+{
+    @synchronized(self) {
+        if (_instance == nil) {
+            _instance = [super allocWithZone:zone];
+        }
+    }
+    return _instance;
+}
+```
+
+### 封锁其他路径
+```
+#import "Singleton.h"  
+  
+@implementation Singleton  
+  
+static Singleton* _instance = nil;  
+  
++(instancetype) shareInstance  
+{  
+    static dispatch_once_t onceToken ;  
+    dispatch_once(&onceToken, ^{  
+        _instance = [[super allocWithZone:NULL] init] ;  
+    }) ;  
+      
+    return _instance ;  
+}  
+  
++(id) allocWithZone:(struct _NSZone *)zone  
+{  
+    return [Singleton shareInstance] ;  
+}  
+  
+-(id) copyWithZone:(struct _NSZone *)zone  
+{  
+    return [Singleton shareInstance] ;  
+}  
+  
+@end 
+```
+
+---
+
+## ARC
+### 懒汉模式
+```
+#import "Singleton.h"
+
+@implementation Singleton
+static id _instance;
+
+/**
+ *  alloc方法内部会调用这个方法
+ */
++ (instancetype)allocWithZone:(struct _NSZone *)zone{
+    if (_instance == nil) { // 防止频繁加锁
+        @synchronized(self) {
+            if (_instance == nil) { // 防止创建多次
+                _instance = [super allocWithZone:zone];
+            }
+        }
+    }
+    return _instance;
+}
+
++ (instancetype)sharedSingleton{
+    if (_instance == nil) { // 防止频繁加锁
+        @synchronized(self) {
+            if (_instance == nil) { // 防止创建多次
+                _instance = [[self alloc] init];
+            }
+        }
+    }
+    return _instance;
+}
+
+- (id)copyWithZone:(NSZone *)zone{
+    return _instance;
+}
+@end
+```
+
+### 饿汉模式（不常用）
+```
+#import "HMSingleton.h"
+
+@implementation Singleton
+static id _instance;
+
+/**
+ *  当类加载到OC运行时环境中（内存），就会调用一次（一个类只会加载1次）
+ */
++ (void)load{
+    _instance = [[self alloc] init];
+}
+
++ (instancetype)allocWithZone:(struct _NSZone *)zone{
+    if (_instance == nil) { // 防止创建多次
+        _instance = [super allocWithZone:zone];
+    }
+    return _instance;
+}
+
++ (instancetype)sharedSingleton{
+    return _instance;
+}
+
+- (id)copyWithZone:(NSZone *)zone{
+    return _instance;
+}
+@end
+
+```
+
+### GCD实现单例模式
+```
+@implementation Singleton
+static id _instance;
+
++ (instancetype)allocWithZone:(struct _NSZone *)zone{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [super allocWithZone:zone];
+    });
+    return _instance;
+}
+
++ (instancetype)sharedSingleton{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[self alloc] init];
+    });
+    return _instance;
+}
+
+- (id)copyWithZone:(NSZone *)zone{
+    return _instance;
+}
+@end
+```
+
+### 非ARC
+在非ARC的环境下，需要再加上下面的方法：
+
+* 重写release方法为空
+* 重写retain方法返回自己
+* 重写retainCount返回1
+* 重写autorelease返回自己
+
+```
+- (oneway void)release { }
+- (id)retain { return self; }
+- (NSUInteger)retainCount { return 1;}
+- (id)autorelease { return self;}
+```
+* 如何判断是否是ARC
+
+```
+#if __has_feature(objc_arc)
+//ARC环境
+#else
+//MRC环境
+#endif
+```
+
+
+## 使用单例的注意事项
+### 全局状态
+### 对象的生命周期
+### 避免使用单例
+
+
+## 其他
+
+## 参考
+* [https://segmentfault.com/a/1190000003941840](https://segmentfault.com/a/1190000003941840)
+* [http://shaynechow.github.io/iOS-Singleton/](http://shaynechow.github.io/iOS-Singleton/)
+* [http://blog.csdn.net/bboyfeiyu/article/details/41980085](http://blog.csdn.net/bboyfeiyu/article/details/41980085)
+* [避免滥用单例](http://objccn.io/issue-13-2/) 研究中~
