@@ -261,6 +261,10 @@ static id _instance;
 
 
 ## 使用单例的注意事项
+* alloc init 
+* copy
+* 子类  继承
+* 线程安全
 
 ### 全局状态
 
