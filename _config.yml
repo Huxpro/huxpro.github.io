@@ -1,9 +1,9 @@
 # Site settings
-title: Vozhuo
+title: Vozhuo's Blog
 SEOTitle: Vozhuo
 header-img: img/home-bg.jpg
 email: qsx753698@outlook.com
-description: ""
+description: "Welcome to my blog!"
 keyword: ""
 url: "http://vozhuo.cf"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
@@ -49,7 +49,7 @@ kramdown:
 #disqus_username: _your_disqus_short_name_
 
 # Duoshuo settings
-#duoshuo_username: huxblog
+#duoshuo_username: 寒灯烟雨
 # Share component is depend on Comment so we can NOT use share only.
 duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
@@ -68,7 +68,7 @@ ga_domain: vozhuo.cf
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: ""
-sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar:      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
