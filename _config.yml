@@ -1,10 +1,10 @@
 # Site settings
 title: Vozhuo
-SEOTitle: Vozhuo's Blog
-header-img: img/home-bg.jpg
+SEOTitle: Vozhuo
+#header-img: img/home-bg.jpg
 email: qsx753698@outlook.com
-description: "Welcome"
-keyword: ""
+description: "Welcome to my blog!"
+keyword: "vozhuo"
 url: "http://vozhuo.cf"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
