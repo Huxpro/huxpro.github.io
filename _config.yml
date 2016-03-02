@@ -60,7 +60,7 @@ duoshuo_share: true                     # set to false if you want to use Commen
 # Baidu Analytics
 ba_track_id: fb933ba1764276e8851885d49d9b3b96
 # Google Analytics
-ga_track_id: #'UA-49627206-1'            # Format: UA-xxxxxx-xx
+ga_track_id: 'UA-74583706-1'            # Format: UA-xxxxxx-xx
 ga_domain: vozhuo.cf
 
 
