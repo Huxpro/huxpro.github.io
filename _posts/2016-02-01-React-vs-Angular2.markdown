@@ -6,6 +6,7 @@ date:       2016-02-01 12:00:00
 author:     "Hux"
 header-img: "img/post-bg-re-vs-ng2.jpg"
 header-mask: 0.3
+onePageNav: true
 tags:
     - 前端开发
     - JavaScript

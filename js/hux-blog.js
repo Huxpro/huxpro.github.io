@@ -18,21 +18,21 @@
  * so I modify the _layout/post and CSS to make post-img responsive!
  */
 // $(function() {
-// 	$("img").addClass("img-responsive");
+//  $("img").addClass("img-responsive");
 // });
 
 // responsive tables
 $(document).ready(function() {
-	$("table").wrap("<div class='table-responsive'></div>");
-	$("table").addClass("table");
+    $("table").wrap("<div class='table-responsive'></div>");
+    $("table").addClass("table");
 });
 
 // responsive embed videos
-$(document).ready(function () { 
+$(document).ready(function() {
     $('iframe[src*="youtube.com"]').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
-	$('iframe[src*="youtube.com"]').addClass('embed-responsive-item');
+    $('iframe[src*="youtube.com"]').addClass('embed-responsive-item');
     $('iframe[src*="vimeo.com"]').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
-	$('iframe[src*="vimeo.com"]').addClass('embed-responsive-item');
+    $('iframe[src*="vimeo.com"]').addClass('embed-responsive-item');
 });
 
 // Navigation Scripts to Show Header on Scroll-Up
@@ -41,13 +41,16 @@ jQuery(document).ready(function($) {
 
     //primary navigation slide-in effect
     if ($(window).width() > MQL) {
-        var headerHeight = $('.navbar-custom').height();
+        var headerHeight = $('.navbar-custom').height(),
+            maskHeihgt = $('.header-mask').height();                 //get the height of headermask
         $(window).on('scroll', {
                 previousTop: 0
             },
-            function() {
-                var currentTop = $(window).scrollTop();
-                //check if user is scrolling up
+            function(event) {
+                var currentTop = $(window).scrollTop(),
+                    c = $('.directory');
+
+                //check if user is scrolling up by mouse or keyborad
                 if (currentTop < this.previousTop) {
                     //if scrolling up...
                     if (currentTop > 0 && $('.navbar-custom').hasClass('is-fixed')) {
@@ -61,6 +64,14 @@ jQuery(document).ready(function($) {
                     if (currentTop > headerHeight && !$('.navbar-custom').hasClass('is-fixed')) $('.navbar-custom').addClass('is-fixed');
                 }
                 this.previousTop = currentTop;
+
+                //adjust the appearance of directory
+                if (currentTop > maskHeihgt && !c.hasClass("closed")) {
+                    c.show();
+                } else {
+                    c.hide();
+                    c.find('li.active').removeClass('active');
+                }
             });
     }
 });

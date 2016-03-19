@@ -1,8 +1,3 @@
-/*!
- * Hux Blog v1.0.0 (http://huxpro.github.io)
- * Copyright 2016 Hux <huxpro@gmail.com>
- */
-
 @media (min-width: 1200px) {
   .post-container,
   .sidebar-container {
@@ -52,6 +47,113 @@
 }
 .sidebar-container .short-about .list-inline > li {
   padding-left: 0px;
+}
+.directory {
+  z-index: 20;
+  display: block;
+  overflow: hidden;
+  position: fixed;
+  right: 50%;
+  top: 15%;
+  margin-top: 20px;
+  margin-right: 400px;
+}
+.directory .direc_side {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 0;
+  min-height: 40px;
+  height: 100%;
+  background-color: #eeeeee;
+  border: 1px solid #eeeeee;
+}
+.directory .direc_side .direc_side_top,
+.directory .direc_side .direc_side_bottom {
+  width: 8px;
+  height: 8px;
+  left: -4px;
+  background-color: #fff;
+  border: 2px solid #ff0952;
+  border-radius: 4px;
+  position: absolute;
+  zoom: 1;
+  overflow: hidden;
+}
+.directory .direc_side .direc_side_top {
+  top: 0;
+}
+.directory .direc_side .direc_side_bottom {
+  bottom: 0;
+}
+.directory .direc_side .direc_close {
+  background-image: url(../img/close.png);
+  background-repeat: no-repeat;
+  position: relative;
+  top: 0;
+  right: -81px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  display: inline-block;
+  background-size: contain;
+}
+.directory .direc_content {
+  position: relative;
+  list-style: none;
+  height: auto;
+  max-height: 600px;
+  overflow: hidden;
+  overflow-y: auto;
+  margin: 30px 0;
+  padding-left: 18px;
+  padding-right: 5px;
+  text-indent: 0;
+}
+.directory .direc_content li {
+  position: relative;
+  list-style: none;
+}
+.directory .direc_content li a {
+  padding: 5px;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 160px;
+  height: 32px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #333;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.directory .direc_content .h2_nav,
+.directory .direc_content .h3_nav {
+  margin-left: 0;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 24px;
+}
+.directory .direc_content .h4_nav,
+.directory .direc_content .h5_nav {
+  margin-left: 10px;
+  font-size: 12px;
+  line-height: 20px;
+}
+.directory .direc_content .h4_nav a,
+.directory .direc_content .h5_nav a {
+  max-width: 150px;
+}
+.directory .direc_content .active a {
+  padding: 3px;
+  border: 2px solid #ff0952;
+  border-radius: 5px;
+  background-color: #ff0952;
+  color: #fff;
+}
+@media (max-width: 1200px) {
+  .directory {
+    display: none;
+  }
 }
 body {
   /* Hux learn from
