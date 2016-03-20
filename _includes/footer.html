@@ -178,38 +178,32 @@
 <!-- create the directory and set the animatescroll. failed to adjust the scroll event in hux-blog.js so the scroll animation looks odd. -->
 <script type="text/javascript">
     function createCatalog (selector) {
-
         var P = $('div.post-container'),a,n,t,l,i,c;
         a = P.find('h1,h2,h3,h4,h5,h6');
         a.each(function () {
             n = $(this).prop('tagName').toLowerCase();
             i = "#"+$(this).prop('id');
             t = $(this).text();
-            c = $('<a href="'+i+'" class="d_anchor" rel="nofollow">'+t+'</a>');
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
             l = $('<li class="'+n+'_nav"></li>').append(c);
             $(selector).append(l);
         });
         return true;    
     }
 
-    //load the animatescroll.js
-    async("{{ "/js/animatescroll.min.js " | prepend: site.baseurl }}", createCatalog.bind(null, ".direc_content"));
+    createCatalog(".catalog-body");
 
-    //set the scroll
-    // $('.direc_content li a').click(function() {
-    //     var e = $(this).attr('href'),
-    //         w = $('nav.navbar').height();
-    //     return  $(e).animatescroll({padding: w}), !1;
-    // });
-    // $('.direc_close').click(function() {
-    //     $('.directory').addClass("closed").fadeOut(200);
-    // });
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
 </script>
 
 <!-- one-page-nav.js -->
 <script>
     async("{{ '/js/jquery.nav.js' | prepend: site.baseurl }}", function () {
-        $('.direc_content').onePageNav({
+        $('.catalog-body').onePageNav({
             currentClass: "active",
             changeHash: !1,
             easing: "easeOutExpo",

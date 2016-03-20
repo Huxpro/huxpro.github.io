@@ -9,11 +9,25 @@
         position: fixed;
         top: 20px;
     }
+    &.fold{
+        .catalog-toggle::before{
+            content: "+";
+        }
+        .catalog-body{
+            display: none;
+        }
+    }
+    .catalog-toggle::before{
+        content: "−";
+        position: relative;
+        margin-right: 5px;
+        bottom: 1px;
+    }
     display: block;
     overflow: auto;
     height: 100%;
     padding-bottom: 40px;
-    .direc_content{
+    .catalog-body{
         position: relative;
         list-style: none;
         height: auto;
@@ -55,7 +69,7 @@
                 color: #0085a1!important;
             }
             border-radius: 4px;
-            background-color: #EFEEEE;
+            background-color: #F5F5F5;
         }
     }
 }
