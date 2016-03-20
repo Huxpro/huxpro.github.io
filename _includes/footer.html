@@ -172,12 +172,10 @@
 {% endif %}
 
 
-<!-- one-page-nav-js, Doc:https://github.com/davist11/jQuery-One-Page-Nav -->
+<!-- Side Catalog -->
 {% if page.catalog %}
-
-<!-- create the directory and set the animatescroll. failed to adjust the scroll event in hux-blog.js so the scroll animation looks odd. -->
 <script type="text/javascript">
-    function createCatalog (selector) {
+    function generateCatalog (selector) {
         var P = $('div.post-container'),a,n,t,l,i,c;
         a = P.find('h1,h2,h3,h4,h5,h6');
         a.each(function () {
@@ -191,17 +189,18 @@
         return true;    
     }
 
-    createCatalog(".catalog-body");
+    generateCatalog(".catalog-body");
 
     // toggle side catalog
     $(".catalog-toggle").click((function(e){
         e.preventDefault();
         $('.side-catalog').toggleClass("fold")
     }))
-</script>
 
-<!-- one-page-nav.js -->
-<script>
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
     async("{{ '/js/jquery.nav.js' | prepend: site.baseurl }}", function () {
         $('.catalog-body').onePageNav({
             currentClass: "active",
