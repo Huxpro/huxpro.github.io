@@ -173,12 +173,12 @@
 
 
 <!-- one-page-nav-js, Doc:https://github.com/davist11/jQuery-One-Page-Nav -->
-{% if page.onePageNav %}
+{% if page.catalog %}
 
 <!-- create the directory and set the animatescroll. failed to adjust the scroll event in hux-blog.js so the scroll animation looks odd. -->
 <script type="text/javascript">
-    function createDirectory (e) {
-        
+    function createCatalog (selector) {
+
         var P = $('div.post-container'),a,n,t,l,i,c;
         a = P.find('h1,h2,h3,h4,h5,h6');
         a.each(function () {
@@ -187,39 +187,40 @@
             t = $(this).text();
             c = $('<a href="'+i+'" class="d_anchor" rel="nofollow">'+t+'</a>');
             l = $('<li class="'+n+'_nav"></li>').append(c);
-            $('.'+e).append(l);
+            $(selector).append(l);
         });
         return true;    
     }
 
     //load the animatescroll.js
-    async("{{ "/js/animatescroll.min.js " | prepend: site.baseurl }}", createDirectory("direc_content"));
+    async("{{ "/js/animatescroll.min.js " | prepend: site.baseurl }}", createCatalog.bind(null, ".direc_content"));
 
     //set the scroll
-    $('.direc_content li a').click(function() {
-        var e = $(this).attr('href'),
-            w = $('nav.navbar').height();
-        return  $(e).animatescroll({padding: w}), !1;
-    });
-    $('.direc_close').click(function() {
-        $('.directory').addClass("closed").fadeOut(200);
-    });
+    // $('.direc_content li a').click(function() {
+    //     var e = $(this).attr('href'),
+    //         w = $('nav.navbar').height();
+    //     return  $(e).animatescroll({padding: w}), !1;
+    // });
+    // $('.direc_close').click(function() {
+    //     $('.directory').addClass("closed").fadeOut(200);
+    // });
 </script>
 
 <!-- one-page-nav.js -->
 <script>
-    async('http://cdn.bootcss.com/jquery-one-page-nav/3.0.0/jquery.nav.min.js', function () {
+    async("{{ '/js/jquery.nav.js' | prepend: site.baseurl }}", function () {
         $('.direc_content').onePageNav({
             currentClass: "active",
             changeHash: !1,
-            easing: "easeInOutExpo",
+            easing: "easeOutExpo",
             filter: "",
             scrollSpeed: 800,
             scrollOffset: 0,
-            scrollThreshold: .1,
-            begin: !1,
-            end: !1,
-            scrollChange: !1
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
         });
     });
 </script>

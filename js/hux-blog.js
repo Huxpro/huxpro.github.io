@@ -4,6 +4,12 @@
  * Licensed under Apache 2.0 (https://github.com/IronSummitMedia/startbootstrap/blob/gh-pages/LICENSE)
  */
 
+ /*!
+ * Hux Blog v1.6.0 (http://startbootstrap.com)
+ * Copyright 2016 @huxpro
+ * Licensed under Apache 2.0 
+ */
+
 // Tooltip Init
 // Unuse by Hux since V1.6: Titles now display by default so there is no need for tooltip
 // $(function() {
@@ -42,13 +48,13 @@ jQuery(document).ready(function($) {
     //primary navigation slide-in effect
     if ($(window).width() > MQL) {
         var headerHeight = $('.navbar-custom').height(),
-            maskHeihgt = $('.header-mask').height();                 //get the height of headermask
+            bannerHeight  = $('.intro-header .container').height();     
         $(window).on('scroll', {
                 previousTop: 0
             },
-            function(event) {
+            function() {
                 var currentTop = $(window).scrollTop(),
-                    c = $('.directory');
+                    $catalog = $('.side-catalog');
 
                 //check if user is scrolling up by mouse or keyborad
                 if (currentTop < this.previousTop) {
@@ -65,12 +71,13 @@ jQuery(document).ready(function($) {
                 }
                 this.previousTop = currentTop;
 
-                //adjust the appearance of directory
-                if (currentTop > maskHeihgt && !c.hasClass("closed")) {
-                    c.show();
+
+                //adjust the appearance of side-catalog
+                $catalog.show()
+                if (currentTop > bannerHeight) {
+                    $catalog.addClass('fixed')
                 } else {
-                    c.hide();
-                    c.find('li.active').removeClass('active');
+                    $catalog.removeClass('fixed')
                 }
             });
     }

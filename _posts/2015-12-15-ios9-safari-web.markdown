@@ -5,6 +5,7 @@ subtitle:   "iOS 9, Safari and the Web: 3D Touch, new Responsive Web Design, Nat
 date:       2015-12-15
 author:     "Hux"
 header-img: "img/post-bg-ios9-web.jpg"
+catalog:    true
 tags:
     - 前端开发
     - JavaScript
