@@ -1,3 +1,8 @@
+/*!
+ * Hux Blog v1.6.0 (http://huxpro.github.io)
+ * Copyright 2016 Hux <huxpro@gmail.com>
+ */
+
 @media (min-width: 1200px) {
   .post-container,
   .sidebar-container {
@@ -47,6 +52,87 @@
 }
 .sidebar-container .short-about .list-inline > li {
   padding-left: 0px;
+}
+.catalog-container {
+  padding: 0px;
+}
+.side-catalog {
+  display: block;
+  overflow: auto;
+  height: 100%;
+  padding-bottom: 40px;
+}
+.side-catalog.fixed {
+  position: fixed;
+  top: 20px;
+}
+.side-catalog.fold .catalog-toggle::before {
+  content: "+";
+}
+.side-catalog.fold .catalog-body {
+  display: none;
+}
+.side-catalog .catalog-toggle::before {
+  content: "−";
+  position: relative;
+  margin-right: 5px;
+  bottom: 1px;
+}
+.side-catalog .catalog-body {
+  position: relative;
+  list-style: none;
+  height: auto;
+  max-height: 600px;
+  overflow: hidden;
+  padding-left: 0px;
+  padding-right: 5px;
+  text-indent: 0;
+}
+.side-catalog .catalog-body li {
+  position: relative;
+  list-style: none;
+}
+.side-catalog .catalog-body li a {
+  padding-left: 10px;
+  max-width: 190px;
+  display: inline-block;
+  vertical-align: middle;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.side-catalog .catalog-body .h1_nav,
+.side-catalog .catalog-body .h2_nav,
+.side-catalog .catalog-body .h3_nav {
+  margin-left: 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+.side-catalog .catalog-body .h4_nav,
+.side-catalog .catalog-body .h5_nav,
+.side-catalog .catalog-body .h6_nav {
+  margin-left: 10px;
+  font-size: 12px;
+}
+.side-catalog .catalog-body .h4_nav a,
+.side-catalog .catalog-body .h5_nav a,
+.side-catalog .catalog-body .h6_nav a {
+  max-width: 180px;
+}
+.side-catalog .catalog-body .active {
+  border-radius: 4px;
+  background-color: #F5F5F5;
+}
+.side-catalog .catalog-body .active a {
+  color: #0085a1!important;
+}
+@media (max-width: 1200px) {
+  .side-catalog {
+    display: none;
+  }
 }
 body {
   /* Hux learn from
