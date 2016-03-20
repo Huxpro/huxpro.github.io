@@ -135,7 +135,79 @@
     })
 </script>
 
+{% if site.autoTOC %}
+<script>
 
+    /*  generate TOC */
+    if ($('#toc').length > 0) {
+
+        var makeTitle = function (root) {
+            var element = root._index == -1 ? $('<div></div>') : $('<li></li>');
+            if (root._index != -1) {
+                var href = $('<a></a>').attr('href', root.ref).text(root.text);
+                element.append(href);
+            }
+            var children = root.children;
+            if (children.length > 0) {
+                var list = $('<ul></ul>');
+                for (var i = 0; i < children.length; i++) {
+                    var childEle = children[i];
+                    list.append(makeTitle(childEle));
+                }
+                element.append(list);
+            }
+            return element;
+        };
+
+        var wrap = function (data) {
+            console.info(data);
+            var map = {
+                '-1': {
+                    '_index': -1,
+                    'children': []
+                }
+            };
+            for (var i = 0; i < data.length; i++) {
+                var title = data[i];
+                var ref = $(title).attr('id');
+                var text = $(title).text();
+                var obj = {
+                    'ref': '#' + ref,
+                    'text': text,
+                    '_index': title._index,
+                    'children': []
+                };
+                map[obj._index] = obj;
+                if( map[obj._index - 1]) {
+                    map[obj._index - 1].children.push(obj);
+                }
+            }
+            return makeTitle(map[-1]);
+        };
+
+        $(function () {
+            var title_table = ['h2', 'h3', 'h4', 'h5', 'h6'];
+            var postContainer = $('.post-container');
+            if (postContainer.length > 0) {
+                var children = [];
+                postContainer.children().each(function () {
+                    var that = $(this);
+                    for (var i = 0; i < title_table.length; i++) {
+                        var index = title_table[i];
+                        if (that.is(index)) {
+                            that._index = i;
+                            children.push(that);
+                        }
+                    }
+                });
+                var wrapper = wrap(children);
+                $('#toc').after(wrapper);
+            }
+        });
+    }
+
+</script>
+{% endif %}
 <!-- Google Analytics -->
 {% if site.ga_track_id %}
 <script>
