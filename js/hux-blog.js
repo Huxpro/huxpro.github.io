@@ -74,7 +74,7 @@ jQuery(document).ready(function($) {
 
                 //adjust the appearance of side-catalog
                 $catalog.show()
-                if (currentTop > bannerHeight) {
+                if (currentTop > (bannerHeight + 41)) {
                     $catalog.addClass('fixed')
                 } else {
                     $catalog.removeClass('fixed')
