@@ -1,113 +1,26 @@
 ---
-layout:     keynote
-title:      "都 2015 年了，CSS 怎么还是这么糟糕"
-subtitle:   "Keynote: CSS Still Sucks 2015"
-iframe:     "http://huangxuan.me/css-sucks-2015/"
-date:       2015-12-28
-author:     "Hux"
+layout:     post
+title:      "还是工程师玩的酷啊！"
+subtitle:   "新博客的感谢"
+date:       2016-04-26 16:54:00
+author:     "Teng"
+header-img: "img/post-bg-re-vs-ng2.jpg"
+header-mask: 0.3
+catalog:    true
 tags:
-    - 前端开发
-    - CSS
+    - thinking
+    - reading
+    - 瞎扯
 ---
 
-
-> 下滑这里查看更多内容
-
-
-### [Watch Slides →](http://huangxuan.me/css-sucks-2015)
-
-<img src="http://huangxuan.me/css-sucks-2015/attach/qrcode.png" width="350" height="350"/>
-
-<small class="img-hint">你也可以通过扫描二维码在手机上观看</small>
+我很少有后悔的时候，目前最后悔的一件事**为什么当初不学计算机呢？**
+工程师才是最酷的生物啊。
 
 
-这个 Web Slides 开源在[我的 Github 上](https://github.com/Huxpro/css-sucks-2015)，欢迎你帮助我完善这个展示文稿，你可以给我提 issue，可以 fork & pull request。如果它能帮助到你了，希望你还能不吝啬 star 一下这个项目
+2016年四月份，因为一些原因我非常想把自己在LOFTER上的博客搬走，换个地方接着写。
+我考虑了WordPress建站的方式，也在老薛主机上买了空间，却因为嫌麻烦放弃，中途要求了退款，直接导致了我损失五块钱。
+后来还是不死心，就在网上找各种自主建站的教程，慢慢了解到github+jekyll、github+hexo、github+的各种搭建模式。可是我，在代码的世界里，
+我真是什么也不懂。看了好多教程，但凡出现一点问题，我就进行不下去了。虽然我知道这肯定是很简单的一件事情，只是一个小小的地方阻碍了我的搭建，
+但我就是不知道什么问题。
 
-
-### Catalog
-
-- Document Times
-    - Frameworks
-    - Style Guide
-        - **OOCSS**
-        - **SMACSS**
-    - **Pre-processer**
-    - **PostCSS**
-- Application Times
-    - **Shadow DOM**
-    - **CSS "4"**
-    - Naming Convention
-        - **BEM**
-        - **SUIT**
-    - **CSS in JS**
-    - **CSS Modules**  
-        - Interoperable CSS
-    - PostCSS, again
-- My Opinionated Proposal
-    - **POCss**
-
-## POCss: Page Override Components CSS
-
-### 1. Scoping Components <br><small style="line-height:2em;">*CSS Blocks should only be used inside a component of the same name.*</small>
-
-```scss
-// Component/index.scss
-.ComponentName {
-    &--mofierName {}
-    &__decendentName {
-        &--modifierName {}
-    }
-    .isStateOfComponent {}
-}
-```
-
-```javascript
-// Component/index.js
-require('./index.scss');
-```
-
-CSS is *always bundled* with components<br>(from loading, mount to unmount)
-
-### 2. Components can be Overrode by Pages <br><small style="line-height:2em;">*There is always requirements to rewrite styles of components in pages*</small>
-
-```scss
-// Pages/PageA.scss
-#PageA {
-    .pagelet-name {
-        .pagelet-descendent-name {}
-    }
-    .ComponentName{ /* override */ }
-}
-```
-
-```javascript
-// Pages/index.js
-require('./PageA.scss');
-```
-
-- *#Page* for absolutely scoping between pages
-- *.pagelet-name* should be lowercase to prevent conflicting with components
-
-### Why POC?
-
-- **It's technology-agnostic**
-<small>
-    *One css framework can be played with whatever technology stacks*<br>
-    *You can combined Scss, PostCSS and whatever you want*
-</small>
-
-- **Solving problems, and easy**
-<small>
-    *Makes reading and teamwork much easier*<br>
-    *Get all benefit from BEM, SUITCSS and others*
-</small>
-
-- **Leverage the power of cascading properly**
-<small>
-    *Scoping components but allow reasonable overriding*<br>
-    *It's pragmatic, flexible and hitting the sweet spot*
-</small>
-
-### Thanks
-
-[Reveal.js](http://lab.hakim.se/reveal-js)
+感觉自己失败。
