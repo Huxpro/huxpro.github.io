@@ -82,13 +82,13 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
+        title: "黄玄的博客",
+        href: "http://huangxuan.me/"
     },{
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
+        title: "Geno1024的博客",
+        href: "http://geno1024.com/"
     },{
-        title: "Luke的自留地",
-        href: "http://hmqk1995.github.io"
+        title: "马腾的LOFTER",
+        href: "http://matengteng.lofter.com"
     }
 ]
