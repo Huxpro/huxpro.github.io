@@ -1,17 +1,18 @@
 ---
 layout:     post
-title:      "还是工程师玩的酷啊！"
-subtitle:   "新博客的感谢"
-date:       2016-04-26 16:54:00
-author:     "Teng"
-header-img: "img/post-bg-re-vs-ng2.jpg"
-header-mask: 0.3
+title:      "iOS 9，为前端世界都带来了些什么？「译」"
+subtitle:   "iOS 9, Safari and the Web: 3D Touch, new Responsive Web Design, Native integration and HTML5 APIs"
+date:       2015-12-15
+author:     "Hux"
+header-img: "img/post-bg-ios9-web.jpg"
 catalog:    true
 tags:
-    - thinking
-    - reading
-    - 瞎扯
+    - 前端开发
+    - JavaScript
+    - iOS
+    - 译文
 ---
+
 
 我很少有后悔的时候，目前最后悔的一件事**为什么当初不学计算机呢？**
 工程师才是最酷的生物啊。
