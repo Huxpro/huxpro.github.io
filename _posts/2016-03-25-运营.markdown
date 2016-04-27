@@ -1,5 +1,4 @@
-* * *
-
+---
 layout:     post
 title:      "《从零开始做运营》读后"
 subtitle:   "互联网运营是件技术活"
@@ -7,13 +6,12 @@ iframe:     "[http://huangxuan.me/js-module-7day/](http://huangxuan.me/js-module
 date:       2016-03-25
 author:     "Teng"
 header-img: "img/post-bg-js-version.jpg"
+catalog:    true
 tags:
- - thingking
- - 互联网
- - 笔记
- - reading
-
-* * *
+    - Thinking
+    - 瞎扯
+    - 博客
+---
 
 3月份看完了一本新书《从零开始做运营》。
 
