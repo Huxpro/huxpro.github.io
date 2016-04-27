@@ -1,20 +1,17 @@
-* * *
+---
 
 layout:     post
 title:      "清莱咖啡馆 "
-subtitle:   "聊聊在线旅行行业与老东家的产品思路"
+subtitle:   "让人怀念的清莱和其他"
 date:       2016-03-21
 author:     "Teng"
 header-img: "img/post-bg-alitrip.jpg"
 catalog: true
 tags:
-
-    -<span class="ruby">thinking
-    </span>-<span class="ruby"> 瞎扯
-    </span>-<span class="ruby"> 感慨
-    </span>-<span class="ruby"> 泰国杂忆</span>
-
-* * *
+    - Thinking
+    - 瞎扯
+    - 泰国杂忆
+---
 
 > 本篇为**泰国杂忆**的系列文章之一
 
