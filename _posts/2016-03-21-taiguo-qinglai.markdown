@@ -1,7 +1,7 @@
 * * *
 
 layout:     post
-title:      "聊聊「阿里旅行 · 去啊」—— 行业与战略 "
+title:      "清莱咖啡馆 "
 subtitle:   "聊聊在线旅行行业与老东家的产品思路"
 date:       2016-03-21
 author:     "Teng"
@@ -9,7 +9,7 @@ header-img: "img/post-bg-alitrip.jpg"
 catalog: true
 tags:
 
-    -<span class="ruby"> thinking
+    -<span class="ruby">thinking
     </span>-<span class="ruby"> 瞎扯
     </span>-<span class="ruby"> 感慨
     </span>-<span class="ruby"> 泰国杂忆</span>
