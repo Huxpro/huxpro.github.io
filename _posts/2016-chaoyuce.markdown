@@ -2,7 +2,7 @@
 layout:     post
 title:      "超预测读书笔记"
 subtitle:   "超预测是本好书"
-date:       2016-04-18
+date:       2016-04-10
 author:     "Teng"
 header-img: "img/post-bg-ios9-web.jpg"
 catalog:    true
