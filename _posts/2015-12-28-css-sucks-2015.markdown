@@ -1,17 +1,17 @@
 ---
 layout:     post
-title:      "总结是进阶之路"
-subtitle:   "多读书，多看报，多总结"
-date:       2016-04-28 16:54:00
+title:      "总结是进阶之路！"
+subtitle:   "多读书多总结"
+date:       2016-04-18
 author:     "Teng"
-header-img: "img/post-bg-re-vs-ng2.jpg"
-header-mask: 0.3
+header-img: "img/post-bg-ios9-web.jpg"
 catalog:    true
 tags:
-    - thinking
-    - reading
+    - Thinking
     - 正经
+    - 读书
 ---
+
 
 > **本文遵循 CC BY 4.0协议，你可以自由的复制、分享，甚至用于商业目的，只要保留署名。**
 
