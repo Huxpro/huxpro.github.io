@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "总结是进步之路「译」"
+title:      "总结是进步之路"
 subtitle:   "多读书多总结"
 date:       2016-04-18
 author:     "Teng"
