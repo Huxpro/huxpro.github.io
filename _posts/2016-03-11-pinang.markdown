@@ -7,7 +7,6 @@ date:       2016-03-11
 author:     "Teng"
 header-img: "img/post-bg-js-module.jpg"
 catalog: true
----
 tags:
     - Thinking
     - reading
