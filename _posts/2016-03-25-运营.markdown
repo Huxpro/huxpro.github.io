@@ -8,11 +8,10 @@ date:       2016-03-25
 author:     "Teng"
 header-img: "img/post-bg-js-version.jpg"
 tags:
-
-    -<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-tag"</span>><<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-title"</span>>span</span> <<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-attribute"</span>>class</span>=<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-value"</span>><span class="hljs-string">"ruby"</span></span>></span> 互联网
-    <<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-tag"</span>></<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-title"</span>>span</span>></span>-<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-tag"</span>><<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-title"</span>>span</span> <<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-attribute"</span>>class</span>=<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-value"</span>><span class="hljs-string">"ruby"</span></span>></span> reading
-    <<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-tag"</span>></<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-title"</span>>span</span>></span>-<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-tag"</span>><<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-title"</span>>span</span> <<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-attribute"</span>>class</span>=<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-value"</span>><span class="hljs-string">"ruby"</span></span>></span> thinking
-    <<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-tag"</span>></<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-title"</span>>span</span>></span>-<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-tag"</span>><<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-title"</span>>span</span> <<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-attribute"</span>>class</span>=<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-value"</span>><span class="hljs-string">"ruby"</span></span>></span> 笔记<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-tag"</span>></<<span class="hljs-tag">span</span> class=<span class="hljs-string">"hljs-title"</span>>span</span>></span>
+ - thingking
+ - 互联网
+ - 笔记
+ - reading
 
 * * *
 
