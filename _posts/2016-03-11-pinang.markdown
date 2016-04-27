@@ -1,4 +1,4 @@
-* * *
+---
 
 layout:     post
 title:      "《皮囊》读后"
@@ -7,13 +7,15 @@ date:       2016-03-11
 author:     "Teng"
 header-img: "img/post-bg-js-module.jpg"
 catalog: true
+---
 tags:
+    - Thinking
+    - reading
+    - 博客
+    - 笔记
+---
 
-    -<span class="ruby"> <span class="hljs-constant">Thinking</span>
-    </span>-<span class="ruby"> reading
-    </span>-<span class="ruby"> 笔记</span>
 
-* * *
 
 皮囊上市的时候，我还在关注着韩寒的微博，压见过韩为皮囊站台。
 
