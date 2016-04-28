@@ -7,13 +7,11 @@ date:       2016-02-25
 author:     "Teng"
 header-img: "img/post-bg-js-module.jpg"
 tags:
-    - 人生
-    - 感慨
+    - 生活
+    - 瞎扯
+    - 广告
+    
 ---
-
-
-
-
 
 一
 
