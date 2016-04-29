@@ -1,0 +1,53 @@
+{% comment %}
+    @param {string} type - check if it's a 'page' or 'post'
+{% endcomment %}
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')
+    }
+
+    {% if page.header-mask %}
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, {{ page.header-mask }});
+    }
+    {% endif %}
+</style>
+<header class="intro-header" >
+    {% if page.header-mask %}
+    <div class="header-mask"></div>
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            {% if include.type == "page" %}
+                <div class="site-heading">
+                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">{{ page.description }}</span>
+                </div>
+            {% elsif include.type == "post" %}
+                <div class="post-heading">
+                    <div class="tags">
+                        {% for tag in page.tags %}
+                        <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    <h1>{{ page.title }}</h1>
+                    {% comment %}
+                        always create a h2 for keeping the margin , Hux
+                    {% endcomment %}
+                    {% comment %} if page.subtitle {% endcomment %}
+                    <h2 class="subheading">{{ page.subtitle }}</h2>
+                    {% comment %} endif {% endcomment %}
+                    <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,18 @@
+{% comment %}
+    @param {boolean} hr - with/without hr tag
+{% endcomment %}
+<section>
+    {% if include.hr %}
+    <hr class="hidden-sm hidden-xs">
+    {% endif %}
+    <h5><a href="{{'/tags/' | prepend: site.baseurl }}">FEATURED TAGS</a></h5>
+    <div class="tags">
+        {% for tag in site.tags %}
+            {% if tag[1].size > {{site.featured-condition-size}} %}
+            <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                {{ tag[0] }}
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
