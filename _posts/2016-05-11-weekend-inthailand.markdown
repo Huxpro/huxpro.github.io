@@ -1,7 +1,8 @@
 ---
 layout:     post
-title:      "在曼谷度过无聊周末？"
-date:       2016-05-11 09:00:00
+title:      "在曼谷度过无聊周末"
+subtitle:   "阅读还要看质量"
+date:       2016-05-11 12:00:00
 author:     "Teng"
 header-img: "img/post-bg-rwd.jpg"
 tags:
