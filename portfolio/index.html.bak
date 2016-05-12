@@ -12,12 +12,10 @@
     <link  rel="stylesheet"  type="text/css"  href="css/timeline.css">
     <script  src="js/modernizr.custom.js"></script>
     <div  class="container"  style="margin:0;padding:0;width:100%;">
-      <header> <img  alt="01"  src="images/hux_avatar.png"  height="190"  width="190">
-        <h1>MaTeng</h1>
-        <p><span  style="font-family: Adobe ÑS Std R;"><span>一个新闻专业的学生，</span></span></p>
-        <p><span  style="font-family: Adobe ÑS Std R;"><span>永远是个学生，希望不断进化自己的人，</span></span></p>
-        <p><span  style="font-family: Adobe ÑS Std R;"><span>要是能坚持的话。</span></span><br>
-        </p>
+      <header> <img  src="images/hux_avatar.png"  height="190"  width="190">
+        <h1>Hux</h1>
+        <p>A student major in Web &amp; Mobile,<br>
+          focus on UI Development, UX Design and Motion Graphic.</p>
       </header>
       <div  class="main">
         <ul  class="cbp_tmtimeline">
