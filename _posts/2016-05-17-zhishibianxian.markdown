@@ -1,14 +1,14 @@
 ---
 layout:     post
-title:      "在曼谷度过无聊周末"
-subtitle:   " 商场妹子多 "
-date:       2016-05-12 
+title:      "知识变现的时代到来？"
+subtitle:   " 我们要怎么变现呢？"
+date:       2016-05-17
 author:     "Teng"
-header-img: "img/post-bg-rwd.jpg"
+header-img: "img/post-bg-fenda.jpg"
 catalog: true
 tags:
     - 随想录
-    - reading
+    - 感慨
     - 笔记
 ---
 
