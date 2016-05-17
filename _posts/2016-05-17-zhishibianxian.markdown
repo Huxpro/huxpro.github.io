@@ -1,14 +1,15 @@
 ---
 layout:     post
-title:      "知识变现的时代真的来临了？"
-subtitle:   "不过要怎么让自己也能知识变现"
-date:       2016-05-17 19:00:00
+title:      "在曼谷度过无聊周末"
+subtitle:   " 商场妹子多 "
+date:       2016-05-12 
 author:     "Teng"
-header-img: "img/post-bg-fenda.jpg"
+header-img: "img/post-bg-rwd.jpg"
 catalog: true
 tags:
     - 随想录
-    - 感慨
+    - reading
+    - 笔记
 ---
 
 果壳网旗下的“在行”又有一款新的产品刷爆了朋友圈，效果就和4月1日知乎推出的“值乎”一样，大家纷纷尝试，也赚点零花钱。
