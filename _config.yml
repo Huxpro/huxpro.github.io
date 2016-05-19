@@ -17,18 +17,25 @@ zhihu_username:     huxpro
 github_username:    huxpro
 #twitter_username:  huxpro
 facebook_username:  huxpro
+# linkedin_username:  firstname-lastname-idxxxx
 
 
 
 # Build settings
-highlighter: pygments
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
+highlighter: rouge
 permalink: pretty
 paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
-#gems
+
+
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
 gems: [jekyll-paginate]
+
+
 
 # Markdown settings
 # replace redcarpet to kramdown,
@@ -76,6 +83,9 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
+        title: "前端外刊评论",
+        href: "http://qianduan.guru/"
+    },{
         title: "天镶的博客",
         href: "http://lingyu.wang/"
     },{
@@ -96,5 +106,8 @@ friends: [
     },{
         title: "尹峰以为",
         href: "http://ingf.github.io/"
+    },{
+        title: "前端神盾局",
+        href: "http://wepiaofei.github.io/blog/"
     }
 ]
