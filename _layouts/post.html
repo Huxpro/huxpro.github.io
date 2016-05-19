@@ -185,6 +185,10 @@ layout: default
     </div>
 </article>
 
+<!-- Add support for Mathjax by Voleking-->
+{% if page.mathjax %}
+  {% include mathjax_support.html %}
+{% endif %}
 
 {% if site.duoshuo_username %}
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
