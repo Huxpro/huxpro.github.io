@@ -70,7 +70,7 @@ ga_domain: huangxuan.me
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "山外青山楼外楼,天外有天人外人，莫言年少莫轻狂"
+sidebar-about-description:  "山外青山楼外青楼？"
 sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
