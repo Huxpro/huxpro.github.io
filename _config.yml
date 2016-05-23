@@ -83,7 +83,7 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 
 friends: [
-    {
+   {
         title: "黄玄的博客",
         href: "http://huangxuan.me/"
     },{
