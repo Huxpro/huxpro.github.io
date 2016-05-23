@@ -27,6 +27,17 @@
                     </li>
                     {% endif %}
                     
+                     {% if site.twitter_username %}
+                    <li>
+                        <a href="https://twitter.com/{{ site.twitter_username }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
                      <!-- add lofter,ins by teng, add target = "_blank" to <a> by Hux -->
                     {% if site.lofter_username %}
                     <li>
