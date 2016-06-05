@@ -11,7 +11,6 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 
 # SNS settings
-<<<<<<< HEAD
 RSS: ture
 #zhihu_username: lengli
 weibo_username: yanchufei
