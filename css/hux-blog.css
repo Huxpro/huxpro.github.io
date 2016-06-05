@@ -60,7 +60,7 @@
 }
 .side-catalog.fixed {
   position: fixed;
-  top: 20px;
+  top: -21px;
 }
 .side-catalog.fold .catalog-toggle::before {
   content: "+";
