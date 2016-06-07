@@ -174,20 +174,20 @@ address span{
 .education  h3{
   background: #999;
   color: #FFF;
-  padding: 5px 190px 5px 30px;
+  padding: 5px 41px 5px 30px;
   display: inline-block;
 }
 h3.clr1{
 	background:#6ecadc;
+}
+h3.clr01{
+	background:#963
 }
 h3.clr2{
 	background:#e9a820;
 }
 h3.clr3{
 	background:#3eb991;
-}
-h3.clr4{
-	background:#6CC;
 }
 .copywrite{
 	padding-left:2em;
