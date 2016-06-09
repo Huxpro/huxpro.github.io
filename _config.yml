@@ -14,8 +14,8 @@ baseurl: ""                             # for example, '/blog' if your blog host
 RSS: false
 #weibo_username:     huxpro
 #zhihu_username:     huxpro
-#github_username:    huxpro
-#twitter_username:  huxpro
+github_username:    mettadann
+twitter_username:  dannsaoyou
 #facebook_username:  huxpro
 # linkedin_username:  firstname-lastname-idxxxx
 
@@ -25,7 +25,7 @@ RSS: false
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
 permalink: pretty
-paginate: 10
+paginate: 5
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
@@ -62,8 +62,8 @@ duoshuo_share: true                     # set to false if you want to use Commen
 # Baidu Analytics
 ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: karindou.me
+ga_track_id: 'UA-79014677-1'            # Format: UA-xxxxxx-xx
+ga_domain: auto
 
 
 
