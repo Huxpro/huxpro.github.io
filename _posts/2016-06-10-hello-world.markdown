@@ -2,7 +2,7 @@
 layout:     post
 title:      "Hello World"
 subtitle:   " Again！"
-date:       2016-06-10 12:00:00
+date:       2016-06-10
 author:     "Dann"
 header-img: "img/post-bg-helloworld.jpg"
 catalog: true
@@ -10,7 +10,7 @@ tags:
     - 生活
 ---
 
-> “Go on! ”
+> Go on! 
 
 
 ## 前言
