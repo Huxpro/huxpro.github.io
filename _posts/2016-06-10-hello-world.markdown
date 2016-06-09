@@ -31,7 +31,7 @@ tags:
 
 ## 其他
 
-搭建这个博客的用的是Jektll，模板修改自<a href="http://huangxuan.me">Hux Bolg</a>,省卻了很多麻煩。 
+搭建这个博客的用的是Jekytll，模板修改自<a href="http://huangxuan.me">Hux Bolg</a>,省卻了很多麻煩。 
 
 —— Dann 记于 2016.6
 
