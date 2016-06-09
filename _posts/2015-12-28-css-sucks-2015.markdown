@@ -1,7 +1,7 @@
 ---
 layout:     keynote
 title:      "都 2015 年了，CSS 怎么还是这么糟糕"
-subtitle:   "Keynote: CSS Still Sucks 2015"
+subtitle:   "Slides: CSS Still Sucks 2015"
 iframe:     "http://huangxuan.me/css-sucks-2015/"
 date:       2015-12-28
 author:     "Hux"
