@@ -48,7 +48,7 @@ temple$count<-c(1335,26,277,3396,756,1554,221,475,
 
 col5<-colorRampPalette(c("#FF6666","#FFFF00","#FFFF66","#FFFF99")) 
 
-#自定义配色，其他命令如heat.colors,etc.
+#自定义配色，如果觉得颜色区分不够，可以添加更多颜色。配色表见最后。默认命令如heat.colors,etc.
 
 spplot(temple,"count",col.regions = rev(col5(temple$count)),
 
@@ -103,3 +103,5 @@ Beijing$NAME_2;Jiangsu$NAME_2 #查看各区或者市的排序,剩余步骤如上
 
 ### Over
 以上是利用R的SP包快速绘制带有标签的地图热力图。如果有错误或更好的办法，<a href="mailto:dannsaoyou@gmail.com">欢迎告诉我。</a>
+
+绘图可以参考的配色表在这里：<a href="http://tool.c7sky.com/webcolor/">网站设计常用配色表</a>
