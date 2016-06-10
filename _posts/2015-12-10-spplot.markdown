@@ -26,20 +26,39 @@ SP包专注在空间数据分析中，能够以简洁的代码快速生成地图
 本例以中国佛教寺庙的分布为绘图目标。准备工作需要从<a href="http://gadm.org/">GADM</a>下载R语言格式的中国数据，有四种比例。如果访问有困难的，也可以从<a href="http://pan.baidu.com/s/1eROX0zS">中国地图信息</a>下载。其中只有**maps_data.7z**中含括了湾湾。当然利用ggmap谷歌抓取可以直接得到完整数据。但我没有台湾寺庙的数据，所以干脆用缺腿的大公鸡了。
 
 R 代码如下：
+
 <div>
+```
+
     library(maptools)
+
     library(sp)
+    
     library(gpclib) 
+    
     gpclibPermit() 
+    
     temple<-readRDS('chnmap/CHN_adm1.rds')
+    
     temple$VARNAME_1 #查看省市排序
+    
     temple$count<-c(1335,26,277,3396,756,1554,221,475,20,756,86,715,1995,
-                3231,1016,3260,204,735,301,411,801,595,214,108,439,
-                2195,19,57,1786,2609,4057)#根据省市排序匹配对应数量,也可以调用其他数组
-    col5<-colorRampPalette(c("#FF6666",  "#FFFF00","#FFFF66","#FFFF99"))#自定义配色，其他命令如heat.colors,etc.
+
+    3231,1016,3260,204,735,301,411,801,595,214,108,439,
+
+    2195,19,57,1786,2609,4057)#根据省市排序匹配对应数量,也可以调用其他数组
+    
+    col5<-colorRampPalette(c("#FF6666",
+
+    "#FFFF00","#FFFF66","#FFFF99"))#自定义配色，其他命令如heat.colors,etc.
+
     spplot(temple,"count",
-       col.regions = rev(col5(temple$count)),
-       col=NA,main="China Mainland Temple")
+
+    col.regions = rev(col5(temple$count)),
+
+    ol=NA,main="China Mainland Temple")
+
+```
 </div>
 ![China Mainland Temple](/img/Rplot39.png)
 
@@ -48,14 +67,23 @@ R 代码如下：
 
 R 代码如下：
 <div>
+```
    sp.label <- function(x, label) {list("sp.text", coordinates(x), label)}
+
    count.sp.label <- function(x) {sp.label(x, as.vector(x@data$count))}
+
    make.count.sp.label <- function(x) {do.call("list",count.sp.label(x))}#以上设置标签函数
+
    spplot(temple,"count",
-         sp.layout=make.count.sp.label(temple),
-         cex=2,#设置标签大小
-         col.regions = rev(col5(temple$count)),
-         col=NA,main="China Mainland Temple")
+
+   sp.layout=make.count.sp.label(temple),
+
+   cex=2,#设置标签大小
+
+   col.regions = rev(col5(temple$count)),
+
+   col=NA,main="China Mainland Temple")
+```
 </div>
 
 ![China Mainland Temple](/img/Rplot38.png)
