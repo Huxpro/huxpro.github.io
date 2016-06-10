@@ -54,9 +54,8 @@ R 代码如下：
 
     col.regions = rev(col5(temple$count)),
 
-    ol=NA,main="China Mainland Temple")
+    ol=NA,main="China Mainland Temple")```
 
-```
 ![China Mainland Temple](/img/Rplot39.png)
 
 ###  Attach Labels
@@ -78,8 +77,9 @@ R 代码如下：
 
    col.regions = rev(col5(temple$count)),
 
-   col=NA,main="China Mainland Temple")
-```
+   col=NA,main="China Mainland Temple")```
+
+
 ![China Mainland Temple](/img/Rplot38.png)
 
 ###  Other
