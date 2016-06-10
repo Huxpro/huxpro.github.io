@@ -12,7 +12,6 @@ tags:
      - Data Visual
 ---
 
-
 > 一份快速绘制地图并附加标签的指导，欢迎补充
 
 ###  R & Map   
@@ -27,7 +26,7 @@ SP包专注在空间数据分析中，能够以简洁的代码快速生成地图
 本例以中国佛教寺庙的分布为绘图目标。准备工作需要从<a href="http://gadm.org/">GADM</a>下载R语言格式的中国数据，有四种比例。如果访问有困难的，也可以从<a href="http://pan.baidu.com/s/1eROX0zS">中国地图信息</a>下载。其中只有**maps_data.7z**中含括了湾湾。当然利用ggmap谷歌抓取可以直接得到完整数据。但我没有台湾寺庙的数据，所以干脆用缺腿的大公鸡了。
 
 R 代码如下：
-```{R} 
+```{r} 
     library(maptools)
     library(sp)
     library(gpclib) 
@@ -39,7 +38,7 @@ R 代码如下：
                 2195,19,57,1786,2609,4057)#根据省市排序匹配对应数量,也可以调用其他数组
     col5<-colorRampPalette(c("#FF6666",  "#FFFF00","#FFFF66","#FFFF99"))#自定义配色，其他命令如heat.colors,etc.
     spplot(temple,"count",
-       col.regions = rev(col5(abc$person)),
+       col.regions = rev(col5(temple$count)),
        col=NA,main="China Mainland Temple")
 ```
 ![China Mainland Temple](/img/Rplot39.png)
@@ -48,7 +47,7 @@ R 代码如下：
 上面其实已经经完成基本热力分布图了，但是像我这种人，根本认不清省份，同时也想一眼看到具体寺庙数是多少，省得再做别的图表。那么就需要在地图上方添加标签。在spplot中，我们添加sp.layout参数调用标签函数设置即可（在ggmap中，则利用text()参数进行）。
 
 R 代码如下：
-```{R}
+```{r}
    sp.label <- function(x, label) {list("sp.text", coordinates(x), label)}
    count.sp.label <- function(x) {sp.label(x, as.vector(x@data$count))}
    make.count.sp.label <- function(x) {do.call("list",count.sp.label(x))}#以上设置标签函数
