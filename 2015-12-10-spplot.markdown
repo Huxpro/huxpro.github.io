@@ -1,0 +1,73 @@
+---
+layout:     post
+title:      "Spplot: map & labels "
+subtitle:   "R中快速生成地图和标签"
+data:       2015-4-9 14:23:22
+author:     "Dann"
+header-img: "img/post-spplot.jpg"
+tags:
+     -spplot
+     -R
+     -Map
+     -Data Visual
+---
+
+
+> 一份快速绘制地图并附加标签的指导，欢迎补充
+
+###  R & Map
+
+>R语言作为最流行的数据分析软件，在生成地图类图表上有着天然优势。
+
+在R的开发包中，能够进行地图绘制的包括**maps、mapsdata、ggmap、maptools、sp**等等,运用中也有各自的优势。而有时我们仅仅需要在长篇报告中生成一些地图热力图，就需要快手上菜了。
+
+- ####SP package
+SP包专注在空间数据分析中，能够以简洁的代码快速生成地图图表并修改简易。它涉及的图形元素通过spplot命令来形成，并且可以叠加sp_layout命令调用自定义函数。（用ggplot命令十多分钟都没渲染好的地图spplot十秒就搞定了。）本文尝试使用中国地图数据来制作一些地理图表，并解决如何在地图上标注出数值、地名等标签。
+
+本例以中国佛教寺庙的分布为绘图目标。准备工作需要从<a href="http://gadm.org/">GADM</a>下载R语言格式的中国数据，有四种比例。如果访问有困难的，也可以从<a href="http://pan.baidu.com/s/1eROX0zS">中国地图信息</a>下载。其中只有**maps_data.7z**中含括了湾湾。当然利用ggmap谷歌抓取可以直接得到完整数据。但我没有台湾寺庙的数据所以干脆用缺腿的大公鸡了。
+
+R 代码如下：
+    library(maptools)
+    library(sp)
+    library(gpclib) 
+    gpclibPermit() 
+    temple<-readRDS('chnmap/CHN_adm1.rds')
+    temple$VARNAME_1 #查看省市排序
+    temple$count<-c(1335,26,277,3396,756,1554,221,475,20,756,86,715,1995,
+                3231,1016,3260,204,735,301,411,801,595,214,108,439,
+                2195,19,57,1786,2609,4057)#根据省市排序匹配对应数量,也可以调用其他数组
+    col5<-colorRampPalette(c("#FF6666",  "#FFFF00","#FFFF66","#FFFF99"))#自定义配色，其他命令如heat.colors,etc.
+    spplot(temple,"count",
+       col.regions = rev(col5(abc$person)),
+       col=NA,main="China Mainland Temple") 
+
+![China Mainland Temple](/img/Rplot39.png)
+
+
+- ####Attach Labels
+
+上面其实已经经完成基本热力分布图了，但是像我这种人，根本认不清省份，同时也想一眼看到具体寺庙数是多少，省得再做别的图表。那么就需要在地图上方添加标签。在spplot中，我们添加sp.layout参数调用标签函数设置即可（在ggmap中，则利用text()参数进行）。
+
+R 代码如下：
+    sp.label <- function(x, label) {list("sp.text", coordinates(x), label)}
+    count.sp.label <- function(x) {sp.label(x, as.vector(x@data$count))}
+    make.count.sp.label <- function(x) {do.call("list",count.sp.label(x))}#以上设置标签函数
+    spplot(temple,"count",
+       sp.layout=make.count.sp.label(temple),
+       cex=2,#设置标签大小
+       col.regions = rev(col5(temple$count)),
+       col=NA,main="China Mainland Temple") 
+
+![China Mainland Temple](/img/Rplot38.png)
+
+
+-#### Other
+
+如果想同时出现省份和数字，通常需要在数据中添加一列中文地名，否则出现的都是拼音。添加完成后，利用`paste(x,y,seq=" ")`函数合并地名与数值成为新列即可.
+
+以上是利用R的SP包快速绘制带有标签的地图热力图。如果有错误或更好的办法，<a href="mailto:dannsaoyou@gmail.com">欢迎告诉我。</a>
+
+
+
+
+
