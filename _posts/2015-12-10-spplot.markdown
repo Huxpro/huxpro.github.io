@@ -40,9 +40,15 @@ temple<-readRDS('chnmap/CHN_adm1.rds')
 
 temple$VARNAME_1 #查看省市排序
 
-temple$count<-c(1335,26,277,3396,756,1554,221,475,20,756,86,715,1995,3231,1016,3260,204,735,301,411,801,595,214,108,439,2195,19,57,1786,2609,4057)#根据省市排序匹配对应数量,也可以调用其他数组
+temple$count<-c(1335,26,277,3396,756,1554,221,475,
 
-col5<-colorRampPalette(c("#FF6666","#FFFF00","#FFFF66","#FFFF99")) #自定义配色，其他命令如heat.colors,etc.
+20,756,86,715,1995,3231,1016,3260,204,735,301,411,801,
+
+595,214,108,439,2195,19,57,1786,2609,4057)#根据省市排序匹配对应数量,也可以调用其他数组
+
+col5<-colorRampPalette(c("#FF6666","#FFFF00","#FFFF66","#FFFF99")) 
+
+#自定义配色，其他命令如heat.colors,etc.
 
 pplot(temple,"count",col.regions = rev(col5(temple$count)),
 
@@ -56,21 +62,25 @@ col=NA,main="China Mainland Temple")
 
 R 代码如下：
 
-    sp.label <- function(x, label) {list("sp.text", coordinates(x), label)}
+```r
+sp.label <- function(x, label) {list("sp.text", coordinates(x), label)}
 
-    count.sp.label <- function(x) {sp.label(x, as.vector(x@data$count))}
+count.sp.label <- function(x) {sp.label(x, as.vector(x@data$count))}
 
-    make.count.sp.label <- function(x) {do.call("list",count.sp.label(x))}#以上设置标签函数
+make.count.sp.label <- function(x) {do.call("list",count.sp.label(x))}
+
+#以上设置标签函数
  
-    spplot(temple,"count",
+spplot(temple,"count",
 
-    sp.layout=make.count.sp.label(temple),
+sp.layout=make.count.sp.label(temple),
 
-    cex=2,#设置标签大小
+cex=2,#设置标签大小
 
-    col.regions = rev(col5(temple$count)),
+col.regions = rev(col5(temple$count)),
 
-    col=NA,main="China Mainland Temple")
+col=NA,main="China Mainland Temple")
+```
 
 ![China Mainland Temple](/img/Rplot38.png)
 
