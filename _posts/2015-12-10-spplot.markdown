@@ -58,7 +58,7 @@ col=NA,main="China Mainland Temple")
 ![China Mainland Temple](/img/Rplot39.png)
 
 ###  Attach Labels
-上面其实已经经完成基本热力分布图了，但是像我这种人，根本认不清省份，同时也想一眼看到具体寺庙数是多少，省得再做别的图表。那么就需要在地图上方添加标签。在spplot中，我们添加sp.layout参数调用标签函数设置即可（在ggmap中，则利用text()参数进行）。
+上面其实已经完成基本热力分布图。但是像我这种人，根本认不清省份，同时也想一眼看到具体寺庙数是多少，省得再做别的图表。那么就需要在地图上方添加所需标签。在spplot中，我们添加`sp.layout=`参数调用标签函数设置即可（在ggmap中，则利用text()参数进行）。
 
 R 代码如下：
 
