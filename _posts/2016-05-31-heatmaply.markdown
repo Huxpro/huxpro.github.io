@@ -3,15 +3,17 @@ layout:    post
 title:     "New Interactive Heatmap with Plotly.js"
 subtitle:  "基于heatmaply和plotly的交互式热力图"
 date:      2016-05-31
-author:    'Dann'
-head-img:  "img/blog-helloworld.jpg"
+author:    "Dann"
+header-img:  "img/blog-helloworld.jpg"
 catalog: true
 tags:
-     - Heatmap
-     - R
-     - plotly
-     -Interactive
+    - Heatmap
+    - R
+    - plotly
+    -Interactive
 ---
+
+>新鲜出炉的交互式热图！
 
  ### Interactive Heatmap
 
@@ -20,8 +22,11 @@ tags:
 新包的作者<a href="https://gist.github.com/jonocarroll">Jonathan Carroll</a>基于gglot和plotly.js开发了这一款新包，并且可以完美的运行在各个端口。
 
 ```r
+
 install.packages("heatmaply")
+
 library(heatmaply)
+
 heatmaply(mtcars, k_col = 2, k_row = 3) %>% layout(margin = list(l = 130, b = 40))
 ```
 <iframe src="https://plot.ly/~talgalili/23.embed" width="450" height="400" frameborder="0" scrolling="no"></iframe>
