@@ -53,7 +53,7 @@ R 代码如下：
 
     col.regions = rev(col5(temple$count)),
 
-    ol=NA,main="China Mainland Temple")```
+    ol=NA,main="China Mainland Temple")
 
 ![China Mainland Temple](/img/Rplot39.png)
 
@@ -62,24 +62,23 @@ R 代码如下：
 
 R 代码如下：
 
-   sp.label <- function(x, label) {list("sp.text", coordinates(x), label)}
+    ```sp.label <- function(x, label) {list("sp.text", coordinates(x), label)}
 
-   count.sp.label <- function(x) {sp.label(x, as.vector(x@data$count))}
+    count.sp.label <- function(x) {sp.label(x, as.vector(x@data$count))}
 
-   make.count.sp.label <- function(x) {do.call("list",count.sp.label(x))}#以上设置标签函数
+    make.count.sp.label <- function(x) {do.call("list",count.sp.label(x))}#以上设置标签函数
+ 
+    spplot(temple,"count",
 
-   spplot(temple,"count",
+    sp.layout=make.count.sp.label(temple),
 
-   sp.layout=make.count.sp.label(temple),
+    cex=2,#设置标签大小
 
-   cex=2,#设置标签大小
+    col.regions = rev(col5(temple$count)),
 
-   col.regions = rev(col5(temple$count)),
+    col=NA,main="China Mainland Temple")
 
-   col=NA,main="China Mainland Temple")
-
-
-![China Mainland Temple](/img/Rplot38.png)
+![China Mainland Temple](/img/Rplot38.png)```
 
 ###  Other
 如果想同时出现省份和数字，通常需要在数据中添加一列中文地名，否则出现的都是拼音。添加完成后，利用`paste(x,y,seq=" ")`函数合并地名与数值成为新列即可.
