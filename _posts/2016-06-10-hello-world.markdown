@@ -4,7 +4,7 @@ title:      "Hello World"
 subtitle:   " Again！"
 date:       2016-06-10
 author:     "Dann"
-header-img: "img/post-bg-helloworld.jpg"
+header-img: "img/blog-helloworld.jpg"
 catalog: true
 tags:
     - 生活
