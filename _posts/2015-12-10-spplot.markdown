@@ -50,7 +50,7 @@ col5<-colorRampPalette(c("#FF6666","#FFFF00","#FFFF66","#FFFF99"))
 
 #自定义配色，其他命令如heat.colors,etc.
 
-pplot(temple,"count",col.regions = rev(col5(temple$count)),
+spplot(temple,"count",col.regions = rev(col5(temple$count)),
 
 col=NA,main="China Mainland Temple")
 ```
