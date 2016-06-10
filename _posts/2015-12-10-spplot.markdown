@@ -32,7 +32,7 @@ library(maptools)
 
 library(sp)
 
-ibrary(gpclib)
+library(gpclib)
 
 gpclibPermit() 
 
@@ -84,7 +84,22 @@ col=NA,main="China Mainland Temple")
 
 ![China Mainland Temple](/img/Rplot38.png)
 
-###  Other
 如果想同时出现省份和数字，通常需要在数据中添加一列中文地名，否则出现的都是拼音。添加完成后，利用`paste(x,y,seq=" ")`函数合并地名与数值成为新列即可.
 
+### Province、City & County
+全国的热力图通常好做一些。如果有时候希望针对多个省份或者单个省份的城市县区绘图，在SP中也可以实现。
+
+R代码如下：
+
+```r
+Beijing<-subset(temple,NAME_1=="Beijing")
+
+East<-subset(temple,NAME_1=="Jiangsu" | NAME_1=="Shanghai" | NAME_1=="Zhejiang")
+
+#调出北京的数据或者东部数据
+
+Beijing$NAME_2;Jiangsu$NAME_2 #查看各区或者市的排序,剩余步骤如上所示
+```
+
+### Over
 以上是利用R的SP包快速绘制带有标签的地图热力图。如果有错误或更好的办法，<a href="mailto:dannsaoyou@gmail.com">欢迎告诉我。</a>
