@@ -12,7 +12,7 @@ tags:
      - Data Visual
 ---
 
-> 手把手做个新鲜出炉的交互式热图
+> 手把手做个新鲜出炉的网页交互热图
 
 ### Interactive Heatmap
 
@@ -90,8 +90,41 @@ list(l = 100, b = 100))
 基本上，这些代码已经可以在R实现交互式热力图了。下面的问题是如何在网页端中实现？
 
 
+### Plotly For R
+终于轮到`Plotly`出场了。作为第三方开源库，heatmaply就是专门为`Plotly`服务的。
 
+首先需要注册一个<a href="https://plot.ly">Plotly</a>网站的帐号，注册成功后，进入到个人页面（profile）中，点击APT Generate产生自己的钥匙。
 
+![img](/img/in-post/plotlyapi.png)
+
+之后，就可以回到R部署所需的包：
+
+```r
+install.packages("plotly")
+
+library(plotly)
+
+plotly_username="******"#你的用户名
+
+plotly_api_key="*****"#你的API
+
+library(heatmaply)#加载heatmaply包
+
+a<-heatmaply(mtcars, k_col = 2, k_row = 3) %>% layout(margin = list(l = 130, b = 40))
+
+plotly_POST(a, filename = "heatmap", fileopt = "new",sharing = "public")
+```
+到此，`plotly`就已经成功上传了你的作品。然后回到自己的页面，就会看到已经出现的分享页面
+
+![img](/img/in-post/plotlyshare.png)
+
+选择`iframe`格式，就可以轻松把他们插入到自己的页面了。如下是我生成的页面：
+
+<iframe width="900" height="800" frameborder="0" scrolling="no" src="https://plot.ly/~dannsaoyou/1.embed"></iframe>
+
+### Over
+
+以上是对5月31日发布的heatmaply的一个使用说明，如果有错误或优化，<a href="mailto:dannsaoyou@gmail.com">欢迎告诉我。</a>
 
 
 
