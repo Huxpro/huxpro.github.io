@@ -3,9 +3,9 @@ title: Dann Blog
 SEOTitle: 談楊的博客 | Dann Blog
 header-img: img/home-bg.jpg
 email: dannsouyou@gmail.com
-description: "关于R與Python、詩歌与戲曲、根本佛法 | 談楊，Data Science, R & Python, NGO, Buddhist | 不著調的人"
-keyword: "談楊, dannsaoyou, Dann談楊, Dann, 佛法, 上座部, @dannsaoyou, 談楊的博客, Dann Blog, 博客, 个人网站, 公益組織,教育,NGO"
-            # your host, for absolute URL
+description: "R与Python、诗歌与戏曲、佛法与解脱 | 谈杨，Data Science, R & Python, NGO, Buddhist | 不著調的人"
+keyword: "谈杨, dannsaoyou, Dann談楊, Dann, Python, 佛法, 上座部, @dannsaoyou, R, Dann Blog, 博客, 个人网站, 公益组织,教育,NGO"
+url: http://tanyang.me # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
@@ -69,7 +69,7 @@ ga_domain: tanyang.me
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "搗鼓數據，做做筆記，學學佛法。一切輪迴終有盡頭"
+sidebar-about-description: "捣鼓数据，做做笔记，学学佛法。须知，一切轮回终有尽头。"
 sidebar-avatar: /img/avatar-dann.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
