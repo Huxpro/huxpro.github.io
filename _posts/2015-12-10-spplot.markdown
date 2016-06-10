@@ -27,6 +27,8 @@ SP包专注在空间数据分析中，能够以简洁的代码快速生成地图
 
 R 代码如下：
 
+<div class="highlighter-rouge"><pre class="highlight"><code>
+
     library(maptools)
 
     library(sp)
@@ -55,6 +57,9 @@ R 代码如下：
 
     ol=NA,main="China Mainland Temple")
 
+</code></pre>
+</div>
+
 ![China Mainland Temple](/img/Rplot39.png)
 
 ###  Attach Labels
@@ -62,7 +67,7 @@ R 代码如下：
 
 R 代码如下：
 
-    ```sp.label <- function(x, label) {list("sp.text", coordinates(x), label)}
+    sp.label <- function(x, label) {list("sp.text", coordinates(x), label)}
 
     count.sp.label <- function(x) {sp.label(x, as.vector(x@data$count))}
 
@@ -78,7 +83,7 @@ R 代码如下：
 
     col=NA,main="China Mainland Temple")
 
-![China Mainland Temple](/img/Rplot38.png)```
+![China Mainland Temple](/img/Rplot38.png)
 
 ###  Other
 如果想同时出现省份和数字，通常需要在数据中添加一列中文地名，否则出现的都是拼音。添加完成后，利用`paste(x,y,seq=" ")`函数合并地名与数值成为新列即可.
