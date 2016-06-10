@@ -12,11 +12,11 @@ tags:
      - Data Visual
 ---
 
->新鲜出炉的交互式热图！
+> 新鲜出炉的交互式热图！
 
- ### Interactive Heatmap
+### Interactive Heatmap
 
- 利用R绘制热力图比较简单，而随着可视化工具喷涌，交互式热力图在R中的实现也常见起来。以前有`heatmap`包，`d3heatmap`,现在则出现了速度更快，交互效果更好的`heatmaply`。
+利用R绘制热力图比较简单，而随着可视化工具喷涌，交互式热力图在R中的实现也常见起来。以前有`heatmap`包，`d3heatmap`,现在则出现了速度更快，交互效果更好的`heatmaply`。
 
 新包的作者<a href="https://gist.github.com/jonocarroll">Jonathan Carroll</a>基于gglot和plotly.js开发了这一款新包，并且可以完美的运行在各个端口。
 
