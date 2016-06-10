@@ -4,7 +4,7 @@ title:      "New Interactive Heatmap with Plotly"
 subtitle:   "基于heatmaply和plotly的交互式热力图"
 data:       2016-5-31 15:23:22
 author:     "Dann"
-header-img: "img/post-spplot.jpg"
+header-img: "img/post-heatmaply.png"
 tags:
      - Heatmap
      - R
