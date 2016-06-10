@@ -39,23 +39,23 @@ R 代码如下：
     
     temple<-readRDS('chnmap/CHN_adm1.rds')
     
-    temple$VARNAME_1 #查看省市排序
+    temple$VARNAME_1 <span class="c1"> #查看省市排序</span>
     
     temple$count<-c(1335,26,277,3396,756,1554,221,475,20,756,86,715,1995,
 
     3231,1016,3260,204,735,301,411,801,595,214,108,439,
 
-    2195,19,57,1786,2609,4057)#根据省市排序匹配对应数量,也可以调用其他数组
+    2195,19,57,1786,2609,4057)<span class="c1"> #根据省市排序匹配对应数量,也可以调用其他数组</span>
     
     col5<-colorRampPalette(c("#FF6666",
 
-    "#FFFF00","#FFFF66","#FFFF99"))#自定义配色，其他命令如heat.colors,etc.
+    "#FFFF00","#FFFF66","#FFFF99"))<span class="c1"> #自定义配色，其他命令如heat.colors,etc.</span>
 
     spplot(temple,"count",
 
     col.regions = rev(col5(temple$count)),
 
-    ol=NA,main="China Mainland Temple")
+    col=NA,main="China Mainland Temple")
 
 </code></pre>
 </div>
