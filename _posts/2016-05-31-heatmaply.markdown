@@ -93,7 +93,7 @@ list(l = 100, b = 100))
 ### Plotly For R
 作为第三方开源库的`Plotly`出场了。`heatmaply`就是依托`Plotly`服务的。
 
-首先需要注册一个<a href="https://plot.ly">Plotly</a>网站的帐号，注册成功后，进入到个人页面（profile）中，点击APT Generate产生自己的钥匙。
+首先需要注册一个<a href="https://plot.ly">Plotly</a>网站的帐号，注册成功后，进入到个人页面（profile）中，点击API Keys产生自己的钥匙。
 
 ![img](/img/in-post/plotlyapi.png)
 
