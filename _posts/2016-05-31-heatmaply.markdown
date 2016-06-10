@@ -1,16 +1,15 @@
 ---
-layout:    post
-title:     "New Interactive Heatmap with Plotly.js"
-subtitle:  "基于heatmaply和plotly的交互式热力图"
-date:      2016-05-31
-author:    "Dann"
-header-img:  "img/blog-helloworld.jpg"
-catalog: true
+layout:     post
+title:      "New Interactive Heatmap with Plotly.js "
+subtitle:   "基于heatmaply和plotly的交互式热力图"
+data:       2016-5-31 15:23:22
+author:     "Dann"
+header-img: "img/post-spplot.jpg"
 tags:
-    - Heatmap
-    - R
-    - plotly
-    -Interactive
+     - Heatmap
+     - R
+     - plotly
+     - Data Visual
 ---
 
 >新鲜出炉的交互式热图！
