@@ -18,4 +18,4 @@ tags:
 
 <iframe src="http://onterrawms.blob.core.windows.net/r-sample/index.html" width="800" height="500"></iframe>
 
-<iframe src="/test.html" width="500" height="500"></iframe>>
+<iframe src="/test.html" width="800" height="500"></iframe>>
