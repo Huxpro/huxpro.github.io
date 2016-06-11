@@ -16,5 +16,5 @@ tags:
 
 最轻松创建交互式地图的方式。
 
-<iframe SRC="http://onterrawms.blob.core.windows.net/r-sample/index.html" WIDTH="800" HEIGHT="500",scrolling="no"></IFRAME>
+<iframe src="http://onterrawms.blob.core.windows.net/r-sample/index.html" width="800" height="500",scrolling="no"></iframe>
 
