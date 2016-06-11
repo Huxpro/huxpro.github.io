@@ -3,7 +3,7 @@ layout:    post
 title:     'Interactive Maps and Charts in R'
 subtitle:  "R中创建交互式地图与图表"
 author:    "Dann"
-data:      2016-06-15 12:00
+data:      2016-06-10 12:00
 header-img: "img/bg-leafet.png"
 tags:
     - Interactive
