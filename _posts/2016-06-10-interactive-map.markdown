@@ -20,7 +20,7 @@ tags:
 
 引入Microsofo dygraph
 
-<iframe src="/_posts/test.<!DOCTYPE html>
+<iframe src="/test.<!DOCTYPE html>
 <html>
 <head>
 	<title></title>
