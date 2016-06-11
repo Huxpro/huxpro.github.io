@@ -122,9 +122,11 @@ plotly_POST(a, filename = "heatmap", fileopt = "new",sharing = "public")
 
 <iframe width="900" height="800" frameborder="0" scrolling="no" src="https://plot.ly/~dannsaoyou/1.embed"></iframe>
 
-### Over
+### Another Way
+如果从R本地生成`Html`文件的话，可以使用`<iframe>`，`</iframe>`的方式将其移入自己的网站中，这样子比使用`Plotly`更加方便，但是传播并不方便。
 
-以上是对5月31日发布的heatmaply的一个使用说明，如果有错误或优化，<a href="mailto:dannsaoyou@gmail.com">欢迎告诉我。</a>
+### Over
+以上是对5月31日发布的heatmaply的使用说明，如果有错误或优化，<a href="mailto:dannsaoyou@gmail.com">欢迎告诉我。</a>
 
 
 
