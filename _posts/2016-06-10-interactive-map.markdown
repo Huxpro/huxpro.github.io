@@ -18,15 +18,3 @@ tags:
 
 <iframe src="http://onterrawms.blob.core.windows.net/r-sample/index.html" width="800" height="500"></iframe>
 
-引入Microsofo dygraph
-
-<iframe src="/test.<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-
-</body>
-</html>"></iframe>>
-
