@@ -14,8 +14,12 @@ tags:
 
 ### R Changes the Geos
 
-最轻松创建交互式地图的方式。
+最轻松创建交互式图表的方式。
+
+Leaflet的地区房价图
 
 <iframe src="http://onterrawms.blob.core.windows.net/r-sample/index.html" width="800" height="500"></iframe>
+
+Microsoft dygraph制作的的天气图模式
 
 <iframe src="/test.html" width="800" height="500"></iframe>>
