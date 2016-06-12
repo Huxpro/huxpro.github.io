@@ -1,0 +1,168 @@
+---
+layout:    post
+title:     'AHP & R in Practice'
+subtitle:  "用R实现可视化的层次分析与寻找非一致性值"
+date:      2016-6-12
+author:    "Dann"
+header-imh: "img/ahp-bg.png"
+tags:
+     - AHP
+     - R Package
+     - 层次分析模型
+---
+
+> 确立合理因子和寻找非一致性值真是难了我一会
+
+### Analytic Hierarchy Process & R package
+
+<strong>AHP</strong>（层次分析模型）是决策中经常使用的一种建模形式，和人自身处理问题的思路比较契合。因最近要对一项教育评估进行权值计算，正好用到了AHP。网上的大做法都是自己创建函数模型，轻松但没有那么友好。当然也有pmr包里的ahp函数和王斌会编写的mvstats包中ahp分析。（所以只需要简单的计算的话，函数代码就在文章的最后面）但感谢<strong><a href="https://github.com/gluc">Christoph Glur</a></strong>的努力，开发了一款可视的R包，可以运用AHP中的多种方式进行计算和检验。所以这篇文章介绍下AHP Package的使用，以及在AHP一致性检验中<strong>寻找非一致性值的一种办法。</strong>>
+
+### How To Use It 
+
+ahp包只针对AHP决策开发，因此整个过程非常简单：
+
+- 将特定的问题编制为ahp文件
+
+- `Loadfile`命令加载ahp文件
+
+- 使用`Caculate`命令计算
+
+- 以`GetDataFrame`或者`ShowTable`输出模型分析结果
+
+在这其中，重点是如何编制ahp文件以及如何加载图形操作界面。
+
+#### Creat An Ahp File
+
+作者提供了两个基础数据文件`carAhp`和`vacationAhp`，使用`file.copy(x,"")`就可以导出这两个ahp格式文件。在文本文件中打开，其实就是按照AHP计算步骤排列的格式。即先计算因子间的两两偏好，再计算对于某个方案的两两偏好，最终得出了对应的方案权值和最佳方案。直接复制粘贴按照自己的格式进行修改即可。
+
+![img](/img/ahpcar.png)
+
+而在使用图形截面的时候，需要安装好四个包：`shiny`, `shinyAce`,`shinyjs`, `shinythemes`。对于3.3.0版本的R来说，`shiny`和`shinythemes`的cran源、镜像源和本地安装是失效了，可以尝试从github下载安装。
+
+```r
+devtools::install_github("rstudio/shinyAce")
+```
+
+安装完成后，以carAhp为例，运行如下代码即可获得图形面的操作，甚至计算权重的方式都完整了。
+
+```r
+
+library(ahp)
+
+RunGUI()#调用shiny截面
+```
+![img](/img/in-post/ahp-load.png)
+
+然后直接加载相关文件即可。
+
+![img](/img/in-post/ahp-visual.png)
+
+
+![img](/img/in-post/ahp-caculate.png)
+
+如图所示，ahp不仅能够以多种方式计算权重等问题，也能够直接展示层次分析法的结构特征，比在pages慢慢画强太多了。
+
+当然你也可以使用普通代码来绘制：
+
+```r
+#
+library(ahp)
+
+ahpFile <- system.file("extdata", "car.ahp", package="ahp")
+
+carAhp <- Load(ahpFile)
+
+Calculate(carAhp)
+
+Visualize(carAhp)
+
+Analyze(carAhp)
+
+AnalyzeTable(carAhp)
+
+```
+
+### Find Out the Bug
+
+在一致性检验中，如果<strong>CR<0.1</strong>,就通过了一致性检验。如果非一致性检验比较严重的话，需要我们去找到错误的数字以及其原因。不一致的问题可能处在因素的选择和分层，或者我们所给的判断尺度出现了问题，这已经是后面执行的问题。前提时如何找到出现错误的尺度呢？
+
+有一种比较简易的方式：当判断矩阵A是一致性矩阵时，矩阵A的特征向量w 及逆矩阵A的列向量完全相同，因而夹角余弦值为1。因此夹角余弦值越小，则偏差越大。因此可以找到非一致性的列。同时也要修改其互反行。
+
+在R中，可以见得实现如下：
+
+```r
+BC<-c(1,5,1/3,1/5,1,1/6,3,6,1)
+Matix<- matrix(BC, nrow=3)
+X<- (Matix - min(Matix))/(max(Matix) - min(Matix)#逆矩阵A的列向量即将A按列归一化处理
+#或者Matix/sqrt(sum(Matix^2))
+Y<-eigen(Matix)#矩阵特征值和特征向量，其中特征向量w为Y$vectors
+cosXY=X*Y$vectors/sqrt(sum(X^2)*sum(Y$vectors^2))
+```
+
+### Easy Function
+
+``` r
+#给定矩阵
+
+A<-c(1,1/2,1/4,2,1,1/5,4,5,1)
+matrixA <- matrix(b, nrow=3)#注意矩阵的输入形式
+
+#创建权重输出的函数
+weighttab<-function (B) 
+{
+  A = matrix(B, nrow = sqrt(length(B)), ncol = sqrt(length(B)), 
+             byrow = TRUE)
+  n = ncol(A)
+  mul_collect = c(1:n)
+  for (i in 1:n) mul_collect[i] = prod(A[i, ])
+  weight = mul_collect^(1/n)
+  weight_one = weight/sum(weight)
+  round(weight_one, 4)
+}
+
+#矩阵一致性检验
+Crtest<-function (B) 
+{
+  RI = c(0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49, #这里的检验值可以自行拓展
+         1.51)
+  Wi = weight(B)
+  n = length(Wi)
+  if (n > 2) {
+    W = matrix(Wi, ncol = 1)
+    A = matrix(B, nrow = sqrt(length(B)), ncol = sqrt(length(B)), 
+               byrow = TRUE)
+    AW = A %*% W
+    aw = as.vector(AW)
+    la_max = sum(aw/Wi)/n
+    CI = (la_max - n)/(n - 1)
+    CR = CI/RI[n]
+    cat("\n CI=", round(CI, 4), "\n")
+    cat("\n CR=", round(CR, 4), "\n")
+    cat("\n la_max=", round(la_max, 4), "\n\n")
+    if (CR <= 0.1) {
+      cat(" 通过一致性检验！\n")
+      cat("\n Wi: ", round(Wi, 4), "\n")
+    }
+    else {
+      cat(" 请调整判断矩阵！\n")
+      Wi = null
+      break
+    }
+  }
+  else if (n <= 2) {
+    return(Wi)
+  }
+}
+
+#如何监测是否有效？
+
+BUG<-c(1,5,1/3,1/5,1,1/6,3,6,1)
+MatixBUG<- matrix(BUG, nrow=3)#这个矩阵是一个非一致性矩阵，你可以用此检验自己之前的输入是否有错
+
+```
+
+### Over
+
+以上是对ahp包的介绍和寻找矩阵中非一致性值的检验办法。如果有错误或者优化，<a href="mailto:dannsaoyou@gmail.com">欢迎告诉我</a>
+
+
