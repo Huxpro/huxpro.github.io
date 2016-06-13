@@ -12,10 +12,10 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 # SNS settings
 RSS: ture
-#zhihu_username: lengli
 weibo_username: yanchufei
 instagram_username: lovemadao
 jianshu_username: erLDs1
+#zhihu_username: lengli
 #github_username:    mateng27
 #twitter_username:   tteng27
 #facebook_username:  tengteng27
