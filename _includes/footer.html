@@ -50,6 +50,17 @@
                     </li>
                     {% endif %}
                     
+                       {% if site.lofter_username %}
+                    <li>
+                        <a target="_blank" href="http://www.jianshu.com/users/{{ site.jianshu_username }}./latest_articles">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-lofter fa-stack-1x fa-inverse">简</i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
                     <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
                     {% if site.zhihu_username %}
                     <li>
