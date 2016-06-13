@@ -4,7 +4,7 @@ title:     'AHP & R in Practice'
 subtitle:  "用R实现可视化的层次分析与寻找非一致性值"
 date:      2016-6-12
 author:    "Dann"
-header-imh: "img/ahp-bg.png"
+header-img: "img/ahp-bg.png"
 tags:
      - AHP
      - R Package
