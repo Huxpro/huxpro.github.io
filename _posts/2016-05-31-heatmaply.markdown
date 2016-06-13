@@ -18,7 +18,7 @@ tags:
 
 利用R绘制热力图比较简单，而随着可视化工具喷涌，交互式热力图在R中的实现也常见起来。以前有`heatmap`包，`d3heatmap`包，今天则出现了干脆利落的`heatmaply`包（我喜欢）。
 
-新包作者<a href="https://gist.github.com/jonocarroll">Jonathan Carroll</a>基于gglot2和plotly.js开发了这一款新包，并且可以完美运行在各个端口。如下图，用老家伙`mtcars`生成了内嵌在网页中的交互热力图。
+新包作者Jonathan Carroll(https://gist.github.com/jonocarroll)基于gglot2和plotly.js开发了这一款新包，并且可以完美运行在各个端口。如下图，用老家伙`mtcars`生成了内嵌在网页中的交互热力图。
 
 <iframe src="https://plot.ly/~talgalili/23.embed" width="630" height="560" frameborder="0" scrolling="no"></iframe>
 
