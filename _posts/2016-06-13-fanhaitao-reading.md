@@ -1,4 +1,4 @@
-﻿---
+---
 layout:     post
 title:      "日渐飘远的梦想"
 subtitle:   "----《就要一场绚丽的突围》"
