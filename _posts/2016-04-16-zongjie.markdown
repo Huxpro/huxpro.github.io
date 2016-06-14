@@ -1,4 +1,4 @@
-﻿---
+---
 layout:     post
 title:      "总结是进阶之路！"
 subtitle:   "多读书多总结"
