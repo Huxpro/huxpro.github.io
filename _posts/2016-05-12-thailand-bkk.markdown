@@ -8,8 +8,8 @@ header-img: "img/post-bg-rwd.jpg"
 catalog: true
 tags:
     - 随想录
-    - reading
-    - 笔记
+    - 泰国杂忆
+    - 瞎扯
 ---
 
 
