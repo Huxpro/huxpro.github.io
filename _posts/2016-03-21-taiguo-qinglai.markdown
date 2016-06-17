@@ -1,4 +1,4 @@
----
+﻿---
 
 layout:     post
 title:      "清莱咖啡馆 "
@@ -8,7 +8,7 @@ author:     "Teng"
 header-img: "img/post-bg-alitrip.jpg"
 catalog: true
 tags:
-    - Thinking
+    - 随想录
     - 瞎扯
     - 泰国杂忆
 ---
