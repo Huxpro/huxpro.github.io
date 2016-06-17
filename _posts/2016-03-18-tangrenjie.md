@@ -12,7 +12,7 @@ tags:
     - 泰国杂忆
 ---
 
-> 本文首发于微信公号：qiwangyuedu  [曼谷的雨季](http://mp.weixin.qq.com/s?__biz=MjM5MDI1OTI0Mg==&mid=403226240&idx=1&sn=724c6f32e21048919b92e5ec60bda5f3#rd)
+> 本文首发于微信公号：qiwangyuedu  [寻食唐人街](http://mp.weixin.qq.com/s?__biz=MjM5MDI1OTI0Mg==&mid=403226240&idx=1&sn=724c6f32e21048919b92e5ec60bda5f3#rd)
 
 **8月2日，农历七夕节，**曼谷区志愿者要去泰国玫瑰园中学接受培训。培训完后，为了不辜负七夕的良辰美景，也为了在泰国吃到正宗中国菜，我和同事打了出租车奔向曼谷唐人街。
 

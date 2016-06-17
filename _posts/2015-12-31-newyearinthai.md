@@ -12,7 +12,7 @@ tags:
     - 泰国杂忆
 ---
 
-> 本文首发于微信公号：qiwangyuedu  [曼谷的雨季](http://mp.weixin.qq.com/s?__biz=MjM5MDI1OTI0Mg==&mid=401590438&idx=1&sn=7a5d72b6f0eb6f12a3c1a242ff88dc22#rd)
+> 本文首发于微信公号：qiwangyuedu  [去年今日](http://mp.weixin.qq.com/s?__biz=MjM5MDI1OTI0Mg==&mid=401590438&idx=1&sn=7a5d72b6f0eb6f12a3c1a242ff88dc22#rd)
 
 **泰国新年**
 
