@@ -1,0 +1,13 @@
+---
+---
+[
+	{% for post in site.posts %}
+		{
+		  "title"      : "{{ post.title | escape }}",
+		  "category"   : "{{ post.category }}",
+		  "url"        : "{{ site.url }}{{ post.url }}",
+		  "date"       : "{{ post.date }}",
+		  "shortdate"  : "{{ post.date | date: '%B %d, %Y' }}"
+		} {% if forloop.last %}{% else %},{% endif %}
+	{% endfor %}
+]
