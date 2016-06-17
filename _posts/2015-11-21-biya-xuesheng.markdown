@@ -7,7 +7,7 @@ author:     "Teng"
 header-img: "img/post-bg-unix-linux.jpg"
 catalog: true
 tags:
-    - 写作
+    - 瞎扯
     - 随想录
     - 泰国杂忆
 ---
