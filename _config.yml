@@ -9,7 +9,8 @@ url: "http://tengblog.com"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
-
+# add sreach
+search:           true
 # SNS settings
 RSS: ture
 weibo_username: yanchufei
