@@ -4,10 +4,11 @@ title:      "不再是超级英雄的报纸记者们 "
 subtitle:   "再见，记者"
 date:       2016-01-25
 author:     "Teng"
-header-img: "img/post-bg-see-u-ali.jpg"
+header-img: "img/post-bg-jizhe.jpg"
 tags:
     - 电影
-    - thinking
+    - Thinking
+    - 瞎扯
 ---
 
 
