@@ -1,0 +1,330 @@
+/**
+ *  Timeline.css
+ */
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+body, html {
+	font-size: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.main a{
+	color:#0085a1;
+}
+.main a:hover {
+	/*color: #000;*/
+	/*text-decoration: none;*/
+}
+
+.main, .container > header {
+	width: 90%;
+	max-width: 69em;
+	margin: 0 auto;
+	padding: 0 1.375em;
+}
+
+@font-face {
+	font-family: 'huxico';
+	src:url('../fonts/huxico.eot');
+	src:url('../fonts/huxico.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/huxico.woff') format('woff'),
+		url('../fonts/huxico.ttf') format('truetype'),
+		url('../fonts/huxico.svg#huxico') format('svg');
+	font-weight: normal;
+	font-style: normal;
+} /* Made with http://icomoon.io/ */
+
+.cbp_tmtimeline {
+	padding: 0;
+	list-style: none;
+	position: relative;
+	max-width: 600px;
+	margin: 0 auto;
+	margin-top: -120px;
+}
+
+.cbp_tmtimeline > li {
+	position: relative;
+	box-sizing: border-box;
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+}
+
+/* The date/time */
+.cbp_tmlabel time {
+	font-size: 1.0em;
+	position: absolute;
+	top: 0px;
+	line-height: 64px;
+	right: 5px;
+	margin-right: 1em;
+	color: #a5a7aa;
+}
+
+/* The Duoshuo */
+.cbp_tmlabel .comment{
+	padding: 0 1.5em 0.5em;
+}
+
+/* The card */
+.cbp_tmtimeline > li .cbp_tmlabel {
+	background: white;
+	color: rgb(78, 78, 78);
+	/* line-height: 1.4; */
+	position: relative;
+	border-radius: 3px;
+	border: 1px solid #edeeee;
+	margin: 0 0 30px 0;
+	font-weight: 400;
+	font-size: 95%;
+}
+
+.cbp_tmtimeline > li .cbp_tmlabel h2 {
+	font-weight: bold;
+	font-size: 15px;
+	padding: 14px 20px;
+	margin: 0;
+	height: 64px;
+	line-height: 36px;
+}
+
+.cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
+	border-right-color: #FFFFFF;
+	display: no;
+}
+
+/* The icons */
+.cbp_tmtimeline > li .cbp_tmicon {
+	width: 40px;
+	height: 40px;
+	font-family: 'huxico';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	font-size: 1.4em;
+	line-height: 40px;
+	-webkit-font-smoothing: antialiased;
+	position: absolute;
+	color: #fff;
+	background: #46a4da;
+	border-radius: 50%;
+	box-shadow: 0 0 0 8px #afdcf8;
+	text-align: center;
+	left: 20%;
+	top: 0;
+	margin: 0 0 0 -25px;
+}
+
+.cbp_tmicon-phone:before {
+	content: "\e004";
+	font-family: 'huxico';
+}
+
+.cbp_tmicon-screen:before {
+	content: "\e005";
+	font-family: 'huxico';
+}
+
+.cbp_tmicon-html:before {
+	content: "\e001";
+	font-family: 'huxico';
+}
+
+.cbp_tmicon-video:before {
+	content: "\e002";
+	font-family: 'huxico';
+}
+
+.cbp_tmicon-font:before {
+	content: "\e003";
+	font-family: 'huxico';
+}
+
+/** Venders Logo **/
+.i-vue:before {
+	content: "";
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: url("../images/logo-vue.png") 50% 50% no-repeat;
+    background-size: 20px;
+}
+
+.i-kissy:before {
+	content: "";
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: url("../images/logo-kissy.png") 50% 50% no-repeat;
+	background-size: 20px;
+}
+
+.i-jquery:before {
+	content: "";
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: url("../images/logo-jquery.png") 50% 50% no-repeat;
+	background-size: 20px;
+}
+
+.i-react:before {
+	content: "";
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: url("../images/logo-react.png") 50% 50% no-repeat;
+	background-size: 22px;
+}
+
+/******* Hux Branch *****/
+html{
+	font-size: 90%;
+}
+body{
+	background: #fafafa;
+}
+header{
+	background: #6ca8fb;
+	text-align: center;
+	height: 620px;
+	min-width: 100%;
+	padding: 5em 0px !important;
+	position: relative;
+	border-bottom: 1px solid #edeeee;
+}
+header h1 {
+    font-size: 70px;
+    color: white;
+    font-weight: 100;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    line-height: 1;
+    letter-spacing: 0.1em;
+}
+header p{
+	text-align: center;
+	color: white;
+	font-size: 16px;
+	line-height: 1.6em;
+	letter-spacing: 1px;
+	font-weight: 300;
+	margin: 1.7em;
+}
+header img{
+	width: 190px;
+}
+
+.cbp_tmlabel .hux_ul{
+	border:none;
+	padding:0;
+	margin:0;
+}
+.cbp_tmlabel .hux_ul li{
+	padding:0;
+	margin: 0;
+	list-style: none;
+}
+
+.cbp_tmlabel img{
+	width: 100%;
+	margin-bottom: 1em;
+	border-top: 1px solid #eeefef;
+	border-bottom: 1px solid #eeefef;
+}
+
+.cbp_tmlabel p{
+    padding: 1em 0;
+	/*text-indent: 2em;*/
+    margin: 0 1.5em;
+    border-top: 1px solid rgba(255,255,255,0.4);
+}
+.cbp_tmlabel ul{
+    padding: 0em 0;
+    margin: 0 1.5em;
+    list-style: none;
+}
+.cbp_tmlabel ul li{
+    padding: 0.5em 0;
+}
+.cbp_tmlabel ul li.skill{
+	overflow: auto;
+	margin-top: 9px;
+	border-top: 1px solid #eeefef;
+}
+.cbp_tmlabel ul li.skill>span,
+.cbp_tmlabel ul li.skill>a{
+    display: block;
+    float: left;
+    font-size: 1.3rem;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 8px;
+    color: #a5a7aa;
+    transition: all 0.3s ease;
+}
+.cbp_tmlabel ul li a:hover{
+	background: rgba(0,0,0,0.05);
+	border-radius: 50%;
+}
+.cbp_tmlabel ul li.skill>span:nth-child(1){
+	margin-left: -7px;
+}
+.cbp_tmlabel ul li.skill span:before{
+    line-height: 40px;
+}
+.cbp_tmlabel ul li.skill span.link{
+	float: right;
+	font-size: 0.8em;
+	line-height: 30px;
+	width: auto;
+	padding: 0 11px;
+	min-width: 70px;
+	box-sizing: border-box;
+	height: 32px;
+	border-radius: 3px;
+	background: white;
+	border: 1px solid #D5D6D8;
+	margin: 4px 0px;
+}
+
+.cbp_tmlabel ul li.skill span.link:hover,
+.cbp_tmlabel ul li.skill span.link:active{
+	background: #eee;
+}
+.cbp_tmlabel ul li.skill span.link a {
+	color: #a5a7aa;
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	font-weight: bold;
+	/*reset before*/
+	background: none !important;
+	text-decoration: none;
+}
+
+@media screen and (max-width: 400px) {
+	.main{
+		width: 100%;
+		padding-bottom: 0px;
+	}
+	html{
+		font-size: 90%;
+	}
+	header p{
+		font-size: 1.05em;
+		letter-spacing: 0px;
+		margin: 1.5em;
+	}
+	.cbp_tmlabel ul li.skill>span, .cbp_tmlabel ul li.skill>a{
+	    margin-right: 2px;
+	}
+}

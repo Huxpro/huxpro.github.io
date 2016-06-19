@@ -1,0 +1,82 @@
+---
+title: Portfolio
+layout: default
+---
+
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Hux - Timeline</title>
+		<link rel="stylesheet" type="text/css" href="css/timeline.css" />
+		<script src="js/modernizr.custom.js"></script>
+	</head>
+	<body>
+		<div class="container" style="margin:0;padding:0;width:100%;">
+			<header>
+				<img width="190" height="190" src="images/dann.png">
+				<h1>Dann</h1>
+				<p>Focus on education and nonprofit-organization,<br>
+					Enjoy data-analysing and stroytelling.</p>
+			</header>
+			<div class="main">
+				<ul class="cbp_tmtimeline">
+					<li>
+						<div class="cbp_tmlabel">
+							<h2 id="boxoffice">拥翠行动 Organic Education Program</h2>
+							<time>2015.09</time>
+							<img src="images/oep1.jpg">
+							<ul>
+								<li>
+									The Organic Education Program unites teachers from both local schools and Teach for China, as well as local students, to design a creative framework of courses ranging from art to natural science. The program comprises two parts: the first part is developing the coursework during summer and winter camps; the second part is to implement the coursework in regular school curriculum during spring and fall semesters. A guidebook will be produced from part one as the basis for implementation.<br>A special team cooprating with Harvard SEED Lab dedicated to data collection and analysis will evaluate the effectiveness of these courses and teachers’ performance. </b>The program will last three years, and will continue to improve existing curriculum and to design new ones through this process. The local government and the department of education will promote these courses once they become mature enough in three years. <br>OEP is spornsored by Chenyidan Charity Foundation and various donors. Click the 'Get it' to download the impact report and autograph paper. If you're willing to donate the program, please connact us with <a href='mailto:OEP@fellow.tfchina.org'>OEP@fellow.tfchina.org</a>
+								</li>
+								<li class="skill">
+									<span class="cbp_tmicon-phone"></span>
+									<span><b>JS</b></span>
+									<span class="i-react"></span>
+									<span class="link"><a target="_blank" href="http://pan.baidu.com/s/1eSFKIvo">Get it</a></span>
+								</li>
+							</ul>
+						</div>
+					</li>
+					{% if site.duoshuo_username %}
+					<li>
+						<div class="cbp_tmlabel">
+			                <!-- 多说评论框 start -->
+			                <div class="comment">
+			                    <div class="ds-thread"
+									data-thread-key="{{site.duoshuo_username}}/portfolio"
+			                        data-title="{{page.title}}"
+			                        data-url="{{site.url}}{{site.baseurl}}{{page.url}}" >
+			                    </div>
+			                </div>
+			                <!-- 多说评论框 end -->
+						</div>
+					</li> 
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+		{% if site.duoshuo_username %}
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		    // dynamic User by Hux
+		    var _user = '{{site.duoshuo_username}}';
+
+		    // duoshuo comment query.
+		    var duoshuoQuery = {short_name: _user };
+		    (function() {
+		        var ds = document.createElement('script');
+		        ds.type = 'text/javascript';ds.async = true;
+		        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		        ds.charset = 'UTF-8';
+		        (document.getElementsByTagName('head')[0]
+		         || document.getElementsByTagName('body')[0]).appendChild(ds);
+		    })();
+		</script>
+		<!-- 多说公共JS代码 end -->
+		{% endif %}
+	</body>
+</html>
