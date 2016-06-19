@@ -2,7 +2,7 @@
 layout:    post
 title:     'AHP in R Practice'
 subtitle:  "用R实现可视化的层次分析与寻找非一致性值"
-date:      2016-6-12
+date:      2016-6-16
 author:    "Dann"
 header-img: "img/ahp-bg.png"
 tags:
