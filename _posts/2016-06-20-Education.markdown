@@ -1,14 +1,16 @@
 ---
 layout:     post
 title:      "Take it, Feel it and Pass it on"
-subtitle:   "我所理解的教育""
-date:       2016-6-20 1:23:22
-author:     "Dann"
-header-img:'img/hector.png'
+subtitle:    "我所理解的教育"
+data:        2016-6-20 1:23:22
+author:      "Dann"
+header-img:  "img/hector.png"
 tags:
-     - 生活
-     - Education
+       - 生活
+       - Education
 ---
+
+
 
 > 一行行，看似轻巧，其实复杂；看似呆萌，实则低劣。
 > 我们在农村要做得事情很简单，做一个真实的人。
