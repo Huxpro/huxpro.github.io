@@ -2,7 +2,7 @@
 layout:     post
 title:      "Spplot: map & labels "
 subtitle:   "R中快速生成地图和标签"
-data:       2015-4-9 14:23:22
+date:       2015-4-9 14:23:22
 author:     "Dann"
 header-img: "img/post-spplot.jpg"
 tags:
