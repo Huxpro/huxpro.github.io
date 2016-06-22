@@ -1,0 +1,17 @@
+---
+layout: null
+---
+{
+	"code" : 0 ,
+	"data" : [
+	 {% for post in site.posts %}
+	{
+		"title" : "{{ post.title }} - {% for tag in post.tags %}{% if forloop.rindex != 1 %}{{ tag }}_{% else %}{{ tag }}{% endif %}{% endfor %}",
+		"url" : "{{ post.url }}"
+	}
+	{% if forloop.rindex != 1  %}
+	,
+	{% endif %}
+    {% endfor %}
+	]
+}
