@@ -280,6 +280,12 @@
         });
     });
 </script>
+<script>
+    async("//cdn.bootcss.com/highlight.js/9.4.0/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+<link href="//cdn.bootcss.com/highlight.js/9.4.0/styles/github.min.css" rel="stylesheet">
 
 <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
       opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
@@ -292,7 +298,6 @@
     </div>
 </div>
 
-
 <div style="position: fixed; right: 16px; bottom: 20px;">
     <img src="/search/img/cb-search.png"  id="search-btn"  title="双击ctrl试一下"/>
 </div>
@@ -301,5 +306,3 @@
 
 <script src="{{ "/search/js/bootstrap3-typeahead.min.js" | prepend: site.baseurl }}"></script>
 <script src="{{ "/search/js/cb-search.js" | prepend: site.baseurl }}"></script>
-
-{% endif %}
