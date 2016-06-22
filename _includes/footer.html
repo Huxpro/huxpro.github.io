@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     {% endif %}
-                    
+
                     <!-- add lofter,ins by teng, add target = "_blank" to <a> by Hux -->
                     {% if site.instagram_username %}
                     <li>
@@ -26,7 +26,7 @@
                         </a>
                     </li>
                     {% endif %}
-                    
+
                      {% if site.twitter_username %}
                     <li>
                         <a href="https://twitter.com/{{ site.twitter_username }}">
@@ -37,7 +37,7 @@
                         </a>
                     </li>
                     {% endif %}
-                    
+
                      <!-- add lofter,ins by teng, add target = "_blank" to <a> by Hux -->
                     {% if site.lofter_username %}
                     <li>
@@ -49,7 +49,7 @@
                         </a>
                     </li>
                     {% endif %}
-                    
+
                        {% if site.jianshu_username %}
                     <li>
                         <a target="_blank" href="http://www.jianshu.com/users/{{ site.jianshu_username }}/latest_articles">
@@ -60,7 +60,7 @@
                         </a>
                     </li>
                     {% endif %}
-                    
+
                     <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
                     {% if site.zhihu_username %}
                     <li>
@@ -128,26 +128,6 @@
             </div>
         </div>
     </div>
-    
-<div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
-      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
-    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" 
-           placeholder="文章标题 日期 标签"
-           >
-
-    <div style="position: fixed; top: 16px; right: 16px;">
-        <img src="/search/img/cb-close.png"  id="close-btn"/>
-    </div>
-</div>
-
-<div style="position: fixed; right: 16px; bottom: 20px;">
-    <img src="/search/img/cb-search.png"  id="search-btn"  title="双击ctrl试一下"/>
-</div>
-
-<link rel="stylesheet" href="{{ "/search/css/cb-search.css" | prepend: site.baseurl }}">
-
-<script src="{{ "/search/js/bootstrap3-typeahead.min.js" | prepend: site.baseurl }}"></script>
-<script src="{{ "/search/js/cb-search.js" | prepend: site.baseurl }}"></script>
 
 
 </footer>
@@ -174,15 +154,15 @@
     }
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
      so Huxblog drops it officially.
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
 -->
 <!--
     <script>
@@ -269,7 +249,7 @@
             l = $('<li class="'+n+'_nav"></li>').append(c);
             $(selector).append(l);
         });
-        return true;    
+        return true;
     }
 
     generateCatalog(".catalog-body");
@@ -301,4 +281,3 @@
     });
 </script>
 {% endif %}
-

@@ -108,6 +108,35 @@ layout: default
                         {% if site.sidebar-about-description %}
                             <p>{{site.sidebar-about-description}}</p>
                         {% endif %}
+
+          <!-- add search -->
+                 <input type="text"  id="search" size="30" placeholder="Search" required />
+                     $(function() {
+                              $.ajax({
+                                  url: "/search.xml",
+                                  dataType: "xml",
+                                  success: function( xmlResponse ) {
+                                     var data = $( "article", xmlResponse ).map(function() {
+                                          return {
+                                              value: $( "title", this ).text() + ", " +
+                                                  ( $.trim( $( "date", this ).text() ) ),
+                                              desc: $("description", this).text(),
+                                              url: $("url", this).text()
+                                          };
+                                      }).get();
+
+                                      $( "#j_search" ).autocomplete({
+                                          source: data,
+                                          minLength: 0,
+                                          select: function( event, ui ) {
+                                            window.location.href = ui.item.url;
+                                          }
+                                      });
+                                  }
+                              });
+                          });
+
+
                         <!-- SNS Link -->
                         <ul class="list-inline">
                             {% if site.RSS %}
@@ -120,33 +149,8 @@ layout: default
                                 </a>
                             </li>
                             {% endif %}
-                            
 
-                            <input type="text"  id="search" size="30" placeholder="Search" required />
-                            $(function() {
-      $.ajax({
-          url: "/search.xml",
-          dataType: "xml",
-          success: function( xmlResponse ) {
-             var data = $( "article", xmlResponse ).map(function() {
-                  return {
-                      value: $( "title", this ).text() + ", " +
-                          ( $.trim( $( "date", this ).text() ) ),
-                      desc: $("description", this).text(),
-                      url: $("url", this).text()
-                  };
-              }).get();
 
-              $( "#j_search" ).autocomplete({
-                  source: data,
-                  minLength: 0,
-                  select: function( event, ui ) {
-                    window.location.href = ui.item.url;
-                  }
-              });
-          }
-      });
-  });
 
                              <!-- add lofter,ins by teng, add target = "_blank" to <a> by Hux -->
                     {% if site.instagram_username %}

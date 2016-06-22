@@ -1,0 +1,13 @@
+---
+layout: none
+---
+<?xml version="1.0" encoding="UTF-8" ?>
+<articles>
+    {% for post in site.posts %}
+    <article>
+        <title>{{ post.title }}</title>
+        <url>{{ site.url }}{{ post.url }}</url>
+        <date>{{ post.date | date_to_utc | date: '%Y-%m-%d'}}</date>
+    </article>
+    {% endfor %}
+</articles>
