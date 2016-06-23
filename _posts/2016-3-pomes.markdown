@@ -2,12 +2,13 @@
 layout:     post
 title:      "Poems"
 subtitle:   "凑满100首我就出集子"
-author:     "Dann"
 date:       2016-3-10
+author:     "Dann"
 header-img: "img/poem.png"
 tags:
-    - poem
-    - 诗
+     - poem
+     - 诗
+     - 生活
 ---
 
 > 诗集战斗储备库！PIAPIA！
