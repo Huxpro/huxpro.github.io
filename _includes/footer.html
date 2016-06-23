@@ -54,7 +54,7 @@
                         <a target="_blank" href="http://{{ site.lofter_username }}.lofter.com">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-lofter fa-stack-1x fa-inverse">乐</i>
+                                <i class="fa fa-lofter fa-stack-1x fa-inverse">��</i>
                             </span>
                         </a>
                     </li>
@@ -65,7 +65,7 @@
                         <a target="_blank" href="http://www.jianshu.com/users/{{ site.jianshu_username }}/latest_articles">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-lofter fa-stack-1x fa-inverse">简</i>
+                                <i class="fa fa-lofter fa-stack-1x fa-inverse">��</i>
                             </span>
                         </a>
                     </li>
@@ -77,7 +77,7 @@
                         <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                                <i class="fa  fa-stack-1x fa-inverse">֪</i>
                             </span>
                         </a>
                     </li>
@@ -129,7 +129,7 @@
                   <p class="copyright text-muted">
                       Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
                       <br>
-                      Theme by <a href="http://tengblog.com">Teng</a> | 对世界保持学习力
+                      Theme by <a href="http://tengblog.com">Teng</a> | �����籣��ѧϰ��
 
                   </p>
               </div>
@@ -137,18 +137,9 @@
       </div>
 
 
-
-
   </footer>
-  <!-- jQuery -->
-  <script src="{{ "/js/jquery.min.js " | prepend: site.baseurl }}"></script>
+</footer>
 
-  <!-- Bootstrap Core JavaScript -->
-  <script src="{{ "/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
-
-  <!-- Custom Theme JavaScript -->
-  <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
---------------------------------------------------------------------------------
 <!-- jQuery -->
 <script src="//cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
 
@@ -157,20 +148,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/codeboy.min.js " | prepend: site.baseurl }}"></script>
-------------------------------------------------------------------------------------
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
---------------------------------------------------------------------------------
 
 <!-- TODO: only load in tag.html -->
 <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
@@ -183,6 +160,7 @@
         $('#tag_cloud a').tagcloud();
     });
 </script>
+
 
 <!-- async load function -->
 <script>
@@ -239,6 +217,8 @@
 </script>
 
 
+
+
 <!-- Google Analytics -->
 {% if site.ga_track_id %}
 <script>
@@ -274,8 +254,6 @@
     })();
 </script>
 {% endif %}
-
-
 
 <!-- Side Catalog -->
 {% if page.catalog %}
@@ -322,6 +300,11 @@
         });
     });
 </script>
+<script>
+    async("//cdn.bootcss.com/highlight.js/9.4.0/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
 
 <!-- Highlight.js -->
 <script>
@@ -334,7 +317,7 @@
 <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
       opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
     <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px"
-           placeholder="文章标题 日期 标签"
+           placeholder="���±��� ���� ��ǩ"
            >
 
     <div style="position: fixed; top: 16px; right: 16px;">
@@ -343,7 +326,7 @@
 </div>
 
 <div style="position: fixed; right: 16px; bottom: 20px;">
-    <img src="/search/img/cb-search.png"  id="search-btn"  title="双击ctrl试一下"/>
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="˫��ctrl��һ��"/>
 </div>
 
 <link rel="stylesheet" href="{{ "/search/css/cb-search.css" | prepend: site.baseurl }}">
