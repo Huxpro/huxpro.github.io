@@ -13,6 +13,8 @@ tags:
 ---
 > 电影是个好东西
 
+## 诚意，不装很重要
+
 看电影和以前做阅读理解一样，有类似“薛定谔的猫”的迷局，作者这么写到底是具体实景如此，顺手写下，还如同阅读理解答案里的层层伏笔，绵伏千里呢？
 
 周末去影院看了雪茄杜的银河映像20年纪念的《三人行》，老实说一般，不如前一晚看的《PTU》，更不如刚才看完的《树大招风》。比电影有趣的是，退场的时候，在电影售票处看到在发送《三人行》宣传画的两个小姑娘。
@@ -38,6 +40,7 @@ tags:
 ![](http://7xtgob.com2.z0.glb.clouddn.com/shudazhaofen1463118850.jpg)
 
 这处，盗匪吹口哨，致敬的是《文雀》
+
 ![](https://img1.doubanio.com/view/photo/photo/public/p1959224857.jpg)
 
 不过，也许是担心观众看不懂片中的典故，还同期出了纪录片，就像“古典名著”出的注解版，发送传单的小姑娘为什么不相信，
@@ -55,9 +58,18 @@ tags:
 
 ![](http://7xtgob.com2.z0.glb.clouddn.com/shudazhaofen%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160628115922.png)
 
+## 树大招风
+
 这电影好啊，
 > 好在没有上面《三人行》的做作，好在微思则明的时代感，好在即便是贼王在时代面前也无力的悲凉感，也好在和现在香港的对照。
 
 三个角色都是响当当的贼王，面对现实却是那么的无力。
+![](http://7xtgob.com2.z0.glb.clouddn.com/shudazhaofen0%20%283%29.jpg)
+
+![](http://7xtgob.com2.z0.glb.clouddn.com/shudazhaofen0%20%284%29.jpg)
+
+![](http://7xtgob.com2.z0.glb.clouddn.com/shudazhaofen%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160628115957.png)
+
+慢慢的银河映像风格。
 
 > 未完
