@@ -41,8 +41,6 @@ tags:
 
 这处，盗匪吹口哨，致敬的是《文雀》
 
-![](https://img1.doubanio.com/view/photo/photo/public/p1959224857.jpg)
-
 不过，也许是担心观众看不懂片中的典故，还同期出了纪录片，就像“古典名著”出的注解版，发送传单的小姑娘为什么不相信，
 > 好电影，观众自然会看得懂，就像好演技不是靠台词多、秀智商来表现一样。
 
@@ -70,6 +68,6 @@ tags:
 
 ![](http://7xtgob.com2.z0.glb.clouddn.com/shudazhaofen%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160628115957.png)
 
-慢慢的银河映像风格。
+满满的银河映像风格。
 
 > 未完
