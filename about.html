@@ -51,7 +51,7 @@ header-img: "img/about-bg.jpg"
 <script type="text/javascript">
     // get nodes
     var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".un");
+    var $un = document.querySelector(".un");
     var $select = document.querySelector("select");
 
     // bind hashchange event
@@ -63,14 +63,14 @@ header-img: "img/about-bg.jpg"
         // en
         if(_hash == "#un"){
             $select.selectedIndex = 0;
-            $en.style.display = "block";
+            $un.style.display = "block";
             $zh.style.display = "none";
         // zh by default
         }else{
             // not trigger onChange, otherwise cause a loop call.
             $select.selectedIndex = 1;
             $zh.style.display = "block";
-            $en.style.display = "none";
+            $un.style.display = "none";
         }
     }
 
