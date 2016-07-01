@@ -4,7 +4,7 @@ title:      "06书单以及半年的记录"
 subtitle:   "看书还是要多看，翻翻也好"
 date:       2016-06-30
 author:     "Teng"
-header-img: "img/post-bg-06reading.jpg"
+header-img: "img/post-bg-06reading0.jpg"
 catalog: true
 tags:
     - 随想录
@@ -38,6 +38,7 @@ tags:
   当然，看的时候有很多感受，还写了不少自己的感受，也可以在博客开始写个“职场”的标签，希望可以写写东西，指导着自己的工作。
 
 此外，还一些在翻的书，
+
 - 正午02
 - 梵高手稿
 - 西雅图之声
