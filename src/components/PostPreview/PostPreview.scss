@@ -1,0 +1,59 @@
+@import "../variables.scss";
+
+.root {
+	> a {
+		color: $gray-dark;
+		&:hover,
+		&:focus {
+			color: $brand-primary;
+			text-decoration: none;
+		}
+		> .title {
+			margin-top: 30px;
+			margin-bottom: 8px;
+			font-size: 21px;
+			line-height: 1.3;
+		}
+		> .subtitle {
+			margin: 0;
+			margin-bottom: 10px;
+			font-size: 15px;
+			font-weight: 300;
+			line-height: 1.3;
+		}
+		> .preview {
+			font-size: 13px;
+			font-style: italic;
+			color: #a3a3a3;
+			&:hover {
+				color: $brand-primary;
+			}
+		}
+	}
+	.meta {
+		margin-top: 0;
+		font-family: $font-family-serif;
+		font-size: 16px;
+		font-style: italic;
+		color: $gray;
+	}
+
+	@media only screen and (min-width: 768px) {
+		> a {
+			> .title {
+				margin-bottom: 10px;
+				font-size: 26px;
+				line-height: 1.3;
+			}
+			> .subtitle {
+				font-size: 16px;
+			}
+			> .preview {
+				font-size: 14px;
+			}
+		}
+		.meta {
+			font-size: 18px;
+		}
+	}
+}

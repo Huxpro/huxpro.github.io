@@ -1,0 +1,15 @@
+@import "../variables.scss";
+
+.root {
+	@media only screen and (max-width: 991px) {
+		display: none;
+	}
+	img {
+		display: block;
+		width: 80%;
+		margin-bottom: 20px;
+		vertical-align: middle;
+		border: 0;
+		border-radius: 5px;
+	}
+}

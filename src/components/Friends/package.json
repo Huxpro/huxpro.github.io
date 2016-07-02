@@ -1,0 +1,6 @@
+{
+	"name": "Friends",
+	"version": "0.0.0",
+	"private": true,
+	"main": "./Friends.js"
+}

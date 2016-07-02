@@ -1,0 +1,6 @@
+{
+	"name": "ToggleButton",
+	"version": "0.0.0",
+	"private": true,
+	"main": "./ToggleButton.js"
+}

@@ -1,0 +1,81 @@
+@import "../variables.scss";
+
+.root {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 3;
+	width: 100%;
+	min-height: 50px;
+	margin-bottom: 20px;
+	font-family: $font-family-base;
+	// materialize
+	background: none;
+	border: none;
+	border-radius: 0;
+
+	.header {
+		margin-right: -15px;
+		margin-left: -15px;
+		@mixin clearFix {
+		}
+	;
+	}
+	.brand {
+		float: left;
+		height: 56px;
+		// materialize
+		padding: 15px;
+		font-size: 18px;
+		font-weight: 800;
+		line-height: 25px;
+		color: white;
+		&:hover {
+			color: rgba(255, 255, 255, .8);
+		}
+	}
+
+	@media only screen and (min-width: 768px) {
+		background: transparent;
+		border-bottom: 1px solid transparent;
+		.header {
+			float: left;
+			margin-right: 0;
+			margin-left: 0;
+		}
+		.brand {
+			padding: 20px;
+			margin-left: -15px;
+			line-height: 20px;
+			color: #fff;
+		}
+	}
+
+	@media only screen and (min-width: 1170px) {
+		transition: background-color .3s;
+		/* Force Hardware Acceleration in WebKit */
+		transform: translate3d(0, 0, 0);
+
+		backface-visibility: hidden;
+		&.fixed {
+			/* when the user scrolls down, we hide the header right above the viewport */
+			position: fixed;
+			top: -61px;
+			background-color: rgba(255, 255, 255, .9);
+			border-bottom: 1px solid #f2f2f2;
+			transition: transform .3s;
+			.brand {
+				color: $gray-dark;
+				&:hover,
+				&:focus {
+					color: $brand-primary;
+				}
+			}
+		}
+		&.visible {
+			/* if the user changes the scrolling direction, we show the header */
+			transform: translate3d(0, 100%, 0);
+		}
+	}
+}

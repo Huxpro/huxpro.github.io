@@ -1,0 +1,8 @@
+@import "../variables.scss";
+
+.postList {
+	margin-bottom: 15px;
+	@media only screen and (min-width: 992px) {
+		margin-left: 8.33333333%;
+	}
+}

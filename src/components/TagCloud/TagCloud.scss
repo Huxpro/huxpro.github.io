@@ -1,0 +1,23 @@
+@import "../variables.scss";
+
+.root {
+	margin: 20px 0 15px 0;
+	.tag {
+		display: inline-block;
+		padding: 0 10px;
+		margin: 0 2px 8px;
+		font-size: 14px;
+		line-height: 28px;
+		color: #fff;
+		border: none;
+		border-radius: 999em;
+		&:hover, &:active {
+			color: #fff;
+			background-color: $brand-primary !important;
+			border-color: #fff;
+		}
+	}
+	@media only screen and (min-width: 768px) {
+		margin-bottom: 25px;
+	}
+}

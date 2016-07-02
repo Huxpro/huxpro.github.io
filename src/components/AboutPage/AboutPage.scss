@@ -1,0 +1,29 @@
+@import "../variables.scss";
+
+.root {
+	blockquote {
+		padding: 10px 20px;
+		margin: 20px 0 20px;
+		font-size: .95em;
+		font-style: italic;
+		color: gray;
+		border-left: 5px solid #eee;
+		p {
+			margin: 0;
+		}
+	}
+	a {
+		color: #557ab7;
+		&:hover,
+		&:focus {
+			color: #0085e1;
+			text-decoration: none;
+		}
+	}
+	h5 {
+		margin: 30px 0 10px;
+		font-size: 19px;
+		font-weight: 600;
+		color: gray;
+	}
+}

@@ -1,0 +1,35 @@
+@import "../variables.scss";
+
+.root {
+	position: relative;
+	float: right;
+	padding: 19px 16px;
+	margin-top: 2px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+	background: transparent none;
+	border: 1px solid transparent;
+	border-radius: 50%;
+	&:focus {
+		background-color: inherit;
+		outline: none;
+	}
+	&:active {
+		background-color: rgba(255, 255, 255, .25);
+	}
+	.iconBar {
+		display: block;
+		width: 18px;
+		height: 2px;
+		// materialize
+		background-color: white;
+		border-radius: 0;
+	}
+	.iconBar + .iconBar {
+		margin-top: 3px;
+	}
+
+	@media only screen and (min-width: 768px) {
+		display: none;
+	}
+}

@@ -1,0 +1,198 @@
+// Bootstrap Variables Lite
+
+// Variables
+//
+// Copy settings from this file into the provided `_custom.scss` to override
+// the Bootstrap defaults without modifying key, versioned files.
+
+// Table of Contents
+//
+// Colors
+// Options
+// Spacing
+// Body
+// Links
+// Grid
+// Grid breakpoints
+// Grid containers
+// Grid columns
+// Typography
+// Components
+// Animations
+
+/*
+ * Colors
+ * ========================================================================== */
+
+$white-base: hsl(255, 255, 255);
+$gray-darker: #222 !default;
+$gray-dark: #373a3c !default;
+$gray: #55595c !default;
+$gray-light: #818a91 !default;
+$gray-lighter: #eceeef !default;
+$gray-lightest: #f7f7f9 !default;
+$brand-primary: #0275d8 !default;
+$brand-success: #5cb85c !default;
+$brand-info: #5bc0de !default;
+$brand-warning: #f0ad4e !default;
+$brand-danger: #d9534f !default;
+$brand-inverse: $gray-dark !default;
+
+// custom by Hux
+$brand-primary: #0085a1;
+$gray-dark: #404040;
+$gray: #808080;
+$gray-l: #bfbfbf;
+$white-faded: rgba(255, 255, 255, .8);
+$gray-light: #eee;
+
+/*
+ * Options
+ * ========================================================================== */
+
+$enable-flex: false !default;
+$enable-rounded: true !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: false !default;
+$enable-hover-media-query: false !default;
+$enable-grid-classes: true !default;
+$enable-print-styles: true !default;
+
+/*
+ * Spacing
+ * ========================================================================== */
+
+/*
+ * Body
+ * ========================================================================== */
+
+$body-bg: #fff !default;
+$body-color: $gray-dark !default;
+
+/*
+ * Links
+ * ========================================================================== */
+
+$link-color: $brand-primary !default;
+$link-decoration: none !default;
+$link-hover-color: darken($link-color, 15%) !default;
+$link-hover-decoration: underline !default;
+
+/*
+ * Grid
+ * ========================================================================== */
+
+$max-content-width: 1000px;
+
+/*
+ * Grid breakpoints
+ * ========================================================================== */
+
+$screen-xs-min: 480px; /* Extra small screen / phone */
+$screen-sm-min: 768px; /* Small screen / tablet */
+$screen-md-min: 992px; /* Medium screen / desktop */
+$screen-lg-min: 1200px; /* Large screen / wide desktop */
+$grid-breakpoints: (
+	// Extra small screen / phone
+	xs: 0,
+	// Small screen / phone
+	sm: 544px,
+	// Medium screen / tablet
+	md: 768px,
+	// Large screen / desktop
+	lg: 992px,
+	// Extra large screen / wide desktop
+	xl: 1200px
+) !default;
+
+/*
+ * Grid containers
+ * ========================================================================== */
+
+$container-max-widths: (
+	sm: 576px,
+	md: 720px,
+	lg: 940px,
+	xl: 1140px
+) !default;
+
+/*
+ * Grid columns
+ * ========================================================================== */
+
+/*
+ * Typography
+ * ========================================================================== */
+
+$font-family-sans-serif: -apple-system,
+"Helvetica Neue",
+"Arial",
+" Segoe UI",
+"PingFang SC",
+"Hiragino Sans GB",
+"STHeiti",
+"Microsoft YaHei",
+"Microsoft JhengHei",
+"Source Han Sans SC",
+"Noto Sans CJK SC",
+"Source Han Sans CN",
+"Noto Sans SC",
+"Source Han Sans TC",
+"Noto Sans CJK TC",
+"WenQuanYi Micro Hei",
+SimSun,
+sans-serif;
+$font-family-base: $font-family-sans-serif !default;
+$font-family-serif: 'Lora', 'Times New Roman', serif !default;
+$font-size-base: 1rem !default;
+$line-height-base: 1.7 !default;
+$abbr-border-color: $gray-light !default;
+$dt-font-weight: bold !default;
+$text-muted: $gray-light !default;
+
+/*
+ * Components
+ * ========================================================================== */
+
+// tables
+
+$table-cell-padding: .75rem !default;
+$table-bg: transparent !default;
+
+// forms
+
+$cursor-disabled: not-allowed !default;
+
+/*
+ * Animations
+ * ========================================================================== */
+
+$animation-swift-out: .45s cubic-bezier(.3, 1, .4, 1) 0s;
+
+/*
+ * mixins
+ * ========================================================================== */
+//noinspection ALL
+@define-mixin transition-all {
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+}
+
+//noinspection ALL
+@define-mixin background-cover {
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+//noinspection ALL
+@define-mixin clearFix {
+	&::after {
+		display: table;
+		clear: both;
+		content: "";
+	}
+}

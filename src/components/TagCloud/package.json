@@ -1,0 +1,6 @@
+{
+	"name": "TagCloud",
+	"version": "0.0.0",
+	"private": true,
+	"main": "./TagCloud.js"
+}

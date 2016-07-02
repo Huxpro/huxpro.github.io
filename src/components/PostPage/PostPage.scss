@@ -1,0 +1,195 @@
+@import "../variables.scss";
+
+.post {
+	a {
+		color: #337ab7;
+		&:hover {
+			color: #0085a1;
+		}
+		&:hover, &:focus {
+			text-decoration: underline;
+		}
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin: 30px 0 10px;
+	}
+
+	h2 {
+		font-size: 30px;
+	}
+	h3 {
+		font-size: 24px;
+	}
+	h4 {
+		font-size: 21px;
+	}
+	h5 {
+		font-size: 19px;
+		font-weight: 600;
+		color: gray;
+		& + p {
+			margin-top: 5px;
+		}
+	}
+	h6 {
+		font-size: 16px;
+		font-weight: 600;
+		color: gray;
+		& + p {
+			margin-top: 5px;
+		}
+	}
+	ul, ol {
+		margin-bottom: 40px;
+		@media screen and (max-width: 768px) {
+			& {
+				padding-left: 30px;
+			}
+		}
+		@media screen and (max-width: 500px) {
+			& {
+				padding-left: 20px;
+			}
+		}
+	}
+	ol ol, ol ul, ul ol, ul ul {
+		margin-bottom: 5px;
+	}
+	li {
+		p {
+			margin: 0;
+			margin-bottom: 5px;
+		}
+		h1, h2, h3, h4, h5, h6 {
+			margin-top: 20px;
+			line-height: 2;
+		}
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin: 1.5em auto 1.6em auto;
+	}
+
+	pre {
+		display: block;
+		padding: 6px 10px;
+		margin: 0 0 10px;
+		overflow: auto;
+		font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #333;
+		word-break: break-all;
+		word-wrap: break-word;
+		background-color: #f8f8f8;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		code {
+			display: block;
+			width: auto;
+			padding: 0;
+			font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+			font-size: inherit;
+			color: inherit;
+			word-wrap: normal;
+			white-space: pre;
+			background-color: transparent;
+			border-radius: 0;
+		}
+	}
+	code {
+		padding: 2px 4px;
+		font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+		font-size: 90%;
+		color: #c7254e;
+		background-color: #f9f2f4;
+		border-radius: 4px;
+	}
+}
+
+.catalog {
+	display: block;
+	width: 195px;
+	height: 100%;
+	padding-bottom: 40px;
+	overflow: auto;
+	.catalogBrand {
+		padding-bottom: 1em;
+		color: gray;
+	}
+	a {
+		font-size: 14px;
+		color: gray;
+		text-decoration: none;
+		&:hover, &:active, &:focus {
+			color: #0085a1;
+		}
+	}
+	.catalogToggle::before {
+		position: relative;
+		bottom: 1px;
+		margin-right: 5px;
+		content: "−";
+	}
+	.catalogBody {
+		position: relative;
+		height: auto;
+		padding-right: 5px;
+		padding-left: 0;
+		overflow: hidden;
+		text-indent: 0;
+		list-style: none;
+		.h1-nav,
+		.h2-nav,
+		.h3-nav {
+			margin-left: 0;
+			font-size: 13px;
+			font-weight: 700;
+		}
+		.h4-nav,
+		.h5-nav,
+		.h6-nav {
+			margin-left: 10px;
+			font-size: 12px;
+		}
+		a {
+			display: inline-block;
+			max-width: 180px;
+			height: 30px;
+			padding-left: 10px;
+			overflow: hidden;
+			line-height: 30px;
+			text-decoration: none;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			vertical-align: middle;
+		}
+		.active {
+			background-color: #f5f5f5;
+			border-radius: 4px;
+			a {
+				color: #0085a1;
+			}
+		}
+	}
+	&.fold {
+		.catalogBody {
+			display: none;
+		}
+		.catalogToggle::before {
+			content: "+";
+		}
+	}
+	&.fixed {
+		position: fixed;
+		top: -21px;
+	}
+}

@@ -1,0 +1,66 @@
+@import "../variables.scss";
+
+.root {
+	padding: 0;
+	margin: 20px 0 0;
+	text-align: center;
+	list-style: none;
+	@mixin clearFix {
+	}
+	li {
+		display: inline;
+		> a {
+			display: inline-block;
+			padding: 10px;
+			font-family: $font-family-base;
+			font-size: 13px;
+			font-weight: 800;
+			line-height: 1.7;
+			color: $gray-dark;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			border-radius: 0;
+			.sub {
+				font-weight: 400;
+				color: $gray;
+				letter-spacing: .5px;
+			}
+			&:hover, &:focus {
+				color: white;
+				background-color: $brand-primary;
+				border: 1px solid $brand-primary;
+				.sub {
+					color: #fff;
+				}
+			}
+		}
+		&.previous > a {
+			float: left;
+		}
+		&.next > a {
+			float: right;
+		}
+	}
+	@media only screen and (min-width: 768px) {
+		li > a {
+			padding: 15px 25px;
+			font-size: 14px;
+		}
+	}
+	&.post {
+		li {
+			width: 48%;
+			> a {
+				width: 100%;
+			}
+			&.previous {
+				float: left;
+			}
+			&.next {
+				float: right;
+			}
+		}
+	}
+}

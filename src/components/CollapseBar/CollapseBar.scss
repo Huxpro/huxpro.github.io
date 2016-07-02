@@ -1,0 +1,135 @@
+@import "../variables.scss";
+
+.root {
+	max-height: 340px;
+	padding-right: 15px;
+	padding-left: 15px;
+	overflow-x: visible;
+	-webkit-overflow-scrolling: touch;
+	border-color: #e7e7e7;
+	border-top: 1px solid transparent;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
+	@mixin clearFix {
+	}
+;
+	.bar {
+		padding-left: 0;
+		margin: 7.5px -15px;
+		list-style: none;
+		> li {
+			position: relative;
+			display: block;
+			a {
+				position: relative;
+				display: block;
+				padding: 10px 15px;
+				font-size: 12px;
+				font-weight: 800;
+				line-height: 20px;
+				color: #777;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				// only highlight in mobile
+				&:active {
+					background: rgba(0, 0, 0, .12);
+				}
+				&:hover {
+					color: #333;
+					background: transparent;
+				}
+			}
+		}
+	}
+	@media only screen and (min-width: 768px) {
+		width: auto;
+		padding-right: 0;
+		padding-left: 0;
+		overflow-x: visible;
+		border-top: 0;
+		box-shadow: none;
+		.bar {
+			float: right;
+			padding-left: 0;
+			margin: 0 -15px 0 0;
+			list-style: none;
+			> li {
+				float: left;
+				a {
+					padding: 20px;
+					color: white;
+					&:hover,
+					&:focus {
+						color: $white-faded;
+					}
+					&:active {
+						background: none;
+					}
+				}
+			}
+		}
+	}
+
+	@media only screen and (min-width: 1170px) {
+		&.fixed .bar {
+			> li a {
+				color: $gray-dark;
+				&:hover,
+				&:focus {
+					color: $brand-primary;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.wrapper {
+		opacity: 0;
+		transition: all 200ms cubic-bezier(.47, 0, .4, .99) 0ms;
+		transform: scaleX(0);
+		transform-origin: top right;
+		.root {
+			position: absolute;
+			right: 0;
+			width: 170px;
+			height: 0; // to solve container-mask-tags issue (default state).
+			background: white;
+			border: none;
+			border-radius: 2px;
+			box-shadow: rgba(0, 0, 0, .117647) 0 1px 6px, rgba(0, 0, 0, .239216) 0 1px 4px;
+			transition: transform 400ms cubic-bezier(.32, 1, .23, 1) 0ms;
+			transform: scaleY(0);
+			transform-origin: top right;
+			.bar > li {
+				opacity: 0;
+				-webkit-transition: opacity 100ms cubic-bezier(.23, 1, .32, 1) 0ms;
+				transition: opacity 100ms cubic-bezier(.23, 1, .32, 1) 0ms;
+
+				a {
+					font-size: 13px;
+					line-height: 28px;
+				}
+			}
+		}
+		&.in {
+			opacity: 1;
+			-webkit-transition: all 250ms cubic-bezier(.23, 1, .32, 1) 0ms;
+			transition: all 250ms cubic-bezier(.23, 1, .32, 1) 0ms;
+			-webkit-transform: scaleX(1);
+			transform: scaleX(1);
+			.root {
+				height: 0;
+				-webkit-transition: -webkit-transform 500ms cubic-bezier(.23, 1, .32, 1);
+				transition: transform 500ms cubic-bezier(.23, 1, .32, 1);
+				-webkit-transform: scaleY(1);
+				transform: scaleY(1);
+				.bar > li {
+					opacity: 1;
+					-webkit-transition: opacity 450ms cubic-bezier(.23, 1, .32, 1) 205ms;
+					transition: opacity 450ms cubic-bezier(.23, 1, .32, 1) 205ms;
+				}
+			}
+		}
+	}
+}

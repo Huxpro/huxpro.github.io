@@ -1,0 +1,14 @@
+@import "../variables.scss";
+
+.root {
+	padding-left: 0;
+	margin-top: 0;
+	margin-bottom: 10px;
+	margin-left: -5px;
+	list-style: none;
+	li {
+		display: inline-block;
+		padding-right: 5px;
+		padding-left: 0;
+	}
+}

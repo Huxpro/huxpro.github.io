@@ -1,0 +1,17 @@
+@import '../variables.scss';
+
+.root {
+	padding: 50px 0 65px;
+	font-size: 20px;
+	ul {
+		padding: 0 !important;
+		margin: 0 !important;
+		text-align: center;
+	}
+	.copyright {
+		margin-bottom: 0;
+		font-size: 14px;
+		color: #777;
+		text-align: center;
+	}
+}

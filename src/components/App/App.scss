@@ -1,0 +1,314 @@
+@import '../../../node_modules/normalize.css/normalize.css';
+@import '../variables.scss';
+
+//@import '../reboot.scss';
+
+/*
+ * Base styles
+ * ========================================================================== */
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-family: $font-family-base;
+	//font-weight: 100;
+	font-size: 1em; /* ~16px; */
+	line-height: 1.7; /* ~22px */
+	color: #222;
+}
+
+div[class^='col'] {
+	position: relative;
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+a {
+	text-decoration: none;
+	&:link,
+	&:visited,
+	&:hover,
+	&:active {
+		text-decoration: none;
+	}
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+	display: block;
+	height: 1px;
+	padding: 0;
+	margin: 1.27em 0;
+	border: 0;
+	border-top: 1px solid #ccc;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * portfolio, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+	vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+	resize: vertical;
+}
+
+/*
+ * Browser upgrade prompt
+ * ========================================================================== */
+
+//noinspection ALL
+:global(.browserupgrade) {
+	padding: .2em 0;
+	margin: .2em 0;
+	color: #000;
+	background: #ccc;
+}
+
+/*
+ * Print styles
+ * Inlined to avoid the additional HTTP request:
+ * http://www.phpied.com/delay-loading-your-print-css/
+ * ========================================================================== */
+
+@media print {
+	*,
+	*:before,
+	*:after {
+		color: #000 !important; /* Black prints faster: http://www.sanbeiji.com/archives/953 */
+		text-shadow: none !important;
+		background: transparent !important;
+		box-shadow: none !important;
+	}
+
+	a,
+	a:visited {
+		text-decoration: underline;
+	}
+
+	a[href]:after {
+		content: " (" attr(href) ")";
+	}
+
+	abbr[title]:after {
+		content: " (" attr(title) ")";
+	}
+
+	/*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+	a[href^="#"]:after,
+	a[href^="javascript:"]:after {
+		content: "";
+	}
+
+	pre,
+	blockquote {
+		border: 1px solid #999;
+
+		page-break-inside: avoid;
+	}
+
+	/*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+	thead {
+		display: table-header-group;
+	}
+
+	tr,
+	img {
+		page-break-inside: avoid;
+	}
+
+	img {
+		max-width: 100% !important;
+	}
+
+	p,
+	h2,
+	h3 {
+		orphans: 3;
+		widows: 3;
+	}
+
+	h2,
+	h3 {
+		page-break-after: avoid;
+	}
+}
+
+/*
+ * Global Components
+ * ========================================================================== */
+body {
+	//-webkit-user-select:text; //对于 Blog 还是先不开启这句。
+	overflow-x: hidden;
+	font-family: $font-family-base;
+	font-size: 16px;
+	// Hux mpdify to 16px (Mobile First), and increase to 20px while 768+ width
+	color: $gray-dark;
+}
+
+// -- Typography
+
+p {
+	margin: 30px 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-bottom: 10px;
+	font-family: $font-family-base;
+	font-weight: bold;
+	line-height: 1.1;
+}
+
+h1 {
+	// drop V1.1.1
+	//font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h4 {
+	font-size: 21px;
+}
+
+a {
+	color: $gray-dark;
+	&:hover,
+	&:focus {
+		color: $brand-primary;
+	}
+}
+
+a img {
+	&:hover,
+	&:focus {
+		cursor: zoom-in;
+	}
+}
+
+article {
+	overflow-x: hidden;
+}
+
+blockquote {
+	padding: 10px 20px;
+	margin: 20px 0 20px;
+	font-size: .95em;
+	font-style: italic;
+	color: $gray;
+	border-left: 5px solid #eee;
+	p {
+		margin: 0;
+	}
+}
+
+// Utils Style Class can be used in Markdown.
+small.img-hint {
+	display: block;
+	margin-top: -20px;
+	text-align: center;
+}
+
+br + small.img-hint {
+	margin-top: -40px;
+}
+
+img.shadow {
+	box-shadow: rgba(0, 0, 0, .258824) 0 2px 5px 0;
+}
+
+// Utils Style End
+
+@media screen and (max-width: 768px) {
+	select {
+		-webkit-appearance: none;
+		padding: 0 .4em;
+		margin-top: 15px;
+		color: #337ab7;
+		background: white;
+		border-color: #337ab7;
+	}
+}
+
+// override table style in bootstrap
+.table th,
+.table td {
+	border: 1px solid #eee !important;
+}
+
+hr.small {
+	max-width: 100px;
+	margin: 15px auto;
+	border-color: white;
+	border-width: 4px;
+}
+
+// add by Hux
+pre,
+.table-responsive {
+	// sometimes you should use vendor-feature.
+	-webkit-overflow-scrolling: touch;
+}
+
+pre code {
+	display: block;
+	width: auto;
+	word-wrap: normal; // no-wrap
+	white-space: pre; // save it but no-wrap;
+}

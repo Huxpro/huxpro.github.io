@@ -1,0 +1,23 @@
+@import "../variables.scss";
+
+.root {
+	font-size: 14px;
+	color: $gray-l;
+	@media (min-width: 768px) {
+		padding-right: 5%;
+	}
+	h5 {
+		padding-bottom: 1em;
+		color: $gray;
+		a {
+			color: $gray;
+			text-decoration: none;
+		}
+	}
+	a {
+		color: $gray-l;
+		&:hover, &:active {
+			color: $brand-primary;
+		}
+	}
+}

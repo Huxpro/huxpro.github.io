@@ -1,0 +1,6 @@
+{
+	"name": "PortfolioPage",
+	"version": "0.0.0",
+	"private": true,
+	"main": "./PortfolioPage.js"
+}

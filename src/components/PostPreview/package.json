@@ -1,0 +1,6 @@
+{
+	"name": "PostPreview",
+	"version": "0.0.0",
+	"private": true,
+	"main": "./PostPreview.js"
+}

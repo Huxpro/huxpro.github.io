@@ -1,6 +1,8 @@
-_site
+# Include your project-specific ignores in this file
+# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+
+build
 node_modules
-.DS_Store
-*/.DS_Store
-*/*/.DS_Store
-*.sh
+ncp-debug.log
+npm-debug.log
+/scss/
