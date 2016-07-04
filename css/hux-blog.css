@@ -1087,3 +1087,26 @@ img::-moz-selection {
 .page-fullscreen footer .copyright a:hover {
   color: #ddd;
 }
+
+
+#back-top {
+  position: fixed;
+  bottom: 30px;
+  margin-left: 1040px;
+}
+#back-top a {
+  width: 40px;
+  height: 80px;
+  display: block;
+  background: #ddd url(/img/top_bg.png) no-repeat center center;
+  background-color: #aaa;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  background-color: #777;
+}
