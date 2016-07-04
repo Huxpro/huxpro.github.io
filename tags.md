@@ -1,6 +1,6 @@
 ---
 title: Tags
-layout: default
+layout: default09
 description: keep hungry keep foolish
 header-img: "img/tag-bg.jpg"
 ---
