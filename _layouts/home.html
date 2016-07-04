@@ -2,12 +2,12 @@
 <html>
 <!--
 ====================================================
-    __  ____  ______________  _______ ___    __ 
-   / / / /  |/  / ____/   \ \/ / ___//   |  / / 
-  / /_/ / /|_/ / /_  / /| |\  /\__ \/ /| | / /  
+    __  ____  ______________  _______ ___    __
+   / / / /  |/  / ____/   \ \/ / ___//   |  / /
+  / /_/ / /|_/ / /_  / /| |\  /\__ \/ /| | / /
  / __  / /  / / __/ / ___ |/ /___/ / ___ |/ /___
 /_/ /_/_/  /_/_/   /_/  |_/_//____/_/  |_/_____/
-                                                     
+
 ====================================================
 Owner Name: Hossain Mohammad Faysal
 Profile: https://www.facebook.com/hmfaysal
@@ -31,11 +31,11 @@ Description: Awesome dude, awesome life
                 {% else %}
                     <a href="{{ site.url }}{{ link.url }}">{{ link.title }}</a>
                 {% endif %} </li>
-{% endfor %}            
+{% endfor %}
            <li><a href="{{ site.url }}/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
     </nav>
-    
-    
+
+
 </aside>
 {% if page.imagefeature %}<header id="masthead" class="blog-background overlay align-center align-middle animated from-bottom"  style="background-image: url({{ site.url }}/images/{{ page.imagefeature }})" itemscope itemtype="http://schema.org/Organization">
 {% else %}
@@ -56,7 +56,7 @@ Description: Awesome dude, awesome life
             <h1 class="blog-title light" itemprop="name">
                 {{ site.title }}
             </h1>
-                
+
             </a>
             <h2 class="blog-description light bordered bordered-top" itemprop="description">
                 {{ site.description }}
@@ -67,13 +67,13 @@ Description: Awesome dude, awesome life
     <div class="inner">
         <div class="container">
             <a class="brand" href="{{ site.url }}" role="banner" itemprop="url">
-                
+
                     <img itemprop="logo" src="{{ site.url }}/images/{{ site.logo }}" alt="{{ site.title }} Logo" />
 
             <h1 class="blog-title light" itemprop="name">
                 {{ site.title }}
             </h1>
-                
+
             </a>
         </div>
     </div>
@@ -111,18 +111,24 @@ Description: Awesome dude, awesome life
 </header>
 
 
+{%add up by mateng%}
+
+<a href="javascript":; id="btn" title="回到顶部"></a>
+
+
+
 
 <div id="main" class="content" role="main" itemprop="mainContentOfPage">
     <div class="container">
         <div class="row">
             <div class="page-body" itemprop="description">
             {{ content }}
-            </div>    
+            </div>
         </div>
     </div>
 </div>
     {% include footer.html %}
 
-{% include scripts.html %}  
+{% include scripts.html %}
 </body>
 </html>
