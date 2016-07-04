@@ -1087,9 +1087,3 @@ img::-moz-selection {
 .page-fullscreen footer .copyright a:hover {
   color: #ddd;
 }
-#btn {width:40px; height:40px; position: fixed; right:66px; bottom: 20px; display:none; background:url(img/top_bg.png) no-repeat left top;
-}
-#btn:hover {background:url(img/top_bg.png) no-repeat 0 -39px;
-}
-.bg {width:1190px; margin:0 auto;
-}
