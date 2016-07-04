@@ -1,9 +1,9 @@
----
+﻿
 title: Tags
-layout: default09
+layout: default
 description: keep hungry keep foolish
 header-img: "img/tag-bg.jpg"
----
+
 
 <!-- Page Header -->
 <header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
