@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "06书单以及半年的记录"
+title:      "06月书单以及半年的记录"
 subtitle:   "看书还是要多看，翻翻也好"
 date:       2016-06-30
 author:     "Teng"
