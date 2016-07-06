@@ -83,13 +83,19 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
+        title: "Su",
+        href: "http://su.gallery/"
+    },{
+        title: "乱序",
+        href: "http://mida.re/"
+    },{
         title: "前端外刊评论",
         href: "http://qianduan.guru/"
     },{
         title: "天镶的博客",
         href: "http://lingyu.wang/"
     },{
-        title: "Luke的自留地",
+        title: "Luke 的自留地",
         href: "http://hmqk1995.github.io"
     },{
         title: "Ebn's Blog",
