@@ -1,6 +1,5 @@
 ---
-
-layout:    post
+layout:     post
 title:      "《神逻辑》：和不讲道理的人讲道理？"
 subtitle:   "你咋不上天呢？ "
 date:       2016-07-08
