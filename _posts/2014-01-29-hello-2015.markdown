@@ -1,13 +1,13 @@
 ---
 layout:     post
-title:      "Hello 2015"
-subtitle:   " \"Hello World, Hello Blog\""
-date:       2015-01-29 12:00:00
-author:     "Hux"
+title:      "RAC2.5 到 RxSwift"
+subtitle:   " \"RAC2.5到 RxSwift的演变过程\""
+date:       2016-03-29 12:00:00
+author:     "Mub"
 header-img: "img/post-bg-2015.jpg"
 catalog: true
 tags:
-    - 生活
+    - iOS
 ---
 
 > “Yeah It's on. ”
@@ -15,7 +15,7 @@ tags:
 
 ## 前言
 
-Hux 的 Blog 就这么开通了。
+Mub 的 Blog 就这么开通了。
 
 [跳过废话，直接看技术实现 ](#build) 
 
