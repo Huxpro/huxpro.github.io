@@ -19,8 +19,8 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 
 ## Porting 
 
-- ![Hexo](https://github.com/Kaijun/hexo-theme-huxblog) by @kaijun
-- ![React-SSR](https://github.com/LucasIcarus/huxpro.github.io/tree/ssr) by @LucasIcarus
+- [**Hexo**](https://github.com/Kaijun/hexo-theme-huxblog) by @kaijun
+- [**React-SSR**](https://github.com/LucasIcarus/huxpro.github.io/tree/ssr) by @LucasIcarus
 
 ## Translation
 
