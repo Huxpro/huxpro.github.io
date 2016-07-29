@@ -1,6 +1,6 @@
 ---
 layout:      post
-title:       "Understanding NAs In R"
+title:       "Understand NAs In R"
 subtitle:    "理解R中缺失值的办法"
 data:        2016-7-24 10:23:22
 author:      "Dann"
