@@ -5,16 +5,6 @@
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
 
-### "Page Build Warning" email
-
-These days, some of you must receive a "Page Build Warning" email from github after you commit happily. **Don't Worried!** It just that github changes its build environment.
-
-In this mail, github told us:
-
-> You are attempting to use the 'pygments' highlighter, which is currently unsupported on GitHub Pages. Your site will use 'rouge' for highlighting instead. To suppress this warning, change the 'highlighter' value to 'rouge' in your '_config.yml'.
-
-So, just edit `_config.yml`, find `highlighter: pygments`, change it to `highlighter: rouge` and the warning will be gone.
-
 
 ## Boilerplate (beta)
 
@@ -26,6 +16,11 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 
 **[View Boilerplate Here &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
 
+
+## Porting 
+
+- [**Hexo**](https://github.com/Kaijun/hexo-theme-huxblog) by @kaijun
+- [**React-SSR**](https://github.com/LucasIcarus/huxpro.github.io/tree/ssr) by @LucasIcarus
 
 ## Translation
 
@@ -111,6 +106,7 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 	* [Customization](#customization)
 	* [Header Image](#header-image)
 	* [SEO Title](#seo-title)
+	* [Page Build Warning](#page-build-warning)
 
 #### Environment
 
@@ -300,6 +296,18 @@ Before V1.4, site setting `title` is not only used for displayed in Home Page an
 It's possible that you want the two things different. For me, my site-title is **“Hux Blog”** but I want the title shows in search engine is **“黄玄的博客 | Hux Blog”** which is multi-language.
 
 So, the SEO Title is introduced to solve this problem, you can set `SEOTitle` different from `title`, and it would be only used to generate HTML `<title>` and setting DuoShuo Sharing.
+
+#### Page Build Warning
+
+There are many possible reasons to cause a "Page Build Warning" email or similar error.
+
+One of these is that github changes its build environment.
+
+> You are attempting to use the 'pygments' highlighter, which is currently unsupported on GitHub Pages. Your site will use 'rouge' for highlighting instead. To suppress this warning, change the 'highlighter' value to 'rouge' in your '_config.yml'.
+
+So, just edit `_config.yml`, find `highlighter: pygments`, change it to `highlighter: rouge` and the warning will be gone.
+
+For other circumstance, check out existing issues or create a new one!
 
 ## Thanks
 
