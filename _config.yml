@@ -1,22 +1,23 @@
 # Site settings
-title: XuXinkun Blog
-SEOTitle: 徐新坤的博客 | XuXinkun Blog
-header-img: img/home-bg-o.jpg
-email: xuxinkun@gmail.com
-description: "XuXinkun Blog. 记录, 学习, 成长。"
-keyword: "徐新坤的博客, XuXinkun Blog, 博客, 个人网站, 云计算, docker, openstack"
-url: "http://xuxinkun.github.io"              # your host, for absolute URL
+title: 潘磊 Blog
+SEOTitle: 潘磊的博客 | 潘磊 Blog
+header-img: img/home-bg.jpg
+email: 361panlei@163.com
+description: "探索"
+keyword: "潘磊"
+url: "http://panlei361.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
 # SNS settings
 RSS: false
-#weibo_username:     xuxinkun
-#zhihu_username:     xuxinkun
-github_username:    xuxinkun
-#twitter_username:  xuxinkun
-#facebook_username:  xuxinkun
+#weibo_username:     huxpro
+#zhihu_username:     huxpro
+github_username:    panlei361
+#twitter_username:  huxpro
+#facebook_username:  huxpro
+# linkedin_username:  firstname-lastname-idxxxx
 
 
 
@@ -50,9 +51,9 @@ kramdown:
 #disqus_username: _your_disqus_short_name_
 
 # Duoshuo settings
-duoshuo_username: xuxinkungithub
+#duoshuo_username: panlei361
 # Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+#duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
 
 
@@ -68,8 +69,8 @@ duoshuo_share: true                     # set to false if you want to use Commen
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "记录，学习，分享，成长。"
-sidebar-avatar: /img/avatar-me.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，我想去看看。"
+sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -77,16 +78,16 @@ sidebar-avatar: /img/avatar-me.jpg      # use absolute URL, seeing it's used in 
 featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 2              # A tag will be featured if the size of it is more than this condition value
 
-catalog: true
+
 
 # Friends
 friends: [
     {
-        title: "黄玄的博客 | Hux Blog",
-        href: "http://huangxuan.me/"
-    },
-    {
-        title: "王亚普的博客 | WangYapu Blog",
-        href: "http://wangyapu0714.github.io/"
+        title: "Su",
+        href: "http://su.gallery/"
+    },{
+        title: "乱序",
+        href: "http://mida.re/"
     }
 ]
+port: 5001
