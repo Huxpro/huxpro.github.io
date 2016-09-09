@@ -1,0 +1,199 @@
+---
+layout:     post
+title:      "HOT学习"
+subtitle:   "Heat Orchestration Template Learn"
+date:       2016-03-28 12:00:00
+author:     "XuXinkun"
+header-img: "img/post-bg-hot-learn.jpg"
+tags:
+    - heat
+    - openstack
+    - template
+---
+
+# HOT学习
+
+heat支持aws的模板CFN(Cloud Formation)和heat自身的模板HOT。这里我们主要介绍的是heat的模板，Heat Orchestration Template (HOT)。
+
+HOT是使用yaml进行的定义。以下是一个基本的样例
+
+	heat_template_version: 2015-04-30
+	
+	description:
+	  # a description of the template
+	
+	parameter_groups:
+	  # a declaration of input parameter groups and order
+	
+	parameters:
+	  # declaration of input parameters
+	
+	resources:
+	  # declaration of template resources
+	
+	outputs:
+	  # declaration of output parameters
+
+
+# Intrinsic functions
+
+Intrinsic functions是用于template的函数。
+L版本主要使用的HOT版本:2015-10-15。
+支持的函数包括以下几种
+
+	get_attr
+	get_file
+	get_param
+	get_resource
+	list_join
+	repeat
+	digest
+	resource_facade
+	str_replace
+	str_split
+
+## get_attr
+
+get_attr的语法
+
+	get_attr:
+	  - <resource name>
+	  - <attribute name>
+	  - <key/index 1> (optional)
+	  - <key/index 2> (optional)
+	  - ...
+
+get_attr主要是从resource中获取对应attr的值。返回对应的值。
+
+查看resource_type的attr，比如查看OS::Nova::Server的attr可以通过 *heat resource-type-show OS::Nova::Server* 查看。
+
+比如template如下：
+
+	resources:
+	  my_instance:
+	    type: OS::Nova::Server
+	    # ...
+	
+	outputs:
+	  instance_ip:
+	    description: IP address of the deployed compute instance
+	    value: { get_attr: [my_instance, first_address] }
+	  instance_private_ip:
+	    description: Private IP address of the deployed compute instance
+	   value: { get_attr: [my_instance, networks, private, 0] }
+
+
+假设my_instance的resource中的attr中的networks如下：
+
+	{"public": ["2001:0db8:0000:0000:0000:ff00:0042:8329", "1.2.3.4"],
+	 "private": ["10.0.0.1"]}
+	 
+那么 *get_attr: [my_instance, networks, private, 0]* 即可获取"10.0.0.1"。
+
+## get_file
+
+get_file的语法
+
+	get_file: <content key>
+	
+一般content key是文件的对应路径。
+
+get_file主要是从对应的文件读取数据。返回整个文件的内容。
+
+## get_param
+
+	get_param:
+	 - <parameter name>
+	 - <key/index 1> (optional)
+	 - <key/index 2> (optional)
+	 - ...
+ 
+从parameter中获取对应的数据。返回从指定parameter中获取的数据。
+ 
+## get_resource
+
+get_resource的语法
+
+	get_resource: <resource ID>
+
+resource ID可以是resource的name，可以是在template定义的resource。
+
+get_resource主要是从resource获取resource的id。返回值为resource的ID。
+
+# 参考资料
+
+* [Template Guide](http://docs.openstack.org/developer/heat/template_guide/hot_spec.html)
+* [Heat Orchestration Template (HOT) Guide](http://docs.openstack.org/developer/heat/template_guide/hot_guide.html)
+* [HOT SPEC](http://docs.openstack.org/developer/heat/template_guide/hot_spec.html)
+
+# 测试模板
+
+测试命令: heat stack-create -f /tmp/test.yaml first
+
+	heat_template_version: 2013-05-23
+	
+	description: HOT template for two interconnected VMs with floating ips.
+	
+	parameters:
+	  image_id:
+	    type: string
+	    default: centos71_x86_64
+	    description: Image Name
+	 
+	  secgroup_id:
+	    type: string
+	    default: 0463af6b-e015-413c-852e-5c1bcb176cc0
+	    description : Id of the security groupe
+	
+	  public_net:
+	    type: string
+	    default: public
+	    description: public network id
+	
+	resources:
+	  private_net:
+	    type: OS::Neutron::Net
+	    properties:
+	      name: private-net
+	     
+	  private_subnet:
+	    type: OS::Neutron::Subnet
+	    properties:
+	      network_id: { get_resource: private_net }
+	      cidr: 172.16.2.0/24
+	      gateway_ip: 172.16.2.1
+	     
+	  router1:
+	    type: OS::Neutron::Router
+	    properties:
+	      external_gateway_info:
+	        network: { get_param: public_net }
+	     
+	  router1_interface:
+	    type: OS::Neutron::RouterInterface
+	    properties:
+	      router_id: { get_resource: router1 }
+	      subnet_id: { get_resource: private_subnet }
+	
+	  server1_port:
+	    type: OS::Neutron::Port
+	    properties:
+	      network_id: { get_resource: private_net }
+	      security_groups: [ get_param: secgroup_id ]
+	      fixed_ips:
+	        - subnet_id: { get_resource: private_subnet }
+	
+	  server1:
+	    type: OS::Nova::Server
+	    properties:
+	      name: Server1
+	      image: { get_param: image_id }
+	      flavor: m1.small
+	      networks:
+	        - port: { get_resource: server1_port }
+	     
+	outputs:
+	  server1_private_ip:
+	    description: Private IP address of server1
+	    value: { get_attr: [ server1, first_address ] }
+

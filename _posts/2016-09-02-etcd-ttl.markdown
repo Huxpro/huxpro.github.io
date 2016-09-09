@@ -1,0 +1,80 @@
+---
+layout:     post
+title:      "etcd使用之ttl不准确问题"
+subtitle:   "TTL for etcd"
+date:       2016-09-02 8:00:00
+author:     "XuXinkun"
+header-img: "img/post-bg-etcd-ttl.jpg"
+tags:
+    - etcd
+---
+
+
+# 问题现象
+
+部署有一个etcd集群，分别是`10.8.65.106`，`10.8.65.107`和`10.8.65.108`。
+
+然后我使用etcdctl为一个值设置ttl，然后通过watch观察，发现失效时间不准确，而且时间随机。
+
+比如我设置`/mytest/test`的ttl时间为10秒
+
+```sh
+[root@node-106 ~]# date && etcdctl set --ttl 10 /mytest/test hello && date
+Fri Sep  2 05:31:10 EDT 2016
+hello
+Fri Sep  2 05:31:10 EDT 2016
+```
+
+> 这里采用的是东八区时间，所以UTC时间应该为`2016-09-02T09:31:20`
+
+但是通过watch查看时候，发现etcd将其失效时间设置为了`2016-09-02T09:31:18`，而不是`2016-09-02T09:31:20`。
+
+```sh
+[root@node-106 ~]# curl -X GET "http://10.8.65.108:2379/v2/keys/mytest/test1?recursive=false&wait=true&stream=true"
+{"action":"set","node":{"key":"/mytest/test","value":"hello","expiration":"2016-09-02T09:31:18.221701998Z","ttl":17,"modifiedIndex":306840,"createdIndex":306840}}
+{"action":"expire","node":{"key":"/mytest/test","modifiedIndex":306844,"createdIndex":306840},"prevNode":{"key":"/mytest/test","value":"hello","expiration":"2016-09-02T09:31:18.221701998Z","ttl":9,"modifiedIndex":306840,"createdIndex":306840}}
+{"action":"expire","node":{"key":"/mytest/test","modifiedIndex":306844,"createdIndex":306840},"prevNode":{"key":"/mytest/test","value":"hello","expiration":"2016-09-02T09:31:18.221701998Z","ttl":9,"modifiedIndex":306840,"createdIndex":306840}}
+```
+
+这个反复实验多次，发现理论失效时间10秒与实际失效时间的误差，最多可能到9秒，也有0秒。误差似乎是随机的。
+
+# 问题分析
+
+打开debug模式，进行详细分析。
+
+```
+[root@node-106 ~]# date && etcdctl --debug set --ttl 10 /mytest/test1 hello && date
+Fri Sep  2 05:57:20 EDT 2016
+start to sync cluster using endpoints(http://127.0.0.1:4001,http://127.0.0.1:2379)
+cURL Command: curl -X GET http://127.0.0.1:4001/v2/members
+cURL Command: curl -X GET http://127.0.0.1:2379/v2/members
+got endpoints(http://10.8.65.107:2379,http://10.8.65.106:2379,http://10.8.65.108:2379) after sync
+Cluster-Endpoints: http://10.8.65.107:2379, http://10.8.65.106:2379, http://10.8.65.108:2379
+cURL Command: curl -X PUT http://10.8.65.107:2379/v2/keys/mytest/test1 -d "ttl=10&value=hello"
+hello
+Fri Sep  2 05:57:20 EDT 2016
+```
+
+可以看到etcdctl发起设置请求时，会首先获得集群的members，然后向其中发送一个set `mytest/test1`的请求。而这个请求会是随机的。如上是请求定位到了`10.8.65.107`之上。
+
+之后我分别查看了三台机器的时间，发现三台时间不同步。初步判断是时间不同步导致的，因此这里使用ntp进行同步。
+
+```sh
+[root@node-106 ~]# ntpdate pool.ntp.org
+ 2 Sep 05:45:23 ntpdate[24846]: adjust time server 120.25.108.11 offset -0.000273 sec
+```
+
+之后再进行ttl设置，失效时间恢复准确。
+
+# 回顾与解决
+
+回顾整个问题，主要原因还是时间不同步。之后再出现该问题时，可以根据返回值进行判断。
+
+```sh
+[root@node-106 ~]# curl -X GET "http://10.8.65.108:2379/v2/keys/mytest/test1?recursive=false&wait=true&stream=true"
+{"action":"set","node":{"key":"/mytest/test","value":"hello","expiration":"2016-09-02T09:31:18.221701998Z","ttl":17,"modifiedIndex":306840,"createdIndex":306840}}
+```
+
+返回的action为set的值，其中的ttl值应与自己设置的ttl值一致。如果该值与设置的ttl值不一致，就极有可能是时间不同步原因造成的。
+
+所以解决方法是将三台机器进行时间同步，就不再出现ttl失效时间不准确的问题。

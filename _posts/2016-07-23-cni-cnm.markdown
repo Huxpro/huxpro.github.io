@@ -1,0 +1,152 @@
+---
+layout:     post
+title:      "docker的网络-Container network interface(CNI)与Container network model(CNM)"
+subtitle:   "Container network interface(CNI) and Container network model(CNM)"
+date:       2016-07-22 8:00:00
+author:     "XuXinkun"
+header-img: "img/post-bg-cni-cnm.jpg"
+tags:
+    - kubernetes
+    - docker
+---
+
+# Overview
+
+目前围绕着docker的网络，目前有两种比较主流的声音，docker主导的Container network model(CNM)和社区主导的Container network interface(CNI)。本文就针对两者模型进行分别介绍。
+
+# Container Networking Interface
+
+## 概述
+
+[Container Networking Interface(CNI)](https://github.com/containernetworking/cni)提供了一种linux的应用容器的插件化网络解决方案。最初是由rkt Networking Proposal发展而来。也就是说，CNI本身并不完全针对docker的容器，而是提供一种普适的容器网络解决方案。因此他的模型只涉及两个概念:
+
+- 容器(container) : 容器是拥有独立linux网络命名空间的独立单元。比如rkt/docker创建出来的容器。
+
+> 这里很关键的是容器需要拥有自己的linux网络命名空间。这也是加入网络的必要条件。
+
+- 网络(network): 网络指代了可以相互联系的一组实体。这些实体拥有各自独立唯一的ip。这些实体可以是容器，是物理机，或者其他网络设备(比如路由器)等。
+
+## 接口及实现
+
+[CNI的接口](https://github.com/containernetworking/cni/blob/master/SPEC.md)设计的非常简洁，只有两个接口ADD/DELETE。
+
+以 ADD接口为例
+
+### Add container to network
+
+参数主要包括:
+
+- **Version**. CNI版本号 
+- **Container ID**. 这是一个可选的参数，提供容器的id
+- **Network namespace path**.  容器的命名空间的路径，比如 /proc/[pid]/ns/net。
+- **Network configuration**.  这是一个json的文档，具体可以参看[network-configuration](https://github.com/containernetworking/cni/blob/master/SPEC.md#network-configuration)
+- **Extra arguments**. 其他参数
+- **Name of the interface inside the container**. 容器内的网卡名
+
+[返回值](https://github.com/containernetworking/cni/blob/master/SPEC.md#result):
+
+- **IPs assigned to the interface**. ipv4或者ipv6地址
+- **DNS information**. DNS相关信息
+
+## 调用实现
+
+CNI的调用方式是通过一个可执行文件进行的。这里以[calico](https://github.com/projectcalico/calico-containers/blob/master/docs/cni/kubernetes/KubernetesIntegration.md)为例，说明CNI插件的调用方式。
+
+首先，calico进行插件注册
+
+```sh
+mkdir -p /etc/cni/net.d
+$ cat >/etc/cni/net.d/10-calico.conf <<EOF
+{
+    "name": "calico-k8s-network",
+    "type": "calico",
+    "etcd_authority": "<ETCD_IP>:<ETCD_PORT>",
+    "log_level": "info",
+    "ipam": {
+        "type": "calico-ipam"
+    },
+    "policy": {
+        "type": "k8s"
+    }
+}
+EOF
+```
+
+
+[k8s的DefaultCNIDir](https://github.com/kubernetes/kubernetes/blob/v1.2.0/pkg/kubelet/network/cni/cni.go#L36)是`/opt/cni/bin`。因为注册的`type`是`calico`，所以k8s会从`/opt/cni/bin`中搜索一个`calico`的可执行文件，然后进行执行。
+
+执行的时候传递参数有[两种方式](https://github.com/containernetworking/cni/blob/master/SPEC.md#parameters)，一种是通过环境变量进行传递，比如上文中的**Version**、**Container ID**等；另外一种是通过执行`calico`作为执行的参数传进去，这个主要就是**Network configuration**的部分，通过json将其打包传入。
+
+同样判断是否执行成功，是通过执行文件的返回值获取的。0为成功，1为版本版本不匹配，2为存在不符合的字段。如果执行成功，返回值将通过stdout返回。
+
+# Container Network Model
+
+## 概述
+
+相较于CNI，CNM是docker公司力推的网络模型。其主要模型如下图：
+
+![docker network](http://xuxinkun.github.io/img/kuryr/docker_network.png)
+
+### Sandbox
+
+Sandbox包含了一个容器的网络栈。包括了管理容器的网卡，路由表以及DNS设置。一种Sandbox的实现是通过linux的网络命名空间，一个FreeBSD Jail 或者其他类似的概念。一个Sandbox可以包含多个endpoints。
+
+### Endpoint
+
+一个endpoint将Sandbox连接到network上。一个endpoint的实现可以通过veth pair，Open vSwitch internal port 或者其他的方式。一个endpoint只能属于一个network，也只能属于一个sandbox。
+
+### Network
+
+一个network是一组可以相互通信的endpoints组成。一个network的实现可以是linux bridge，vlan或者其他方式。一个网络中可以包含很多个endpoints。
+
+## 接口
+
+CNM的接口相较于CNI模型，较为复杂。其提供了[remote plugin](https://github.com/docker/libnetwork/blob/master/docs/remote.md)的方式，进行插件化开发。remote plugin相较与CNI的命令行，更加友好一些，是通过http请求进行的。remote plugin监听一个指定的端口，docker daemon直接通过这个端口与remote plugin进行交互。
+
+鉴于CNM的接口较多，这里就不一一展开解释了。这里主要介绍下在进行docker的操作中，docker daemon是如何同CNM插件繁盛交互。
+
+### 调用过程
+
+### Create Network
+
+这一系列调用发生在使用`docker network create`的过程中。
+
+1. /IpamDriver.RequestPool: 创建subnetpool用于分配IP
+2. /IpamDriver.RequestAddress: 为gateway获取IP
+3. /NetworkDriver.CreateNetwork: 创建neutron network和subnet
+
+### Create Container
+
+这一系列调用发生在使用`docker run`，创建一个contain的过程中。当然，也可以通过`docker network connect`触发。
+
+1. /IpamDriver.RequestAddress: 为容器获取IP
+2. /NetworkDriver.CreateEndpoint: 创建neutron port
+3. /NetworkDriver.Join: 为容器和port绑定
+4. /NetworkDriver.ProgramExternalConnectivity:
+5. /NetworkDriver.EndpointOperInfo
+
+### Delete Container
+
+这一系列调用发生在使用`docker delete`，删除一个contain的过程中。当然，也可以通过`docker network disconnect`触发。
+
+1. /NetworkDriver.RevokeExternalConnectivity
+2. /NetworkDriver.Leave: 容器和port解绑
+3. /NetworkDriver.DeleteEndpoint
+4. /IpamDriver.ReleaseAddress: 删除port并释放IP
+
+### Delete Network
+
+这一系列调用发生在使用`docker network delete`的过程中。
+
+1. /NetworkDriver.DeleteNetwork: 删除network
+2. /IpamDriver.ReleaseAddress: 释放gateway的IP
+3. /IpamDriver.ReleasePool: 删除subnetpool
+
+
+# CNI与CNM的转化
+
+CNI和CNM并非是完全不可调和的两个模型。二者可以进行转化。比如calico项目就是直接支持两种接口模型。
+
+从模型中来看，CNI中的container应与CNM的sandbox概念一致，CNI中的network与CNM中的network一致。在CNI中，CNM中的endpoint被隐含在了ADD/DELETE的操作中。CNI接口更加简洁，把更多的工作托管给了容器的管理者和网络的管理者。从这个角度来说，CNI的ADD/DELETE接口其实只是实现了`docker network connect`和`docker network disconnect`两个命令。
+
+[kubernetes/contrib](https://github.com/kubernetes/contrib/tree/master/cni-plugins/to_docker)项目提供了一种从CNI向CNM转化的过程。其中原理很简单，就是直接通过shell脚本执行了`docker network connect`和`docker network disconnect`命令，来实现从CNI到CNM的转化。
