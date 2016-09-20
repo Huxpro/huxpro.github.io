@@ -1,0 +1,126 @@
+---
+layout:     post
+title:      "Kubernetes环境之简易搭建"
+subtitle:   " \"k8s+etcd+flannel+docker\""
+date:       2016-09-08 00:00:00
+author:     "panlei"
+header-img: "img/2016-09-08-k8s-install/header.jpg"
+catalog: true
+tags:
+    -  k8s
+---
+> [Kubernetes](http://kubernetes.io/) is an open-source system for automating deployment, scaling, and management of containerized applications.
+
+# 1. 准备
+### 1.1 环境说明：
+    master节点：10.8.65.10  Kubernetes+etcd
+    node1 节点：10.8.65.11   Kubernetes+flannel+docker
+    node2 节点：10.8.65.12   Kubernetes+flannel+docker
+
+### 1.2  安装iptables
+   为整个集群所有节点安装防火墙iptables(10.8.65.10&10.8.65.11&10.8.65.12)
+1)先停用firewalld
+```dockerfile
+# systemctl stop  firewalld
+# systemctl disable  firewalld
+```
+### 2)安装iptables防火墙
+```dockerfile
+# yum install iptables-services #安装
+# systemctl start iptables.service #最后重启防火墙使配置生效
+# systemctl enable iptables.service #设置防火墙开机启动
+```
+### 1.3 配置iptables规则
+master节点：
+```dockerfile
+#  iptables -I INPUT -s 10.8.65.0/24 -p tcp --dport 8080 -j ACCEPT
+#  iptables -I INPUT -s 10.8.65.0/24 -p tcp --dport 2379 -j ACCEPT
+```
+Node节点：
+```dockerfile
+#  iptables -I INPUT -s 10.8.65.0/24 -p tcp --dport 10250 -j ACCEPT
+```
+注：8080:kubeAPIserver；2379:etcd；10250:kubelet；
+# 2. master节点安装
+### 2.1 master节点  安装etcd：
+   etcd是一个高可用的键值存储系统，主要用于共享配置和服务发现。
+```dockerfile
+# yum -y install etcd
+```
+   配置etcd，编辑/etc/etcd/etcd.conf。
+	ETCD_NAME=default
+	ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
+	ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379"
+	ETCD_ADVERTISE_CLIENT_URLS="http://10.8.65.10:2379"
+### 2.2 master节点  安装Kubernetes：
+```dockerfile
+# yum -y install kubernetes
+```
+   配置kubernetes，编辑/etc/kubernetes/apiserver
+
+    KUBE_API_ADDRESS="--address=0.0.0.0"
+    KUBE_API_PORT="--port=8080"
+    KUBELET_PORT="--kubelet_port=10250"
+    KUBE_ETCD_SERVERS="--etcd_servers=http://127.0.0.1:2379"
+    KUBE_SERVICE_ADDRESSES="--service-cluster-ip-range=10.254.0.0/16"
+    KUBE_ADMISSION_CONTROL="--KUBE_ADMISSION_CONTROL="--admission-control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ResourceQuota"
+    KUBE_API_ARGS=""
+
+### 2.3 master节点  启动etcd和Kubernetes：
+```dockerfile
+ # for SERVICES in etcd kube-apiserver kube-controller-manager kube-scheduler; do     systemctl restart $SERVICES;     systemctl enable $SERVICES;     systemctl status $SERVICES ; done
+```
+### 2.4 master节点 etcd设置网络
+```dockerfile
+# etcdctl set /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
+```
+
+etcd设置完之后，会被运行在node节点上的flannel自动获取，并用来设置docker的IP地址。
+查看的命令是：
+```dockerfile
+# etcdctl get /coreos.com/network/config
+```
+
+# 3. node节点安装
+### 3.1 node节点  安装flannel：
+   flannel为每个使用 Kubernetes 的机器提供一个子网。简单来说，它的功能是让集群中的不同节点主机创建的Docker容器都具有全集群唯一的虚拟IP地址，并使Docker容器可以互连。该模型的好处就是降低端口映射的复杂度，缺点是目前只有 GCE 云服务提供者可以实现。
+
+```dockerfile
+# yum install flannel -y
+```
+
+配置flannel，编辑/etc/sysconfig/flanneld
+    FLANNEL_ETCD="http://10.8.65.10:2379"
+    FLANNEL_ETCD_KEY="/coreos.com/network"
+### 3.2 node节点  安装docker和kubernetes：
+```dockerfile
+# yum -y install docker-engine kubernetes
+```
+ 配置kubernetes，编辑/etc/kubernetes/config
+    KUBE_MASTER="--master=http://10.8.65.10:8080"
+
+配置kubernetes，编辑/etc/kubernetes/kubelet（请使用每台node节点自己的IP地址比如：10.8.65.11代替下面的$LOCALIP）
+    KUBELET_ADDRESS="--address=0.0.0.0"
+    KUBELET_PORT="--port=10250"
+    # change the hostname to this host’s IP address
+    KUBELET_HOSTNAME="--hostname_override=$LOCALIP"
+    KUBELET_API_SERVER="--api_servers=http://10.8.65.10:8080"
+    KUBELET_ARGS=""
+### 3.3  node节点 启动flannel & Kubernetes & docker
+```dockerfile
+# for SERVICES in kube-proxy kubelet  flanneld docker; do     systemctl restart $SERVICES;     systemctl enable $SERVICES;     systemctl status $SERVICES ; done
+```
+
+# 4. master节点验证安装
+
+在master节点运行命令：
+```dockerfile
+# kubectl get nodes
+```
+得到下面的结果，则表示安装成功：
+​	![node](https://d17oy1vhnax1f7.cloudfront.net/items/2P2a1U2y123n0S412z00/node.png?v=08ffc817)	
+可以看到配置的两台node节点，已经在master的node列表中了。如果想要更多的node，只需要按照上面node节点的配置，配置更多的机器就可以了。
+
+
+
+
