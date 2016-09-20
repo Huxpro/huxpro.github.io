@@ -36,11 +36,13 @@ tags:
 
 ### 1.3 配置iptables规则
 master节点：
+
 ```dockerfile
 #  iptables -I INPUT -s 10.8.65.0/24 -p tcp --dport 8080 -j ACCEPT
 #  iptables -I INPUT -s 10.8.65.0/24 -p tcp --dport 2379 -j ACCEPT
 ```
 Node节点：
+
 ```dockerfile
 #  iptables -I INPUT -s 10.8.65.0/24 -p tcp --dport 10250 -j ACCEPT
 ```
@@ -49,21 +51,25 @@ Node节点：
 # 2. master节点安装
 
 ### 2.1 master节点  安装etcd：
-   etcd是一个高可用的键值存储系统，主要用于共享配置和服务发现。
+
+etcd是一个高可用的键值存储系统，主要用于共享配置和服务发现。
+
 ```dockerfile
 # yum -y install etcd
 ```
-   配置etcd，编辑/etc/etcd/etcd.conf。
+配置etcd，编辑/etc/etcd/etcd.conf。
+
 	ETCD_NAME=default
 	ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
 	ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379"
 	ETCD_ADVERTISE_CLIENT_URLS="http://10.8.65.10:2379"
 
 ### 2.2 master节点  安装Kubernetes：
+
 ```dockerfile
 # yum -y install kubernetes
 ```
-   配置kubernetes，编辑/etc/kubernetes/apiserver
+配置kubernetes，编辑/etc/kubernetes/apiserver
 
     KUBE_API_ADDRESS="--address=0.0.0.0"
     KUBE_API_PORT="--port=8080"
@@ -74,6 +80,7 @@ Node节点：
     KUBE_API_ARGS=""
 
 ### 2.3 master节点  启动etcd和Kubernetes：
+
 ```dockerfile
  # for SERVICES in etcd kube-apiserver kube-controller-manager kube-scheduler; do     systemctl restart $SERVICES;     systemctl enable $SERVICES;     systemctl status $SERVICES ; done
 ```
@@ -85,6 +92,7 @@ Node节点：
 
 etcd设置完之后，会被运行在node节点上的flannel自动获取，并用来设置docker的IP地址。
 查看的命令是：
+
 ```dockerfile
 # etcdctl get /coreos.com/network/config
 ```
@@ -125,6 +133,7 @@ etcd设置完之后，会被运行在node节点上的flannel自动获取，并�
 # 4. master节点验证安装
 
 在master节点运行命令：
+
 ```dockerfile
 # kubectl get nodes
 ```
