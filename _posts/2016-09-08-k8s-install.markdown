@@ -12,6 +12,7 @@ tags:
 > [Kubernetes](http://kubernetes.io/) is an open-source system for automating deployment, scaling, and management of containerized applications.
 
 # 1. 准备
+
 ### 1.1 环境说明：
     master节点：10.8.65.10  Kubernetes+etcd
     node1 节点：10.8.65.11   Kubernetes+flannel+docker
@@ -19,17 +20,20 @@ tags:
 
 ### 1.2  安装iptables
    为整个集群所有节点安装防火墙iptables(10.8.65.10&10.8.65.11&10.8.65.12)
-1)先停用firewalld
+
+### 1)先停用firewalld
 ```dockerfile
 # systemctl stop  firewalld
 # systemctl disable  firewalld
 ```
+
 ### 2)安装iptables防火墙
 ```dockerfile
 # yum install iptables-services #安装
 # systemctl start iptables.service #最后重启防火墙使配置生效
 # systemctl enable iptables.service #设置防火墙开机启动
 ```
+
 ### 1.3 配置iptables规则
 master节点：
 ```dockerfile
@@ -41,7 +45,9 @@ Node节点：
 #  iptables -I INPUT -s 10.8.65.0/24 -p tcp --dport 10250 -j ACCEPT
 ```
 注：8080:kubeAPIserver；2379:etcd；10250:kubelet；
+
 # 2. master节点安装
+
 ### 2.1 master节点  安装etcd：
    etcd是一个高可用的键值存储系统，主要用于共享配置和服务发现。
 ```dockerfile
@@ -52,6 +58,7 @@ Node节点：
 	ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
 	ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379"
 	ETCD_ADVERTISE_CLIENT_URLS="http://10.8.65.10:2379"
+
 ### 2.2 master节点  安装Kubernetes：
 ```dockerfile
 # yum -y install kubernetes
@@ -70,6 +77,7 @@ Node节点：
 ```dockerfile
  # for SERVICES in etcd kube-apiserver kube-controller-manager kube-scheduler; do     systemctl restart $SERVICES;     systemctl enable $SERVICES;     systemctl status $SERVICES ; done
 ```
+
 ### 2.4 master节点 etcd设置网络
 ```dockerfile
 # etcdctl set /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
@@ -82,6 +90,7 @@ etcd设置完之后，会被运行在node节点上的flannel自动获取，并�
 ```
 
 # 3. node节点安装
+
 ### 3.1 node节点  安装flannel：
    flannel为每个使用 Kubernetes 的机器提供一个子网。简单来说，它的功能是让集群中的不同节点主机创建的Docker容器都具有全集群唯一的虚拟IP地址，并使Docker容器可以互连。该模型的好处就是降低端口映射的复杂度，缺点是目前只有 GCE 云服务提供者可以实现。
 
@@ -92,6 +101,7 @@ etcd设置完之后，会被运行在node节点上的flannel自动获取，并�
 配置flannel，编辑/etc/sysconfig/flanneld
     FLANNEL_ETCD="http://10.8.65.10:2379"
     FLANNEL_ETCD_KEY="/coreos.com/network"
+
 ### 3.2 node节点  安装docker和kubernetes：
 ```dockerfile
 # yum -y install docker-engine kubernetes
@@ -106,6 +116,7 @@ etcd设置完之后，会被运行在node节点上的flannel自动获取，并�
     KUBELET_HOSTNAME="--hostname_override=$LOCALIP"
     KUBELET_API_SERVER="--api_servers=http://10.8.65.10:8080"
     KUBELET_ARGS=""
+
 ### 3.3  node节点 启动flannel & Kubernetes & docker
 ```dockerfile
 # for SERVICES in kube-proxy kubelet  flanneld docker; do     systemctl restart $SERVICES;     systemctl enable $SERVICES;     systemctl status $SERVICES ; done
