@@ -2,7 +2,7 @@
 layout:     keynote
 title:      "都 2015 年了，CSS 怎么还是这么糟糕"
 subtitle:   "Slides: CSS Still Sucks 2015"
-iframe:     "http://huangxuan.me/css-sucks-2015/"
+iframe:     "//huangxuan.me/css-sucks-2015/"
 date:       2015-12-28
 author:     "Hux"
 tags:
@@ -16,7 +16,7 @@ tags:
 
 ### [Watch Slides →](http://huangxuan.me/css-sucks-2015)
 
-<img src="http://huangxuan.me/css-sucks-2015/attach/qrcode.png" width="350" height="350"/>
+<img src="//huangxuan.me/css-sucks-2015/attach/qrcode.png" width="350" height="350"/>
 
 <small class="img-hint">你也可以通过扫描二维码在手机上观看</small>
 

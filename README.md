@@ -1,6 +1,6 @@
 #Hux Blog
 
-###[View Live Hux Blog &rarr;](http://huxpro.github.io)
+###[View Live Hux Blog &rarr;](https://huangxuan.me)
 
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
@@ -268,6 +268,7 @@ ga_domain: huangxuan.me
 
 Just checkout the code offered by Google/Baidu, and copy paste here, all the rest is already done for you.
 
+(Google might ask for meta tag "google-site-verification")
 
 
 #### Customization
@@ -307,7 +308,7 @@ One of these is that github changes its build environment.
 
 So, just edit `_config.yml`, find `highlighter: pygments`, change it to `highlighter: rouge` and the warning will be gone.
 
-For other circumstance, check out existing issues or create a new one!
+For other circumstances, check out existing issues or create a new one!
 
 ## License
 
