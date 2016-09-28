@@ -204,6 +204,9 @@ img.shadow {
     padding: 0em 0.4em;
     background: white;
   }
+  select.sel-lang {
+    min-height: 28px;
+  }
 }
 .table th,
 .table td {
