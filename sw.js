@@ -14,10 +14,6 @@ const HOSTNAME_WHITELIST = [
   "cdnjs.cloudflare.com",
   "ghbtns.com"
 ]
-console.log(HOSTNAME_WHITELIST)
-
-// ServiceWorkerGlobalScope
-// console.log(self) 	
 
 /**
  *  @Lifecycle Install
@@ -28,16 +24,13 @@ console.log(HOSTNAME_WHITELIST)
  *  skipWaiting() : waiting(installed) ====> activating
  */
 self.addEventListener('install', e => {
-  // nothing need to be precached, skip precatch step.
-  self.skipWaiting()
-
-  // e.waitUntil(
-  //   caches.open(PRECACHE).then(cache => {
-  //     return cache.addAll([])
-  //     .then(self.skipWaiting())
-  //     .catch(err => console.log(err))
-  //   })
-  // )
+  e.waitUntil(
+    caches.open(PRECACHE).then(cache => {
+      return cache.add('offline.html')
+      .then(self.skipWaiting())
+      .catch(err => console.log(err))
+    })
+  )
 });
 
 
@@ -67,13 +60,20 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       caches.open(RUNTIME).then(cache => {
         return caches.match(event.request).then(cachedResponse => {
+          // cache busting
           var fetchPromise = fetch(`${event.request.url}?${Math.random()}`,  {cache: "no-store"})
             .then(networkResponse => {
               var resUrl = networkResponse.url
               cache.put(event.request, networkResponse.clone())
               return networkResponse;
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+              console.log(error);
+              // for navigation requests, fallback to offline.html
+              if(event.request.url.substr(-1) == "/") {
+                return caches.match('offline.html')
+              }
+            })
         
           // Return the response from cache or wait for network.
           return cachedResponse || fetchPromise;
