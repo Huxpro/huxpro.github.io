@@ -11,8 +11,7 @@ const RUNTIME = 'runtime';
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
   "huangxuan.me",
-  "cdnjs.cloudflare.com",
-  "ghbtns.com"
+  "cdnjs.cloudflare.com"
 ]
 
 /**
