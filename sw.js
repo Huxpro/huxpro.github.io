@@ -83,9 +83,3 @@ self.addEventListener('fetch', event => {
     );
   }
 });
-
-
-
-self.addEventListener('foreighfetch', event => {
-  console.log("foreighfetch", event.request.url)
-})
