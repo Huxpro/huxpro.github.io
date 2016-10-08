@@ -11,6 +11,7 @@ const RUNTIME = 'runtime';
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
   "huangxuan.me",
+  "yanshuo.io",
   "cdnjs.cloudflare.com"
 ]
 
@@ -53,6 +54,7 @@ self.addEventListener('activate',  event => {
  */
 self.addEventListener('fetch', event => {
   // Skip some of cross-origin requests, like those for Google Analytics.
+  console.log("fetch", event.request.url)
   if (HOSTNAME_WHITELIST.indexOf(new URL(event.request.url).hostname) > -1) {
     // Stale-while-revalidate 
     // similar to HTTP's stale-while-revalidate: https://www.mnot.net/blog/2007/12/12/stale
@@ -81,3 +83,9 @@ self.addEventListener('fetch', event => {
     );
   }
 });
+
+
+
+self.addEventListener('foreighfetch', event => {
+  console.log("foreighfetch", event.request.url)
+})
