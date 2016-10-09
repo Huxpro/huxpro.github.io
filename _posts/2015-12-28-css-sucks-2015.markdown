@@ -14,7 +14,7 @@ tags:
 > 下滑这里查看更多内容
 
 
-### [Watch Slides →](http://huangxuan.me/css-sucks-2015)
+### [Watch Slides →](https://huangxuan.me/css-sucks-2015/)
 
 <img src="//huangxuan.me/css-sucks-2015/attach/qrcode.png" width="350" height="350"/>
 
