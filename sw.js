@@ -61,10 +61,10 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       caches.open(RUNTIME).then(cache => {
         return caches.match(event.request).then(cachedResponse => {
-          // Under HSTS, unsecure resources response 307 redirect which broke cache.
+          // fetch(httpURL) is active mixed content, fetch(httpRequest) is not supported yet...
           var fixedUrl = event.request.url.replace('http://', '//')
           // cache busting
-          var fetchPromise = fetch(`${event.request.url}?${Math.random()}`,  {
+          var fetchPromise = fetch(`${fixedUrl}?${Math.random()}`,  {
             cache: "no-store",
             redirect: "follow"
           })
