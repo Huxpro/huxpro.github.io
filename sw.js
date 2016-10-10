@@ -61,8 +61,13 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       caches.open(RUNTIME).then(cache => {
         return caches.match(event.request).then(cachedResponse => {
+          // Under HSTS, unsecure resources response 307 redirect which broke cache.
+          var fixedUrl = event.request.url.replace('http://', '//')
           // cache busting
-          var fetchPromise = fetch(`${event.request.url}?${Math.random()}`,  {cache: "no-store"})
+          var fetchPromise = fetch(`${event.request.url}?${Math.random()}`,  {
+            cache: "no-store",
+            redirect: "follow"
+          })
             .then(networkResponse => {
               var resUrl = networkResponse.url
               cache.put(event.request, networkResponse.clone())
