@@ -1,0 +1,383 @@
+
+body{
+    font: 16px/1.8 "Microsoft Yahei",verdana;
+}
+.section{
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    text-align: center;
+}
+
+
+/*第一屏样式设置*/
+
+.section1{
+    background: url("img/hero_sunset_large_2x.jpg") no-repeat center;
+    background-size: cover;
+}
+.section1 img{
+    margin-top: 8%;
+}
+.section1 h1{
+    margin-top: 5%;
+    color: #fff;
+    font-size: 30px;
+    font-weight: normal;
+    opacity: .8;
+}
+.section1 p{
+    margin: 800px auto 0;
+    color: #fff;
+    font-size: 18px;
+    width: 60%;
+    opacity: .6;
+}
+.section1 a{
+    display: block;
+    margin: 5% auto 0;
+    color: #ff9000;
+    font-size: 18px;
+    opacity: .9;
+}
+
+
+
+/* 内容模块 */
+}
+.main a{
+    color:#0085a1;
+}
+.main a:hover {
+    /*color: #000;*/
+    /*text-decoration: none;*/
+}
+
+.main, .container > header {
+    width: 100%;
+    max-width: 40em;
+    margin: 0 auto;
+    padding: 0 1.375em;
+}
+
+.cbp_tmtimeline {
+    padding: 0;
+    list-style: none;
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: -120px;
+}
+
+.cbp_tmtimeline > li {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+}
+
+/* The date/time */
+.cbp_tmlabel time {
+    font-size: 1.0em;
+    position: absolute;
+    top: 0px;
+    line-height: 64px;
+    right: 5px;
+    margin-right: 1em;
+    color: black;
+}
+
+/* The Duoshuo */
+.cbp_tmlabel .comment{
+    padding: 0 1.5em 0.5em;
+}
+
+/* The card */
+.cbp_tmtimeline .cbp_tmlabel {
+    background: white;
+    color: rgb(78, 78, 78);
+    /* line-height: 1.4; */
+    position: relative;
+    border-radius: 3px;
+    border: 1px solid #edeeee;
+    margin: 120px 30px 0;
+    font-weight: 400;
+    font-size: 95%;
+}
+
+.cbp_tmtimeline > li .cbp_tmlabel h2 {
+    font-weight: bold;
+    font-size: 15px;
+    padding: 14px 20px;
+    height: 64px;
+    line-height: 36px;
+}
+
+/* The icons */
+.cbp_tmtimeline > li .cbp_tmicon {
+    width: 40px;
+    height: 40px;
+    font-family: 'huxico';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 1.4em;
+    line-height: 40px;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    color: #fff;
+    background: #46a4da;
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px #afdcf8;
+    text-align: center;
+    left: 20%;
+    top: 0;
+    margin: 0 0 0 -25px;
+}
+
+/******* Hux Branch *****/
+
+
+.cbp_tmlabel .hux_ul{
+    border:none;
+    padding:0;
+    margin:0;
+}
+.cbp_tmlabel .hux_ul li{
+    padding:0;
+    margin: 0;
+    list-style: none;
+}
+
+.cbp_tmlabel img{
+    width: 100%;
+    margin-bottom: 1em;
+    border-top: 1px solid #eeefef;
+    border-bottom: 1px solid #eeefef;
+}
+
+.cbp_tmlabel p{
+    padding: 1em 0;
+    /*text-indent: 2em;*/
+    margin: 0 1.5em;
+    border-top: 1px solid rgba(255,255,255,0.4);
+}
+.cbp_tmlabel ul{
+    text-align:left;
+    padding: 0em 0;
+    margin: 0 1.5em;
+    list-style: none;
+}
+.cbp_tmlabel ul li{
+    padding: 0.5em 0;
+}
+.cbp_tmlabel ul li.skill{
+    overflow: auto;
+    margin-top: 9px;
+    border-top: 1px solid #eeefef;
+}
+.cbp_tmlabel ul li.skill>span,
+.cbp_tmlabel ul li.skill>a{
+    display: block;
+    float: left;
+    font-size: 1.3rem;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 8px;
+    color: #a5a7aa;
+    transition: all 0.3s ease;
+}
+.cbp_tmlabel ul li.skill>span:nth-child(1){
+    margin-left: -7px;
+}
+.cbp_tmlabel ul li.skill span:before{
+    line-height: 40px;
+}
+.cbp_tmlabel ul li.skill span.link{
+    float: right;
+    font-size: 0.8em;
+    line-height: 30px;
+    width: auto;
+    padding: 0 11px;
+    min-width: 70px;
+    box-sizing: border-box;
+    height: 32px;
+    border-radius: 3px;
+    background: white;
+    border: 1px solid #D5D6D8;
+    margin: 4px 0px;
+}
+
+.cbp_tmlabel ul li.skill span.link:hover,
+.cbp_tmlabel ul li.skill span.link:active{
+    background: #eee;
+}
+
+
+
+
+
+/*第二屏样式设置*/
+.section2{
+    background: #f2f2f2 url("img/section2-bg-caise.jpg") no-repeat bottom;
+    background-size: cover;
+}
+.section2 h1{
+    margin: 20px auto;
+    color: #333;
+    font-size: 50px;
+    font-weight: normal;
+}
+.section2 p{
+    margin: 20px auto 0 1500px;
+    color: #333;
+    font-size: 18px;
+    width: 60%;
+    /*margin-left: 1500px;*/
+}
+.section2 a{
+    display: block;
+    margin: 20px auto 0;
+    color: #08c;
+    font-size: 18px;
+}
+
+ @media screen and (max-width: 400px) {
+    .main{
+        width: 100%;
+        padding-bottom: 0px;
+    }
+    .section2 h1 {
+    margin: 5px auto 0;
+    color: #333;
+    font-size: 40px;
+    font-weight: normal;
+    }
+    .section2 p {
+        font-size: 25px;
+    margin: 0 auto 10px auto;
+    }
+    .section2 h2 {
+    margin: 0 auto 10px auto;
+    }
+    .cbp_tmlabel ul li{
+        margin-right: 2px;
+        font-size: 90%;
+    }
+    .cbp_tmlabel img {
+    margin-bottom:0;
+    }
+}  
+
+@media screen and (max-height: 700px) {
+    .main{
+        width: 100%;
+        padding-bottom: 0px;
+    }
+    .section2 img {
+        size: 50%;
+    }
+  
+    .section2 p {
+        font-size: 25px;
+    margin: 0 auto 10px auto;
+    }
+    .section2 h2 {
+    margin: 0 auto 10px auto;
+    }
+    .cbp_tmlabel ul li{
+        margin-right: 2px;
+        font-size: 90%;
+    }
+    .cbp_tmlabel img {
+    margin-bottom:0;
+    width: 70%;
+   }
+}
+
+
+
+
+/*第三屏样式设置*/
+
+.section3{
+    background: url("img/timekeeping_hero_large_2x.jpg") no-repeat center;
+    background-size: cover;
+}
+
+.section3 h1{
+    margin: 20px auto 20px -1500px;
+    color: white;
+    font-size: 40px;
+    font-weight: normal;
+    width: 60%;
+    /*margin-left: -1500px;*/
+}
+.section3 p{
+    margin: 20px auto 0 1500px;
+    color: white;
+    font-size: 18px;
+    width: 60%;
+    /*margin-left: 1500px;*/
+}
+.section3 a{
+    display: block;
+    margin: 20px auto 0;
+    color: #08c;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 400px) {
+    .main{
+        width: 100%;
+        padding-bottom: 0px;
+    }
+    .section3 h1 {
+    margin: 5px auto 0;
+    color: white;
+    font-size: 40px;
+    font-weight: normal;
+	}
+	.section3 p {
+    margin: 0 auto 10px auto;
+	}
+	.section3 h2 {
+    margin: 0 auto 10px auto;
+	}
+    .cbp_tmlabel ul li{
+        margin-right: 2px;
+        font-size: 90%;
+    }
+    .cbp_tmlabel img {
+    margin-bottom:0;
+	}
+}
+@media screen and (max-height: 600px) {
+    .main{
+        width: 100%;
+        padding-bottom: 0px;
+    }
+    .section2 img {
+        size: 50%;
+    }
+   
+    .section2 p {
+        font-size: 25px;
+    margin: 0 auto 10px auto;
+    }
+    .section2 h2 {
+    margin: 0 auto 10px auto;
+    }
+    .cbp_tmlabel ul li{
+        margin-right: 2px;
+        font-size: 90%;
+    }
+    .cbp_tmlabel img {
+    margin-bottom:0;
+    width: 70%;
+   }
