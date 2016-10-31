@@ -69,6 +69,8 @@ self.addEventListener('fetch', event => {
             redirect: "follow"
           })
             .then(networkResponse => {
+              // Fetch API not throw error on 404, 500 etc
+              if (!networkResponse.ok) throw Error('Not ok');
               var resUrl = networkResponse.url
               cache.put(event.request, networkResponse.clone())
               return networkResponse;
