@@ -95,6 +95,12 @@ self.addEventListener('fetch', event => {
   // Skip some of cross-origin requests, like those for Google Analytics.
   if (HOSTNAME_WHITELIST.indexOf(new URL(event.request.url).hostname) > -1) {
     
+    // Redirect in SW manually fixed github pages 404s on repo?blah 
+    if(shouldRedirect(event.request)){
+      event.respondWith(Response.redirect(`${event.request.url}/`))
+      return;
+    }
+
     // Stale-while-revalidate 
     // similar to HTTP's stale-while-revalidate: https://www.mnot.net/blog/2007/12/12/stale
     // Upgrade from Jake's to Surma's: https://gist.github.com/surma/eb441223daaedf880801ad80006389f1
@@ -102,17 +108,6 @@ self.addEventListener('fetch', event => {
     const fixedUrl = getFixedUrl(event.request);
     const fetched = fetch(fixedUrl, {cache: "no-store"});
     const fetchedCopy = fetched.then(resp => resp.clone());
-
-    // Redirect in SW manually fixed github pages 404s on repo?blah 
-    if(shouldRedirect(event.request)){
-      event.respondWith(
-        new Response(null, {
-          "status": 301,
-          "headers": {"location": `${event.request.url}/`}
-        })
-      )
-      return;
-    }
 
     // Call respondWith() with whatever we get first.
     // If the fetch fails (e.g disconnected), wait for the cache.
