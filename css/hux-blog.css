@@ -195,6 +195,9 @@ br + small.img-hint {
 img.shadow {
   box-shadow: rgba(0, 0, 0, 0.258824) 0px 2px 5px 0px;
 }
+select.sel-lang {
+  font: -webkit-control;
+}
 @media screen and (max-width: 768px) {
   select {
     -webkit-appearance: none;
