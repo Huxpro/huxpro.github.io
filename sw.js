@@ -43,14 +43,15 @@ const getFixedUrl = (req) => {
 const isNavigationReq = (req) => (req.mode === 'navigate' || (req.method === 'GET' && req.headers.get('accept').includes('text/html')))
 
 // Redirect in SW manually fixed github pages 404s on repo?blah 
-// if An url is navigation and isnt end with '/' (indicate github would 404s on it )
-// it should be a dir request and need to fixed
-// P.S. An url.pathname has no '.' cant indicate it's file (e.g. http://test.com/api/version/1.2/)
+// If It's a navigation req and it's url.pathname isn't end with '/' (indicate github might well 404 on it )
+// it should be a dir/repo request and need to be fixed (a.k.a be redirected)
+// P.S. An url.pathname has no '.' can not indicate it's file (e.g. http://test.com/api/version/1.2/)
 // https://twitter.com/Huxpro/status/793519812127227905
 const shouldRedirect = (req) => (isNavigationReq(req) && new URL(req.url).pathname.substr(-1) !== "/")
 
 // The Util Function to get redirect URL
 // `${url}/` would mis-add "/" in the end of query, so we use URL object.
+// P.P.S. Always trust url.pathname instead of the whole url string.
 const getRedirectUrl = (req) => {
   url = new URL(req.url)
   url.pathname += "/"
