@@ -47,7 +47,7 @@ const isNavigationReq = (req) => (req.mode === 'navigate' || (req.method === 'GE
 // it should be a dir request and need to fixed
 // P.S. An url.pathname has no '.' cant indicate it's file (e.g. http://test.com/api/version/1.2/)
 // https://twitter.com/Huxpro/status/793519812127227905
-const shouldRedirect = (req) => (isNavigationReq(req) && req.url.substr(-1) !== "/")
+const shouldRedirect = (req) => (isNavigationReq(req) && new URL(req.url).pathname.substr(-1) !== "/")
 
 // The Util Function to get redirect URL
 // `${url}/` would mis-add "/" in the end of query, so we use URL object.
