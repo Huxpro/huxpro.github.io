@@ -105,7 +105,7 @@ self.addEventListener('fetch', event => {
     
     // Redirect in SW manually fixed github pages 404s on repo?blah 
     if(shouldRedirect(event.request)){
-      event.respondWith(Response.redirect(getRedirectUrl(event.request.url)))
+      event.respondWith(Response.redirect(getRedirectUrl(event.request)))
       return;
     }
 
