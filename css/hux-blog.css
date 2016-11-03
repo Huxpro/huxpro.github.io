@@ -195,21 +195,17 @@ br + small.img-hint {
 img.shadow {
   box-shadow: rgba(0, 0, 0, 0.258824) 0px 2px 5px 0px;
 }
-select.sel-lang {
-  font: -webkit-control;
+select {
+  -webkit-appearance: none;
+  margin-top: 15px;
+  color: #337ab7;
+  border-color: #337ab7;
+  padding: 0em 0.4em;
+  background: white;
 }
-@media screen and (max-width: 768px) {
-  select {
-    -webkit-appearance: none;
-    margin-top: 15px;
-    color: #337ab7;
-    border-color: #337ab7;
-    padding: 0em 0.4em;
-    background: white;
-  }
-  select.sel-lang {
-    min-height: 28px;
-  }
+select.sel-lang {
+  min-height: 28px;
+  font-size: 13px;
 }
 .table th,
 .table td {
