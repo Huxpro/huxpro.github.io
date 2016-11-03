@@ -49,6 +49,14 @@ const isNavigationReq = (req) => (req.mode === 'navigate' || (req.method === 'GE
 // https://twitter.com/Huxpro/status/793519812127227905
 const shouldRedirect = (req) => (isNavigationReq(req) && req.url.substr(-1) !== "/")
 
+// The Util Function to get redirect URL
+// `${url}/` would mis-add "/" in the end of query, so we use URL object.
+const getRedirectUrl = (req) => {
+  url = new URL(req.url)
+  url.pathname += "/"
+  return url.href
+}
+
 /**
  *  @Lifecycle Install
  *  Precache anything static to this version of your app.
@@ -97,7 +105,7 @@ self.addEventListener('fetch', event => {
     
     // Redirect in SW manually fixed github pages 404s on repo?blah 
     if(shouldRedirect(event.request)){
-      event.respondWith(Response.redirect(`${event.request.url}/`))
+      event.respondWith(Response.redirect(getRedirectUrl(event.request.url)))
       return;
     }
 
