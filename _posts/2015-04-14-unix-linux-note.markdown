@@ -47,7 +47,7 @@ An **object-oriented**, multitasking OS. Low-level C but High-level OC language 
 大家都知道 NeXT 是 Steve Jobs 被 forced out of Apple 后和 a few of his coworkers 创办的，所以 **NeXTSTEP 绝对是证明 Jobs 实力的作品。** 
 
 - #### Darwin
-[Darwin](http://en.wikipedia.org/wiki/Darwin_(operating_system\)), the core set of components upon which Mac OS X and iOS based, mostly POSIX compatible, but has never, by itself, been certified as being compatible with any version of **POSIX**. (OS X, since Leopard, has been certified as compatible with the Single UNIX Specification version 3)  
+[Darwin](https://en.wikipedia.org/wiki/Darwin_(operating_system)), the core set of components upon which Mac OS X and iOS based, mostly POSIX compatible, but has never, by itself, been certified as being compatible with any version of **POSIX**. (OS X, since Leopard, has been certified as compatible with the Single UNIX Specification version 3)  
 **所以说 Mac OS X 算是很正统 Unix 的了**
 
 - #### POSIX
