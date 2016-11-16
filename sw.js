@@ -36,18 +36,28 @@ const getFixedUrl = (req) => {
   return url.href
 }
 
-// The Util Function to filter out Navigation Requests.
+// The Util Function to detect and polyfill req.mode="navigate"
 // request.mode of 'navigate' is unfortunately not supported in Chrome
 // versions older than 49, so we need to include a less precise fallback,
 // which checks for a GET request with an Accept: text/html header.
 const isNavigationReq = (req) => (req.mode === 'navigate' || (req.method === 'GET' && req.headers.get('accept').includes('text/html')))
 
-// Redirect in SW manually fixed github pages 404s on repo?blah 
-// If It's a navigation req and it's url.pathname isn't end with '/' (indicate github might well 404 on it )
+// The Util Function to detect if a req is end with extension
+// Accordin to Fetch API spec <https://fetch.spec.whatwg.org/#concept-request-destination>
+// Any HTML's navigation has consistently mode="navigate" type="" and destination="document" 
+// including requesting an img (or any static resources) from URL Bar directly.
+// So It ends up with that regExp is still the king of URL routing ;)
+// P.S. An url.pathname has no '.' can not indicate it ends with extension (e.g. /api/version/1.2/)
+const endWithExtension = (req) => Boolean(new URL(req.url).pathname.match(/\.\w+$/))
+
+// Redirect in SW manually fixed github pages arbitray 404s on things?blah 
+// what we want:
+//    repo?blah -> !(gh 404) -> sw 302 -> repo/?blah 
+//    .ext?blah -> !(sw 302 -> .ext/?blah -> gh 404) -> .ext?blah 
+// If It's a navigation req and it's url.pathname isn't end with '/' or '.ext'
 // it should be a dir/repo request and need to be fixed (a.k.a be redirected)
-// P.S. An url.pathname has no '.' can not indicate it's file (e.g. http://test.com/api/version/1.2/)
-// https://twitter.com/Huxpro/status/793519812127227905
-const shouldRedirect = (req) => (isNavigationReq(req) && new URL(req.url).pathname.substr(-1) !== "/")
+// Tracking https://twitter.com/Huxpro/status/798816417097224193
+const shouldRedirect = (req) => (isNavigationReq(req) && new URL(req.url).pathname.substr(-1) !== "/" && !endWithExtension(req))
 
 // The Util Function to get redirect URL
 // `${url}/` would mis-add "/" in the end of query, so we use URL object.
