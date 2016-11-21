@@ -15,10 +15,13 @@ tags:
 
 > 下滑这里查看更多内容
 
+### [Watching Fullscreen →](https://huangxuan.me/pwa-in-my-pov/)
 
-### [Watch Slides → ](https://yanshuo.io/assets/player/?deck=5753088f79bc440063aa84f0#/)
+<div class="visible-md visible-lg">
+    <img src="//huangxuan.me/pwa-in-my-pov/attach/qrcode.png" width="350" />
+    <small class="img-hint">Scanning on mobile</small>
+</div>
 
-<img src="//huangxuan.me/pwa-in-my-pov/attach/qrcode.png" width="350" />
 
 ### Catalog
 
