@@ -102,9 +102,11 @@ header-img: "img/about-bg.jpg"
 <!-- 多说评论框 start -->
 <div class="comment">
     <div class="ds-thread"
+    <!-- This id is used for indexing my loss comments forcedly -->
     {% if site.duoshuo_username == "huxblog" %}
         data-thread-id="1187623191091085319"
     {% else %}
+    <!-- U can just use this key generated to index comments at page about -->
         data-thread-key="{{site.duoshuo_username}}/about"
     {% endif %}
 
