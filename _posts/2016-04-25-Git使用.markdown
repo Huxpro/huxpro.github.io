@@ -1,0 +1,21 @@
+# Git使用
+
+## Git命令
+* git clone xxx 将远程工程clone下来
+* git reflog/ git lg  git日志
+* git status
+
+### dd
+* git rm --cached "路径" 移除缓存区
+
+### 提交
+* git commit -m "注释"
+
+
+### 分支相关
+* 展示所有分支：git branch -va
+* 展示本地有的分支：git branch    
+* 创建分支：git branch 分支名
+* 创建并切换：git checkout -b
+* 切换分支：git checkout 分支名
+* 移除分支：git branch -d 分支名  

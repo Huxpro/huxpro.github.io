@@ -1,0 +1,30 @@
+---
+layout:     post
+title:      "GCD"
+subtitle:   "多线程"
+date:       2016-03-15
+author:     "未久夕多"
+header-img: "img/home-bg-o.jpg"
+tags:
+    - GCD 
+---
+
+> GCD相关问题整理
+
+## GCD
+
+### 各种队列
+
+### 线程间通信
+
+### 常用队列 - 主队列  全局并发队列
+
+### group
+
+### apply
+
+### once
+
+### 单例实现
+
+### 

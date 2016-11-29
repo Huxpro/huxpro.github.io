@@ -1,0 +1,59 @@
+---
+layout:     post
+title:      "NSThread"
+subtitle:   "多线程"
+date:       2016-03-15
+author:     "未久夕多"
+header-img: "img/home-bg-o.jpg"
+tags:
+    - NSThread 
+---
+
+> NSThread 的使用及相关问题
+
+## pthreads
+```
+
+```
+
+## NSThread
+
+### 创建和启动线程
+```c
+NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(run) object:nil];
+[thread start];
+```
+### 其他用法
+```c
++ (NSThread *)currentThread;
++ (BOOL)isMultiThreaded;
++ (BOOL)isMainThread
+@property (readonly) BOOL isMainThread NS_AVAILABLE(10_5, 2_0);
+@property (nullable, copy) NSString *name NS_AVAILABLE(10_5, 2_0);
+```
+
+### 其他创建线程的方式
+
+
+### 线程的状态
+![Snip20160315_1.png](http://upload-images.jianshu.io/upload_images/1414945-7d84e3acec9b170d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+### 控制线程的状态
+```
+// 启动线程- (void)start; // 进入就绪状态 -> 运行状态。当线程任务执行完毕，自动进入死亡状态// 阻塞（暂停）线程+ (void)sleepUntilDate:(NSDate *)date;+ (void)sleepForTimeInterval:(NSTimeInterval)ti;// 进入阻塞状态
+
+// 强制停止线程+ (void)exit;// 进入死亡状态
+```
+
+### 多线程安全隐患
+@synchronized
+互斥锁的使用前提：多条线程抢夺同一块资源
+
+### 原子性和非原子性
+atomic：原子属性，为setter方法加锁（默认就是atomic）nonatomic：非原子属性，不会为setter方法加锁
+
+### 线程间通信
+线程间通信常用方法- (void)performSelectorOnMainThread:(SEL)aSelector withObject:(id)arg waitUntilDone:(BOOL)wait;- (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(id)arg waitUntilDone:(BOOL)wait;
+
+利用NSPort

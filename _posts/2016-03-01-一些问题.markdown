@@ -1,0 +1,90 @@
+## 一些问题
+
+1. 字符串反转
+[http://www.cnblogs.com/pianoid/archive/2011/10/30/string_reverse_in_c_language.html](http://www.cnblogs.com/pianoid/archive/2011/10/30/string_reverse_in_c_language.html)
+2. UIView CAlayer<br>
+[详解CALayer 和 UIView的区别和联系](http://www.jianshu.com/p/079e5cf0f014)<br>
+[UIView与CALayer的区别，很详细](http://www.cnblogs.com/pengyingh/articles/2381673.html)<br> 
+[UIView 和 CALayer的那点事](http://o0o0o0o.iteye.com/blog/1728599)<br>
+[CALayer与UIView的关系](http://www.cnblogs.com/yswdarren/p/3555436.html)<br>
+[UIView与CALayer的区别，很详细](http://blog.csdn.net/zypsg/article/details/6592629)<br><br>
+[干货系列之手把手教你使用Core animation 做动画](http://www.jianshu.com/p/1e2b8ff3519e?utm_campaign=hugo&utm_medium=reader_share&utm_content=note)
+
+
+
+
+
+3. AFNetworking
+[]()
+
+4. block *
+[]()
+
+5. runtime
+[]()
+
+6. runloop --
+[]()
+
+7. 协议
+[]()
+
+8. MVVM  --
+[]()
+
+
+9. React-Native
+[]()
+
+10. RAC
+[]()
+
+11. 二分查找 * --
+[]()
+
+12. 冒泡排序 *--
+[]()
+
+13. 二叉树 *
+[]()
+
+14. 快速排序 *--
+[]()
+
+15. Sunnyxx面试题
+[]()
+
+16. 网络队列
+[]()
+
+17. UITableview优化
+[]()
+
+18. SDWebImage
+[]()
+
+19. Core Text
+[]()
+
+20. Core Animation --
+[]()
+
+21. Quarz2D  
+[]()
+
+22. 链表
+23. 单链表反转
+24. xml/json 解析
+25. http协议
+26. 响应链 点击button 到响应的整个过程<br>
+uibutton -> uiview -> UIViewController -> UIWindow -> UIApplicaiton -> Appdelegate
+
+
+27. ARC 内存管理
+28. KVO NSNotification Delegate
+29. 如果实现一个通知
+30. 消息传递机制
+31. 二叉树遍历
+32. 第三方
+[]()
+[]()

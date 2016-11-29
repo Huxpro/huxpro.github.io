@@ -12,4 +12,22 @@ tags:
 > GCD的相关知识
 
 ## 基础理论
-* 33
+
+### NSThread
+
+#### 锁
+
+
+### 同步异步
+
+### 串行队列  并发队列
+
+### group
+
+### barrier
+
+### apply
+
+### after
+
+### once

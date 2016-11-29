@@ -1,0 +1,47 @@
+---
+layout:     post
+title:      "多线程"
+subtitle:   "多线程"
+date:       2016-03-15
+author:     "未久夕多"
+header-img: "img/home-bg-o.jpg"
+tags:
+    - NSThread 
+    - GCD
+    - NSOpreation
+    - 串行
+    - 并行
+---
+
+> 多线程的相关知识
+
+## 多线程的几种实现形式
+* pthread
+* NSThread
+* GCD
+* NSOpreation/NSOpreationQueue
+
+### NSThread
+
+### 锁
+
+
+### 同步异步
+
+### 串行队列  并发队列
+
+## GCD
+
+### group
+
+### barrier
+
+### apply
+
+### after
+
+### once
+
+## NSOpreation/NSOpreationQueue
+
+### 
