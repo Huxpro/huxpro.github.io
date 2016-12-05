@@ -1,5 +1,17 @@
+---
+layout:     post
+title:      "JS实现多选全选"
+subtitle:   " \"angularjs+多选+全选\""
+date:       2016-12-05 00:00:00
+author:     "panlei"
+header-img: "img/2016-09-08-k8s-install/header.jpg"
+catalog: true
+tags:
+    -  angularjs
+---
+
 #JS实现多选全选
-@[angularjs|多选|全选]
+
 
 ## js代码
 >直接上代码，不废话，代码中有注释
