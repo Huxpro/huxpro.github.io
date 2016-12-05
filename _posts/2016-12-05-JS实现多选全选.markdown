@@ -1,0 +1,149 @@
+#JS实现多选全选
+@[angularjs|多选|全选]
+
+## js代码
+>直接上代码，不废话，代码中有注释
+``` javascript
+//  下面处理批量删除
+$scope.choseArr=[];   //定义数组,用于存放要删除的变量
+var str="";           //用存放要删除的变量的字符串
+var flag='';          //是否点击了全选，是为all
+$scope.x=false;       //默认未选中
+
+$scope.all= function (c,v) {   //页面点击了全选按钮全选
+    if(c==true){
+        $scope.x=true;
+        $scope.choseArr= v;
+        str = "";
+        flag='all';      //设置全选标志位：all
+    }else{               //取消全选
+        $scope.x=false;
+        $scope.choseArr=[""];
+        str = "";
+        flag='no_all';   //设置全选标志位：no_all
+    }
+    console.log($scope.choseArr);
+};
+$scope.chk= function (z,x) {    //单选或者多选
+
+    if(flag=='all') {           //在全选的基础上操作
+        for(var i=0;i<$scope.choseArr.length;i++) {
+            str = str  + $scope.choseArr[i].imageTag;
+            if(i<=($scope.choseArr.length-2)){
+                str = str  +',';
+            }
+        }
+    }
+    if (x == true) {           //单条选中
+        if(str == ""){
+            str = str + z ;
+        }else{
+            str = str + ',' + z ;
+        }
+
+    } else {                   //取消选中       在已选中的基础上取消选中，就是替换之前选中的条目
+        str = str.replace(z + ',', '');     //替换多个中的开始和中间，
+        str = str.replace(',' + z , '');    //替换最末尾一个
+        str = str.replace( z , '');         //替换只有一个的情况
+        flag='no_all';
+    }
+
+    $scope.choseArr=(str.substr(0,str.length)).split(',');  //将str中的字符串，放到choseArr的数组中
+};
+$scope.delete_select= function () {         // 选中之后的操作
+
+    if($scope.choseArr[0]==""||$scope.choseArr.length==0){//没有选择一个的时候提示
+        alert("请至少选中一条数据在操作！")
+        return;
+    };
+
+    var msg_title = gettext('delete_image');
+    var msg_content = gettext('delete_image_content').replace("app_name", $scope.imageName);
+
+    common.confirm_box(msg_title, msg_content, function () {
+        if(flag=='all'){
+            for(var i=0;i<$scope.choseArr.length;i++) {
+                imageListService.deleteImage($scope.system, $scope.app, $scope.imageName, $scope.choseArr[i].imageTag, function (data) {
+                    if (data.code) {
+                        //$scope['images'].splice($scope['images'].indexOf(item), 1);
+                        common.ajaxAlert("success", "删除镜像成功");
+                    } else {
+                        common.ajaxAlert("error", "删除镜像失败");
+                    }
+                });
+                console.log($scope.choseArr[i]);//遍历选中的id
+            }
+
+        }else{
+            for(var i=0;i<$scope.choseArr.length;i++){
+                //alert($scope.choseArr[i]);
+                imageListService.deleteImage( $scope.system , $scope.app , $scope.imageName , $scope.choseArr[i], function (data) {
+
+                    if (data.code) {
+                        //$scope['images'].splice($scope['images'].indexOf(item), 1);
+                        $scope.refresh();
+                        common.ajaxAlert("success", "删除镜像成功");
+                    } else {
+                        common.ajaxAlert("error", "删除镜像失败");
+                    }
+                });
+                console.log($scope.choseArr[i]);//遍历选中的id
+            }
+        }
+    });
+
+};
+
+
+```
+##  HTML代码
+
+
+
+```vbscript-html
+<table class="table table-bordered">
+<thead>
+<tr>
+    <th style="width: auto">
+        <!--<label class="i-checks m-b-none">-->
+            <input type="checkbox" ng-model="master" ng-click="all(master,images)"><i></i>
+        <!--</label>-->
+    </th>
+    <th class="col-xs-3">镜像名称</th>
+    <th class="col-xs-3">版本号</th>
+    <th class="col-xs-3">创建时间</th>
+    <th class="col-xs-3">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="item in images | orderBy:'imageCreated':true">
+    <td>
+        <label class="i-checks m-b-none">
+            <input  type="checkbox" name="selected" ng-model="x" ng-checked="master" ng-click="chk(item.imageTag,x)"><i></i>
+        </label>
+    </td>
+    <td>
+        <span>{{item.imageName}}</span>
+    </td>
+    <td>
+        <span>{{item.imageTag}}</span>
+    </td>
+    <td>
+        <span>{{item.imageCreated | date:"yyyy-MM-dd HH:mm:ss"}}</span>
+    </td>
+    <td>
+        <a class="btn btn-xs btn-default" uib-tooltip="删除"
+           tooltip-append-to-body="true"
+           ng-click="deleteImage(item)">
+            <i class="fa fa-times"></i>
+        </a>
+        <a class="btn btn-xs btn-default" uib-tooltip="详情"
+           tooltip-append-to-body="true"
+           ng-click="getImageDetail(item)">
+            <i class="fa fa-list"></i>
+        </a>
+    </td>
+</tr>
+</tbody>
+            </table>
+```
