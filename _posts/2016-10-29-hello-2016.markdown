@@ -1,0 +1,184 @@
+---
+layout:     post
+title:      "Hello 2016"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2016-10-29 16:34:00
+author:     "WQ"
+header-img: "img/post-bg-2016.jpg"
+catalog: true
+tags:
+    - 生活
+---
+
+> “Yeah It's on. ”
+
+
+## 前言
+
+王强的 Blog 就这么开通了。
+
+今天试水搭建一个blog，之前一直有这个想法但是一直木有时间啊！哈哈，今天总算闲下来了，so搞起!
+
+---
+
+## 正文
+
+### Build Your First Jekyll Blog
+
+关于 gh Pages 的特性，顺便归纳一下：
+
+- 编辑器与工具本地化，用合心意的应用软件书写和改造 blog；
+- 无需另行搭建服务器或购买独立空间，一切基于 GitHub 仓库搭建（有空间限制 300M 但够用）；
+- 配置方便，生效速度快；
+- 有丰富的博客主题可以尽情挑选；
+- 可绑定个人独立域名；
+- Markdown 标记语言书写；
+- 可本地和在线发布博文；
+- Git 对博客内容的版本控制；
+
+### About Jekyll
+
+简要说明一下 Jekyll 是什么。
+
+Jekyll 是一个静态站点生成器，基于 ruby 语言编写。结合 Markdown、CSS、Liquid 等技术，能快速搭建好博客，借助第三方的开源工具/服务，实现强大且完备的博客系统。
+
+此外，利用现成的开源主题（GitHub 上非常丰富），在添加或修改诸如评论系统、访问统计、分享模块等全方面自定义设定，也足以将一个主题模板打造成自己理想博客的样子。
+
+本文倾向于更为小白的方式，也就是基于现成的博客主题模板来打造出一个自己的独立博客。省却繁琐的环境搭建，工具配置过程，快速上手和部署，进而能快速完成。
+
+---
+
+### Create A Repo
+
+力求快速建站，还是奉行「拿来主义」的策略。在找到合意的 GitHub Pages(这里主要是基于 Jekyll ) 博客主题后，Fork 这个博客主题的 GitHub 仓库。
+
+当然，对于已经下载的博客主题 git 压缩包，可以在网页版主页右上角（ID 头像边），点击「+」，Create New Repository，并通过客户端版将解压的仓库文件上传到该 Repo。或客户端版「Create」选项，创建新仓库并选择该将仓库文件 publish 到 GitHub。
+
+这里有一个*注意点*，无论是 Fork 还是 Create，必须要将这个打算作为博客的 Repo 的标题，命名或改名为如下形式：
+
+>yourname.github.io
+
+yourname 是指你的 GitHub Name，此处命名形式 yourname 必须与你的用户名一致。gh Pages 博客才能生效（ Repo 首次生效需要等待几分钟，生效后就可以访问该博客啦。完成后以后添加或改动的更新都会蛮快同步）。
+
+- Fork a repo;
+- Change the repo title to 「yourname.github.io」;
+- Waiting for the setting take effect a few nimutes later;
+- You can interview the blog from 「yourname.github.io」 on your browser;
+
+---
+
+### Jekyll Blog Files Overview
+
+磨刀不误砍柴工。先说明 Jekyll 博客的一般文档类型。
+
+一个典型博客的基础目录结构:
+
+```
+|-- _config.yml
+|-- index.html
+|-- _includes
+|-- _layouts
+|   |-- default.html
+|   `-- post.html
+|-- css
+|-- js
+|-- _posts
+|   `-- 2015-04-27-Like-Kissing.md
+|-- images
+|   `-- Leah.png 
+|-- CNAME
+|-- _404.html
+|-- About.md
+|—— feed.xml
+`-- README.md
+```
+
+---
+
+### Description of The Catalog Document
+
+目录文档详细说明。如下：
+
+- _config.yml 博客配置文档（包括博客标题、favicon、博主 ID、头像、描述、联系方式等基本信息都在这个文档添加或修改）；
+- ndex.html 博客架构文档；
+- _includes 博客调用的网页模块（比如导航栏、底栏、博文内容显示、评论模块等），一般不需要管；
+- _layouts 存放博客调用的页面模板文件（比如博客主页、具体博文页）的文件夹；
+- css 存放博客系统的页面渲染文档文件夹，主要用于调节诸如标题字体、博文字体大小颜色之类；
+- js 存放博客调用的 JS 文档文件夹
+- _posts 博客正文存放的文件夹。命名有规定，必须为「日期 + 标题」的模式，即「2015-04-27-Like-Kissing.md」，才能发布到博客里；
+- images 图片文件夹，存放博客相关素材，包括博客 favicon、博主头像等图片及博文贴图素材；
+- CNAME 用于绑定个人域名的文档；
+- 404.html 「404 Not Found.」站点链接无法访问时的提示页面。
+- About.html 博客中的个人说明文档（About Me），以 html、md 格式为主；
+- feed.xml 博客的 RSS 订阅；
+- README.md 项目说明文档。用于 Github 个人项目主页的说明（描述）。
+
+除此之外，还有诸如 fonts 文件夹，存放博客用的字体文件，或有主题是将 css/js/fonts/images 等文件夹合并到 _assets 为名的主文件夹中。404.html/feed.xml/CNAME 文件并非必须，但一般架构完整的博客都有。
+
+---
+
+### Custom Configuration
+
+自定义修改中，涉及到修改的文档包括：
+
+- _config.yml
+- About.html
+- CNAME
+- images
+
+博客标题、博主 ID 一类都可以直接改。博客 favicon、博主 avatar 一类，还需要到 images 文件夹替换图片和配置文件的对应文件名。注意原图的尺寸，尽量与模板中的原图保持一致。
+
+- TextMate / Sublime Text 用于打开 yml/THML 等文件并进行修改。Windows 用户就只有后者可选了…
+- damotou.com 在线制作（转换）用于 favicon（还不知道这是什么？瞧一下自己 Chrome 浏览器书签页左侧的小图标） 的 icon 图片，选择 32*32 像素的图片下载；
+- CNAME 文件，如果有独立域名请修改该文件；如果没有，则删掉该文件；如果没有但想要，请看附录。
+
+
+---
+
+### Create An New Post
+
+接下来我们要开始更新自己的第一篇博文啦。
+
+比较标准的 Jekyll 博客，博文都被放置于 _posts 文件夹中。文档格式为 markdown 或 HTML。当然一般书写 md 文档快捷得多。
+
+如果你打算删除掉这些并非自己所书写的 md 文档（「必须的！」），先熟悉一下这些文件大致的构造再删不迟。
+
+Markdown 文件的命名类型为「日期(20xx-xx-xx) + 主题(英文) + 格式（md/HTML）」。
+
+像这样：
+
+>2015-04-27-Like-Kissing.md
+
+如果不以这个标准格式命名，文档将无法解析（有的博客也可以，不过标题会默认为文件名，比如我的）。
+
+一般一个 Jekyll 博客，因为主题模板的差异，md 文件也都有些差别。但基本每一篇 Markdown 文档的开头（第一行都为「 —」）都必须添加一段代码，用以将文档收录到博客以及标签系统中。
+
+所以，一般 md 文档的内容组成都是这样：
+- 博文代码
+- 正文
+
+---
+
+### About Markdown File#
+
+```
+---
+layout: post
+title: 中文简要排版参考
+categories: [blog ]
+tags: [Chinese, Read, ]
+description: 如何创造优美的阅读体验
+---
+正文开始...
+```
+这其中，
+- layout 一般不用改；
+- Title 一项是必须添加的；
+- Categories 目录可以换，但如果不是要多重分类，一般也不用管，这篇归档在 Blog 目录下；
+- Tags 可以自己按照文章主题添加，也可以不加，不同的 Tags 直接用英文逗号加半角空格间隔开；
+- description 博文概述，一句话概述，一般添加会好些。
+
+---
+
+### End
+这只是blog中的一部分，但已经能够完成bolg的搭建了，当然还需要学习很多东西才能把它做的漂亮，共勉！
