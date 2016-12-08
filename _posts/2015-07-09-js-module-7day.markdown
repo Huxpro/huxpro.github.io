@@ -1,10 +1,11 @@
 ---
 layout:     keynote
-title:      "JavaScript 模块化七日谈"
-subtitle:   "Slides: JavaScript Modularization Journey"
-iframe:     "//huangxuan.me/js-module-7day/"
+title:      "Example Post using Keynote Layout"
+subtitle:   "Keynote: JavaScript Modularization Journey"
+iframe:     "http://huangxuan.me/js-module-7day/"
 date:       2015-07-09
 author:     "Hux"
+header-img: "img/post-bg-js-version.jpg"
 tags:
     - 前端开发
     - JavaScript
@@ -18,12 +19,11 @@ tags:
 于是，我决定将它重新发到我的博客上，并为它专门制作了适用于 Keynote 展示文稿的新布局。它能自动根据屏幕大小/旋转以一定比例填充屏幕，你也可以直接点击下方链接在新页面打开，来获得更好的、沉浸式的全屏体验
 
 
-### [Watch Fullscreen →](https://huangxuan.me/js-module-7day/)
+### [Watch Slides →](http://huangxuan.me/js-module-7day)
 
-<div class="visible-md visible-lg">
-<img src="//huangxuan.me/js-module-7day/attach/qrcode.png" width="350"/>
+<img src="http://huangxuan.me/js-module-7day/attach/qrcode.png" width="350" height="350"/>
+
 <small class="img-hint">你也可以通过扫描二维码在手机上观看</small>
-</div>
 
 
 这个 Web Slides 开源在[我的 Github 上](https://github.com/Huxpro/js-module-7day)，欢迎你帮助我完善这个展示文稿，你可以给我提 issue，可以 fork & pull request。如果它能帮助到你了，希望你还能不吝啬 star 一下这个项目
