@@ -76,7 +76,7 @@ sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in
 
 
 # Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
+featured-tags: no                     # whether or not using Feature-Tags
 featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
 
 
@@ -84,43 +84,3 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Progressive Web Apps
 chrome-tab-theme-color: "#000000"
 service-worker: true
-
-
-
-# Friends
-friends: [
-    {
-        title: "Su",
-        href: "http://su.gallery/"
-    },{
-        title: "乱序",
-        href: "http://mida.re/"
-    },{
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
-    },{
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
-    },{
-        title: "Luke 的自留地",
-        href: "http://hmqk1995.github.io"
-    },{
-        title: "Ebn's Blog",
-        href: "http://ebnbin.com/"
-    },{
-        title: "SmdCn's Blog",
-        href: "http://blog.smdcn.net"
-    },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
-    },{
-        title: "DHong Say",
-        href: "http://dhong.co"
-    },{
-        title: "尹峰以为",
-        href: "http://ingf.github.io/"
-    },{
-        title: "前端神盾局",
-        href: "http://wepiaofei.github.io/blog/"
-    }
-]
