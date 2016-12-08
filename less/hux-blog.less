@@ -1,7 +1,6 @@
 @import "variables.less";
 @import "mixins.less";
 @import "sidebar.less";
-@import "side-catalog.less";
 
 // Global Components
 
@@ -79,21 +78,16 @@ img.shadow{
 }
 // Utils Style End
 
-// Select 
-select{
-	-webkit-appearance:none;
-	margin-top:15px;
-	color:#337ab7;
-	border-color:#337ab7;
-	padding: 0em 0.4em;
-	background: white;
-	&.sel-lang{
-		min-height: 28px;
-		font-size:14px;
+@media screen and (max-width: 768px){
+	select{
+		-webkit-appearance:none;
+		margin-top:15px;
+		color:#337ab7;
+		border-color:#337ab7;
+		padding: 0em 0.4em;
+		background: white;
 	}
 }
-
-
 // override table style in bootstrap
 .table th, .table td{
 	border: 1px solid #eee !important;
@@ -117,10 +111,6 @@ pre code{
 	word-wrap: normal;	// no-wrap
 }
 
-// In the list of posts
-.postlist-container{
-	margin-bottom: 15px;
-}
 
 // In the post.
 .post-container{
@@ -182,20 +172,6 @@ pre code{
 			margin-top: 20px;
 		}
 	}
-	// V1.6 Hux display title by default.
-	.pager li{
-		width: 48%;
-		&.next{ float: right};
-		&.previous{ float: left};
-		> a {
-			width: 100%;
-			> span{
-				color: @gray;
-				font-weight: normal;
-				letter-spacing: 0.5px;
-			}
-		}
-	}
 }
 
 
@@ -204,74 +180,53 @@ pre code{
 
 // materialize, mobile only
 @media only screen and (max-width: 767px) {
-	/**
-	 * Layout
-	 * Since V1.6 we use absolute positioning to prevent to expand container-fluid
-	 * which would cover tags. A absolute positioning make a new layer.
-	 */
 	.navbar-default .navbar-collapse{
-		position: absolute; 
-     	right: 0;
 		border: none;
 		background: white;
 		box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
 		box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.239216) 0px 1px 4px;
 		border-radius: 2px;
 		width: 170px;
+		float: right;
+		margin: 0px;
 	}
-	/**
-	 * Animation
-	 * HuxBlog-Navbar using genuine Material Design Animation
-	 */
-	#huxblog_navbar{ 	
-		/**
-		 * Sharable code and 'out' function
-		 */
-		// the container do width-transition
+	// HuxBlog-Navbar using genuine Material Design Animation
+	#huxblog_navbar{
 		opacity: 0;
 		transform: scaleX(0);
 		transform-origin: top right;
-		transition: all 200ms cubic-bezier(0.47, 0, 0.4, 0.99) 0ms;
+		transition: all 0.25s cubic-bezier(0.23,1,0.32,1);
 		-webkit-transform: scaleX(0);
 		-webkit-transform-origin: top right;
-		-webkit-transition: all 200ms cubic-bezier(0.47, 0, 0.4, 0.99) 0ms;
+		-webkit-transition: all 0.25s cubic-bezier(0.23,1,0.32,1);
 		a {
 			font-size: 13px;
 			line-height: 28px;
 		}
-		.navbar-collapse{	// the navbar do height-transition
-			height: 0px; 	// to solve container-mask-tags issue (default state).
+		.navbar-collapse{
+			height: 0px; // to solve container-mask-tags issue.
 			transform: scaleY(0);
 			transform-origin: top right;
-			transition: transform 400ms cubic-bezier(0.32, 1, 0.23, 1) 0ms;
+			transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
 			-webkit-transform: scaleY(0);
 			-webkit-transform-origin: top right;
-			-webkit-transition: -webkit-transform 400ms cubic-bezier(0.32, 1, 0.23, 1) 0ms;
+			-webkit-transition: -webkit-transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
 		}
 		li{
 			opacity: 0;
-			transition: opacity 100ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-			-webkit-transition: opacity 100ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+			transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 205ms;
+			-webkit-transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 205ms;
 		}
-		/**
-		 *'In' Animation
-		 */
 		&.in {
 			transform: scaleX(1);
 			-webkit-transform: scaleX(1);
 			opacity: 1;
-			transition: all 250ms cubic-bezier(0.23,1,0.32,1) 0ms;
-			-webkit-transition: all 250ms cubic-bezier(0.23,1,0.32,1) 0ms;
 			.navbar-collapse{
 				transform: scaleY(1);
 				-webkit-transform: scaleY(1);
-				transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
-				-webkit-transition: -webkit-transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
 			}
 			li{
 				opacity: 1;
-				transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 205ms;
-				-webkit-transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 205ms;
 			}
 		}
 	}
@@ -684,6 +639,7 @@ form .row:first-child .floating-label-form-group {
 // Pager Styling
 
 .pager {
+
 	margin: 20px 0 0 !important;
 	padding:0px !important;
 
@@ -712,11 +668,6 @@ form .row:first-child .floating-label-form-group {
 			color: white;
 			background-color: @brand-primary;
 			border: 1px solid @brand-primary;
-
-			// V1.6 display title
-			> span{
-				color: white;
-			}
 		}
 	}
 
@@ -754,6 +705,10 @@ img::selection {
 img::-moz-selection {
 	color: white;
 	background: transparent;
+}
+
+body {
+	webkit-tap-highlight-color: @brand-primary;
 }
 
 
@@ -953,19 +908,8 @@ img::-moz-selection {
 			.ds-gradient-bg{
 				background: none;
 			}
-			.ds-post-options{
-				border-bottom: 1px solid #ccc;
-			}
 			.ds-post-button{
-				border-bottom: 1px solid #ccc;
-			}
-			//v1.6 flatten button
-			.ds-post-button{
-				background: white;
-				box-shadow: none;
-				&:hover{
-					background: @gray-light;
-				}
+
 			}
 		}
 	}
@@ -1023,6 +967,3 @@ img::-moz-selection {
 .page-fullscreen footer .copyright a:hover{
 	color: #ddd;
 }
-
-
-
