@@ -4,7 +4,7 @@ title:      "Goodbye 2016"
 subtitle:   "不精彩的2016年终总结"
 date:       2016-12-20 19:20:00
 author:     "Liuyuan"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/post-bg-goodbye.jpg"
 catalog: true
 tags:
     - 生活
