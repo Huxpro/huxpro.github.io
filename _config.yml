@@ -1,22 +1,22 @@
 # Site settings
-title: Hux Blog
-SEOTitle: 黄玄的博客 | Hux Blog
+title: Alex Blog
+SEOTitle: 陈玺的博客 | Alex Blog
 header-img: img/home-bg.jpg
 email: huxpro@gmail.com
-description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
-keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, 前端, 设计, 产品, 肖玉, Lynn, 肖玉的男朋友"
-url: "https://huangxuan.me"              # your host, for absolute URL
+description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Alex陈玺 的个人博客，与你一起发现更大的世界。"
+keyword: "陈玺, Alex陈玺, Alex, 鬼栈, alexpro, @alexpro, 陈玺的博客, Alex Blog, 博客, 个人网站, 互联网, 前端, 设计, 产品, 肖玉, Lynn, 肖玉的男朋友"
+url: "https://achan.xyz"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
+weibo_username:     2782011662
+zhihu_username:     alex-chan-64
+github_username:    Alexander-Chen
 #twitter_username:  huxpro
-facebook_username:  huxpro
+facebook_username:  alexander.chan.524596
 # linkedin_username:  firstname-lastname-idxxxx
 
 
@@ -51,7 +51,7 @@ kramdown:
 #disqus_username: _your_disqus_short_name_
 
 # Duoshuo settings
-duoshuo_username: huxblog
+duoshuo_username: alexblog
 # Share component is depend on Comment so we can NOT use share only.
 duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
@@ -63,15 +63,15 @@ duoshuo_share: true                     # set to false if you want to use Commen
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_track_id: 'UA-87273808-1'            # Format: UA-xxxxxx-xx
+ga_domain: achan.xyz
 
 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "写写代码，做做设计，<br>离开世界之前，一切都是过程"
-sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/avatar-alex.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -90,17 +90,17 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "Su",
-        href: "http://su.gallery/"
+        title: "Hux Blog",
+        href: "http://huangxuan.me/"
     },{
-        title: "乱序",
-        href: "http://mida.re/"
+        title: "Jecvay Notes",
+        href: "http://jecvay.com/"
     },{
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
+        title: "Yangwan Group",
+        href: "http://yangwangroup.net"
     },{
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
+        title: "chanx",
+        href: "http://chanx.me/"
     },{
         title: "Luke 的自留地",
         href: "http://hmqk1995.github.io"
