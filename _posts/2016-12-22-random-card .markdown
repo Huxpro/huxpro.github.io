@@ -8,6 +8,7 @@ header-img: "img/post-bg-algorithm.jpg"
 catalog: true
 tags:
     - 算法
+    - Python
 ---
 
 > “第一篇博客”
