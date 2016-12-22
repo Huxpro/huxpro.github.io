@@ -4,7 +4,7 @@ title:      "Python爬虫入门"
 subtitle:   "爬虫笔记(一)"
 date:       2016-12-20
 author:     "Alex"
-header-img: "img/post-bg-xi.jpg"
+header-img: "img/post-bg-xi.JPG"
 catalog: true
 tags:
     - 爬虫
