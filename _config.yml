@@ -2,6 +2,7 @@
 title: 潘磊 Blog
 SEOTitle: 潘磊的博客 | 潘磊 Blog
 header-img: img/home-bg.jpg
+
 email: 361panlei@163.com
 description: "探索"
 keyword: "潘磊"
@@ -50,10 +51,10 @@ kramdown:
 # Disqus settings
 #disqus_username: _your_disqus_short_name_
 
-# Duoshuo settings
-#duoshuo_username: panlei361
+#Duoshuo settings
+duoshuo_username: panlei361
 # Share component is depend on Comment so we can NOT use share only.
-#duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
 
 
@@ -61,6 +62,7 @@ kramdown:
 # Analytics settings
 # Baidu Analytics
 #ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
+
 # Google Analytics
 #ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
 #ga_domain: huangxuan.me
@@ -74,9 +76,16 @@ sidebar-avatar: /img/panlei.jpg      # use absolute URL, seeing it's used in bot
 
 
 
+
 # Featured Tags
 featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 2              # A tag will be featured if the size of it is more than this condition value
+
+
+
+# Progressive Web Apps
+chrome-tab-theme-color: "#000000"
+service-worker: true
 
 
 
