@@ -204,7 +204,7 @@ iframe在不同的设备中，将会自动的调整大小。保留内边距是�
 **其次**，你只需要在下面的yaml头文件中设置一下就可以了。
 
 ```
-duoshuo_username: panlei361
+duoshuo_username: _你的用户名_
 # 或者
 disqus_username: _你的用户名_
 ```
