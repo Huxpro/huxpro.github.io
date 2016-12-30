@@ -6,7 +6,7 @@ header-img: "img/about-bg.jpg"
 ---
 
 <!-- Language Selector -->
-<select onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
+<select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
     <option value="0" selected> 中文 Chinese </option>
     <option value="1"> 英文 English </option>
 </select>
@@ -15,6 +15,7 @@ header-img: "img/about-bg.jpg"
 <div class="zh post-container">
 
     <!--copied from markdown -->
+<<<<<<< HEAD
     <blockquote><p>我不是诗人，所以，只能够把爱你写进程序，<br>
        当作不可解的密码，作为我一个人知道的秘密。<br>
     </p></blockquote>
@@ -25,19 +26,53 @@ header-img: "img/about-bg.jpg"
 
     <ul>
     <li><a href="https://github.com/panlei361">Github Page</a></li>
+=======
+    <blockquote><p>写写代码，做做设计，<br>
+    离开世界之前，一切都是过程</p></blockquote>
+
+    <p>Hey，我是<strong>黄玄</strong>，程序员 &amp; 设计师，<a href="https://medium.com/ben-and-dion/team-web-3315aa447fb2#.359a9c6cl">Team Web</a>，前淘宝网 · <a href="http://alitrip.com">阿里旅行</a>前端团队资深实习生 · 花名鬼栈，前微影时代 · <a href="http://www.wepiao.com/?r=movie">微票儿</a>前端基础工程团队负责人。</p>
+
+    <p>一些作品和开源项目，👉 戳 <a href="https://zhuanlan.zhihu.com/p/21280918">演说.io</a>、<a href="/portfolio">Portfolio</a> 与 <a href="http://github.com/huxpro">Github</a>；除了在博客与 <a href="http://zhuanlan.zhihu.com/huxblog">知乎专栏 · 一生想做浪漫极客</a> 写点东西外，我也是 <a href="http://www.gfansub.com/">GDG 字幕组</a> 与 <a href="http://zhuanlan.zhihu.com/FrontendMagazine">前端外刊评论 · 知乎专栏</a> 的翻译维护成员。</p>
+    
+    <p>音乐重度依赖患者，设计师强迫症患者，书买得比看得多患者，毒舌患者，科技产品发布会观看癖患者，间歇性感伤患者，习惯性熬夜患者。</p>
+    <h5>Talks</h5>
+
+    <ul>
+    <li><a href="//huangxuan.me/2016/11/20/sw-101-gdgdf/">Service Worker 101 · GDG DevFest 2016 北京</a></li>
+    <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/">Progressive Web Apps，复兴序章 · QCon 上海 2016</a></li>
+    <li><a href="//huangxuan.me/2016/06/05/pwa-in-my-pov/">Progressive Web App 之我见 · 2016</a></li>
+    <li><a href="//huangxuan.me/2015/12/28/css-sucks-2015/">CSS Still Sucks 2015 · 2015</a></li>
+    <li><a href="//huangxuan.me/2015/07/09/js-module-7day/">JavaScript 模块化七日谈 · 2015</a></li>
+>>>>>>> refs/remotes/Huxpro/master
     </ul>
 
 </div>
 
 <!-- English Version -->
 <div class="en post-container">
-    <blockquote><p>Yet another Frontend Engineer. <br>
-    Yet another Lifelong Designer.</p></blockquote>
+    <blockquote><p>Yet another Web Developer. <br>
+    Yet another Life-long Designer.</p></blockquote>
 
     <p>Hi, I am <strong>PanLei(潘磊)</strong>， I'm an engineer &amp; .</p>
 
+<<<<<<< HEAD
+=======
+    <p>As an engineer, I worked at Wepiao (<a href="https://www.crunchbase.com/organization/wepiao#/entity">see CrunchBase</a>) as the dev lead of Front-End Infrastructure Team, and used to intern at <a href="https://www.alitrip.com/">Alibaba Trip</a> for one year. As a designer, I was offered to be the UI/UX Designer Intern of Alibaba, Microsoft etc.</p>
+>>>>>>> refs/remotes/Huxpro/master
 
 
+<<<<<<< HEAD
+=======
+    <h5>Talks</h5>
+
+    <ul>
+    <li><a href="//huangxuan.me/2016/11/20/sw-101-gdgdf/">Service Worker 101, working offline and instant loading · GDG DevFest 2016 Beijing</a></li>
+    <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/">Progressive Web Apps, make web great again · QCon Shanghai 2016</a></li>
+    <li><a href="//huangxuan.me/2016/06/05/pwa-in-my-pov/">Progressive Web App in my pov · 2016</a></li>
+    <li><a href="//huangxuan.me/2015/12/28/css-sucks-2015/">CSS Still Sucks 2015, and how we work around it · 2015</a></li>
+    <li><a href="//huangxuan.me/2015/07/09/js-module-7day/">JavaScript Modularization Journey · 2015</a></li>
+    </ul>
+>>>>>>> refs/remotes/Huxpro/master
 </div>
 
 <!-- Handle Language Change -->
@@ -85,10 +120,12 @@ header-img: "img/about-bg.jpg"
 {% if site.duoshuo_username %}
 <!-- 多说评论框 start -->
 <div class="comment">
+    <!-- This id is used for indexing my loss comments forcedly -->
     <div class="ds-thread"
     {% if site.duoshuo_username == "huxblog" %}
         data-thread-id="1187623191091085319"
     {% else %}
+    <!-- U can just use this key generated to index comments at page about -->
         data-thread-key="{{site.duoshuo_username}}/about"
     {% endif %}
 
