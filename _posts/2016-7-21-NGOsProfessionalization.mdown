@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "The Role of Knowlegde and Professionalization in the Development of NGOs"
-subtitle:   "知道如何做一个行动研究者吧"
+subtitle:   "做一个行动研究者吧"
 data:       2016-8-31 20:23:22
 author:     "Dann"
 header-img: "img/post-knowledgepro.png"
@@ -34,3 +34,16 @@ _Author: <a href="mailto:jenniferhsu@cantab.net">Jennifer Y.J. Hsu & Reza Hasmat
 
 ## 正文
 过去的二十年见证了中国非政府组织在数量和规模上的极速发展。如今，这些公益组织在大城市流行开来，并和各级政府建立了友好关系。他们运营的业务范围包括教育、扶贫、社区发展、环境保护、健康以及少数族群服务和支援等。
+
+
+
+
+
+
+
+
+
+
+
+
+
