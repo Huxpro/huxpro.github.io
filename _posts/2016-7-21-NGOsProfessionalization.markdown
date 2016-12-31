@@ -44,7 +44,7 @@ _Author: <a href="mailto:jenniferhsu@cantab.net">Jennifer Y.J. Hsu & Reza Hasmat
 _Link: <a href="/attach/A-maturing-civil-society-in-China.pdf">原文发表在《China Information》，复制许可来在SAGES。全文翻译有所节选</a>_
 
 ### 摘要
-该论文指出中国大陆的公益组织并不认为自己是*<font color="Crimson">认知共同体（epistemic communities）</font>*的一份子。在重庆、昆明、南京和上海开展的访谈结果显示，这一现象应该归结于其缺乏标准化和专业化的运营模式。此外，本文也指出也发现，公益组织并不认同在组织发展中，承担知识生产的是他们的首要角色。这或许说明伴随着了中国公民社会发展中变动的道路，中国的非盈利组织发展模式将不同以往。
+该论文指出中国大陆的公益组织并不认为自己是*<a href="http://www.wem.org.cn/news/view.asp?id=663&title=%CC%D8%B1%F0%B1%A8%B5%C0&cataid=38"><font color="Crimson">认知共同体（epistemic communities）</font></a>*的一份子。在重庆、昆明、南京和上海开展的访谈结果显示，这一现象应该归结于其缺乏标准化和专业化的运营模式。此外，本文也指出也发现，公益组织并不认同在组织发展中，承担知识生产的是他们的首要角色。这或许说明伴随着了中国公民社会发展中变动的道路，中国的非盈利组织发展模式将不同以往。
 
 ### 正文
 过去的二十年见证了中国非政府组织在数量和规模上的极速发展。如今，这些公益组织在大城市流行开来，并和各级政府建立了友好关系。他们也在包括教育、扶贫、社区发展、环境保护、健康以及少数族群服务和支援等在内的社会领域开展了工作。
