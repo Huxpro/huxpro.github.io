@@ -69,8 +69,8 @@ ga_domain: tanyang.me
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "捣鼓数据，做做笔记，学学佛法。须知，一切轮回终有尽头。"
-sidebar-avatar: /img/avatar-dann.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "一切轮回终有尽头"
+sidebar-avatar: /img/avatar-dann.png     # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
