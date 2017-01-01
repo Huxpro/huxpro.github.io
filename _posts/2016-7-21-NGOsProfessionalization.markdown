@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "The Role of Knowledge and Professionalization in the Development of NGOs"
+title:      "Social Research in NGOs：Duty and Capacity"
 subtitle:   "做一个行动研究者吧"
 data:       2016-8-31 20:23:22
 author:     "Dann"
