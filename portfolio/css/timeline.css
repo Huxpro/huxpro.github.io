@@ -191,6 +191,8 @@ body{
 }
 header{
 	background: #6ca8fb;
+	background: -webkit-linear-gradient(to left, #00d2ff , #6ca8fb);
+	background: linear-gradient(to left, #00d2ff , #6ca8fb);
 	text-align: center;
 	height: 620px;
 	min-width: 100%;
