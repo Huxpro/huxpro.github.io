@@ -1,13 +1,13 @@
 ---
 layout:      post
-title:       "Understand NAs in R"
-subtitle:    "理解R中缺失值的办法"
+title:       "Logic and Methodology of Non-profit"
+subtitle:    "令人怀念的质朴、健康的粗俗"
 data:        2016-7-24 10:23:22
 author:      "Dann"
-header-img:  "img/nas.png"
+header-img:  "img/ngo-logic.png"
 tags:
-       - R
-       - NAs
+       - NGO
+       - Methodology
 ---
 
 > 理解NAs的一种小技巧
