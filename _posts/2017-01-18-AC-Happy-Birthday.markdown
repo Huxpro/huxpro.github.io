@@ -1,5 +1,5 @@
 ---
-layout:     default
+layout:     post
 title:      "Happy Birthday「to myself 2017 成都」"
 subtitle:   "happy birthday "
 iframe:     "//music.163.com/outchain/player?type=2&id=28563317&auto=0&height=66/"
@@ -25,7 +25,7 @@ tags:
 ### 生日快乐 → 
 
 
-    <img src='http://p1.bpimg.com/1949/e67c5d4da3a7a381.jpg'>" 
+      ![阴天快乐](http://p1.bpimg.com/1949/e67c5d4da3a7a381.jpg)
 
 
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28563317&auto=1&height=66"></iframe>
@@ -39,6 +39,7 @@ tags:
 - 编程，学Python
 - 不当单身狗了。是时候改变一下状态了
 
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=500 height=150 src="https://music.daoapp.io/iframe?song=28563317&qssl=1&qlrc=1&qnarrow=0&autoplay=1"></iframe>
 
 
 ### Notes  
