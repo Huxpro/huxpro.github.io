@@ -57,33 +57,27 @@ IDE刚开始我用的Python自带的`IDLE`，还用过`Visual Stdio code`,后来
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## History
+## Python爬虫爬取知乎某一个问题下的图片
 
 <!--<h2 id="history"> History </h2>-->
 
-> 此段落参考自玉伯的 [前端模块化开发那点历史](https://github.com/seajs/seajs/issues/588)
+> 代码请看这里 [这里](https://achan.xyz/zhihupicdownload.py/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 09-10 年间，CommonJS（那时还叫 ServerJS） 社区推出 [Modules/1.0](http://wiki.commonjs.org/wiki/Modules) 规范，并且在 Node.js 等环境下取得了很不错的实践。
 
