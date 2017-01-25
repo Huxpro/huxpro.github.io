@@ -13,7 +13,7 @@ tags:
 
 > 问题那么多，还是得一个个说。
 
-部门交流的时候，给小伙伴分享了关于对公益逻辑和方法的一些看法。这块内容其实是隶属于NGO能力建设的一部分，但现在很少见到这样的体系化学习渠道了。2015年，联合国开发的NGO Capacity Building在线入门课程（coursera上面还有，但已经没法报名了）涵盖了<a href="link=https://www.coursera.org/learn/undp-cso/home/week/1"><font color="#1E90FF">“使命与治理”、“人力资源管理”、“筹款”、“对外拓展”</font></a>四个章节。WISPAD发来的课程则大都是属于商业管理板块。两周前和蔡葵老师在云大交流国内NGO发展，她说还是应该从能力建设入手对NGO组织每年有两次培训。倍能15年的时候也组织过讨论<a href="link=http://www.chinadevelopmentbrief.org.cn/news-17976.html"><font color="#1E90FF">《谁该为NGO能力建设买单?》</font></a>。他们都提出了买单资源，而在这一问题之上的是：能力建设意识是不是被NGO从业者上升到第一高度呢？或者说是不是能够意识到<b>公益专业主义</b>的严肃性。
+部门交流的时候，给小伙伴分享了关于对公益逻辑和方法的一些看法。这块内容其实是隶属于NGO能力建设的一部分，但现在很少见到这样的体系化学习渠道了。2015年，联合国开发的NGO Capacity Building在线入门课程（coursera上面还有，但已经没法报名了）涵盖了<a href="https://www.coursera.org/learn/undp-cso/home/week/1"><font color="#1E90FF">“使命与治理”、“人力资源管理”、“筹款”、“对外拓展”</font></a>四个章节。WISPAD发来的课程则大都是属于商业管理板块。两周前和蔡葵老师在云大交流国内NGO发展，她说还是应该从能力建设入手对NGO组织每年有两次培训。倍能15年的时候也组织过讨论<a href="http://www.chinadevelopmentbrief.org.cn/news-17976.html"><font color="#1E90FF">《谁该为NGO能力建设买单?》</font></a>。他们都提出了买单资源，而在这一问题之上的是：能力建设意识是不是被NGO从业者上升到第一高度呢？或者说是不是能够意识到<b>公益专业主义</b>的严肃性。
 
 这篇文章对会议分享的概括并补充一些新的观点。
 
