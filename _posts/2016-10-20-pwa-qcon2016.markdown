@@ -1,0 +1,62 @@
+---
+layout:     keynote
+title:      "Progressive Web Apps，复兴序章「QCon 上海 2016」"
+subtitle:   "Slides: Progressive Web Apps, Make Web Great Again. (QCon Shanghai 2016)"
+iframe:     "//huangxuan.me/pwa-qcon2016/"
+navcolor:   "invert"
+date:       2016-10-20
+author:     "Hux"
+tags:
+    - 前端开发
+    - JavaScript
+    - PWA
+---
+
+
+> 下滑这里查看更多内容
+
+
+### [Watching Fullscreen →](https://huangxuan.me/pwa-qcon2016/)
+
+<div class="visible-md visible-lg">
+    <img src="//huangxuan.me/pwa-qcon2016/attach/qrcode.png" width="350" />
+    <small class="img-hint">Scanning on mobile</small>
+</div>
+
+
+### Catalog
+
+- The State Of Web
+- Rethinking Hybridzation
+- PWA 101
+    - Definition
+    - Add To HomeScreen
+        - Web Manifest
+    - Reliable Experience (Network as PE)
+        - Service Worker
+            - Register SW
+            - On Install & Cache API
+                - ExtendableEvent & SkipWaiting
+            - On Fetch
+            - Stale-While-Revalidate & Fallback
+            - Updating SW
+            - SW LifeCycle
+            - On Activate
+            - SW Brings Architectural Revolution
+    - Re-engageable
+- PWA In Production 
+    - User Expectation & Guiding
+    - Low Deliver Friction
+- PWA vs. Others
+- The Belief In Web
+    - One Web
+    - Fulfill WWDC 2007 
+
+
+### Notes  
+
+This slides is powered by [Yanshuo.io (演说.io)](http://yanshuo.io), a online software helping you create, store and share web slides. 
+
+`index.html` is the HTML source code exported from [Yanshuo.io](http://yanshuo.io), and many of its dependencis (js, css, fonts) are still linked to CDN of [Yanshuo.io](http://yanshuo.io). You can do any secondary development and host it by yourself.
+
+
