@@ -271,9 +271,10 @@ self.addEventListener('notificationclose', event => {
 
 ```
 
-对于 Push Notification，笔者的几次分享中一直都提的稍微少一些，一是因为 Push API 还处于 Editor Draft 的状态，二是目前浏览器与推送服务的互相支持都还不够成熟：Android 上的 Chrome（与其它基于 Blink 的浏览器）目前只支持基于 Google 私有的 GCM/FCM 的通知推送，只有 Firefox 已经实现了正在由 IETF 进行标准化的 [Web 推送协议（Web Push Protocol）][spec5]。
+对于 Push Notification，笔者的几次分享中一直都提的稍微少一些，一是因为 Push API 还处于 Editor Draft 的状态，二是目前浏览器与推送服务间的协议支持还不够成熟：Chrome（与其它基于 Blink 的浏览器）在 Chromium 52 之前只支持基于 Google 私有的 GCM/FCM 服务进行通知推送。不过好消息是，继 Firefox 44 之后，Chrome 52 与 Opera 39 也紧追其后实现了正在由 IETF 进行标准化的 [Web 推送协议（Web Push Protocol）][spec5]。
 
-不过，如果你已经在使用 Google 的云服务（比如 Firebase），并且主要面向的是海外用户，那么在 web 应用上支持基于 GCM/FCM 的推送通知并不是一件费力的事情，笔者推荐你阅读一下 Google Developers 的[系列文章][25]，很多国外公司已经玩起来了。
+
+如果你已经在使用 Google 的云服务（比如 Firebase），并且主要面向的是海外用户，那么在 web 应用上支持基于 GCM/FCM 的推送通知并不是一件费力的事情，笔者推荐你阅读一下 Google Developers 的[系列文章][25]，很多国外公司已经玩起来了。
 
 
 
@@ -342,7 +343,7 @@ PWA 作为一个涵盖性术语，与过往的这些或多或少通过私有平�
 
 ### PWA in China
 
-看看 Google 官方宣传较多的 PWA [案例][47]就会发现，FlipKart、Housing.com 来自印度；Uber、华盛顿邮报来自北美；唯一来自中国的 AliExpress 主要开展的则是海外业务。
+看看 Google 官方宣传较多的 PWA [案例][47]就会发现，FlipKart、Housing.com 来自印度；Lyft、华盛顿邮报来自北美；唯一来自中国的 AliExpress 主要开展的则是海外业务。
 
 由于中国的特殊性，笔者在[第一次][46]聊到 PWA 时难免表现出了一定程度的悲观：
 
