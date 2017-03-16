@@ -51,9 +51,9 @@ kramdown:
 #disqus_username: _your_disqus_short_name_
 
 # Duoshuo settings
-duoshuo_username: AngelZblog
+#duoshuo_username: 
 # Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: fasle                     # set to false if you want to use Comment without Sharing
+#duoshuo_share: fasle                     # set to false if you want to use Comment without Sharing
 
 
 
@@ -71,7 +71,7 @@ duoshuo_share: fasle                     # set to false if you want to use Comme
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "永不止息，悲欣交集 <br> To live without limits“
-sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+#sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
