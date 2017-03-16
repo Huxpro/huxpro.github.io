@@ -1,10 +1,10 @@
 # Site settings
-title: AngelZ Blog
+title: 末节 | 记录
 SEOTitle: 杨浅的博客 | AngelZ
 header-img: img/home-bg.jpg
 email: fongching7@gmail.com
 description: "关于医学，科研，个人成长，写作练习，社会评论| 杨浅 | 这里是 @AngelZ 的个人博客，记录在生活中的所见所闻。"
-keyword: "杨浅, AngelZ杨浅, Angel, 丰成, AngelZ, @AngelZ, 杨浅的博客, AngelZ Blog, 博客, 个人网站, 医学评论, 科研评论, 写作"
+keyword: "杨浅, AngelZ杨浅, 末节，杨浅末节 丰成, AngelZ, @AngelZ, 杨浅的博客, AngelZ Blog, 博客, 个人网站, 医学评论, 科研评论, 写作"
 url: "https://angelfangzhu.github.io/"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
