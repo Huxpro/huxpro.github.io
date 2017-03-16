@@ -1,7 +1,7 @@
 {
-  "name": "Hux Blog",
-  "short_name": "Hux Blog",
-  "description": "About an engineer & designer who loves web.",
+  "name": "末节|记录",
+  "short_name": "末节|记录",
+  "description": "About how to live without limits.",
   "icons": [{
     "src": "icons/128.png",
     "sizes": "128x128",
