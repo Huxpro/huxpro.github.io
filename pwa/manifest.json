@@ -4,11 +4,11 @@
   "description": "About how to live without limits.",
   "icons": [{
     "src": "icons/128.png",
-    "sizes": "128x128",
+    "sizes": "110x123",
     "type": "image/png"
   }, {
     "src": "icons/512.png",
-    "sizes": "512x512",
+    "sizes": "455x508",
     "type": "image/png"
   }],
   "background_color": "#fff",
