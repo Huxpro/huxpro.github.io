@@ -2,8 +2,10 @@
 layout:     post
 title:      "在微信时代，回归博客"
 subtitle:   " \"Why I am back to blog\""
-date:       
+date:       2017-03-17 12:00:00 
 author:     "杨浅"
+header-img: 
+header-mask: 0.3
 catalog: true
 tags:
    - 生活
