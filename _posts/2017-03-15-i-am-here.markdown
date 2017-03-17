@@ -4,7 +4,6 @@ title:      "Yeah, I am here"
 subtitle:   "在这里生活"
 date:       2017-03-16 2230:00
 author:     "杨浅"
-header-img: 
 header-mask: 0.3
 catalog: true
 tags:
