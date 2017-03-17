@@ -4,7 +4,6 @@ title:      "春天还没有来吗"
 subtitle:   "Is spring here"
 date:       2017-03-17 12:00:00
 author:     "杨浅"
-header-img: 
 header-mask: 0.3
 catalog: true
 
