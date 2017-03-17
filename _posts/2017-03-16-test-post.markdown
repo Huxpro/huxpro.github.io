@@ -1,11 +1,14 @@
 ---
-layout:     post title: “Yeah I test” 
-subtitle:   “test” 
-date:       2017-03-17 13:56:00 -0700 
-author:     “杨浅” 
-header-mask: 0.3 
-catalog: true 
-tags: - 生活 
+layout:     post
+title:      "Hello 2017"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2017-03-16 12:00:00
+author:     "杨浅"
+header-img:  
+header-mask: 3.0
+catalog: true
+tags:
+    - 生活
 ---
 
 > This is a test post
