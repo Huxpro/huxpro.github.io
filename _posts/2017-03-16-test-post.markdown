@@ -5,11 +5,7 @@ date:       2017-03-17 13:56 +500
 author:     “杨浅” 
 header-mask: 0.3 
 catalog: true 
-tags: - 生活 —
-
-
-
-
+tags: - 生活 
 ---
 
 > This is a test post
