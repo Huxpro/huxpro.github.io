@@ -17,7 +17,7 @@ zhihu_username:     AngelZ
 github_username:    AngelFangZhu
 twitter_username:   byronchu
 #facebook_username:  byronchu
-linkedin_username:  Fang Angel Zhu-78814b53
+#linkedin_username:  Fang Angel Zhu-78814b53
 
 
 
@@ -71,7 +71,7 @@ kramdown:
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "永不止息，悲欣交集 <br> To live without limits“
-sidebar-avatar: /img/icon_wechat.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/bg-tag.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
