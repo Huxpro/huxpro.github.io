@@ -11,13 +11,13 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 
 # SNS settings
-RSS: true
+RSS: fasle
 #weibo_username:     
 zhihu_username:     AngelZ
 github_username:    AngelFangZhu
 twitter_username:   byronchu
 #facebook_username:  byronchu
-#linkedin_username:  Fang Angel Zhu-78814b53
+linkedin_username:  Fang Angel Zhu-78814b53
 
 
 
@@ -70,7 +70,7 @@ kramdown:
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "永不止息，悲欣交集 <br> To live without limits“
+sidebar-about-description: "永不止息，悲欣交集 <br> To live without limits"
 sidebar-avatar: /img/bg-tag.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
