@@ -1,0 +1,20 @@
+---
+layout: post title: “Yeah, I test” 
+subtitle: “test” 
+date: 2017-03-16 2230:00 
+author:     “杨浅” 
+header-mask: 0.3 
+catalog: true 
+tags: - 生活 —
+
+
+
+
+---
+
+> This is a test post
+## 正文
+
+## 前言
+
+## 结语
