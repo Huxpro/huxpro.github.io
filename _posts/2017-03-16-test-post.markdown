@@ -1,7 +1,7 @@
 ---
 layout:     post title: “Yeah I test” 
 subtitle:   “test” 
-date:       2017-03-17 13:56 +500 
+date:       2017-03-17 13:56:00 -0700 
 author:     “杨浅” 
 header-mask: 0.3 
 catalog: true 
