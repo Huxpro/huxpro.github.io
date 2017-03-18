@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "Yeah, I am here"
-subtitle:   "在这里生活"
+subtitle:   在这里生活
 date:       2017-03-15 22:30:00
-author:     "杨浅"
+author:     杨浅
 header-img:
 header-mask: 0.3
 catalog: true
