@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      记趣
+title:      记趣
 subtitle:   Live In Present
 date:       2017-03-19 21:00:00
 author:     杨浅
