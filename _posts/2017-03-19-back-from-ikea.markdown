@@ -13,6 +13,7 @@ tags:
 ## 记趣
 ### 一
 >在Burlington的Ikea，那个小女孩和一个小男孩拥抱了。七次。
+
 ![](https://github.com/AngelFangZhu/AngelFangZhu.github.io/blob/master/img/in-post/ikea-burlington.jpg?raw=true)
 
 *Image Source: Credit to CBC News*
