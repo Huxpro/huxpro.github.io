@@ -12,9 +12,10 @@ tags:
 ---
 ## 记趣
 ### 一
-![Alt](AngelFangZhu.github.io/img/ikea-burlington.jpg "Title")
-![](img/in-post/ikea-burlington.jpg)
-![Alt text](AngelFangZhu.github.io/img/ikea-burlington.jpg?raw=true "Optional Title")
+
+![](https://github.com/AngelFangZhu/AngelFangZhu.github.io/blob/master/img/in-post/ikea-burlington.jpg?raw=true)
+*Image Source: Credit to CBC News*
+
 >在Burlington的Ikea，那个小女孩和一个小男孩拥抱了。七次。
 
 小女孩约摸三四岁的样子。四个孩子中的老三。她从桌子左侧跑过她的姐姐之一，来到男孩身边。男孩子从儿童椅里扭过身子，张嘴笑起来，眼睛弯弯的，咿呀地说一句什么话。小女孩也笑开了，重复了一遍，姐弟俩人，小脸相贴，拥抱在了一起。放开后，小弟弟又说了一遍同样的话，呀呀的，笑看着姐姐，小女孩也重复一回，俩人便头脸相抵，抱在一起。如是再五。
