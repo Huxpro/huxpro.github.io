@@ -12,7 +12,7 @@ tags:
 ---
 ## 记趣
 ### 一
-![Alt](/ikea-burlington.jpg "Title")
+![Alt](AngelFangZhu.github.io/img/ikea-burlington.jpg "Title")
 
 >在Burlington的Ikea，那个小女孩和一个小男孩拥抱了。七次。
 
