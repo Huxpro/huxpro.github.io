@@ -128,7 +128,10 @@ friends: [
     },{
         title: "Google Finance",
         href: "https://www.google.ca/finance"
+    },{
+        title: "ETF database",
+        href: "http://etfdb.com/etfdb-category/europe-equities/"
     }
   
-    
+   
 ]
