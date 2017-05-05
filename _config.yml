@@ -90,10 +90,29 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
+        title: "Ali Invest, Ali blog",
+        href: "http://aliinvest.blogspot.ca/"
     },{
-        title: "前端神盾局",
-        href: "http://wepiaofei.github.io/blog/"
+        title: "market folly",
+        href: "http://www.marketfolly.com/"
+    },{
+        title: "Hastings Center",
+        href: "http://www.thehastingscenter.org/"
+    },{
+        title: "Healthy Debate",
+        href: "http://healthydebate.ca/"
+    },{
+        title: "路透中文网",
+        href: "http://cn.reuters.com/"
+    },{
+        title: "Futures Blogs",
+        href: "http://www.futuresblogs.com/"
+    },{
+        title: "Practical Ethics",
+        href: "http://blog.practicalethics.ox.ac.uk/"
+    },{
+        title: "歪歪理财记事本",
+        href: "http://yy-mylifediary.blogspot.ca/"
     }
+    
 ]
