@@ -116,9 +116,13 @@ friends: [
     },{
         title: "SHARETISFY",
         href: "http://www.sharetisfy.com/"
-    }{
+    },{
         title: "雪球",
         href: "http://www.xueqiu.com/"
+    },{
+        title: "Finviz",
+        href: "https://www.finviz.com/"
     }
+  
     
 ]
