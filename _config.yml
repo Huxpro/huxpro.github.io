@@ -1,22 +1,40 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @slientuill
+ Sign out
+ Unwatch 1
+  Star 0
+  Fork 0 slientuill/slientuill.github.com
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
+Branch: master Find file Copy pathslientuill.github.com/_config.yml
+f4c1c7b  20 minutes ago
+@slientuill slientuill Update _config.yml
+1 contributor
+RawBlameHistory     
+127 lines (93 sloc)  3.46 KB
 # Site settings
-title: Hux Blog
-SEOTitle: 黄玄的博客 | Hux Blog
+title: Slientuill Blog
+SEOTitle: Slientuill的博客 | SU Blog
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
-description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
-keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, 前端, 设计, 产品, 肖玉, Lynn, 肖玉的男朋友"
-url: "https://huangxuan.me"              # your host, for absolute URL
+email: slientuill@outlook.com
+description: "计算机学院 | slientuill，图形学，贰刺辕，深度宅| 这里是 @slientuill 的个人博客，与你一起发现更大的世界。"
+keyword: "slientuill, Nano, 计算机科学与技术, 基地班,  @slientuill, slientuill的博客, slientuill Blog, 博客, 个人网站, 互联网, 图形学, android开发, 昏睡12小时,"
+url: "https://slientuill.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
+weibo_username:     slientuill
+zhihu_username:     萌既是正义
+github_username:    slientuill
 #twitter_username:  huxpro
-facebook_username:  huxpro
+#facebook_username:  huxpro
 # linkedin_username:  firstname-lastname-idxxxx
 
 
@@ -70,7 +88,7 @@ ga_domain: huangxuan.me
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，做做设计，<br>离开世界之前，一切都是过程"
+sidebar-about-description: "学习5分钟，昏睡一整天，<br>离开世界之前，一切都是过程"
 sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
@@ -90,37 +108,39 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "Su",
+        title: "1",
         href: "http://su.gallery/"
     },{
-        title: "乱序",
+        title: "2",
         href: "http://mida.re/"
     },{
-        title: "前端外刊评论",
+        title: "3",
         href: "http://qianduan.guru/"
     },{
-        title: "天镶的博客",
+        title: "4",
         href: "http://lingyu.wang/"
     },{
-        title: "Luke 的自留地",
+        title: "5",
         href: "http://hmqk1995.github.io"
     },{
-        title: "Ebn's Blog",
+        title: "6",
         href: "http://ebnbin.com/"
     },{
-        title: "SmdCn's Blog",
+        title: "7",
         href: "http://blog.smdcn.net"
     },{
-        title: "解旻的博客",
+        title: "8",
         href: "http://xieminis.me/"
     },{
-        title: "DHong Say",
+        title: "9",
         href: "http://dhong.co"
     },{
-        title: "尹峰以为",
+        title: "10",
         href: "http://ingf.github.io/"
     },{
-        title: "前端神盾局",
+        title: "并没有什么朋友，请不要点",
         href: "http://wepiaofei.github.io/blog/"
     }
 ]
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
