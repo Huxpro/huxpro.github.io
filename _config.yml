@@ -88,7 +88,7 @@ service-worker: true
 
 
 # Friends
-#friends: [
+friends: [
 {
         title: "zfn",
         href: "http://zhufengning.github.io/"
