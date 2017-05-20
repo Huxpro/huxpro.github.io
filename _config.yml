@@ -48,12 +48,8 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: hux
+disqus_username: disqus_VmV1LUAFFH
 
-# Duoshuo settings
-duoshuo_username: huxblog
-# Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
 
 
@@ -64,7 +60,7 @@ duoshuo_share: true                     # set to false if you want to use Commen
 
 # Google Analytics
 ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+#ga_domain: huangxuan.me
 
 
 
