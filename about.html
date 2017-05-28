@@ -13,47 +13,14 @@ header-img: "img/about-bg.jpg"
 
 <!-- Chinese Version -->
 <div class="zh post-container">
-
-    <!--copied from markdown -->
-    <blockquote><p>写写代码，做做设计，<br>
-    离开世界之前，一切都是过程</p></blockquote>
-
-    <p>Hey，我是<strong>黄玄</strong>，程序员 &amp; 设计师，<a href="https://medium.com/ben-and-dion/team-web-3315aa447fb2#.359a9c6cl">Team Web</a>。前淘宝网 · <a href="http://alitrip.com">阿里旅行</a>前端工程师，前微影时代 · <a href="http://www.wepiao.com/?r=movie">微票儿</a>前端基础工程团队负责人，现就职于<a href="https://ele.me">饿了么</a> · <a href="https://fe.ele.me">大前端团队</a>。</p>
-
-    <p>一些作品和开源项目，👉 戳 <a href="https://zhuanlan.zhihu.com/p/21280918">演说.io</a>、<a href="/portfolio">Portfolio</a> 与 <a href="http://github.com/huxpro">Github</a>；除了在博客与 <a href="http://zhuanlan.zhihu.com/huxblog">知乎专栏 · 一生想做浪漫极客</a> 写点东西外，我也是 <a href="http://www.gfansub.com/">GDG 字幕组</a> 与 <a href="http://zhuanlan.zhihu.com/FrontendMagazine">前端外刊评论 · 知乎专栏</a> 的翻译维护成员。</p>
-    
-    <p>音乐重度依赖患者，设计师强迫症患者，书买得比看得多患者，毒舌患者，科技产品发布会观看癖患者，间歇性感伤患者，习惯性熬夜患者。</p>
-    <h5>Talks</h5>
-
-    <ul>
-    <li><a href="//huangxuan.me/2016/11/20/sw-101-gdgdf/">Service Worker 101</a> · GDG DevFest 北京 2016</li>
-    <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/">Progressive Web Apps 复兴序章</a> · <a href="http://2016.qconshanghai.com/presentation/3111">QCon 上海 2016</a></li>
-    <li><a href="//huangxuan.me/2016/06/05/pwa-in-my-pov/">Progressive Web App 之我见</a> · IO Redux 北京 2016</li>
-    <li><a href="//huangxuan.me/2015/12/28/css-sucks-2015/">CSS Still Sucks 2015</a> · 2015</li>
-    <li><a href="//huangxuan.me/2015/07/09/js-module-7day/">JavaScript 模块化七日谈</a> · 2015</li>
-    </ul>
+    {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
+    {{ about_zh | markdownify }}
 </div>
 
 <!-- English Version -->
 <div class="en post-container">
-    <blockquote><p>Yet another Web Developer. <br>
-    Yet another Life-long Designer.</p></blockquote>
-
-    <p>Hi, I am <strong>Huang Xuan(黄玄)</strong>，you can call me <strong>Hux</strong>. I'm an engineer &amp; a designer who builds softwares (👉 <a href="/portfolio">Portfolio</a> and <a href="http://github.com/huxpro">Github</a>). I studied Digital Media Art and graduated from <a href="https://en.wikipedia.org/wiki/Communication_University_of_China">Communication University of China</a> in 2016.</p>
-    
-    <p>I previsouly worked at <a href="https://www.alitrip.com/">Alibaba Trip</a> and then led Front-End Infrastructure Team at Wepiao (<a href="https://www.crunchbase.com/organization/wepiao#/entity">see CrunchBase</a>). Now I am working at <a href="https://github.com/elemefe/">Ele.me Front-End Engineering Team</a> as Staff Software Engineer, focusing on performance and web app architecture.</p>
-
-    <p>In addition, I'm also an active member of GDG Beijing, a translator at <a href="http://www.gfansub.com/">GDG China Subtitle Team</a>, maintainer at <a href="http://zhuanlan.zhihu.com/FrontendMagazine">Frontend Magazine (in Chinese)</a> and the owner of <a href="http://zhuanlan.zhihu.com/huxblog">Lifelong Romantic Geek (in Chinese)</a>.</p>
-
-    <h5>Talks</h5>
-
-    <ul>
-    <li><a href="//huangxuan.me/2016/11/20/sw-101-gdgdf/" title="Service Worker 101 - working offline and instant loading">Service Worker 101</a> · GDG DevFest Beijing 2016</li>
-    <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/" title="Progressive Web Apps - make web great again">Progressive Web Apps</a> · QCon Shanghai 2016</li>
-    <li><a href="//huangxuan.me/2016/06/05/pwa-in-my-pov/" title="Progressive Web App in my point of view">Progressive Web App in my POV</a> · IO Redux Beijing 2016</li>
-    <li><a href="//huangxuan.me/2015/12/28/css-sucks-2015/" title="CSS Still Sucks 2015 - and how we work around it">CSS Still Sucks 2015</a> · 2015</li>
-    <li><a href="//huangxuan.me/2015/07/09/js-module-7day/">JavaScript Modularization Journey</a> · 2015</li>
-    </ul>
+    {% capture about_en %}{% include about/en.md %}{% endcapture %}
+    {{ about_en | markdownify }}
 </div>
 
 <!-- Handle Language Change -->

@@ -18,6 +18,8 @@ tags:
 
 ### [Watching Fullscreen →](https://huangxuan.me/pwa-qcon2016/)
 
+### [Watching Video →](http://www.infoq.com/cn/presentations/progressive-web-app)
+
 <div class="visible-md visible-lg">
     <img src="//huangxuan.me/pwa-qcon2016/attach/qrcode.png" width="350" />
     <small class="img-hint">Scanning on mobile</small>

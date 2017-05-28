@@ -15,8 +15,8 @@ RSS: false
 weibo_username:     huxpro
 zhihu_username:     huxpro
 github_username:    huxpro
-#twitter_username:  huxpro
-facebook_username:  huxpro
+twitter_username:   huxpro
+#facebook_username:  huxpro
 # linkedin_username:  firstname-lastname-idxxxx
 
 
@@ -90,9 +90,9 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "Su",
-        href: "http://su.gallery/"
-    },{
+    #     title: "Su",
+    #     href: "http://su.gallery/"
+    # },{
         title: "乱序",
         href: "http://mida.re/"
     },{
