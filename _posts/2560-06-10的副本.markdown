@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      " title1"
+title:      "title1"
 subtitle:   "subtitle1"
-date:       2017-6-10
+date:       2017-06-10
 author:     "Dann"
 header-img: "![](http://okbndcmdr.bkt.clouddn.com/IMG_1086.JPG)"
 tags:
