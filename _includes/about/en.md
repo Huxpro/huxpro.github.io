@@ -13,7 +13,7 @@ I studied Digital Media Art and graduated from [Communication University of Chin
 ##### Talks
 
 - [Service Worker 101](//huangxuan.me/2016/11/20/sw-101-gdgdf/) · GDG DevFest Beijing 2016
-- [Progressive Web Apps](//huangxuan.me/2016/10/20/pwa-in-my-pov/) · QCon Shanghai 2016
+- [Progressive Web Apps](//huangxuan.me/2016/10/20/qcon-2016/) · QCon Shanghai 2016
 - [Progressive Web App in my POV](//huangxuan.me/2016/06/05/pwa-in-my-pov/) · GDG IO Redux Beijing 2016
 - [CSS Still Sucks 2015](//huangxuan.me/2015/12/28/css-sucks-2015/) · 2015
 - [JavaScript Modularization Journey](//huangxuan.me/2015/07/09/js-module-7day/) · 2015
