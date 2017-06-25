@@ -51,7 +51,7 @@ kramdown:
 disqus_username: hux
 
 # Netease setttings
-netease_comment: true
+netease_comment: false
 
 # Duoshuo settings
 duoshuo_username: huxblog
