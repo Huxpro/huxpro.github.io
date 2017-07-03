@@ -10,6 +10,9 @@ Hey，我是黄玄，病毒种，进化程度不明，多出没于[博客](https
 
 ##### Talks
 
+- 即将 · [Upgrading to Progressive Web Apps](http://2017.jsconf.cn/) · [JSConfCN 上海 2017](http://2017.jsconf.cn/)
+- [Building Progressive Web Apps](https://yanshuo.io/assets/player/?deck=594d673d570c357d0698a950) · [CSDI 广州 2017](http://www.csdisummit.com/)
+- [The State of Progressive Web App](https://yanshuo.io/assets/player/?deck=593ad6fbfe88c2006a0a0d6d#/) · GDG IO Redux 北京 2017
 - [Service Worker 101](//huangxuan.me/2016/11/20/sw-101-gdgdf/) · GDG DevFest 北京 2016
 - [Progressive Web App，复兴序章](//huangxuan.me/2016/10/20/qcon-2016/) · [QCon 上海 2016](http://2016.qconshanghai.com/presentation/3111)
 - [Progressive Web App 之我见](//huangxuan.me/2016/06/05/pwa-in-my-pov/) · GDG IO Redux 北京 2016
