@@ -99,7 +99,12 @@ self.addEventListener('install', e => {
  *  waitUntil(): activating ====> activated
  */
 self.addEventListener('activate',  event => {
-  // TODO: consider some cleanning up.
+  // delete old deprecated caches.
+  caches.keys().then(cacheNames => Promise.all(
+    cacheNames
+      .filter(cacheName => ['precache-v1', 'runtime'].includes(cacheName))
+      .map(cacheName => caches.delete(cacheName))
+  ))
   console.log('service worker activated.')
   event.waitUntil(self.clients.claim());
 });
