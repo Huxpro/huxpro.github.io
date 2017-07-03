@@ -106,6 +106,7 @@
 
 <!-- Service Worker -->
 {% if site.service-worker %}
+<script src="{{ "/js/snackbar.js " | prepend: site.baseurl }}"></script>
 <script src="{{ "/js/sw-registration.js " | prepend: site.baseurl }}"></script>
 {% endif %}
 

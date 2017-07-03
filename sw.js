@@ -11,14 +11,32 @@
 // A namespace can prevent potential name conflicts and mis-deletion.
 const CACHE_NAMESPACE = 'main-'
 
-const PRECACHE = CACHE_NAMESPACE + 'precache-v1';
-const RUNTIME = CACHE_NAMESPACE + 'runtime';
+const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
+const PRECACHE_LIST = [
+  "./",
+  "./offline.html",
+  "./js/jquery.min.js",
+  "./js/bootstrap.min.js",
+  "./js/hux-blog.min.js",
+  "./js/snackbar.js",
+  "./img/icon_wechat.png",
+  "./img/avatar-hux.jpg",
+  "./img/home-bg.jpg",
+  "./img/404-bg.jpg",
+  "./css/hux-blog.min.css",
+  "./css/syntax.css",
+  "./css/bootstrap.min.css", 
+  "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css",
+  "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/fonts/fontawesome-webfont.woff2?v=4.6.3",
+  "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"
+]
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
   "huangxuan.me",
   "yanshuo.io",
   "cdnjs.cloudflare.com"
 ]
+const DEPRECATED_CACHES = ['precache-v1', 'runtime', 'main-precache-v1', 'main-runtime']
 
 
 // The Util Function to hack URLs of intercepted requests
@@ -73,52 +91,6 @@ const getRedirectUrl = (req) => {
   return url.href
 }
 
-/**
- * Broadcasting all clients with MessageChannel API
- */
-function sendMessageToAllClients(msg){
-  self.clients.matchAll().then( clients => {
-    clients.forEach(client => {
-      //console.log(client);
-      client.postMessage(msg)
-    })
-  })
-}
-
-/**
- * Broadcasting newly created clients
- */
-function sendMessageToNewClients(msg){
-  // waiting for new client alive with "async" setTimeout hacking
-  // https://twitter.com/Huxpro/status/799265578443751424
-  // https://jakearchibald.com/2016/service-worker-meeting-notes/#fetch-event-clients
-  setTimeout(() => {
-    sendMessageToAllClients(msg)
-  }, 1000)
-}
-
-/**
- * if content modified, we can notify clients to hot-swap content
- * @param  {Promise<response>} cachedVersion  [description]
- * @param  {Promise<response>} fetchedVersion [description]
- * @return {Promise}
- */
-function checkIfContentModified(cachedVersion, fetchedVersion){
-  return Promise.all([cachedVersion, fetchedVersion])
-    .then(([cached, fetched]) => {
-      const cachedDate = cached.headers.get('last-modified')
-      const fetchedDate = fetched.headers.get('last-modified')
-
-      if(cachedDate !== fetchedDate) {
-        console.log(`${cachedDate} VS. ${fetchedDate}`);
-        sendMessageToNewClients({
-          'command': 'UPDATE_FOUND',
-          'url': event.request.url
-        })
-      }
-    })
-    .catch(_ => {})
-}
 
 /**
  *  @Lifecycle Install
@@ -130,10 +102,10 @@ function checkIfContentModified(cachedVersion, fetchedVersion){
  */
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(PRECACHE).then(cache => {
-      return cache.add('offline.html')
-      .then(self.skipWaiting())
-      .catch(err => console.log(err))
+    caches.open(CACHE).then(cache => {
+      return cache.addAll(PRECACHE_LIST)
+        .then(self.skipWaiting())
+        .catch(err => console.log(err))
     })
   )
 });
@@ -145,11 +117,11 @@ self.addEventListener('install', e => {
  *
  *  waitUntil(): activating ====> activated
  */
-self.addEventListener('activate',  event => {
+self.addEventListener('activate', event => {
   // delete old deprecated caches.
   caches.keys().then(cacheNames => Promise.all(
     cacheNames
-      .filter(cacheName => ['precache-v1', 'runtime'].includes(cacheName))
+      .filter(cacheName => DEPRECATED_CACHES.includes(cacheName))
       .map(cacheName => caches.delete(cacheName))
   ))
   console.log('service worker activated.')
@@ -173,7 +145,7 @@ self.addEventListener('fetch', event => {
   if (HOSTNAME_WHITELIST.indexOf(new URL(event.request.url).hostname) > -1) {
 
     // Redirect in SW manually fixed github pages 404s on repo?blah
-    if(shouldRedirect(event.request)){
+    if (shouldRedirect(event.request)) {
       event.respondWith(Response.redirect(getRedirectUrl(event.request)))
       return;
     }
@@ -183,7 +155,7 @@ self.addEventListener('fetch', event => {
     // Upgrade from Jake's to Surma's: https://gist.github.com/surma/eb441223daaedf880801ad80006389f1
     const cached = caches.match(event.request);
     const fixedUrl = getFixedUrl(event.request);
-    const fetched = fetch(fixedUrl, {cache: "no-store"});
+    const fetched = fetch(fixedUrl, { cache: "no-store" });
     const fetchedCopy = fetched.then(resp => resp.clone());
 
     // Call respondWith() with whatever we get first.
@@ -194,19 +166,70 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       Promise.race([fetched.catch(_ => cached), cached])
         .then(resp => resp || fetched)
-        .catch(_ => caches.match('offline.htmel'))
+        .catch(_ => caches.match('offline.html'))
     );
 
     // Update the cache with the version we fetched (only for ok status)
     event.waitUntil(
-      Promise.all([fetchedCopy, caches.open(RUNTIME)])
+      Promise.all([fetchedCopy, caches.open(CACHE)])
         .then(([response, cache]) => response.ok && cache.put(event.request, response))
-        .catch(_ => {/* eat any errors */})
+        .catch(_ => {/* eat any errors */ })
     );
 
     // If one request is a HTML naviagtion, checking update!
-    if(isNavigationReq(event.request)){
-      event.waitUntil(checkIfContentModified(cached, fetchedCopy))
+    if (isNavigationReq(event.request)) {
+      // you need "preserve logs" to see this log
+      // cuz it happened before navigating
+      console.log(`fetch ${event.request.url}`)
+      event.waitUntil(revalidateContent(cached, fetchedCopy))
     }
   }
 });
+
+
+/**
+ * Broadcasting all clients with MessageChannel API
+ */
+function sendMessageToAllClients(msg) {
+  self.clients.matchAll().then(clients => {
+    clients.forEach(client => {
+      //console.log(client);
+      client.postMessage(msg)
+    })
+  })
+}
+
+/**
+ * Broadcasting all clients async
+ */
+function sendMessageToClientsAsync(msg) {
+  // waiting for new client alive with "async" setTimeout hacking
+  // https://twitter.com/Huxpro/status/799265578443751424
+  // https://jakearchibald.com/2016/service-worker-meeting-notes/#fetch-event-clients
+  setTimeout(() => {
+    sendMessageToAllClients(msg)
+  }, 1000)
+}
+
+/**
+ * if content modified, we can notify clients to refresh
+ * @param  {Promise<response>} cachedResp  [description]
+ * @param  {Promise<response>} fetchedResp [description]
+ * @return {Promise}
+ */
+function revalidateContent(cachedResp, fetchedResp) {
+  // revalidate when both promise resolved
+  return Promise.all([cachedResp, fetchedResp])
+    .then(([cached, fetched]) => {
+      const cachedVer = cached.headers.get('last-modified')
+      const fetchedVer = fetched.headers.get('last-modified')
+      console.log(`"${cachedVer}" vs. "${fetchedVer}"`);
+      if (cachedVer !== fetchedVer) {
+        sendMessageToClientsAsync({
+          'command': 'UPDATE_FOUND',
+          'url': fetched.url
+        })
+      }
+    })
+    .catch(err => console.log(err))
+}
