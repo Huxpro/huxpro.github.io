@@ -22,6 +22,7 @@ body, html {
 	width: 90%;
 	max-width: 69em;
 	margin: 0 auto;
+	margin-bottom: 423px;
 	padding: 0 1.375em;
 }
 
@@ -190,9 +191,12 @@ body{
 	background: #fafafa;
 }
 header{
-	background: #6ca8fb;
+	background: #232526; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #232526 , #414345); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #232526 , #414345); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 	text-align: center;
-	height: 620px;
+	height: 167px;
 	min-width: 100%;
 	padding: 5em 0px !important;
 	position: relative;
@@ -200,7 +204,7 @@ header{
 }
 header h1 {
     font-size: 70px;
-    color: white;
+    color: #252728;
     font-weight: 100;
     margin-top: 26px;
     margin-bottom: 10px;
@@ -209,7 +213,7 @@ header h1 {
 }
 header p{
 	text-align: center;
-	color: white;
+	color: #252728;
 	font-size: 16px;
 	line-height: 1.6em;
 	letter-spacing: 1px;
@@ -217,7 +221,7 @@ header p{
 	margin: 1.7em;
 }
 header img{
-	width: 190px;
+	width: 175px;
 }
 
 .cbp_tmlabel .hux_ul{

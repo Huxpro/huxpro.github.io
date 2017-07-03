@@ -6,8 +6,13 @@
  * service worker scripting
  * ========================================================== */
 
-const PRECACHE = 'precache-v1';
-const RUNTIME = 'runtime';
+// CACHE_NAMESPACE
+// CacheStorage is shared between all sites under same domain.
+// A namespace can prevent potential name conflicts and mis-deletion.
+const CACHE_NAMESPACE = 'main-'
+
+const PRECACHE = CACHE_NAMESPACE + 'precache-v1';
+const RUNTIME = CACHE_NAMESPACE + 'runtime';
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
   "huangxuan.me",
@@ -141,6 +146,12 @@ self.addEventListener('install', e => {
  *  waitUntil(): activating ====> activated
  */
 self.addEventListener('activate',  event => {
+  // delete old deprecated caches.
+  caches.keys().then(cacheNames => Promise.all(
+    cacheNames
+      .filter(cacheName => ['precache-v1', 'runtime'].includes(cacheName))
+      .map(cacheName => caches.delete(cacheName))
+  ))
   console.log('service worker activated.')
   event.waitUntil(self.clients.claim());
 });

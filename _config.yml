@@ -15,8 +15,8 @@ RSS: false
 weibo_username:     huxpro
 zhihu_username:     huxpro
 github_username:    huxpro
-#twitter_username:  huxpro
-facebook_username:  huxpro
+twitter_username:   huxpro
+#facebook_username:  huxpro
 # linkedin_username:  firstname-lastname-idxxxx
 
 
@@ -48,7 +48,10 @@ kramdown:
 
 
 # Disqus settings
-#disqus_username: _your_disqus_short_name_
+disqus_username: hux
+
+# Netease setttings
+netease_comment: false
 
 # Duoshuo settings
 duoshuo_username: huxblog
@@ -90,9 +93,9 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "Su",
-        href: "http://su.gallery/"
-    },{
+    #     title: "Su",
+    #     href: "http://su.gallery/"
+    # },{
         title: "乱序",
         href: "http://mida.re/"
     },{

@@ -1,3 +1,8 @@
+/*!
+ * Hux Blog v1.7.0 (http://huxpro.github.io)
+ * Copyright 2017 Hux <huxpro@gmail.com>
+ */
+
 @media (min-width: 1200px) {
   .post-container,
   .sidebar-container {
@@ -231,6 +236,7 @@ pre code {
   margin-bottom: 15px;
 }
 .post-container a {
+  display: inline-block;
   color: #337ab7;
 }
 .post-container a:hover,
