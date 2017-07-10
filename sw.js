@@ -40,7 +40,7 @@ const DEPRECATED_CACHES = ['precache-v1', 'runtime', 'main-precache-v1', 'main-r
 
 
 // The Util Function to hack URLs of intercepted requests
-const getFixedUrl = (req) => {
+const getCacheBustingUrl = (req) => {
   var now = Date.now();
   url = new URL(req.url)
 
@@ -129,6 +129,33 @@ self.addEventListener('activate', event => {
 });
 
 
+var fetchHelper = {
+
+  fetchThenCache: function(request){
+    // Requests with mode "no-cors" can result in Opaque Response,
+    // Requests to Allow-Control-Cross-Origin: * can't include credentials.
+    const init = { mode: "cors", credentials: "omit" } 
+
+    const fetched = fetch(request, init)
+    const fetchedCopy = fetched.then(resp => resp.clone());
+
+    // NOTE: Opaque Responses have no hedaders so [[ok]] make no sense to them
+    //       so Opaque Resp will not be cached in this case.
+    Promise.all([fetchedCopy, caches.open(CACHE)])
+      .then(([response, cache]) => response.ok && cache.put(request, response))
+      .catch(_ => {/* eat any errors */})
+    
+    return fetched;
+  },
+
+  cacheFirst: function(url){
+    return caches.match(url) 
+      .then(resp => resp || this.fetchThenCache(url))
+      .catch(_ => {/* eat any errors */})
+  }
+}
+
+
 /**
  *  @Functional Fetch
  *  All network requests are being intercepted here.
@@ -150,14 +177,19 @@ self.addEventListener('fetch', event => {
       return;
     }
 
-    // Stale-while-revalidate
+    // Cache-only Startgies for ys.static resources
+    if (event.request.url.indexOf('ys.static') > -1){
+      event.respondWith(fetchHelper.cacheFirst(event.request.url))
+      return;
+    }
+
+    // Stale-while-revalidate for possiblily dynamic content
     // similar to HTTP's stale-while-revalidate: https://www.mnot.net/blog/2007/12/12/stale
     // Upgrade from Jake's to Surma's: https://gist.github.com/surma/eb441223daaedf880801ad80006389f1
     const cached = caches.match(event.request);
-    const fixedUrl = getFixedUrl(event.request);
-    const fetched = fetch(fixedUrl, { cache: "no-store" });
+    const fetched = fetch(getCacheBustingUrl(event.request), { cache: "no-store" });
     const fetchedCopy = fetched.then(resp => resp.clone());
-
+    
     // Call respondWith() with whatever we get first.
     // Promise.race() resolves with first one settled (even rejected)
     // If the fetch fails (e.g disconnected), wait for the cache.
@@ -213,6 +245,8 @@ function sendMessageToClientsAsync(msg) {
 
 /**
  * if content modified, we can notify clients to refresh
+ * TODO: Gh-pages rebuild everything in each release. should find a workaround (e.g. ETag with cloudflare)
+ * 
  * @param  {Promise<response>} cachedResp  [description]
  * @param  {Promise<response>} fetchedResp [description]
  * @return {Promise}
