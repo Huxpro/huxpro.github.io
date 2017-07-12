@@ -178,9 +178,12 @@ HTML 文件中有标签并不意味着这些标签就能立刻被绘制到屏幕
 
 ![](/img/in-post/post-eleme-pwa/lighthouse-after.png)
 
+最后附上一张图，这张图当时是做给 Addy Osmani 的 I/O 演讲用的，描述了饿了么 PWA 是如何结合 Vue 来实现多页应用的 PRPL 模式，可以作为一个架构的参考与示意图。
+
+![]((/img/in-post/post-eleme-pwa/Architecture.png)
+
 
 ## 一些感想
-
 
 ### 多页应用仍然有很长的路要走
 
