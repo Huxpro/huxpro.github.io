@@ -176,7 +176,7 @@ HTML 文件中有标签并不意味着这些标签就能立刻被绘制到屏幕
 
 最后，是优化后的 Lighthouse 跑分结果，同样可以看到明显的性能提升。需要说明的是，能影响 Lighthouse 跑分的因素有很多，所以我建议你以控制变量（跑分用的设备、跑分时的网络环境等）的方式来进行对照实验。
 
-![](/img/in-post/post-eleme-pwa/lighthouse-after.png)
+![](/img/in-post/post-eleme-pwa/Lighthouse-after.png)
 
 最后附上一张图，这张图当时是做给 Addy Osmani 的 I/O 演讲用的，描述了饿了么 PWA 是如何结合 Vue 来实现多页应用的 PRPL 模式，可以作为一个架构的参考与示意图。
 
