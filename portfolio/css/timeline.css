@@ -22,8 +22,6 @@ body, html {
 	width: 90%;
 	max-width: 69em;
 	margin: 0 auto;
-	margin-bottom: 423px;
-	padding: 0 1.375em;
 }
 
 @font-face {
@@ -184,6 +182,13 @@ body, html {
 }
 
 /******* Hux Branch *****/
+
+.navbar-custom .nav li a,
+.navbar-custom .nav li a:hover,
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-brand:hover {color:#777;}
+.navbar-default .navbar-toggle .icon-bar {background-color:#777;}
+
 html{
 	font-size: 90%;
 }
@@ -191,25 +196,19 @@ body{
 	background: #fafafa;
 }
 header{
-	background: #232526; /* fallback for old browsers */
-	background: -webkit-linear-gradient(to left, #232526 , #414345); /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to left, #232526 , #414345); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 	text-align: center;
-	height: 167px;
 	min-width: 100%;
-	padding: 5em 0px !important;
+	padding: 5em 0px;
+	padding-bottom: 10em;
 	position: relative;
 	border-bottom: 1px solid #edeeee;
 }
 header h1 {
     font-size: 70px;
-    color: #252728;
-    font-weight: 100;
+    font-weight: 700;
     margin-top: 26px;
     margin-bottom: 10px;
     line-height: 1;
-    letter-spacing: 0.1em;
 }
 header p{
 	text-align: center;
