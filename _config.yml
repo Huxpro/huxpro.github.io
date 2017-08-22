@@ -48,10 +48,9 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: hux
-
-# Netease setttings
-netease_comment: true
+disqus_username: dis351135612
+comments: true
+layout: default
 
 
 
@@ -61,7 +60,7 @@ netease_comment: true
 
 # Google Analytics
 ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_domain: auto
 
 
 
@@ -87,12 +86,6 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "wallpaperswide",
-        href: "http://wallpaperswide.com/"
-    },{
-        title: "精品MAC应用分享",
-        href: "http://xclient.info/"
-    },{
         title: "D动漫1080P",
         href: "http://dm1080p.com/"
     },{
@@ -101,5 +94,8 @@ friends: [
     },{
         title: "Ultra HD | 背景",
         href: "https://wall.alphacoders.com/"
+    },{
+        title: "wallpaperswide",
+        href: "http://wallpaperswide.com/"
     }
 ]
