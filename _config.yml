@@ -1,21 +1,21 @@
 # Site settings
-title: Hux Blog
-SEOTitle: 黄玄的博客 | Hux Blog
+title: ITGrocery's Blog
+SEOTitle: IT杂货铺 | ITGrocery
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
-description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
-keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, 前端, 设计, 产品, 肖玉, Lynn, 肖玉的男朋友"
-url: "https://huangxuan.me"              # your host, for absolute URL
+email: 351135612@qq.com
+description: "后端与大数据、果粉 | 陈祥龙，Java Web & Big Data | 分享有趣好玩的影视，音乐，APP。"
+keyword: "ITGrocery, IT杂货铺, mac OS, 大数据, @ITGrocery, IT杂货铺的博客, ITGrocery Blog, ITGrocery's Blog, 博客, 个人网站, 互联网, 后端"
+url: "https://itgrocery.github.io/"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
 # SNS settings
-RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-twitter_username:   huxpro
+RSS: true
+weibo_username:
+zhihu_username:
+github_username:    ITGrocery
+twitter_username:
 #facebook_username:  huxpro
 # linkedin_username:  firstname-lastname-idxxxx
 
@@ -27,7 +27,7 @@ highlighter: rouge
 permalink: pretty
 paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+anchorjs: false                          # if you want to customize anchor. check out line:181 of `post.html`
 
 
 
@@ -48,27 +48,26 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: hux
-
-# Netease setttings
-netease_comment: false
+disqus_username: dis351135612
+comments: true
+layout: default
 
 
 
 # Analytics settings
-# Baidu Analytics 
+# Baidu Analytics
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_track_id: 'UA-105158501-1'            # Format: UA-xxxxxx-xx
+ga_domain: auto
 
 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，做做设计，<br>离开世界之前，一切都是过程"
-sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "码农的自留地，记录自己的所见、所学、所感。"
+sidebar-avatar: /img/avatar-amazing.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -87,37 +86,16 @@ service-worker: true
 # Friends
 friends: [
     {
-    #     title: "Su",
-    #     href: "http://su.gallery/"
-    # },{
-        title: "乱序",
-        href: "http://mida.re/"
+        title: "D动漫1080P",
+        href: "http://dm1080p.com/"
     },{
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
+        title: "4k资源",
+        href: "https://www.zhaiiker.com/"
     },{
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
+        title: "Ultra HD | 背景",
+        href: "https://wall.alphacoders.com/"
     },{
-        title: "Luke 的自留地",
-        href: "http://hmqk1995.github.io"
-    },{
-        title: "Ebn's Blog",
-        href: "http://ebnbin.com/"
-    },{
-        title: "SmdCn's Blog",
-        href: "http://blog.smdcn.net"
-    },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
-    },{
-        title: "DHong Say",
-        href: "http://dhong.co"
-    },{
-        title: "尹峰以为",
-        href: "http://ingf.github.io/"
-    },{
-        title: "前端神盾局",
-        href: "http://wepiaofei.github.io/blog/"
+        title: "wallpaperswide",
+        href: "http://wallpaperswide.com/"
     }
 ]

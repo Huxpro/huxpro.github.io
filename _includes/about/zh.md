@@ -1,31 +1,16 @@
-> 写写代码，做做设计，  
-> 离开世界之前，一切都是过程。
+> 写写代码，捣鼓一下博客
 
-Hey，我是黄玄，病毒种，进化程度不明，多出没于[博客](https://huangxuan.me)、[微博](weibo.com/huxpro)、[知乎](https://www.zhihu.com/people/huxpro/pins/posts)、[Twitter](https://twitter.com/Huxpro/)、[Github](http://github.com/huxpro)、[Medium](https://medium.com/@Huxpro) 等地带，绝招尚在开发中。
+### 简介
+坐标上海，现任职软件工程师，主要涉及Java后端的开发。之前开发过Android，带着生不逢时的遗憾转战大数据，所幸的是现在终于不用被界面折磨得死去活来。
 
-职业是软件工程师，[Web 工会](https://medium.com/ben-and-dion/team-web-3315aa447fb2#.359a9c6cl)活跃成员。曾被招募为淘宝网 · [阿里旅行](http://alitrip.com)前端工程师、微影时代 · [微票儿](http://www.wepiao.com/?r=movie)前端基础工程团队负责人、[饿了么](https://ele.me/) · 大前端团队 · [PWA 顾问](https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)。
+不过换了方向之后视角也发生了变化，之前开发Android就像生活在远古时代，没有IOC，没有AOP，全部代码靠手撸，真的是太累了，不是Android端没有这些框架，主要这些运行时的注解太消耗性能。
 
-一些作品和开源软件项目，👉 戳 [Portfolio](/portfolio)、[Github](http://github.com/huxpro)、[演说.io](http://https://zhuanlan.zhihu.com/p/21280918)。 
+感谢那些大神们发明了Spring、Spring MVC、MyBatis这些强大的框架，让我的后端工作真的是事半功倍，节省了我不少时间。
 
+目前主要是做一些大数据平台的工具，能用到的大数据框架不多，这些框架用起来简单，但基本都是Apache的顶级项目（不像之前的Android中的框架大部分都是个人开发的），后续会根据工作的需要深入研究这些大型项目。
 
-##### Talks
+### 项目
+说到项目，基本没啥可以拿的出手的，只有一些自用的小Demo。各位如果有好的项目记得<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=59TS1tbU0tHW1aeWlsmEiIo" style="text-decoration:none;">@我</a>啊！
 
-- [Upgrading to Progressive Web Apps][9] · [JSConf CN 上海 2017](http://2017.jsconf.cn/)
-- Building Progressive Web Apps · [CSDI 广州 2017](http://www.csdisummit.com/)
-- The State of Progressive Web App · GDG IO Redux 北京 2017
-- 炒冷饭 · PWA 到底是个什么玩意？· Baidu HQ 北京 2017
-- [Service Worker 101][5] · GDG DevFest 北京 2016
-- [Progressive Web App，复兴序章][4] · [QCon 上海 2016](http://2016.qconshanghai.com/presentation/3111)
-- Progressive Web App 之我见 · GDG IO Redux 北京 2016
-- [CSS Still Sucks 2015][2] · 2015
-- [JavaScript 模块化七日谈][1] · 2015
-
-[1]: //huangxuan.me/2015/07/09/js-module-7day/
-[2]: //huangxuan.me/2015/12/28/css-sucks-2015/
-[3]: //huangxuan.me/2016/06/05/pwa-in-my-pov/
-[4]: //huangxuan.me/2016/10/20/pwa-qcon2016/
-[5]: //huangxuan.me/2016/11/20/sw-101-gdgdf/
-[6]: https://yanshuo.io/assets/player/?deck=58ac8598b123db0067292f92 "PWA Rehashing"
-[7]: https://yanshuo.io/assets/player/?deck=593ad6fbfe88c2006a0a0d6d "The State of PWA"
-[8]: https://yanshuo.io/assets/player/?deck=594d673d570c357d0698a950 "Building PWA"
-[9]: //huangxuan.me/jsconfcn2017/
+* [presto with oracle](https://github.com/ITGrocery/presto.git)
+* [logger-sc](https://github.com/ITGrocery/logger-sc.git)
