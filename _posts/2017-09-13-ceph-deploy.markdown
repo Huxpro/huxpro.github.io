@@ -19,18 +19,16 @@ hostnamectl set-hostname ceph-node1
 '''
 然后修改hosts文件
 
-'''
-vi /etc/hosts
-'''
+> vi /etc/hosts
 
-将以下回还ip
-'''
-127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-'''
+将以下回环ip
+
+> 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+> ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
 改成真实ip和主机名（hostname）
-'''
-192.168.1.1 localhost ceph-node1 localhost4 localhost4.localdomain4
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-'''
+
+> 192.168.1.1 localhost ceph-node1 localhost4 localhost4.localdomain4
+> ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
 
