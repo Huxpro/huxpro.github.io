@@ -12,7 +12,8 @@ tags:
 
 > “Ceph-deploy”
 
-# 安装ceph-deploy
+### 1. 安装ceph-deploy
+
 首先需要修改当前节点的主机名，命令为
 ```shell
 hostnamectl set-hostname ceph-node1
@@ -31,5 +32,30 @@ vi /etc/hosts
 192.168.1.1 localhost ceph-node1 localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 ```
+
+```c++
+void main()
+{
+  printf("hello,world");
+}
+cout>>"fafaf">>endl
+```
+
+![ceph.log](http://own0pq3pm.bkt.clouddn.com/ceph.png)
+
+### 2. 测试目录
+
+#### 2.1 啊发放
+
+
+
+### 3测试目录
+
+#### 3.1哈哈
+
+
+
+###4.test content
+
 
 
