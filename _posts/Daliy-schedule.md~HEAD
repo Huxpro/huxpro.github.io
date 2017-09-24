@@ -12,8 +12,6 @@ tags:
 ---
 #Daliy schedule
 
-day:
-
 Get up: 6:00 am 
 Fresh and finish washing: 6:30 am
 **Learning 6:30 - 8:30 am**
