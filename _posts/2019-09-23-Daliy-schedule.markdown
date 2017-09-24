@@ -11,6 +11,9 @@ tags:
     - daily life
 ---
 #Daliy schedule
+
+day:
+
 Get up: 6:00 am 
 Fresh and finish washing: 6:30 am
 **Learning 6:30 - 8:30 am**
@@ -21,6 +24,7 @@ Show and finish dinner: 7:00 - 8:00 pm
 **Study or update blog: 8:00 - 10:00 pm**
 Reading: 10:00 pm - 11: 00 pm
 Go to bed: 11: 00 pm
+
 
 
  
