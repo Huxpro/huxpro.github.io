@@ -36,15 +36,15 @@ header-img: "img/about-bg.jpg"
     // handle render
     function _render(){
         var _hash = window.location.hash;
-        // en
-        if(_hash == "#en"){
-            $select.selectedIndex = 1;
+        // zh
+        if(_hash == "#zh"){
+            $select.selectedIndex = 0;
             $en.style.display = "block";
             $zh.style.display = "none";
-        // zh by default
+        // en by default
         }else{
             // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 0;
+            $select.selectedIndex = 1;
             $zh.style.display = "block";
             $en.style.display = "none";
         }
