@@ -90,6 +90,14 @@ layout: default
                 <!-- disqus 评论框 end -->
                 {% endif %}
 
+                {% if site.coding_comments.user %}
+                <!-- coding_comments 评论框 start -->
+                <div class="comment">
+                    <div id="coding_comments_thread" class="coding_comments-thread"></div>
+                </div>
+                <!-- coding_comments 评论框 end -->
+                {% endif %}
+
                 {% if site.netease_comment %}
                 <!-- 网易云跟帖 评论框 start -->
                 <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
@@ -187,6 +195,7 @@ layout: default
 <!-- disqus 公共JS代码 end -->
 {% endif %}
 
+{% include coding_comments.html %}
 
 {% if site.anchorjs %}
 <!-- async load function -->
