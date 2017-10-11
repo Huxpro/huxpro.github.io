@@ -7,7 +7,7 @@ author:     "WQ"
 header-img: "img/2016-10-29-alswz.jpg"
 catalog: true
 tags:
-    - markdown
+    - Markdown
 ---
 
 ## 主要内容 ##
