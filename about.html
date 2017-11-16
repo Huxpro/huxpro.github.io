@@ -16,14 +16,16 @@ header-img: "img/about.jpg"
 
     <!--copied from markdown -->
     <blockquote><p>毕业之后才明白的道理，“原来我只是普通人”。<br>
-    世界那么大，我想去看看。</p></blockquote>
+        世界那么大，我想去看看。</p></blockquote>
 
     <p>Hey，我是<strong>王强</strong>，程序员 &amp; 陈年dotaer &amp; 爱电影 &amp; 爱音乐;虽然不会sing,but anyway，到头来却什么都不喜欢。</p>
-    <p>半路出生，基础欠缺，还在恶补当中，leetcode玩多了，觉得很是有趣，所以有了[我的leetcode之路](https://github.com/ted-wq-x/personalCode/blob/master/java/src/main/java/com/go2going/leetcode)</p>
+    <p>半路出生，基础欠缺，还在恶补当中，leetcode玩多了，觉得很是有趣，所以有了<a
+            href="https://github.com/ted-wq-x/personalCode/blob/master/java/src/main/java/com/go2going/leetcode">我的leetcode之路
+    </a></p>
 
-<!--    <p>一些作品和开源项目，👉 戳 <a href="https://zhuanlan.zhihu.com/p/21280918">演说.io</a>、<a href="/portfolio">Portfolio</a> 与 <a href="http://github.com/huxpro">Github</a>；除了在博客与 <a href="http://zhuanlan.zhihu.com/huxblog">知乎专栏 · 一生想做浪漫极客</a> 写点东西外，我也是 <a href="http://www.gfansub.com/">GDG 字幕组</a> 与 <a href="http://zhuanlan.zhihu.com/FrontendMagazine">前端外刊评论 · 知乎专栏</a> 的翻译维护成员。</p>
+    <!--    <p>一些作品和开源项目，👉 戳 <a href="https://zhuanlan.zhihu.com/p/21280918">演说.io</a>、<a href="/portfolio">Portfolio</a> 与 <a href="http://github.com/huxpro">Github</a>；除了在博客与 <a href="http://zhuanlan.zhihu.com/huxblog">知乎专栏 · 一生想做浪漫极客</a> 写点东西外，我也是 <a href="http://www.gfansub.com/">GDG 字幕组</a> 与 <a href="http://zhuanlan.zhihu.com/FrontendMagazine">前端外刊评论 · 知乎专栏</a> 的翻译维护成员。</p>
 
-    <h5>Talks</h5>-->
+        <h5>Talks</h5>-->
 
     <!--<ul>
     <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/">Progressive Web Apps，复兴序章 · QCon 上海 2016</a></li>
@@ -67,15 +69,15 @@ header-img: "img/about.jpg"
     window.addEventListener('hashchange', _render);
 
     // handle render
-    function _render(){
+    function _render() {
         var _hash = window.location.hash;
         // en
-        if(_hash == "#en"){
+        if (_hash == "#en") {
             $select.selectedIndex = 1;
             $en.style.display = "block";
             $zh.style.display = "none";
-        // zh by default
-        }else{
+            // zh by default
+        } else {
             // not trigger onChange, otherwise cause a loop call.
             $select.selectedIndex = 0;
             $zh.style.display = "block";
@@ -84,10 +86,10 @@ header-img: "img/about.jpg"
     }
 
     // handle select change
-    function onLanChange(index){
-        if(index == 0){
+    function onLanChange(index) {
+        if (index == 0) {
             window.location.hash = "#zh"
-        }else{
+        } else {
             window.location.hash = "#en"
         }
     }
@@ -97,19 +99,20 @@ header-img: "img/about.jpg"
 </script>
 
 
-
 {% if site.duoshuo_username %}
 <!-- 多说评论框 start -->
 <div class="comment">
     <div class="ds-thread"
-    {% if site.duoshuo_username == "huxblog" %}
-        data-thread-id="1187623191091085319"
+         {% if site.duoshuo_username==
+    "huxblog" %}
+    data-thread-id="1187623191091085319"
     {% else %}
-        data-thread-key="{{site.duoshuo_username}}/about"
+    data-thread-key="{{site.duoshuo_username}}/about"
     {% endif %}
 
     data-title="{{page.title}}"
-    data-url="{{site.url}}/about/"></div>
+    data-url="{{site.url}}/about/">
+</div>
 </div>
 <!-- 多说评论框 end -->
 
@@ -119,14 +122,15 @@ header-img: "img/about.jpg"
     var _user = '{{site.duoshuo_username}}';
 
     // duoshuo comment query.
-    var duoshuoQuery = {short_name: _user };
-    (function() {
+    var duoshuoQuery = {short_name: _user};
+    (function () {
         var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
+        ds.type = 'text/javascript';
+        ds.async = true;
         ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
         ds.charset = 'UTF-8';
         (document.getElementsByTagName('head')[0]
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 </script>
 <!-- 多说公共JS代码 end -->
@@ -149,8 +153,10 @@ header-img: "img/about.jpg"
     var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";
     var disqus_url = "{{site.url}}{{page.url}}";
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    (function () {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
