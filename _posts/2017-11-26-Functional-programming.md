@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "functional programming"
+title:      "Functional Programming"
 subtitle:   " \"函数式编程初探\""
 date:       2017-11-26 14:27:00
 author:     "WQ"
