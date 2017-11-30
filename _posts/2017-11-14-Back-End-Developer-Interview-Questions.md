@@ -56,7 +56,7 @@ tags:
   1. [比尔盖茨式问题](#billgates)
   1. [代码示例问题](#snippets)
 
-####[[↑]](#toc) <a name='general'>通用问题:</a>
+#### [[↑]](#toc) <a name='general'>通用问题:</a>
 
 * 语言设计中空引用([null reference](http://programmers.stackexchange.com/questions/12777/are-null-references-really-a-bad-thing))的存在有什么问题？假设你想要将空引用的概念从你的首选语言中移除，可能导致什么结果？
 * 为什么函数式编程重要？什么时候适用函数式语言？
@@ -74,7 +74,7 @@ tags:
 * 在客户端渲染(client-side rendering)和服务端渲染(server-side rendering)之间，你是如何权衡的？
 * 如何在一个不可靠的协议之上构建一个可靠的通信协议？
 
-####[[↑]](#toc) <a name='open'>开放式问题:</a>
+#### [[↑]](#toc) <a name='open'>开放式问题:</a>
 
 * 为什么人们会抵制变化？
 * 如何向你的祖母解释什么是线程？
@@ -103,7 +103,7 @@ tags:
 * 为什么在创新上，企业会比创业公司慢些？
 * 为什么说，你不应该尝试应用自己发明或者设计的密码学？
 
-####[[↑]](#toc) <a name='patterns'>设计模式相关问题:</a>
+#### [[↑]](#toc) <a name='patterns'>设计模式相关问题:</a>
 
 * 请用一个例子表明，全局对象是邪恶的存在。
 * 假设你工作的系统不支持事务性，你会如何从头开始实现它？
@@ -124,7 +124,7 @@ tags:
 
 译者注： "发送时要保守，接收时要开发"的原文是： "Be conservative in what you send, be liberal in what you accept"，有点类似于“严于律己，宽于待人”的意味。
 
-####[[↑]](#toc) <a name='design'>代码设计相关问题:</a>
+#### [[↑]](#toc) <a name='design'>代码设计相关问题:</a>
 
 * 你在进行软件设计时会考虑软件测试吗？软件测试是如何影响软件设计的？
 * 内聚和耦合的区别是什么？
@@ -135,7 +135,7 @@ tags:
 * C++支持多继承，Java允许类实现多个接口。这些特性对正交性有什么影响？使用多继承和使用多接口有区别吗？[这个问题来自Andrew .Hunt 和 David Thomas写的《程序员修炼之道》]
 * 在存储过程（Stored Procedures）中写业务逻辑有什么优缺点？
 
-####[[↑]](#toc) <a name='languages'>语言相关问题:</a>
+#### [[↑]](#toc) <a name='languages'>语言相关问题:</a>
 
 * 告诉我你的首选语言的三个最坏的缺陷。
 * 为什么现在函数式编程这么越来越受关注？
@@ -157,11 +157,11 @@ tags:
 * 为什么有些语言设计上没有异常机制？这有什么优缺点？
 * 如果`Cat`是一个`Animal`, 那么`TaskCare<Cat>`是一个`TakeCare<Animal>`吗？
 
-####[[↑]](#toc) <a name='web'>web相关问题:</a>
+#### [[↑]](#toc) <a name='web'>web相关问题:</a>
 
 * 为什么"第一方cookie(first-party cookie)"和"第三方cookie(third-party cookie)"被如此不同的对待？
 
-####[[↑]](#toc) <a name='databases'>数据库相关问题:</a>
+#### [[↑]](#toc) <a name='databases'>数据库相关问题:</a>
 
 * 如果要你将一个项目从MySQL迁移至PostgreSQL中，你会如何迁移？
 * 为什么```SELECT * FROM table WHERE field = null```不能匹配空的字段？
@@ -171,14 +171,14 @@ tags:
 * 什么是N+1问题？
 * 如何找出应用中开销最大的查询？
 
-####[[↑]](#toc) <a name='nosql'>非关系型数据库相关问题:</a>
+#### [[↑]](#toc) <a name='nosql'>非关系型数据库相关问题:</a>
 
 * 什么是最终一致性(Eventual Consistency)？
 * 关于CAP理论，举一些CP、AP、CA系统的例子。
 * NoSQL是如何解决可伸缩性的挑战的？
 * 什么情况下你会使用类似于MongoDB的文档数据库而不是关系型数据库（如Mysql或者PostgreSQL）？
 
-####[[↑]](#toc) <a name='codeversioning'>代码版本管理相关问题:</a>
+#### [[↑]](#toc) <a name='codeversioning'>代码版本管理相关问题:</a>
 
 * 为什么在Mercurial或者git中(管理)分支比SVN容易？
 * 分散式版本控制系统（比如git），相比集中式版本控制系统（如svn）有哪些优势和劣势？
@@ -189,7 +189,7 @@ tags:
 * 什么是rebase？
 * 为什么合并操作(merge)在Mercurial和git中比在SVN和CVS中容易？
 
-####[[↑]](#toc) <a name='concurrency'>并发问题:</a>
+#### [[↑]](#toc) <a name='concurrency'>并发问题:</a>
 
 * 为什么我们需要并发呢？解释一下。
 * 为什么测试多线程/并发代码这么困难？
@@ -198,7 +198,7 @@ tags:
 * 什么是饿死？
 * 什么是Wait-Free算法？
 
-####[[↑]](#toc) <a name='distributed'>分布式系统相关问题:</a>
+#### [[↑]](#toc) <a name='distributed'>分布式系统相关问题:</a>
 
 * 怎么测试一个分布式系统？
 * 什么场景下你会在两个系统中采用异步通信机制？
@@ -210,7 +210,7 @@ tags:
 * 你认为分布式计算中有哪些谬论？
 * 你在什么时候会使用Request/Response模式，什么时候使用Publish/Subscribe模式？
 
-####[[↑]](#toc) <a name='management'>软件生命周期和团队管理相关问题:</a>
+#### [[↑]](#toc) <a name='management'>软件生命周期和团队管理相关问题:</a>
 
 * 什么是敏捷（Agility）？
 * 你是如何处理遗留代码（Legacy Code）的？
@@ -227,7 +227,7 @@ tags:
 * 除了代码之外，你最关注你的同事的哪3项素质？
 * 关于代码，你最希望非技术人员能知道的的三件事是什么？
 
-####[[↑]](#toc) <a name='algorithms'>逻辑和算法相关问题:</a>
+#### [[↑]](#toc) <a name='algorithms'>逻辑和算法相关问题:</a>
 
 * 只用LIFO栈如何构造一个FIFO队列？只用FIFO队列如何构造一个LIFO栈？
 * 写一段有栈溢出的代码。
@@ -243,7 +243,7 @@ tags:
 * 如何对一个10GB的文件进行排序？如果是10TB的数据，你会采用什么方法？
 * 请实现`rnd()`函数
 
-####[[↑]](#toc) <a name='architecture'>软件架构相关问题:</a>
+#### [[↑]](#toc) <a name='architecture'>软件架构相关问题:</a>
 
 * 什么情况下缓存是没用的，甚至是危险的？
 * 为什么事件驱动的架构能提高可扩展性(scalability)？
@@ -267,7 +267,7 @@ tags:
 * 一个系统要有什么特征才能适配云计算环境(Cloud Ready)？
 * Does unity of design imply an aristocracy of architects?
 
-####[[↑]](#toc) <a name='soa'>面向服务架构(SOA)和微服务(Microservice)相关问题:</a>
+#### [[↑]](#toc) <a name='soa'>面向服务架构(SOA)和微服务(Microservice)相关问题:</a>
 
 * 在SOA中，为什么长期存活的事务(Long-lived transation)不被看好，而Saga却被看好？
 
@@ -285,11 +285,11 @@ tags:
 * 微服务不能做得太"微"，你认为什么时候微服务太"微"了？
 * MicroService架构的优劣是什么？
 
-####[[↑]](#toc) <a name='security'>安全相关问题:</a>
+#### [[↑]](#toc) <a name='security'>安全相关问题:</a>
 
 * 什么是双因素认证(Two Factor Authentication)？在一个已有的Web应用中，你如何实现这种机制？
 
-####[[↑]](#toc) <a name='billgates'>比尔盖茨式问题:</a>
+#### [[↑]](#toc) <a name='billgates'>比尔盖茨式问题:</a>
 
 * 如果你把一面镜子放在扫描仪上，会发生什么？
 * 假设有一个和你完全一样的克隆人，而他是你的上司，你愿意和他工作吗？
@@ -302,7 +302,7 @@ tags:
 * 老板要你对公司撒谎，你的反应是什么？
 * 如果你可以穿越到以前，你会给年轻时候的你什么建议？
 
-####[[↑]](#toc) <a name='snippets'>代码示例问题:</a>
+#### [[↑]](#toc) <a name='snippets'>代码示例问题:</a>
 
 * 这段Javascript函数的输出是什么？
 
