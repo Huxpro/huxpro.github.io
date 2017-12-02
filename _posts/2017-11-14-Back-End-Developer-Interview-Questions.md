@@ -289,12 +289,33 @@ tags:
 
 * 只用LIFO栈如何构造一个FIFO队列？只用FIFO队列如何构造一个LIFO栈？
 * 写一段有栈溢出的代码。
+    > 无限递归
+    
 * 写一个尾递归版本的阶乘函数。
 * 使用任何一个语言，写一个REPL，功能是echo你输入的字符串。然后将它演化成一个逆波兰表达式的计算器。
 * 如果需要你设计一个文件系统磁盘碎片整理程序，你会如何设计？
 * 写一个生成随机迷宫的程序。
 * 写一段有内存泄漏的示例代码。
+    > 例如Vector中的removeElementAt方法
+    
 * 随机生成一个的数字序列，里面每个数字都不同。
+```java
+
+        int[] ints = new int[10];
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 5; ) {
+            int i1 = random.nextInt(10);
+            if (ints[i1] == 0) {
+                sb.append(i1);
+                i++;
+                ints[i1] = 1;
+            }
+        }
+        System.out.println(sb.toString());
+        
+```
+
 * 写一个简单的垃圾回收系统。
 * 使用任何一门语言，写一个基本的消息代理。
 * 写一个基础的web服务器，然后画一张线路图，展示你将来还想要实现的功能。
