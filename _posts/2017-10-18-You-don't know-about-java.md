@@ -185,7 +185,7 @@ class Test {
 或换句话说：
 
 > 在我4周休假前的最后一个提交里，我写了这样的代码，然后。。。  
-![for-you-my-dear-coworkers](for-you-my-dear-coworkers.jpg)  
+![for-you-my-dear-coworkers](img/blogImg/for-you-my-dear-coworkers.jpg)  
 【**_译注_**：然后，亲爱的同事你，就有得火救啦，哼，哼哼，哦哈哈哈哈～】
 
 请找出上面用法的合适的使用场景，这个还是留给你作为一个练习吧。
@@ -335,7 +335,7 @@ for (int i = 0; i < 10; i++) {
 同学们请勿模仿！或换句话说，想想会有这样的状况，再说一次：
 
 > 在我4周休假前的最后一个提交里，我写了这样的代码，然后。。。  
-![for-you-my-dear-coworkers](for-you-my-dear-coworkers.jpg)  
+![for-you-my-dear-coworkers](img/blogImg/for-you-my-dear-coworkers.jpg)  
 【**_译注_**：然后，亲爱的同事你，就有得火救啦，哼，哼哼，哦哈哈哈哈～】
 
 ## 7. `GOTO`
