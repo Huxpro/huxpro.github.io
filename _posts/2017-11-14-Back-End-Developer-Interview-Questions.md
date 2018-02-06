@@ -87,6 +87,8 @@ tags:
 * 什么是O/R阻抗失衡(Object-Relational impedence mismatch)？
 * 如果你需要使用缓存，你使用哪些原则来确定缓存的大小？
 * TCP和HTTP有什么区别？
+    > 我觉得OSI模型能很好的解释，![参考](https://pic1.zhimg.com/0192769f6dab9a46decb0ac3b8548531_r.jpg)
+
 * 在客户端渲染(client-side rendering)和服务端渲染(server-side rendering)之间，你是如何权衡的？
     > SSR的优点是SEO，能够边下载js文件并执行页面渲染而CSR必须等下载完成并执行完才能渲染，使用CSR容易出现白屏所以经常出现菊花在转的情况
     但是SSR也有明显的缺点，需要等待服务器渲染页面，且这段时间内用户和页面不能执行任何的交互；会显著的降低服务器的吞吐量。权衡的因素有很多
