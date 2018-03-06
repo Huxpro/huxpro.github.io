@@ -108,8 +108,8 @@ friends: [
         title: "SmdCn's Blog",
         href: "http://blog.smdcn.net"
     },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
+        title: "David's Game",
+        href: "https://www.ruoyaowu.com/"
     },{
         title: "DHong Say",
         href: "http://dhong.co"
@@ -117,7 +117,7 @@ friends: [
         title: "尹峰以为",
         href: "http://ingf.github.io/"
     },{
-        title: "前端神盾局",
-        href: "http://wepiaofei.github.io/blog/"
+        title: "解旻的博客",
+        href: "http://xieminis.me/"
     }
 ]
