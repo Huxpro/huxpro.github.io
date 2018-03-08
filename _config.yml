@@ -50,6 +50,14 @@ kramdown:
 # Disqus settings
 disqus_username: hux
 
+# Coding Comments Settings
+coding_comments:
+  user: 
+  project: 
+  oauth:
+    client_id: 
+    client_secret: 
+
 # Netease setttings
 netease_comment: false
 

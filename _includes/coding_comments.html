@@ -1,0 +1,29 @@
+{% if site.coding_comments.user %}
+<!-- coding_comments 公共JS代码 start (一个网页只需插入一次) -->
+<link rel="stylesheet" href="//dn-coding-net-public-file.qbox.me/Coding-Comments/v0.0.3/default.css">
+<script type="text/javascript" src="//dn-coding-net-public-file.qbox.me/Coding-Comments/v0.0.3/gitment.min.js"></script>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var coding_comments_user = "{{site.coding_comments.user}}";
+    var coding_comments_project = "{{site.coding_comments.user}}";
+    var coding_comments_client_id = "{{site.coding_comments.oauth.client_id}}";
+    var coding_comments_client_secret = "{{site.coding_comments.oauth.client_secret}}";
+
+    var coding_comments_id = "{{site.url}}{{page.url}}";
+
+    (function() {
+        const gitment = new Gitment({
+		  owner: coding_comments_user,
+		  repo: coding_comments_project,
+		  oauth: {
+		    client_id: coding_comments_client_id,
+		    client_secret: coding_comments_client_secret,
+		  },
+          author: 'i@wusisu.com', // how to contact with you
+          theme: 'huxpro.github.io' // where to download this blog's theme
+		})
+		document.getElementById('coding_comments_thread').appendChild(gitment.render())
+    })();
+</script>
+<!-- coding_comments 公共JS代码 end -->
+{% endif %}
