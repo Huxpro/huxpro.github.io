@@ -12,7 +12,7 @@ tags:
 
 # Mybatis中拦截器
 
-拦截器的初始化配置使用xml的方式，xml解析是在类`XMLConfigBuilder`中完成,然后将生产的`InterceptorChain`放到`Configuration`类当中。
+拦截器的初始化配置使用xml的方式，xml解析是在类`XMLConfigBuilder`中完成,然后将生成的`InterceptorChain`放到`Configuration`类当中。
 
 在mybatis中共有四处定义了可以使用拦截器的地方：<br>
 * ParameterHandler
