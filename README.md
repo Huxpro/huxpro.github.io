@@ -1,6 +1,6 @@
 #Hux Blog
 
-###[View Live Hux Blog &rarr;](http://huxpro.github.io)
+###[View Live Hux Blog &rarr;](https://huangxuan.me)
 
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
@@ -17,6 +17,11 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 **[View Boilerplate Here &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
 
 
+## Porting 
+
+- [**Hexo**](https://github.com/Kaijun/hexo-theme-huxblog) by @kaijun
+- [**React-SSR**](https://github.com/LucasIcarus/huxpro.github.io/tree/ssr) by @LucasIcarus
+
 ## Translation
 
  - ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese (Simplified)**: 感谢 [@BrucZhaoR](https://github.com/BruceZhaoR) 的 [中文翻译 &rarr;](https://github.com/Huxpro/huxpro.github.io/blob/master/README.zh.md)
@@ -25,8 +30,8 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 
 ##### New Feature (V1.5.2)
 
-- Annoyed to delete my blog post after clone or pull? **Boilerplate** comes to help you get started quickly and easily merge update. 
-- `-apple-system` is added in font rule, which display beautiful new font **San Francisco** in iOS 9 by default. 
+- Annoyed to delete my blog post after clone or pull? **Boilerplate** comes to help you get started quickly and easily merge update.
+- `-apple-system` is added in font rule, which display beautiful new font **San Francisco** in iOS 9 by default.
 - Fixed [issue#15](https://github.com/Huxpro/huxpro.github.io/issues/15) about code wrap.
 
 ##### New Feature (V1.5.1)
@@ -101,6 +106,7 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 	* [Customization](#customization)
 	* [Header Image](#header-image)
 	* [SEO Title](#seo-title)
+	* [Page Build Warning](#page-build-warning)
 
 #### Environment
 
@@ -262,6 +268,7 @@ ga_domain: huangxuan.me
 
 Just checkout the code offered by Google/Baidu, and copy paste here, all the rest is already done for you.
 
+(Google might ask for meta tag "google-site-verification")
 
 
 #### Customization
@@ -291,7 +298,22 @@ It's possible that you want the two things different. For me, my site-title is *
 
 So, the SEO Title is introduced to solve this problem, you can set `SEOTitle` different from `title`, and it would be only used to generate HTML `<title>` and setting DuoShuo Sharing.
 
-## Thanks
+#### Page Build Warning
 
-This theme is forked from [IronSummitMedia/startbootstrap-clean-blog-jekyll](https://github.com/IronSummitMedia/startbootstrap-clean-blog-jekyll)  
-Thanks Jekyll and Github Pages!
+There are many possible reasons to cause a "Page Build Warning" email or similar error.
+
+One of these is that github changes its build environment.
+
+> You are attempting to use the 'pygments' highlighter, which is currently unsupported on GitHub Pages. Your site will use 'rouge' for highlighting instead. To suppress this warning, change the 'highlighter' value to 'rouge' in your '_config.yml'.
+
+So, just edit `_config.yml`, find `highlighter: pygments`, change it to `highlighter: rouge` and the warning will be gone.
+
+For other circumstances, check out existing issues or create a new one!
+
+## License
+
+Apache License 2.0.
+Copyright (c) 2015-2016 Huxpro
+
+Hux Blog is derived from [Clean Blog Jekyll Theme (MIT License)](https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll/)
+Copyright (c) 2013-2016 Blackrock Digital LLC.
