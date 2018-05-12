@@ -30,13 +30,13 @@ prophet就是在这样的背景下的产物，将一些时间序列建模常见�
 
 很多商业行为是存在一定的时间相依的模式的。作者以Facebook上用户创造“事件”（events）来举例：
 
-![img](https://pic4.zhimg.com/v2-ef385d40037fbbfd5b87e199e89683ef_r.jpg)
+![img](https://ws2.sinaimg.cn/large/006tNc79ly1fr8th4oltrj31kw0t3n46.jpg)
 
 可以看到用户创造事件的数量有很明显的时间序列特征：多种周期性、趋势性、节假日效应，以及部分异常值。
 
 然后作者用R的forecast包里的几种常见的时间序列预测技术（ARIMA, 指数平滑等等）来建模，效果惨不忍睹：
 
-![img](https://pic3.zhimg.com/v2-d8a8f169bfa29c87b95b0eb615e53733_r.jpg)
+![img](https://ws2.sinaimg.cn/large/006tNc79ly1fr8thn9tywj31ca152wov.jpg)
 
 图1是ARIMA，图2是指数平滑，图3是snaive，图4是tbats。
 
@@ -82,15 +82,15 @@ prophet用傅里叶级数（Fourier series）来建立周期模型：
 
 还是使用上面Facebook的例子，作者给出了Prophet的模型拟合与预测能力：
 
-![img](https://pic2.zhimg.com/v2-cb808afc95f559b0c7895e8a75b11086_r.jpg)
+![img](https://ws1.sinaimg.cn/large/006tNc79ly1fr8thqx1y1j31kw0o7jxs.jpg)
 
-![img](https://pic2.zhimg.com/v2-d83ed58f86a1459f4195acc217ec75ec_r.jpg)
+![img](https://ws1.sinaimg.cn/large/006tNc79ly1fr8ths9mnjj31kw0sh48h.jpg)
 
 看起来比前面用R的forecast做的效果好了很多，并且不需要使用者具有很强的统计背景就能够轻松进行建模。
 
 同时prophet支持将模型分解为单独的各项组成部分，并且实现起来很容易，只需要调用一行代码prophet_plot_components：
 
-![img](https://pic1.zhimg.com/v2-9eb5121f2ad91362e3ae470cfe6f6174_r.jpg)
+![img](https://ws2.sinaimg.cn/large/006tNc79ly1fr8thts258j31dq12w449.jpg)
 
 #适用范围
 
