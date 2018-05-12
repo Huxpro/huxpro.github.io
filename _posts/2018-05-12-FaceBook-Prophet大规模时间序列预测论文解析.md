@@ -4,8 +4,8 @@ title:      Facebook Prophet大规模时间序列预测论文解析
 subtitle:   可爱的论文搬运工
 date:       2018-05-12
 autor:      Yan He
-header-img: img/in-post/facebook-prophet-1.jpg
-catalog:true
+header-img: img/facebook-prophet-1.jpg
+catalog:    true
 tags:
     - 论文
     - 时间序列
@@ -46,7 +46,7 @@ Prophet的本质是一个可加模型，基本形式如下：
 
 ![y(t) = g(t) + s(t) + h(t) + \varepsilon_{t}](https://www.zhihu.com/equation?tex=y%28t%29+%3D+g%28t%29+%2B+s%28t%29+%2B+h%28t%29+%2B+%5Cvarepsilon_%7Bt%7D)
 
-其中$g(t)$是趋势项，![s(t)](https://www.zhihu.com/equation?tex=s%28t%29) 是周期项， ![h(t)](https://www.zhihu.com/equation?tex=h%28t%29) 是节假日项， ![\varepsilon_{t}](https://www.zhihu.com/equation?tex=%5Cvarepsilon_%7Bt%7D) 是误差项并且服从正态分布。
+其中![g(t)](https://www.zhihu.com/equation?tex=g%28t%29)是趋势项，![s(t)](https://www.zhihu.com/equation?tex=s%28t%29) 是周期项， ![h(t)](https://www.zhihu.com/equation?tex=h%28t%29) 是节假日项， ![\varepsilon_{t}](https://www.zhihu.com/equation?tex=%5Cvarepsilon_%7Bt%7D) 是误差项并且服从正态分布。
 
 **趋势模型**
 
