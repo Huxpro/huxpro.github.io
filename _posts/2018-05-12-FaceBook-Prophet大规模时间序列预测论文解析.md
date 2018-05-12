@@ -90,7 +90,7 @@ prophet用傅里叶级数（Fourier series）来建立周期模型：
 
 同时prophet支持将模型分解为单独的各项组成部分，并且实现起来很容易，只需要调用一行代码prophet_plot_components：
 
-![img](https://pic1.zhimg.com/80/v2-9eb5121f2ad91362e3ae470cfe6f6174_hd.jpg)
+![img](https://pic1.zhimg.com/v2-9eb5121f2ad91362e3ae470cfe6f6174_r.jpg)
 
 #适用范围
 
