@@ -46,8 +46,7 @@ Prophet的本质是一个可加模型，基本形式如下：
 
 ![y(t) = g(t) + s(t) + h(t) + \varepsilon_{t}](https://www.zhihu.com/equation?tex=y%28t%29+%3D+g%28t%29+%2B+s%28t%29+%2B+h%28t%29+%2B+%5Cvarepsilon_%7Bt%7D)
 
-其中![g(t)](https://www.zhihu.com/equation?tex=g%28t%29)是趋势项，![s(t)](https://www.zhihu.com/equation?tex=s%28t%29) 是周期项， ![h(t)](https://www.zhihu.com/equation?tex=h%28t%29) 是节假日项， ![\varepsilon_{t}](https://www.zhihu.com/equation?tex=%5Cvarepsilon_%7Bt%7D) 是误差项并且服从正态分布。
-$g(t)$
+其中$g(t)$是趋势项(trend)，$s(t)$是周期项(period)，$h(t)$是节假日项(holiday)，$\varepsilon_{t}$是误差项并且服从正态分布。
 
 **趋势模型**
 
