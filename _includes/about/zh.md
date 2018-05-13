@@ -17,17 +17,17 @@
 
 热爱回龙观，但最近刚搬进四环。
 
-爱好广泛，最近的兴趣是Modeling、机器学习与数据挖掘，常用R, Python, 最近在~~写~~(学)Java, Go和Scala。
+爱好广泛，最近的兴趣是Modeling、机器学习与数据挖掘，常用R, Python, 最近在 ~~写~~ (学)Java, Go和Scala。
 
 
 
 #### 迄今为止的路径
 
 
-- 2018 - Now    Bytedance, Beijing
-- 2015 - 2018   Meituan, Beijing
-- 2014 - 2015   Alipay, Hangzhou
-- 2010 - 2014   SWUFE, Chengdu
+- 2018 - Now    今日头条       北京
+- 2015 - 2018   美团点评       北京
+- 2014 - 2015   支付宝         杭州
+- 2010 - 2014   西南财经大学    成都
 
 #### 关于签名
 第一段来自[Aqua Timez](https://zh.wikipedia.org/wiki/Aqua_Timez)的[千の夜をこえて
