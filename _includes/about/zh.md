@@ -1,31 +1,36 @@
-> 写写代码，做做设计，  
-> 离开世界之前，一切都是过程。
 
-Hey，我是黄玄，病毒种，进化程度不明，多出没于[博客](https://huangxuan.me)、[微博](weibo.com/huxpro)、[知乎](https://www.zhihu.com/people/huxpro/pins/posts)、[Twitter](https://twitter.com/Huxpro/)、[Github](http://github.com/huxpro)、[Medium](https://medium.com/@Huxpro) 等地带，绝招尚在开发中。
+> 千の夜をこえて  
+> 今あなたに会いに行こう
 
-职业是软件工程师，[Web 工会](https://medium.com/ben-and-dion/team-web-3315aa447fb2#.359a9c6cl)活跃成员。曾被招募为淘宝网 · [阿里旅行](http://alitrip.com)前端工程师、微影时代 · [微票儿](http://www.wepiao.com/?r=movie)前端基础工程团队负责人、[饿了么](https://ele.me/) · 大前端团队 · [PWA 顾问](https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)。
+#### About Me
 
-一些作品和开源软件项目，👉 戳 [Portfolio](/portfolio)、[Github](http://github.com/huxpro)、[演说.io](http://https://zhuanlan.zhihu.com/p/21280918)。 
+男，四川土著，~~帅且可爱~~。
+
+不吐槽会死星人。理性，毒舌，孤僻，宅。
+
+会弹琴，常听J-Rock, J-Pop, Folks, Original Soundtrack。喜欢[いきものがかり](http://ikimonogakari.com/)(生物股长), [Mr.Children](http://www.mrchildren.jp/), 宋冬野。
 
 
-##### Talks
+专业是金融，职业是风控(背锅侠)，一个混杂了PM， RD、算法和一部分前端的奇怪工种。
 
-- [Upgrading to Progressive Web Apps][9] · [JSConf CN 上海 2017](http://2017.jsconf.cn/)
-- Building Progressive Web Apps · [CSDI 广州 2017](http://www.csdisummit.com/)
-- The State of Progressive Web App · GDG IO Redux 北京 2017
-- 炒冷饭 · PWA 到底是个什么玩意？· Baidu HQ 北京 2017
-- [Service Worker 101][5] · GDG DevFest 北京 2016
-- [Progressive Web App，复兴序章][4] · [QCon 上海 2016](http://2016.qconshanghai.com/presentation/3111)
-- Progressive Web App 之我见 · GDG IO Redux 北京 2016
-- [CSS Still Sucks 2015][2] · 2015
-- [JavaScript 模块化七日谈][1] · 2015
+常混迹于北京各大互联网公司的金融事业部。
 
-[1]: //huangxuan.me/2015/07/09/js-module-7day/
-[2]: //huangxuan.me/2015/12/28/css-sucks-2015/
-[3]: //huangxuan.me/2016/06/05/pwa-in-my-pov/
-[4]: //huangxuan.me/2016/10/20/pwa-qcon2016/
-[5]: //huangxuan.me/2016/11/20/sw-101-gdgdf/
-[6]: https://yanshuo.io/assets/player/?deck=58ac8598b123db0067292f92 "PWA Rehashing"
-[7]: https://yanshuo.io/assets/player/?deck=593ad6fbfe88c2006a0a0d6d "The State of PWA"
-[8]: https://yanshuo.io/assets/player/?deck=594d673d570c357d0698a950 "Building PWA"
-[9]: //huangxuan.me/jsconfcn2017/
+热爱回龙观，但最近刚搬进四环。
+
+爱好广泛，最近的兴趣是Modeling、机器学习与数据挖掘，常用R, Python, 最近在~~写~~(学)Java, Go和Scala。
+
+
+
+#### 迄今为止的路径
+
+
+- 2018 - Now    Bytedance, Beijing
+- 2015 - 2018   Meituan, Beijing
+- 2014 - 2015   Alipay, Hangzhou
+- 2010 - 2014   SWUFE, Chengdu
+
+#### 关于签名
+第一段来自[Aqua Timez](https://zh.wikipedia.org/wiki/Aqua_Timez)的[千の夜をこえて
+](https://music.douban.com/subject/1926414/), 2010年左右最喜欢的日文歌。
+
+![img](https://ws3.sinaimg.cn/large/006tNc79gy1fr9q3araduj30dw0dw0t1.jpg)
