@@ -13,12 +13,13 @@ tags:
     - R
     - Python
 ---
-
+# 前言
 >原文发在知乎上。
 
 在今年三月prophet刚发布的时候就简单用过，但最近才想起去读paper……
 
 ------
+# 背景
 
 首先，prophet是一个工业级应用，而不是说在时间序列预测的模型上有非常大的创新。
 
@@ -40,7 +41,7 @@ prophet就是在这样的背景下的产物，将一些时间序列建模常见�
 
 图1是ARIMA，图2是指数平滑，图3是snaive，图4是tbats。
 
-#模型结构
+# 模型结构
 
 Prophet的本质是一个可加模型，基本形式如下：
 
@@ -48,7 +49,7 @@ Prophet的本质是一个可加模型，基本形式如下：
 
 其中$g(t)$是趋势项(trend)，$s(t)$是周期项(period)，$h(t)$是节假日项(holiday)，$\varepsilon_{t}$是误差项并且服从正态分布。
 
-**趋势模型**
+## 趋势模型
 
 prophet里使用了两种趋势模型：饱和增长模型（saturating growth model）和分段线性模型（piecewise linear model）。两种模型都包含了不同程度的假设和一些调节光滑度的参数，并通过选择变化点（changepoints）来预测趋势变化。具体推导就不写了（展开来讲是一个很漫长的过程，有空补充），只写下最终形式：
 
@@ -60,7 +61,7 @@ prophet里使用了两种趋势模型：饱和增长模型（saturating growth m
 
 ![g(t) = (k + a(t)^T\delta)t + (m + a(t)^T\gamma)](https://www.zhihu.com/equation?tex=g%28t%29+%3D+%28k+%2B+a%28t%29%5ET%5Cdelta%29t+%2B+%28m+%2B+a%28t%29%5ET%5Cgamma%29)
 
-**周期模型**
+## 周期模型
 
 prophet用傅里叶级数（Fourier series）来建立周期模型：
 
@@ -68,7 +69,7 @@ prophet用傅里叶级数（Fourier series）来建立周期模型：
 
 对N的调节起到了低通滤波（low-pass filter）的作用。作者说对于年周期与星期周期，N分别选取为10和3的效果比较好。
 
-**节假日与突发事件模型**
+## 节假日与突发事件模型
 
 节假日需要用户事先指定，每一个节假日都包含其前后的若干天。模型形式如下（感觉就是一个虚拟变量）：
 
@@ -78,7 +79,7 @@ prophet用傅里叶级数（Fourier series）来建立周期模型：
 
 ![\kappa \sim Normal(0, \nu^2)](https://www.zhihu.com/equation?tex=%5Ckappa+%5Csim+Normal%280%2C+%5Cnu%5E2%29)
 
-#模型性能
+# 模型性能
 
 还是使用上面Facebook的例子，作者给出了Prophet的模型拟合与预测能力：
 
@@ -92,7 +93,7 @@ prophet用傅里叶级数（Fourier series）来建立周期模型：
 
 ![img](https://ws2.sinaimg.cn/large/006tNc79ly1fr8thts258j31dq12w449.jpg)
 
-#适用范围
+# 适用范围
 
 很明显，Prophet只适用于具有**明显的内在规律（或者说，模式）的商业行为数据。**
 
@@ -102,7 +103,7 @@ prophet用傅里叶级数（Fourier series）来建立周期模型：
 
 我自己最早是基于内部历史数据，尝试公司风控的潜在损失做一个简单预测，但很明显，没有任何证据能说明过去的序列特征（比如风险集中趋势，外部环境影响，公司层面的合并等等）会在2017年重演。所以充其量就是拿来写写周报，以及为2017年风控预算做一点微小的贡献……
 
-#总结
+# 总结
 
 Prophet是一个比较好用的预测工具，特别是对我这种拿着forecast的ets和auto.arima也懒到自动定阶和模型选择的人来说（逃……
 
