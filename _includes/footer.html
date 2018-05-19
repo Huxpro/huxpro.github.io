@@ -207,8 +207,8 @@
 <script type="text/javascript">
     function generateCatalog (selector) {
 
-        // interop with multilangual 
-        if ({{ page.multilingual }}) {
+        // interop with multilangual
+        if ('{{ page.multilingual }}' == 'true') {
             _containerSelector = 'div.post-container.active'
         } else {
             _containerSelector = 'div.post-container'
@@ -297,7 +297,7 @@
             $en.style.display = "none";
             $en.classList.remove("active");
         }
-        // interop with catalog 
+        // interop with catalog
         if ("{{ page.catalog }}") generateCatalog(".catalog-body");
     }
 
