@@ -54,14 +54,24 @@ kramdown:
 netease_comment: false
 
 
-
+## 统计
 # Analytics settings
 # Baidu Analytics
 # ba_track_id: [your track id]
 
-# Google Analytics
-#ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-#ga_domain: huangxuan.me
+Google Analytics
+ga_track_id: 'UA-61699906-2'            # Format: UA-xxxxxx-xx
+ga_domain: yanheluke.github.io
+
+# Gitalk
+gitalk:
+  enable: true    #是否开启Gitalk评论
+  clientID: 18186e1968a6b84191a4                            #生成的clientID
+  clientSecret: 251ac585a8b2fe3807ffdbfaf490a20ba4e172e6    #生成的clientSecret
+  repo: yanheluke.github.io    #仓库名称
+  owner: yanheluke    #github用户名
+  admin: yanheluke
+  distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
 
 
