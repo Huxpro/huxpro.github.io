@@ -12,7 +12,7 @@ tags:
 
 # Java Agent
 
-![java-agent](../img/blogImg/2018-06-26/java-agent.png)
+![java-agent](img/blogImg/2018-06-26/java-agent.png)
 
 Java Instrumentation指的是可以用独立于应用程序之外的代理（agent）程序来监测和协助运行在JVM上的应用程序。这种监测和协助包括但不限于获取JVM运行时状态，替换和修改类定义等。 java SE5中使用JVM TI替代了JVM PI和JVM DI。提供一套代理机制，支持独立于JVM应用程序之外的程序以代理的方式连接和访问JVM。Instrumentation 的最大作用就是类定义的动态改变和操作。
 
