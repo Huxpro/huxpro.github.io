@@ -8,7 +8,8 @@ keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux 
 url: "https://huangxuan.me"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
-
+# Publish posts or collection documents with a future date.
+future: true
 
 # SNS settings
 RSS: false
@@ -17,7 +18,7 @@ zhihu_username:     huxpro
 github_username:    huxpro
 twitter_username:   huxpro
 #facebook_username:  huxpro
-# linkedin_username:  firstname-lastname-idxxxx
+#linkedin_username:  firstname-lastname-idxxxx
 
 
 
@@ -52,7 +53,7 @@ kramdown:
 # Disqus settings
 disqus_username: hux
 
-# Netease setttings
+# Netease settings
 netease_comment: false
 
 
@@ -110,8 +111,8 @@ friends: [
         title: "SmdCn's Blog",
         href: "http://blog.smdcn.net"
     },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
+        title: "David's Game",
+        href: "https://www.ruoyaowu.com/"
     },{
         title: "DHong Say",
         href: "http://dhong.co"
@@ -119,7 +120,7 @@ friends: [
         title: "尹峰以为",
         href: "http://ingf.github.io/"
     },{
-        title: "前端神盾局",
-        href: "http://wepiaofei.github.io/blog/"
+        title: "解旻的博客",
+        href: "http://xieminis.me/"
     }
 ]

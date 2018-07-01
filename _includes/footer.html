@@ -208,7 +208,7 @@
     function generateCatalog (selector) {
 
         // interop with multilangual 
-        if ({{ page.multilingual }}) {
+        if ('{{ page.multilingual }}' == 'true') {
             _containerSelector = 'div.post-container.active'
         } else {
             _containerSelector = 'div.post-container'
