@@ -107,6 +107,7 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 	* [Header Image](#header-image)
 	* [SEO Title](#seo-title)
 	* [Page Build Warning](#page-build-warning)
+* FAQ
 
 #### Environment
 
@@ -309,6 +310,19 @@ One of these is that github changes its build environment.
 So, just edit `_config.yml`, find `highlighter: pygments`, change it to `highlighter: rouge` and the warning will be gone.
 
 For other circumstances, check out existing issues or create a new one!
+
+## FAQ
+
+#### cannot load such file -- jekyll-paginate
+
+Executing this command to install this plugin:
+
+```
+$ gem install jekyll-paginate 
+```
+
+This blog started in Jekyll 2 time when `jekyll-paginate` is standard. With Jekyll 3, it's a plugin we included in `_config.yml`.
+
 
 ## License
 
