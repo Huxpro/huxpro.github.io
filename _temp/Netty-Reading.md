@@ -166,7 +166,7 @@ public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
 在Threadlocal中使用的ThreadLocalMap存放的Entry实现了WeakReference，这是为了解决map中key的内存泄漏（ThreadLocal没有提供remove）。 key是ThreadLocal，令ThreadLocal=null并不能被gc回收，因为该ThreadLocal还在Map中做为key，但是设为null，解除了对象的强引用，只有弱引用了，在下次gc时会被清除，防止了内存泄漏。 
 
-
+FastThreadLocal相比ThreadLocal快的原因，使用InternalThreadLocalMap ，而该类使用数组作为数据结构，这个数组用来存储跟同一个线程关联的多个FastThreadLocal的值 ，在创建FastThreadLocal时就确定了index，因此在读取的时候发生随机存取，速度很快。但是这也造成了一定的空间浪费，因为是数组，其初始化容量为32，每次增加都是*2。
 
 ## socks协议
 
