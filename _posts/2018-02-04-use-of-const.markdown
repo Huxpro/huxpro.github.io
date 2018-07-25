@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "const参数，const返回值与const函数"
+title:      "const参数,const返回值与const函数"
 subtitle:   ""
 date:       2018-02-04 12:00:00
 author:     "Alex"
@@ -32,17 +32,17 @@ header-img: ""img/post-bg-xi.JPG""
         1.以“指针传递”方式的函数返回值加上const修饰，那么该函数的返回值的内容不能被修改，归根究底就是使得函数调用表达式不能作为左值。
          例如：const char *get_string(void)
          
-         2.如果函数返回值采用“值传递方式”，由于函数会把返回值复制到外部的临时存储单元中，所以加上const修饰
+        2.如果函数返回值采用“值传递方式”，由于函数会把返回值复制到外部的临时存储单元中，所以加上const修饰
          没有意义，
          例如：int get_number(void)不用写成const int get_number(void)
         
-         3.但是返回值不是内部数据类型，例如：A get_string(void),这样会产生一个临时的对象用来存放返回的数据，
+        3.但是返回值不是内部数据类型，例如：A get_string(void),这样会产生一个临时的对象用来存放返回的数据，
          会调用拷贝构造函数，这样效率会低，所以采用“引用传递”A &get_string(void),如果加上const那么返回值的
          内容就不会被改变const A &get_string(void)
 
 **(3)const修饰成员函数**
 
-<br />
+
 
 
          1.任何不会修改成员的函数都应该声明为const类型。
@@ -65,5 +65,5 @@ header-img: ""img/post-bg-xi.JPG""
           
 
 
-<br />
+
 
