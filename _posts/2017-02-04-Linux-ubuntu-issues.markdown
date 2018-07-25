@@ -34,8 +34,11 @@ tags:
 
 > 正确的解压缩方法是：
 
-$xz -d ***.tar.xz
-$tar -xvf  ***.tar
+```bash
+xz -d ***.tar.xz
+tar -xvf  ***.tar
+
+```
 
 可以看到这个压缩包也是打包后再压缩，外面是xz压缩方式，里层是tar打包方式。
 
@@ -56,8 +59,9 @@ $tar -xvf  ***.tar
 
 编译的时候，出现"zipimport.ZipImportError: can't decompress data; zlib not available"的错误，修改编辑Modules/Setup.dist文件，将
 
-#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz 
-
+```bash
+zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz 
+```
 这行的注释去掉，然后在次编译安装即可。
 
 
@@ -70,10 +74,10 @@ $tar -xvf  ***.tar
 怎么设置默认python命令是执行python3而不是python2?
 
 shell里执行：
-
+```bash
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 100
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 150
-
+```
 此时你会发现
 
 ![](https://segmentfault.com/img/bVpXpE)
