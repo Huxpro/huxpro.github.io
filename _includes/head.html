@@ -24,7 +24,7 @@
     {% endfor %}
     {% else %}
     <meta property="og:type" content="website">
-    <meta property="og:description" content="{{ site.description }}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     {% endcase %}
     <meta property="og:image" content="{{ site.url }}{{ site.sidebar-avatar }}">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
