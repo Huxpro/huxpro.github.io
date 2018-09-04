@@ -13,8 +13,7 @@ tags:
 
 # MR笔记
 
-1. `org.apache.hadoop.mapred`是旧的api，`org.apache.hadoop.mapreduce`是新的api。
-
+`org.apache.hadoop.mapred`是旧的api，`org.apache.hadoop.mapreduce`是新的api。
 
 ## 本地无hadoop环境debug MR
 
@@ -29,7 +28,6 @@ tags:
     <artifactId>hadoop-client</artifactId>
     <version>3.1.0</version>
 </dependency>
-
 ```
 
 如果执行过程中找不到某类就添加相应的类。
@@ -47,6 +45,7 @@ tags:
 1. 本地调试需要设置log4j配置，否则的话会看不到错误日志
 1. 设置combiner类的时需要注意，由于combiner的输出是reducer的输入，所以类型必须匹配
 1. 说明两个容易混淆的参数
+
 ```java
 // 首先是MR的pipeline
 // map-->partition-->sort-->group-->reducer
@@ -57,11 +56,12 @@ job.setGroupingComparatorClass();
 
 ```
 
+
 ## 例子
+
 
 ```java
 package com.go2going.domain;
-
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -275,7 +275,6 @@ public class CustomizeTypeMain {
 }
 
 ```
-
 
 ## 提醒
 
