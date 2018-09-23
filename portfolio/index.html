@@ -16,13 +16,28 @@ layout: default
 	<body>
 		<div class="container" style="margin:0;padding:0;width:100%;">
 			<header>
-				<img width="190" height="190" src="images/hux_avatar.png">
+				<img width="175" height="175" style="border-radius:50%;" src="/img/avatar-hux-ny.jpg">
 				<h1>Hux</h1>
-				<p>A student major in Web & Mobile,<br>
-					focus on UI Development, UX Design and Motion Graphic.</p>
 			</header>
 			<div class="main">
 				<ul class="cbp_tmtimeline">
+					<li>
+						<div class="cbp_tmlabel">
+							<h2 id="boxoffice">Yanshuo.io (演说.io)</h2>
+							<time>2016.06</time>
+							<img src="images/work-yanshuo.jpg">
+							<ul>
+								<li>
+									"Yanshuo.io" is an online full-featured presentation software to create Web-based slides which are linkable, sharable, cross-platform and without delivery friction. It differentiate from traditional presentation tools such as Powerpoint and Keynote due to its web-friendly and its strong belief in Web.
+								</li>
+								<li class="skill">
+									<span><b>JS</b></span>
+									<span class="i-react"></span>
+									<span class="link"><a target="_blank" href="https://yanshuo.io">Try it</a></span>
+								</li>
+							</ul>
+						</div>
+					</li>
 					<li>
 						<div class="cbp_tmlabel">
 							<h2 id="boxoffice">BoxOffice @Wepiao</h2>
@@ -109,7 +124,7 @@ layout: default
 									<span class="fa fa-css3"></span>
 									<span><b>JS</b></span>
 									<span class="i-jquery"></span>
-									<span class="link"><a target="_blank" href="http://www.tudou.com/programs/view/Xa-pGW55N4g/">Github</a></span>
+									<span class="link"><a target="_blank" href="https://github.com/Huxpro/jquery.HSlider">Github</a></span>
 								</li>
 							</ul>
 						</div>
@@ -178,42 +193,8 @@ layout: default
 							</ul>
 						</div>
 					</li>
-					{% if site.duoshuo_username %}
-					<li>
-						<div class="cbp_tmlabel">
-			                <!-- 多说评论框 start -->
-			                <div class="comment">
-			                    <div class="ds-thread"
-									data-thread-key="{{site.duoshuo_username}}/portfolio"
-			                        data-title="{{page.title}}"
-			                        data-url="{{site.url}}{{site.baseurl}}{{page.url}}" >
-			                    </div>
-			                </div>
-			                <!-- 多说评论框 end -->
-						</div>
-					</li> 
-					{% endif %}
 				</ul>
 			</div>
 		</div>
-		{% if site.duoshuo_username %}
-		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-		<script type="text/javascript">
-		    // dynamic User by Hux
-		    var _user = '{{site.duoshuo_username}}';
-
-		    // duoshuo comment query.
-		    var duoshuoQuery = {short_name: _user };
-		    (function() {
-		        var ds = document.createElement('script');
-		        ds.type = 'text/javascript';ds.async = true;
-		        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		        ds.charset = 'UTF-8';
-		        (document.getElementsByTagName('head')[0]
-		         || document.getElementsByTagName('body')[0]).appendChild(ds);
-		    })();
-		</script>
-		<!-- 多说公共JS代码 end -->
-		{% endif %}
 	</body>
 </html>

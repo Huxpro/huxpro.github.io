@@ -2,6 +2,7 @@
 @import "mixins.less";
 @import "sidebar.less";
 @import "side-catalog.less";
+@import "snackbar.less";
 
 // Global Components
 
@@ -12,6 +13,10 @@ body {
 	color: @gray-dark;
 	//-webkit-user-select:text; //对于 Blog 还是先不开启这句。
 	overflow-x : hidden;
+
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 // -- Typography
@@ -53,10 +58,10 @@ a img {
 }
 
 article{
-	overflow-x : hidden;
+	overflow : hidden;
 }
 blockquote {
-	color: @gray;
+	color: gray;
 	font-style: italic;
 	font-size: 0.95em;
 	margin: 20px 0 20px;
@@ -79,16 +84,21 @@ img.shadow{
 }
 // Utils Style End
 
-@media screen and (max-width: 768px){
-	select{
-		-webkit-appearance:none;
-		margin-top:15px;
-		color:#337ab7;
-		border-color:#337ab7;
-		padding: 0em 0.4em;
-		background: white;
+// Select 
+select{
+	-webkit-appearance:none;
+	margin-top:15px;
+	color:#337ab7;
+	border-color:#337ab7;
+	padding: 0em 0.4em;
+	background: white;
+	&.sel-lang{
+		min-height: 28px;
+		font-size:14px;
 	}
 }
+
+
 // override table style in bootstrap
 .table th, .table td{
 	border: 1px solid #eee !important;
@@ -119,7 +129,9 @@ pre code{
 
 // In the post.
 .post-container{
-	a{
+	a{	
+		// display: inline-block;
+		// safari has bugs on word-break on inline elements.
 		color:#337ab7;
 		// different to @brand-primary
 		&:hover,
@@ -833,8 +845,9 @@ img::-moz-selection {
 	}
 }
 
-// Customize Style for Posts in One-Tag-List
-.one-tag-list{
+// Customize Style for Posts in Mini-Post-List
+.mini-post-list{
+	margin: 20px 0 15px 0;
 	.tag-text{
 		font-weight: 200;
 		.sans-serif;

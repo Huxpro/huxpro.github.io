@@ -2,7 +2,7 @@
     "name": "hux-blog",
     "title": "Hux Blog",
     "author": "Hux <huxpro@gmail.com>",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "homepage": "http://huxpro.github.io",
     "repository": {
         "type": "git",
@@ -18,7 +18,9 @@
     },
     "scripts": {
         "preview": "cd _site; python -m SimpleHTTPServer 8020",
+        "py3view": "cd _site; python3 -m http.server 8020",
         "watch"  : "grunt watch & npm run preview & jekyll serve -w",
+        "py3wa"  : "grunt watch & npm run py3view & jekyll serve -w",
         "boil"   : "git push boilerplate boilerplate:master",
         "push"   : "git push origin master --tag",
         "cafe"   : "git co gitcafe-pages; git merge master; git push gitcafe gitcafe-pages:gitcafe-pages --tag; git co master;"

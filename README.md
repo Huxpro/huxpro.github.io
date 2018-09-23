@@ -1,19 +1,9 @@
-#Hux Blog
+# Hux Blog
 
-###[View Live Hux Blog &rarr;](http://huxpro.github.io)
+### [View Live Hux Blog &rarr;](https://huangxuan.me)
 
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
-
-### "Page Build Warning" email
-
-These days, some of you must receive a "Page Build Warning" email from github after you commit happily. **Don't Worried!** It just that github changes its build environment.
-
-In this mail, github told us:
-
-> You are attempting to use the 'pygments' highlighter, which is currently unsupported on GitHub Pages. Your site will use 'rouge' for highlighting instead. To suppress this warning, change the 'highlighter' value to 'rouge' in your '_config.yml'.
-
-So, just edit `_config.yml`, find `highlighter: pygments`, change it to `highlighter: rouge` and the warning will be gone.
 
 
 ## Boilerplate (beta)
@@ -26,6 +16,11 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 
 **[View Boilerplate Here &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
 
+
+## Porting 
+
+- [**Hexo**](https://github.com/Kaijun/hexo-theme-huxblog) by @kaijun
+- [**React-SSR**](https://github.com/LucasIcarus/huxpro.github.io/tree/ssr) by @LucasIcarus
 
 ## Translation
 
@@ -111,6 +106,8 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 	* [Customization](#customization)
 	* [Header Image](#header-image)
 	* [SEO Title](#seo-title)
+	* [Page Build Warning](#page-build-warning)
+* FAQ
 
 #### Environment
 
@@ -272,6 +269,7 @@ ga_domain: huangxuan.me
 
 Just checkout the code offered by Google/Baidu, and copy paste here, all the rest is already done for you.
 
+(Google might ask for meta tag "google-site-verification")
 
 
 #### Customization
@@ -301,7 +299,35 @@ It's possible that you want the two things different. For me, my site-title is *
 
 So, the SEO Title is introduced to solve this problem, you can set `SEOTitle` different from `title`, and it would be only used to generate HTML `<title>` and setting DuoShuo Sharing.
 
-## Thanks
+#### Page Build Warning
 
-This theme is forked from [IronSummitMedia/startbootstrap-clean-blog-jekyll](https://github.com/IronSummitMedia/startbootstrap-clean-blog-jekyll)  
-Thanks Jekyll and Github Pages!
+There are many possible reasons to cause a "Page Build Warning" email or similar error.
+
+One of these is that github changes its build environment.
+
+> You are attempting to use the 'pygments' highlighter, which is currently unsupported on GitHub Pages. Your site will use 'rouge' for highlighting instead. To suppress this warning, change the 'highlighter' value to 'rouge' in your '_config.yml'.
+
+So, just edit `_config.yml`, find `highlighter: pygments`, change it to `highlighter: rouge` and the warning will be gone.
+
+For other circumstances, check out existing issues or create a new one!
+
+## FAQ
+
+#### cannot load such file -- jekyll-paginate
+
+Executing this command to install this plugin:
+
+```
+$ gem install jekyll-paginate 
+```
+
+This blog started in Jekyll 2 time when `jekyll-paginate` is standard. With Jekyll 3, it's a plugin we included in `_config.yml`.
+
+
+## License
+
+Apache License 2.0.
+Copyright (c) 2015-2016 Huxpro
+
+Hux Blog is derived from [Clean Blog Jekyll Theme (MIT License)](https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll/)
+Copyright (c) 2013-2016 Blackrock Digital LLC.

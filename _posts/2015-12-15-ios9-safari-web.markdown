@@ -87,7 +87,7 @@ Force Touch API 为我们添加了两个新东西：
 
 [@Marcel Freinbichler](https://twitter.com/fr3ino) 第一个在 Twitter 上晒出了自己的 [Demo](http://freinbichler.me/apps/3dtouch)。在 6s 或 new Macbook 的 Safari（目前仅 Safari 支持）上访问就可以看到圆圈会随着压力放大。墙内的小伙伴可以直接试试下面这个圆圈，体验下 3D/Force Touch 带来的的奇妙体验。
 
-<iframe src="http://huangxuan.me/forcify/" style="
+<iframe src="//huangxuan.me/forcify/" style="
     width:100%;
     height:500px;
     border: 0;
