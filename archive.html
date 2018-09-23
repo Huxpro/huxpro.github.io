@@ -1,5 +1,5 @@
 ---
-title: Tags
+title: Archive
 layout: default
 description: keep hungry keep foolish
 header-img: "img/tag-bg.jpg"
@@ -23,31 +23,29 @@ header-img: "img/tag-bg.jpg"
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-			<div id='tag_cloud' class="tags">
-				{% for tag in site.tags %}
-				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
-				{% endfor %}
-			</div>
-
             <!--<blockquote class="tag-comments">
-                标签命名规范：
-                    <li>行业观察、职位、公司优先使用中文</li>
-                    <li>外国产品、术语优先使用英文</li>
+				TODO: Using `data-tag` to make posts filter-able at runtime
             </blockquote>-->
 
-            <!-- 标签列表 -->
+            <!-- Article List -->
 			<div class="mini-post-list">
-			{% for tag in site.tags %}
-			  	<span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
-                    <span class="tag-text">{{ tag[0] }}</span>
+			{% for post in site.posts  %}
+				{% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+				{% capture this_month %}{{ post.date | date: "%B" }}{% endcapture %}
+				{% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
+				{% capture next_month %}{{ post.previous.date | date: "%B" }}{% endcapture %}
+			
+				{% if forloop.first %}
+			  	<span class="fa   listing-seperator" id="{{this_year}}-{{this_month}}">
+                    <span class="tag-text">{{this_year}} {{this_month}}</span>
                 </span>
-				{% for post in tag[1] %}
-				  <!-- <li class="listing-item">
-				  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-				  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-				  </li> -->
-				 <div class="post-preview">
+				{% endif %}
+			
+				<!-- <li>
+					<span>{{ post.date | date: "%F" }}</span> 
+					<a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
+				</li> -->
+				<div class="post-preview">
 				    <a href="{{ post.url | prepend: site.baseurl }}">
 				        <h2 class="post-title">
                             {{ post.title }}
@@ -58,11 +56,24 @@ header-img: "img/tag-bg.jpg"
 				        </h3>
 				        {% endif %}
 				    </a>
-				    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
 				</div>
 				<hr>
-				{% endfor %}
-			{% endfor %}
+			
+				{% if forloop.last %}
+				{% else %}
+				{% if this_year != next_year %}
+				  	<span class="fa   listing-seperator" id="{{this_year}}-{{this_month}}">
+						<span class="tag-text">{{this_year}} {{this_month}}</span>
+					</span>
+				{% else %}    
+					{% if this_month != next_month %}
+				  	<span class="fa   listing-seperator" id="{{this_year}}-{{this_month}}">
+						<span class="tag-text">{{this_year}} {{this_month}}</span>
+					</span>
+					{% endif %}
+					{% endif %}
+				{% endif %}
+			{% endfor%}
 			</div>
 
 		</div>

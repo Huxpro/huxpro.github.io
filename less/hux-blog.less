@@ -13,6 +13,10 @@ body {
 	color: @gray-dark;
 	//-webkit-user-select:text; //对于 Blog 还是先不开启这句。
 	overflow-x : hidden;
+
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 // -- Typography
@@ -841,8 +845,9 @@ img::-moz-selection {
 	}
 }
 
-// Customize Style for Posts in One-Tag-List
-.one-tag-list{
+// Customize Style for Posts in Mini-Post-List
+.mini-post-list{
+	margin: 20px 0 15px 0;
 	.tag-text{
 		font-weight: 200;
 		.sans-serif;

@@ -1,3 +1,8 @@
+/*!
+ * Hux Blog v1.7.0 (http://huxpro.github.io)
+ * Copyright 2018 Hux <huxpro@gmail.com>
+ */
+
 @media (min-width: 1200px) {
   .post-container,
   .sidebar-container {
@@ -309,6 +314,9 @@ body {
   font-size: 16px;
   color: #404040;
   overflow-x: hidden;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 p {
   margin: 30px 0;
@@ -1099,7 +1107,10 @@ img::-moz-selection {
     line-height: 2 !important;
   }
 }
-.one-tag-list .tag-text {
+.mini-post-list {
+  margin: 20px 0 15px 0;
+}
+.mini-post-list .tag-text {
   font-weight: 200;
   /* Hux learn from
      *     TypeIsBeautiful,
@@ -1108,18 +1119,18 @@ img::-moz-selection {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;
 }
-.one-tag-list .post-preview {
+.mini-post-list .post-preview {
   position: relative;
 }
-.one-tag-list .post-preview > a .post-title {
+.mini-post-list .post-preview > a .post-title {
   font-size: 16px;
   font-weight: 500;
   margin-top: 20px;
 }
-.one-tag-list .post-preview > a .post-subtitle {
+.mini-post-list .post-preview > a .post-subtitle {
   font-size: 12px;
 }
-.one-tag-list .post-preview > .post-meta {
+.mini-post-list .post-preview > .post-meta {
   position: absolute;
   right: 5px;
   bottom: 0px;
@@ -1128,17 +1139,17 @@ img::-moz-selection {
   line-height: 12px;
 }
 @media only screen and (min-width: 768px) {
-  .one-tag-list .post-preview {
+  .mini-post-list .post-preview {
     margin-left: 20px;
   }
-  .one-tag-list .post-preview > a > .post-title {
+  .mini-post-list .post-preview > a > .post-title {
     font-size: 18px;
     line-height: 1.3;
   }
-  .one-tag-list .post-preview > a > .post-subtitle {
+  .mini-post-list .post-preview > a > .post-subtitle {
     font-size: 14px;
   }
-  .one-tag-list .post-preview .post-meta {
+  .mini-post-list .post-preview .post-meta {
     font-size: 18px;
   }
 }
