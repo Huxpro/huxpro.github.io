@@ -148,16 +148,17 @@ var localServer = google.gears.factory.create("bata.localserver");
 var store = localServer.createManagedStore(STORE_NAME);
 store.manifestUrl = "manifest.json"
 ```
-```json
-// manifest.json - 假设 JSON 有注释
+```js
+// manifest.json
 {
-　　"betaManifestVersion":　1,
-　　"version": 　"1.0",
-　　"entries":　[　
-　　　　{　"url": 　"index.html"},
-　　　　{　"url": 　"main.js"}
-　　]
+  "betaManifestVersion": 1,
+  "version": "1.0",
+  "entries": [
+    { "url": "index.html" }, 
+    { "url": "main.js" }
+  ]
 }
+
 ```
 
 是不是感到很熟悉？好像 [HTML5 规范][spec11]中的 Application Cache 也是类似的东西？

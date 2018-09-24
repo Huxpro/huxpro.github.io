@@ -313,6 +313,10 @@ For other circumstances, check out existing issues or create a new one!
 
 ## FAQ
 
+#### How can I customize the theme of code block?
+
+This theme uses the default code syntax highlighter of jekyll, "rouge, which is compatible with Pygments theme so just pick any pygments theme css (e.g. from [here](http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html) and replace the content of `highlight.less`.
+
 #### cannot load such file -- jekyll-paginate
 
 Executing this command to install this plugin:
