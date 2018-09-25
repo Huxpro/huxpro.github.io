@@ -216,24 +216,30 @@ pre.highlight {
     padding: 0;
     word-wrap: normal; // Safari Bug
   }
-  .lineno {
-    text-align: right;
-    margin-right: 10px;
-  }
   .table-responsive {
     margin: 0px;
     border: 0px;
-    padding: 10px;
   }
   .table {
     margin: 0px;
+    table-layout: fixed;
   }
   table > tbody > tr {
     > td {
       margin: 0;
       border: 0;
-      // I dunno how the width of "table-cell" is determined
-      display: inline-block;
+      padding: 0;
+      > pre {
+        padding: 14px;
+      }
     }
+  }
+  td.rouge-gutter {
+    width: 56px;
+  }
+  .lineno {
+    text-align: right;
+    border-right: 1px solid #555;
+    border-radius: 0px;
   }
 }
