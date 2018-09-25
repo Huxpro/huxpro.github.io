@@ -2,7 +2,6 @@
 layout: post
 title: "「知乎」如何通俗地解释停机问题？"
 subtitle: "How to explain the Halting Problem?"
-date: 2017-12-12 12:00:00
 author: "Hux"
 header-img: "img/post-bg-halting.jpg"
 header-mask: 0.3
