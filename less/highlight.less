@@ -239,7 +239,18 @@ pre.highlight {
   }
   .lineno {
     text-align: right;
-    border-right: 1px solid #555;
+    // border-right: 1px solid #373434;
     border-radius: 0px;
+  }
+}
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+  .highlighter-rouge .highlight {
+    margin-left: -15px;
+    margin-right: -15px;
+    border-radius: 0px;
+    td.rouge-gutter {
+      width: 46px;
+    }
   }
 }
