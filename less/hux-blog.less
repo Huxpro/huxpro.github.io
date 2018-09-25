@@ -785,18 +785,26 @@ img::-moz-selection {
 /* Hux add tags support */
 .tags {
   margin-bottom: -5px;
-  a,
-  .tag {
+  &.tags-sup {
+    a, .tag {
+      padding: 0 10px 0 12px;
+    }
+  }
+  a, .tag {
     display: inline-block;
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 999em;
-    padding: 0 10px;
+    padding: 0 10px 0 10px;
     color: rgba(255, 255, 255, 1);
     line-height: 24px;
     font-size: 12px;
     text-decoration: none;
     margin: 0 1px;
     margin-bottom: 6px;
+    > sup {
+      margin-left: -2px;
+      font-weight: 700;
+    }
     &:hover,
     &:active {
       color: white;

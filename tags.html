@@ -6,28 +6,25 @@ header-img: "img/tag-bg.jpg"
 ---
 
 <!-- Page Header -->
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading" id="tag-heading">
-                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
-                    <span class="subheading">{{ page.description }}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+{% include intro-header.html type='page' short=true %}
+
 
 <!-- Main Content -->
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-			<div id='tag_cloud' class="tags">
+			<!-- 标签云 -->
+			<div id='tag_cloud' class="tags tags-sup">
+				{% capture tags %}
 				{% for tag in site.tags %}
-				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+				<a  data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
+					href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+					{{ tag[0] }}
+					<sup>{{tag[1].size}}</sup>
+				</a>
 				{% endfor %}
+				{% endcapture %}
+				{{ tags | split:'</a>' | sort | join:'</a>' }}
 			</div>
 
             <!--<blockquote class="tag-comments">
@@ -37,6 +34,12 @@ header-img: "img/tag-bg.jpg"
             </blockquote>-->
 
             <!-- 标签列表 -->
+				<!-- 
+					Jekyll + Liquid is so shity at manipulating data structure due to its nature of template engine.
+					There were hacks that sorts tags by size by pre concatentating string...
+					https://stackoverflow.com/questions/24700749/how-do-you-sort-site-tags-by-post-count-in-jekyll
+					But sorting posts in this way is so unefficient and unsafe (how can u find a unique token?)
+				-->
 			<div class="mini-post-list">
 			{% for tag in site.tags %}
 			  	<span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">

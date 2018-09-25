@@ -7,45 +7,7 @@ layout: default
 <!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
 
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')
-    }
-
-    {% if page.header-mask %}
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, {{ page.header-mask }});
-    }
-    {% endif %}
-</style>
-<header class="intro-header" >
-    <div class="header-mask"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        {% for tag in page.tags %}
-                        <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
-                        {% endfor %}
-                    </div>
-                    <h1>{{ page.title }}</h1>
-                    {% comment %}
-                        always create a h2 for keeping the margin , Hux
-                    {% endcomment %}
-                    {% comment %} if page.subtitle {% endcomment %}
-                    <h2 class="subheading">{{ page.subtitle }}</h2>
-                    {% comment %} endif {% endcomment %}
-                    <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+{% include intro-header.html type='post' %}
 
 <!-- Post Content -->
 <article>
@@ -130,38 +92,16 @@ layout: default
                 sidebar-container">
 
                 <!-- Featured Tags -->
-                {% if site.featured-tags %}
-                <section>
-                    <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-        				{% for tag in site.tags %}
-                            {% if tag[1].size > site.featured-condition-size %}
-                				<a href="/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-                                    {{ tag[0] }}
-                                </a>
-                            {% endif %}
-        				{% endfor %}
-        			</div>
-                </section>
-                {% endif %}
+                {% include featured-tags.html bottom=true %}
 
                 <!-- Friends Blog -->
-                {% if site.friends %}
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-                    {% for friend in site.friends %}
-                        <li><a href="{{friend.href}}">{{friend.title}}</a></li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
+                {% include friends.html %}
             </div>
         </div>
     </div>
 </article>
 
-<!-- Add support for Mathjax by Voleking-->
+<!-- add support for mathjax by voleking-->
 {% if page.mathjax %}
   {% include mathjax_support.html %}
 {% endif %}
