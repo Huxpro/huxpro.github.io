@@ -14,7 +14,7 @@ tags:
 一年半前，我曾和 Flash 作过一次告别。那一次，Adobe Flash Professional CC 被重新命名为了 Adobe Animate CC，宣告着 Flash 作为一个创作工具走到了尽头。
 
 
-![](https://pic2.zhimg.com/80/v2-a0896b47aecbfe5960aba296fa4df5e3_hd.jpg)
+![](/img/in-post/post-f-f-weibo.png)
 
   
 
