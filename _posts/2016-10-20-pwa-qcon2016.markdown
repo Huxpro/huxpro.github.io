@@ -1,7 +1,7 @@
 ---
 layout:     keynote
 title:      "Progressive Web Apps，复兴序章「QCon 上海 2016」"
-subtitle:   "Slides: Progressive Web Apps, Make Web Great Again. (QCon Shanghai 2016)"
+subtitle:   "🎞  Slides:Progressive Web Apps, Make Web Great Again. (QCon Shanghai 2016)"
 iframe:     "//huangxuan.me/pwa-qcon2016/"
 navcolor:   "invert"
 date:       2016-10-20
@@ -9,7 +9,6 @@ author:     "Hux"
 tags:
     - Slides
     - Web 前端
-    - JavaScript
     - PWA
 ---
 

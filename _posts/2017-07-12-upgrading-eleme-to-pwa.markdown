@@ -10,7 +10,6 @@ catalog:      true
 multilingual: true
 tags:
     - Web 前端
-    - JavaScript
     - PWA
 ---
 

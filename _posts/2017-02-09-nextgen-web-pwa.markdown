@@ -9,7 +9,6 @@ header-mask: 0.3
 catalog:    true
 tags:
     - Web 前端
-    - JavaScript
     - PWA
 ---
 
