@@ -7,8 +7,8 @@ author:     "Hux"
 header-img: "img/post-bg-android.jpg"
 tags:
     - 知乎
-    - 交互设计
-    - Android
+    - 产品
+    - UX/UI
 ---
 
 > 这篇文章转载自[我在知乎上的回答](http://www.zhihu.com/question/25104721/answer/30108886)

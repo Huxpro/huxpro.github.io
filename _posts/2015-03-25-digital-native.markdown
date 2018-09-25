@@ -8,8 +8,7 @@ header-img: "img/post-bg-digital-native.jpg"
 catalog: true
 tags:
     - hUX 随想录
-    - 职业病
-    - 交互设计
+    - UX/UI
 ---
 
 > 那是一种与生俱来的天赋，就好像矮人天生擅长舞锤，而精灵则拥有魔法庇护。那些数字时代的原住民们，天生具备着一种操纵数字世界的领悟。

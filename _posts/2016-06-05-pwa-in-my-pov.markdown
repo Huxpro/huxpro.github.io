@@ -7,7 +7,8 @@ navcolor:   "invert"
 date:       2016-06-05
 author:     "Hux"
 tags:
-    - 前端开发
+    - Slides
+    - Web 前端
     - JavaScript
     - PWA
 ---

@@ -7,10 +7,7 @@ author:     "Hux"
 header-img: "img/post-bg-apple-event-2015.jpg"
 tags:
     - 知乎
-    - 职业病
-    - Apple
-    - Macbook
-    - Apple Watch
+    - 产品
 ---
 
 > 这篇文章转载自[我在知乎上的回答](http://www.zhihu.com/question/28617408/answer/41626694)
@@ -58,12 +55,6 @@ tags:
     <br>
     <br>
     <br>有人说 Apple Watch 简直是 Jony Ive 这个一心向往做奢侈品设计的天才将 Apple 引入了歧途里，而我却觉得<b>科技与时尚的结合为何就不是一件美丽的事情？</b>
-    <br>
-    <br>
-    <br>
-    <p>
-    <b>破 200 赞，感谢下对时尚业颇有研究的女友对我的影响<a data-hash="8ffb556cbebb0cfe22aa194ff89b635d" href="http://www.zhihu.com/people/8ffb556cbebb0cfe22aa194ff89b635d" class="member_mention" data-editable="true" data-title="@肖玉" data-tip="p$b$8ffb556cbebb0cfe22aa194ff89b635d"> @肖玉</a></b>
-    </p>
 </div>
 
 

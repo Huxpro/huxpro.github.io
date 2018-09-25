@@ -1,14 +1,14 @@
 ---
 layout:     post
-title:      "ES5, ES6, ES2016, ES.Next: JavaScript 的版本是怎么回事？「译」"
+title:      "「译」ES5, ES6, ES2016, ES.Next: JavaScript 的版本是怎么回事？"
 subtitle:   "ES5, ES6, ES2016, ES.Next: What's going on with JavaScript versioning?"
 date:       2015-09-22
 author:     "Hux"
 header-img: "img/post-bg-js-version.jpg"
 tags:
-    - 前端开发
+    - Web 前端
     - JavaScript
-    - 翻译
+    - 译
 ---
 
 

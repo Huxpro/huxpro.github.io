@@ -7,8 +7,8 @@ author:     "Hux"
 header-img: "img/post-bg-alibaba.jpg"
 tags:
     - 知乎
-    - 阿里巴巴
-    - 交互设计
+    - 产品
+    - 阿里
 ---
 
 > 这篇文章转载自[我在知乎上的回答](http://www.zhihu.com/question/25657351/answer/31278511)

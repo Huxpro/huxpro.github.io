@@ -7,8 +7,8 @@ author:     "Hux"
 header-img: "img/home-bg-o.jpg"
 tags:
     - 知乎
-    - 前端开发
-    - UX Design
+    - Web 前端
+    - UX/UI 
 ---
 
 > 这篇文章转载自[我在知乎上的回答](https://www.zhihu.com/question/21921588/answer/69680480)，也被刊登于[优秀网页设计](http://www.uisdc.com/head-first-front-end)等多个网站上 ;)
