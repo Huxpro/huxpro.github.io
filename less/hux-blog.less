@@ -783,6 +783,9 @@ img::-moz-selection {
 }
 
 /* Hux add tags support */
+.d-none {
+  display: none !important;
+}
 .tags {
   margin-bottom: -5px;
   &.tags-sup {
@@ -801,6 +804,7 @@ img::-moz-selection {
     text-decoration: none;
     margin: 0 1px;
     margin-bottom: 6px;
+    cursor: pointer;
     > sup {
       margin-left: -2px;
       font-weight: 700;
@@ -829,15 +833,28 @@ img::-moz-selection {
   margin: 20px 0 15px 0;
   a,
   .tag {
+    transition-property: all;
+    transition-duration: 0.4s;
+    transition-timing-function: ease;
     font-size: 14px;
     border: none;
     line-height: 28px;
     margin: 0 2px;
     margin-bottom: 8px;
-    background: #d6d6d6;
+    background: #f3f5f5;
     &:hover,
     &:active {
       background-color: #0085a1 !important;
+    }
+    &.focus{
+      box-shadow: rgba(0,0,0,.117647) 0 1px 6px, rgba(0,0,0,.239216) 0 1px 4px;
+    }
+    &.tag-button--all {
+      font-weight: 700;
+      color: #0085a1!important;
+      &:hover, &:active{
+        background-color: #e4e4e4 !important;
+      }
     }
   }
   @media only screen and (min-width: 768px) {
@@ -889,7 +906,7 @@ img::-moz-selection {
         margin-top: 20px;
       }
       .post-subtitle {
-        font-size: 12px;
+        font-size: 13px;
       }
     }
     > .post-meta {
@@ -938,6 +955,7 @@ img::-moz-selection {
     background-color: rgba(255, 255, 255, 0.25);
   }
 }
+
 
 /* Hux customize Style for navBar button */
 
