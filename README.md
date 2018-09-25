@@ -26,45 +26,60 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 
  - ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese (Simplified)**: 感谢 [@BrucZhaoR](https://github.com/BruceZhaoR) 的 [中文翻译 &rarr;](https://github.com/Huxpro/huxpro.github.io/blob/master/README.zh.md)
 
-## Features
+## Releases
 
-##### New Feature (V1.5.2)
+##### V1.8
+
+- Brand new [Archive](https://huangxuan.me/archive/) page! Which is not just serving as common archive page but also Tag page where all posts are filter-able with tags!
+Thanks [@kitian616/jekyll-TeXt-theme](https://github.com/kitian616/jekyll-TeXt-theme) to bring some a brilliant idea. Noted that the old Tag page and Archive page are deprecated but it's back-compatiable with all your tag and config!
+- Re-engineering of the blog by extracting duplicated templates. This was proposed in #74 by @Kaijun but postponed for entirely 2.5 years! I wasn't able to merge his PR directly because long-time divegence but I do follow his code. I'd love to give full credit to him!
+- New code block feature! Long-wanted line number are supported out of the box now (thanks for @SmilingParadise's help on Sina Weibo) and the theme was updated to Atom One Dark (checkout FQA for how to change to your farovite theme)
+
+##### V1.7
+
+- PWA / Service Worker
+
+##### v1.6
+
+- change cdn to cdnjs for better HTTPS support
+
+##### V1.5.2
 
 - Annoyed to delete my blog post after clone or pull? **Boilerplate** comes to help you get started quickly and easily merge update.
 - `-apple-system` is added in font rule, which display beautiful new font **San Francisco** in iOS 9 by default.
 - Fixed [issue#15](https://github.com/Huxpro/huxpro.github.io/issues/15) about code wrap.
 
-##### New Feature (V1.5.1)
+##### V1.5.1
 
 - **[Comment](#comment)** support [**Disqus**](http://disqus.com) officially, thanks to @rpsh.
 
-##### New Feature (V1.5)
+##### V1.5
 
 - **[Comment](#comment)** and **[Analytics](#analytics)** is configurable now! We also add **Google Analytics support** and drop tencents. Both documents is updated.
 
-##### New Feature (V1.4)
+##### V1.4
 
 - **[Featured Tags](#featured-tags)** is now independent of [SideBar](#sidebar). Both documents is updated.
 - New **[SEO Title](#seo-title)** for SEO usage which is differ from the site title
 
-##### New Feature (V1.3.1)
+##### V1.3.1
 
 - Support **PingFang (苹方)**, the new Chinese font presented by [OS X El Capitan](http://www.apple.com/cn/osx/whats-new/)
 
 
-##### New Feature (V1.3)
+##### V1.3
 
 - Big Improvement to the **Navigation Menu** *(especially in Android)*:  Dropping the old, stuttering, low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse),  replaced with an own wrote, [jank free](http://jankfree.org/) navbar menu in a pretty high-performance implementation of [Google Material Design](https://www.google.com/design/spec/material-design/introduction.html).
 
 <img src="http://huangxuan.me/img/blog-md-navbar.gif" width="320" />
 
 
-##### New Feature (V1.2)
+##### V1.2
 
 - Brand new **[Keynote Layout](#keynote-layout)** is provided for easily posting beautiful HTML presentations you have created with this blog
 
 
-##### New Feature (V1.1)
+##### V1.1
 
 - We now support a clean and gorgeous **[SideBar](#sidebar)** for displaying more info
 - **[Friends](#friends)** is also added as a common feature of blog help you do SEO
