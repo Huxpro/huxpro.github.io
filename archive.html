@@ -34,7 +34,7 @@ https://github.com/kitian616/jekyll-TeXt-theme
 				</a>
 				{% endfor %}
 				{% endcapture %}
-        {{ tags | url_encode | split:'</a>' | sort | join:'</a>' | url_decode }}
+        {{ tags | split:'</a>' | sort | join:'</a>' }}
 			</div>
 
             <!-- Article List -->
