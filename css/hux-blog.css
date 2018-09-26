@@ -1365,7 +1365,9 @@ img::-moz-selection {
 #tag_cloud a:hover,
 #tag_cloud .tag:hover,
 #tag_cloud a:active,
-#tag_cloud .tag:active {
+#tag_cloud .tag:active,
+#tag_cloud a.focus,
+#tag_cloud .tag.focus {
   background-color: #0085a1 !important;
 }
 #tag_cloud a.focus,
@@ -1380,7 +1382,9 @@ img::-moz-selection {
 #tag_cloud a.tag-button--all:hover,
 #tag_cloud .tag.tag-button--all:hover,
 #tag_cloud a.tag-button--all:active,
-#tag_cloud .tag.tag-button--all:active {
+#tag_cloud .tag.tag-button--all:active,
+#tag_cloud a.tag-button--all.focus,
+#tag_cloud .tag.tag-button--all.focus {
   background-color: #e4e4e4 !important;
 }
 @media only screen and (min-width: 768px) {
