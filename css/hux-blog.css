@@ -658,6 +658,12 @@ pre code {
   white-space: pre;
   word-wrap: normal;
 }
+code,
+kbd,
+pre,
+samp {
+  font-family: "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+}
 .postlist-container {
   margin-bottom: 15px;
 }
@@ -692,6 +698,20 @@ pre code {
 }
 .post-container h6 + p {
   margin-top: 5px;
+}
+@media screen and (max-width: 768px) {
+  .post-container h1 {
+    font-size: 30px;
+  }
+  .post-container h2 {
+    font-size: 24px;
+  }
+  .post-container h3 {
+    font-size: 21px;
+  }
+  .post-container h4 {
+    font-size: 19px;
+  }
 }
 .post-container ul,
 .post-container ol {
@@ -884,6 +904,26 @@ pre code {
     background: none;
   }
 }
+.navbar-custom.invert .navbar-toggle:active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.navbar-custom.invert .navbar-toggle .icon-bar {
+  background-color: #404040;
+}
+.navbar-custom.invert .navbar-brand {
+  color: #404040;
+}
+.navbar-custom.invert .navbar-brand:hover,
+.navbar-custom.invert .navbar-brand:focus {
+  color: #0085a1;
+}
+.navbar-custom.invert .nav li a {
+  color: #404040;
+}
+.navbar-custom.invert .nav li a:hover,
+.navbar-custom.invert .nav li a:focus {
+  color: #0085a1;
+}
 @media only screen and (min-width: 1170px) {
   .navbar-custom {
     -webkit-transition: background-color 0.3s;
@@ -941,6 +981,31 @@ pre code {
   -o-background-size: cover;
   margin-bottom: 0px;
   /* 0 on mobile, modify by Hux */
+}
+.intro-header.style-text {
+  background: none;
+}
+.intro-header.style-text .site-heading,
+.intro-header.style-text .post-heading,
+.intro-header.style-text .page-heading {
+  padding: 85px 0 20px;
+  color: #404040;
+}
+.intro-header.style-text .site-heading .subheading,
+.intro-header.style-text .post-heading .subheading,
+.intro-header.style-text .page-heading .subheading {
+  margin-bottom: 15px;
+}
+.intro-header.style-text .tags a,
+.intro-header.style-text .tags .tag {
+  border-color: #404040;
+  color: #404040;
+}
+.intro-header.style-text .tags a:hover,
+.intro-header.style-text .tags .tag:hover,
+.intro-header.style-text .tags a:active,
+.intro-header.style-text .tags .tag:active {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 @media only screen and (min-width: 768px) {
   .intro-header {
@@ -1024,7 +1089,7 @@ pre code {
   font-family: 'Lora', 'Times New Roman', serif;
   font-style: italic;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 16px;
 }
 .intro-header .post-heading .meta a {
   color: white;

@@ -19,7 +19,7 @@ tags:
 > 另外，出于对 wiki 式阅读的偏爱，笔者为您添加了很多额外的链接，方便您查阅文档或出处
 
 
-### 简而言之
+## 简而言之
 
 如果你不想阅读整篇文章，这里为你准备了一个总结：
 
@@ -60,7 +60,7 @@ tags:
 > **再注！** 由于原文写于 Apple 发布会之前，为了不让读者感到奇怪，笔者将会对文章进行适当改写与补充，以保证本文的连贯性
 
 
-### 新的 iOS 设备特性
+## 新的 iOS 设备特性
 
 ##### iPhones 6s 与 3D Touch
 
@@ -106,7 +106,7 @@ Force Touch API 为我们添加了两个新东西：
 从交互的角度上来说，iPad Pro 虽然不支持 3D Touch，但是可以搭配 Smart Keyboard 与/或 Apple Pen（带有压力侦测）使用。对于键盘其实并没有什么好说的，如果一个网站在搭配键盘的桌面电脑上好用，它在 iPad Pro 上应该也不赖。而对于 Apple Pen，很可惜，目前似乎并没有 API 能让你在网站上获得这根笔的压力与角度。
 
 
-### 新的 iOS 操作系统特性
+## 新的 iOS 操作系统特性
 
 ##### iPad 上的多任务处理
 
@@ -222,7 +222,7 @@ Apple 刚刚发布了一个 [App Search Validation Tool（应用搜索验证工�
 
 <img src="http://www.mobilexweb.com/wp-content/uploads/2015/09/back.png" alt="backbutton" width="320" />
 
-### 新的 API 支持
+## 新的 API 支持
 
 ##### Navigation Timing API
 
@@ -313,7 +313,7 @@ if (CSS.supports("-webkit-scroll-snap-type", "mandatory")) {}
 * 当你加载一个 HTTPS 协议的页面时，你不能混用 HTTP 与 HTTPS 的资源
 
 
-### Bugs
+## Bugs
 
 Bug 通常都要在几周之后才会显露出来，我也会持续跟进并更新这篇文章。目前为止，我的发现如下：
 
@@ -321,11 +321,11 @@ Bug 通常都要在几周之后才会显露出来，我也会持续跟进并更�
 * Speech Synthesis API （语音综合 API）不再工作了
 
 
-### 仍在等待……
+## 仍在等待……
 
 当 Mac 上的 Safari、桌面电脑与 Android 上的 Chrome 都已经为网站支持 Push Notification （通知推送）时，iOS 上的 Safari 仍然不支持这个特性。就 API 而言，我们仍然没有：WebRTC、getUserMedia、Service Worker、FileSystem API、Network Information API、Battery Status API、Vibration API 等等……你又在 iOS 上等待哪些特性呢？ 
 
-### watchOS 与 tvOS
+## watchOS 与 tvOS
 
 新发布的 watchOS 2.0 与 tvOS 9.0 都是基于 iOS 的操作系统，它们针对特定的设备发行（Apple Watch 与新的 Apple TV）。从用户的角度来说，那里并没有浏览器了。从开发者的角度，那里也没有 Webview 了。
 
@@ -334,7 +334,7 @@ Bug 通常都要在几周之后才会显露出来，我也会持续跟进并更�
 对于 Apple TV ，它支持使用 JavaScript、DOM API 与 XMLHttpRequest 来让我们构建某种类似 Client-Server webapp 的东西。没有 HTML 和 CSS，这是什么把戏？其实它支持的叫 TVML，是一种基于 XML、为那些可以被渲染在 TV 屏幕上的特定内容而优化后的标签。这些标签只可以在来自应用商店的 native app 中渲染，但是这些 TVML 是由服务器端来生成的。
 
 
-### 著作权声明
+## 著作权声明
 
 本文译自 [iOS 9, Safari and the Web: 3D Touch, new Responsive Web Design, Native integration and HTML5 APIs --- Breaking the Mobile Web](http://www.mobilexweb.com/blog/ios9-safari-for-web-developers)   
 译者 [黄玄](http://weibo.com/huxpro)，首次发布于 [Hux Blog](http://huangxuan.me)，转载请保留以上链接
