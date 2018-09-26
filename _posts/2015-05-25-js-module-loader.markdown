@@ -8,7 +8,7 @@ header-img: "img/post-bg-js-module.jpg"
 catalog: true
 tags:
     - 笔记
-    - Web 前端
+    - Web
     - JavaScript
 ---
 

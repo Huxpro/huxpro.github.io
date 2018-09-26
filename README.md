@@ -34,6 +34,9 @@ $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 Thanks [@kitian616/jekyll-TeXt-theme](https://github.com/kitian616/jekyll-TeXt-theme) to bring this brilliant idea. Noted that the old Tag page and Archive page are deprecated but the new archive's totally backward compatiable.
 - Re-engineering of the blog by extracting duplicated liquid templates. This was proposed in #74 by @Kaijun but postponed for entirely 2.5 years! I wasn't able to merge his PR directly because of long-time divegence but I'd love to give him the full credit! 
 - New code block! Long-wanted line number are supported out of the box now (thanks for @SmilingParadise's help on Sina Weibo) and the theme was updated to Atom One Dark (checkout FQA for how to change to your farovite theme)
+- MathJax support by @Voleking in #80, but I choose the SVG renderer.
+- Open Graph Protocol support by @Android-KitKat in #253
+- `header-img-credit` and `header-img-credit-href`
 
 ##### V1.7
 

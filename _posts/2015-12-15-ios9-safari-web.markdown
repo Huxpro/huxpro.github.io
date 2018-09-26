@@ -7,7 +7,7 @@ author:     "Hux"
 header-img: "img/post-bg-ios9-web.jpg"
 catalog:    true
 tags:
-    - Web 前端
+    - Web
     - 译
 ---
 

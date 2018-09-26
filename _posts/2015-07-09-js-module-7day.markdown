@@ -7,7 +7,7 @@ date:       2015-07-09
 author:     "Hux"
 tags:
     - Slides
-    - Web 前端
+    - Web
     - JavaScript
 ---
 

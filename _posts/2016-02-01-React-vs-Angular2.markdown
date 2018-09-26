@@ -8,7 +8,7 @@ header-img: "img/post-bg-re-vs-ng2.jpg"
 header-mask: 0.3
 catalog:    true
 tags:
-  - Web 前端
+  - Web
   - JavaScript
   - 译
 ---

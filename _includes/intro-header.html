@@ -7,7 +7,8 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')
+        background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');
+        background: {{ page.header-bg-css }};
     }
 
     {% if page.header-mask %}
@@ -21,6 +22,9 @@
 </style>
 <header class="intro-header" >
     <div class="header-mask"></div>
+    <div class="header-img-credit">
+        Image by <a href="//{{page.header-img-credit-href}}">{{page.header-img-credit}}</a>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">

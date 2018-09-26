@@ -9,7 +9,7 @@ header-mask:  0.3
 catalog:      true
 multilingual: true
 tags:
-    - Web 前端
+    - Web
     - PWA
 ---
 

@@ -8,7 +8,7 @@ date:       2016-10-20
 author:     "Hux"
 tags:
     - Slides
-    - Web 前端
+    - Web
     - PWA
 ---
 

@@ -6,7 +6,7 @@ date:       2015-09-22
 author:     "Hux"
 header-img: "img/post-bg-js-version.jpg"
 tags:
-    - Web 前端
+    - Web
     - JavaScript
     - 译
 ---

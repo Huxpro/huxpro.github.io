@@ -7,7 +7,7 @@ author:     "Hux"
 header-img: "img/home-bg-o.jpg"
 tags:
     - 知乎
-    - Web 前端
+    - Web
     - UX/UI 
 ---
 
