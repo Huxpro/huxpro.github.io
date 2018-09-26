@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Web 在继续离我们远去"
-subtitle: "Thoughts on Wechat Mini-Program"
+subtitle: "After the release of Wechat Mini-Program"
 author: "Hux"
 header-img: "img/post-bg-web.jpg"
 header-mask: 0.4

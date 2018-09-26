@@ -672,6 +672,7 @@ pre code {
 .post-container h5,
 .post-container h6 {
   margin: 30px 0 10px;
+  line-height: 1.4;
 }
 .post-container h5 {
   font-size: 19px;
@@ -740,6 +741,10 @@ pre code {
   color: #cccccc;
   font-weight: normal;
   letter-spacing: 0.5px;
+}
+.post-container .anchorjs-link {
+  position: absolute;
+  padding-top: 1px;
 }
 @media only screen and (max-width: 767px) {
   /**
