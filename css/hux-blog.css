@@ -518,6 +518,9 @@ pre.highlight {
   padding: 0;
   word-wrap: normal;
 }
+.highlighter-rouge .highlight .rouge-code pre {
+  color: #abb2bf;
+}
 .highlighter-rouge .highlight .table-responsive {
   margin: 0px;
   border: 0px;
