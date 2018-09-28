@@ -3,6 +3,7 @@ layout: post
 title: How does SW-Precache works?
 author: "Hux"
 header-style: text
+lang: en
 tags:
   - Web
   - PWA
