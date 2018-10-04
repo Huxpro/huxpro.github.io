@@ -32,6 +32,21 @@
     
     <title>{% if page.title %}{{ page.title }} - {{ site.SEOTitle }}{% else %}{{ site.SEOTitle }}{% endif %}</title>
 
+    <!-- Apple Web Clip-->
+    <!-- https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/pwa/icons/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-title" content="Hux Blog">
+    <meta name="application-name" content="Hux Blog">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- Microsoft Windows Tile Icon -->
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="msapplication-TileImage" content="{{ site.baseurl }}/pwa/icons/mstile-144x144.png">
+    <meta name="msapplication-config" content="{{ site.baseurl }}/pwa/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+
     <!-- Web App Manifest -->
     <link rel="manifest" href="{{ site.baseurl }}/pwa/manifest.json">
 
