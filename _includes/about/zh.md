@@ -1,7 +1,7 @@
 > 写写代码，推推公式，  
 > 离开世界之前，一切都是过程。
 
-Hey，我是莫坤东，一名数据科学小学生
+Hey，我是莫坤东，一名数据科学小学生。我的email地址：mokundong@sina.com
 
 <!--
 作者：CandyBullet
