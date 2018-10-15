@@ -30,7 +30,7 @@ paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:
-#timezone: CN  
+timezone: CN  
 
 
 
@@ -71,8 +71,8 @@ netease_comment: false
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: mokundong.cn
+#ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+#ga_domain: mokundong.cn
 
 
 
@@ -135,5 +135,7 @@ friends: [
     # },{
     #     title: "解旻的博客",
     #     href: "http://xieminis.me/"
+        title: "莫坤东的CSDN",
+        href: "https://blog.csdn.net/u010292372"
     }
 ]
