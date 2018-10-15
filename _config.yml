@@ -1,7 +1,7 @@
 # Site settings
-title: Mkd's Blog
-# SEOTitle: 莫坤东的博客 | Mkd's Blog
-SEOTitle: 莫坤东的博客
+title: 莫坤东的博客
+SEOTitle: 莫坤东的博客 | Mkd's Blog
+# SEOTitle: 莫坤东的博客
 header-img: img/home-bg.jpg
 email: mokundong92@gmail.com
 description: "机器学习 | Python | 深度学习 |这里是 @莫坤东 的个人博客，与你一起发现更大的世界。"
