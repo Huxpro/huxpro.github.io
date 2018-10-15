@@ -1,6 +1,6 @@
-# Hux blog 模板
+# Mkd blog 模板
 
-### [我的博客在这里 &rarr;](http://huxpro.github.io)
+### [我的博客在这里 &rarr;](http://mokundong.github.io)
 
 
 ### 关于收到"Page Build Warning"的email

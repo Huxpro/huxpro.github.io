@@ -1,4 +1,4 @@
-> Read at medium.com: [Upgrading Ele.me to Progressive Web Apps](https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)
+<!-- > Read at medium.com: [Upgrading Ele.me to Progressive Web Apps](https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)
 
 Since the very first experiments that [@Vue.js tweeted][1], we at Ele.me (the biggest food ordering and delivering company in China) have been working on upgrading our mobile website to a [Progressive Web App][2]. We’re proud to ship the world-first PWA exclusively for the Chinese market, but even prouder to collaborate with Google, UC and Tencent to push the boundary of web experience and browser supports in China.
 
@@ -239,4 +239,4 @@ Thank you all!
 [10]: https://webpack.github.io/
 [11]: https://medium.com/@Huxpro/how-does-sw-precache-works-2d99c3d3c725
 [12]: https://developers.google.com/web/updates/2015/11/app-shell
-[13]: https://googlechrome.github.io/sw-toolbox/
+[13]: https://googlechrome.github.io/sw-toolbox/ -->
