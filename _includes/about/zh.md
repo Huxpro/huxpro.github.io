@@ -2,8 +2,8 @@
 > 离开世界之前，一切都是过程。
 
 Hey，我是莫坤东，数据科学小学生
-<!--
 
+<!--
 作者：CandyBullet
 链接：https://www.imooc.com/article/23400
 来源：慕课网
@@ -34,4 +34,5 @@ Hey，我是黄玄，病毒种，进化程度不明，多出没于[博客](https
 [6]: https://yanshuo.io/assets/player/?deck=58ac8598b123db0067292f92 "PWA Rehashing"
 [7]: https://yanshuo.io/assets/player/?deck=593ad6fbfe88c2006a0a0d6d "The State of PWA"
 [8]: https://yanshuo.io/assets/player/?deck=594d673d570c357d0698a950 "Building PWA"
-[9]: //huangxuan.me/jsconfcn2017/ -->
+[9]: //huangxuan.me/jsconfcn2017/ 
+-->
