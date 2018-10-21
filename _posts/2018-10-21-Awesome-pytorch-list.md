@@ -1,3 +1,17 @@
+---
+layout:     post
+title:      "Awesome-Pytorch-list"
+subtitle:   " \"Awesome-Pytorch-list\""
+date:       2018-10-21 12:00:00
+author:     "bharathgs"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - Pytorch
+---
+
+
+
+
 Awesome-Pytorch-list
 ========================
 
@@ -11,6 +25,11 @@ Awesome-Pytorch-list
 
 
 ## Pytorch & related libraries
+## [机器之心翻译戳这里](https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650750397&idx=1&sn=c87bc1df09ad90b60565918f92a24039&chksm=871af9c3b06d70d555f9c926a629eb146478c5d4f71b75f7be6fd7bc7d1be2682e4284826102&mpshare=1&scene=1&srcid=1021Nfz1kQvzITVjAiqUcJb1#rd)
+
+## [项目地址戳这里](https://github.com/bharathgs/Awesome-pytorch-list)
+
+## 详细内容如下
 
 1. [pytorch](http://pytorch.org ) : Tensors and Dynamic neural networks in Python with strong GPU acceleration.
 
@@ -518,4 +537,4 @@ Implementation for the paper A Structured Self-Attentive Sentence Embedding, whi
 24. [derplearning](https://github.com/John-Ellis/derplearning): Self Driving RC Car Code. 
 
 
-## [翻译来自机器之心](https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650750397&idx=1&sn=c87bc1df09ad90b60565918f92a24039&chksm=871af9c3b06d70d555f9c926a629eb146478c5d4f71b75f7be6fd7bc7d1be2682e4284826102&mpshare=1&scene=1&srcid=1021Nfz1kQvzITVjAiqUcJb1#rd)
+
