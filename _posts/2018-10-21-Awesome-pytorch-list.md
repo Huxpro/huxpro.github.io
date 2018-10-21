@@ -15,12 +15,8 @@ tags:
 Awesome-Pytorch-list
 ========================
 
-![pytorch-logo-dark](https://raw.githubusercontent.com/pytorch/pytorch/master/docs/source/_static/img/pytorch-logo-dark.png)
+![pytorch-logo-dark](https://raw.githubusercontent.com/pytorch/pytorch/master/docs/source/_static/img/pytorch-logo-dark.png)  
 
-
-
-
-## Pytorch & related libraries
 ## [机器之心翻译戳这里](https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650750397&idx=1&sn=c87bc1df09ad90b60565918f92a24039&chksm=871af9c3b06d70d555f9c926a629eb146478c5d4f71b75f7be6fd7bc7d1be2682e4284826102&mpshare=1&scene=1&srcid=1021Nfz1kQvzITVjAiqUcJb1#rd)
 
 ## [项目地址戳这里](https://github.com/bharathgs/Awesome-pytorch-list)
