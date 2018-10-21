@@ -518,4 +518,4 @@ Implementation for the paper A Structured Self-Attentive Sentence Embedding, whi
 24. [derplearning](https://github.com/John-Ellis/derplearning): Self Driving RC Car Code. 
 
 
-##### Feedback: If you have any ideas or you want any other content to be added to this list, feel free to contribute.
+## [翻译来自机器之心](https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650750397&idx=1&sn=c87bc1df09ad90b60565918f92a24039&chksm=871af9c3b06d70d555f9c926a629eb146478c5d4f71b75f7be6fd7bc7d1be2682e4284826102&mpshare=1&scene=1&srcid=1021Nfz1kQvzITVjAiqUcJb1#rd)
