@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Awesome-Pytorch-list"
+title:      "很棒的Pytorch项目"
 subtitle:   " \"Awesome-Pytorch-list\""
 date:       2018-10-21 12:00:00
 author:     "bharathgs"
