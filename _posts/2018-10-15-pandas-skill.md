@@ -1,14 +1,15 @@
 ---
 layout:     post
-title:      "Pandas 在数据科学中的使用技巧"
-subtitle:   " \"pandas in data science\""
-date:       2018-10-15 12:00:00
+title:      "macOS使用技巧"
+subtitle:   " \"skills for macOs\""
+date:       2018-11-15 12:00:00
 author:     "Mkd"
 header-img: "img/post-bg-2015.jpg"
 tags:
-    - pandas
+    - macOs
 ---
 
 > “let's begin. ”
 
-## 前言
+## 前言  
+小白第一次使用macOS，在使用过程中收录一下使用技巧
