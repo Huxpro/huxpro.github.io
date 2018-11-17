@@ -10,9 +10,7 @@ tags:
 ---
 
 > “let's begin. ”
-
-## 前言  
-小白第一次使用macOS，在使用过程中收录一下使用技巧  
+  
 ## HomeBrew
 ### 1、HomeBrew介绍   
 [homebrew](https://brew.sh/index_zh-cn)是一款MacOS平台下的一款软件包管理工具，具有安装、卸载、搜索、更新等功能的工具，可以很简单的方式安装git、wget、cpp等工具。  
