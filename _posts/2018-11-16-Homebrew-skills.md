@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "macOS使用技巧"
-subtitle:   " \"skills for macOs\""
+title:      "HomeBrew基本使用方法及常见问题"
+subtitle:   " \"\""
 date:       2018-11-16 12:00:00
 author:     "Mkd"
 header-img: "img/post-bg-2015.jpg"
@@ -93,6 +93,6 @@ $ <install path> -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/ins
 &#160;&#160;&#160;&#160;&#160;&#160;我就只有采用这种方法最终奏效，前两种方法在StackOverFlow也有人成功过。
 
 ### 5、参考文献
-1、[Homebrew官网](https://brew.sh/index_zh-cn)
-2、[Homebrew介绍和使用](https://www.jianshu.com/p/de6f1d2d37bf)
+1、[Homebrew官网](https://brew.sh/index_zh-cn)  
+2、[Homebrew介绍和使用](https://www.jianshu.com/p/de6f1d2d37bf)  
 3、[chown: /usr/local: Operation not permitted问题解决](https://blog.csdn.net/yemao_guyue/article/details/80575532)
