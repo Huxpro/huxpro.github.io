@@ -2,7 +2,7 @@
 layout:     post
 title:      "macOS使用技巧"
 subtitle:   " \"skills for macOs\""
-date:       2018-11-15 12:00:00
+date:       2018-11-16 12:00:00
 author:     "Mkd"
 header-img: "img/post-bg-2015.jpg"
 tags:
