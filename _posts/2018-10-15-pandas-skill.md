@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "oandas 在数据科学中的使用技巧"
+title:      "pandas 在数据科学中的使用技巧"
 subtitle:   " \"pandas in data science\""
 date:       2018-110-15 12:00:00
 author:     "Mkd"
