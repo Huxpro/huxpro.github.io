@@ -1,12 +1,12 @@
 ---
 layout:     post
-title:      "macOS使用技巧"
-subtitle:   " \"skills for pandas\""
+title:      "oandas 在数据科学中的使用技巧"
+subtitle:   " \"pandas in data science\""
 date:       2018-110-15 12:00:00
 author:     "Mkd"
 header-img: "img/post-bg-2015.jpg"
 tags:
-    - macOs
+    - pandas
 ---
 
 > “let's begin. ”
