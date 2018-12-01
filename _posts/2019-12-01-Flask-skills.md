@@ -16,5 +16,35 @@ tags:
 > 异步和多线程有什么区别？其实，异步是目的，而多线程是实现这个目的的方法。异步是说，A发起一个操作后（一般都是比较耗时的操作，如果不耗时的操作就没有必要异步了），可以继续自顾自的处理它自己的事儿，不用干等着这个耗时操作返回。  
 > 实现异步可以采用多线程技术或则交给另外的进程来处理,详解常见[这里](https://www.cnblogs.com/dream844/archive/2012/06/12/2546083.html)。
 
-## 二、多线程
-
+## 二、实现方法  
+- Flask启动自带方法
+- 采用gunicorn部署
+### 1、Flask中实现  
+> `app.run(host=xxx,port=xx,threaded=True)`中threaded开启后则不需要等队列  
+```Python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2018-12-01 16:37
+# @Author  : mokundong
+from flask import Flask
+import socket
+from time import sleep
+
+myhost = socket.gethostbyname(socket.gethostname())
+app = Flask(__name__)
+
+@app.route('/job1')
+def some_long_task1():
+    print("Task #1 started!")
+    sleep(10)
+    print("Task #1 is done!")
+
+@app.route('/job2')
+def some_long_task2(arg1, arg2):
+    print("Task #2 started with args: %s %s!" % (arg1, arg2))
+    sleep(5)
+    print("Task #2 is done!")
+
+if __name__ == '__main__':
+    app.run(host=myhost,port=5000,threaded=True)
+```
