@@ -21,7 +21,7 @@ tags:
 - 采用gunicorn部署
 ### 1、Flask中自带方法实现  
 > `app.run(host=xxx,port=xx,threaded=True)`中threaded开启后则不需要等队列  
-``` 
+```Python 
 #!/usr/bin/env python  
 # -*- coding: utf-8 -*-  
 # @Time    : 2018-12-01 16:37  
