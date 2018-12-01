@@ -112,8 +112,8 @@ page-mathjax: false
 
 
 # Friends
-friends: [
-    {
+#friends: [
+#    {
     #     title: "Su",
     #     href: "http://su.gallery/"
     # },{
@@ -148,5 +148,5 @@ friends: [
     #     href: "http://xieminis.me/"
     #    title: "莫坤东的CSDN",
      #   href: "https://blog.csdn.net/u010292372"
-    }
-]
+#    }
+#]
