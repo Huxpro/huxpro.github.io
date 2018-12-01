@@ -61,7 +61,7 @@ if __name__ == '__main__':
  
 > run.py  
 
-```Python 
+```Python
 #!/usr/bin/env python  
 # -*- coding: utf-8 -*-  
 # @Time    : 2018-12-01 17:00  
@@ -172,6 +172,10 @@ if __name__ == '__main__':
 > 另外就是有些服务器会在 `/etc/hosts` 中添加本机的`hostname`的地址，这个做法也不是不可以，但是如果设置成了 `127.0.0.1`，那么获取出来的IP就都是这个地址了。 
 > 这里给出一种优雅的方式获取IP，利用 UDP 协议来实现的，生成一个UDP包，把自己的 IP 放如到 UDP 协议头中，然后从UDP包中获取本机的IP。  
 ```Python
+#!/usr/bin/env python  
+# -*- coding: utf-8 -*-  
+# @Time    : 2018-12-01 17:20  
+# @Author  : mokundong
 # 可以封装成函数，方便 Python 的程序调用
 import socket
  
