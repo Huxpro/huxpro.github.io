@@ -20,7 +20,7 @@ tags:
 - Flask启动自带方法
 - 采用gunicorn部署
 ### 1、Flask中自带方法实现  
-> `app.run(host=xxx,port=xx,threaded=True)`中threaded开启后则不需要等队列  
+ 
 ```Python 
 #!/usr/bin/env python  
 # -*- coding: utf-8 -*-  
@@ -48,6 +48,7 @@ def some_long_task2(arg1, arg2):
 if __name__ == '__main__':  
     app.run(host=myhost,port=5000,threaded=True)  
 ```  
-
+`app.run(host=xxx,port=xx,threaded=True)`
+中threaded开启后则不需要等队列。 
 ### 2、gunicorn部署
 > 关于gunicorn的详细说明，可以参考[这里](https://gunicorn.org/)。
