@@ -131,4 +131,39 @@ x_forwarded_for_header = 'X-FORWARDED-FOR'
 ```bash  
 gunicorn -c gunicorn_config.py run:app
 ```  
-## 三、补充
+## 三、补充  
+> 在工作中我还遇到一种情况，当一个请求过来后，我需要两种回应，一个是及时返回app运行结果，第二个响应是保存数据到日志或者数据库。往往我们在写数据的过程中会花销一定的时间，导致结果返回会有所延迟，因此我们需要用两个线程处理这两个任务，那么我们如下处理。
+
+> run.py  
+
+```Python
+#!/usr/bin/env python  
+# -*- coding: utf-8 -*-  
+# @Time    : 2018-12-01 17:20  
+# @Author  : mokundong
+from flask import Flask,request
+from time import sleep
+from concurrent.futures import ThreadPoolExecutor
+executor = ThreadPoolExecutor(2)
+app = Flask(__name__)
+
+@app.route('/job')
+def run_jobs():
+    executor.submit(some_long_task1)
+    executor.submit(some_long_task2, 'hello', 123)
+    return 'Two jobs was launched in background!'
+def some_long_task1():
+    print("Task #1 started!")
+    sleep(10)
+    print("Task #1 is done!")
+
+def some_long_task2(arg1, arg2):
+    print("Task #2 started with args: %s %s!" % (arg1, arg2))
+    sleep(5)
+    print("Task #2 is done!")
+
+if __name__ == '__main__':
+    app.run()
+```  
+
+## 总结
