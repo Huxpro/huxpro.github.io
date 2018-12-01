@@ -21,7 +21,8 @@ tags:
 - 采用gunicorn部署
 ### 1、Flask中自带方法实现  
  
- > run.py
+ > run.py  
+   
 ```Python 
 #!/usr/bin/env python  
 # -*- coding: utf-8 -*-  
@@ -49,6 +50,7 @@ def some_long_task2(arg1, arg2):
 if __name__ == '__main__':  
     app.run(host=myhost,port=5000,threaded=True)  
 ```  
+  
 `app.run(host=xxx,port=xx,threaded=True)`
 中threaded开启后则不需要等队列。 
 ### 2、gunicorn部署  
@@ -57,7 +59,8 @@ if __name__ == '__main__':
 
 > 使用命令行启动gunicorn有两种方式获取配置项，一种是在命令行配置，一种是在配置文件中获取。 
  
-> run.py
+> run.py  
+> 
 ```Python 
 #!/usr/bin/env python  
 # -*- coding: utf-8 -*-  
@@ -83,6 +86,7 @@ def some_long_task2(arg1, arg2):
 if __name__ == '__main__':  
     app.run()  
 ```  
+
 #### 命令行配置  
 ```bash
 gunicorn --workers=4 --bind=127.0.0.1:8000 run:app
@@ -90,7 +94,8 @@ gunicorn --workers=4 --bind=127.0.0.1:8000 run:app
 更多配置见官网  
 
 #### 配置文件获取配置  
-> gunicorn_config.py
+> gunicorn_config.py  
+> 
 ```Python 
 #!/usr/bin/env python  
 # -*- coding: utf-8 -*-  
@@ -119,8 +124,10 @@ workers = 4 # 启动的进程数
 threads = 2 #指定每个进程开启的线程数
 worker_class = 'gevent' #默认为sync模式，也可使用gevent模式。
 x_forwarded_for_header = 'X-FORWARDED-FOR'
-``` 
-> 启动命令如下  
-```bash
+```  
+  
+> 启动命令如下 
+>  
+```bash  
 gunicorn -c gunicorn_config.py run:app
 ```
