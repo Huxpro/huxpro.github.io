@@ -60,7 +60,7 @@ if __name__ == '__main__':
 > 使用命令行启动gunicorn有两种方式获取配置项，一种是在命令行配置，一种是在配置文件中获取。 
  
 > run.py  
-> 
+
 ```Python 
 #!/usr/bin/env python  
 # -*- coding: utf-8 -*-  
@@ -95,7 +95,7 @@ gunicorn --workers=4 --bind=127.0.0.1:8000 run:app
 
 #### 配置文件获取配置  
 > gunicorn_config.py  
-> 
+ 
 ```Python 
 #!/usr/bin/env python  
 # -*- coding: utf-8 -*-  
