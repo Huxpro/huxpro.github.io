@@ -1,6 +1,9 @@
 # Site settings
 title: 便利贴回收站
 SEOTitle: 便利贴回收站
+theme: jekyll-text-theme
+text_skin: forest
+highlight_theme: tomorrow-night-eighties
 # SEOTitle: 莫坤东的博客
 header-img: img/home-bg.jpg
 email: mokundong92@gmail.com
