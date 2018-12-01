@@ -133,6 +133,7 @@ gunicorn -c gunicorn_config.py run:app
 ```  
 
 ## 三、补充  
+### 1、关于线程的补充
 > 在工作中我还遇到一种情况，当一个请求过来后，我需要两种回应，一个是及时返回app运行结果，第二个响应是保存数据到日志或者数据库。往往我们在写数据的过程中会花销一定的时间，导致结果返回会有所延迟，因此我们需要用两个线程处理这两个任务，那么我们如下处理。
 
 > run.py  
@@ -166,6 +167,24 @@ def some_long_task2(arg1, arg2):
 if __name__ == '__main__':
     app.run()
 ```  
+### 2、关于获取IP的补充
+> 上述代码中通过获取`hostname`，然后再通过`hostname`反查处机器的IP。这个方法是不推荐的。因为很多的机器没有规范这个`hostname`的设置。 
+> 另外就是有些服务器会在 `/etc/hosts` 中添加本机的`hostname`的地址，这个做法也不是不可以，但是如果设置成了 `127.0.0.1`，那么获取出来的IP就都是这个地址了。 
+> 这里给出一种优雅的方式获取IP，利用 UDP 协议来实现的，生成一个UDP包，把自己的 IP 放如到 UDP 协议头中，然后从UDP包中获取本机的IP。  
+```Python
+# 可以封装成函数，方便 Python 的程序调用
+import socket
+ 
+def get_host_ip():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('8.8.8.8', 80))
+        ip = s.getsockname()[0]
+    finally:
+        s.close()
+ 
+    return ip
+``` 
 
-## 总结
+## 总结  
 在写作过程中才发现自己知识漏洞不是一般多，共勉！
