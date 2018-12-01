@@ -120,3 +120,7 @@ threads = 2 #指定每个进程开启的线程数
 worker_class = 'gevent' #默认为sync模式，也可使用gevent模式。
 x_forwarded_for_header = 'X-FORWARDED-FOR'
 ``` 
+> 启动命令如下  
+```bash
+gunicorn -c gunicorn_config.py run:app
+```
