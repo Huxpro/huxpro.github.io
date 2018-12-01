@@ -21,6 +21,7 @@ tags:
 - 采用gunicorn部署
 ### 1、Flask中自带方法实现  
  
+ > run.py
 ```Python 
 #!/usr/bin/env python  
 # -*- coding: utf-8 -*-  
@@ -48,7 +49,74 @@ def some_long_task2(arg1, arg2):
 if __name__ == '__main__':  
     app.run(host=myhost,port=5000,threaded=True)  
 ```  
-`app.run(host=xxx,port=xx,threaded=True)`
+`app.run(host=xxx,port=xx,threaded=True)`
 中threaded开启后则不需要等队列。 
-### 2、gunicorn部署
-> 关于gunicorn的详细说明，可以参考[这里](https://gunicorn.org/)。
+### 2、gunicorn部署  
+> Gunicorn 是一个高效的Python WSGI Server,通常用它来运行 wsgi application 或者 wsgi framework(如Django,Paster,Flask),地位相当于Java中的Tomcat。gunicorn 会启动一组 worker进程，所有worker进程公用一组listener，在每个worker中为每个listener建立一个wsgi server。每当有HTTP链接到来时，wsgi server创建一个协程来处理该链接，协程处理该链接的时候，先初始化WSGI环境，然后调用用户提供的app对象去处理HTTP请求。
+> 关于gunicorn的详细说明，可以参考[这里](https://gunicorn.org/)。  
+
+> 使用命令行启动gunicorn有两种方式获取配置项，一种是在命令行配置，一种是在配置文件中获取。 
+ 
+> run.py
+```Python 
+#!/usr/bin/env python  
+# -*- coding: utf-8 -*-  
+# @Time    : 2018-12-01 17:00  
+# @Author  : mokundong  
+from flask import Flask  
+from time import sleep  
+
+app = Flask(__name__)  
+
+@app.route('/job1')  
+def some_long_task1():  
+    print("Task #1 started!")  
+    sleep(10)  
+    print("Task #1 is done!")  
+
+@app.route('/job2')  
+def some_long_task2(arg1, arg2):  
+    print("Task #2 started with args: %s %s!" % (arg1, arg2))
+    sleep(5)  
+    print("Task #2 is done!")  
+
+if __name__ == '__main__':  
+    app.run()  
+```  
+#### 命令行配置  
+```bash
+gunicorn --workers=4 --bind=127.0.0.1:8000 run:app
+```  
+更多配置见官网  
+
+#### 配置文件获取配置  
+> gunicorn_config.py
+```Python 
+#!/usr/bin/env python  
+# -*- coding: utf-8 -*-  
+# @Time    : 2018-12-01 17:00  
+# @Author  : mokundong  
+import os
+import socket
+import multiprocessing
+import gevent.monkey
+
+gevent.monkey.patch_all()
+myhost = socket.gethostbyname(socket.gethostname())  
+
+debug = False
+loglevel = 'info'
+hosts = get_host_ip()
+bind = hosts+":5000"
+timeout = 30      #超时
+
+pidfile = "log/gunicorn.pid"
+accesslog = "log/access.log"
+errorlog = "log/debug.log"
+
+daemon = True #意味着开启后台运行，默认为False
+workers = 4 # 启动的进程数
+threads = 2 #指定每个进程开启的线程数
+worker_class = 'gevent' #默认为sync模式，也可使用gevent模式。
+x_forwarded_for_header = 'X-FORWARDED-FOR'
+``` 
