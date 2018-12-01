@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "HomeBrew基本使用方法及常见问题"
-subtitle:   " \"\""
+subtitle:   " \"HomeBrew skills\""
 date:       2018-11-16 12:00:00
 author:     "Mkd"
 header-img: "img/post-bg-2015.jpg"
