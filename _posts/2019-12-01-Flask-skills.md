@@ -174,7 +174,7 @@ if __name__ == '__main__':
 ```Python
 #!/usr/bin/env python  
 # -*- coding: utf-8 -*-  
-# @Time    : 2018-12-01 17:20  
+# @Time    : 2018-12-01 17:30  
 # @Author  : mokundong
 # 可以封装成函数，方便 Python 的程序调用
 import socket
