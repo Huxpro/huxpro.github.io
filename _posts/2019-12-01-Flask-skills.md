@@ -22,31 +22,31 @@ tags:
 ### 1、Flask中自带方法实现  
 > `app.run(host=xxx,port=xx,threaded=True)`中threaded开启后则不需要等队列  
 ``` 
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# @Time    : 2018-12-01 16:37
-# @Author  : mokundong
-from flask import Flask
-import socket
-from time import sleep
+#!/usr/bin/env python  
+# -*- coding: utf-8 -*-  
+# @Time    : 2018-12-01 16:37  
+# @Author  : mokundong  
+from flask import Flask  
+import socket  
+from time import sleep  
 
-myhost = socket.gethostbyname(socket.gethostname())
-app = Flask(__name__)
+myhost = socket.gethostbyname(socket.gethostname())  
+app = Flask(__name__)  
 
-@app.route('/job1')
-def some_long_task1():
-    print("Task #1 started!")
-    sleep(10)
-    print("Task #1 is done!")
+@app.route('/job1')  
+def some_long_task1():  
+    print("Task #1 started!")  
+    sleep(10)  
+    print("Task #1 is done!")  
 
-@app.route('/job2')
-def some_long_task2(arg1, arg2):
+@app.route('/job2')  
+def some_long_task2(arg1, arg2):  
     print("Task #2 started with args: %s %s!" % (arg1, arg2))
-    sleep(5)
-    print("Task #2 is done!")
+    sleep(5)  
+    print("Task #2 is done!")  
 
-if __name__ == '__main__':
-    app.run(host=myhost,port=5000,threaded=True)
+if __name__ == '__main__':  
+    app.run(host=myhost,port=5000,threaded=True)  
 ```  
 
 ### 2、gunicorn部署
