@@ -137,3 +137,5 @@ friends: [
         href: "http://xieminis.me/"
     }
 ]
+
+theme: jekyll-theme-time-machine
