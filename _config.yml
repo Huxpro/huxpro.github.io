@@ -56,6 +56,12 @@ kramdown:
       line_numbers: true
       start_line: 1
 
+gitalk:
+	   owner: linyi4843
+	   repo: linyi4843/huxpro.github.io
+	   clientID: da91910585c3fa341fe6
+	   clientSecret: 89eac1af0d5b19dfafda7531487cc507f35f65fe
+	   admin: linyi_blog
 
 
 # Disqus settings
