@@ -85,7 +85,7 @@ ga_domain: blog.manguo.me
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "For the next quantum leap<br>离开世界之前，一切都是过程"
-sidebar-avatar: /img/avatar-hux-ny.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/avatar-ciya.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -117,29 +117,5 @@ friends: [
     },{
         title: "微博",
         href: "https://weibo.com/u/5836302382"
-    },{
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
-    },{
-        title: "Luke 的自留地",
-        href: "http://hmqk1995.github.io"
-    },{
-        title: "Ebn's Blog",
-        href: "http://ebnbin.com/"
-    },{
-        title: "SmdCn's Blog",
-        href: "http://blog.smdcn.net"
-    },{
-        title: "David's Game",
-        href: "https://www.ruoyaowu.com/"
-    },{
-        title: "DHong Say",
-        href: "http://dhong.co"
-    },{
-        title: "尹峰以为",
-        href: "http://ingf.github.io/"
-    },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
     }
 ]

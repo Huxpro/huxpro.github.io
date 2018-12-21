@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:      "Hello myblog"
-subtitle:   " \"Hello World, Hello Blog\""
+title:      "你好呀~ Blog"
+subtitle:   " \"Hey Blog\""
 date:       2018-12-12 15:07:00
 author:     "linyi"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/post-bg-alitrip.jpg"
 catalog: true
 tags:
     - start
