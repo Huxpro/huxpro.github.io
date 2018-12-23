@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: linyi4843@gmail.com
 description: "一个坑B程序员 | 林意，Web & Mobile Lover，Software Engineer，UX Designer | 林意的博客,欢迎光临。"
 keyword: "linyi, 林意, java"
-url: "http://blog.manguo.fun"              # your host, for absolute URL
+url: "http://linyi4843.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
