@@ -56,17 +56,17 @@ kramdown:
       line_numbers: true
       start_line: 1
 
-#gitalk:
+gitalk:
 #  admin: linyi4843
 # 	repo: linyi4843.github.io
 #   	clientID: da91910585c3fa341fe6
 #  clientSecret: e3e39c5fe7550a24549b4f62c4b125206e552a1e
 
 	# Disqus settings
-disqus_username: linyi4843
+	disqus_username: linyi4843
 	
 	# Netease settings
-netease_comment: false
+	netease_comment: false
 	
 	
 	
