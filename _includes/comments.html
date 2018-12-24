@@ -7,8 +7,8 @@
 	    clientID: '{{ site.gitalk.clientID }}',
 	    clientSecret: '{{ site.gitalk.clientSecret }}',
 	    repo: '{{ site.gitalk.repo }}',
-	    owner: '{{ site.gitalk.owner }}',
-	    admin: ['{{ site.gitalk.owner }}'], 
+	    owner: '{{ site.gitalk.admin }}',
+	    admin: ['{{ site.gitalk.admin }}'],
 		labels: ['Gitalk'],
 })
 gitalk.render('gitalk-container')
