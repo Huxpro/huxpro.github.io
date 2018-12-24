@@ -61,17 +61,12 @@ gitalk:
 # 	repo: linyi4843.github.io
 #   	clientID: da91910585c3fa341fe6
 #  clientSecret: e3e39c5fe7550a24549b4f62c4b125206e552a1e
-
 	disqus_username: linyi4843
 	netease_comment: false
-
-
 	# Analytics settings
 	# Baidu Analytics
 	# ba_track_id: [your track id]
-
 	# Google Analytics
-
 	ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
 	ga_domain: blog.manguo.me
 	
