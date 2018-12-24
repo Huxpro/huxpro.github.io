@@ -68,7 +68,7 @@ netease_comment: false
 # ba_track_id: [your track id]
 # Google Analytics
 ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: blog.manguo.me
+ga_domain: ioccc.cc
 
 
 
