@@ -14,7 +14,7 @@ future: true
 # SNS settings
 RSS: false
 weibo_username:     u/5836302382
-zhihu_username:     people/lin-yi-44-63/activities
+zhihu_username:     lin-yi-44-63/activities
 github_username:    linyi4843
 twitter_username:
 #facebook_username:
