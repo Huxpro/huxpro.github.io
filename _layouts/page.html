@@ -56,6 +56,11 @@ layout: default
                 <!-- Friends Blog -->
                 {% include friends.html %}
     		</div>
+            {% if site.gitalk %}
+            <div class="comment">
+                {% include comments.html %}
+            </div>
+            {% endif %}
         {% endif %}
 	</div>
 </div>
