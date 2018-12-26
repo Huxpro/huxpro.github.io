@@ -60,11 +60,11 @@ layout: default
                 <!--&lt;!&ndash; disqus 评论框 end &ndash;&gt;-->
                 <!--{% endif %}-->
 
-		{% if true %}
-            <div class="comment">
-                {% include comments.html %}
-            </div>
-		{% endif %}
+                {% if site.gitalk %}
+                <div class="comment">
+                    {% include comments.html %}
+                </div>
+                {% endif %}
 
                 <!--{% if site.netease_comment %}-->
                 <!--&lt;!&ndash; 网易云跟帖 评论框 start &ndash;&gt;-->
