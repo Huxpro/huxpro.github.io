@@ -57,10 +57,11 @@ kramdown:
       start_line: 1
 
 gitalk:
-#  admin: linyi4843
-# 	repo: linyi4843.github.io
-#   	clientID: da91910585c3fa341fe6
-#  clientSecret: e3e39c5fe7550a24549b4f62c4b125206e552a1e
+  admin: linyi4843
+  repo: linyi4843.github.io
+  clientID: da91910585c3fa341fe6
+  clientSecret: e3e39c5fe7550a24549b4f62c4b125206e552a1e
+
 disqus_username: hux
 netease_comment: false
 # Analytics settings
