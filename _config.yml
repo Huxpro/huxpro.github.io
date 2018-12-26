@@ -60,7 +60,7 @@ gitalk:
   owner: linyi4843
   repo: linyi4843.github.io
   clientID: da91910585c3fa341fe6
-  clientSecret: e3e39c5fe7550a24549b4f62c4b125206e552a1e
+  clientSecret: 8a3398a2e38c056a9baa12dd8fa8e3290a286071
   admin: linyi4843
 
 disqus_username: hux
