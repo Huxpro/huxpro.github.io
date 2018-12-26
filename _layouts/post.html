@@ -66,30 +66,30 @@ layout: default
 		</div>
 		{% endif %}
 
-                <!-- Gitalk 评论 start  -->
-                {% if site.gitalk.enable %}
-                <!-- Link Gitalk 的支持文件  -->
-                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+                <!--&lt;!&ndash; Gitalk 评论 start  &ndash;&gt;-->
+                <!--{% if site.gitalk.enable %}-->
+                <!--&lt;!&ndash; Link Gitalk 的支持文件  &ndash;&gt;-->
+                <!--<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">-->
+                <!--<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>-->
 
-                <div id="gitalk-container"></div>
-                <script type="text/javascript">
-                    var gitalk = new Gitalk({
+                <!--<div id="gitalk-container"></div>-->
+                <!--<script type="text/javascript">-->
+                    <!--var gitalk = new Gitalk({-->
 
-                        // gitalk的主要参数
-                        id: '{{ page.url }}',
-                        clientID: '{{ da91910585c3fa341fe6 }}',
-                        clientSecret: '{{ e3e39c5fe7550a24549b4f62c4b125206e552a1e }}',
-                        repo: '{{ linyi4843.github.io }}',
-                        owner: '{{ linyi4843 }}',
-                        admin: ['{{ linyi4843 }}'],
-                        labels: ['Gitalk'],
+                        <!--// gitalk的主要参数-->
+                        <!--id: '{{ page.url }}',-->
+                        <!--clientID: '{{ da91910585c3fa341fe6 }}',-->
+                        <!--clientSecret: '{{ e3e39c5fe7550a24549b4f62c4b125206e552a1e }}',-->
+                        <!--repo: '{{ linyi4843.github.io }}',-->
+                        <!--owner: '{{ linyi4843 }}',-->
+                        <!--admin: ['{{ linyi4843 }}'],-->
+                        <!--labels: ['Gitalk'],-->
 
-                    });
-                    gitalk.render('gitalk-container');
-                </script>
-                {% endif %}
-                <!-- Gitalk end -->
+                    <!--});-->
+                    <!--gitalk.render('gitalk-container');-->
+                <!--</script>-->
+                <!--{% endif %}-->
+                <!--&lt;!&ndash; Gitalk end &ndash;&gt;-->
 
                 {% if site.netease_comment %}
                 <!-- 网易云跟帖 评论框 start -->
