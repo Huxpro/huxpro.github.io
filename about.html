@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "About"
+title: "关于我"
 description: "你是我的梦想"
 header-img: "img/about-bg.jpg"
 multilingual: true
@@ -9,7 +9,7 @@ multilingual: true
 <!-- Language Selector -->
 <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
     <option value="0" selected> 中文 Chinese </option>
-    <option value="1"> 英文 English </option>
+    <!--<option value="1"> 英文 English </option> -->
 </select>
 
 <!-- Chinese Version -->
@@ -18,12 +18,12 @@ multilingual: true
     {{ about_zh | markdownify }}
 </div>
 
-<!-- English Version -->
+<!-- English Version
 <div class="en post-container">
     {% capture about_en %}{% include about/en.md %}{% endcapture %}
     {{ about_en | markdownify }}
 </div>
-
+-->
 
 {% if site.disqus_username %}
 <!-- disqus 评论框 start -->
