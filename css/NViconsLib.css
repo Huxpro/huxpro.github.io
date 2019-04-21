@@ -1,0 +1,594 @@
+@font-face {
+	font-family: 'NViconsLib2';
+    /* Change fonts path */
+	src:url('/fonts/NViconsLib2.eot?-1rsxqu');
+	src:url('/fonts/NViconsLib2.eot?#iefix-1rsxqu') format('embedded-opentype'),
+		url('/fonts/NViconsLib2.ttf?-1rsxqu') format('truetype'),
+		url('/fonts/NViconsLib2.woff?-1rsxqu') format('woff'),
+		url('/fonts/NViconsLib2.svg?-1rsxqu#NViconsLib2') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'NViconsLib2';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+    /* Compatible with Font Awesome */
+	/* line-height: 1; */
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-CN_15yan:before {
+	content: "\e601";
+}
+.icon-CN_115:before {
+	content: "\e602";
+}
+.icon-CN_acfuntv:before {
+	content: "\e603";
+}
+.icon-CN_aikume:before {
+	content: "\e604";
+}
+.icon-CN_Alibabai:before {
+	content: "\e605";
+}
+.icon-CN_Alibabai_Alipay:before {
+	content: "\e606";
+}
+.icon-CN_Alibabai_Aliyun:before {
+	content: "\e607";
+}
+.icon-CN_Alibabai_Laiwang:before {
+	content: "\e608";
+}
+.icon-CN_appinncom:before {
+	content: "\e609";
+}
+.icon-CN_baidu:before {
+	content: "\e60a";
+}
+.icon-CN_baidu_pan:before {
+	content: "\e60b";
+}
+.icon-CN_baidu_shouji:before {
+	content: "\e60c";
+}
+.icon-CN_baidu_tieba:before {
+	content: "\e60d";
+}
+.icon-CN_bilibili:before {
+	content: "\e60e";
+}
+.icon-CN_bilibili_B:before {
+	content: "\e60f";
+}
+.icon-CN_cnblogs:before {
+	content: "\e610";
+}
+.icon-CN_codingnet:before {
+	content: "\e611";
+}
+.icon-CN_coolapkcom_CoolMarket:before {
+	content: "\e612";
+}
+.icon-CN_csdnnet:before {
+	content: "\e613";
+}
+.icon-CN_dewenio:before {
+	content: "\e614";
+}
+.icon-CN_dgtlecom:before {
+	content: "\e615";
+}
+.icon-CN_diandian:before {
+	content: "\e616";
+}
+.icon-CN_douban:before {
+	content: "\e617";
+}
+.icon-CN_douban_artists:before {
+	content: "\e618";
+}
+.icon-CN_douban_B:before {
+	content: "\e619";
+}
+.icon-CN_douban_FM:before {
+	content: "\e61a";
+}
+.icon-CN_douban_group:before {
+	content: "\e61b";
+}
+.icon-CN_douban_movie:before {
+	content: "\e61c";
+}
+.icon-CN_ituring:before {
+	content: "\e61d";
+}
+.icon-CN_douban_Read:before {
+	content: "\e600";
+}
+.icon-CN_duitang:before {
+	content: "\e61e";
+}
+.icon-CN_goldxituio:before {
+	content: "\e61f";
+}
+.icon-CN_guokr:before {
+	content: "\e620";
+}
+.icon-CN_hexieshecom:before {
+	content: "\e621";
+}
+.icon-CN_huaban:before {
+	content: "\e622";
+}
+.icon-CN_Huawei_dbank:before {
+	content: "\e623";
+}
+.icon-CN_hujiang:before {
+	content: "\e624";
+}
+.icon-CN_jianshu:before {
+	content: "\e625";
+}
+.icon-CN_kingsoft_wps_office:before {
+	content: "\e626";
+}
+.icon-CN_meile:before {
+	content: "\e627";
+}
+.icon-CN_mknote:before {
+	content: "\e628";
+}
+.icon-CN_mokocc:before {
+	content: "\e629";
+}
+.icon-CN_momo:before {
+	content: "\e62a";
+}
+.icon-CN_mopcom:before {
+	content: "\e62b";
+}
+.icon-CN_mtimecom:before {
+	content: "\e62c";
+}
+.icon-CN_NetEase_lofter:before {
+	content: "\e62d";
+}
+.icon-CN_NetEase_music:before {
+	content: "\e62e";
+}
+.icon-CN_NetEase_weibo:before {
+	content: "\e62f";
+}
+.icon-CN_NetEase_youdao_note:before {
+	content: "\e630";
+}
+.icon-CN_papame:before {
+	content: "\e631";
+}
+.icon-CN_Qihoo_360_sj:before {
+	content: "\e632";
+}
+.icon-CN_Qihoo_360_yunpan:before {
+	content: "\e633";
+}
+.icon-CN_Qihoo_360_yunpan_nwe:before {
+	content: "\e634";
+}
+.icon-CN_qngoocom:before {
+	content: "\e635";
+}
+.icon-CN_renren:before {
+	content: "\e636";
+}
+.icon-CN_renren_xiaozhan:before {
+	content: "\e637";
+}
+.icon-CN_sina_weibo:before {
+	content: "\e638";
+}
+.icon-CN_sina_weibo_vdisk:before {
+	content: "\e639";
+}
+.icon-CN_Sohu_kan:before {
+	content: "\e63a";
+}
+.icon-CN_taobao:before {
+	content: "\e63b";
+}
+.icon-CN_taobao_wangwang:before {
+	content: "\e63c";
+}
+.icon-CN_tencent:before {
+	content: "\e63d";
+}
+.icon-CN_tencent_pengyou:before {
+	content: "\e63e";
+}
+.icon-CN_tencent_QQ:before {
+	content: "\e63f";
+}
+.icon-CN_tencent_QQ_music:before {
+	content: "\e640";
+}
+.icon-CN_tencent_qzone:before {
+	content: "\e641";
+}
+.icon-CN_tencent_tmyapp:before {
+	content: "\e642";
+}
+.icon-CN_tencent_video:before {
+	content: "\e643";
+}
+.icon-CN_tencent_wechat:before {
+	content: "\e644";
+}
+.icon-CN_tencent_wechat_moments:before {
+	content: "\e645";
+}
+.icon-CN_tencent_weibo:before {
+	content: "\e646";
+}
+.icon-CN_tencent_weibo_B:before {
+	content: "\e647";
+}
+.icon-CN_Tencent_weiyun:before {
+	content: "\e648";
+}
+.icon-CN_tianyacn:before {
+	content: "\e649";
+}
+.icon-CN_tmall:before {
+	content: "\e64a";
+}
+.icon-CN_tuchong:before {
+	content: "\e64b";
+}
+.icon-CN_tudou:before {
+	content: "\e64c";
+}
+.icon-CN_V2EX:before {
+	content: "\e64d";
+}
+.icon-CN_wandoujiacom:before {
+	content: "\e64e";
+}
+.icon-CN_Wiz_note:before {
+	content: "\e64f";
+}
+.icon-CN_xiamicom:before {
+	content: "\e650";
+}
+.icon-CN_xiami_music_app:before {
+	content: "\e651";
+}
+.icon-CN_xianguo:before {
+	content: "\e652";
+}
+.icon-CN_xiaomi:before {
+	content: "\e653";
+}
+.icon-CN_xituio:before {
+	content: "\e654";
+}
+.icon-CN_xunlei:before {
+	content: "\e655";
+}
+.icon-CN_xunlei_B:before {
+	content: "\e656";
+}
+.icon-CN_xunlei_C:before {
+	content: "\e657";
+}
+.icon-CN_yinyuetai:before {
+	content: "\e658";
+}
+.icon-CN_youku:before {
+	content: "\e659";
+}
+.icon-CN_youku_B:before {
+	content: "\e65a";
+}
+.icon-CN_ZAKER:before {
+	content: "\e65b";
+}
+.icon-CN_zhihu:before {
+	content: "\e65c";
+}
+.icon-Design_Behance:before {
+	content: "\e65d";
+}
+.icon-Design_codepen:before {
+	content: "\e65e";
+}
+.icon-Design_deviantart:before {
+	content: "\e65f";
+}
+.icon-Design_deviantart_2014:before {
+	content: "\e660";
+}
+.icon-Design_Dribbble:before {
+	content: "\e661";
+}
+.icon-Design_dropr:before {
+	content: "\e662";
+}
+.icon-Design_Forrst:before {
+	content: "\e663";
+}
+.icon-Design_gameuicn:before {
+	content: "\e664";
+}
+.icon-Design_jaypeg:before {
+	content: "\e665";
+}
+.icon-Design_Loveuicn:before {
+	content: "\e666";
+}
+.icon-Design_pixelapse:before {
+	content: "\e667";
+}
+.icon-Design_Pixiv:before {
+	content: "\e668";
+}
+.icon-Design_poocgcom:before {
+	content: "\e669";
+}
+.icon-Design_shijueme:before {
+	content: "\e66a";
+}
+.icon-Design_uehtmlcom:before {
+	content: "\e66b";
+}
+.icon-Design_uicn:before {
+	content: "\e66c";
+}
+.icon-Design_zcool:before {
+	content: "\e66d";
+}
+.icon-jp_Ameba:before {
+	content: "\e66e";
+}
+.icon-jp_gree:before {
+	content: "\e66f";
+}
+.icon-jp_Hatena_Blog:before {
+	content: "\e670";
+}
+.icon-jp_Hatena_bookmark:before {
+	content: "\e671";
+}
+.icon-jp_Line:before {
+	content: "\e672";
+}
+.icon-jp_mixi:before {
+	content: "\e673";
+}
+.icon-jp_niconico:before {
+	content: "\e674";
+}
+.icon-OS_Android:before {
+	content: "\e675";
+}
+.icon-OS_Apple:before {
+	content: "\e676";
+}
+.icon-OS_Blackberry:before {
+	content: "\e677";
+}
+.icon-OS_LinuxGnome:before {
+	content: "\e678";
+}
+.icon-OS_LinuxRedhat:before {
+	content: "\e679";
+}
+.icon-OS_Linuxubuntu:before {
+	content: "\e67a";
+}
+.icon-OS_Linux:before {
+	content: "\e67b";
+}
+.icon-OS_OSXB:before {
+	content: "\e67c";
+}
+.icon-OS_OSX:before {
+	content: "\e67d";
+}
+.icon-OS_SymbianS60:before {
+	content: "\e67e";
+}
+.icon-OS_Windows:before {
+	content: "\e67f";
+}
+.icon-OS_Xbox:before {
+	content: "\e680";
+}
+.icon-Popular_1x:before {
+	content: "\e681";
+}
+.icon-Popular_500px:before {
+	content: "\e682";
+}
+.icon-Popular_500px_Full:before {
+	content: "\e683";
+}
+.icon-Popular_aim:before {
+	content: "\e684";
+}
+.icon-Popular_app_store_iphone:before {
+	content: "\e685";
+}
+.icon-Popular_Blogger:before {
+	content: "\e686";
+}
+.icon-Popular_box:before {
+	content: "\e687";
+}
+.icon-Popular_box_B:before {
+	content: "\e688";
+}
+.icon-Popular_Delicious:before {
+	content: "\e689";
+}
+.icon-Popular_digg:before {
+	content: "\e68a";
+}
+.icon-Popular_dropbox:before {
+	content: "\e68b";
+}
+.icon-Popular_evernote:before {
+	content: "\e68c";
+}
+.icon-Popular_Facebook:before {
+	content: "\e68d";
+}
+.icon-Popular_Feedly:before {
+	content: "\e68e";
+}
+.icon-Popular_flickr:before {
+	content: "\e68f";
+}
+.icon-Popular_Flipboard:before {
+	content: "\e690";
+}
+.icon-Popular_foursquare:before {
+	content: "\e691";
+}
+.icon-Popular_FriendFeed:before {
+	content: "\e692";
+}
+.icon-Popular_G:before {
+	content: "\e693";
+}
+.icon-Popular_GitHub:before {
+	content: "\e694";
+}
+.icon-Popular_Gmail:before {
+	content: "\e695";
+}
+.icon-Popular_google_drive:before {
+	content: "\e696";
+}
+.icon-Popular_Google_Picasa:before {
+	content: "\e697";
+}
+.icon-Popular_Google_Play:before {
+	content: "\e698";
+}
+.icon-Popular_grooveshark:before {
+	content: "\e699";
+}
+.icon-Popular_IFTTT:before {
+	content: "\e69a";
+}
+.icon-Popular_Instagram:before {
+	content: "\e69b";
+}
+.icon-Popular_Instapaper:before {
+	content: "\e69c";
+}
+.icon-Popular_lastfm:before {
+	content: "\e69d";
+}
+.icon-Popular_linkedin:before {
+	content: "\e69e";
+}
+.icon-Popular_mail:before {
+	content: "\e69f";
+}
+.icon-Popular_medium:before {
+	content: "\e6a0";
+}
+.icon-Popular_Microsoft_Office:before {
+	content: "\e6a1";
+}
+.icon-Popular_Microsoft_Outlook:before {
+	content: "\e6a2";
+}
+.icon-Popular_Microsoft_Zune:before {
+	content: "\e6a3";
+}
+.icon-Popular_onedrive:before {
+	content: "\e6a4";
+}
+.icon-Popular_onenote:before {
+	content: "\e6a5";
+}
+.icon-Popular_Path:before {
+	content: "\e6a6";
+}
+.icon-Popular_Pinterest:before {
+	content: "\e6a7";
+}
+.icon-Popular_Pocket:before {
+	content: "\e6a8";
+}
+.icon-Popular_Quora:before {
+	content: "\e6a9";
+}
+.icon-Popular_Readability:before {
+	content: "\e6aa";
+}
+.icon-Popular_reddit:before {
+	content: "\e6ab";
+}
+.icon-Popular_RSS:before {
+	content: "\e6ac";
+}
+.icon-Popular_Skype:before {
+	content: "\e6ad";
+}
+.icon-Popular_Soundcloud:before {
+	content: "\e6ae";
+}
+.icon-Popular_spotifycom:before {
+	content: "\e6af";
+}
+.icon-Popular_stackoverflow:before {
+	content: "\e6b0";
+}
+.icon-Popular_steam_game:before {
+	content: "\e6b1";
+}
+.icon-Popular_Stumble:before {
+	content: "\e6b2";
+}
+.icon-Popular_Technorati:before {
+	content: "\e6b3";
+}
+.icon-Popular_tumblr:before {
+	content: "\e6b4";
+}
+.icon-Popular_Twitter:before {
+	content: "\e6b5";
+}
+.icon-Popular_Uber:before {
+	content: "\e6b6";
+}
+.icon-Popular_vimeo:before {
+	content: "\e6b7";
+}
+.icon-Popular_vkcom:before {
+	content: "\e6b8";
+}
+.icon-Popular_Wikipedia:before {
+	content: "\e6b9";
+}
+.icon-Popular_Windows_Store_App:before {
+	content: "\e6ba";
+}
+.icon-Popular_WordPress:before {
+	content: "\e6bb";
+}
+.icon-Popular_YouTube:before {
+	content: "\e6bc";
+}
