@@ -5,7 +5,6 @@ subtitle:   "Git -- summary of common errors"
 date:       2019-04-29 
 author:     "zzw"
 header-style: text
-header-mask: 0.3
 catalog:    true
 tags:
     - git
