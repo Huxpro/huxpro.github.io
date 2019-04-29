@@ -1,15 +1,14 @@
 ---
 layout:     post
-title:      "下一代 Web 应用模型 —— Progressive Web App"
-subtitle:   "The Next Generation Application Model For The Web - Progressive Web App"
-date:       2017-02-09 12:00:00
-author:     "Hux"
-header-img: "img/post-bg-nextgen-web-pwa.jpg"
+title:      "git常见错误汇总"
+subtitle:   "Git -- summary of common errors"
+date:       2019-04-29 
+author:     "zzw"
+header-style: text
 header-mask: 0.3
 catalog:    true
 tags:
-    - Web
-    - PWA
+    - git
 ---
 
 
