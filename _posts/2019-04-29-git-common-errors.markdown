@@ -42,4 +42,4 @@ tags:
 
 分析：没有.git文件夹
 
-解决：' git init '
+解决：` git init `
