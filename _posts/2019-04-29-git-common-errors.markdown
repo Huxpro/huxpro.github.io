@@ -27,7 +27,7 @@ tags:
 
 1.粗暴简单的解决方案：如果项目小，可以重新克隆到本地
 
-2.把远程库同步到本地库：'git pull --rebase origin master',[参考](https://blog.csdn.net/rocling/article/details/82956402)
+2.把远程库同步到本地库：` git pull --rebase origin master `,[参考](https://blog.csdn.net/rocling/article/details/82956402)
 
 
 ## fatal: HttpRequestException encountered.
