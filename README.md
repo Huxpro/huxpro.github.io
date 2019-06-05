@@ -1,4 +1,4 @@
-# Hux Blog
+# MY Blog
 
 ### [View my Blog &rarr;](https://spinachhh.github.io/)
 
