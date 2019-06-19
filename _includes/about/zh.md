@@ -8,6 +8,16 @@ Hey，我是黄玄，病毒种，进化程度不明，多出没于[博客](https
 一些作品和开源软件项目，👉 戳 [Portfolio](/portfolio)、[Github](http://github.com/huxpro)、[演说.io](https://zhuanlan.zhihu.com/p/21280918)。 
 
 
+##### 编程语言 Spectrum
+
+|   	| 💔️        | ❤️ ️                                  	| ❤️❤️ ️                                       	| ❤️❤️❤️ ️                               	|
+|---	|---------	|-------------------------------------	|----------------------------------------------	|------------------------------------	|
+| 😅 	| `PHP`   	| `C`                                 	| `Kotlin` `Dart`                              	| `Swift` `Agda` `Idris`             	|
+| 🧐 	|         	| `C+` `Hack` <br> `Lisp {Scheme, Clojure}`  |`Cpp >11` `C#` `Typed Py` <br> `ActionScript 3`	  | `Scala` `Rust`                     	|
+| 😏 	| `Shell` 	| `Java` `Python`                     	| `Typed JS {TS, Flow}`                        	| `Haskell` `Coq` <br> `SML` `OCaml` `ReasonML` 	|
+| 🤓 	|         	| `JavaScript`                        	| `Javascript >ES6`                          	| `λ`                                	|
+
+
 ##### Talks
 
 - [Upgrading to Progressive Web Apps][9] · [JSConf CN 上海 2017](http://2017.jsconf.cn/)

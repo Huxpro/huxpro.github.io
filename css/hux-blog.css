@@ -635,6 +635,9 @@ select.sel-lang {
   min-height: 28px;
   font-size: 14px;
 }
+table {
+  margin-top: 10px;
+}
 table.table > tbody th,
 table.table > thead th,
 table.table > tbody td,

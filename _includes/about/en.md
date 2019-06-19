@@ -8,6 +8,18 @@ Hi, I am *@huxpro* (Huang, Xuan), a software engineer & a designer. I am current
 I studied Digital Media Art and graduated from [Communication University of China](https://en.wikipedia.org/wiki/Communication_University_of_China) by 2016, and am studying Computer Science at [Rochester Institute of Technology](https://en.wikipedia.org/wiki/Rochester_Institute_of_Technology) from 2017.
 
 
+##### Programming Languages Spectrum
+
+|   	| 💔️        | ❤️ ️                                  	| ❤️❤️ ️                                       	| ❤️❤️❤️ ️                               	|
+|---	|---------	|-------------------------------------	|----------------------------------------------	|------------------------------------	|
+| 😅 	| `PHP`   	| `C`                                 	| `Kotlin` `Dart`                              	| `Swift` `Agda` `Idris`             	|
+| 🧐 	|         	| `C+` `Hack` <br> `Lisp {Scheme, Clojure}`  |`Cpp >11` `C#` `Typed Py` <br> `ActionScript 3`	  | `Scala` `Rust`                     	|
+| 😏 	| `Shell` 	| `Java` `Python`                     	| `Typed JS {TS, Flow}`                        	| `Haskell` `Coq` <br> `SML` `OCaml` `ReasonML` 	|
+| 🤓 	|         	| `JavaScript`                        	| `Javascript >ES6`                          	| `λ`                                	|
+
+
+
+
 ##### Talks
 
 - [Upgrading to Progressive Web Apps][9] · [JSConf China Shanghai 2017](http://2017.jsconf.cn/)
