@@ -99,7 +99,12 @@ select {
 table.table > tbody, table.table > thead {
   th,
   td {
-    border: 1px solid #eee;
+    border: 1px solid #eee !important;
+  }
+}
+@media screen and (max-width: 767px) {
+  .table-responsive {
+    border: 0;
   }
 }
 
