@@ -1,4 +1,4 @@
-# Hux Blog
+# Tan Yuxin Blog
 
 ### [View Live Hux Blog &rarr;](https://huangxuan.me)
 
@@ -11,10 +11,10 @@
 Want to clone a boilerplate instead of my buzz blog? Here comes this!  
 
 ```
-$ git clone git@github.com:Huxpro/huxblog-boilerplate.git
+$ git clone git@github.com:yuxintan/yuxintan.github.io.git
 ```
 
-**[View Boilerplate Here &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
+**[View Boilerplate Here &rarr;](https://yuxintan.github.io/huxblog-boilerplate/)**
 
 
 ## Porting 
@@ -140,13 +140,13 @@ You can easily get started by modifying `_config.yml`:
 
 ```
 # Site settings
-title: Hux Blog             # title of your website
-SEOTitle: Hux Blog			# check out docs for more detail
+title: Tan Yuxin Blog       # title of your website
+SEOTitle: Tan Yuxin Blog    # check out docs for more detail
 description: "Cool Blog"    # ...
 
 # SNS settings      
-github_username: huxpro     # modify this account to yours
-weibo_username: huxpro      # the footer woule be auto-updated.
+github_username: yuxintan     # modify this account to yours
+weibo_username: tanyuxin      # the footer woule be auto-updated.
 
 # Build settings
 # paginate: 10              # nums of posts in one page
@@ -167,7 +167,7 @@ layout:     post
 title:      "Hello 2015"
 subtitle:   "Hello World, Hello Blog"
 date:       2015-01-29 12:00:00
-author:     "Hux"
+author:     "Yuxin"
 header-img: "img/post-bg-2015.jpg"
 tags:
     - Life
@@ -314,7 +314,7 @@ In technical views, it can be done with CSS. However, the opacity of the black o
 #### SEO Title
 
 Before V1.4, site setting `title` is not only used for displayed in Home Page and Navbar, but also used to generate the `<title>` in HTML.
-It's possible that you want the two things different. For me, my site-title is **“Hux Blog”** but I want the title shows in search engine is **“黄玄的博客 | Hux Blog”** which is multi-language.
+It's possible that you want the two things different. For me, my site-title is **“Hux Blog”** but I want the title shows in search engine is **“Yuxin的博客 | Yuxin Blog”** which is multi-language.
 
 So, the SEO Title is introduced to solve this problem, you can set `SEOTitle` different from `title`, and it would be only used to generate HTML `<title>` and setting DuoShuo Sharing.
 

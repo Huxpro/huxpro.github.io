@@ -1,11 +1,11 @@
 # Site settings
-title: Hux Blog
-SEOTitle: 黄玄的博客 | Hux Blog
+title: Tan Yuxin Blog
+SEOTitle: 谭玉新的博客 | Yuxin Blog
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
-description: "关于程序与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Software Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
-keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计"
-url: "https://huangxuan.me"              # your host, for absolute URL
+email: yuxinJob@gmail.com
+description: "关于程序与设计、美剧、运动 | 谭玉新，Web & Mobile Lover，Software Engineer，UX Designer | 这里是 @Yuxin谭玉新 的个人博客，与你一起发现更大的世界。"
+keyword: "谭玉新, Yuxin谭玉新, Yuxin, 谭玉新的博客, Yuxin Blog, 博客, 个人网站, 互联网, 大数据，Hadoop, 后台，后台开发, 设计"
+url: "https://yuxintan.github.io"       # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
@@ -13,11 +13,11 @@ future: true
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-twitter_username:   huxpro
-#facebook_username:  huxpro
+weibo_username:     tanyuxin
+zhihu_username:     tanyuxin
+github_username:    tanyuxin
+twitter_username:   tanyuxin
+#facebook_username:  tanyuxin
 #linkedin_username:  firstname-lastname-idxxxx
 
 
