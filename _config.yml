@@ -5,8 +5,8 @@ header-img: img/home-bg.jpg
 email: shicons@hotmail.com
 description: ""
 keyword: ""
-url: "https://shicons.github.io"              # your host, for absolute URL
-baseurl: "/shicons.github.io"         # for example, '/blog' if your blog hosted on 'host/blog'
+url: "https://github.com/shiconsLeva/"              # your host, for absolute URL
+baseurl: "/shiconsLeva.github.io"         # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
