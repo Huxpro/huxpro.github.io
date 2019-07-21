@@ -5,7 +5,7 @@
 - 在网上下载ubuntu-18.04-desktop-amd64.iso，同时准备好easyBCD软件（网上下载最新版）。将iso文件移动到c盘根目录。
 - 打开easyBCD软件，注意到目前只有一个win7启动项。选择“添加新条目”，然后选择“NeoGrub”，点击“安装”。
 
-![](../img/Ubuntu安装.jpg)
+![](../Public/img/Ubuntu安装.jpg)
 
 - 然后点击配置，将menu.lst文件的内容替换成一下文本：
 
@@ -32,7 +32,7 @@
 - 经过配置后，c盘中会多出一个“NST”文件夹和一个NeoGrub文件。
   接下来把系统镜像文件用DAEMON tools打开，或者以压缩包形式将其中两个文件解压出来，分别是initrd.lz和vmlinuz.efi（无后缀名的可手动添加），这两个文件在casper文件夹里。
 
-  ![](../img/Ubuntu安装1.jpg)
+  ![](../Public/img/Ubuntu安装1.jpg)
 
 - 将解压出来的两个文件复制到c盘根目录。这样，安装系统的前期准备就完成了，重启电脑准备安装ubuntu18.04。
 
@@ -48,15 +48,13 @@
 
 - 设置分区，首先设置交换空间大小，与电脑内存差不多或为电脑内存的两倍。
 
-  ![](../img/Ubuntu安装3.jpg)
-
-![](../img/Ubuntu安装4.jpg)
+  ![](../Public/img/Ubuntu安装3.jpg)![](../Public/img/Ubuntu安装4.jpg)
 
 - 设置其他挂载点的大小，可以简单的设置/、/boot、/home共3个分区，均为ext4文件系统。
 
   / 10G；/boot 100M;/home 剩余所有空间。注意linux系统的1G对应1000M。
 
-  ![](../img/Ubuntu安装2.jpg)
+  ![](../Public/img/Ubuntu安装2.jpg)
 
 - 简单的设置地区、键盘布局，用户名和密码。
 
@@ -64,4 +62,4 @@
 
 - 安装完成后点击“现在重启”。回到win7系统打开easyBCD软件把“NeoGrub”引导项删除，否则每次进入win7都得选一次。
 
-  ![](../img/Ubuntu安装5.jpg)
+  ![](../Public/img/Ubuntu安装5.jpg)
