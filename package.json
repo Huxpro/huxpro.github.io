@@ -17,12 +17,9 @@
         "grunt-contrib-uglify": "~0.5.1"
     },
     "scripts": {
-        "preview": "cd _site; python -m SimpleHTTPServer 8020",
-        "py3view": "cd _site; python3 -m http.server 8020",
-        "watch"  : "grunt watch & npm run preview & jekyll serve -w",
-        "py3wa"  : "grunt watch & npm run py3view & jekyll serve -w",
-        "boil"   : "git push boilerplate boilerplate:master",
-        "push"   : "git push origin master --tag",
-        "cafe"   : "git co gitcafe-pages; git merge master; git push gitcafe gitcafe-pages:gitcafe-pages --tag; git co master;"
+        "start" : "jekyll serve -w -l --host 0.0.0.0 --port 4000",
+        "dev"   : "grunt watch & npm run start",
+        "boil"  : "git push boilerplate boilerplate:master",
+        "push"  : "git push origin master --tag"
     }
 }
