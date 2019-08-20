@@ -1,8 +1,8 @@
-> Yet another man.
+> Your time is limited, so don’t waste it living someone else’s life. 
 
-Hi, I am _@huxpro_ (Huang, Xuan), a software engineer & a designer. I am currently working on programming langugaes at [Facebook](https://www.facebook.com/). I previously worked as Web Front-End Engineer at [Alibaba Trip](https://www.alitrip.com/); Web Front-End Infrastructure Team Lead at [Wepiao.com](https://www.crunchbase.com/organization/wepiao#/entity); And [Invited Consultant on PWA](<(https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)>) at [Ele.me](https://github.com/elemefe/).
+Hi, I am _@huxpro_ (Huang, Xuan), a will-be [Facebook](https://www.facebook.com/) software engineer and a professed designer. My interests range from programming languages, compiler construction, Web/App development, human computer interaction and developer infra. I previously worked on [Alitrip (Fliggy)](https://www.alitrip.com/) mobile/web at [Alibaba Group](https://en.wikipedia.org/wiki/Alibaba_Group), found and lead front-end infrastructure team at unicorn startup [Beijing Weiying (WePiao)](https://www.crunchbase.com/organization/beijing-weiying-technology), and help building [the first influential progressive web app in China](https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509) at [Ele.me](https://en.wikipedia.org/wiki/Ele.me). 
 
-I studied Digital Media Art and graduated from [Communication University of China](https://en.wikipedia.org/wiki/Communication_University_of_China) by 2016, and am studying Computer Science at [Rochester Institute of Technology](https://en.wikipedia.org/wiki/Rochester_Institute_of_Technology) from 2017.
+I studied BA, Digital Media Art at [Communication University of China](https://en.wikipedia.org/wiki/Communication_University_of_China) and MS, Computer Science at [Rochester Institute of Technology](https://en.wikipedia.org/wiki/Rochester_Institute_of_Technology).
 
 ##### My Programming Languages Spectrum
 
@@ -13,7 +13,6 @@ I studied Digital Media Art and graduated from [Communication University of Chin
 | 😏  | `Shell`       | `Java` `Python`                               | `TypeScript` `Flow` `WASM`                      | `Haskell` `Coq` <br> `SML` `OCaml` `ReasonML` |
 | 🤓  |               | `JavaScript`                                  | `Javascript >ES6`                               | `λ` `Λ` `Π` `Σ`                               |
 
-> To be continue: `Fortran` `Smalltalk` `Pascal` `Forth` `Ruby` `CoffeeScript` `Go` `Elm` `Erlang` `Elixir` `F#` `F*` `Q#` `Nim` `Haxe` `Cyclone` `VimScript` `Perl` `Lua` `AppleScript`
 
 ##### Talks
 

@@ -1,13 +1,10 @@
-> 写写代码，做做设计，  
 > 离开世界之前，一切都是过程。
 
-Hey，我是黄玄，病毒种，进化程度不明，多出没于[博客](https://huangxuan.me)、[微博](weibo.com/huxpro)、[知乎](https://www.zhihu.com/people/huxpro/pins/posts)、[Twitter](https://twitter.com/Huxpro/)、[Github](http://github.com/huxpro)、[Medium](https://medium.com/@Huxpro) 等地带，绝招尚在开发中。
+Hi，我是黄玄，[Facebook](https://www.facebook.com/) 软件工程师，设计师。主要兴趣包括编程语言、编译器、前端/应用开发、人机交互、开发者工具等。我曾被招募为阿里巴巴 · [阿里旅行（飞猪）](http://alitrip.com)· 前端工程师、微影时代 · 微票儿 · 前端基础工程团队负责人、[饿了么](https://ele.me/) · 大前端团队 · [PWA 顾问](https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)。
 
-职业是软件工程师，[Web 工会](https://medium.com/ben-and-dion/team-web-3315aa447fb2#.359a9c6cl)活跃成员。目前在 [Facebook](https://www.facebook.com/) 做编程语言相关的工作 ，曾被招募为淘宝网 · [阿里旅行](http://alitrip.com)前端工程师、微影时代 · [微票儿](http://www.wepiao.com/?r=movie)前端基础工程团队负责人、[饿了么](https://ele.me/) · 大前端团队 · [PWA 顾问](https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)。
+我多出没于[博客](https://huangxuan.me)、[微博](weibo.com/huxpro)、[知乎](https://www.zhihu.com/people/huxpro/pins/posts)、[Twitter](https://twitter.com/Huxpro/)、[Github](http://github.com/huxpro)、[Medium](https://medium.com/@Huxpro) 等地带。一些作品和开源项目，👉 戳 [Portfolio](/portfolio)、[Github](http://github.com/huxpro)、[演说.io](https://zhuanlan.zhihu.com/p/21280918)。
 
-一些作品和开源软件项目，👉 戳 [Portfolio](/portfolio)、[Github](http://github.com/huxpro)、[演说.io](https://zhuanlan.zhihu.com/p/21280918)。
-
-##### My Programming Languages Spectrum
+##### 编程语言倾向表
 
 |     | 💔️           | ❤️ ️                                          | ❤️❤️ ️                                          | ❤️❤️❤️ ️                                      |
 | --- | ------------- | --------------------------------------------- | ----------------------------------------------- | --------------------------------------------- |
@@ -16,9 +13,8 @@ Hey，我是黄玄，病毒种，进化程度不明，多出没于[博客](https
 | 😏  | `Shell`       | `Java` `Python`                               | `TypeScript` `Flow` `WASM`                      | `Haskell` `Coq` <br> `SML` `OCaml` `ReasonML` |
 | 🤓  |               | `JavaScript`                                  | `Javascript >ES6`                               | `λ` `Λ` `Π` `Σ`                               |
 
-> 未完待续: `Fortran` `Smalltalk` `Pascal` `Forth` `Ruby` `CoffeeScript` `Go` `Elm` `Erlang` `Elixir` `F#` `F*` `Q#` `Nim` `Haxe` `Cyclone` `VimScript` `Perl` `Lua` `AppleScript`
 
-##### Talks
+##### 演讲与分享
 
 - [Upgrading to Progressive Web Apps][9] · [JSConf CN 上海 2017](http://2017.jsconf.cn/)
 - Building Progressive Web Apps · [CSDI 广州 2017](http://www.csdisummit.com/)
