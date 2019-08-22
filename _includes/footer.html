@@ -201,24 +201,27 @@
     var $en = document.querySelector(".en");
     var $select = document.querySelector("select");
 
-    // bind hashchange event
-    // Changes at v1.7.2: change the language flag from hash-basing to in-memory basing
-    // due to its confliction with catalog anchors.
-    // window.addEventListener('hashchange', _render);
+    // Changes at v1.8.1: include lang flag as a url query. This interop well with catalog hash anchors.
+    function getLang() { return new URLSearchParams(document.location.search).get("lang") }
+
+    function setLang(newLang) {
+        var params = new URLSearchParams(document.location.search)
+        params.set("lang", newLang)
+        document.location.search = params.toString()  // refresh.
+    }
 
     // handle render
-    function _render(_hash){
-        var _hash = _hash || window.location.hash;
+    function _render(){
+        var lang = getLang()
         // en
-        if(_hash == "#en"){
+        if(lang == "en"){
             $select.selectedIndex = 1;
             $en.style.display = "block";
             $en.classList.add("active");
             $zh.style.display = "none";
             $zh.classList.remove("active");
-        // zh by default
+        // default to zh-cn
         }else{
-            // not trigger onChange, otherwise cause a loop call.
             $select.selectedIndex = 0;
             $zh.style.display = "block";
             $zh.classList.add("active");
@@ -232,11 +235,11 @@
     // handle select change
     function onLanChange(index){
         if(index == 0){
-            _hash = "#zh"
+            lang = "zh"
         }else{
-            _hash = "#en"
+            lang = "en"
         }
-        _render(_hash)
+        setLang(lang)
     }
 
     // init
