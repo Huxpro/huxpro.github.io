@@ -155,7 +155,7 @@ You can easily customize the blog by modifying `_config.yml`:
 ```yml
 # Site settings
 title: Hux Blog             # title of your website
-SEOTitle: Hux Blog			    # check out docs for more detail
+SEOTitle: Hux Blog          # check out docs for more detail
 description: "Cool Blog"    # ...
 
 # SNS settings      
@@ -176,7 +176,7 @@ Posts are simply Markdown files in the `_posts/`.
 
 Metadata of posts are written in **front-matter**. A example post could start with:
 
-```
+```yml
 ---
 layout:     post
 title:      "Hello 2015"
@@ -187,7 +187,6 @@ header-img: "img/post-bg-2015.jpg"
 tags:
     - Life
 ---
-
 ```
 
 ### SideBar
@@ -196,7 +195,7 @@ tags:
 
 **SideBar** provides possible modules to show off more personal information.
 
-```
+```yml
 # Sidebar settings
 sidebar: true   # default true
 sidebar-about-description: "your description here"
@@ -217,7 +216,7 @@ It would be hidden in a smaller screen when the entire sidebar are pushed to bot
 **Featured-Tags** is similar to any cool tag features in website like [Medium](http://medium.com).
 Started from V1.4, this module can be used even when sidebar is off and displayed always in the bottom. 
 
-```
+```yml
 # Featured Tags
 featured-tags: true  
 featured-condition-size: 1     # A tag will be featured if the size of it is more than this condition value
@@ -232,7 +231,7 @@ This module can live when sidebar is off as well.
 
 Friends information is configured as a JSON string in `_config.yml`
 
-```
+```yml
 # Friends
 friends: [
     {
@@ -255,7 +254,7 @@ There is a increased trend to use Open Web technology for keynotes and presentat
 
 To use, in the **front-matter**:
 
-```
+```yml
 ---
 layout:     keynote
 iframe:     "http://huangxuan.me/js-module-7day/"
@@ -274,7 +273,7 @@ First of all, you need to sign up and get your own account. **Repeat, DO NOT use
 
 Second, from V1.5, you can easily complete your comment configuration by just adding your **short name** into `_config.yml`:
 
-```
+```yml
 duoshuo_username: _your_duoshuo_short_name_
 # OR
 disqus_username: _your_disqus_short_name_
@@ -290,7 +289,7 @@ disqus_username: _your_disqus_short_name_
 
 From V1.5, Google Analytics and Baidu Tongji are supported with a simple config away:
 
-```
+```yml
 # Baidu Analytics
 ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
 
@@ -356,7 +355,7 @@ This theme uses the default code syntax highlighter of jekyll, "rouge, which is 
 
 Executing this command to install this plugin:
 
-```
+```yml
 $ gem install jekyll-paginate 
 ```
 

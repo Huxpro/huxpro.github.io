@@ -16,7 +16,7 @@ Hi，我是黄玄，自由设计师，[Facebook](https://www.facebook.com/) 软�
 | 😏  | `Shell`       | `Java` `Python`      | `TypeScript` `Flow` `Wasm` | `Haskell` `Coq` `ML*`  |
 | 🤓  |               | `JavaScript`         | `EcmaScript6`              | `λ` `Λ` `Π` `Σ`        |
 
-> __`ML*` 家族__：`OCaml` `ReasonML` `Standard ML` (`F#`)
+> __`ML*` 家族__：`OCaml` `ReasonML` `Standard ML` (`F#`)  
 > __`Lisp*` 家族__：`Clojure` `Scheme` `Racket`
 
 
