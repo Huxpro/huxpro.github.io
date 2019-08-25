@@ -20,6 +20,12 @@ pre.highlight {
   color: #960050;
   background-color: #1e0010;
 }
+.language-coq .highlight .err {
+  // Hux: a temp workaround to fix for Coq math symbol
+  // @see https://github.com/rouge-ruby/rouge/issues/1312
+  &:extend(.highlight .k);
+  background-color: transparent;
+}
 .highlight .k {
   color: #c678dd;
 }

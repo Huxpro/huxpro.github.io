@@ -318,7 +318,11 @@ pre.highlight {
   color: #960050;
   background-color: #1e0010;
 }
-.highlight .k {
+.language-coq .highlight .err {
+  background-color: transparent;
+}
+.highlight .k,
+.language-coq .highlight .err {
   color: #c678dd;
 }
 .highlight .l {
