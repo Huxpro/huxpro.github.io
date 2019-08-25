@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Hadoop"
+title:      "MapReduce"
 subtitle:   " \"好好学习，天天向上\""
 date:       2019-08-25 18:23:00
 author:     "WQ"
@@ -214,4 +214,4 @@ MapOutputBuffer中使用外部排序【快排(默认)和堆排】，在flush阶�
 
 这个类贯穿reduce计算阶段的，这里有一个重要的配置参数，即在job中设置的setOutputValueGroupingComparator，如果没有这个值就默认是用key的比较器，如果还没有那么key必须继承WritableComparable接口。
 
-这个类的作用在org.apache.hadoop.mapreduce.task.ReduceContextImpl#nextKeyValue中可以看到，当我们在reduce中调用迭代器获取下一个value的时候，在该类的ValueIterator中可以看到，在不断的通过比较器判断是否时在同一组当中【前提是在shuffle阶段已经使用外部排序了】，注意比较的是key。
+这个类的作用在org.apache.hadoop.mapreduce.task.ReduceContextImpl#nextKeyValue中，当我们在reduce中调用迭代器获取下一个value的时候，在该类的ValueIterator中可以看到，在不断的通过比较器判断是否时在同一组当中【前提是在shuffle阶段已经使用外部排序了】，注意比较的是key。
