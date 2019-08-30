@@ -36,6 +36,10 @@ Translation
 Releases
 --------
 
+#### V1.8.2
+
+- Drop the entire `portfolio` page until a big rewrite of a better `project` page.
+
 #### V1.8.1
 
 - Improve multi-lingual implementation, see `about.html` or `_posts/2017-07-12-upgrading-eleme-to-pwa.markdown` for a example of uses.

@@ -1,9 +1,10 @@
 _site
 _posts/_draft
+_archive
 node_modules
-npm-debug.log
+.vscode
+*.log
+*.sh
 .DS_Store
 */.DS_Store
 */*/.DS_Store
-*.sh
-.vscode
