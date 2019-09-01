@@ -38,6 +38,7 @@ Releases
 
 #### V1.8.2
 
+- TODO: `multilingual` could be more automative via configurations and convention.
 - Drop the entire `portfolio` page until a big rewrite of a better `project` page.
 
 #### V1.8.1
