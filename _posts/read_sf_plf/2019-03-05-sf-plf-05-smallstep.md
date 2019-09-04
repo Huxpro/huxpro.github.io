@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - PLF」 5. Small-Step Operational Semantics"
+title: "「编程语言基础」 5. Small-Step Operational Semantics"
+subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 05"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 编程语言基础
   - Coq
   - 笔记
 ---

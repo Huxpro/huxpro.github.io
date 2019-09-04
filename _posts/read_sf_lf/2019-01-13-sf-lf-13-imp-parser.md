@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - LF」 13. Lexing And Parsing In Coq"
+title: "「逻辑基础」 13. Lexing And Parsing In Coq"
+subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 13"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 逻辑基础
   - Coq
   - 笔记
 ---

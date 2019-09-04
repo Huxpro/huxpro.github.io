@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - PLF」 8. Properties of STLC"
+title: "「编程语言基础」 8. Properties of STLC"
+subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 08"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 编程语言基础
   - Coq
   - 笔记
 ---

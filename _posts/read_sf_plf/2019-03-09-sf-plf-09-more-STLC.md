@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - PLF」 9. More on STLC"
+title: "「编程语言基础」 9. More on STLC"
+subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 09"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 编程语言基础
   - Coq
   - 笔记
 ---
@@ -36,7 +38,7 @@ SF here, same as TaPL, treat it _less derived_ by _compute the type `T1` from `t
 
 我想这里有一个原因是， `λ` 必须要可以独立被 typed，但是这时候我们还没有 `t1`，无法计算出 `T1`。而 `let` 的形式中包括了 `t1`，所以可以直接计算:
 
-```BNF
+```coq
 t ::=                Terms
     | ...
     | let x=t in t      let-binding
@@ -62,7 +64,7 @@ t ::=                Terms
 ### Pairs (Product Type)
 
 
-```BNF
+```coq
 t ::=                Terms
     | ...
     | (t,t)             pair
@@ -124,7 +126,7 @@ T ::=                Types
 `unit` is the only value/normal form of type `Unit`, but not the only term (also any terms that would reduce to `unit`)
 
 
-```BNF
+```coq
 t ::=                Terms
     | ...
     | unit              unit              -- often written `()` as well
@@ -179,7 +181,7 @@ SF here, use something in the middle:
 - you provide only `T2` to `L(t1)` and `T1` would be computed from `t1` to form the `T1 + T2`. 
 
 
-```BNF
+```coq
 t ::=                Terms
     | ...
     | inl T t           tagging (left)
@@ -263,7 +265,7 @@ T ::=                Types
 and that's we did for SF here! 
 
 
-```BNF
+```coq
 t ::=                Terms
     | ...
     | nil T                          -- nil need explicit type annotation
@@ -340,7 +342,7 @@ fact = fix (\fact:Nat->Nat.
 ```
 
 
-```BNF
+```coq
 t ::=                Terms
     | ...
     | fix t             fixed-point operator
@@ -368,7 +370,7 @@ t ::=                Terms
 这里的定义非常 informal:
 
 
-```BNF
+```coq
 t ::=                          Terms
     | ...
     | {i1=t1, ..., in=tn}         record

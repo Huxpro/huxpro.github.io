@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - LF」 10. Induction Principles"
+title: "「逻辑基础」 10. Induction Principles"
+subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 10"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 逻辑基础
   - Coq
   - 笔记
 ---

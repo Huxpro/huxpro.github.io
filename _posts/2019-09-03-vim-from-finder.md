@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "使用终端下的 Vim 打开 macOS Finder 里的文件"
-subtitle: 'Open file with Terminal Vim from macOS finder'
+title: "把「终端下的 Vim」作为 macOS Finder 的打开方式"
+subtitle: 'Open file with terminal Vim from the macOS Finder'
 author: "Hux"
 header-style: text
 tags:
@@ -15,7 +15,7 @@ tags:
 - Visual Studio Code
 - IntelliJ IDEA
 
-这里面只有 (Neo)Vim 是存活在终端中的（我并不在终端内使用 Emacs），而由于我日常主要是从终端（via iTerm）来使用电脑，所以会把他们都加入到 `$PATH` 里以方便从终端中唤起，VSCode 和 IDEA 都有一建加入的功能， Emacs 我在 `~/.zshrc` 中放了一个 `alias emacs='open -n -a Emacs.app .'` 解决。
+这里面只有 (Neo)Vim 是存活在终端中的（我并不在终端内使用 Emacs），而由于我日常主要是从终端（via iTerm）来使用电脑，所以会把他们都加入到 `$PATH` 里以方便从终端中唤起，VSCode 和 IDEA 都有一键加入的功能， Emacs 我在 `~/.zshrc` 中放了一个 `alias emacs='open -n -a Emacs.app .'` 解决。
 
 但是，偶尔也会有从 Finder 中打开文件的需求，这时候如果通常会打开拓展名所绑定的 `Open with...` 应用，在大部分时候我的默认绑定是 VSCode，但是今天心血来潮觉得有没有办法直接打开 Vim 呢？搜了一下还真有基于 AppleScript 的解决方案：
 

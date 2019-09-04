@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - LF」 2. Induction "
+title: "「逻辑基础」 2. Induction "
+subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 02"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 逻辑基础
   - Coq
   - 笔记
 ---
@@ -24,7 +26,8 @@ In _Proof Engineering_, we probably won't need to include `review2` but need to 
 > Why we have `simpl.` but not `refl.` ?
 
 
-## Proving `0` is a "neutral element" for `+` (additive identity)
+Proving `0` is a "neutral element" for `+` (additive identity)
+--------------------------------------------------------------
 
 ### Proving `0 + n = n`
 
@@ -84,9 +87,9 @@ Our 2nd try is to use _case analysis_ (`destruct`), but the proof stucks in _ind
 
 Princeple of induction over natural numbers (i.e. _mathematical induction_)
 
-$$
+```coq
 P(0); ∀n' P(n') → P(S n')  ====>  P(n)
-$$
+```
 
 In Coq, like `destruct`, `induction` break `P(n)` into 2 subgoals:
 
@@ -99,7 +102,8 @@ Proof.
 ```
 
 
-## Proving `n - n = 0`
+Proving `n - n = 0`
+-------------------
 
 ```coq
 Theorem minus_diag : ∀n,
@@ -124,7 +128,8 @@ Noticed that the definition of `minus`:
       end.
 ```
 
-## `rewrite`
+`rewrite`
+---------
 
 `rewrite` would do a (DFS) preorder traversal in the syntax tree.
 

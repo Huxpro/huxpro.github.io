@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - LF」 15. Extracting ML From Coq"
+title: "「逻辑基础」 15. Extracting ML From Coq"
+subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 15"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 逻辑基础
   - Coq
   - 笔记
 ---
@@ -99,7 +101,7 @@ let rec ceval_step st c i =
 
 recall _sum type_ 在 PLT 中的语法与语义：
 
-```BNF
+```coq
 T ::= 
   T + T
 

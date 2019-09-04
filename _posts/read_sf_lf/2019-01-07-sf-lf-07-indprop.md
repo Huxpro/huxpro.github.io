@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - LF」 7. Ind Prop (归纳定义命题)"
+title: "「逻辑基础」 7. Ind Prop (归纳定义命题)"
+subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 07"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 逻辑基础
   - Coq
   - 笔记
 ---

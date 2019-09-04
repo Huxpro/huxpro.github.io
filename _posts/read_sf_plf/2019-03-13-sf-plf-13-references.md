@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - PLF」 13. Typing Mutable References"
+title: "「编程语言基础」 13. Typing Mutable References"
+subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 13"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 编程语言基础
   - Coq
   - 笔记
 ---
@@ -46,7 +48,7 @@ Syntax
 
 ### Types & Terms
 
-```BNF
+```coq
 T ::= 
     | Nat
     | Unit

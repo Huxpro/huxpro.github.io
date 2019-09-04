@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - PLF」 18. Theory And Practice Of Automation In Coq Proofs"
+title: "「编程语言基础」 18. Theory And Practice Of Automation In Coq Proofs"
+subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 18"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 编程语言基础
   - Coq
   - 笔记
 ---

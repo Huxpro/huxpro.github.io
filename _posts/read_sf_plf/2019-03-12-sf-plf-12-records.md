@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - PLF」 12. Adding Records To STLC"
+title: "「编程语言基础」 12. Adding Records To STLC"
+subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 12"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 编程语言基础
   - Coq
   - 笔记
 ---
@@ -14,7 +16,7 @@ tags:
 ## Adding Records
 
 
-```BNF
+```coq
 t ::=                          Terms:
     | {i1=t1, ..., in=tn}         record
     | t.i                         projection

@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - PLF」 14. Subtyping with Records"
+title: "「编程语言基础」 14. Subtyping with Records"
+subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 14"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 编程语言基础
   - Coq
   - 笔记
 ---

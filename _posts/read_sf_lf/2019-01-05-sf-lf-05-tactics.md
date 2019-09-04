@@ -1,11 +1,13 @@
 ---
-title: "「软件基础 - LF」 5. Tactics"
+title: "「逻辑基础」 5. Tactics"
+subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 05"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础 SF
+  - 软件基础
+  - 逻辑基础
   - Coq
   - 笔记
 ---

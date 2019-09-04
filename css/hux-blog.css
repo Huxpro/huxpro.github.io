@@ -782,10 +782,10 @@ samp {
 }
 @media only screen and (max-width: 767px) {
   /**
-	 * Layout
-	 * Since V1.6 we use absolute positioning to prevent to expand container-fluid
-	 * which would cover tags. A absolute positioning make a new layer.
-	 */
+   * Layout
+   * Since V1.6 we use absolute positioning to prevent to expand container-fluid
+   * which would cover tags. A absolute positioning make a new layer.
+   */
   .navbar-default .navbar-collapse {
     position: absolute;
     right: 0;
@@ -797,13 +797,13 @@ samp {
     width: 170px;
   }
   /**
-	 * Animation
-	 * HuxBlog-Navbar using genuine Material Design Animation
-	 */
+   * Animation
+   * HuxBlog-Navbar using genuine Material Design Animation
+   */
   #huxblog_navbar {
     /**
-		 * Sharable code and 'out' function
-		 */
+     * Sharable code and 'out' function
+     */
     opacity: 0;
     transform: scaleX(0);
     transform-origin: top right;
@@ -812,8 +812,8 @@ samp {
     -webkit-transform-origin: top right;
     -webkit-transition: all 200ms cubic-bezier(0.47, 0, 0.4, 0.99) 0ms;
     /**
-		 *'In' Animation
-		 */
+     *'In' Animation
+     */
   }
   #huxblog_navbar a {
     font-size: 13px;
