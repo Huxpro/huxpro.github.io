@@ -697,19 +697,28 @@ samp {
   margin: 30px 0 10px;
   line-height: 1.4;
 }
-.post-container h5 {
+.post-container h2::before {
+  content: " ";
+  display: block;
+  border-bottom: 1px solid #ececec;
+  margin-top: 44px;
+  margin-bottom: 30px;
+}
+.post-container h4 {
   font-size: 19px;
   font-weight: 600;
   color: gray;
 }
-.post-container h5 + p {
+.post-container h4 + p {
   margin-top: 5px;
 }
+.post-container h5,
 .post-container h6 {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
   color: gray;
 }
+.post-container h5 + p,
 .post-container h6 + p {
   margin-top: 5px;
 }
@@ -718,13 +727,13 @@ samp {
     font-size: 30px;
   }
   .post-container h2 {
-    font-size: 24px;
+    font-size: 22px;
   }
   .post-container h3 {
-    font-size: 21px;
+    font-size: 19px;
   }
   .post-container h4 {
-    font-size: 19px;
+    font-size: 18px;
   }
 }
 .post-container ul,
@@ -781,7 +790,7 @@ samp {
 }
 .post-container .anchorjs-link {
   position: absolute;
-  padding-top: 1px;
+  text-decoration: none !important;
 }
 @media only screen and (max-width: 767px) {
   /**

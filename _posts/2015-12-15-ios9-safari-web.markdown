@@ -24,13 +24,13 @@ tags:
 如果你不想阅读整篇文章，这里为你准备了一个总结：
 
 
-###### 新的设备特性
+#### 新的设备特性
 
 * iPhone 6s 与 6s Plus 拥有 **“[3D Touch](http://www.apple.com/iphone-6s/3d-touch/)”**，这是一个全新的硬件特性，它可以侦测压力，是一个可以让你拿到手指压力数据的 API
 * iPad Pro 的 viewport 为 1024px，与以往的 iPad 全都不同
 * 想在 iPad Pro 上支持新的 Apple Pen？不好意思，目前似乎并没有适用于网站的 API 
 
-###### 新的操作系统特性（与 web 相关的）
+#### 新的操作系统特性（与 web 相关的）
 
 * iPad 上的 Safari 现在可以通过 [Split View](https://developer.apple.com/library/prerelease/ios/documentation/WindowsViews/Conceptual/AdoptingMultitaskingOniPad/QuickStartForSlideOverAndSplitView.html#//apple_ref/doc/uid/TP40015145-CH13-SW1)（分屏视图）与其他应用一起使用，这意味着新的 viewport 尺寸将会越来越常见
 * 新的 Safari View Controller（[`SFSafariViewController`](https://developer.apple.com/library/prerelease/ios/documentation/SafariServices/Reference/SFSafariViewController_Ref/index.html#//apple_ref/occ/cl/SFSafariViewController)）可以让你在 native app 内提供与 Safari 界面、行为连贯一致的应用内网页浏览体验
@@ -39,7 +39,7 @@ tags:
 * [App Search（应用搜索）](https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/AppSearch/index.html#//apple_ref/doc/uid/TP40016308)：现在，Apple 将会抓取你的网页内容（与 native app 内容）用于 Spotlight 与 Siri 的搜索结果，[想知道你的标签都兼容吗？](https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/AppSearch/WebContent.html#//apple_ref/doc/uid/TP40016308-CH8)
 * 你的网站现在可以通过 JavaScript API 访问 iCloud 的用户数据
 
-###### 新的 API 支持
+#### 新的 API 支持
 
 * [Performance Timing API](https://developer.mozilla.org/en-US/docs/Web/API/Performance/timing) 在 iOS 9 得到回归
 * 关于 HTML5 Video，你现在可以在支持 [Picture in Picture（画中画）](https://developer.apple.com/library/prerelease/ios/documentation/WindowsViews/Conceptual/AdoptingMultitaskingOniPad/QuickStartForPictureInPicture.html#//apple_ref/doc/uid/TP40015145-CH14)的 iPad 设备上提供这项新功能；你的视频甚至可以在 Safari 关闭后继续播放
@@ -51,7 +51,7 @@ tags:
 * WKWebView 现在可以访问本地文件了
 * 我们仍然需要等待 Push Notification，camera access，Service Workers 这些现代 web API 的到来
 
-###### 新的操作系统
+#### 新的操作系统
 
 * 新一代 Apple TV 的 **tvOS**： 没有浏览器，也没有 webview。但是 JavaScript、XHR 和 DOM 可以通过一个叫做 TVML 的标记语言来使用
 * Apple Watch 的 **watchOS**：完全没有任何浏览器和 webview
@@ -62,7 +62,7 @@ tags:
 
 ## 新的 iOS 设备特性
 
-##### iPhones 6s 与 3D Touch
+### iPhones 6s 与 3D Touch
 
 从 web 设计与开发的角度来说，新的 iPhone 6s 与 6s Plus 与之前的版本并没有太多差别。不过，有一个特性注定会吸引我们的目光：**3D Touch**
 
@@ -97,7 +97,7 @@ Force Touch API 为我们添加了两个新东西：
 
 
 
-##### iPad Pro
+### iPad Pro
 
 全新的 iPad Pro（12.9 寸）打破了以往 iPad 渲染网站的方式。在此之前，市面上所有的 iPad（从初代 iPad，到 iPad Air 4，到 iPad Mini）都是以 768px 的宽度提供 viewport。
 
@@ -108,11 +108,11 @@ Force Touch API 为我们添加了两个新东西：
 
 ## 新的 iOS 操作系统特性
 
-##### iPad 上的多任务处理
+### iPad 上的多任务处理
 
 自 iOS 9 起，iPad 允许两个应用在同一时刻并肩执行，有三种方式：**Slide Over**，**Split View** 与 **Picture-in-Picture**。不过，每一种方式都有其硬件需求，比如说 Slide Over 需要 iPad Air, iPad Mini 2 以上的设备，而 Split View 由于对内存的要求目前只支持 iPad Air 2 与 iPad Pro。
 
-###### Slide Over（滑过来！）
+#### Slide Over（滑过来！）
 
 Slide Over 支持的 App 并不多，不过 Safari 名列其中，这意味着我们的网站将可能在这个模式下被渲染。当网站处于 Slide Over 模式下时，它将在屏幕的右 1/4 位置渲染，并且置于其他 native app 之上。
 
@@ -130,7 +130,7 @@ Slide Over 支持的 App 并不多，不过 Safari 名列其中，这意味着�
 (device-width: 1024px) and (width: 320px)
 ```
 
-###### Split View（分屏视图）
+#### Split View（分屏视图）
 
 在较新版本的 iPad 上，你可以将 Slide Over 的 Side View（侧视图）升级为 Split View。此时，两个应用将以相同比例在你的屏幕上同时工作。
 
@@ -143,20 +143,20 @@ Slide Over 支持的 App 并不多，不过 Safari 名列其中，这意味着�
 ![Split View](http://www.mobilexweb.com/wp-content/uploads/2015/09/splitview.png)
 
 
-###### Picture in Picture（画中画）
+#### Picture in Picture（画中画）
 
 在一些较新版本的 iPad 上，使用 HTML5 video 标签的网站可以将其暴露到 Picture in Picture 机制中。通过 API（本文稍后会讲）或用户的触发，视频可以独立于网站在其他应用的上方继续播放。
 
 ![Picture in Picture](http://www.mobilexweb.com/wp-content/uploads/2015/09/pip.png)
 
 
-##### iOS 9 下的响应式网页设计
+### iOS 9 下的响应式网页设计
 
 下图向你展示了 iOS 9 所有可能的 viewport 尺寸，检查检查你的响应式断点都包含它们了吗？
 
 ![iOS 9 RWD](http://www.mobilexweb.com/wp-content/uploads/2015/09/ios9rwd.png)
 
-##### Safari View Controller 
+### Safari View Controller 
 
 如果你用过 Twitter 或者 Facebook（或者微信，微博……），那么你一定知道很多 native app 在打开一个网页链接时并不会默认使用 Safari。它们试图让你留在它们的应用里，所以通过提供 webview 让你在应用内进行网页浏览。可是问题在于，这类 webview 并不会与浏览器共享 cookies，sessions，autofill（自动填充）与 bookmark（书签），为了解决这些问题，就有了 Safari View Controller。
 
@@ -168,7 +168,7 @@ Slide Over 支持的 App 并不多，不过 Safari 名列其中，这意味着�
 > 2015 年 6 月，Apple Safari 工程师 Ricky Mondello 的 Twitter 宣告了这个设想的落地：You all asked for it. Come see me introduce it. Introducing Safari View Controller 1:30 PM, Tuesday. Nob Hill.
 
 
-##### Safari Content Blockers
+### Safari Content Blockers
 
 现在，iOS 9 上的 Safari 支持一种全新的 App Extensions（应用拓展）：**Content Blocker**（内容拦截器）。这类拓展以 native app 的形式存在，你可以在 App Store 上下载到，它们可以拦截 Safari 内的任何内容，包括：跟踪器、广告、自定义字体、大图片、JavaScript 文件等等。
 
@@ -184,13 +184,13 @@ Content Blocker 能隐藏元素，也有能力通过 CSS 选择器、域名、�
 
 ![purify](http://www.mobilexweb.com/wp-content/uploads/2015/09/purify.png)
 
-##### WKWebView 的增强
+### WKWebView 的增强
 
 UIWebView 已经被官方弃用，虽然它还在在那，不过它再也不会得到什么升级。与此相反，WKWebView 正在取代它的位置。一个最受期待的特性现在终于推出：加载本地文件到 WKWebView。因此，现在 Apache Cordova 应用与其他 web 内容都可以直接从 iOS 包中使用本地文件了，不再需要各种诡异的 hack 了。
 
 此外，还有一些新特性也一并推出。比如说，通过 WKWebsiteDataStore，Objective-C 或 Swift 有能力查询与管理 webview 的本地存储（比如 localStorage 或 IndexedDB）。这就允许我们将原有的数据存储替换成新的某些东西，比如说替换成一个不永久的（Chrome for iOS 的隐身模式就需要这种东西）
 
-##### Universal Links（通用链接）
+### Universal Links（通用链接）
 
 如果你既有一个网站，又有一个 native app，你现在可以通过 Universal Links 来增强用户体验。它允许你在操作系统内“占有”自己的域名，这样，一切指向你网站的链接都会被重定向到你的 app。
 
@@ -200,7 +200,7 @@ UIWebView 已经被官方弃用，虽然它还在在那，不过它再也不会�
 
 目前唯一的缺点是用户好像并不能决定到底以哪种方式来打开内容（使用 web 还是 app），不过我们可以观望一段时间看看它会如何发展。在不远的这段时间里，你可能会发现在网站或 Google 搜索里点击一个链接时会没有任何预警的就跳进了 native app 里。
 
-##### App Search（应用搜索）
+### App Search（应用搜索）
 
 Apple 带着自己的 web 蜘蛛杀进了搜索的市场，而我们需要支持它得以在 Siri 与 Spotlight 中提升自己的曝光率。这在我们同时拥有网站与 app 时尤为重要，因为现在 Apple 会索引你网站的内容，但打开时却可能将用户带到了 app 里去。
 
@@ -212,11 +212,11 @@ Apple 刚刚发布了一个 [App Search Validation Tool（应用搜索验证工�
 
 ![App Search](http://www.mobilexweb.com/wp-content/uploads/2015/09/appsearch-1024x467.png)
 
-##### CloudKit JS
+### CloudKit JS
 
 如果你拥有一个 native app，你很可能会将用户数据保存在 iCloud 上。在过去，只有 iOS 与 Mac 应用被允许使用它。现在，通过 CloudKit JS，你的网站也可以连接上 iCloud 数据了。
 
-##### Back Button
+### Back Button
 
 现在，当你链接到一个 native app 时（通过自定义 URI 或者 Universal Link），Safari 会询问用户是否想要使用 native app 打开这个链接（见下图）。如果用户同意了，这个应用将被打开，并且在左上角会有一个返回按钮可以返回 Safari ，返回到你的网站。
 
@@ -224,12 +224,12 @@ Apple 刚刚发布了一个 [App Search Validation Tool（应用搜索验证工�
 
 ## 新的 API 支持
 
-##### Navigation Timing API
+### Navigation Timing API
 
 Navigation Timing API 在 iOS 9 迎来了回归。让我们回忆一下，这货添加于 8.0 却在一周后的 8.1 中去掉了。这对于 Web 性能是个好消息。通过这个 API，我们可以更精确的测量时间，还可以获得一系列有关加载过程的时间戳，它们对于追踪与在真实场景中做决策来改进用户体验都非常有用。
 
 
-##### Picture in Picture
+### Picture in Picture
 
 PiP API（被称为 Presentation Mode API）目前只支持 iOS，它允许我们手动让一个 `<video>` 元素进入或离开 PiP 模式如果 `video.webkitSupportsPresentationMode` 是支持的。
 
@@ -246,7 +246,7 @@ video.webkitSetPresentationMode(
 我们还可以通过新的 `onwebkitpresentationmodechanged` 事件来检测 Presentation Mode（展示模式）的变化。
 
 
-##### Backdrop CSS
+### Backdrop CSS
 
 iOS 7 与最近的 Mac OS 使用 Backdrop filter（背景滤镜）来模糊背景（指 native 开发），而在网站上实现这个却并不容易。
 
@@ -263,7 +263,7 @@ header {
 ![backdrop](http://www.mobilexweb.com/wp-content/uploads/2015/09/backdrop.png)
 
 
-##### CSS Scroll Snapping
+### CSS Scroll Snapping
 
 在 web 上实现分页内容（比如相册跑马灯）总是非常麻烦，无论是使用 JavaScript 框架、touch 事件还是 hacking 滚动条等等。Apple 新添加了一个很赞的 CSS 特性叫做 CSS Scroll Snapping。这个特性新增了一系列的 CSS 属性让你定义规则或者不规则的 snap zone（停留区域），这样滚动的位置就会“啪”地一下停在这个区域，而非像以前一样可以停在任何地方。  
 
@@ -281,7 +281,7 @@ header {
 > 想要看个跑起来后的例子？笔者为大家准备了 webkit 的官方 [demo](http://www.webkit.org/demos/scroll-snap/)，不过这个属性目前只支持 iOS 9 Safari 哦，并不支持 webview
 
 
-##### CSS Supports
+### CSS Supports
 
 CSS Supports，包括 CSS `@supports` 与来自 CSS Conditional Rules Module Level 3 spec 的 JavaScript CSS Supports API 都在 iOS 上迎来降临。现在，我们可以针对某个 CSS 属性的特定值的支持情况来编写代码：
 
@@ -297,7 +297,7 @@ CSS Supports，包括 CSS `@supports` 与来自 CSS Conditional Rules Module Lev
 if (CSS.supports("-webkit-scroll-snap-type", "mandatory")) {}
 ```
 
-##### 一些细微的改进
+### 一些细微的改进
 
 * ECMAScript 6 的更完善支持：classed、computed properties、template literial 与 week sets
 * 新的 CSS Level4 伪类/元素选择器：`:not`、`:matches`、`:any-link`、`:placeholder-shown`、`:read-write`、`:read-only`

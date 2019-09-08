@@ -162,7 +162,14 @@ samp {
     margin: 30px 0 10px;
     line-height: 1.4;
   }
-  h5 {
+  h2::before {
+    content: " ";
+    display: block;
+    border-bottom: 1px solid #ececec;
+    margin-top: 44px;
+    margin-bottom: 30px;
+  }
+  h4 {
     font-size: 19px;
     font-weight: 600;
     color: gray;
@@ -170,8 +177,8 @@ samp {
       margin-top: 5px;
     }
   }
-  h6 {
-    font-size: 16px;
+  h5, h6 {
+    font-size: 17px;
     font-weight: 600;
     color: gray;
     & + p {
@@ -181,9 +188,9 @@ samp {
   // downscale the font a little bit in mobile
   @media screen and (max-width: 768px) {
     h1 { font-size: 30px; }
-    h2 { font-size: 24px; }
-    h3 { font-size: 21px; }
-    h4 { font-size: 19px; }
+    h2 { font-size: 22px; }
+    h3 { font-size: 19px; }
+    h4 { font-size: 18px; }
   }
   ul,
   ol {
@@ -241,7 +248,7 @@ samp {
   .anchorjs-link {
     // I can not understand this but this made anchor always in the same line as title
     position: absolute; 
-    padding-top: 1px;
+    text-decoration: none !important;
   }
 }
 
