@@ -7,7 +7,6 @@ header-style: text
 lang: en
 tags:
   - Haskell
-  - PL
   - 笔记
   - 🇬🇧
 ---

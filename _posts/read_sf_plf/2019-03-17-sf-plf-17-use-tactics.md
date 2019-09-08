@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 17. Tactic Library For Coq: A Gentle Introduction"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 17"
+title: "「编程语言基础」17 UseTactics"
+subtitle: "Programming Language Foundations - Tactic Library For Coq"
 layout: post
 author: "Hux"
 header-style: text

@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 14. Subtyping with Records"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 14"
+title: "「编程语言基础」14 RecordSub"
+subtitle: "Programming Language Foundations - Subtyping with Records"
 layout: post
 author: "Hux"
 header-style: text

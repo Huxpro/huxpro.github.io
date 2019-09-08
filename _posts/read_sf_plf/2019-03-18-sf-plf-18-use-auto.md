@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 18. Theory And Practice Of Automation In Coq Proofs"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 18"
+title: "「编程语言基础」18 UseAuto"
+subtitle: "Programming Language Foundations - Theory And Practice Of Automation In Coq Proofs"
 layout: post
 author: "Hux"
 header-style: text

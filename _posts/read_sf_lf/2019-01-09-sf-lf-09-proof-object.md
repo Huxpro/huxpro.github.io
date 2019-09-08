@@ -1,6 +1,6 @@
 ---
-title: "「逻辑基础」 9. Proof Objects - The Curry-Howard Correspondence "
-subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 09"
+title: "「逻辑基础」9 ProofObjects"
+subtitle: "Logical Foundations - The Curry-Howard Correspondence "
 layout: post
 author: "Hux"
 header-style: text

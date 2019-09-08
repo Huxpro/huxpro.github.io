@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 19. Partial Evaluation"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 19"
+title: "「编程语言基础」19 PE"
+subtitle: "Programming Language Foundations - Partial Evaluation"
 layout: post
 author: "Hux"
 header-style: text

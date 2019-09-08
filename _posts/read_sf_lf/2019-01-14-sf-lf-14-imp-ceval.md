@@ -1,6 +1,6 @@
 ---
-title: "「逻辑基础」 14. An Evaluation Function For Imp"
-subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 14"
+title: "「逻辑基础」14 ImpCEvalFun"
+subtitle: "Logical Foundations - An Evaluation Function For Imp"
 layout: post
 author: "Hux"
 header-style: text

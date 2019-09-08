@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 4. Hoare Logic as a Logic"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 04"
+title: "「编程语言基础」4 HoareAsLogic"
+subtitle: "Programming Language Foundations - Hoare Logic as a Logic"
 layout: post
 author: "Hux"
 header-style: text

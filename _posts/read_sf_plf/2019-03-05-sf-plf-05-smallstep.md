@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 5. Small-Step Operational Semantics"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 05"
+title: "「编程语言基础」5 Smallstep"
+subtitle: "Programming Language Foundations - Small-Step Operational Semantics"
 layout: post
 author: "Hux"
 header-style: text

@@ -1,6 +1,6 @@
 ---
-title: "「逻辑基础」 15. Extracting ML From Coq"
-subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 15"
+title: "「逻辑基础」15 Extraction"
+subtitle: "Logical Foundations - Extracting ML From Coq"
 layout: post
 author: "Hux"
 header-style: text

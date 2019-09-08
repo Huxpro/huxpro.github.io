@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 16. A Collection of Handy General-Purpose Tactics"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 16"
+title: "「编程语言基础」16 LibTactics"
+subtitle: "Programming Language Foundations - A Collection of Handy General-Purpose Tactics"
 layout: post
 author: "Hux"
 header-style: text

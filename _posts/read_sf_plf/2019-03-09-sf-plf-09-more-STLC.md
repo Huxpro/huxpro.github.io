@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 9. More on STLC"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 09"
+title: "「编程语言基础」9 MoreStlc"
+subtitle: "Programming Language Foundations - More on The Simply Typed Lambda-Calculus"
 layout: post
 author: "Hux"
 header-style: text

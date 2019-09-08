@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 10. Subtyping"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 10"
+title: "「编程语言基础」10 Sub"
+subtitle: "Programming Language Foundations - Subtyping (子类型化)"
 layout: post
 author: "Hux"
 header-style: text

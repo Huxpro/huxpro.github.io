@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 13. Typing Mutable References"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 13"
+title: "「编程语言基础」13 References"
+subtitle: "Programming Language Foundations - Typing Mutable References"
 layout: post
 author: "Hux"
 header-style: text

@@ -1,6 +1,6 @@
 ---
-title: "「逻辑基础」 7. Ind Prop (归纳定义命题)"
-subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 07"
+title: "「逻辑基础」7 Ind Prop"
+subtitle: "Logical Foundations - Inductively Defined Propositions (归纳定义命题)"
 layout: post
 author: "Hux"
 header-style: text

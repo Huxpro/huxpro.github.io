@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 8. Properties of STLC"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 08"
+title: "「编程语言基础」8 StlcProp"
+subtitle: "Programming Language Foundations - Properties of STLC"
 layout: post
 author: "Hux"
 header-style: text

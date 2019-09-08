@@ -1,6 +1,6 @@
 ---
-title: "「逻辑基础」 13. Lexing And Parsing In Coq"
-subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 13"
+title: "「逻辑基础」13 ImpParser"
+subtitle: "Logical Foundations - Lexing And Parsing In Coq"
 layout: post
 author: "Hux"
 header-style: text

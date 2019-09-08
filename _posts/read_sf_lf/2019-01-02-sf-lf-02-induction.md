@@ -1,6 +1,6 @@
 ---
-title: "「逻辑基础」 2. Induction "
-subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 02"
+title: "「逻辑基础」2 Induction"
+subtitle: "Logical Foundations - Proof by Induction"
 layout: post
 author: "Hux"
 header-style: text

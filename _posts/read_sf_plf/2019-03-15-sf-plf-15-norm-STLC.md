@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 15. Normalization of STLC"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 15"
+title: "「编程语言基础」15 Norm"
+subtitle: "Programming Language Foundations - Normalization of STLC"
 layout: post
 author: "Hux"
 header-style: text

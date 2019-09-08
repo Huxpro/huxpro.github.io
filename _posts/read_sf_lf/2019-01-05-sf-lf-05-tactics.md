@@ -1,6 +1,6 @@
 ---
-title: "「逻辑基础」 5. Tactics"
-subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 05"
+title: "「逻辑基础」5 Tactics"
+subtitle: "Logical Foundations - More Basic Tactics"
 layout: post
 author: "Hux"
 header-style: text

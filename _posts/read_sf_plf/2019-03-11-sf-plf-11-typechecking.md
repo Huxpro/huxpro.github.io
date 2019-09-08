@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 11. TypeChecking"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 11"
+title: "「编程语言基础」11. TypeChecking"
+subtitle: "Programming Language Foundations - A Typechecker for STLC"
 layout: post
 author: "Hux"
 header-style: text

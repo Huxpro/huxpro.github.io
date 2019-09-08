@@ -1,6 +1,6 @@
 ---
-title: "「编程语言基础」 12. Adding Records To STLC"
-subtitle: "Software Foundations Volume 2: Programming Language Foundations - Chapter 12"
+title: "「编程语言基础」12 Records"
+subtitle: "Programming Language Foundations - Adding Records To STLC"
 layout: post
 author: "Hux"
 header-style: text

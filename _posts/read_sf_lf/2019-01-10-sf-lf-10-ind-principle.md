@@ -1,6 +1,6 @@
 ---
-title: "「逻辑基础」 10. Induction Principles"
-subtitle: "Software Foundations Volume 1: Logical Foundations - Chapter 10"
+title: "「逻辑基础」10 IndPrinciples"
+subtitle: "Logical Foundations - Induction Principles"
 layout: post
 author: "Hux"
 header-style: text
