@@ -555,7 +555,10 @@ pre.highlight {
     border-radius: 0px;
   }
   .highlighter-rouge .highlight td.rouge-gutter {
-    width: 46px;
+    width: 36px;
+  }
+  .highlighter-rouge .highlight table > tbody > tr > td > pre {
+    padding: 14px 10px;
   }
 }
 body {
