@@ -21,8 +21,6 @@ tags:
 *“看呐，那个虚拟又真实的世界”*
 
 
----
-
 ## Metro 
 
 我们第一个要聊的，就是 [Metro](http://en.wikipedia.org/wiki/Metro_(design_language\)) 。虽然它已经改名为 Modern UI ，虽然它作为 Windows Phone 、Windows 8 甚至 Windows 10 的 UI 风格算不上成功，但是作为一个设计语言，它却是声名显赫。以它而非 Windows 来命名这一章节，就是出于对它的敬意。
@@ -78,8 +76,6 @@ Status Bar 和 Application Bar 就像是紧贴在屏幕上的卡片，所以不�
 
 ![img](/img/in-post/post-metro-real.jpg)
 
-
----
 
 ## 结语
 

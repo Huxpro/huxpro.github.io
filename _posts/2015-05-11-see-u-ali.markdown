@@ -19,9 +19,7 @@ Hi all
 ![img](/img/in-post/post-c-u-ali-team.png)
 
 
----
-
-### Review
+## Review
 
 去年 5 月，大二的我拿到阿里的交互实习生 Offer，成为阿里的实习员工，刚好过去一个年头。
 
@@ -52,9 +50,8 @@ Hi all
 
 ![img](/img/in-post/post-c-u-ali-memo.jpg)
 
----
 
-### To Mates
+## To Mates
 
 感谢大家这么多天的照顾！  
 
@@ -89,9 +86,7 @@ Hi all
 
 **希望所有人都能工作顺利（少加班）、生活开心（多旅游）、身体健康哈。**
 
----
-
-### Future
+## Future
 
 距离毕业还有一年多的光景，前路未卜，还是想到处逛逛，多看看再做选择。
 

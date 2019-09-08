@@ -21,8 +21,6 @@ tags:
 虽然不是含着着金 iPhone 出生的一代，但好歹也算是摸着电脑长大的一代人，估摸着也算是 **Digital native** 了。你说这词是什么意思？别急，我们慢慢说。
 
 
----
-
 ## 正文
 
 今年暑假回了两个老家，也看望了不少长辈。  
@@ -115,8 +113,6 @@ Kant 给你发了一个红包
 >  **Digital immigrant，数字移民**：指代更早的一代人，已经情愿或者不情愿地适应了这个数字世界，并且将各类数字工具运用到生活当中。（Digital immigrants are their antithesis, being the folks born earlier who, either reluctantly or enthusiastically, have adapted to the digital world and incorporated its tools into their lives.）
 
 定义如此，但其实边界模糊。而真正重要的是：**或许在这个飞速发展的世界里，只有保持小孩般的好奇与初心，才能不被时代轻易的抛弃。**
-
----
 
 ## 结语
 

@@ -14,13 +14,9 @@ tags:
 > “Yeah It's on. ”
 
 
-## 前言
-
 Hux 的 Blog 就这么开通了。
 
 [跳过废话，直接看技术实现 ](#build) 
-
-
 
 2015 年，Hux 总算有个地方可以好好写点东西了。
 
@@ -31,7 +27,6 @@ Hux 的 Blog 就这么开通了。
 
 
 <p id = "build"></p>
----
 
 ## 正文
 
@@ -52,7 +47,6 @@ Hux 的 Blog 就这么开通了。
 
 哥哥可是个前端好嘛！ 果断开 Chrome DevTool 查了下网络请求，原来是 **pending 在了 Google Fonts** 上，页面渲染一直被阻塞到请求超时为止，难怪这么慢。  
 忍痛割爱，只好把 Web Fonts 去了（反正超时看到的也只能是 fallback ），果然一下就正常了，而且 GitHub 和 GitCafe 对比并没有感受到明显的速度差异，虽然 github 的 ping 值明显要高一些，达到了 300ms，于是用 DNSPOD 优化了一下速度。
-
 
 
 ---
