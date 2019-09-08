@@ -53,6 +53,14 @@ I tend to open multiple _workspace_. Though people might found Vim tabs useful, 
 [r/spacemacs - Vim-style tabs?](https://www.reddit.com/r/spacemacs/comments/5w5d2s/vimstyle_tabs/) gave me a good way to approximate the experience by using [Spacemacs Workspaces](http://spacemacs.org/doc/DOCUMENTATION.html#workspaces): `SPC l w <nth>` trigger a so-called "layout transient state" (I have no idea what's that mean) to open N-th workspaces, and use `gt`/`gT` to switch between.
 
 
+### Fuzz File Name Search / Rg
+
+`SPC f f`
+
+
+### Buffers
+
+`SPC b b`
 
 
 

@@ -694,8 +694,16 @@ samp {
 .post-container h4,
 .post-container h5,
 .post-container h6 {
-  margin: 30px 0 10px;
+  margin: 50px 0 20px;
   line-height: 1.4;
+}
+.post-container h1 + p,
+.post-container h2 + p,
+.post-container h3 + p,
+.post-container h4 + p,
+.post-container h5 + p,
+.post-container h6 + p {
+  margin-top: 20px;
 }
 .post-container h2::before {
   content: " ";
@@ -710,7 +718,7 @@ samp {
   color: gray;
 }
 .post-container h4 + p {
-  margin-top: 5px;
+  margin-top: 10px;
 }
 .post-container h5,
 .post-container h6 {
@@ -720,7 +728,7 @@ samp {
 }
 .post-container h5 + p,
 .post-container h6 + p {
-  margin-top: 5px;
+  margin-top: 10px;
 }
 @media screen and (max-width: 768px) {
   .post-container h1 {

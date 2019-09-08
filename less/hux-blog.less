@@ -159,8 +159,11 @@ samp {
   h4,
   h5,
   h6 {
-    margin: 30px 0 10px;
+    margin: 50px 0 20px;
     line-height: 1.4;
+    & + p {
+      margin-top: 20px;
+    }
   }
   h2::before {
     content: " ";
@@ -174,7 +177,7 @@ samp {
     font-weight: 600;
     color: gray;
     & + p {
-      margin-top: 5px;
+      margin-top: 10px;
     }
   }
   h5, h6 {
@@ -182,7 +185,7 @@ samp {
     font-weight: 600;
     color: gray;
     & + p {
-      margin-top: 5px;
+      margin-top: 10px;
     }
   }
   // downscale the font a little bit in mobile
