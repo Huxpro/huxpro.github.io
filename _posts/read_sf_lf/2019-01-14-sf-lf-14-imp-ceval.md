@@ -1,13 +1,13 @@
 ---
-title: "「逻辑基础」14 ImpCEvalFun"
+title: "「SF-LC」14 ImpCEvalFun"
 subtitle: "Logical Foundations - An Evaluation Function For Imp"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 逻辑基础
+  - LF (逻辑基础)
+  - SF (软件基础)
   - Coq
   - 笔记
 ---

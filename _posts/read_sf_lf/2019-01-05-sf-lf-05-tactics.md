@@ -1,13 +1,13 @@
 ---
-title: "「逻辑基础」5 Tactics"
+title: "「SF-LC」5 Tactics"
 subtitle: "Logical Foundations - More Basic Tactics"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 逻辑基础
+  - LF (逻辑基础)
+  - SF (软件基础)
   - Coq
   - 笔记
 ---

@@ -1,13 +1,13 @@
 ---
-title: "「编程语言基础」10 Sub"
+title: "「SF-PLF」10 Sub"
 subtitle: "Programming Language Foundations - Subtyping (子类型化)"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 编程语言基础
+  - SF (软件基础)
+  - PLF (编程语言基础)
   - Coq
   - 笔记
 ---

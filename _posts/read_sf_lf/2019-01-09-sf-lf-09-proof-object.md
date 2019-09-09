@@ -1,20 +1,16 @@
 ---
-title: "「逻辑基础」9 ProofObjects"
+title: "「SF-LC」9 ProofObjects"
 subtitle: "Logical Foundations - The Curry-Howard Correspondence "
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 逻辑基础
+  - LF (逻辑基础)
+  - SF (软件基础)
   - Coq
   - 笔记
 ---
-
-## Props as Types
-
-## Top
 
 > "Algorithms are the computational content of proofs." —Robert Harper
 
@@ -36,7 +32,8 @@ e.g.
 > Proving manipulates evidence, much as programs manipuate data.
 
 
-## Curry-Howard Correspondence
+Curry-Howard Correspondence
+---------------------------
 
 > deep connection between the world of logic and the world of computation:
 
@@ -51,8 +48,11 @@ e.g.
 `ev_SS : ∀n, even n -> even (S (S n))`
 - takes a nat `n` and evidence for `even n` and yields evidence for `even (S (S n))`.
 
+This is _Props as Types_.
 
-## Proof Objects
+
+Proof Objects
+-------------
 
 Proofs are data! We can see the _proof object_ that results from this _proof script_.
 
@@ -60,7 +60,6 @@ Proofs are data! We can see the _proof object_ that results from this _proof scr
 Print ev_4.
 (* ===> ev_4 = ev_SS 2 (ev_SS 0 ev_0) 
              : even 4  *)
-             
 
 Check (ev_SS 2 (ev_SS 0 ev_0)).     (* concrete derivation tree, we r explicitly say the number tho *)
 (* ===> even 4 *)
@@ -69,7 +68,8 @@ Check (ev_SS 2 (ev_SS 0 ev_0)).     (* concrete derivation tree, we r explicitly
 These two ways are the same in principle!
 
 
-## Proof Scripts
+Proof Scripts
+-------------
 
 `Show Proof.`  will show the _partially constructed_ proof terms / objects.
 `?Goal` is the _unification variable_. (the hold we need to fill in to complete the proof)
@@ -96,7 +96,8 @@ Qed.
 Agda doesn't have tactics built-in. (but also Interactive)
 
 
-## Quantifiers, Implications, Functions
+Quantifiers, Implications, Functions
+------------------------------------
 
 In Coq's _computational universe_ (where data structures and programs live), to give `->`:
 - constructors (introduced by `Indutive`)
@@ -147,11 +148,10 @@ Now we call them `dependent type function`
 
 
 
-
 ### `→` is degenerated `∀` (`Pi`)
 
-> Notice that both implication (→) and quantification (∀) correspond to functions on evidence. 
-> In fact, they are really the same thing: → is just a shorthand for a degenerate use of ∀ where there is no dependency, i.e., no need to give a name to the type on the left-hand side of the arrow:
+> Notice that both implication (`→`) and quantification (`∀`) correspond to functions on evidence. 
+> In fact, they are really the same thing: `→` is just a shorthand for a degenerate use of `∀` where there is no dependency, i.e., no need to give a name to the type on the left-hand side of the arrow:
 
 ```coq
   ∀(x:nat), nat 
@@ -164,17 +164,20 @@ Now we call them `dependent type function`
 ```
 
 > In general, `P → Q` is just syntactic sugar for `∀ (_:P), Q`.
-Same as what TAPL mentioned for `Pi`.
+
+TaPL also mention this fact for `Pi`.
 
 
-## Q&A - Slide 15
+Q&A - Slide 15
+--------------
 
 1. `∀ n, even n → even (4 + n)`. (`2 + n = S (S n)`)
 
 
 
 
-## Programming with Tactics.
+Programming with Tactics.
+-------------------------
 
 If we can build proofs by giving explicit terms rather than executing tactic scripts, 
 you may be wondering whether we can _build programs using tactics_? Yes!
@@ -234,7 +237,8 @@ Unlike Agda - you program intensively in dependent type...?
 When Extracting to OCaml...Coq did a lot of `Object.magic` for coercion to bypass OCaml type system. (Coq has maken sure the type safety.)
 
 
-## Logical Connectives as Inductive Types
+Logical Connectives as Inductive Types
+--------------------------------------
 
 > Inductive definitions are powerful enough to express most of the connectives we have seen so far. 
 > Indeed, only universal quantification (with implication as a special case) is built into Coq; 
@@ -284,7 +288,8 @@ Inductive or (P Q : Prop) : Prop :=
 this explains why `destruct` works but `split` not..
 
 
-## Q&A - Slide 22 + 24
+Q&A - Slide 22 + 24
+-------------------
 
 Both Question asked about what's the type of some expression
 
@@ -397,7 +402,8 @@ Inductive False : Prop := .
 ```
 
 
-## Equality
+Equality
+--------
 
 ```coq
 Inductive eq {X:Type} : X → X → Prop :=
@@ -417,8 +423,9 @@ Notation "x == y" := (eq x y)
 > The reason is that Coq treats as "the same" any two terms that are convertible according to a simple set of computation rules.
 
 nothing in the unification engine but we relies on the _reduction engine_.
-(how much is it willing to do?)
-> Mtf: just running them! (since Coq is total!)
+
+> Q: how much is it willing to do?  
+> Mtf: just run them! (since Coq is total!)
 
 ```coq
 Lemma four: 2 + 2 == 1 + 3.
@@ -430,7 +437,8 @@ Qed.
 The `reflexivity` tactic is essentially just shorthand for `apply eq_refl`.
 
 
-## Slide Q & A
+Slide Q & A
+-----------
 
 - (4) has to be applicable thing, i.e. lambda, or "property" in the notion! 
 
@@ -454,13 +462,13 @@ In general, the `inversion` tactic...
    3. (apply `constructor` theorem), match the conclusion of `C`, calculates a set of equalities (some extra restrictions)
    4. adds these equalities
    5. if there is contradiction, `discriminate`, solve subgoal.
-   
+
 
 ### Q
 
-> Q: Can we write `+` in a communitive way?
+> Q: Can we write `+` in a communitive way?  
 > A: I don't believe so.
-   
+
 
 [Ground truth](https://en.wikipedia.org/wiki/Ground_truth)
  - provided by direct observation (instead of inference)
@@ -468,7 +476,7 @@ In general, the `inversion` tactic...
 [Ground term](https://en.wikipedia.org/wiki/Ground_expression#Ground_terms) 
  - that does not contain any free variables.
 
-Groundness 
+Groundness
  - 根基性?
 
 > Weird `Axiomness` might break the soundness of generated code in OCaml...

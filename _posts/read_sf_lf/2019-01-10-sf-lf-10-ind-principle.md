@@ -1,13 +1,13 @@
 ---
-title: "「逻辑基础」10 IndPrinciples"
+title: "「SF-LC」10 IndPrinciples"
 subtitle: "Logical Foundations - Induction Principles"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 逻辑基础
+  - LF (逻辑基础)
+  - SF (软件基础)
   - Coq
   - 笔记
 ---

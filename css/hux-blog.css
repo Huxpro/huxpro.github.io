@@ -718,7 +718,7 @@ samp {
   margin-bottom: 30px;
 }
 .post-container h4 {
-  font-size: 19px;
+  font-size: 22px;
   font-weight: 600;
   color: gray;
 }
@@ -727,7 +727,7 @@ samp {
 }
 .post-container h5,
 .post-container h6 {
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 600;
   color: gray;
 }
@@ -743,9 +743,13 @@ samp {
     font-size: 22px;
   }
   .post-container h3 {
-    font-size: 19px;
+    font-size: 20px;
   }
   .post-container h4 {
+    font-size: 19px;
+  }
+  .post-container h5,
+  .post-container h6 {
     font-size: 18px;
   }
 }

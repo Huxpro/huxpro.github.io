@@ -1,13 +1,13 @@
 ---
-title: "「逻辑基础」7 Ind Prop"
+title: "「SF-LC」7 Ind Prop"
 subtitle: "Logical Foundations - Inductively Defined Propositions (归纳定义命题)"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 逻辑基础
+  - LF (逻辑基础)
+  - SF (软件基础)
   - Coq
   - 笔记
 ---

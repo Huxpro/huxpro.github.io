@@ -1,13 +1,13 @@
 ---
-title: "「编程语言基础」13 References"
+title: "「SF-PLF」13 References"
 subtitle: "Programming Language Foundations - Typing Mutable References"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 编程语言基础
+  - SF (软件基础)
+  - PLF (编程语言基础)
   - Coq
   - 笔记
 ---

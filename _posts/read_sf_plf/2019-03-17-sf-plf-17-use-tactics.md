@@ -1,13 +1,13 @@
 ---
-title: "「编程语言基础」17 UseTactics"
+title: "「SF-PLF」17 UseTactics"
 subtitle: "Programming Language Foundations - Tactic Library For Coq"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 编程语言基础
+  - SF (软件基础)
+  - PLF (编程语言基础)
   - Coq
   - 笔记
 ---

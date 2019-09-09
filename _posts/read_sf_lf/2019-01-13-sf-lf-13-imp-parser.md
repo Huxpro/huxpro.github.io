@@ -1,13 +1,13 @@
 ---
-title: "「逻辑基础」13 ImpParser"
+title: "「SF-LC」13 ImpParser"
 subtitle: "Logical Foundations - Lexing And Parsing In Coq"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 逻辑基础
+  - LF (逻辑基础)
+  - SF (软件基础)
   - Coq
   - 笔记
 ---

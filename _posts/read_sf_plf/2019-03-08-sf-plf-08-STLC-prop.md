@@ -1,13 +1,13 @@
 ---
-title: "「编程语言基础」8 StlcProp"
+title: "「SF-PLF」8 StlcProp"
 subtitle: "Programming Language Foundations - Properties of STLC"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 编程语言基础
+  - SF (软件基础)
+  - PLF (编程语言基础)
   - Coq
   - 笔记
 ---

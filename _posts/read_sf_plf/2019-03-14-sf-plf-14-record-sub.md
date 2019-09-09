@@ -1,13 +1,13 @@
 ---
-title: "「编程语言基础」14 RecordSub"
+title: "「SF-PLF」14 RecordSub"
 subtitle: "Programming Language Foundations - Subtyping with Records"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 编程语言基础
+  - SF (软件基础)
+  - PLF (编程语言基础)
   - Coq
   - 笔记
 ---

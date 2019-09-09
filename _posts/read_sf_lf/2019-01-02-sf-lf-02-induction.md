@@ -1,13 +1,13 @@
 ---
-title: "「逻辑基础」2 Induction"
+title: "「SF-LC」2 Induction"
 subtitle: "Logical Foundations - Proof by Induction"
 layout: post
 author: "Hux"
 header-style: text
 hidden: true
 tags:
-  - 软件基础
-  - 逻辑基础
+  - LF (逻辑基础)
+  - SF (软件基础)
   - Coq
   - 笔记
 ---
