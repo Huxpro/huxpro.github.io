@@ -27,13 +27,13 @@ GRANT ALL PRIVILEGES ON *.* TO 'sammy'@'localhost' WITH GRANT OPTION;
 
 ## Mysql命令行
 
-sudo apt-get install phpmyadmin    phpmyadmin管理
+sudo apt-get install phpmyadmin;    phpmyadmin管理
 
 systemctl status mysql.service;    查看运行状态
 
-sudo systemctl start mysql； 如果没有启动服务，通过该命令启动服务
+sudo systemctl start mysql; 如果没有启动服务，通过该命令启动服务
 
-sudo mysqladmin -p -u root version    检查版本信息
+sudo mysqladmin -p -u root version;    检查版本信息
 
 ## ALTER命令使用
 
