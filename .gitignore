@@ -7,4 +7,4 @@ npm-debug.log
 .vscode
 .idea/**
 .jekyll-cache/
-_posts/
+_site/

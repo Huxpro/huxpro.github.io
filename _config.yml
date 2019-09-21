@@ -13,10 +13,10 @@ future: true
 
 # SNS settings
 RSS: false
-weibo_username:     izbk@163.com
-zhihu_username:     izbk@163.com
-github_username:    izbk@163.com
-twitter_username:   izbk@163.com
+weibo_username:     1737934112
+zhihu_username:     think-31-30
+github_username:    izbk
+twitter_username:
 
 
 # Build settings
@@ -90,8 +90,6 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Progressive Web Apps
 chrome-tab-theme-color: "#000000"
 service-worker: true
-
-
 
 # MathJax rendering for layout:page (e.g. post preview)
 page-mathjax: false
