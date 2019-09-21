@@ -109,11 +109,8 @@ friends: [
         title: "乱序",
         href: "http://mida.re/"
     },{
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
-    },{
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
+        title: "Sherry Wu",
+        href: "https://xuechundesign.github.io"
     },{
         title: "Luke 的自留地",
         href: "http://hmqk1995.github.io"
@@ -124,6 +121,9 @@ friends: [
         title: "SmdCn's Blog",
         href: "http://blog.smdcn.net"
     },{
+        title: "JiyinYiyong",
+        href: "http://tiye.me/"
+    },{
         title: "David's Game",
         href: "https://www.ruoyaowu.com/"
     },{
@@ -132,8 +132,5 @@ friends: [
     },{
         title: "尹峰以为",
         href: "http://ingf.github.io/"
-    },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
     }
 ]
