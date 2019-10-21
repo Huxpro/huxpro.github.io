@@ -11,15 +11,16 @@ Hi，我是黄玄，前端 Online NPC，编程语言/编译器初心者，[Faceb
 
 > __从左到右__ 为喜欢程度，__从上到下__ 为了解程度，__版本__ 表示下界。
 
-|     | 💔️           | ❤️ ️                 | ❤️❤️ ️                     | ❤️❤️❤️ ️               |
-| --- | ------------- | -------------------- | -------------------------- | ---------------------- |
-| 😅  | `PHP` `BASIC` | `C` `ObjC` `Prolog`  | `Kotlin` `Dart` `Asm`      | `Swift` `Agda` `Idris` |
-| 🧐  |               | `C++` `Hack` `Lisp*` | `C++11` `C#` `AS3`         | `Scala` `Rust`         |
-| 😏  | `Shell`       | `Java` `Python`      | `TypeScript` `Flow` `Wasm` | `Haskell` `Coq` `ML*`  |
-| 🤓  |               | `JavaScript`         | `EcmaScript6`              | `λ` `Λ` `Π` `Σ`        |
+|     | 💔️           | ❤️ ️                   | ❤️❤️ ️             | ❤️❤️❤️ ️               |
+| --- | ------------- | ---------------------- | ------------------ | ---------------------- |
+| 😅  | `PHP` `BASIC` | `ObjC` `Prolog` `Hack` | `Kotlin` `Dart`    | `Swift` `Agda` `Idris` |
+| 🧐  |               | `Asm` `C++`  `Lisp*`   | `C++11` `C#` `AS3` | `Scala` `Rust`         |
+| 😏  | `Shell`       | `C` `Java` `Python`    | `Typed JS*` `Wasm` | `Haskell` `Coq` `ML*`  |
+| 🤓  |               | `JavaScript`           | `ECMAScript6`      | `λ` `Λ` `Π` `Σ`        |
 
 > __`ML*` 家族__：`OCaml` `ReasonML` `Standard ML`  
-> __`Lisp*` 家族__：`Clojure` `Scheme` `Racket`
+> __`Lisp*` 家族__：`Clojure` `Scheme` `Racket`  
+> __`Typed JS*`__：`Flow` `TypeScript`
 
 
 ##### 演讲与分享
