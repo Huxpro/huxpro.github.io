@@ -1,0 +1,14 @@
+I"Û<div class="language-pascal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="n">Z</span> <span class="p">::=</span> <span class="n">X</span><span class="p">;;</span>
+<span class="n">Y</span> <span class="p">::=</span> <span class="m">1</span><span class="p">;;</span>
+<span class="k">WHILE</span> <span class="p">~(</span><span class="n">Z</span> <span class="p">=</span> <span class="m">0</span><span class="p">)</span> <span class="k">DO</span>
+  <span class="n">Y</span> <span class="p">::=</span> <span class="n">Y</span> <span class="p">*</span> <span class="n">Z</span><span class="p">;;</span>
+  <span class="n">Z</span> <span class="p">::=</span> <span class="n">Z</span> <span class="p">-</span> <span class="m">1</span>
+<span class="k">END</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+:ET

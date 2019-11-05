@@ -1,0 +1,145 @@
+I"�<blockquote>
+  <p>下滑这里查看更多内容</p>
+</blockquote>
+
+<h3 id="watching-fullscreen-"><a href="https://huangxuan.me/css-sucks-2015/">Watching Fullscreen →</a></h3>
+
+<div class="visible-md visible-lg">
+<img src="//huangxuan.me/css-sucks-2015/attach/qrcode.png" width="350" />
+<small class="img-hint">你也可以通过扫描二维码在手机上观看</small>
+</div>
+
+<p>这个 Web Slides 开源在<a href="https://github.com/Huxpro/css-sucks-2015">我的 Github 上</a>，欢迎你帮助我完善这个展示文稿，你可以给我提 issue，可以 fork &amp; pull request。如果它能帮助到你了，希望你还能不吝啬 star 一下这个项目</p>
+
+<h3 id="catalog">Catalog</h3>
+
+<ul>
+  <li>Document Times
+    <ul>
+      <li>Frameworks</li>
+      <li>Style Guide
+        <ul>
+          <li><strong>OOCSS</strong></li>
+          <li><strong>SMACSS</strong></li>
+        </ul>
+      </li>
+      <li><strong>Pre-processer</strong></li>
+      <li><strong>PostCSS</strong></li>
+    </ul>
+  </li>
+  <li>Application Times
+    <ul>
+      <li><strong>Shadow DOM</strong></li>
+      <li><strong>CSS “4”</strong></li>
+      <li>Naming Convention
+        <ul>
+          <li><strong>BEM</strong></li>
+          <li><strong>SUIT</strong></li>
+        </ul>
+      </li>
+      <li><strong>Atomic CSS</strong></li>
+      <li><strong>CSS in JS</strong></li>
+      <li><strong>CSS Modules</strong>
+        <ul>
+          <li>Interoperable CSS</li>
+        </ul>
+      </li>
+      <li>PostCSS, again</li>
+    </ul>
+  </li>
+  <li>My Opinionated Proposal
+    <ul>
+      <li><strong>POCss</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="pocss-page-override-components-css">POCss: Page Override Components CSS</h2>
+
+<h3 id="1-scoping-components-css-blocks-should-only-be-used-inside-a-component-of-the-same-name">1. Scoping Components <br /><small style="line-height:2em;"><em>CSS Blocks should only be used inside a component of the same name.</em></small></h3>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c1">// Component/index.scss</span>
+<span class="nc">.ComponentName</span> <span class="p">{</span>
+    <span class="k">&amp;</span><span class="nt">--mofierName</span> <span class="p">{}</span>
+    <span class="k">&amp;</span><span class="nt">__decendentName</span> <span class="p">{</span>
+        <span class="k">&amp;</span><span class="nt">--modifierName</span> <span class="p">{}</span>
+    <span class="p">}</span>
+    <span class="nc">.isStateOfComponent</span> <span class="p">{}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c1">// Component/index.js</span>
+<span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./index.scss</span><span class="dl">'</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>CSS is <em>always bundled</em> with components<br />(from loading, mount to unmount)</p>
+
+<h3 id="2-components-can-be-overrode-by-pages-there-is-always-requirements-to-rewrite-styles-of-components-in-pages">2. Components can be Overrode by Pages <br /><small style="line-height:2em;"><em>There is always requirements to rewrite styles of components in pages</em></small></h3>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="c1">// Pages/PageA.scss</span>
+<span class="nn">#PageA</span> <span class="p">{</span>
+    <span class="nc">.pagelet-name</span> <span class="p">{</span>
+        <span class="nc">.pagelet-descendent-name</span> <span class="p">{}</span>
+    <span class="p">}</span>
+    <span class="nc">.ComponentName</span><span class="p">{</span> <span class="cm">/* override */</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c1">// Pages/index.js</span>
+<span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./PageA.scss</span><span class="dl">'</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li><em>#Page</em> for absolutely scoping between pages</li>
+  <li><em>.pagelet-name</em> should be lowercase to prevent conflicting with components</li>
+</ul>
+
+<h3 id="why-poc">Why POC?</h3>
+
+<ul>
+  <li>
+    <p><strong>It’s technology-agnostic</strong>
+<small>
+  <em>One css framework can be played with whatever technology stacks</em><br />
+  <em>You can combined Scss, PostCSS and whatever you want</em>
+</small></p>
+  </li>
+  <li>
+    <p><strong>Solving problems, and easy</strong>
+<small>
+  <em>Makes reading and teamwork much easier</em><br />
+  <em>Get all benefit from BEM, SUITCSS and others</em>
+</small></p>
+  </li>
+  <li>
+    <p><strong>Leverage the power of cascading properly</strong>
+<small>
+  <em>Scoping components but allow reasonable overriding</em><br />
+  <em>It’s pragmatic, flexible and hitting the sweet spot</em>
+</small></p>
+  </li>
+</ul>
+
+<h3 id="thanks">Thanks</h3>
+
+<p><a href="http://lab.hakim.se/reveal-js">Reveal.js</a></p>
+:ET

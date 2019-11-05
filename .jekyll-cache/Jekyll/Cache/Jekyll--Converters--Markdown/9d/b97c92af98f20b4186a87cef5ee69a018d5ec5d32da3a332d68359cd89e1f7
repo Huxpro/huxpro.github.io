@@ -1,0 +1,323 @@
+I"�<blockquote>
+  <p>The <code class="highlighter-rouge">has_type</code> relation is good but doesn’t give us a <em>executable algorithm</em> – 不是一个算法
+but it’s <em>syntax directed</em>, just one typing rule for one term (unique typing) – translate into function!</p>
+</blockquote>
+
+<h2 id="comparing-types">Comparing Types</h2>
+
+<p>首先我们需要 check equality for types.
+这里非常简单，如果是 SystemF 会麻烦很多，对 <code class="highlighter-rouge">∀</code> 要做 local nameless 或者 alpha renaming:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">eqb_ty</span><span class="w"> </span><span class="o">(</span><span class="no">T1</span><span class="w"> </span><span class="no">T2</span><span class="p">:</span><span class="no">ty</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">T1</span><span class="o">,</span><span class="no">T2</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Bool</span><span class="o">,</span><span class="w"> </span><span class="no">Bool</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+      </span><span class="no">true</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Arrow</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">T12</span><span class="o">,</span><span class="w"> </span><span class="no">Arrow</span><span class="w"> </span><span class="no">T21</span><span class="w"> </span><span class="no">T22</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+      </span><span class="no">andb</span><span class="w"> </span><span class="o">(</span><span class="no">eqb_ty</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">T21</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">eqb_ty</span><span class="w"> </span><span class="no">T12</span><span class="w"> </span><span class="no">T22</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="p">_</span><span class="o">,</span><span class="p">_</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+      </span><span class="no">false</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>然后我们需要一个 refl 和一个 reflection，准确得说：「define equality by computation」，反方向用 refl 即可易证</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Lemma</span><span class="w"> </span><span class="no">eqb_ty_refl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">T1</span><span class="o">,</span><span class="w">
+  </span><span class="no">eqb_ty</span><span class="w"> </span><span class="no">T1</span><span class="w"> </span><span class="no">T1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Lemma</span><span class="w"> </span><span class="no">eqb_ty__eq</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">T1</span><span class="w"> </span><span class="no">T2</span><span class="o">,</span><span class="w">
+  </span><span class="no">eqb_ty</span><span class="w"> </span><span class="no">T1</span><span class="w"> </span><span class="no">T2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">T1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">T2</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="the-typechecker">The Typechecker</h2>
+
+<p>直接 syntax directed，不过麻烦的是需要 pattern matching <code class="highlighter-rouge">option</code>…</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="o">(</span><span class="no">Gamma</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">context</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">option</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">var</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
+      </span><span class="no">Gamma</span><span class="w"> </span><span class="no">x</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">abs</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">t12</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
+      </span><span class="kr">match</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="o">(</span><span class="no">update</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">T11</span><span class="o">)</span><span class="w"> </span><span class="no">t12</span><span class="w"> </span><span class="kp">with</span><span class="w">     </span><span class="c">(** &lt;-- 对应 t12 的 rule **)</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">T12</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="o">(</span><span class="no">Arrow</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">T12</span><span class="o">)</span><span class="w">                 
+      </span><span class="o">|</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">None</span><span class="w">
+      </span><span class="kr">end</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">app</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
+      </span><span class="kr">match</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">t1</span><span class="o">,</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="kp">with</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="o">(</span><span class="no">Arrow</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">T12</span><span class="o">),</span><span class="no">Some</span><span class="w"> </span><span class="no">T2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
+          </span><span class="kr">if</span><span class="w"> </span><span class="no">eqb_ty</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">T2</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">T12</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="no">None</span><span class="w">       </span><span class="c">(** eqb_ty 见下文 **)</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="p">_</span><span class="o">,</span><span class="p">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">None</span><span class="w">
+      </span><span class="kr">end</span><span class="w">
+  </span><span class="o">...</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>在课堂时提到关于 <code class="highlighter-rouge">eqb_ty</code> 的一个细节（我以前也经常犯，在 ML/Haskell 中……）：
+我们能不能在 pattern matching 里支持「用同一个 binding 来 imply 说他们两需要 be equal」？</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="c">(** instead of this **)</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="o">(</span><span class="no">Arrow</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">T12</span><span class="o">),</span><span class="no">Some</span><span class="w"> </span><span class="no">T2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">eqb_ty</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">T2</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="o">...</span><span class="w">
+
+</span><span class="c">(** can we do this? **)</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="o">(</span><span class="no">Arrow</span><span class="w"> </span><span class="no">T</span><span class="w">   </span><span class="no">T'</span><span class="w"> </span><span class="o">),</span><span class="no">Some</span><span class="w"> </span><span class="no">T</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">...</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>the answer is <strong>NO</strong> because this demands a <em>decidable equality</em>. 
+我好奇的是，用 typeclass 是不是就可以 bake in 这个功能了？尤其是在 Coq function 还是 total 的情况下</p>
+</blockquote>
+
+<h2 id="digression-improving-the-notation">Digression: Improving the Notation</h2>
+
+<p>这里我们可以自己定义一个 Haskell <code class="highlighter-rouge">do</code> notation 风格的 <em>monadic</em> notation:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">Notation</span><span class="w"> </span><span class="s2">" x &lt;- e1 ;; e2"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="kr">match</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="kp">with</span><span class="w">
+                              </span><span class="o">|</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">e2</span><span class="w">
+                              </span><span class="o">|</span><span class="w"> </span><span class="no">None</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">None</span><span class="w">
+                              </span><span class="kr">end</span><span class="o">)</span><span class="w">
+         </span><span class="o">(</span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">,</span><span class="w"> </span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">60</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">" 'return' e "</span><span class="w">
+  </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">Some</span><span class="w"> </span><span class="no">e</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">60</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">" 'fail' "</span><span class="w">
+  </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">None</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>好看一些吧反正：</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="o">(</span><span class="no">Gamma</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">context</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">option</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">var</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+      </span><span class="no">Gamma</span><span class="w"> </span><span class="no">x</span><span class="w"> 
+  </span><span class="o">|</span><span class="w"> </span><span class="no">abs</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">t12</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+      </span><span class="no">T12</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="o">(</span><span class="no">update</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">T11</span><span class="o">)</span><span class="w"> </span><span class="no">t12</span><span class="w"> </span><span class="p">;;</span><span class="w">
+      </span><span class="kr">return</span><span class="w"> </span><span class="o">(</span><span class="no">Arrow</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">T12</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">app</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+      </span><span class="no">T1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="p">;;</span><span class="w">
+      </span><span class="no">T2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="p">;;</span><span class="w">
+      </span><span class="kr">match</span><span class="w"> </span><span class="no">T1</span><span class="w"> </span><span class="kp">with</span><span class="w"> 
+      </span><span class="o">|</span><span class="w"> </span><span class="no">Arrow</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">T12</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">eqb_ty</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">T2</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kr">return</span><span class="w"> </span><span class="no">T12</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="no">fail</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">fail</span><span class="w">
+      </span><span class="kr">end</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="properties">Properties</h2>
+
+<p>最后我们需要验证一下算法的正确性：
+这里的 soundness 和 completess 都是围绕 “typechecking function ~ typing relation inference rule” 这组关系来说的：</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">type_checking_sound</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">Gamma</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">T</span><span class="o">,</span><span class="w">
+  </span><span class="no">type_check</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">has_type</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">T</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Theorem</span><span class="w"> </span><span class="no">type_checking_complete</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">Gamma</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">T</span><span class="o">,</span><span class="w">
+  </span><span class="no">has_type</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">T</span><span class="pi">.</span><span class="w">
+
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="exercise">Exercise</h2>
+
+<p>给 <code class="highlighter-rouge">MoreStlc.v</code> 里的 StlcE 写 typechecker, 然后 prove soundness / completeness （过程中用了非常 mega 的 tactics）</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="c">(** 还不能这么写 **)</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">fst</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
+    </span><span class="o">(</span><span class="no">Prod</span><span class="w"> </span><span class="no">T1</span><span class="w"> </span><span class="no">T2</span><span class="o">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="p">;;</span><span class="w">
+
+
+</span><span class="c">(** 要这样……感觉是 notation 的缘故？并且要提供 fallback case 才能通过 exhaustive check 是真的 **)</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">fst</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
+    </span><span class="no">Tp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="no">type_check</span><span class="w"> </span><span class="no">Gamma</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="p">;;</span><span class="w">
+    </span><span class="kr">match</span><span class="w"> </span><span class="no">Tp</span><span class="w"> </span><span class="kp">with</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">(</span><span class="no">Prod</span><span class="w"> </span><span class="no">T1</span><span class="w"> </span><span class="no">T2</span><span class="o">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">T1</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">fail</span><span class="w">
+    </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="extra-exercise-profmtf">Extra Exercise (Prof.Mtf)</h2>
+
+<blockquote>
+  <p>I believe this part of exercise was added by Prof. Fluet (not found in SF website version)</p>
+</blockquote>
+
+<p>给 <code class="highlighter-rouge">MoreStlc.v</code> 的 operational semantics 写 Interpreter (<code class="highlighter-rouge">stepf</code>), 然后 prove soundness / completeness…</p>
+
+<h3 id="step-vs-stepf"><code class="highlighter-rouge">step</code> vs. <code class="highlighter-rouge">stepf</code></h3>
+
+<p>首先我们定义了 <code class="highlighter-rouge">value</code> 关系的函数版本 <code class="highlighter-rouge">valuef</code>，
+然后我们定义 <code class="highlighter-rouge">step</code> 关系的函数版本 <code class="highlighter-rouge">stepf</code>:</p>
+
+<p>以 pure STLC 为例：</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">step</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ST_AppAbs</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">t12</span><span class="w"> </span><span class="no">v2</span><span class="o">,</span><span class="w">
+         </span><span class="no">value</span><span class="w"> </span><span class="no">v2</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+         </span><span class="o">(</span><span class="no">app</span><span class="w"> </span><span class="o">(</span><span class="no">abs</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">T11</span><span class="w"> </span><span class="no">t12</span><span class="o">)</span><span class="w"> </span><span class="no">v2</span><span class="o">)</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="o">[</span><span class="no">x</span><span class="p">:</span><span class="o">=</span><span class="no">v2</span><span class="o">]</span><span class="no">t12</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ST_App1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t1'</span><span class="w"> </span><span class="no">t2</span><span class="o">,</span><span class="w">
+         </span><span class="no">t1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t1'</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+         </span><span class="o">(</span><span class="no">app</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="o">)</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="o">(</span><span class="no">app</span><span class="w"> </span><span class="no">t1'</span><span class="w"> </span><span class="no">t2</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ST_App2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">v1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="no">t2'</span><span class="o">,</span><span class="w">
+         </span><span class="no">value</span><span class="w"> </span><span class="no">v1</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+         </span><span class="no">t2</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t2'</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+         </span><span class="o">(</span><span class="no">app</span><span class="w"> </span><span class="no">v1</span><span class="w"> </span><span class="no">t2</span><span class="o">)</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="o">(</span><span class="no">app</span><span class="w"> </span><span class="no">v1</span><span class="w"> </span><span class="no">t2'</span><span class="o">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">stepf</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">option</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">var</span><span class="w"> </span><span class="no">x</span><span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">None</span><span class="w"> </span><span class="c">(* We only define step for closed terms *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">abs</span><span class="w"> </span><span class="no">x1</span><span class="w"> </span><span class="no">T1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">None</span><span class="w"> </span><span class="c">(* Abstraction is a value *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">app</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w">    </span><span class="o">=&gt;</span><span class="w">
+    </span><span class="kr">match</span><span class="w"> </span><span class="no">stepf</span><span class="w"> </span><span class="no">t1</span><span class="o">,</span><span class="w"> </span><span class="no">stepf</span><span class="w"> </span><span class="no">t2</span><span class="o">,</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="kp">with</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">t1'</span><span class="o">,</span><span class="w"> </span><span class="p">_</span><span class="w">       </span><span class="o">,</span><span class="w"> </span><span class="p">_</span><span class="w">           </span><span class="o">=&gt;</span><span class="w">                     </span><span class="no">Some</span><span class="w"> </span><span class="o">(</span><span class="no">app</span><span class="w"> </span><span class="no">t1'</span><span class="w"> </span><span class="no">t2</span><span class="o">)</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">None</span><span class="w">    </span><span class="o">,</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">t2'</span><span class="o">,</span><span class="w"> </span><span class="p">_</span><span class="w">           </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">assert</span><span class="w"> </span><span class="o">(</span><span class="no">valuef</span><span class="w"> </span><span class="no">t1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">Some</span><span class="w"> </span><span class="o">(</span><span class="no">app</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2'</span><span class="o">))</span><span class="w"> </span><span class="c">(* otherwise [t1]      is a normal form *)</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">None</span><span class="w">    </span><span class="o">,</span><span class="w"> </span><span class="no">None</span><span class="w">    </span><span class="o">,</span><span class="w"> </span><span class="no">abs</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">t11</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">assert</span><span class="w"> </span><span class="o">(</span><span class="no">valuef</span><span class="w"> </span><span class="no">t2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">Some</span><span class="w"> </span><span class="o">([</span><span class="no">x</span><span class="p">:</span><span class="o">=</span><span class="no">t2</span><span class="o">]</span><span class="no">t11</span><span class="o">))</span><span class="w"> </span><span class="c">(* otherwise [t1], [t2] are normal forms *)</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="p">_</span><span class="w">       </span><span class="o">,</span><span class="w"> </span><span class="p">_</span><span class="w">       </span><span class="o">,</span><span class="w"> </span><span class="p">_</span><span class="w">           </span><span class="o">=&gt;</span><span class="w">                     </span><span class="no">None</span><span class="w">
+    </span><span class="kr">end</span><span class="w">
+
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">assert</span><span class="w"> </span><span class="o">(</span><span class="no">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">option</span><span class="w"> </span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">option</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="no">None</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<ol>
+  <li>
+    <p>对于关系，一直就是 implicitly applied 的，在可用时即使用。
+对于函数，我们需要手动指定 match 的顺序</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">stepf t1 =&gt; None</code> 只代表这是一个 <code class="highlighter-rouge">normal form</code>，但不一定就是 <code class="highlighter-rouge">value</code>，还有可能是 stuck 了，所以我们需要额外的 <code class="highlighter-rouge">assert</code>ion. (失败时返回异常)
+<strong>dynamics</strong> 本身与 <strong>statics</strong> 是正交的，在 <code class="highlighter-rouge">typecheck</code> 之后我们可以有 <code class="highlighter-rouge">progress</code>，但是现在还没有</p>
+  </li>
+</ol>
+
+<h3 id="soundness">Soundness</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">sound_stepf</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">t'</span><span class="o">,</span><span class="w">
+    </span><span class="no">stepf</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">t'</span><span class="w">  </span><span class="o">-&gt;</span><span class="w">  </span><span class="no">t</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t'</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>证明用了一个 given 的非常夸张的 automation…</p>
+
+<p>不过帮助我找到了 <code class="highlighter-rouge">stepf</code> 和 <code class="highlighter-rouge">step</code> 的多处 inconsistency:</p>
+<ul>
+  <li>3 次做 <code class="highlighter-rouge">subst</code> 时依赖的 <code class="highlighter-rouge">valuef</code> 不能省</li>
+  <li><code class="highlighter-rouge">valuef pair</code> 该怎么写才合适？
+最后把 <code class="highlighter-rouge">step</code> 中的 <code class="highlighter-rouge">value p -&gt;</code> 改成了 <code class="highlighter-rouge">value v1 -&gt; value v2 -&gt;</code>，
+因为 <code class="highlighter-rouge">valuef (pair v1 v2)</code> 出来的 <code class="highlighter-rouge">valuef v1 &amp;&amp; valuef v2</code> 比较麻烦。
+但底线是：<strong>两者必须 consistent！</strong> 这时就能感受到 Formal Methods 的严谨了。</li>
+</ul>
+
+<h3 id="completeness">Completeness</h3>
+
+<p>发现了 pair 实现漏了 2 个 case……然后才发现了 <code class="highlighter-rouge">Soundness</code> 自动化中的 <code class="highlighter-rouge">valuef pair</code> 问题</p>
+
+<h2 id="extra-mentioned">Extra (Mentioned)</h2>
+<hr />
+
+<p><a href="https://lispcast.com/church-vs-curry-types/">Church Style vs. Curry Style</a>
+<a href="https://en.wikipedia.org/wiki/Rice%27s_theorem">Rice’s Theorem</a></p>
+
+<p>CakeML</p>
+<ul>
+  <li>prove correctness of ML lang compiler</li>
+  <li>latest paper on verifying GC</li>
+</ul>
+:ET

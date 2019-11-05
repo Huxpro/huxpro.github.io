@@ -1,0 +1,6 @@
+I"V<ul>
+  <li><code class="highlighter-rouge">auto</code> - proof search</li>
+  <li><code class="highlighter-rouge">Ltac</code> - automated forward reasoning (hypothesis matching machinery)</li>
+  <li><code class="highlighter-rouge">eauto</code>, <code class="highlighter-rouge">eapply</code> - deferred instantiation of existentials</li>
+</ul>
+:ET

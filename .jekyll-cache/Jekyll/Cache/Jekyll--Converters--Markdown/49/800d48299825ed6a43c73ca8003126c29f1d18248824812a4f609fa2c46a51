@@ -1,0 +1,965 @@
+I"̄<div class="language-pascal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="n">Z</span> <span class="p">::=</span> <span class="n">X</span><span class="p">;;</span>
+<span class="n">Y</span> <span class="p">::=</span> <span class="m">1</span><span class="p">;;</span>
+<span class="k">WHILE</span> <span class="p">~(</span><span class="n">Z</span> <span class="p">=</span> <span class="m">0</span><span class="p">)</span> <span class="k">DO</span>
+  <span class="n">Y</span> <span class="p">::=</span> <span class="n">Y</span> <span class="p">*</span> <span class="n">Z</span><span class="p">;;</span>
+  <span class="n">Z</span> <span class="p">::=</span> <span class="n">Z</span> <span class="p">-</span> <span class="m">1</span>
+<span class="k">END</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>A weird convention through out all IMP is:</p>
+<ul>
+  <li><code class="highlighter-rouge">a-</code>: arith</li>
+  <li><code class="highlighter-rouge">b-</code>: bool</li>
+  <li><code class="highlighter-rouge">c-</code>: command</li>
+</ul>
+
+<h2 id="arithmetic-and-boolean-expression">Arithmetic and Boolean Expression</h2>
+
+<h3 id="abstract-syntax">Abstract Syntax</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="no">a</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">nat</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="no">a</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="no">a</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="no">a</span><span class="w">
+</span><span class="no">b</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> 
+    </span><span class="o">|</span><span class="w"> </span><span class="no">true</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">false</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">a</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="err">≤</span><span class="w"> </span><span class="no">a</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="p">¬</span><span class="no">b</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="no">b</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">aexp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ANum</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">APlus</span><span class="w"> </span><span class="o">(</span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">AMinus</span><span class="w"> </span><span class="o">(</span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">AMult</span><span class="w"> </span><span class="o">(</span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">).</span><span class="w">
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">bexp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BTrue</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BFalse</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BEq</span><span class="w"> </span><span class="o">(</span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BLe</span><span class="w"> </span><span class="o">(</span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BNot</span><span class="w"> </span><span class="o">(</span><span class="no">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bexp</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BAnd</span><span class="w"> </span><span class="o">(</span><span class="no">b1</span><span class="w"> </span><span class="no">b2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bexp</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="evaluation">Evaluation</h3>
+
+<p>TODO: is this considered as “denotational semantics”?</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">aeval</span><span class="w"> </span><span class="o">(</span><span class="no">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ANum</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">n</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">APlus</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">a1</span><span class="o">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">a2</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">AMinus</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">a1</span><span class="o">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">a2</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">AMult</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">a1</span><span class="o">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">a2</span><span class="o">)</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span><span class="k">Fixpoint</span><span class="w"> </span><span class="no">beval</span><span class="w"> </span><span class="o">(</span><span class="no">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bexp</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BTrue</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">true</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BFalse</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">false</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BEq</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">a1</span><span class="o">)</span><span class="w"> </span><span class="o">=?</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">a2</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BLe</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">a1</span><span class="o">)</span><span class="w"> </span><span class="o">&lt;=?</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">a2</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BNot</span><span class="w"> </span><span class="no">b1</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">negb</span><span class="w"> </span><span class="o">(</span><span class="no">beval</span><span class="w"> </span><span class="no">b1</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">BAnd</span><span class="w"> </span><span class="no">b1</span><span class="w"> </span><span class="no">b2</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">andb</span><span class="w"> </span><span class="o">(</span><span class="no">beval</span><span class="w"> </span><span class="no">b1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">beval</span><span class="w"> </span><span class="no">b2</span><span class="o">)</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Supposed we have a <code class="highlighter-rouge">Fixpoint optimize_0plus (a:aexp) : aexp</code></p>
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">optimize_0plus_sound</span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">a</span><span class="o">,</span><span class="w">
+  </span><span class="no">aeval</span><span class="w"> </span><span class="o">(</span><span class="no">optimize_0plus</span><span class="w"> </span><span class="no">a</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">aeval</span><span class="w"> </span><span class="no">a</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>During the proof, many cases of <code class="highlighter-rouge">destruct aexp</code> are similar!
+Recursive cases such as <code class="highlighter-rouge">APlus, AMinus, AMult</code> all require duplicated <code class="highlighter-rouge">IH</code> application.</p>
+
+<blockquote>
+  <p>From Coq Intensive:
+when we <code class="highlighter-rouge">simpl</code> on <code class="highlighter-rouge">APlus</code> case. it’s not “simplified” but give us a pattern matching.
+That’s a hint that we need to furthur case analysis by <code class="highlighter-rouge">destruct n</code> as <code class="highlighter-rouge">0</code> case or <code class="highlighter-rouge">_</code> case.</p>
+</blockquote>
+
+<h2 id="coq-automation">Coq Automation</h2>
+
+<h3 id="tacticals">Tacticals</h3>
+
+<blockquote>
+  <p>“higher-order tactics”.</p>
+</blockquote>
+
+<h4 id="try-t-and--tacticals"><code class="highlighter-rouge">try T</code> and <code class="highlighter-rouge">;</code> tacticals</h4>
+
+<blockquote>
+  <p>if <code class="highlighter-rouge">T</code> fail, <code class="highlighter-rouge">try T</code> successfully does nothing at all</p>
+</blockquote>
+
+<blockquote>
+  <p><code class="highlighter-rouge">T;T'</code> : performs <code class="highlighter-rouge">T'</code> on each subgoal generated by <code class="highlighter-rouge">T</code>.</p>
+</blockquote>
+
+<p>Super blindly but useful: (only leave the “interesting” one.)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kp">induction</span><span class="w"> </span><span class="no">a</span><span class="p">;</span><span class="w">
+    </span><span class="c">(* Most cases follow directly by the IH... *)</span><span class="w">
+    </span><span class="kp">try</span><span class="w"> </span><span class="o">(</span><span class="kp">simpl</span><span class="p">;</span><span class="w"> </span><span class="kp">rewrite</span><span class="w"> </span><span class="no">IHa1</span><span class="p">;</span><span class="w"> </span><span class="kp">rewrite</span><span class="w"> </span><span class="no">IHa2</span><span class="p">;</span><span class="w"> </span><span class="ne">reflexivity</span><span class="o">).</span><span class="w">
+    </span><span class="c">(* ... or are immediate by definition *)</span><span class="w">
+    </span><span class="kp">try</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">.</code> is the atomic 
+<code class="highlighter-rouge">;</code> cannot be stepped into…</p>
+
+<h4 id="t-t1--t2----tn-tacticals"><code class="highlighter-rouge">T; [T1 | T2 | ... | Tn]</code> tacticals</h4>
+
+<blockquote>
+  <p>general form or <code class="highlighter-rouge">;</code>
+<code class="highlighter-rouge">T;T'</code> is shorthand for: <code class="highlighter-rouge">T; [T' | T' | ... | T']</code>.</p>
+</blockquote>
+
+<h4 id="repeat-tacticals"><code class="highlighter-rouge">repeat</code> tacticals</h4>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">In10</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">In</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">;</span><span class="mi">4</span><span class="p">;</span><span class="mi">5</span><span class="p">;</span><span class="mi">6</span><span class="p">;</span><span class="mi">7</span><span class="p">;</span><span class="mi">8</span><span class="p">;</span><span class="mi">9</span><span class="p">;</span><span class="mi">10</span><span class="o">].</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">repeat</span><span class="w"> </span><span class="o">(</span><span class="kp">try</span><span class="w"> </span><span class="o">(</span><span class="no">left</span><span class="p">;</span><span class="w"> </span><span class="ne">reflexivity</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="no">right</span><span class="o">).</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>stop when it fails</li>
+  <li>always succeeds, then loop forever! e.g. <code class="highlighter-rouge">repeat simpl</code></li>
+</ul>
+
+<blockquote>
+  <p>This does not affect Coq’s logical consistency, 
+construction process diverges means we have failed to construct a proof, not that we have constructed a wrong one.</p>
+</blockquote>
+
+<h3 id="defining-new-tactic-notations">Defining New Tactic Notations</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">Tactic Notation</code>: syntax extension for tactics (good for simple <em>macros</em>)</li>
+</ul>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="no">Tactic</span><span class="w"> </span><span class="k">Notation</span><span class="w"> </span><span class="s2">"simpl_and_try"</span><span class="w"> </span><span class="no">tactic</span><span class="o">(</span><span class="no">c</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kp">simpl</span><span class="p">;</span><span class="w"> </span><span class="kp">try</span><span class="w"> </span><span class="no">c</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">Ltac</code>: scripting language for tactics (good for more sophisticated proof engineering)</li>
+  <li>OCaml tactic scripting API (for wizards)</li>
+</ul>
+
+<h3 id="the-omega-tactic">The <code class="highlighter-rouge">omega</code> Tactic</h3>
+
+<blockquote>
+  <p><em>Presburger arithmetic</em></p>
+  <ul>
+    <li>arith, equality, ordering, logic connectives</li>
+    <li><code class="highlighter-rouge">O(doubly expontential)</code></li>
+  </ul>
+</blockquote>
+
+<h3 id="a-few-more-handy-tactics">A Few More Handy Tactics</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">clear H</code></li>
+  <li><code class="highlighter-rouge">subst x</code>, <code class="highlighter-rouge">subst</code></li>
+  <li><code class="highlighter-rouge">rename ... into ...</code>  (change auto-generated name that we don’t like…)</li>
+</ul>
+
+<p>the below three are very useful in Coq Automation (w/ <code class="highlighter-rouge">try T; T'</code>)</p>
+
+<ul>
+  <li><code class="highlighter-rouge">assumption</code></li>
+  <li><code class="highlighter-rouge">contradiction</code></li>
+  <li><code class="highlighter-rouge">constructor</code>  (try to <code class="highlighter-rouge">apply</code> all constructors. 
+                Problem: might have multiple constructors applicable but some fail)</li>
+</ul>
+
+<h2 id="evaluation-as-a-relation">Evaluation as a Relation</h2>
+
+<p>Defined as Binary relation on <code class="highlighter-rouge">aexp × nat</code>. 
+Exactly <em>Big Step / Structural Operational Semantics</em>.</p>
+
+<p>More flexible than <code class="highlighter-rouge">Fixpoint</code> (computation, or <em>Denotational</em>). 
+…Since we can operate on <code class="highlighter-rouge">Inductive</code> as data I guess? 
+…and we can also <code class="highlighter-rouge">induction</code> on the relation.
+…and when things getting more and more “un-computable” <em>(see below)</em>.</p>
+
+<blockquote>
+  <p>译注：求值关系不满足对称性，因为它是有方向的。</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">aevalR</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">E_ANum</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="o">(</span><span class="no">ANum</span><span class="w"> </span><span class="no">n</span><span class="o">)</span><span class="w"> </span><span class="no">n</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">E_APlus</span><span class="w"> </span><span class="o">(</span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="no">n2</span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">n1</span><span class="w"> </span><span class="p">→</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="no">e2</span><span class="w"> </span><span class="no">n2</span><span class="w"> </span><span class="p">→</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="o">(</span><span class="no">APlus</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="no">n2</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">E_AMinus</span><span class="w"> </span><span class="o">(</span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="no">n2</span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">n1</span><span class="w"> </span><span class="p">→</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="no">e2</span><span class="w"> </span><span class="no">n2</span><span class="w"> </span><span class="p">→</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="o">(</span><span class="no">AMinus</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="no">n2</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">E_AMult</span><span class="w"> </span><span class="o">(</span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="no">n2</span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">n1</span><span class="w"> </span><span class="p">→</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="no">e2</span><span class="w"> </span><span class="no">n2</span><span class="w"> </span><span class="p">→</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="o">(</span><span class="no">AMult</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="no">n2</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<blockquote>
+  <p>Noticed now we now define <code class="highlighter-rouge">inductive</code> in a mixed style: 
+some arg is before <code class="highlighter-rouge">:</code> (named), some are after <code class="highlighter-rouge">:</code> (anonymous).</p>
+</blockquote>
+
+<p>We could do this as well</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">E_APlus</span><span class="w"> </span><span class="o">(</span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="no">n2</span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w">
+      </span><span class="o">(</span><span class="no">H1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aevalR</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">n1</span><span class="o">)</span><span class="w">
+      </span><span class="o">(</span><span class="no">H2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aevalR</span><span class="w"> </span><span class="no">e2</span><span class="w"> </span><span class="no">n2</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+      </span><span class="no">aevalR</span><span class="w"> </span><span class="o">(</span><span class="no">APlus</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="no">n2</span><span class="o">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">Reserved Notation</code> allow us using the notation during the definition!</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="no">Reserved</span><span class="w"> </span><span class="k">Notation</span><span class="w"> </span><span class="s2">"e '\\' n"</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">90</span><span class="o">,</span><span class="w"> </span><span class="no">left</span><span class="w"> </span><span class="no">associativity</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">aevalR</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">E_ANum</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+      </span><span class="o">(</span><span class="no">ANum</span><span class="w"> </span><span class="no">n</span><span class="o">)</span><span class="w"> </span><span class="err">\\</span><span class="w"> </span><span class="no">n</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">E_APlus</span><span class="w"> </span><span class="o">(</span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="no">n2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+      </span><span class="o">(</span><span class="no">e1</span><span class="w"> </span><span class="err">\\</span><span class="w"> </span><span class="no">n1</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> 
+      </span><span class="o">(</span><span class="no">e2</span><span class="w"> </span><span class="err">\\</span><span class="w"> </span><span class="no">n2</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> 
+      </span><span class="o">(</span><span class="no">APlus</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="o">)</span><span class="w"> </span><span class="err">\\</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="no">n2</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">E_AMinus</span><span class="w"> </span><span class="o">(</span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="no">n2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+      </span><span class="o">(</span><span class="no">e1</span><span class="w"> </span><span class="err">\\</span><span class="w"> </span><span class="no">n1</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> 
+      </span><span class="o">(</span><span class="no">e2</span><span class="w"> </span><span class="err">\\</span><span class="w"> </span><span class="no">n2</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> 
+      </span><span class="o">(</span><span class="no">AMinus</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="o">)</span><span class="w"> </span><span class="err">\\</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="no">n2</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">E_AMult</span><span class="w"> </span><span class="o">(</span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="no">n2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+      </span><span class="o">(</span><span class="no">e1</span><span class="w"> </span><span class="err">\\</span><span class="w"> </span><span class="no">n1</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> 
+      </span><span class="o">(</span><span class="no">e2</span><span class="w"> </span><span class="err">\\</span><span class="w"> </span><span class="no">n2</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> 
+      </span><span class="o">(</span><span class="no">AMult</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="no">e2</span><span class="o">)</span><span class="w"> </span><span class="err">\\</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="no">n2</span><span class="o">)</span><span class="w">
+
+  </span><span class="no">where</span><span class="w"> </span><span class="s2">"e '\\' n"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">aevalR</span><span class="w"> </span><span class="no">e</span><span class="w"> </span><span class="no">n</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">type_scope</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>I hated this infix <code class="highlighter-rouge">\\</code> notation…it tries to mimic <code class="highlighter-rouge">⇓</code> (double down arrow).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>                           e1 \\ n1
+                           e2 \\ n2
+                     -------------------- (E_APlus)
+                     APlus e1 e2 \\ n1+n2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>is actually:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>                           e1 ⇓ n1
+                           e2 ⇓ n2
+                     -------------------- (E_APlus)
+                     APlus e1 e2 ⇓ n1+n2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Coq Intensive:
+If you have two variables above the line. Think about if you need <code class="highlighter-rouge">generalize dependent</code>.</p>
+</blockquote>
+
+<h3 id="computational-vs-relational-definitions-interesting">Computational vs. Relational Definitions <em>INTERESTING</em></h3>
+
+<p>In some cases, relational definition are much better than computational (a.k.a. functional).</p>
+<blockquote>
+  <p>for situations, where thing beingdefined is not easy to express as a function (or not a function at all)</p>
+</blockquote>
+
+<h4 id="case-1---safe-division">case 1 - safe division</h4>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">aexp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">ADiv</span><span class="w"> </span><span class="o">(</span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">).</span><span class="w"> </span><span class="c">(* &lt;--- NEW *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<ul>
+  <li>functional: how to return <code class="highlighter-rouge">ADiv (ANum 5) (ANum 0)</code>? probably has to be <code class="highlighter-rouge">option</code> (Coq is total!)</li>
+  <li>relational: <code class="highlighter-rouge">(a1 \\ n1) → (a2 \\ n2) → (n2 &gt; 0) → (mult n2 n3 = n1) → (ADiv a1 a2) \\ n3</code>.
+    <ul>
+      <li>we can add a constraint <code class="highlighter-rouge">(n2 &gt; 0)</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="case-2---non-determinism">case 2 - non-determinism</h4>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">aexp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">AAny</span><span class="w"> </span><span class="c">(* &lt;--- NEW *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<ul>
+  <li>functional: not a deterministic function…</li>
+  <li>relational: <code class="highlighter-rouge">E_Any (n : nat) : AAny \\ n</code> … just say it’s the case.</li>
+</ul>
+
+<p>Nonetheless, functional definition is good at:</p>
+<ol>
+  <li>by definition deterministic (need proof in relational case)</li>
+  <li>take advantage of Coq’s computation engine.</li>
+  <li>function can be directly “extracted” from Gallina to OCaml/Haskell</li>
+</ol>
+
+<p>In large Coq developments:</p>
+<ol>
+  <li>given <em>both</em> styles</li>
+  <li>a lemma stating they coincise (等价)</li>
+</ol>
+
+<h2 id="expressions-with-variables">Expressions with Variables</h2>
+
+<h3 id="state-environment-环境">State (Environment) 环境</h3>
+
+<blockquote>
+  <p>A <em>machine state</em> (or just <em>state</em>) represents the current values of <em>all variables</em> at some point in the execution of a program.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">state</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">total_map</span><span class="w"> </span><span class="no">nat</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="syntax">Syntax</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">aexp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">AId</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">)</span><span class="w"> </span><span class="c">(* &lt;--- NEW *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="notations--coercisons--meta-programming-and-ast-quasi-quotation">Notations &amp; Coercisons – “meta-programming” and AST quasi-quotation</h3>
+
+<h4 id="quasi-quotation">Quasi-quotation</h4>
+
+<p><a href="https://whitequark.org/blog/2014/04/16/a-guide-to-extension-points-in-ocaml/">OCaml PPX &amp; AST quasi-quotation</a></p>
+
+<blockquote>
+  <p>quasi-quotation enables one to introduce symbols that stand for a linguistic expression in a given instance and are used as that linguistic expression in a different instance.</p>
+</blockquote>
+
+<p>e.g. in above OCaml example, you wrote <code class="highlighter-rouge">%expr 2 + 2</code> and you get <code class="highlighter-rouge">[%expr [%e 2] + [%e 2]]</code>.</p>
+
+<h4 id="coqs-notation-scope--coercision--built-in-quasi-quotation">Coq’s <em>Notation Scope</em> + Coercision == built-in Quasi-quotation</h4>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="c">(** Coercision for constructors **)</span><span class="w">
+</span><span class="no">Coercion</span><span class="w"> </span><span class="no">AId</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="w"> </span><span class="o">&gt;-&gt;</span><span class="w"> </span><span class="no">aexp</span><span class="pi">.</span><span class="w">
+</span><span class="no">Coercion</span><span class="w"> </span><span class="no">ANum</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="o">&gt;-&gt;</span><span class="w"> </span><span class="no">aexp</span><span class="pi">.</span><span class="w">
+
+</span><span class="c">(** Coercision for functions **)</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">bool_to_bexp</span><span class="w"> </span><span class="o">(</span><span class="no">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bexp</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">BTrue</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="no">BFalse</span><span class="pi">.</span><span class="w">
+</span><span class="no">Coercion</span><span class="w"> </span><span class="no">bool_to_bexp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="o">&gt;-&gt;</span><span class="w"> </span><span class="no">bexp</span><span class="pi">.</span><span class="w">
+
+</span><span class="c">(** Scoped Notation **)</span><span class="w">
+</span><span class="no">Bind</span><span class="w"> </span><span class="no">Scope</span><span class="w"> </span><span class="no">imp_scope</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="no">aexp</span><span class="pi">.</span><span class="w">
+</span><span class="no">Bind</span><span class="w"> </span><span class="no">Scope</span><span class="w"> </span><span class="no">imp_scope</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="no">bexp</span><span class="pi">.</span><span class="w">
+
+</span><span class="c">(** the Extension Point token **)</span><span class="w">
+</span><span class="no">Delimit</span><span class="w"> </span><span class="no">Scope</span><span class="w"> </span><span class="no">imp_scope</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="no">imp</span><span class="pi">.</span><span class="w">
+
+</span><span class="c">(** now we can write... **)</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">example_aexp</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="o">))%</span><span class="no">imp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="pi">.</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">example_aexp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="o">))%</span><span class="no">imp</span><span class="pi">.</span><span class="w"> 
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">example_aexp</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="o">))%</span><span class="no">imp</span><span class="pi">.</span><span class="w">    </span><span class="c">(* can be inferred *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="evaluation-w-state-environment">Evaluation w/ State (Environment)</h3>
+
+<p>Noticed that the <code class="highlighter-rouge">st</code> has to be threaded all the way…</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">aeval</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">AId</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="c">(* &lt;--- NEW *)</span><span class="w">              </span><span class="c">(** lookup the environment **)</span><span class="w">
+  </span><span class="o">...</span><span class="w">
+
+</span><span class="k">Fixpoint</span><span class="w"> </span><span class="no">beval</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bexp</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">...</span><span class="w">
+
+</span><span class="k">Compute</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="o">!-&gt;</span><span class="w"> </span><span class="mi">5</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="o">))%</span><span class="no">imp</span><span class="o">).</span><span class="w"> </span><span class="c">(** ===&gt; 13 : nat **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="commands-statement">Commands (Statement)</h2>
+
+<pre><code class="language-bnf">c ::= SKIP | x ::= a | c ;; c | TEST b THEN c ELSE c FI | WHILE b DO c END
+</code></pre>
+
+<blockquote>
+  <p>we use <code class="highlighter-rouge">TEST</code> to avoid conflicting with the <code class="highlighter-rouge">if</code> and <code class="highlighter-rouge">IF</code> notations from the standard library.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">com</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">CSkip</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">CAss</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">CSeq</span><span class="w"> </span><span class="o">(</span><span class="no">c1</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">CIf</span><span class="w"> </span><span class="o">(</span><span class="no">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">c1</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">CWhile</span><span class="w"> </span><span class="o">(</span><span class="no">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">notation</code> magics:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="no">Bind</span><span class="w"> </span><span class="no">Scope</span><span class="w"> </span><span class="no">imp_scope</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="no">com</span><span class="pi">.</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"'SKIP'"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">CSkip</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">imp_scope</span><span class="pi">.</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"x '::=' a"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">CAss</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">a</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">60</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">imp_scope</span><span class="pi">.</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"c1 ;; c2"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">CSeq</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">c2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">80</span><span class="o">,</span><span class="w"> </span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">imp_scope</span><span class="pi">.</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"'WHILE' b 'DO' c 'END'"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">CWhile</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">c</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">80</span><span class="o">,</span><span class="w"> </span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">imp_scope</span><span class="pi">.</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"'TEST' c1 'THEN' c2 'ELSE' c3 'FI'"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">CIf</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">c3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">80</span><span class="o">,</span><span class="w"> </span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">imp_scope</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="unset-notations">Unset Notations</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Unset</span><span class="w"> </span><span class="k">Printing</span><span class="w"> </span><span class="k">Notations</span><span class="pi">.</span><span class="w">  </span><span class="c">(** e1 + e2 -&gt; APlus e1 e2 **)</span><span class="w">
+</span><span class="kr">Set</span><span class="w"> </span><span class="k">Printing</span><span class="w"> </span><span class="no">Coercions</span><span class="pi">.</span><span class="w">    </span><span class="c">(** n -&gt; (ANum n) **)</span><span class="w">
+</span><span class="k">Set</span><span class="w"> </span><span class="k">Printing</span><span class="w"> </span><span class="k">All</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="the-locate-command">The <code class="highlighter-rouge">Locate</code> command</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="no">Locate</span><span class="w"> </span><span class="s2">"&amp;&amp;"</span><span class="o">.</span><span class="w">
+
+</span><span class="c">(** give you two, [Print "&amp;&amp;"] only give you the default one **)</span><span class="w">
+</span><span class="k">Notation</span><span class="w">
+</span><span class="s2">"x &amp;&amp; y"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">andb</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool_scope</span><span class="w"> </span><span class="o">(</span><span class="no">default</span><span class="w"> </span><span class="no">interpretation</span><span class="o">)</span><span class="w">
+</span><span class="s2">"x &amp;&amp; y"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">BAnd</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">imp_scope</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="evaluating-commands">Evaluating Commands</h2>
+
+<p>Noticed that to <em>use quasi-quotation in pattern matching</em>, we need</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="no">Open</span><span class="w"> </span><span class="no">Scope</span><span class="w"> </span><span class="no">imp_scope</span><span class="pi">.</span><span class="w">
+</span><span class="o">...</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">     </span><span class="c">(**  CAss x a1  **)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">     </span><span class="c">(**  CSeq c1 c1 **)</span><span class="w">
+</span><span class="o">...</span><span class="w">
+</span><span class="no">Close</span><span class="w"> </span><span class="no">Scope</span><span class="w"> </span><span class="no">imp_scope</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>An infinite loop (the <code class="highlighter-rouge">%imp</code> scope is inferred)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">loop</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="no">WHILE</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="no">DO</span><span class="w">
+    </span><span class="no">SKIP</span><span class="w">
+  </span><span class="no">END</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>The fact that <code class="highlighter-rouge">WHILE</code> loops don’t necessarily terminate makes defining an evaluation function tricky…</p>
+</blockquote>
+
+<h3 id="evaluation-as-function-fail">Evaluation as function (FAIL)</h3>
+
+<p>In OCaml/Haskell, we simply recurse, but In Coq</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="o">|</span><span class="w"> </span><span class="no">WHILE</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">DO</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">END</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="o">(</span><span class="no">beval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">b</span><span class="o">)</span><span class="w">
+                      </span><span class="kr">then</span><span class="w"> </span><span class="no">ceval_fun</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">(</span><span class="no">c</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="no">WHILE</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">DO</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">END</span><span class="o">)</span><span class="w">
+                      </span><span class="kr">else</span><span class="w"> </span><span class="no">st</span><span class="w">
+</span><span class="c">(** Cannot guess decreasing argument of fix **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Well, if Coq allowed (potentially) non-terminating, the logic would be inconsistent:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">loop_false</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">False</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">loop_false</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w">   </span><span class="c">(** False is proved! **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="step-indexed-evaluator-succ">Step-Indexed Evaluator (SUCC)</h4>
+
+<p>Chapter <code class="highlighter-rouge">ImpCEvalFun</code> provide some workarounds to make functional evalution works:</p>
+<ol>
+  <li><em>step-indexed evaluator</em>, i.e. limit the recursion depth. (think about Depth-Limited Search).</li>
+  <li>return <code class="highlighter-rouge">option</code> to tell if it’s a normal or abnormal termination.</li>
+  <li>use <code class="highlighter-rouge">LETOPT...IN...</code> to reduce the “optional unwrapping” (basicaly Monadic binding <code class="highlighter-rouge">&gt;&gt;=</code>!)
+    <ul>
+      <li>this approach of <code class="highlighter-rouge">let-binding</code> became so popular in ML family.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="evaluation-as-relation-succ">Evaluation as Relation (SUCC)</h3>
+
+<p>Again, we are using some fancy notation <code class="highlighter-rouge">st=[c]=&gt;st'</code> to mimic <code class="highlighter-rouge">⇓</code>:
+In both PLT and TaPL, we are almost exclusively use Small-Step, but in PLC, Big-Step were used:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>                      beval st b1 = true
+                       st =[ c1 ]=&gt; st'
+            ---------------------------------------  (E_IfTrue)
+            st =[ TEST b1 THEN c1 ELSE c2 FI ]=&gt; st'
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>is really:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>                        H; b1 ⇓ true
+                        H; c1 ⇓ H'
+              ----------------------------------  (E_IfTrue)
+              H; TEST b1 THEN c1 ELSE c2 FI ⇓ H'
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="no">Reserved</span><span class="w"> </span><span class="k">Notation</span><span class="w"> </span><span class="s2">"st '=[' c ']⇒' st'"</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">40</span><span class="o">).</span><span class="w">
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">ceval</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">state</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">state</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+</span><span class="o">...</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">E_Seq</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">c1</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="no">st''</span><span class="o">,</span><span class="w">
+    </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="o">]</span><span class="p">⇒</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="p">→</span><span class="w">
+    </span><span class="no">st'</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="o">]</span><span class="p">⇒</span><span class="w"> </span><span class="no">st''</span><span class="w"> </span><span class="p">→</span><span class="w">
+    </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="o">]</span><span class="p">⇒</span><span class="w"> </span><span class="no">st''</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">E_IfTrue</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">st</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">c2</span><span class="o">,</span><span class="w">
+      </span><span class="no">beval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="p">→</span><span class="w">
+      </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="o">]</span><span class="p">⇒</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="p">→</span><span class="w">
+      </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">TEST</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">THEN</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">ELSE</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">FI</span><span class="w"> </span><span class="o">]</span><span class="p">⇒</span><span class="w"> </span><span class="no">st'</span><span class="w">
+</span><span class="o">...</span><span class="w">
+  </span><span class="no">where</span><span class="w"> </span><span class="s2">"st =[ c ]⇒ st'"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">ceval</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">st'</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>By definition evaluation as relation (<em>in <code class="highlighter-rouge">Type</code> level</em>), 
+we need to construct <em>proofs</em> (<em>terms</em>) to define example.</p>
+
+<p>…noticed that in the definition of relaiton <code class="highlighter-rouge">ceval</code>, we actually use the computational <code class="highlighter-rouge">aevel</code>, <code class="highlighter-rouge">beval</code>..
+…noticed that we are using explicit <code class="highlighter-rouge">∀</code> style rather than constructor argument style (for IDK reason). They are the same!</p>
+
+<h3 id="determinism-of-evaluation">Determinism of Evaluation</h3>
+
+<blockquote>
+  <p>Changing from a computational to a relational definition of evaluation is a good move because it frees us from the artificial requirement that evaluation should be a total function
+求值不再必须是全函数</p>
+</blockquote>
+
+<blockquote>
+  <p>But it also raises a question: Is the second definition of evaluation really a partial function? 
+这个定义真的是偏函数吗？（这里的重点在于 偏函数 要求 right-unique 即 deterministic）</p>
+</blockquote>
+
+<p>we can prove:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">ceval_deterministic</span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">c</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">st1</span><span class="w"> </span><span class="no">st2</span><span class="o">,</span><span class="w">
+     </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="o">]</span><span class="p">⇒</span><span class="w"> </span><span class="no">st1</span><span class="w"> </span><span class="p">→</span><span class="w">
+     </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="o">]</span><span class="p">⇒</span><span class="w"> </span><span class="no">st2</span><span class="w"> </span><span class="p">→</span><span class="w">
+     </span><span class="no">st1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">st2</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w"> </span><span class="o">...</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="reasoning-about-imp-programs">Reasoning About Imp Programs</h2>
+
+<h3 id="case-plus2_spec">Case <code class="highlighter-rouge">plus2_spec</code></h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">plus2_spec</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">st</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">st'</span><span class="o">,</span><span class="w">
+  </span><span class="no">st</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">→</span><span class="w">
+  </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">plus2</span><span class="w"> </span><span class="o">]</span><span class="p">⇒</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="p">→</span><span class="w">
+  </span><span class="no">st'</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="no">HX</span><span class="w"> </span><span class="no">Heval</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>this looks much better as inference rules:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>    H(x) = n
+    H; x := x + 2 ⇓ H'
+  --------------------- (plus2_spec)
+    H'(x) = n + 2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>By <code class="highlighter-rouge">inversion</code> on the Big Step eval relation, we can <em>expand</em> one step of <code class="highlighter-rouge">ceval</code>
+(对 derivation tree 的 expanding 过程其实就是展开我们所需的计算步骤的过程)</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>  st : string -&gt; nat
+  =================================
+  (X !-&gt; st X + 2; st) X = st X + 2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>In inference rule:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>  H : string → nat
+  ================================
+  (x ↦ H(x) + 2); H)(x) = H(x) + 2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="case-no_whiles_terminating">Case <code class="highlighter-rouge">no_whiles_terminating</code></h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">no_whilesR_terminating_fail</span><span class="p">:</span><span class="w">
+   </span><span class="kr">forall</span><span class="w"> </span><span class="no">c</span><span class="o">,</span><span class="w"> </span><span class="no">no_whilesR</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">st</span><span class="o">,</span><span class="w"> </span><span class="kp">exists</span><span class="w"> </span><span class="no">st'</span><span class="o">,</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="no">st'</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">induction</span><span class="w"> </span><span class="no">H</span><span class="p">;</span><span class="w"> </span><span class="kp">simpl</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="o">*.</span><span class="w"> 
+  </span><span class="o">-</span><span class="w"> </span><span class="no">admit</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="no">admit</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* E_Seq *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If we <code class="highlighter-rouge">intros st</code> before <code class="highlighter-rouge">induction c</code>, 
+the IH would be <em>for particular <code class="highlighter-rouge">st</code></em> and too specific for <code class="highlighter-rouge">E_Seq</code> 
+(It’s actually okay for <code class="highlighter-rouge">TEST</code> since both branch derive from the same <code class="highlighter-rouge">st</code>)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="no">IHno_whilesR1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">exists</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">,</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="no">st'</span><span class="w">
+</span><span class="no">IHno_whilesR2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">exists</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">,</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="no">st'</span><span class="w">
+</span><span class="o">============================</span><span class="w">
+</span><span class="kp">exists</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">,</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c1</span><span class="p">;;</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="no">st'</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>So we’d love to</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="kp">generalize</span><span class="w"> </span><span class="kp">dependent</span><span class="w"> </span><span class="no">st</span><span class="pi">.</span><span class="w">
+</span><span class="kp">induction</span><span class="w"> </span><span class="no">H</span><span class="o">...</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="kp">specialize</span><span class="w"> </span><span class="o">(</span><span class="no">IHno_whilesR1</span><span class="w"> </span><span class="no">st</span><span class="o">).</span><span class="w">  </span><span class="kp">destruct</span><span class="w"> </span><span class="no">IHno_whilesR1</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="o">[</span><span class="no">st'</span><span class="w"> </span><span class="no">Hc1</span><span class="o">].</span><span class="w">
+  </span><span class="kp">specialize</span><span class="w"> </span><span class="o">(</span><span class="no">IHno_whilesR2</span><span class="w"> </span><span class="no">st'</span><span class="o">).</span><span class="w"> </span><span class="kp">destruct</span><span class="w"> </span><span class="no">IHno_whilesR2</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="o">[</span><span class="no">st''</span><span class="w"> </span><span class="no">Hc2</span><span class="o">].</span><span class="w">  </span><span class="c">(* specialize [IH2] with the existential of [IH1] **)</span><span class="w">
+  </span><span class="kp">exists</span><span class="w"> </span><span class="no">st''</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">apply</span><span class="w"> </span><span class="no">E_Seq</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="o">(</span><span class="no">st'</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="ne">assumption</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="additional-exerciese">Additional Exerciese</h2>
+
+<h3 id="stack-compiler">Stack Compiler</h3>
+
+<blockquote>
+  <p>Things that evaluate arithmetic expressions using stack:</p>
+  <ul>
+    <li>Old HP Calculators</li>
+    <li>Forth, Postscript</li>
+    <li>Java Virtual Machine</li>
+  </ul>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre>infix:
+      (2*3)+(3*(4-2))
+
+postfix:
+      2 3 * 3 4 2 - * +
+
+stack:
+      [ ]           |    2 3 * 3 4 2 - * +
+      [2]           |    3 * 3 4 2 - * +
+      [3, 2]        |    * 3 4 2 - * +
+      [6]           |    3 4 2 - * +
+      [3, 6]        |    4 2 - * +
+      [4, 3, 6]     |    2 - * +
+      [2, 4, 3, 6]  |    - * +
+      [2, 3, 6]     |    * +
+      [6, 6]        |    +
+      [12]          |
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Goal: compiler translates <code class="highlighter-rouge">aexp</code> into stack machine instructions.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">sinstr</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">SPush</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">SLoad</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">)</span><span class="w">   </span><span class="c">(* load from store (heap) *)</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">SPlus</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">SMinus</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">SMult</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="correct-proof">Correct Proof</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">s_compile_correct</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">e</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">),</span><span class="w">
+  </span><span class="no">s_execute</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">[]</span><span class="w"> </span><span class="o">(</span><span class="no">s_compile</span><span class="w"> </span><span class="no">e</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">e</span><span class="w"> </span><span class="o">].</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>To prove this, we need a <em>stronger</em> induction hypothesis (i.e. more general), so we state:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">s_execute_theorem</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">e</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">stack</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">prog</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">sinstr</span><span class="o">),</span><span class="w">
+  </span><span class="no">s_execute</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">stack</span><span class="w"> </span><span class="o">(</span><span class="no">s_compile</span><span class="w"> </span><span class="no">e</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">prog</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">s_execute</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">((</span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">e</span><span class="o">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">stack</span><span class="o">)</span><span class="w"> </span><span class="no">prog</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>and go through!</p>
+
+<h3 id="imp-breakcontinue">IMP <code class="highlighter-rouge">Break/Continue</code></h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">result</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">SContinue</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">SBreak</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The idea is that we can add a <em>signal</em> to notify the loop!</p>
+
+<p>Fun to go through!</p>
+
+<h2 id="slide-q--a">Slide Q &amp; A</h2>
+
+<p><code class="highlighter-rouge">st =[c1;;c2] =&gt; st'</code></p>
+
+<ul>
+  <li>there would be intermediate thing after inversion so… we need <em>determinism</em> to prove this!
+    <ul>
+      <li>(It won’t be even true in undetermincy)</li>
+    </ul>
+  </li>
+  <li>the <code class="highlighter-rouge">WHILE</code> one (would diverge)
+    <ul>
+      <li>true…how to prove?</li>
+      <li>induction on derivation…!
+        <ul>
+          <li>show contradiction for all cases</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>to prove <code class="highlighter-rouge">¬(∃st', ...)</code>, we intro the existentials and prove the <code class="highlighter-rouge">False</code>.</li>
+</ul>
+
+<h3 id="auto"><code class="highlighter-rouge">Auto</code></h3>
+
+<p><code class="highlighter-rouge">auto</code> includes <code class="highlighter-rouge">try</code></p>
+
+<ol>
+  <li><code class="highlighter-rouge">Proof with auto.</code></li>
+  <li><code class="highlighter-rouge">Set Intro Auto</code></li>
+</ol>
+:ET

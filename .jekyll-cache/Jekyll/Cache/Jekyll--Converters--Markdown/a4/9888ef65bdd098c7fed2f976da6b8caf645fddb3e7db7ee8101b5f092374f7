@@ -1,0 +1,705 @@
+I"�<blockquote>
+  <p>make the STLC into a PL!</p>
+</blockquote>
+
+<h2 id="simple-extensions-to-stlc">Simple Extensions to STLC</h2>
+
+<blockquote>
+  <p>其实这一部分我好像没有任何必要做笔记……</p>
+</blockquote>
+
+<h3 id="numbers">Numbers</h3>
+
+<p>See <code class="highlighter-rouge">StlcProp.v</code> exercise <code class="highlighter-rouge">stlc_arith</code>.</p>
+
+<h3 id="let-bindings">Let Bindings</h3>
+
+<ul>
+  <li>In PLT slide, we treat <code class="highlighter-rouge">let x   = t1 in e</code> as a derived form of <code class="highlighter-rouge">(λx   . e) t1</code>.</li>
+  <li>In PLT langF, we treat <code class="highlighter-rouge">let x:T = t1 in e</code> as a derived form of <code class="highlighter-rouge">(λx:T . e) t1</code>. (both require explicit type annotation)</li>
+</ul>
+
+<p>SF here, same as TaPL, treat it <em>less derived</em> by _compute the type <code class="highlighter-rouge">T1</code> from <code class="highlighter-rouge">t1</code>.</p>
+<ul>
+  <li>but TaPL treat it by desugar to <code class="highlighter-rouge">λ</code> later on, here we directly “execute” it via substituion.</li>
+</ul>
+
+<p>我想这里有一个原因是， <code class="highlighter-rouge">λ</code> 必须要可以独立被 typed，但是这时候我们还没有 <code class="highlighter-rouge">t1</code>，无法计算出 <code class="highlighter-rouge">T1</code>。而 <code class="highlighter-rouge">let</code> 的形式中包括了 <code class="highlighter-rouge">t1</code>，所以可以直接计算:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Terms</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="kr">let</span><span class="w"> </span><span class="no">x</span><span class="o">=</span><span class="no">t</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="no">t</span><span class="w">      </span><span class="kr">let</span><span class="o">-</span><span class="no">binding</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre>Reduction:
+
+                             t1 --&gt; t1'
+                 ----------------------------------               (ST_Let1)
+                 let x=t1 in t2 --&gt; let x=t1' in t2
+
+                    ----------------------------              (ST_LetValue)  &lt;-- substitute as λ
+                    let x=v1 in t2 --&gt; [x:=v1]t2
+
+Typing:
+
+         Gamma |- t1 \in T1      x|-&gt;T1; Gamma |- t2 \in T2
+         --------------------------------------------------        (T_Let)
+                    Gamma |- let x=t1 in t2 \in T2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="pairs-product-type">Pairs (Product Type)</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Terms</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="o">,</span><span class="no">t</span><span class="o">)</span><span class="w">             </span><span class="no">pair</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="nn">t</span><span class="p">.</span><span class="no">fst</span><span class="w">             </span><span class="kp">first</span><span class="w"> </span><span class="no">projection</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="nn">t</span><span class="p">.</span><span class="no">snd</span><span class="w">             </span><span class="no">second</span><span class="w"> </span><span class="no">projection</span><span class="w">
+
+</span><span class="no">v</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Values</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">(</span><span class="no">v</span><span class="o">,</span><span class="no">v</span><span class="o">)</span><span class="w">             </span><span class="no">pair</span><span class="w"> </span><span class="no">value</span><span class="w">
+
+</span><span class="no">T</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Types</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="no">T</span><span class="w">             </span><span class="no">product</span><span class="w"> </span><span class="no">type</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+</pre></td><td class="rouge-code"><pre>Reduction:
+
+                          t1 --&gt; t1'
+                     --------------------                        (ST_Pair1)
+                     (t1,t2) --&gt; (t1',t2)
+
+                          t2 --&gt; t2'
+                     --------------------                        (ST_Pair2)
+                     (v1,t2) --&gt; (v1,t2')
+
+                          t1 --&gt; t1'
+                      ------------------                          (ST_Fst1)
+                      t1.fst --&gt; t1'.fst
+
+                      ------------------                       (ST_FstPair)
+                      (v1,v2).fst --&gt; v1
+
+                          t1 --&gt; t1'
+                      ------------------                          (ST_Snd1)
+                      t1.snd --&gt; t1'.snd
+
+                      ------------------                       (ST_SndPair)
+                      (v1,v2).snd --&gt; v2
+
+
+Typing:
+
+           Gamma |- t1 \in T1     Gamma |- t2 \in T2
+           -----------------------------------------               (T_Pair)
+                   Gamma |- (t1,t2) \in T1*T2
+
+                    Gamma |- t \in T1*T2
+                    ---------------------                          (T_Fst)
+                    Gamma |- t.fst \in T1
+
+                    Gamma |- t \in T1*T2
+                    ---------------------                          (T_Snd)
+                    Gamma |- t.snd \in T2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="unit-singleton-type-单元类型">Unit (Singleton Type) 单元类型</h3>
+
+<p><code class="highlighter-rouge">unit</code> is the only value/normal form of type <code class="highlighter-rouge">Unit</code>, but not the only term (also any terms that would reduce to <code class="highlighter-rouge">unit</code>)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Terms</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">unit</span><span class="w">              </span><span class="no">unit</span><span class="w">              </span><span class="o">--</span><span class="w"> </span><span class="no">often</span><span class="w"> </span><span class="no">written</span><span class="w"> </span><span class="err">`</span><span class="o">()</span><span class="err">`</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="no">well</span><span class="w">
+
+</span><span class="no">v</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Values</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">unit</span><span class="w">              </span><span class="no">unit</span><span class="w"> </span><span class="no">value</span><span class="w">
+
+</span><span class="no">T</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Types</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">Unit</span><span class="w">              </span><span class="no">unit</span><span class="w"> </span><span class="no">type</span><span class="w">         </span><span class="o">--</span><span class="w"> </span><span class="no">Haskell</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="no">write</span><span class="w"> </span><span class="no">this</span><span class="w"> </span><span class="err">`</span><span class="o">()</span><span class="err">`</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>No reduction rule!
+
+Typing:
+
+                     ----------------------                        (T_Unit)
+                     Gamma |- unit \in Unit
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>wouldn’t every computation <em>living in</em> such a type be trivial?
+难道不是每个计算都不会在这样的类型中_居留_吗？</p>
+</blockquote>
+
+<blockquote>
+  <p>Where Unit really comes in handy is in richer languages with side effects
+在更丰富的语言中，使用 Unit 类型来处理副作用（side effect） 会很方便</p>
+</blockquote>
+
+<h3 id="sum-type-disjointed-union">Sum Type (Disjointed Union)</h3>
+
+<blockquote>
+  <p>deal with values that can take two distinct forms – binary sum type
+两个截然不同的 … “二元和”类型</p>
+</blockquote>
+
+<blockquote>
+  <p>We create elements of these types by <em>tagging</em> elements of the component types
+我们在创建这些类型的值时，会为值_标记_上其”成分”类型</p>
+</blockquote>
+
+<p>标签 <code class="highlighter-rouge">inl</code>, <code class="highlighter-rouge">inr</code> 可以看做为函数，即 <em>Data Constructor</em></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>inl : Nat  -&gt; Nat + Bool
+inr : Bool -&gt; Nat + Bool
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>that <em>“inject”</em> (注入) elements of <code class="highlighter-rouge">Nat</code> or <code class="highlighter-rouge">Bool</code> into the left and right components of the sum type <code class="highlighter-rouge">Nat+Bool</code></p>
+</blockquote>
+
+<p>不过这里并没有把他们作为 function 来形式化，而是把 <code class="highlighter-rouge">inl</code> <code class="highlighter-rouge">inr</code> 作为关键字，把 <code class="highlighter-rouge">inl t</code> <code class="highlighter-rouge">inr t</code> 作为 primitive syntactic form…</p>
+
+<ul>
+  <li>In PLT slide, we use <code class="highlighter-rouge">L          (e)</code> and say the <code class="highlighter-rouge">T2</code> would be “guessed” to produce <code class="highlighter-rouge">T1 + T2</code>, as <em>TaPL option 1</em></li>
+  <li>In PLT langF, we use <code class="highlighter-rouge">L [T1 +T2] (e)</code> i.e. provide a explicit type annotation for the sum type, as <em>TaPL option 3</em> (ascription)</li>
+</ul>
+
+<p>SF here, use something in the middle:</p>
+<ul>
+  <li>you provide only <code class="highlighter-rouge">T2</code> to <code class="highlighter-rouge">L(t1)</code> and <code class="highlighter-rouge">T1</code> would be computed from <code class="highlighter-rouge">t1</code> to form the <code class="highlighter-rouge">T1 + T2</code>.</li>
+</ul>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Terms</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">inl</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">t</span><span class="w">           </span><span class="no">tagging</span><span class="w"> </span><span class="o">(</span><span class="no">left</span><span class="o">)</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">inr</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">t</span><span class="w">           </span><span class="no">tagging</span><span class="w"> </span><span class="o">(</span><span class="no">right</span><span class="o">)</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">case</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">of</span><span class="w">         </span><span class="no">case</span><span class="w">
+        </span><span class="no">inl</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">t</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">inr</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">t</span><span class="w">
+
+</span><span class="no">v</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Values</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">inl</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">v</span><span class="w">           </span><span class="no">tagged</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="o">(</span><span class="no">left</span><span class="o">)</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">inr</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">v</span><span class="w">           </span><span class="no">tagged</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="o">(</span><span class="no">right</span><span class="o">)</span><span class="w">
+
+</span><span class="no">T</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Types</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="no">T</span><span class="w">             </span><span class="no">sum</span><span class="w"> </span><span class="no">type</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+</pre></td><td class="rouge-code"><pre>Reduction:
+
+                           t1 --&gt; t1'
+                    ------------------------                       (ST_Inl)
+                    inl T2 t1 --&gt; inl T2 t1'
+
+                           t2 --&gt; t2'
+                    ------------------------                       (ST_Inr)
+                    inr T1 t2 --&gt; inr T1 t2'
+
+                           t0 --&gt; t0'
+           -------------------------------------------            (ST_Case)
+            case t0 of inl x1 =&gt; t1 | inr x2 =&gt; t2 --&gt;
+           case t0' of inl x1 =&gt; t1 | inr x2 =&gt; t2
+
+        -----------------------------------------------        (ST_CaseInl)
+        case (inl T2 v1) of inl x1 =&gt; t1 | inr x2 =&gt; t2
+                       --&gt;  [x1:=v1]t1
+
+        -----------------------------------------------        (ST_CaseInr)
+        case (inr T1 v2) of inl x1 =&gt; t1 | inr x2 =&gt; t2
+                       --&gt;  [x2:=v1]t2
+
+Typing:
+
+                      Gamma |- t1 \in T1
+               ------------------------------                       (T_Inl)
+               Gamma |- inl T2 t1 \in T1 + T2
+
+                      Gamma |- t2 \in T2
+               -------------------------------                      (T_Inr)
+                Gamma |- inr T1 t2 \in T1 + T2
+
+                    Gamma |- t \in T1+T2
+                 x1|-&gt;T1; Gamma |- t1 \in T
+                 x2|-&gt;T2; Gamma |- t2 \in T
+     ----------------------------------------------------          (T_Case)
+     Gamma |- case t of inl x1 =&gt; t1 | inr x2 =&gt; t2 \in T
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="lists">Lists</h3>
+
+<blockquote>
+  <p>The typing features we have seen can be classified into</p>
+  <ul>
+    <li>基本类型   <em>base types</em> like <code class="highlighter-rouge">Bool</code>, and</li>
+    <li>类型构造子 <em>type constructors</em> like <code class="highlighter-rouge">→</code> and <code class="highlighter-rouge">*</code> that build new types from old ones.</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <p>In principle, we could encode lists using pairs, sums and <em>recursive types</em>. (and <em>type operator</em> to give the type a name in SystemFω)</p>
+</blockquote>
+
+<blockquote>
+  <p>但是 recursive type 太 non-trivial 了……于是我们直接处理为一个特殊的类型吧</p>
+</blockquote>
+
+<ul>
+  <li>in PLT slide, again, we omit the type and simply write <code class="highlighter-rouge">nil : List T</code>
+    <ul>
+      <li>有趣的是, Prof.Mtf 并不满意这个，因为会有 <code class="highlighter-rouge">hd nil</code> 这样 stuck 的可能，所以额外给了一个用 <code class="highlighter-rouge">unlist</code> (unempty list) 的 def</li>
+    </ul>
+  </li>
+  <li>in PLT langF, we did use pairs + sums + recursive types:
+    <ul>
+      <li>langF <code class="highlighter-rouge">nil : all('a . rec('b . unit + ('a * 'b)))</code></li>
+      <li>StlcE <code class="highlighter-rouge">nil : ∀α     . µβ     . unit + (α ∗ β)</code></li>
+    </ul>
+  </li>
+  <li>in TaPL ch11, we manually provide <code class="highlighter-rouge">T</code> to all term (data constructor)
+    <ul>
+      <li>but actually, only <code class="highlighter-rouge">nil</code> need it! (others can be inferred by argument)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>and that’s we did for SF here!</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Terms</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">nil</span><span class="w"> </span><span class="no">T</span><span class="w">                          </span><span class="o">--</span><span class="w"> </span><span class="no">nil</span><span class="w"> </span><span class="no">need</span><span class="w"> </span><span class="no">explicit</span><span class="w"> </span><span class="no">type</span><span class="w"> </span><span class="no">annotation</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">cons</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">t</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">lcase</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">nil</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">t</span><span class="w">           </span><span class="o">--</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">special</span><span class="w"> </span><span class="no">case</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">list</span><span class="w">
+               </span><span class="o">|</span><span class="w"> </span><span class="no">x</span><span class="p">::</span><span class="no">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">t</span><span class="w">
+
+</span><span class="no">v</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Values</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">nil</span><span class="w"> </span><span class="no">T</span><span class="w">             </span><span class="no">nil</span><span class="w"> </span><span class="no">value</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">cons</span><span class="w"> </span><span class="no">v</span><span class="w"> </span><span class="no">v</span><span class="w">          </span><span class="no">cons</span><span class="w"> </span><span class="no">value</span><span class="w">
+
+</span><span class="no">T</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Types</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">List</span><span class="w"> </span><span class="no">T</span><span class="w">            </span><span class="no">list</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">Ts</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+</pre></td><td class="rouge-code"><pre>Reduction:
+
+                            t1 --&gt; t1'
+                   --------------------------                    (ST_Cons1)
+                   cons t1 t2 --&gt; cons t1' t2
+
+                            t2 --&gt; t2'
+                   --------------------------                    (ST_Cons2)
+                   cons v1 t2 --&gt; cons v1 t2'
+
+                          t1 --&gt; t1'
+            -------------------------------------------         (ST_Lcase1)
+             (lcase t1 of nil =&gt; t2 | xh::xt =&gt; t3) --&gt;
+            (lcase t1' of nil =&gt; t2 | xh::xt =&gt; t3)
+
+           -----------------------------------------          (ST_LcaseNil)
+           (lcase nil T of nil =&gt; t2 | xh::xt =&gt; t3)
+                            --&gt; t2
+
+        ------------------------------------------------     (ST_LcaseCons)
+        (lcase (cons vh vt) of nil =&gt; t2 | xh::xt =&gt; t3)
+                      --&gt; [xh:=vh,xt:=vt]t3                  -- multiple substi
+
+
+Typing:
+
+                    -------------------------                       (T_Nil)
+                    Gamma |- nil T \in List T
+
+         Gamma |- t1 \in T      Gamma |- t2 \in List T
+         ---------------------------------------------             (T_Cons)
+                Gamma |- cons t1 t2 \in List T
+
+                    Gamma |- t1 \in List T1
+                    Gamma |- t2 \in T
+            (h|-&gt;T1; t|-&gt;List T1; Gamma) |- t3 \in T
+      ---------------------------------------------------         (T_Lcase)
+      Gamma |- (lcase t1 of nil =&gt; t2 | h::t =&gt; t3) \in T
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="general-recursion-fixpoint">General Recursion (Fixpoint)</h3>
+
+<p>通用的递归，而非 primitive recursion (PFPL)</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">fact</span> <span class="o">=</span> <span class="nf">\</span><span class="n">x</span><span class="o">:</span><span class="kt">Nat</span> <span class="o">.</span> <span class="kr">if</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span> <span class="kr">then</span> <span class="mi">1</span> <span class="kr">else</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">fact</span> <span class="p">(</span><span class="n">pred</span> <span class="n">x</span><span class="p">)))</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>这个在 Stlc 中不被允许，因为我们在定义 <code class="highlighter-rouge">fact</code> 的过程中发现了一个 free 的 <code class="highlighter-rouge">fact</code>，要么未定义，要么不是自己。
+所以我们需要 <code class="highlighter-rouge">Fixpoint</code></p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">fact</span> <span class="o">=</span> <span class="n">fix</span> <span class="p">(</span><span class="nf">\</span><span class="n">fact</span><span class="o">:</span><span class="kt">Nat</span><span class="o">-&gt;</span><span class="kt">Nat</span><span class="o">.</span> 
+       <span class="nf">\</span><span class="n">x</span><span class="o">:</span><span class="kt">Nat</span> <span class="o">.</span> <span class="kr">if</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span> <span class="kr">then</span> <span class="mi">1</span> <span class="kr">else</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">fact</span> <span class="p">(</span><span class="n">pred</span> <span class="n">x</span><span class="p">)))</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                </span><span class="no">Terms</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">fix</span><span class="w"> </span><span class="no">t</span><span class="w">             </span><span class="no">fixed</span><span class="o">-</span><span class="no">point</span><span class="w"> </span><span class="no">operator</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Reduction:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>                            t1 --&gt; t1'
+                        ------------------                        (ST_Fix1)
+                        fix t1 --&gt; fix t1'
+
+           --------------------------------------------         (ST_FixAbs)
+           fix (\xf:T1.t2) --&gt; [xf:=fix (\xf:T1.t2)] t2         -- fix f = f (fix f)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Typing:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>                       Gamma |- t1 \in T1-&gt;T1
+                       ----------------------                       (T_Fix)
+                       Gamma |- fix t1 \in T1
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="records">Records</h3>
+
+<p>这里的定义非常 informal:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                          </span><span class="no">Terms</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">{</span><span class="no">i1</span><span class="o">=</span><span class="no">t1</span><span class="o">,</span><span class="w"> </span><span class="o">...,</span><span class="w"> </span><span class="kr">in</span><span class="o">=</span><span class="no">tn</span><span class="o">}</span><span class="w">         </span><span class="no">record</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="nn">t</span><span class="p">.</span><span class="no">i</span><span class="w">                         </span><span class="no">projection</span><span class="w">
+
+</span><span class="no">v</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                          </span><span class="no">Values</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">{</span><span class="no">i1</span><span class="o">=</span><span class="no">v1</span><span class="o">,</span><span class="w"> </span><span class="o">...,</span><span class="w"> </span><span class="kr">in</span><span class="o">=</span><span class="no">vn</span><span class="o">}</span><span class="w">         </span><span class="no">record</span><span class="w"> </span><span class="no">value</span><span class="w">
+
+</span><span class="no">T</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                          </span><span class="no">Types</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">{</span><span class="no">i1</span><span class="p">:</span><span class="no">T1</span><span class="o">,</span><span class="w"> </span><span class="o">...,</span><span class="w"> </span><span class="kr">in</span><span class="p">:</span><span class="no">Tn</span><span class="o">}</span><span class="w">         </span><span class="no">record</span><span class="w"> </span><span class="no">type</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre>Reduction:
+
+                          ti --&gt; ti'
+             ------------------------------------                  (ST_Rcd)
+                 {i1=v1, ..., im=vm, in=ti , ...}
+             --&gt; {i1=v1, ..., im=vm, in=ti', ...}
+
+                          t1 --&gt; t1'
+                        --------------                           (ST_Proj1)
+                        t1.i --&gt; t1'.i
+
+                  -------------------------                    (ST_ProjRcd)
+                  {..., i=vi, ...}.i --&gt; vi
+
+Typing:
+
+        Gamma |- t1 \in T1     ...     Gamma |- tn \in Tn
+      ----------------------------------------------------          (T_Rcd)
+      Gamma |- {i1=t1, ..., in=tn} \in {i1:T1, ..., in:Tn}
+
+                Gamma |- t \in {..., i:Ti, ...}
+                -------------------------------                    (T_Proj)
+                      Gamma |- t.i \in Ti
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="其他">其他</h3>
+
+<p>提了一嘴</p>
+
+<ul>
+  <li>Variant</li>
+  <li>Recursive type <code class="highlighter-rouge">μ</code></li>
+</ul>
+
+<p>加起来就可以</p>
+<blockquote>
+  <p>give us enough mechanism to build <em>arbitrary inductive data types</em> like lists and trees from scratch</p>
+</blockquote>
+
+<p>Basically</p>
+
+<p>ADT = Unit + Product + Sum (Variant) + Function (Expo)</p>
+
+<p>但是 Coq 的 <code class="highlighter-rouge">Inductive</code> 还需要进一步的 Pi (Dependent Product), Sigma (Dependent Sum).</p>
+
+<h2 id="exercise-formalizing-the-extensions">Exercise: Formalizing the Extensions</h2>
+
+<h3 id="stlce-definitions">STLCE definitions</h3>
+
+<p>基本上就是把上面的 rule 用 AST 写进来</p>
+
+<h3 id="stlce-examples">STLCE examples</h3>
+
+<blockquote>
+  <p>a bit of Coq hackery to automate searching for typing derivation</p>
+</blockquote>
+
+<p>基本上就是自动化的 pattern matching + tactics</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="k">Hint</span><span class="w"> </span><span class="no">Extern</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">(</span><span class="no">has_type</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="o">(</span><span class="no">app</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="p">_</span><span class="o">)</span><span class="w"> </span><span class="p">_</span><span class="o">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
+  </span><span class="kp">eapply</span><span class="w"> </span><span class="no">T_App</span><span class="p">;</span><span class="w"> </span><span class="kp">auto</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Hint</span><span class="w"> </span><span class="no">Extern</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">(</span><span class="no">has_type</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="o">(</span><span class="no">tlcase</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="p">_</span><span class="o">)</span><span class="w"> </span><span class="p">_</span><span class="o">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
+  </span><span class="kp">eapply</span><span class="w"> </span><span class="no">T_Lcase</span><span class="p">;</span><span class="w"> </span><span class="kp">auto</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Hint</span><span class="w"> </span><span class="no">Extern</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">(</span><span class="p">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">_</span><span class="o">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="kp">compute</span><span class="p">;</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>效果非常酷：typecheck 只需要 <code class="highlighter-rouge">eauto</code>，reduction 只需要 <code class="highlighter-rouge">normalize</code>.</p>
+
+:ET

@@ -1,0 +1,135 @@
+I"<7<h2 id="step-indexed-evaluator">Step-Indexed Evaluator</h2>
+
+<p>…Copied from <code class="highlighter-rouge">12-imp.md</code>:</p>
+
+<blockquote>
+  <p>Chapter <code class="highlighter-rouge">ImpCEvalFun</code> provide some workarounds to make functional evalution works:</p>
+  <ol>
+    <li><em>step-indexed evaluator</em>, i.e. limit the recursion depth. (think about <em>Depth-Limited Search</em>).</li>
+    <li>return <code class="highlighter-rouge">option</code> to tell if it’s a normal or abnormal termination.</li>
+    <li>use <code class="highlighter-rouge">LETOPT...IN...</code> to reduce the “optional unwrapping” (basicaly Monadic binding <code class="highlighter-rouge">&gt;&gt;=</code>!)
+this approach of <code class="highlighter-rouge">let-binding</code> became so popular in ML family.</li>
+  </ol>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td><td class="rouge-code"><pre><span class="k">Notation</span><span class="w"> </span><span class="s2">"'LETOPT' x &lt;== e1 'IN' e2"</span><span class="w">
+   </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="kr">match</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="kp">with</span><span class="w">
+         </span><span class="o">|</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">e2</span><span class="w">
+         </span><span class="o">|</span><span class="w"> </span><span class="no">None</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">None</span><span class="w">
+       </span><span class="kr">end</span><span class="o">)</span><span class="w">
+   </span><span class="o">(</span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">,</span><span class="w"> </span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">60</span><span class="o">).</span><span class="w">
+
+</span><span class="no">Open</span><span class="w"> </span><span class="no">Scope</span><span class="w"> </span><span class="no">imp_scope</span><span class="pi">.</span><span class="w">
+</span><span class="k">Fixpoint</span><span class="w"> </span><span class="no">ceval_step</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">i</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w">
+                    </span><span class="p">:</span><span class="w"> </span><span class="no">option</span><span class="w"> </span><span class="no">state</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">i</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">O</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">None</span><span class="w">       </span><span class="c">(* depth-limit hit! *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="no">i'</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+    </span><span class="kr">match</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="kp">with</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">SKIP</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+          </span><span class="no">Some</span><span class="w"> </span><span class="no">st</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">l</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+          </span><span class="no">Some</span><span class="w"> </span><span class="o">(</span><span class="no">l</span><span class="w"> </span><span class="o">!-&gt;</span><span class="w"> </span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="no">st</span><span class="o">)</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+          </span><span class="no">LETOPT</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="o">&lt;==</span><span class="w"> </span><span class="no">ceval_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">i'</span><span class="w"> </span><span class="no">IN</span><span class="w">    </span><span class="c">(* option bind *)</span><span class="w">
+          </span><span class="no">ceval_step</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">i'</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">TEST</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">THEN</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">ELSE</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">FI</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+          </span><span class="kr">if</span><span class="w"> </span><span class="o">(</span><span class="no">beval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">b</span><span class="o">)</span><span class="w">
+            </span><span class="kr">then</span><span class="w"> </span><span class="no">ceval_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">i'</span><span class="w">
+            </span><span class="kr">else</span><span class="w"> </span><span class="no">ceval_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">i'</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">WHILE</span><span class="w"> </span><span class="no">b1</span><span class="w"> </span><span class="no">DO</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">END</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+          </span><span class="kr">if</span><span class="w"> </span><span class="o">(</span><span class="no">beval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">b1</span><span class="o">)</span><span class="w">
+          </span><span class="kr">then</span><span class="w"> </span><span class="no">LETOPT</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="o">&lt;==</span><span class="w"> </span><span class="no">ceval_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">i'</span><span class="w"> </span><span class="no">IN</span><span class="w">
+               </span><span class="no">ceval_step</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">i'</span><span class="w">
+          </span><span class="kr">else</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">st</span><span class="w">
+    </span><span class="kr">end</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span><span class="no">Close</span><span class="w"> </span><span class="no">Scope</span><span class="w"> </span><span class="no">imp_scope</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="relational-vs-step-indexed-evaluation">Relational vs. Step-Indexed Evaluation</h2>
+
+<p>Prove <code class="highlighter-rouge">ceval_step</code> is equiv to <code class="highlighter-rouge">ceval</code></p>
+
+<h3 id="-">-&gt;</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">ceval_step__ceval</span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">st'</span><span class="o">,</span><span class="w">
+      </span><span class="o">(</span><span class="kp">exists</span><span class="w"> </span><span class="no">i</span><span class="o">,</span><span class="w"> </span><span class="no">ceval_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">st'</span><span class="o">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="no">st'</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The critical part of proof:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">destruct</code> for the <code class="highlighter-rouge">i</code>.</li>
+  <li><code class="highlighter-rouge">induction i</code>, generalize on all <code class="highlighter-rouge">st st' c</code>.
+    <ol>
+      <li><code class="highlighter-rouge">i = 0</code> case contradiction</li>
+      <li><code class="highlighter-rouge">i = S i'</code> case;
+<code class="highlighter-rouge">destruct c</code>.
+        <ul>
+          <li><code class="highlighter-rouge">destruct (ceval_step ...)</code> for the <code class="highlighter-rouge">option</code>
+            <ol>
+              <li><code class="highlighter-rouge">None</code> case contradiction</li>
+              <li><code class="highlighter-rouge">Some</code> case, use induction hypothesis…</li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="--1">&lt;-</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">ceval__ceval_step</span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">st'</span><span class="o">,</span><span class="w">
+      </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="kp">exists</span><span class="w"> </span><span class="no">i</span><span class="o">,</span><span class="w"> </span><span class="no">ceval_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">st'</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="no">Hce</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">induction</span><span class="w"> </span><span class="no">Hce</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+:ET

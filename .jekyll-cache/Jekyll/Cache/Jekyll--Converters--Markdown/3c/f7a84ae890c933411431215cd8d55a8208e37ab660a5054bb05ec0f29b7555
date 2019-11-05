@@ -1,0 +1,395 @@
+I"��<!-- Chinese Version -->
+<div class="zh post-container">
+    
+    
+<blockquote>
+  <p>很荣幸在今年 2 月到 5 月的时间里，以顾问的身份加入饿了么，参与 PWA 的相关工作。这篇文章其实最初是在以英文写作发表在 medium 上的：<a href="https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509">Upgrading Ele.me to Progressive Web Apps</a>，获得了一定的关注。所以也决定改写为中文版本再次分享出来，希望能对你有所帮助 ;) <br /><br />
+本文首发于 <a href="http://geek.csdn.net/news/detail/210535">CSDN</a> 与《程序员》2017 年 7 月刊，同步发布于 <a href="https://zhuanlan.zhihu.com/ElemeFE">饿了么前端 - 知乎专栏</a>、<a href="https://huangxuan.me">Hux Blog</a>，转载请保留链接。</p>
+</blockquote>
+
+<p>自 Vue.js 官方推特第一次<a href="https://twitter.com/vuejs/status/834087199008239619">公开</a>到现在，我们就一直在进行着将<a href="https://h5.ele.me/msite/#pwa=true">饿了么移动端网站</a>升级为 <a href="https://developers.google.com/web/progressive-web-apps/">Progressive Web App</a> 的工作。直到近日在 Google I/O 2017 上<a href="https://m.weibo.cn/status/4109332495285652">登台亮相</a>，才终于算告一段落。我们非常荣幸能够发布全世界第一个专门面向国内用户的 PWA，但更荣幸的是能与 Google、UC 以及腾讯合作，一起推动国内 web 与浏览器生态的发展。</p>
+
+<h2 id="多页应用vuepwa">多页应用、Vue、PWA？</h2>
+
+<p>对于构建一个希望达到原生应用级别体验的 PWA，目前社区里的主流做法都是采用 SPA，即单页面应用模型（Single-page App）来组织整个 web 应用，业内最有名的几个 PWA 案例 <a href="https://blog.twitter.com/2017/how-we-built-twitter-lite">Twitter Lite</a>、 <a href="https://medium.com/progressive-web-apps/building-flipkart-lite-a-progressive-web-app-2c211e641883">Flipkart Lite</a>、<a href="https://medium.com/engineering-housing/progressing-mobile-web-fac3efb8b454">Housing Go</a> 与 <a href="https://shop.polymer-project.org/">Polymer Shop</a> 无一例外。</p>
+
+<p>然而饿了么，与很多国内的电商网站一样，青睐多页面应用模型（MPA，Multi-page App）所能带来的一些好处，也因此在一年多将移动站从基于 Angular.js 的单页应用重构为目前的多页应用模型。团队最看重的优点莫过于页面与页面之间的隔离与解耦，这使得我们可以将每个页面当做一个独立的“微服务”来看待，这些服务可以被独立迭代，独立提供给各种第三方的入口嵌入，甚至被不同的团队独立维护。而整个网站则只是各种服务的集合而非一个巨大的整体。</p>
+
+<p>与此同时，我们仍然依赖 <a href="http://vuejs.org/">Vue.js</a> 作为 JavaScript 框架。Vue 除了是 React/Angular 这种“重型武器”的竞争对手外，其轻量与高性能的优点使得它同样可以作为传统多页应用开发中流行的 “jQuery/Zepto/Kissy + 模板引擎” 技术栈的完美替代。Vue 提供的组件系统、声明式与响应式编程更是提升了代码组织、共享、数据流控制、渲染等各个环节的开发效率。<a href="(https://www.youtube.com/watch?v=pBBSp_iIiVM)">Vue 还是一个渐进式框架</a>，如果网站的复杂度继续提升，我们可以按需、增量地引入 Vuex 或 Vue-Router 这些模块。万一哪天又要改回单页呢？（谁知道呢……）</p>
+
+<p>2017 年，PWA 已经成为 web 应用新的风潮。我们决定试试，以我们现有的“Vue + 多页”的架构，能在升级 PWA 的道路上走多远，达到怎样的效果。</p>
+
+<h2 id="实现-prpl-模式">实现 “PRPL” 模式</h2>
+
+<p><a href="https://developers.google.com/web/fundamentals/performance/prpl-pattern/">“PRPL”</a>（读作 “purple”）是 Google 的工程师提出的一种 web 应用架构模式，它旨在利用现代 web 平台的新技术以大幅优化移动 web 的性能与体验，对如何组织与设计高性能的 PWA 系统提供了一种高层次的抽象。我们并不准备从头重构我们的 web 应用，不过我们可以把实现 “PRPL” 模式作为我们的迁移目标。“PRPL”实际上是 Push/Preload、Render、Precache、Lazy-Load 的缩写，我们会在下文中展开它们的具体含义。</p>
+
+<h3 id="1-pushpreload推送预加载初始-url-路由所需的关键资源">1. PUSH/PRELOAD，推送/预加载初始 URL 路由所需的关键资源。</h3>
+
+<p>无论是 HTTP2 Server Push 还是 <code class="highlighter-rouge">&lt;link rel="preload"&gt;</code>，其关键都在于，我们希望提前请求一些隐藏在应用依赖关系（Dependency Graph）较深处的资源，以节省 HTTP 往返、浏览器解析文档、或脚本执行的时间。比如说，对于一个基于路由进行 code splitting 的 SPA，如果我们可以在 webpack 清单、路由等入口代码（entry chunks）被下载与运行之前就把初始 URL，即用户访问的入口 URL 路由所依赖的代码用 Server Push 推送或 <code class="highlighter-rouge">&lt;link rel="preload"&gt;</code> 进行提前加载。那么当这些资源被真正请求时，它们可能已经下载好并存在在缓存中了，这样就加快了初始路由所有依赖的就绪。</p>
+
+<p>在多页应用中，每一个路由本来就只会请求这个路由所需要的资源，并且通常依赖也都比较扁平。饿了么移动站的大部分脚本依赖都是普通的 <code class="highlighter-rouge">&lt;script&gt;</code> 元素，因此他们可以在文档解析早期就被浏览器的 preloader 扫描出来并且开始请求，其效果其实与显式的 <code class="highlighter-rouge">&lt;link rel="preload"&gt;</code> 是一致的。</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/PUSH-link-rel-preload.jpg" alt="" /></p>
+
+<p>我们还将所有关键的静态资源都伺服在同一域名下（不再做域名散列），以更好的利用 HTTP2 带来的多路复用（Multiplexing）。同时，我们也在进行着对 API 进行 Server Push 的<a href="https://zhuanlan.zhihu.com/p/26757514">实验</a>。</p>
+
+<h3 id="2-render渲染初始路由尽快让应用可被交互">2. RENDER，渲染初始路由，尽快让应用可被交互</h3>
+
+<p>既然所有初始路由的依赖都已经就绪，我们就可以尽快开始初始路由的渲染，这有助于提升应用诸如首次渲染时间、可交互时间等指标。多页应用并不使用基于 JavaScript 的路由，而是传统的 HTML 跳转机制，所以对于这一部分，多页应用其实不用额外做什么。</p>
+
+<h3 id="3-pre-cache用-service-worker-预缓存剩下的路由">3. PRE-CACHE，用 Service Worker 预缓存剩下的路由</h3>
+
+<p>这一部分就需要 <a href="https://w3c.github.io/ServiceWorker/v1/">Service Worker</a> 的参与了，Service Worker 是一个位于浏览器与网络之间的客户端代理，它以可拦截、处理、响应流经的 HTTP 请求，使得开发者得以从缓存中向 web 应用提供资源而闻名。不过，Service Worker 其实也可以主动发起 HTTP 请求，在“后台” 预请求与预缓存我们未来所需要的资源。</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/PRECACHE-future-routes.jpg" alt="" /></p>
+
+<p>我们已经使用 <a href="https://webpack.github.io/">Webpack</a> 在构建过程中进行 <code class="highlighter-rouge">.vue</code> 编译、文件名哈希等工作，于是我们编写了一个 webpack 插件来帮助我们收集需要缓存的依赖到一个“预缓存清单”中，并使用这个清单在每次构建时生成新的 Service Worker 文件。在新的 Service Worker 被激活时，清单里的资源就会被请求与缓存，这其实与 <a href="https://medium.com/@Huxpro/how-does-sw-precache-works-2d99c3d3c725">SW-Precache 这个库的运行机制</a>非常接近。</p>
+
+<p><strong>实际上，我们只对我们标记为“关键路由”的路由进行依赖收集。</strong>你可以将这些“关键路由”的依赖理解为我们整个应用的 <a href="https://developers.google.com/web/updates/2015/11/app-shell">“App Shell”</a> 或者说“安装包”。一旦它们都被缓存，或者说成功安装，无论用户是在线离线，我们的 web 应用都可以从缓存中直接启动。对于那些并不那么重要的路由，我们则采取在运行时增量缓存的方式。我们使用的 <a href="https://googlechrome.github.io/sw-toolbox/">SW-Toolbox</a> 提供了 LRU 替换策略与 TTL 失效机制，可以保证我们的应用不会超过浏览器的缓存配额。</p>
+
+<h3 id="4-lazy-load-按需懒加载懒实例化剩下的路由">4. LAZY-LOAD 按需懒加载、懒实例化剩下的路由</h3>
+
+<p>懒加载与懒实例化剩下的路由对于 SPA 是一件相对麻烦点儿的事情，你需要实现基于路由的 code splitting 与异步加载。幸运的是，这又是一件不需要多页应用担心的事情，多页应用中的各个路由天生就是分离的。</p>
+
+<p>值得说明的是，无论单页还是多页应用，如果在上一步中，我们已经将这些路由的资源都预先下载与缓存好了，那么懒加载就几乎是瞬时完成的了，这时候我们就只需要付出实例化的代价。</p>
+
+<hr />
+
+<p>这四句话即是 PRPL 的全部了。有趣的是，我们发现多页应用在实现 PRPL 这件事甚至比单页还要容易一些。那么结果如何呢？</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/Lighthouse-before.png" alt="" /></p>
+
+<p>根据 Google 推出的 Web 性能分析工具 Lighthouse（v1.6），在模拟的 3G 网络下，用户的初次访问（无任何缓存）大约在 2 秒左右达到“可交互”，可以说非常不错。而对于再次访问，由于所有资源都直接来自于 Service Worker 缓存，页面可以在 1 秒左右就达到可交互的状态了。</p>
+
+<p>但是，故事并不是这么简单得就结束了。在实际的体验中我们发现，<strong>应用在页与页的切换时，仍然存在着非常明显的白屏空隙</strong>，由于 PWA 是全屏运行的，白屏对用户体验所带来的负面影响甚至比以往在浏览器内更大。我们不是已经用 Service Worker 缓存了所有资源了吗，怎么还会这样呢？</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/before-skeleton.jpg" alt="" />
+<em>从首页点击到发现页，跳转过程中的白屏</em></p>
+
+<h2 id="多页应用的陷阱重启开销">多页应用的陷阱：重启开销</h2>
+
+<p>与 SPA 不同，在多页应用中，路由的切换是原生的浏览器文档跳转（Navigating across documents），这意味着之前的页面会被完全丢弃而浏览器需要为下一个路由的页面重新执行所有的启动步骤：重新下载资源、重新解析 HTML、重新运行 JavaScript、重新解码图片、重新布局页面、重新绘制……即使其中的很多步骤本是可以在多个路由之间复用的。这些工作无疑将产生巨大的计算开销，也因此需要付出相当的时间成本。</p>
+
+<p>图中为我们的入口页（同时也是最重的页面）在 2 倍 CPU 节流模拟下的 profile 数据。即使我们可以将“可交互时间”控制在 1 秒左右，我们的用户仍然会觉得这对于“仅仅切换个标签”来说实在是太慢了。</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/msite-Before-Optim.png" alt="" /></p>
+
+<h3 id="巨大的-javascript-重启开销">巨大的 JavaScript 重启开销</h3>
+
+<p>根据 Profile，我们发现在首次渲染（First Paint）发生之前，大量的时间（900 毫秒）都消耗在了 JavaScript 的运行上（Evaluate Script）。几乎所有脚本都是阻塞的（Parser-blocking），不过因为所有的 UI 都是由 JavaScript/Vue 驱动的，倒也不会有性能影响。这 900ms 中，约一半是消耗在包括 Vue 运行时、组件、库等依赖的运行上，而另一半则花在了业务组件实例化时 Vue 的启动与渲染上。从软件工程角度来说，我们需要这些抽象，所以这里并不是想责怪 JavaScript 或是 Vue 所带来的开销。</p>
+
+<p><strong>但是，在 SPA 中，JavaScript 的启动成本是均摊到整个生命周期的：</strong> 每个脚本都只需要被解析与编译一次，诸如生成 Virtual DOM 等较重的任务可以只执行一次，像 Vue 的 ViewModel 或是 Virtual DOM 这样的大对象也可以被留在内存里复用。<strong>可惜在多页应用里就不是这样了，我们每次切换页面都为 JavaScript 付出了巨大的重启代价。</strong></p>
+
+<h3 id="浏览器的缓存啊能不能帮帮忙">浏览器的缓存啊，能不能帮帮忙？</h3>
+
+<p>能，也不能。</p>
+
+<p>V8 提供了<a href="http://v8project.blogspot.com/2015/07/code-caching.html">代码缓存（code caching）</a>，可以将编译后的机器码在本地拷贝一份，这样我们就可以在下次请求同一个脚本时一次省略掉请求、解析、编译的所有工作。而且，对于缓存在 Service Worker 配套的 Cache Storage 中的脚本，会在第一次执行后就触发 V8 的代码缓存，这对于我们的多页切换能提供不少帮助。</p>
+
+<p>另外一个你或许听过的浏览器缓存叫做“进退缓存”，Back-Forward Cache，简称 bfcache。浏览器厂商对其的命名各异，Opera 称之为 Fast History Navigation，Webkit 称其为 Page Cache。但是思路都一样，<strong>就是我们可以让浏览器在跳转时把前一页留存在内存中，保留 JavaScript 与 DOM 的状态，而不是全都销毁掉。</strong>你可以随便找个传统的多页网站在 iOS Safari 上试试，无论是通过浏览器的前进后退按钮、手势，还是通过超链接（会有一些不同），基本都可以看到瞬间加载的效果。</p>
+
+<p>Bfcache 其实非常适合多页应用。但不幸的是，Chrome 由于内存开销与其多进程架构等原因目前并不支持。Chrome 现阶段仅仅只是用了传统的 HTTP 磁盘缓存，来稍稍简化了一下加载过程而已。对于 Chromium 内核霸占的 Android 生态来说，我们没法指望了。</p>
+
+<h2 id="为感知体验奋斗">为“感知体验”奋斗</h2>
+
+<p>尽管多页应用面临着现实中的不少性能问题，我们并不想这么快就妥协。一方面，我们尝试尽可能减少在页面达到可交互时间前的代码执行量，比如减少/推迟一些依赖脚本的执行，还有减少初次渲染的 DOM 节点数以节省 Virtual DOM 的初始化开销。另一方面，我们也意识到应用在感知体验上还有更多的优化空间。</p>
+
+<p>Chrome 产品经理 Owen 写过一篇 <a href="https://medium.com/@owencm/reactive-web-design-the-secret-to-building-web-apps-that-feel-amazing-b5cbfe9b7c50">Reactive Web Design: The secret to building web apps that feel amazing</a>，谈到两种改进感知体验的手段：一是使用骨架屏（Skeleton Screen）来实现瞬间加载；二是预先定义好元素的尺寸来保证加载的稳定。跟我们的做法可以说不谋而合。</p>
+
+<p>为了消除白屏时间，我们同样引入了尺寸稳定的骨架屏来帮助我们实现瞬间的加载与占位。即使是在硬件很弱的设备上，我们也可以在点击切换标签后立刻渲染出目标路由的骨架屏，以保证 UI 是稳定、连续、有响应的。我录了<a href="https://youtu.be/K5JBGnMYO1s">两个</a><a href="https://youtu.be/w1ZbNsHmRjs">视频</a>放在 Youtube 上，不过如果你是国内读者，你可以直接访问饿了么移动网站来体验实地的效果 ;) 最终效果如下图所示。</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/after-skeleton.jpg" alt="" />
+<em>在添加骨架屏后，从发现页点回首页的效果</em></p>
+
+<p>这效果本该很轻松的就能实现，不过实际上我们还费了点功夫。</p>
+
+<h3 id="在构建时使用-vue-预渲染骨架屏">在构建时使用 Vue 预渲染骨架屏</h3>
+
+<p>你可能已经想到了，为了让骨架屏可以被 Service Worker 缓存，瞬间加载并独立于 JavaScript 渲染，我们需要把组成骨架屏的 HTML 标签、CSS 样式与图片资源一并内联至各个路由的静态 <code class="highlighter-rouge">*.html</code> 文件中。</p>
+
+<p>不过，我们并不准备手动编写这些骨架屏。你想啊，如果每次真实组件有迭代（每一个路由对我们来说都是一个 Vue 组件）我们都需要手动去同步每一个变化到骨架屏的话，那实在是太繁琐且难以维护了。好在，<a href="https://www.lukew.com/ff/entry.asp?1797">骨架屏不过是当数据还未加载进来前，页面的一个空白版本而已</a>。如果我们能将骨架屏实现为真实组件的一个特殊状态 —— “空状态”的话，我们理论上就可以从真实组件中直接渲染出骨架屏来。</p>
+
+<p>而 Vue 的多才多艺就在这时体现出来了，我们真的可以用 <a href="https://ssr.vuejs.org/en/">Vue.js 的服务端渲染模块</a> 来实现这个想法，不过不是用在真正的服务器上，而是在构建时用它把组件的空状态预先渲染成字符串并注入到 HTML 模板中。你需要调整你的 Vue 组件代码使得它可以在 Node 上执行，有些页面对 DOM/BOM 的依赖一时无法轻易去除得，我们目前只好额外编写一个 <code class="highlighter-rouge">*.shell.vue</code> 来暂时绕过这个问题。</p>
+
+<h3 id="关于浏览器的绘制painting">关于浏览器的绘制（Painting）</h3>
+
+<p>HTML 文件中有标签并不意味着这些标签就能立刻被绘制到屏幕上，你必须保证页面的<a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/">关键渲染路径</a>是为此优化的。很多开发者相信将 script 标签放在 body 的底部就足以保证内容能在脚本执行之前被绘制，这对于能渲染不完整 DOM 树的浏览器（比如桌面浏览器常见的流式渲染）来说可能是成立的。但移动端的浏览器很可能因为考虑到较慢的硬件、电量消耗等因素并不这么做。<strong>不仅如此，即使你曾被告知设为 <code class="highlighter-rouge">async</code> 或 <code class="highlighter-rouge">defer</code> 的脚本就不会阻塞 HTML 解析了，但这可不意味着浏览器就一定会在执行它们之前进行渲染。</strong></p>
+
+<p><img src="https://html.spec.whatwg.org/images/asyncdefer.svg" alt="" /></p>
+
+<p>首先我想澄清的是，根据 <a href="https://html.spec.whatwg.org/multipage/scripting.html">HTML 规范 Scripting 章节</a>，<code class="highlighter-rouge">async</code> 脚本是在其请求完成后立刻运行的，因此它本来就可能阻塞到解析。只有 <code class="highlighter-rouge">defer</code>（且非内联）与最新的 <code class="highlighter-rouge">type=module</code> 被指定为“一定不会阻塞解析”。（不过 <code class="highlighter-rouge">defer</code> 目前也有点小问题……我们稍后会再提到）</p>
+
+<p><strong>而更重要的是，一个不阻塞 HTML 解析的脚本仍然可能阻塞到绘制。</strong>我做了一个简化的<strong>“最小多页 PWA”</strong>（Minimal Multi-page PWA，或 MMPWA）来测试这个问题，：我们在一个 <code class="highlighter-rouge">async</code>（且确实不阻塞 HTML 解析）脚本中，生成并渲染 1000 个列表项，然后测试骨架屏能否在脚本执行之前渲染出来。下面是通过 USB Debugging 在我的 Nexus 5 真机上录制的 profile：</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/thisTick-&amp;-Load.png" alt="" /></p>
+
+<p>是的，出乎意料吗？首次渲染确实被阻塞到脚本执行结束后才发生。究其原因，<strong>如果我们在浏览器还未完成上一次绘制工作之前就过快得进行了 DOM 操作，我们亲爱的浏览器就只好抛弃所有它已经完成的像素，且一直要等待到 DOM 操作引起的所有工作结束之后才能重新进行下一次渲染。</strong>而这种情况更容易在拥有较慢 CPU/GPU 的移动设备上出现。</p>
+
+<h3 id="黑魔法利用-settimeout-让绘制提前">黑魔法：利用 setTimeout() 让绘制提前</h3>
+
+<p>不难发现，骨架屏的绘制与脚本执行实际是一个竞态。大概是 Vue 太快了，我们的骨架屏还是有非常大的概率绘制不出来。于是我们想着如何能让脚本执行慢点，或者说，“懒”点。于是我们想到了一个经典的 Hack： <code class="highlighter-rouge">setTimeout(callback, 0)</code>。我们试着把 MMPWA 中的 DOM 操作（渲染 1000 个列表）放进 <code class="highlighter-rouge">setTimeout(callback, 0)</code> 里……</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/nextTick-&amp;-Load.png" alt="" /></p>
+
+<p>当当！首次渲染瞬间就被提前了。如果你熟悉浏览器的<strong>事件循环模型（event loop）</strong>的话，这招 Hack 其实是通过 setTimeout 的回调把 DOM 操作放到了事件循环的任务队列中以避免它在当前循环执行，这样浏览器就得以在主线程空闲时喘息一下（更新一下渲染）了。如果你想亲手试试 MMPWA 的话，你可以访问 <a href="https://github.com/Huxpro/mmpwa">github.com/Huxpro/mmpwa</a> 或 <a href="https://huangxuan.me/mmpwa">huangxuan.me/mmpwa/</a> 访问代码与 Demo。我把 UI 设计为了 A/B Test 的形式并改为渲染 5000 个列表项来让效果更夸张一些。</p>
+
+<p>回到饿了么 PWA 上，我们同样试着把 <code class="highlighter-rouge">new Vue()</code> 放到了 <code class="highlighter-rouge">setTimeout</code> 中。果然，黑魔法再次显灵，骨架屏在每次跳转后都能立刻被渲染。这时的 Profile 看起来是这样的：</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/msite-After-Optim.png" alt="" /></p>
+
+<p>现在，我们在 400ms 时触发首次渲染（骨架屏），在 600ms 时完成真实 UI 的渲染并达到页面的可交互。你可以拉上去详细对比下优化前后 profile 的区别。</p>
+
+<h3 id="被我-defer-的有关-defer-的-bug">被我 “defer” 的有关 <code class="highlighter-rouge">defer</code> 的 Bug</h3>
+
+<p>不知道你发现没有，在上图的 Profile 中，我们仍然有不少脚本是阻塞了 HTML 解析的。好吧让我解释一下，由于历史原因，我们确实保留了一部分的阻塞脚本，比如侵入性很强的 <a href="https://github.com/amfe/lib-flexible">lib-flexible</a>，我们没法轻易去除它。不过，profile 里的大部分阻塞脚本实际上都设置了 <code class="highlighter-rouge">defer</code>，我们本以为他们应该在 HTML 解析完成之后才被执行，结果被 profile 打了一脸。</p>
+
+<p>我和 <a href="https://twitter.com/jaffathecake">Jake Archibald</a> <a href="https://twitter.com/Huxpro/status/859842124849827841">聊了一下</a>，果然这是 Chrome 的 Bug：<code class="highlighter-rouge">defer</code> 的脚本被完全缓存时，并没有遵守规范等待解析结束，反而阻塞了解析与渲染。Jake 已经提交在 <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=717979">crbug</a> 上了，一起给它投票吧~</p>
+
+<p>最后，是优化后的 Lighthouse 跑分结果，同样可以看到明显的性能提升。需要说明的是，能影响 Lighthouse 跑分的因素有很多，所以我建议你以控制变量（跑分用的设备、跑分时的网络环境等）的方式来进行对照实验。</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/Lighthouse-after.png" alt="" /></p>
+
+<p>最后附上一张图，这张图当时是做给 Addy Osmani 的 I/O 演讲用的，描述了饿了么 PWA 是如何结合 Vue 来实现多页应用的 PRPL 模式，可以作为一个架构的参考与示意图。</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/Architecture.png" alt="" /></p>
+
+<h2 id="一些感想">一些感想</h2>
+
+<h3 id="多页应用仍然有很长的路要走">多页应用仍然有很长的路要走</h3>
+
+<p>Web 是一个极其多样化的平台。从静态的博客，到电商网站，再到桌面级的生产力软件，它们全都是 Web 这个大家庭的第一公民。而我们组织 web 应用的方式，也同样只会更多而不会更少：多页、单页、Universal JavaScript 应用、WebGL、以及可以预见的 Web Assembly。不同的技术之间没有贵贱，但是适用场景的差距确是客观存在的。</p>
+
+<p><a href="https://twitter.com/jaffathecake">Jake</a> 曾在 <a href="https://youtu.be/J2dOTKBoTL4?list=PLNYkxOF6rcIBTs2KPy1E6tIYaWoFcG3uj">Chrome Dev Summit 2016</a> 上说过 “PWA !== SPA”。可是尽管我们已经用上了一系列最新的技术（PRPL、Service Worker、App Shell……），我们仍然因为多页应用模型本身的缺陷有着难以逾越的一些障碍。多页应用在未来可能会有“bfcache API”、Navigation Transition 等新的规范以缩小跟 SPA 的距离，不过我们也必须承认，时至今日，多页应用的局限性也是非常明显的。</p>
+
+<h3 id="而-pwa-终将带领-web-应用进入新的时代">而 PWA 终将带领 web 应用进入新的时代</h3>
+
+<p>即使我们的多页应用在升级 PWA 的路上不如单页的那些来得那么闪亮，但是 PWA 背后的想法与技术却实实在在的帮助我们在 web 平台上提供了更好的用户体验。</p>
+
+<p>PWA 作为<a href="https://zhuanlan.zhihu.com/p/25167289">下一代 Web 应用模型</a>，其尝试解决的是 web 平台本身的根本性问题：对网络与浏览器 UI 的硬依赖。因此，任何 web 应用都可以从中获益，这与你是多页还是单页、面向桌面还是移动端、是用 React 还是 Vue 无关。或许，它还终将改变用户对移动 web 的期待。现如今，谁还觉得桌面端的 web 只是个看文档的地方呢？</p>
+
+<p>还是那句老话：让我们的用户，也像我们这般热爱 web 吧。</p>
+
+<hr />
+
+<p>最后，感谢饿了么的王亦斯、任光辉、题叶，Google 的 Michael Yeung、DevRel 团队， UC 浏览器团队，腾讯 X5 浏览器团队在这次项目中的合作。感谢尤雨溪、陈蒙迪和 Jake Archibald 在写作过程中给予我的帮助。</p>
+
+
+</div>
+
+<!-- English Version -->
+<div class="en post-container">
+    
+    <blockquote>
+  <p>Read at medium.com: <a href="https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509">Upgrading Ele.me to Progressive Web Apps</a></p>
+</blockquote>
+
+<p>Since the very first experiments that <a href="https://twitter.com/vuejs/status/834087199008239619">@Vue.js tweeted</a>, we at Ele.me (the biggest food ordering and delivering company in China) have been working on upgrading our mobile website to a <a href="https://developers.google.com/web/progressive-web-apps/">Progressive Web App</a>. We’re proud to ship the world-first PWA exclusively for the Chinese market, but even prouder to collaborate with Google, UC and Tencent to push the boundary of web experience and browser supports in China.</p>
+
+<h2 id="multi-page-vue-pwa">Multi-page, Vue, PWA?</h2>
+
+<p>There is a prevailing opinion that only structuring a web app as a Single Page App can we build PWAs that deliver app-like user experience. Popular reference examples including <a href="https://blog.twitter.com/2017/how-we-built-twitter-lite">Twitter Lite</a>, <a href="https://medium.com/progressive-web-apps/building-flipkart-lite-a-progressive-web-app-2c211e641883">Flipkart Lite</a>, <a href="https://medium.com/engineering-housing/progressing-mobile-web-fac3efb8b454">Housing Go</a> and <a href="https://shop.polymer-project.org/">Polymer Shop</a> are all using the SPA model.</p>
+
+<p>However at Ele.me, we’ve come to appreciate many advantages of a Multi-Page App model, and decided to refactor the mobile site from an Angular 1 SPA to a Multi-Paged app more than a year ago. The most important advantage we see is the isolation and decoupling between pages, which allows us to built different parts of the mobile site as “micro-services”. These services can then be independently iterated, embedded into 3rd-party apps, and even maintained by different teams.</p>
+
+<p>Meanwhile, we still leverage <a href="http://vuejs.org/">Vue.js</a> to boost our productivity. You may have heard of Vue as a rival of React or Angular, but Vue’s lightweight and performance make it also a perfect replacement of traditional “jQuery/Zepto + template engine” stack when engineering a Multi-page app. We built every component as <a href="http://vuejs.org/v2/guide/single-file-components.html">Single File Components</a> so they can be easily shareable between pages. The declarative-ness plus reactivity Vue offered help us manage both code and data flow. Oh, did I mention that <a href="https://www.youtube.com/watch?v=pBBSp_iIiVM">Vue is progressive</a>? So things like Vuex or Vue-Router can be incrementally adopted if our site’s complexity scales up, like…migrating to SPA again? (Who knows…)</p>
+
+<p>In 2017, PWA seems to be all the rage, so we embark on exploring how far can our Vue-based Multi-page PWAs actually go.</p>
+
+<h2 id="implementing-prpl-with-mpa">Implementing “PRPL” with MPA</h2>
+
+<p>I love <a href="https://developers.google.com/web/fundamentals/performance/prpl-pattern/">PRPL pattern</a> because it gives you a high-level abstraction of how to structure and design your own PWA systems. Since we are not rebuild everything from scratch, we decided taking implementing PRPL as our migration goal:</p>
+
+<h3 id="1-push-critical-resources-for-initial-url-route">1. PUSH critical resources for initial URL route.</h3>
+
+<p>The key of pushing/preloading is to prioritize resources hidden in deep dependency graph and make browser’s network stack busy ASAP. Let’s say you have a SPA with code splitting by route, you can push/preload chunks for the current route before the “entry chunks” (e.g. webpack manifest, router) finish downloading and evaluating. So when the actual fetches happen, they might already be in caches.</p>
+
+<p>Routes in MPAs naturally fetch code for that route only, and tend to have a flattening dependency graph. Most scripts depended by Ele.me are just <code class="highlighter-rouge">&lt;script&gt;</code> elements, so they can be found and fetched by <a href="https://calendar.perfplanet.com/2013/big-bad-preloader/">good old browser preloader</a> in early parsing phase without explicit <code class="highlighter-rouge">&lt;link rel="preload"&gt;</code>.</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/PUSH-link-rel-preload.jpg" alt="" /></p>
+
+<p>To take benefits from HTTP2 Multiplexing, we currently serve all critical resources under a single domain (no more domain sharding), and we are also experimenting on Server Push.</p>
+
+<h3 id="2-render-initial-route--get-it-interactive-asap">2. RENDER initial route &amp; get it interactive ASAP</h3>
+
+<p>This one is essentially free (ridiculously obvious) in MPA since there’s only one route at one time.</p>
+
+<p>A straightforward rendering is critical for metrics such as First-Meaningful-Paint and Time-To-Interactive. MPAs gain it for free due to the simplicity of traditional HTML navigation they used.</p>
+
+<h3 id="3-pre-cache-remaining-routes-using-service-worker">3. <strong>PRE-CACHE</strong> remaining routes using Service Worker</h3>
+
+<p>This’s the part <a href="https://w3c.github.io/ServiceWorker/v1/">Service Worker</a> come to join the show. Service Worker is known as a client-side proxy enabling developers to intercept requests and serve responses from cache, but it can also perform initiative fetch to prefetch then precache future resources.</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/PRECACHE-future-routes.jpg" alt="" /></p>
+
+<p>We already used <a href="https://webpack.github.io/">Webpack</a> in the build process to do <code class="highlighter-rouge">.vue</code> compilation and asset versioning, so we create a webpack plugin to help us collecting dependencies into a “precache manifest” and generating a new Service Worker file after each build. This is pretty much like <a href="https://medium.com/@Huxpro/how-does-sw-precache-works-2d99c3d3c725">how SW-Precache works</a>.</p>
+
+<p><strong>In fact, we only collect dependencies of routes we flagged as “Critical Route”.</strong> You can think of them as <a href="https://developers.google.com/web/updates/2015/11/app-shell">“App Shell”</a> or the “Installation Package” of our app. Once they are cached/installed successfully, our web app can boot up directly from cache and available offline. Routes that “not critical” would be incrementally cached at runtime during the first visit. Thanks to the LRU cache policies and TTL invalidation mechanisms provided by <a href="https://googlechrome.github.io/sw-toolbox/">SW-Toolbox</a>, we have no worries of hitting the quota in a long run.</p>
+
+<h3 id="4-lazy-load--instantiate-remaining-routes-on-demand">4. LAZY-load &amp; instantiate remaining routes on demand</h3>
+
+<p>Lazy-loading and lazily instantiating remaining parts of the app is relatively challenging for SPA to achieve. It requires both code splitting and async importing. Fortunately, this is also a built-in feature of MPA model, in which routes are naturally separated.</p>
+
+<p>Noticed that the lazy-loading can be done instantly if the requested route is already pre-cached in Service Worker cache, no matter whether SPA or MPA is used. #ServiceWorkerAwesomeness</p>
+
+<hr />
+
+<p>Surprisingly, we found Multi-page PWA is kinda naturally “PRPL”! MPA has already provided built-in support for “PRL”, and the second “P” involving Service Worker can be easily fulfilled in any PWA.</p>
+
+<p>So what about the end result?</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/Lighthouse-before.png" alt="" /></p>
+
+<p><strong>In <a href="https://developers.google.com/web/tools/lighthouse/">Lighthouse</a> simulation (3G &amp; 5x Slower CPU), we made Time-To-Interactive around 2 seconds,</strong> and this was benchmarked on our HTTP1 test server.</p>
+
+<p>The first visit is fast. The repeat visit with Service Worker is even faster. You can check out this video to see the huge difference between with or without Service Worker:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mbi_WnunJa8" frameborder="0" allowfullscreen=""></iframe>
+
+<p>Did you see that? No, I mean the annoying blank screen. Even in the Service Worker one, the blank screen is still conspicuous during navigating. How can that be?</p>
+
+<h2 id="multi-page-pitfall-redo-everything">Multi-page Pitfall: Redo Everything!</h2>
+
+<p>Unlike SPA, changing routes in MPA means actual browser navigation happens: The previous page is discarded completely and the browser need to redo everything for next route: re-download resources, re-parse HTML, re-evaluate JavaScript, re-decode image data, re-layout the page and re-paint the screen, even many of them could be shared across routes. All of these works combined requires significant computing and time.</p>
+
+<p>So here is the profile (2x slower CPU simulated) of our entry page (most heavy one). Even we can make Time-To-Interactive around 1s in repeat visit, our users can still feel too slow for just “switching a tab”.</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/msite-Before-Optim.png" alt="" /></p>
+
+<h3 id="huge-javascript-re-startup-cost">Huge JavaScript Re-Startup Cost</h3>
+
+<p>According to the profile, most of the time (900ms) before hitting the first paint is spent on evaluating JavaScript. Half is on dependencies including Vue Runtime, components, libraries etc., another half is on actual Vue starting-up and mounting. Because all UI rendering is depended on JavaScript/Vue, all of the critical scripts remain guiltily parser-blocking. I’m by no means blaming JavaScript or Vue’s overheads here, It’s just a tradeoff when we need this layer of abstraction in engineering.</p>
+
+<p><strong>In SPA, JavaScript Start-up Cost is amortized during the whole lifecycle.</strong> Parsing/Compiling for each script is only once, many heavy executing can be only once. The big JavaScript objects like Vue’s ViewModels and Virtual DOM can be kept in memory and reused as much as you want. <strong>This is not the case in MPA however.</strong></p>
+
+<h3 id="could-browser-caches-help">Could Browser Caches Help?</h3>
+
+<p>Yes or no.</p>
+
+<p>V8 introduced <a href="http://v8project.blogspot.com/2015/07/code-caching.html">code caching</a>, a way to store a local copy of compiled code so fetching, parsing and compilation could all be skipped next time. As @addyosmani mentioned in <a href="https://medium.com/reloading/javascript-start-up-performance-69200f43b201">JavaScript Start-up Performance</a>, scripts stored in Cache Storage via Service Worker could trigger code caching in just the first execution.</p>
+
+<p>Another browser cache you might hear of is “Back-Forward Cache”, or bfcache. The name varies, like Opera’s “Fast History Navigation” or <a href="https://webkit.org/blog/427/webkit-page-cache-i-the-basics/">WebKit’s “Page Cache”</a>. <strong>The idea is that browsers can keep the previous page live in memory, i.e. DOM/JS states, instead of destroying everything.</strong> In fact, this idea works very well for MPA. You can try every traditional Multi-page websites in iOS Safari and observe an instantaneously loading when back/forward. (With browser UI/Gesture or with hyperlink can have a slight difference though.)</p>
+
+<p>Unfortunately, Chrome has no this kind of in-memory bfcache currently concerning to memory consumption and its multi-process architecture. It just leverages HTTP disk cache to simplify the loading pipeline, almost everything still needs to be redone. More details and discussions can be seen <a href="https://docs.google.com/document/d/1o8KImLPrJQcMNqvd_a-1V8fEVgtVeEJww453ZQ1hGuo/edit#">here</a>.</p>
+
+<h2 id="striving-for-perceived-performance">Striving for Perceived Performance</h2>
+
+<p>Although the reality is dark, we don’t want to give up so easily. One optimization we try to do is to render DOM nodes/create Virtual DOM nodes as less as possible to improve the Time-To-Interactive. While another opportunity we see is to play tricks on perceived performance.</p>
+
+<p>@owencm have written a great post <a href="https://medium.com/@owencm/reactive-web-design-the-secret-to-building-web-apps-that-feel-amazing-b5cbfe9b7c50">“Reactive Web Design: The secret to building web apps that feel amazing”</a> covering both “Instant loads with skeleton screens” and “Stable loads via predefined sizes on elements” to improve perceived performance and user experience. Yes, we actually used both.</p>
+
+<p>What about we showing the end result after these optimizations first before entering technical nitty gritty? There you go!</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/K5JBGnMYO1s" frameborder="0" allowfullscreen=""></iframe>
+
+<p>Too fast and can not see the pulsing Skeleton Screen clearly? Here is a version showing how it looks like under 10 times slower CPU.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/w1ZbNsHmRjs" frameborder="0" allowfullscreen=""></iframe>
+
+<p>This is a much better UX, right? Even we have slow navigation in slow devices, at least the UI is stable, consistent and always responding. So how we get there?</p>
+
+<h3 id="rendering-skeleton-screen-with-vue-at-build-time">Rendering Skeleton Screen with Vue at Build-Time</h3>
+
+<p>As you might have guessed, the Skeleton Screen that consists of markups, styles, and images is inlined into <code class="highlighter-rouge">*.html</code> of each route. So they can be cached by Service Worker, be loaded instantly, and be rendered independently with any JavaScript.</p>
+
+<p>We don’t want to manually craft each Skeleton Screen for each routes. It’s a tedious job and we have to manually sync every change between Skeleton Screens and the actual UI components (Yes we treat every route as just a Vue component). But think about it, <a href="https://www.lukew.com/ff/entry.asp?1797">Skeleton Screen is just a blank version of a page into which information is gradually loaded</a>. What if we bake the Skeleton Screen into the actual UI component as just a loading state so we can render Skeleton Screen out directly from it without the issue of syncing?</p>
+
+<p>Thanks to the versatility of Vue, we can actually realize it with <a href="https://ssr.vuejs.org/en/">Vue.js Server-Side Rendering</a>. Instead of using it on a real server, we use it at build time to render Vue components to strings and injected them into HTML templates.</p>
+
+<h3 id="fast-skeleton-painting">Fast Skeleton Painting…</h3>
+
+<p>Having markups in <code class="highlighter-rouge">*.html</code> doesn’t mean that they will be painted fast, you have to make sure the <a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/">Critical Rendering Path</a> is optimized for that. Many developers believed that putting script tags in the end of the body is sufficient for getting content painted before executing scripts. This might be true for browsers supporting rendering an incomplete DOM tree (e.g. streaming render), But browsers might not do that in mobile concerning slower hardwares, battery, and heats. <strong>And even we are told that script tags with <code class="highlighter-rouge">async</code> or <code class="highlighter-rouge">defer</code> is not parser-blocking, it also doesn’t mean we can get content painted before executing scripts in reality.</strong></p>
+
+<p><img src="https://html.spec.whatwg.org/images/asyncdefer.svg" alt="" /></p>
+
+<p>First I want to clarify it a little bit. According to the <a href="https://www.w3.org/TR/html51/semantics-scripting.html#elementdef-script">Scripting section of HTML</a> (WHATWG living standard, the W3C’s same here), <code class="highlighter-rouge">async</code> scripts would be evaluated as soon as it is available thus could potentially blocking parsing. Only <code class="highlighter-rouge">defer</code> (and not inlined) is specified to be never block parsing. That’s why <a href="http://stevesouders.com/">Steve Souders</a> ever posted <a href="https://calendar.perfplanet.com/2016/prefer-defer-over-async/">“Prefer DEFER Over ASYNC”</a>. (<code class="highlighter-rouge">defer</code> has its own issue and we will cover it later.)</p>
+
+<p><strong>Then I want to say: A script not blocking parser could still block painting nonetheless.</strong> So here is a reduced test I wrote named <strong>“Minimal Multi-page PWA”</strong>, or MMPWA, which basically render 1000 list items within an <code class="highlighter-rouge">async</code> (and truly not parser-blocking) script to see if we can get Skeleton Screen painted before scripts get executed. The profile below (over USB debugging on my real Nexus 5) shows my ignorance:</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/thisTick-&amp;-Load.png" alt="" /></p>
+
+<p>Yes, keep your mouth open. The first paint is blocked. I was also surprised here. The reason I guess is that <strong>if we touch DOM so quickly that the browser has still NOT finished previous painting job, our dear browser has to abort every pixel it has drawn, and has to wait until current DOM manipulation task finished and redo the rendering pipeline again.</strong> And this more often happens with a mobile device with a slower CPU/GPU.</p>
+
+<h3 id="fast-skeleton-painting-with-settimeout-hack">Fast Skeleton Painting with setTimeout Hack</h3>
+
+<p>We indeed encountered this problem when testing our new beautiful Skeleton Screen. Perhaps Vue finishes its job and start to mount nodes too fast ;). But anyway we have to make it slower, or rather lazier. So we try to put DOM manipulation things inside <code class="highlighter-rouge">setTimeout(callback, 0)</code>, and it works like a charm!</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/nextTick-&amp;-Load.png" alt="" /></p>
+
+<p>I think you may curious about how this change performs in the wild, so I have refined MMPWA by rendering 5000 list items rather 1000 to make the differences more obvious, and by designing it in an A/B testing manner. The code is on <a href="https://github.com/Huxpro/mmpwa">Github</a> and the demo is live on <a href="https://huangxuan.me/mmpwa">huangxuan.me/mmpwa/</a>. Here is also a video for loungers.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3Ws7XBHrPD8" frameborder="0" allowfullscreen=""></iframe>
+
+<p>This famous <code class="highlighter-rouge">setTimeout</code> hack (a.k.a. Zero Delays) looks quite magic,  but it is science™. If you are familiar with <strong>event loop</strong>, it just prevents these code from executing in the current loop by putting everything to the <strong>task queues</strong> with the Timer Callback, so the browser could breath (update the rendering) in the main thread.</p>
+
+<p>So we applied what we learned from MMPWA by putting <code class="highlighter-rouge">new Vue()</code> inside <code class="highlighter-rouge">setTimeout</code> and BOOM! We have Skeleton Screen painted consistently after every navigating! Here is the profile after all these optimizations.</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/msite-After-Optim.png" alt="" /></p>
+
+<p>Huge improvements right?  This time we hit First Paint (Skeleton Screen Paint) at 400ms and TTI at 600ms. You should really go back to have a before-after comparison in details.</p>
+
+<h3 id="one-more-thing-that-ideferred">One more thing that I deferred</h3>
+
+<p>But wait, why is there still a bunch of guiltily parser-blocking scripts? Are them all <code class="highlighter-rouge">async</code>? OK, ok. For historical reasons, we do keep some parser-blocking scripts, like <a href="https://github.com/amfe/lib-flexible">lib-flexible</a>, we couldn’t get rid of it without a huge refactoring. But most of these blocking scripts are in fact <code class="highlighter-rouge">defer</code>. We expected that they can be executed after parsing and in order, however the profile kinda slap on my face. :(</p>
+
+<p>Remember I said I would talk about one issue of <code class="highlighter-rouge">defer</code> previously? Yes, that’s it. I have had a <a href="https://twitter.com/Huxpro/status/859842124849827841">conversation</a> with <a href="https://twitter.com/jaffathecake">Jake Archibald</a> and it turns out it might be a bug of Chrome when the deferred scripts are fully cached. <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=717979">Vote it at crbug</a>!</p>
+
+<p>Similar improvements can be seen from Lighthouse (Under same server and network environment). A Pro Tip is you should always use lighthouse in a variable controlling approach.</p>
+
+<p><img src="/img/in-post/post-eleme-pwa/Lighthouse-after.png" alt="" /></p>
+
+<h3 id="performance-in-the-real-world">Performance In the Real World</h3>
+
+<p><a href="https://medium.com/@slightlylate">Alex Russell</a> has given <a href="https://youtu.be/4bZvq3nodf4?list=PLNYkxOF6rcIBTs2KPy1E6tIYaWoFcG3uj">a very insightful talk on mobile web performance</a> at Chrome Dev Summit 2016, talking about how hard can we build performant web applications on mobile devices. Highly recommended.</p>
+
+<p>Chinese users tend to have a pretty powerful phone. MI4 is shipped with snapdragon 801 (slightly out-performs Nexus 5) but only costs 100$. It’s affordable by at least 80% of our users so we take it as a baseline.</p>
+
+<p>Here is a video screen-recorded on my Nexus 5 showing switching between 4 tabs. The performance varies between tabs due to their variant scale. The heaviest one, entry page, take around 1s to hit real Time-To-Interactive on my Nexus 5.</p>
+
+<p>FYI. This is surprisingly comparable to what I get from Chrome Simulation with 2x CPU throttling. With 5x throttling, this can spend 2–3s to get TTI, horribly. (To be honest, I found even under same throttling, the results can vary drastically depended on my Macbook’s “mood”.)</p>
+
+<iframe width="700" height="525" src="https://www.youtube.com/embed/ZLc8jysMqaw?ecver=1" frameborder="0" allowfullscreen=""></iframe>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>This article is much longer than I could imagine. I am really appreciated if you could get here. So what can we learn from it?</p>
+
+<h3 id="mpa-still-has-some-way-to-go">MPA still has some way to go</h3>
+
+<p><a href="https://twitter.com/jaffathecake">Jake Archibald</a> ever said that “PWA !== SPA” at <a href="https://youtu.be/J2dOTKBoTL4?list=PLNYkxOF6rcIBTs2KPy1E6tIYaWoFcG3uj">Chrome Dev Summit 2016</a>. But the sad truth is that even we have taken advantages of bleeding edge technologies such as “PRPL” pattern, Service Worker, App-Shell, Skeleton Screen, there is still a distance between us and many Single Page PWA just because we are Multi-page structured.</p>
+
+<p>The web is extremely versatile. Static blogs, e-business sites, desktop-level software, all of them should be the first-class citizens of the web family. MPA might have things like “bfcache API”, navigation transitions to catch up the SPA in the future, but it is not today certainly.</p>
+
+<h3 id="pwa-is-awesome-no-matter-what">PWA is Awesome No Matter What</h3>
+
+<p>Hey, I am not overblowing it. Even we as a Multi-page PWA couldn’t be as stunning and app-like as many Single Page PWAs are. The idea and technologies behind PWA still help us deliver a much better experience to our users on the web that hasn’t been possible before.</p>
+
+<p>What PWA is trying to solve are some fundamental problems of current web application model such as its hard dependencies to network and browser UIs. That’ why PWA can be always beneficial no matter what architecture or what framework you actually used. <a href="https://medium.com/@addyosmani">Addy Osmani</a> would give a talk <a href="https://events.google.com/io/schedule/?section=may-19&amp;sid=e8436b55-ea89-4243-a644-5ecb319d9ef0">Production Progressive Web Apps With JavaScript Frameworks</a> at this year’s I/O (and <a href="https://youtu.be/srdKq0DckXQ?list=PLNYkxOF6rcIDz1TzmmMRBC-kd8zPRTQIP">I/O 16</a>). You won’t want to miss it!</p>
+
+<hr />
+
+<p>Finally, I’d love to thank:</p>
+
+<ul>
+  <li>my colleagues <a href="https://github.com/YiSiWang">YiSi Wang</a>, <a href="https://github.com/rguanghui">GuangHui Ren</a>, <a href="https://medium.com/@jiyinyiyong">JiyinYiyong</a> from Eleme</li>
+  <li>collaborator <a href="https://medium.com/@micyeung">Michael Yeung</a>, <a href="https://medium.com/@LiamSpradlin">Liam Spradlin</a> and other collaborators from Google</li>
+  <li>collaborators from UC/Tencent</li>
+</ul>
+
+<p>And special thanks to </p>
+
+<ul>
+  <li>invited reviewer, <a href="https://medium.com/@youyuxi">Evan You</a>.</li>
+  <li>Chrome “StackOverflow”, <a href="https://twitter.com/jaffathecake">Jake Archibald</a>.</li>
+</ul>
+
+<p>Thank you all!</p>
+
+<hr />
+
+<h2 id="appendix-architecture-diagram">Appendix. Architecture Diagram</h2>
+
+<p><img src="/img/in-post/post-eleme-pwa/Architecture.png" alt="" /></p>
+
+
+</div>
+:ET

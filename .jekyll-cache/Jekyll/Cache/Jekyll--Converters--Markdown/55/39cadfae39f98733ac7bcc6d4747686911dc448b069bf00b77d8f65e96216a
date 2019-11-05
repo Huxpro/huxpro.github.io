@@ -1,0 +1,296 @@
+I"x<blockquote>
+  <p>useful as env</p>
+</blockquote>
+
+<p>Map == Dictionary</p>
+<ul>
+  <li>building data structure.</li>
+  <li>use of reflection to streamline proofs.</li>
+</ul>
+
+<p>Two flavors of maps:</p>
+<ol>
+  <li><em>total</em>   maps, return <em>default</em> when lookup fails</li>
+  <li><em>partial</em> maps, return <code class="highlighter-rouge">option</code> to indicate success/failure, using <code class="highlighter-rouge">None</code> as the default.</li>
+</ol>
+
+<h2 id="the-coq-standard-lib">The Coq Standard Lib</h2>
+
+<p>From now on, importing from std lib. (but should not notice much difference)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="no">From</span><span class="w"> </span><span class="no">Coq</span><span class="w"> </span><span class="k">Require</span><span class="w"> </span><span class="k">Import</span><span class="w"> </span><span class="nn">Arith</span><span class="p">.</span><span class="no">Arith</span><span class="pi">.</span><span class="w">
+</span><span class="no">From</span><span class="w"> </span><span class="no">Coq</span><span class="w"> </span><span class="k">Require</span><span class="w"> </span><span class="k">Import</span><span class="w"> </span><span class="nn">Bool</span><span class="p">.</span><span class="no">Bool</span><span class="pi">.</span><span class="w">
+</span><span class="k">Require</span><span class="w"> </span><span class="k">Export</span><span class="w"> </span><span class="nn">Coq</span><span class="p">.</span><span class="nn">Strings</span><span class="p">.</span><span class="no">String</span><span class="pi">.</span><span class="w">
+</span><span class="no">From</span><span class="w"> </span><span class="no">Coq</span><span class="w"> </span><span class="k">Require</span><span class="w"> </span><span class="k">Import</span><span class="w"> </span><span class="nn">Logic</span><span class="p">.</span><span class="no">FunctionalExtensionality</span><span class="pi">.</span><span class="w">
+</span><span class="no">From</span><span class="w"> </span><span class="no">Coq</span><span class="w"> </span><span class="k">Require</span><span class="w"> </span><span class="k">Import</span><span class="w"> </span><span class="nn">Lists</span><span class="p">.</span><span class="no">List</span><span class="pi">.</span><span class="w">
+</span><span class="k">Import</span><span class="w"> </span><span class="no">ListNotations</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>TODO: what’s the differences above? 
+Answered in Coq Intensive:</p>
+<ul>
+  <li><code class="highlighter-rouge">Require</code> give access but need to use qualified name</li>
+  <li><code class="highlighter-rouge">Import</code>  no need to use qualified name</li>
+  <li><code class="highlighter-rouge">Export</code>  module importing me no need to use qualified name as well</li>
+</ul>
+
+<p><code class="highlighter-rouge">String</code> in Coq is <code class="highlighter-rouge">list</code> of <code class="highlighter-rouge">Char</code> and <code class="highlighter-rouge">Char</code> is record of 8 <code class="highlighter-rouge">Bool</code>…</p>
+
+<h2 id="identifiers">Identifiers</h2>
+
+<blockquote>
+  <p>we need a type for the <em>keys</em> that we use to index into our maps.</p>
+</blockquote>
+
+<p>In <code class="highlighter-rouge">Lists.v</code> (Partial Maps):</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">id</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> 
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Id</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>From now on we will use the <code class="highlighter-rouge">string</code> from Coq’s std lib:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">eqb_string</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">if</span><span class="w"> </span><span class="no">string_dec</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="no">false</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Check</span><span class="w"> </span><span class="no">string_dec</span><span class="p">:</span><span class="w"> </span><span class="c">(* ===&gt; *)</span><span class="w">
+     </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">,</span><span class="w"> </span><span class="o">{</span><span class="no">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">s2</span><span class="o">}</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">{</span><span class="no">s1</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="no">s2</span><span class="o">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The equality check fn for <code class="highlighter-rouge">string</code> from stdlib is <code class="highlighter-rouge">string_des</code>, which returns a <code class="highlighter-rouge">sumbool</code> type, i.e. <code class="highlighter-rouge">{x=y} + {x≠y}</code>.</p>
+<blockquote>
+  <p>which can be thought of as an <strong>“evidence-carrying boolean”</strong>. 
+Formally, an element of <code class="highlighter-rouge">sumbool</code> is either or</p>
+  <ul>
+    <li>a proof that two things are equal</li>
+    <li>a proof that they are unequal, 
+together with a tag indicating which.</li>
+  </ul>
+</blockquote>
+
+<p>Some properties:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="c">(* reflexive relation *)</span><span class="w">
+</span><span class="k">Theorem</span><span class="w"> </span><span class="no">eqb_string_refl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">s</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">,</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">eqb_string</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="no">s</span><span class="pi">.</span><span class="w">
+
+</span><span class="c">(* functional extensionality *)</span><span class="w">
+</span><span class="k">Theorem</span><span class="w"> </span><span class="no">eqb_string_true_iff</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">,</span><span class="w"> </span><span class="no">eqb_string</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="p">↔</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">y</span><span class="pi">.</span><span class="w">
+</span><span class="k">Theorem</span><span class="w"> </span><span class="no">eqb_string_false_iff</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">,</span><span class="w"> </span><span class="no">eqb_string</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="p">↔</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="err">≠</span><span class="w"> </span><span class="no">y</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="total-maps">Total Maps</h2>
+
+<blockquote>
+  <p>use <em>functions</em>, rather than lists of key-value pairs, to build maps. 
+The advantage of this representation is that it offers a more <em>extensional</em> view of maps. 外延性</p>
+</blockquote>
+
+<blockquote>
+  <p>(where two maps that respond to queries in the same way will be represented as literally the same thing rather than just “equivalent” data structures. This, in turn, simplifies proofs that use maps.)</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">total_map</span><span class="w"> </span><span class="o">(</span><span class="no">A</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">string</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">A</span><span class="pi">.</span><span class="w">
+
+</span><span class="c">(* empty take a default value *)</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">t_empty</span><span class="w"> </span><span class="o">{</span><span class="no">A</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">v</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">A</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">total_map</span><span class="w"> </span><span class="no">A</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">(</span><span class="kr">fun</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">v</span><span class="o">).</span><span class="w">
+
+</span><span class="c">(* update take a key value pair *)</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">t_update</span><span class="w"> </span><span class="o">{</span><span class="no">A</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">m</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">total_map</span><span class="w"> </span><span class="no">A</span><span class="o">)</span><span class="w">
+                    </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">v</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">A</span><span class="o">)</span><span class="w"> </span><span class="c">(* : total_map A *)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">fun</span><span class="w"> </span><span class="no">x'</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">eqb_string</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">x'</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">v</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="no">m</span><span class="w"> </span><span class="no">x'</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Where is the data stored? <em>Closure</em>!</p>
+
+<h3 id="my-reviews-on-api-style-of-ml">My Reviews on API style of ML</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">examplemap</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="no">t_update</span><span class="w"> </span><span class="o">(</span><span class="no">t_update</span><span class="w"> </span><span class="o">(</span><span class="no">t_empty</span><span class="w"> </span><span class="no">false</span><span class="o">)</span><span class="w"> </span><span class="s2">"foo"</span><span class="w"> </span><span class="no">true</span><span class="o">)</span><span class="w">
+           </span><span class="s2">"bar"</span><span class="w"> </span><span class="no">true</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>since <code class="highlighter-rouge">t_update</code> is defined as so called “t-first” style. 
+Reason/BuckleScript and OCaml stdlib uses this style as well:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="kd">let</span> <span class="nx">examplemap</span> <span class="o">=</span> 
+  <span class="nx">t_empty</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+  <span class="o">|</span><span class="p">.</span> <span class="nx">t_update</span><span class="p">(</span><span class="dl">"</span><span class="s2">foo</span><span class="dl">"</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>         <span class="cm">/* fast pipe */</span>
+  <span class="o">|</span><span class="p">.</span> <span class="nx">t_update</span><span class="p">(</span><span class="dl">"</span><span class="s2">bar</span><span class="dl">"</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> 
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="n">key</span> <span class="o">-&gt;</span> <span class="k">'</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">'</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">'</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">let</span> <span class="n">examplemap</span> <span class="o">=</span> 
+  <span class="nn">Map</span><span class="p">.</span><span class="n">empty</span> 
+  <span class="o">|&gt;</span> <span class="nn">Map</span><span class="p">.</span><span class="n">add</span> <span class="s2">"foo"</span> <span class="bp">true</span>
+  <span class="o">|&gt;</span> <span class="nn">Map</span><span class="p">.</span><span class="n">add</span> <span class="s2">"bar"</span> <span class="bp">true</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Or, In Jane Street “named-argument” style 
+e.g. <a href="https://v1.realworldocaml.org/v1/en/html/maps-and-hash-tables.html">Real World OCaml</a></p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">let</span> <span class="n">examplemap</span> <span class="o">=</span> 
+  <span class="nn">Map</span><span class="p">.</span><span class="n">empty</span>
+  <span class="o">|&gt;</span> <span class="nn">Map</span><span class="p">.</span><span class="n">add</span> <span class="o">~</span><span class="n">key</span><span class="o">:</span><span class="s2">"foo"</span> <span class="o">~</span><span class="n">data</span><span class="o">:</span><span class="bp">true</span>
+  <span class="o">|&gt;</span> <span class="nn">Map</span><span class="p">.</span><span class="n">add</span> <span class="o">~</span><span class="n">key</span><span class="o">:</span><span class="s2">"bar"</span> <span class="o">~</span><span class="n">data</span><span class="o">:</span><span class="bp">true</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="lightweight-meta-programming-in-coq---notation">Lightweight Meta-Programming in Coq - Notation</h3>
+
+<p>In Coq, we can leverage some meta programming:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">Notation</span><span class="w"> </span><span class="s2">"'_' '!-&gt;' v"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">t_empty</span><span class="w"> </span><span class="no">v</span><span class="o">)</span><span class="w">
+  </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">100</span><span class="o">,</span><span class="w"> </span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"x '!-&gt;' v ';' m"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">t_update</span><span class="w"> </span><span class="no">m</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">v</span><span class="o">)</span><span class="w">
+  </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">100</span><span class="o">,</span><span class="w"> </span><span class="no">v</span><span class="w"> </span><span class="kp">at</span><span class="w"> </span><span class="no">next</span><span class="w"> </span><span class="no">level</span><span class="o">,</span><span class="w"> </span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">examplemap'</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">(</span><span class="w"> </span><span class="s2">"bar"</span><span class="w"> </span><span class="o">!-&gt;</span><span class="w"> </span><span class="no">true</span><span class="p">;</span><span class="w">
+    </span><span class="s2">"foo"</span><span class="w"> </span><span class="o">!-&gt;</span><span class="w"> </span><span class="no">true</span><span class="p">;</span><span class="w">
+    </span><span class="p">_</span><span class="w">     </span><span class="o">!-&gt;</span><span class="w"> </span><span class="no">false</span><span class="w">
+  </span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Noticed that the “Map building” is in a <em>reversed</em> order…</p>
+
+<blockquote>
+  <p>Note that we don’t need to define a find operation because it is just function application!</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Example</span><span class="w"> </span><span class="no">update_example2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">examplemap'</span><span class="w"> </span><span class="s2">"foo"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="pi">.</span><span class="w">
+</span><span class="k">Example</span><span class="w"> </span><span class="no">update_example4</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">examplemap'</span><span class="w"> </span><span class="s2">"bar"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="pi">.</span><span class="w">
+</span><span class="k">Example</span><span class="w"> </span><span class="no">update_example1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">examplemap'</span><span class="w"> </span><span class="s2">"baz"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="pi">.</span><span class="w"> </span><span class="c">(* default *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="partial-maps">Partial Maps</h2>
+
+<blockquote>
+  <p>we define partial maps on top of total maps. 
+A partial map with elements of type <code class="highlighter-rouge">A</code> is simply a total map with elements of type <code class="highlighter-rouge">option A</code> and default element <code class="highlighter-rouge">None</code>.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">partial_map</span><span class="w"> </span><span class="o">(</span><span class="no">A</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">total_map</span><span class="w"> </span><span class="o">(</span><span class="no">option</span><span class="w"> </span><span class="no">A</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">empty</span><span class="w"> </span><span class="o">{</span><span class="no">A</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">partial_map</span><span class="w"> </span><span class="no">A</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="no">t_empty</span><span class="w"> </span><span class="no">None</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">update</span><span class="w"> </span><span class="o">{</span><span class="no">A</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">m</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">partial_map</span><span class="w"> </span><span class="no">A</span><span class="o">)</span><span class="w">
+           </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">v</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">A</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="o">!-&gt;</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">v</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="no">m</span><span class="o">).</span><span class="w">
+  
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"x '⊢&gt;' v ';' m"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">update</span><span class="w"> </span><span class="no">m</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">v</span><span class="o">)</span><span class="w">
+  </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">100</span><span class="o">,</span><span class="w"> </span><span class="no">v</span><span class="w"> </span><span class="kp">at</span><span class="w"> </span><span class="no">next</span><span class="w"> </span><span class="no">level</span><span class="o">,</span><span class="w"> </span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">).</span><span class="w">
+
+</span><span class="c">(** hide the empty case. Since it's always [None] **)</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"x '⊢&gt;' v"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">update</span><span class="w"> </span><span class="no">empty</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">v</span><span class="o">)</span><span class="w">
+  </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">100</span><span class="o">).</span><span class="w">
+  
+</span><span class="c">(** so nice **)</span><span class="w">
+</span><span class="k">Example</span><span class="w"> </span><span class="no">examplepmap</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">(</span><span class="s2">"Church"</span><span class="w"> </span><span class="p">⊢</span><span class="o">&gt;</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="p">;</span><span class="w"> 
+   </span><span class="s2">"Turing"</span><span class="w"> </span><span class="p">⊢</span><span class="o">&gt;</span><span class="w"> </span><span class="no">false</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>we use the “standard” map operator <code class="highlighter-rouge">↦</code> for partial map since maps in CS are usually partial.</p>
+
+<hr />
+
+<h2 id="maps-are-functions"><a href="https://en.wikipedia.org/wiki/Map_(mathematics)#Maps_as_functions">Maps are functions</a></h2>
+
+<blockquote>
+  <p>In many branches of mathematics, the term map is used to mean a function.
+<em>partial map</em> = <em>partial function</em>, 
+<em>total   map</em> = <em>total   function</em>.</p>
+</blockquote>
+
+<blockquote>
+  <p>In category theory, “map” is often used as a synonym for morphism or arrow.</p>
+</blockquote>
+
+<blockquote>
+  <p>In formal logic, “map” is sometimes used for a functional symbol.</p>
+</blockquote>
+
+:ET

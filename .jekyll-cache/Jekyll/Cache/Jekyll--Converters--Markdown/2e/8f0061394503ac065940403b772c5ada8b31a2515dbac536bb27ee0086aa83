@@ -1,0 +1,381 @@
+I"�k<blockquote>
+  <p>Hux: this chapter is very similar to TAPL - ch13 References
+But under a “formal verification” concept, it’s more interesting and practical and push you to think about it!</p>
+</blockquote>
+
+<p><em>computational effects</em> - “side effects” of computation - <em>impure</em> features</p>
+<ul>
+  <li>assign to mutable variables (reference cells, arrays, mutable record fields, etc.)</li>
+  <li>perform input and output to files, displays, or network connections;</li>
+  <li>make non-local transfers of control via exceptions, jumps, or continuations;</li>
+  <li>engage in inter-process synchronization and communication</li>
+</ul>
+
+<blockquote>
+  <p>The main extension will be dealing explicitly with a</p>
+  <ul>
+    <li><em>store</em> (or <em>heap</em>) and</li>
+    <li><em>pointers</em> (or <em>reference</em>) that name <em>store locations</em>, or <em>address</em>…</li>
+  </ul>
+</blockquote>
+
+<p>interesting refinement: type preservation</p>
+
+<h2 id="definition">Definition</h2>
+
+<p>forms of assignments:</p>
+<ul>
+  <li>rare : Gallina   - No</li>
+  <li>some : ML family - Explicit <em>reference</em> and <em>dereference</em></li>
+  <li>most : C  family - Implicit …</li>
+</ul>
+
+<p>For formal study, use ML’s model.</p>
+
+<h2 id="syntax">Syntax</h2>
+
+<h3 id="types--terms">Types &amp; Terms</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="no">T</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> 
+    </span><span class="o">|</span><span class="w"> </span><span class="no">Nat</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">Unit</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">T</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">Ref</span><span class="w"> </span><span class="no">T</span><span class="w">
+
+</span><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> 
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">                </span><span class="no">Terms</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">ref</span><span class="w"> </span><span class="no">t</span><span class="w">              </span><span class="no">allocation</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">!</span><span class="no">t</span><span class="w">                 </span><span class="no">dereference</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">t</span><span class="w">             </span><span class="no">assignment</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">l</span><span class="w">                  </span><span class="no">location</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Nat</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ty</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Unit</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ty</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Arrow</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">ty</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Ref</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">ty</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="c">(* STLC with numbers: *)</span><span class="w">
+  </span><span class="o">...</span><span class="w">
+  </span><span class="c">(* New terms: *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">unit</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ref</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">deref</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">assign</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">loc</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="pi">.</span><span class="w">         </span><span class="c">(** 这里表示 l 的方式是 wrap 一个 nat as loc **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="typing">Typing</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre>                       Gamma |- t1 : T1
+                   ------------------------                         (T_Ref)
+                   Gamma |- ref t1 : Ref T1
+
+                    Gamma |- t1 : Ref T11
+                    ---------------------                         (T_Deref)
+                      Gamma |- !t1 : T11
+
+                    Gamma |- t1 : Ref T11
+                      Gamma |- t2 : T11
+                   ------------------------                      (T_Assign)
+                   Gamma |- t1 := t2 : Unit
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="values-and-substitution">Values and Substitution</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">...</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">v_unit</span><span class="w"> </span><span class="p">:</span><span class="w">     </span><span class="no">value</span><span class="w"> </span><span class="no">unit</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">v_loc</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">l</span><span class="o">,</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="o">(</span><span class="no">loc</span><span class="w"> </span><span class="no">l</span><span class="o">).</span><span class="w">  </span><span class="c">(* &lt;-- 注意这里是一个 Π (l:nat) . value (loc l) *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="kp">subst</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="p">:</span><span class="no">string</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">s</span><span class="p">:</span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="p">:</span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">...</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">unit</span><span class="w">         </span><span class="p">⇒</span><span class="w"> </span><span class="no">t</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ref</span><span class="w"> </span><span class="no">t1</span><span class="w">       </span><span class="p">⇒</span><span class="w"> </span><span class="no">ref</span><span class="w"> </span><span class="o">(</span><span class="kp">subst</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="no">t1</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">deref</span><span class="w"> </span><span class="no">t1</span><span class="w">     </span><span class="p">⇒</span><span class="w"> </span><span class="no">deref</span><span class="w"> </span><span class="o">(</span><span class="kp">subst</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="no">t1</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">assign</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">assign</span><span class="w"> </span><span class="o">(</span><span class="kp">subst</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="no">t1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kp">subst</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="no">t2</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">loc</span><span class="w"> </span><span class="p">_</span><span class="w">        </span><span class="p">⇒</span><span class="w"> </span><span class="no">t</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="pragmatics">Pragmatics</h2>
+
+<h3 id="side-effects-and-sequencing">Side Effects and Sequencing</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>r:=succ(!r); !r
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>can be desugar to</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>(\x:Unit. !r) (r:=succ(!r)).
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>then we can write some “imperative programming”</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>r:=succ(!r); 
+r:=succ(!r); 
+r:=succ(!r); 
+!r
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="references-and-aliasing">References and Aliasing</h3>
+
+<p><em>shared reference</em> brings <em>_shared state</em></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>let r = ref 5 in
+let s = r in
+s := 82;
+(!r)+1
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="shared-state">Shared State</h3>
+
+<p><em>thunks</em> as <em>methods</em></p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>
+    <span class="kr">let</span> <span class="n">c</span> <span class="o">=</span> <span class="n">ref</span> <span class="mi">0</span> <span class="kr">in</span>
+    <span class="kr">let</span> <span class="n">incc</span> <span class="o">=</span> <span class="nf">\</span><span class="kr">_</span><span class="o">:</span><span class="kt">Unit</span><span class="o">.</span> <span class="p">(</span><span class="n">c</span> <span class="o">:=</span> <span class="n">succ</span> <span class="p">(</span><span class="o">!</span><span class="n">c</span><span class="p">);</span> <span class="o">!</span><span class="n">c</span><span class="p">)</span> <span class="kr">in</span>
+    <span class="kr">let</span> <span class="n">decc</span> <span class="o">=</span> <span class="nf">\</span><span class="kr">_</span><span class="o">:</span><span class="kt">Unit</span><span class="o">.</span> <span class="p">(</span><span class="n">c</span> <span class="o">:=</span> <span class="n">pred</span> <span class="p">(</span><span class="o">!</span><span class="n">c</span><span class="p">);</span> <span class="o">!</span><span class="n">c</span><span class="p">)</span> <span class="kr">in</span> <span class="p">(</span>
+      <span class="n">incc</span> <span class="n">unit</span><span class="p">;</span> 
+      <span class="n">incc</span> <span class="n">unit</span><span class="p">;</span>          <span class="c1">-- in real PL: the concrete syntax is `incc()`</span>
+      <span class="n">decc</span> <span class="n">unit</span>
+    <span class="p">)</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="objects">Objects</h3>
+
+<p><em>constructor</em> and <em>encapsulation</em>!</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>
+    <span class="n">newcounter</span> <span class="o">=</span>
+      <span class="nf">\</span><span class="kr">_</span><span class="o">:</span><span class="kt">Unit</span><span class="o">.</span>            <span class="c1">-- add `(self, init_val)` would make it more "real"</span>
+        <span class="kr">let</span> <span class="n">c</span> <span class="o">=</span> <span class="n">ref</span> <span class="mi">0</span> <span class="kr">in</span>  <span class="c1">-- private and only accessible via closure (特权方法)</span>
+        <span class="kr">let</span> <span class="n">incc</span> <span class="o">=</span> <span class="nf">\</span><span class="kr">_</span><span class="o">:</span><span class="kt">Unit</span><span class="o">.</span> <span class="p">(</span><span class="n">c</span> <span class="o">:=</span> <span class="n">succ</span> <span class="p">(</span><span class="o">!</span><span class="n">c</span><span class="p">);</span> <span class="o">!</span><span class="n">c</span><span class="p">)</span> <span class="kr">in</span>
+        <span class="kr">let</span> <span class="n">decc</span> <span class="o">=</span> <span class="nf">\</span><span class="kr">_</span><span class="o">:</span><span class="kt">Unit</span><span class="o">.</span> <span class="p">(</span><span class="n">c</span> <span class="o">:=</span> <span class="n">pred</span> <span class="p">(</span><span class="o">!</span><span class="n">c</span><span class="p">);</span> <span class="o">!</span><span class="n">c</span><span class="p">)</span> <span class="kr">in</span>
+        <span class="p">{</span> <span class="n">i</span><span class="o">=</span><span class="n">incc</span><span class="p">,</span> 
+          <span class="n">d</span><span class="o">=</span><span class="n">decc</span>  <span class="p">}</span>       <span class="c1">-- return a "record", or "struct", or "object"!</span>
+          
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="references-to-compound-types-eg-function-type">References to Compound Types (e.g. Function Type)</h3>
+
+<p>Previously, we use <em>closure</em> to represent <em>map</em>, with <em>functional update</em>
+这里的”数组” （这个到底算不算数组估计都有争议，虽然的确提供了 index 但是这个显然是 O(n) 都不知道算不算 random access…
+并不是 in-place update 里面的数据的，仅仅是一个 <code class="highlighter-rouge">ref</code> 包住的 map 而已 （仅仅是多了可以 shared</p>
+
+<p>其实或许 <code class="highlighter-rouge">list (ref nat)</code> 也可以表达数组？ 反正都是 O(n) 每次都 linear search 也一样……</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>
+    <span class="n">newarray</span> <span class="o">=</span> <span class="nf">\</span><span class="kr">_</span><span class="o">:</span><span class="kt">Unit</span><span class="o">.</span> <span class="n">ref</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span><span class="o">:</span><span class="kt">Nat</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">lookup</span> <span class="o">=</span> <span class="nf">\</span><span class="n">a</span><span class="o">:</span><span class="kt">NatArray</span><span class="o">.</span> <span class="nf">\</span><span class="n">n</span><span class="o">:</span><span class="kt">Nat</span><span class="o">.</span> <span class="p">(</span><span class="o">!</span><span class="n">a</span><span class="p">)</span> <span class="n">n</span>   
+    <span class="n">update</span> <span class="o">=</span> <span class="nf">\</span><span class="n">a</span><span class="o">:</span><span class="kt">NatArray</span><span class="o">.</span> <span class="nf">\</span><span class="n">m</span><span class="o">:</span><span class="kt">Nat</span><span class="o">.</span> <span class="nf">\</span><span class="n">v</span><span class="o">:</span><span class="kt">Nat</span><span class="o">.</span>
+               <span class="kr">let</span> <span class="n">oldf</span> <span class="o">=</span> <span class="o">!</span><span class="n">a</span> <span class="kr">in</span>
+               <span class="n">a</span> <span class="o">:=</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span><span class="o">:</span><span class="kt">Nat</span><span class="o">.</span> <span class="kr">if</span> <span class="n">equal</span> <span class="n">m</span> <span class="n">n</span> <span class="kr">then</span> <span class="n">v</span> <span class="kr">else</span> <span class="n">oldf</span> <span class="n">n</span><span class="p">);</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="null-references">Null References</h3>
+
+<p><em>nullptr</em>!</p>
+
+<p>Deref a nullptr:</p>
+<ul>
+  <li>exception in Java/C#</li>
+  <li>insecure in C/C++     &lt;– violate memory safety!!</li>
+</ul>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
+    <span class="kr">type</span> <span class="kt">Option</span> <span class="kt">T</span>   <span class="o">=</span> <span class="kt">Unit</span> <span class="o">+</span> <span class="kt">T</span>
+    <span class="kr">type</span> <span class="kt">Nullable</span> <span class="kt">T</span> <span class="o">=</span> <span class="kt">Option</span> <span class="p">(</span><span class="kt">Ref</span> <span class="kt">T</span><span class="p">)</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Why is <code class="highlighter-rouge">Option</code> outside?
+think about C, <code class="highlighter-rouge">nullptr</code> is A special <em>const</em> location, like <code class="highlighter-rouge">Unit</code> (<code class="highlighter-rouge">None</code> in terms of datacon) here.</p>
+
+<h3 id="garbage-collection">Garbage Collection</h3>
+
+<p>last issue: store <em>de-allocation</em></p>
+
+<blockquote>
+  <p>w/o GC, extremely difficult to achieve type safety…if a primitive for “explicit deallocation” provided
+one can easily create <em>dangling reference</em> i.e. references -&gt; deleted</p>
+</blockquote>
+
+<p>One type-unsafe example: (pseudo code)</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>
+   <span class="n">a</span> <span class="o">:</span> <span class="kt">Ref</span> <span class="kt">Nat</span> <span class="o">=</span> <span class="n">ref</span> <span class="mi">1</span><span class="p">;</span>       <span class="c1">-- alloc loc 0</span>
+   <span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>                   <span class="c1">-- free  loc 0</span>
+   <span class="n">b</span> <span class="o">:</span> <span class="kt">Ref</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="n">ref</span> <span class="kt">True</span><span class="p">;</span>   <span class="c1">-- alloc loc 0</span>
+   
+   <span class="n">a</span> <span class="o">:=</span> <span class="o">!</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>                <span class="c1">-- BOOM!</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="operational-semantics">Operational Semantics</h2>
+
+<h3 id="locations">Locations</h3>
+
+<blockquote>
+  <p>what should be the <em>values</em> of type <code class="highlighter-rouge">Ref T</code>?</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">ref</code> allocate some memory/storage!</p>
+
+<blockquote>
+  <p>run-time store is essentially big array of bytes.
+different datatype need to allocate different size of space (region)</p>
+</blockquote>
+
+<blockquote>
+  <p>we think store as <em>array of values</em>, <em>abstracting away different size of different values</em>
+we use the word <em>location</em> here to prevent from modeling <em>pointer arithmetic</em>, which is un-trackable by most type system</p>
+</blockquote>
+
+<p>location <code class="highlighter-rouge">n</code> is <code class="highlighter-rouge">float</code> doesn’t tell you anything about location <code class="highlighter-rouge">n+4</code>…</p>
+
+<h3 id="stores">Stores</h3>
+
+<p>we defined <code class="highlighter-rouge">replace</code> as <code class="highlighter-rouge">Fixpoint</code> since it’s computational and easier. The consequence is it has to be total.</p>
+
+<h3 id="reduction">Reduction</h3>
+
+<h2 id="typing-1">Typing</h2>
+
+<p>typing context:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">context</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">partial_map</span><span class="w"> </span><span class="no">ty</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="store-typings">Store typings</h3>
+
+<p>why not just make a <em>context</em> a map of pair? 
+we don’t want to complicate the dynamics of language,
+and this store typing is only for type check.</p>
+
+<h3 id="the-typing-relation">The Typing Relation</h3>
+
+<h2 id="properties">Properties</h2>
+
+<h3 id="well-typed-stores">Well-Typed Stores</h3>
+
+<h3 id="extending-store-typings">Extending Store Typings</h3>
+
+<h3 id="preservation-finally">Preservation, Finally</h3>
+
+<h3 id="substitution-lemma">Substitution Lemma</h3>
+
+<h3 id="assignment-preserves-store-typing">Assignment Preserves Store Typing</h3>
+
+<h3 id="weakening-for-stores">Weakening for Stores</h3>
+
+<h3 id="preservation">Preservation!</h3>
+
+<h3 id="progress">Progress</h3>
+
+<h2 id="references-and-nontermination">References and Nontermination</h2>
+:ET

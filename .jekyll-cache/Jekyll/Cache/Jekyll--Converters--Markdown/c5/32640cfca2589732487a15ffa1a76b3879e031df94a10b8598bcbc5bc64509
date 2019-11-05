@@ -1,0 +1,186 @@
+I"�9<h2 id="basic-extraction">Basic Extraction</h2>
+
+<ul>
+  <li>OCaml   (most mature)</li>
+  <li>Haskell (mostly works)</li>
+  <li>Scheme  (a bit out of date)</li>
+</ul>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="no">Extraction</span><span class="w"> </span><span class="s2">"imp1.ml"</span><span class="w"> </span><span class="no">ceval_step</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>When Coq processes this command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>The file imp1.ml has been created by extraction.
+The file imp1.mli has been created by extraction.
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="controlling-extraction-of-specific-types">Controlling Extraction of Specific Types</h2>
+
+<p>如果不做任何处理的话…生成的 <code class="highlighter-rouge">ml</code> 里的 <code class="highlighter-rouge">nat</code> 则都会是 Church Numeral…</p>
+
+<blockquote>
+  <p>We can tell Coq how to extract certain <code class="highlighter-rouge">Inductive</code> definitions to specific OCaml types.
+we must say:</p>
+  <ol>
+    <li>how the Coq type itself should be represented in OCaml</li>
+    <li>how each constructor should be translated</li>
+  </ol>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="no">Extract</span><span class="w"> </span><span class="k">Inductive</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="s2">"bool"</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"true"</span><span class="w"> </span><span class="s2">"false"</span><span class="w"> </span><span class="o">].</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>also, for non-enumeration types (where the constructors take arguments), 
+we give an OCaml expression that can be used as a <em>“recursor”</em> over elements of the type. (Think Church numerals.)</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="no">Extract</span><span class="w"> </span><span class="k">Inductive</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="s2">"int"</span><span class="w">
+  </span><span class="o">[</span><span class="w"> </span><span class="s2">"0"</span><span class="w"> </span><span class="s2">"(fun x → x + 1)"</span><span class="w"> </span><span class="o">]</span><span class="w">
+  </span><span class="s2">"(fun zero succ n →
+      if n=0 then zero () else succ (n-1))"</span><span class="o">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="no">Extract</span><span class="w"> </span><span class="no">Constant</span><span class="w"> </span><span class="no">plus</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="s2">"( + )"</span><span class="o">.</span><span class="w">
+</span><span class="no">Extract</span><span class="w"> </span><span class="no">Constant</span><span class="w"> </span><span class="no">mult</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="s2">"( * )"</span><span class="o">.</span><span class="w">
+</span><span class="no">Extract</span><span class="w"> </span><span class="no">Constant</span><span class="w"> </span><span class="no">eqb</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="s2">"( = )"</span><span class="o">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>注意：保证提取结果的合理性是你的责任。</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="no">Extract</span><span class="w"> </span><span class="no">Constant</span><span class="w"> </span><span class="no">minus</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="s2">"( - )"</span><span class="o">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>比如这么做很诱人……但是我们 Coq 的定义里 <code class="highlighter-rouge">0 - 1 = 0</code>, OCaml 的 <code class="highlighter-rouge">int</code> 则会有负数…</p>
+
+<h3 id="recursor-的理论与实现---a-encoding-of-case-expression-and-sum-type">Recursor 的理论与实现 - a “encoding” of case expression and sum type</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">ceval_step</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">i</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w">
+                    </span><span class="p">:</span><span class="w"> </span><span class="no">option</span><span class="w"> </span><span class="no">state</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">i</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">O</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">None</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="no">i'</span><span class="w"> </span><span class="o">=&gt;</span><span class="w">
+    </span><span class="kr">match</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="kp">with</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">let</span> <span class="k">rec</span> <span class="n">ceval_step</span> <span class="n">st</span> <span class="n">c</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">O</span> <span class="o">-&gt;</span> <span class="nc">None</span>
+  <span class="o">|</span> <span class="nc">S</span> <span class="n">i'</span> <span class="o">-&gt;</span>
+    <span class="p">(</span><span class="k">match</span> <span class="n">c</span> <span class="k">with</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">let</span> <span class="k">rec</span> <span class="n">ceval_step</span> <span class="n">st</span> <span class="n">c</span> <span class="n">i</span> <span class="o">=</span>
+  <span class="p">(</span><span class="k">fun</span> <span class="n">zero</span> <span class="n">succ</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span> <span class="k">then</span> <span class="n">zero</span> <span class="bp">()</span> <span class="k">else</span> <span class="n">succ</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">fun</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="nc">None</span><span class="p">)</span>     <span class="c">(* zero *)</span>
+    <span class="p">(</span><span class="k">fun</span> <span class="n">i'</span> <span class="o">-&gt;</span>          <span class="c">(* succ *)</span>
+    <span class="k">match</span> <span class="n">c</span> <span class="k">with</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>注意我们是如何使用 “recursor” 来替代 <code class="highlighter-rouge">case</code>, <code class="highlighter-rouge">match</code>, pattern matching 得。</p>
+
+<p>recall <em>sum type</em> 在 PLT 中的语法与语义：</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="no">T</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> 
+  </span><span class="no">T</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="no">T</span><span class="w">
+
+</span><span class="no">e</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">
+  </span><span class="no">case</span><span class="w"> </span><span class="no">e</span><span class="w"> </span><span class="no">of</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">L</span><span class="o">(</span><span class="no">e</span><span class="o">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">e</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">R</span><span class="o">(</span><span class="no">e</span><span class="o">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">e</span><span class="w">
+
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre>                      e → e' 
+                  ------------- (work inside constructor)
+                  C(e) -&gt; C(e')
+
+                      e → e' 
+          -------------------------------   (work on the expr match against)
+          case e of ... →  case e' of ...
+
+     -----------------------------------------------  (match Left constructor, substitute)
+     case L(v) of L(x) =&gt; e1 | R(y) =&gt; e2 → e1 [v/x]
+
+     -----------------------------------------------  (match Right constructor, substitute)
+     case R(v) of L(x) =&gt; e1 | R(y) =&gt; e2 → e1 [v/x]
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>可以发现 <code class="highlighter-rouge">case</code> 表达式可以理解为一种特殊的 application，会将其 argument 根据某种 tag （这里为构造函数） apply 到对应的 case body 上，
+每个 case body 都是和 lambda abstraction 同构的一种 binder：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre> L(x) =&gt; e1     ===   λx.e1
+ R(x) =&gt; e2     ===   λx.e2 
+
+ case v e1|e2   ===   (λx.e1|e2) v      -- `e1` or `e2` depends on the _tag_ wrapped on `v`
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>这个角度也解释了 Haskell/SML 在申明函数时直接对参数写 pattern match 的理论合理性.</p>
+
+<p>根据经验几乎所有的 <em>binding</em> 都可以被 desugar 成函数（即 lambda expression).
+难点在于我们如何 re-implement 这个 <em>tag</em> 的 <em>switch</em> 机制?</p>
+
+<p>对于 <code class="highlighter-rouge">Inductive nat</code> 翻译到 OCaml <code class="highlighter-rouge">int</code> 时，这个机制可以用 <code class="highlighter-rouge">v =? 0</code> 来判断，因此我们的 <em>recursor</em> 实现为</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">fun</span> <span class="n">zero</span> <span class="n">succ</span>                <span class="c">(* partial application  *)</span>
+  <span class="n">n</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span>                <span class="c">(* 判断 tag ... *)</span>
+       <span class="k">then</span> <span class="n">zero</span> <span class="bp">()</span>          <span class="c">(* 0   case =&gt;  (λx.e1) v *)</span>
+       <span class="k">else</span> <span class="n">succ</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>       <span class="c">(* S n case =&gt;  (λx.e2) v *)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+:ET

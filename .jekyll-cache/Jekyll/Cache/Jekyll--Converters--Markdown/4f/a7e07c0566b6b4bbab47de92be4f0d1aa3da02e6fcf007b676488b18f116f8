@@ -1,0 +1,346 @@
+I"��<p>This chapter:</p>
+<ul>
+  <li>typing relation                                             – 定型关系</li>
+  <li><code class="highlighter-rouge">type preservation</code> and <code class="highlighter-rouge">progress</code> (i.e. soundness proof)   – 类型保留，可进性</li>
+</ul>
+
+<h2 id="typed-arithmetic-expressions-toy-typed-language">Typed Arithmetic Expressions (Toy Typed Language)</h2>
+
+<p>The toy lang from <code class="highlighter-rouge">SmallStep</code> is too “safe” to demonstrate any <strong>runtime (or dynamic) type errors</strong>.  – 运行时类型错误
+So that’s add some operations (common church numeral ones), and <code class="highlighter-rouge">bool</code> type.</p>
+
+<p>…same teaching order as TAPL. In PLT, we went directly to STLC.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">tru</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">fls</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">test</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">zro</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">scc</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">prd</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">iszro</span><span class="w"> </span><span class="no">t</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">tru</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">fls</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">test</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">zro</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">scc</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">prd</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">iszro</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="pi">.</span><span class="w">
+
+</span><span class="c">(* object language has its own bool / nat , 这里不使用 Coq (meta-language) 比较 pure 一些? *)</span><span class="w">
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">bvalue</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">bv_tru</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bvalue</span><span class="w"> </span><span class="no">tru</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">bv_fls</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bvalue</span><span class="w"> </span><span class="no">fls</span><span class="pi">.</span><span class="w">
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">nvalue</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">nv_zro</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nvalue</span><span class="w"> </span><span class="no">zro</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">nv_scc</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t</span><span class="o">,</span><span class="w"> </span><span class="no">nvalue</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">nvalue</span><span class="w"> </span><span class="o">(</span><span class="no">scc</span><span class="w"> </span><span class="no">t</span><span class="o">).</span><span class="w">  </span><span class="c">(** 注意这里 nv_scc 是描述所有 [scc t] 是 nvalue 的一个 constructor / tag **)</span><span class="w">
+
+</span><span class="c">(* [value?] predicate *)</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">bvalue</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">∨</span><span class="w"> </span><span class="no">nvalue</span><span class="w"> </span><span class="no">t</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="automation">Automation</h3>
+
+<p><code class="highlighter-rouge">Hint</code> are added to database to help with <code class="highlighter-rouge">auto</code>.
+More details on <code class="highlighter-rouge">auto. eapply. eauto.</code> were mentioned in <code class="highlighter-rouge">lf/Auto</code>.</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Hint</span><span class="w"> </span><span class="no">Constructors</span><span class="w"> </span><span class="no">bvalue</span><span class="w"> </span><span class="no">nvalue</span><span class="pi">.</span><span class="w">
+</span><span class="k">Hint</span><span class="w"> </span><span class="no">Unfold</span><span class="w"> </span><span class="no">value</span><span class="pi">.</span><span class="w">
+</span><span class="k">Hint</span><span class="w"> </span><span class="no">Unfold</span><span class="w"> </span><span class="no">update</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="sos">S.O.S</h3>
+
+<p>Small-step operational semantics…
+can be made formally in Coq code:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="no">Reserved</span><span class="w"> </span><span class="k">Notation</span><span class="w"> </span><span class="s2">"t1 '--&gt;' t2"</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">40</span><span class="o">).</span><span class="w">
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">step</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ST_TestTru</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="o">,</span><span class="w">
+      </span><span class="o">(</span><span class="no">test</span><span class="w"> </span><span class="no">tru</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="o">)</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t1</span><span class="w">
+  </span><span class="o">...</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="is-stuck-vs-can-get-stuck--卡住的项-vs-将会卡住的项">“is stuck” vs. “can get stuck”  卡住的项 vs. 将会卡住的项</h3>
+
+<p>Noticed that the small-step semantics doesn’t care about if some term would eventually get stuck.</p>
+
+<h3 id="normal-forms-and-values">Normal Forms and Values</h3>
+
+<blockquote>
+  <p>因为这个语言有 stuck 的情况，所以 <code class="highlighter-rouge">value != normal form</code> (terms cannot make progress) 
+<code class="highlighter-rouge">possible_results_of_reduction = value | stuck</code></p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Notation</span><span class="w"> </span><span class="no">step_normal_form</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">normal_form</span><span class="w"> </span><span class="no">step</span><span class="o">).</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">stuck</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="no">step_normal_form</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="p">¬</span><span class="no">value</span><span class="w"> </span><span class="no">t</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="slide-qa-1">Slide Q&amp;A 1</h3>
+
+<ol>
+  <li>Yes</li>
+  <li>No   <code class="highlighter-rouge">scc zro</code> is a value</li>
+  <li>No   is a value</li>
+</ol>
+
+<h3 id="typing">Typing</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Bool</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ty</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Nat</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ty</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Noticed that it’s just a non-dependently-typed ADT, but <code class="highlighter-rouge">: ty</code> is written explcitly here…they are the same!</p>
+
+<h3 id="typing-relations">Typing Relations</h3>
+
+<p>okay the funny thing…
+it make sense to use <code class="highlighter-rouge">∈</code> here since <code class="highlighter-rouge">:</code> has been used by Coq.
+but this notation is actually represented as <code class="highlighter-rouge">\in</code>. 
+We suddenly switch to LaTex mode…</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="no">Reserved</span><span class="w"> </span><span class="k">Notation</span><span class="w"> </span><span class="s2">"'|-' t '\in' T"</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">40</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Noticed the generic <code class="highlighter-rouge">T</code> here. 
+In PLT we sometimes treat them as “magic” <em>meta variable</em>, here we need to make the <code class="highlighter-rouge">T</code> explcit (we are in the meta-language).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>⊢ t1 ∈ Bool    ⊢ t2 ∈ T    ⊢ t3 ∈ T	
+----------------------------------  (T_Test)
+  ⊢ test t1 then t2 else t3 ∈ T
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="o">|</span><span class="w"> </span><span class="no">T_Test</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="no">t3</span><span class="w"> </span><span class="no">T</span><span class="o">,</span><span class="w">     </span><span class="c">(** &lt;--- explicit ∀ T **)</span><span class="w">
+       </span><span class="p">⊢</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">Bool</span><span class="w"> </span><span class="p">→</span><span class="w">
+       </span><span class="p">⊢</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">→</span><span class="w">
+       </span><span class="p">⊢</span><span class="w"> </span><span class="no">t3</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">→</span><span class="w">
+       </span><span class="p">⊢</span><span class="w"> </span><span class="no">test</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="no">t3</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">T</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">Example</span><span class="w"> </span><span class="no">has_type_1</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="p">⊢</span><span class="w"> </span><span class="no">test</span><span class="w"> </span><span class="no">fls</span><span class="w"> </span><span class="no">zro</span><span class="w"> </span><span class="o">(</span><span class="no">scc</span><span class="w"> </span><span class="no">zro</span><span class="o">)</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">Nat</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">apply</span><span class="w"> </span><span class="no">T_Test</span><span class="pi">.</span><span class="w">      </span><span class="c">(** &lt;--- we already know [T] from the return type [Nat] **)</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">T_Fls</span><span class="pi">.</span><span class="w">   </span><span class="c">(** ⊢ _ ∈ Bool **)</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">T_Zro</span><span class="pi">.</span><span class="w">   </span><span class="c">(** ⊢ _ ∈ Nat  **)</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">T_Scc</span><span class="pi">.</span><span class="w">   </span><span class="c">(** ⊢ _ ∈ Nat  **)</span><span class="w">
+       </span><span class="o">+</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">T_Zro</span><span class="pi">.</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>(Since we’ve included all the constructors of the typing relation in the hint database, the <code class="highlighter-rouge">auto</code> tactic can actually find this proof automatically.)</p>
+</blockquote>
+
+<h4 id="typing-relation-is-a-conservative-or-static-approximation">typing relation is a conservative (or static) approximation</h4>
+
+<blockquote>
+  <p>类型关系是一个保守的（或静态的）近似</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Example</span><span class="w"> </span><span class="no">has_type_not</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="p">¬</span><span class="o">(</span><span class="w"> </span><span class="p">⊢</span><span class="w"> </span><span class="no">test</span><span class="w"> </span><span class="no">fls</span><span class="w"> </span><span class="no">zro</span><span class="w"> </span><span class="no">tru</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">Bool</span><span class="w"> </span><span class="o">).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">Contra</span><span class="pi">.</span><span class="w"> </span><span class="no">solve_by_inverts</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">   </span><span class="c">(** 2-depth inversions **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="lemma-canonical-forms-典范形式"><code class="highlighter-rouge">Lemma</code> Canonical Forms 典范形式</h3>
+
+<p>As PLT.</p>
+
+<h3 id="progress-可进性">Progress (可进性)</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">progress</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t</span><span class="w"> </span><span class="no">T</span><span class="o">,</span><span class="w">
+  </span><span class="p">⊢</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">→</span><span class="w">
+  </span><span class="no">value</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">∨</span><span class="w"> </span><span class="p">∃</span><span class="no">t'</span><span class="o">,</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t'</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Progress vs Strong Progress?
+Progress require the “well-typeness”!</p>
+</blockquote>
+
+<blockquote>
+  <p>Induction on typing relation.</p>
+</blockquote>
+
+<h3 id="slide-qa">Slide Q&amp;A</h3>
+
+<ul>
+  <li>partial function yes</li>
+  <li>total function no
+    <ul>
+      <li>thinking as our inference rules.</li>
+      <li>we could construct some terms that no inference rules can apply and get stucked.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="type-preservation-维型性">Type Preservation (维型性)</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">preservation</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="no">T</span><span class="o">,</span><span class="w">
+  </span><span class="p">⊢</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">→</span><span class="w">   </span><span class="c">(** HT **)</span><span class="w">
+  </span><span class="no">t</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="p">→</span><span class="w">  </span><span class="c">(** HE **)</span><span class="w">
+  </span><span class="p">⊢</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">T</span><span class="pi">.</span><span class="w">   </span><span class="c">(** HT' **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>按 PLT  的思路 Induction on HT，需要 inversion HE 去枚举所有情况拿到 t’ 之后证明 HT’
+按 PFPL 的思路 Inudction on HE, 只需 inversion HT，因为 HT 是按 reduction 相反方向定义的!</p>
+  <ul>
+    <li>reduction 方向，AST top-down   e.g. (+ 5 5)   —–&gt;   10</li>
+    <li>
+      <table>
+        <tbody>
+          <tr>
+            <td>typing    方向，AST bottom-up  e.g.</td>
+            <td>- ..:N</td>
+            <td>—–</td>
+            <td>- (+ 5 5):N</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="k">Proof</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="kp">eauto</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">HT</span><span class="w"> </span><span class="no">HE</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">generalize</span><span class="w"> </span><span class="kp">dependent</span><span class="w"> </span><span class="no">T</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">induction</span><span class="w"> </span><span class="no">HE</span><span class="p">;</span><span class="w"> </span><span class="kp">intros</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">HT</span><span class="p">;</span><span class="w">
+    </span><span class="kp">inversion</span><span class="w"> </span><span class="no">HT</span><span class="p">;</span><span class="w"> </span><span class="kp">subst</span><span class="o">...</span><span class="w">
+  </span><span class="kp">apply</span><span class="w"> </span><span class="no">nvalue_in_nat</span><span class="o">...</span><span class="w">  </span><span class="c">(** 除了 ST_PrdScc 全部 inversion 解决... **)</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>The preservation theorem is often called <em>subject reduction</em>,  – 主语化简
+想象 term 是主语，仅仅 term 在化简，而谓语宾语不变</p>
+</blockquote>
+
+<blockquote>
+  <p>one might wonder whether the opposity property — <em>subject expansion</em> — also holds. – 主语拓张
+No, 我们可以很容易从 <code class="highlighter-rouge">(test tru zro fls)</code> 证明出 <code class="highlighter-rouge">|- fls \in Nat</code>. – 停机问题 (undecidable)</p>
+</blockquote>
+
+<h3 id="type-soundness-type-safety">Type Soundness (Type Safety)</h3>
+
+<blockquote>
+  <p>a well-typed term never get stuck.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">multistep</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">multi</span><span class="w"> </span><span class="no">step</span><span class="o">).</span><span class="w">  </span><span class="c">(** &lt;--- from SmallStep **)</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"t1 '--&gt;*' t2"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">multistep</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">40</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Corollary</span><span class="w"> </span><span class="no">soundness</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="no">T</span><span class="o">,</span><span class="w">
+  </span><span class="p">⊢</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">→</span><span class="w">
+  </span><span class="no">t</span><span class="w"> </span><span class="o">--&gt;*</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="p">→</span><span class="w">
+  </span><span class="o">~(</span><span class="no">stuck</span><span class="w"> </span><span class="no">t'</span><span class="o">).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">HT</span><span class="w"> </span><span class="no">P</span><span class="pi">.</span><span class="w"> </span><span class="kp">induction</span><span class="w"> </span><span class="no">P</span><span class="p">;</span><span class="w"> </span><span class="kp">intros</span><span class="w"> </span><span class="o">[</span><span class="no">R</span><span class="w"> </span><span class="no">S</span><span class="o">].</span><span class="w">
+  </span><span class="kp">destruct</span><span class="w"> </span><span class="o">(</span><span class="no">progress</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">HT</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="kp">auto</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">apply</span><span class="w"> </span><span class="no">IHP</span><span class="pi">.</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="o">(</span><span class="no">preservation</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">HT</span><span class="w"> </span><span class="no">H</span><span class="o">).</span><span class="w">
+  </span><span class="kp">unfold</span><span class="w"> </span><span class="no">stuck</span><span class="pi">.</span><span class="w"> </span><span class="kp">split</span><span class="p">;</span><span class="w"> </span><span class="kp">auto</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Induction on <code class="highlighter-rouge">--&gt;*</code>, the multi-step derivation. (i.e. the reflexive-transtive closure)</p>
+
+<p>Noticed that in PLT, we explcitly write out what is “non-stuck”.
+But here is <code class="highlighter-rouge">~(stuck t')</code>
+thus the proof becomes:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="no">R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">step_normal_form</span><span class="w"> </span><span class="no">x</span><span class="w">    </span><span class="c">(** normal form **)</span><span class="w">
+</span><span class="no">S</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="no">x</span><span class="w">             </span><span class="c">(** and not value **)</span><span class="w">
+</span><span class="o">=======================</span><span class="w">
+</span><span class="no">False</span><span class="w">                     </span><span class="c">(** prove this is False **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The proof is weird tho.</p>
+
+:ET

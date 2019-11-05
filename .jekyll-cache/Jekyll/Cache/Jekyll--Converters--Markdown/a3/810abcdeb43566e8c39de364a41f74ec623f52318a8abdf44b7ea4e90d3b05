@@ -1,0 +1,259 @@
+I"�[<blockquote>
+  <p>These series of notes combined</p>
+  <ul>
+    <li>My notes on reading <em>Software Foundation</em> and (if any) watching on <em>Coq intensive</em>.</li>
+    <li>Gotchas from my independent studies and discussion within <em>Prof.Fluet</em>’s class.</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">.v</code> code is a gorgeous example of <em>literal programming</em> and the compiled <code class="highlighter-rouge">.html</code> website is full-fledged.
+So this note is intended to be NOT self-contained and only focus on things I found essential or interesting.</p>
+</blockquote>
+
+<blockquote>
+  <p>This note is intended to be very personal and potentially mix English with Chinese (You can Lol)
+So yeah. Don’t expect it to be well organized and well written.
+I posted it on blog mainly for my own references purpose.</p>
+</blockquote>
+
+<blockquote>
+  <p>The quotes could either come from the book or saying from someone (even including me).</p>
+</blockquote>
+
+<h2 id="data-and-functions">Data and Functions</h2>
+
+<h3 id="custom-notation">Custom Notation</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Notation</span><span class="w"> </span><span class="s2">"x &amp;&amp; y"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">andb</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="o">).</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"x || y"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">orb</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>can go pretty far with unicode char…</p>
+
+<p>making things <em>infix</em></p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">Notation</span><span class="w"> </span><span class="s2">"x + y"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">plus</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="o">)</span><span class="w">
+                      </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">50</span><span class="o">,</span><span class="w"> </span><span class="no">left</span><span class="w"> </span><span class="no">associativity</span><span class="o">)</span><span class="w">
+                      </span><span class="p">:</span><span class="w"> </span><span class="no">nat_scope</span><span class="pi">.</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"x - y"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">minus</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="o">)</span><span class="w">
+                      </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">50</span><span class="o">,</span><span class="w"> </span><span class="no">left</span><span class="w"> </span><span class="no">associativity</span><span class="o">)</span><span class="w">
+                      </span><span class="p">:</span><span class="w"> </span><span class="no">nat_scope</span><span class="pi">.</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"x * y"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">mult</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="o">)</span><span class="w">
+                      </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">40</span><span class="o">,</span><span class="w"> </span><span class="no">left</span><span class="w"> </span><span class="no">associativity</span><span class="o">)</span><span class="w">
+                      </span><span class="p">:</span><span class="w"> </span><span class="no">nat_scope</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>why <code class="highlighter-rouge">40</code> <code class="highlighter-rouge">50</code>? Making sure there are still <em>rooms</em> for priority in between…</p>
+
+<blockquote>
+  <p>no known PL using real number for priority though</p>
+</blockquote>
+
+<h3 id="data-constructor-with-arguments">Data Constructor with arguments</h3>
+
+<p>there are 2 ways to define them:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">color</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">black</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">white</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">primary</span><span class="w"> </span><span class="o">(</span><span class="no">p</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">rgb</span><span class="o">).</span><span class="w">      </span><span class="c">(* ADT, need to name arg, useful in proof *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">primary</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">rgb</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">color</span><span class="pi">.</span><span class="w"> </span><span class="c">(* GADT style, dependent type *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="syntax-for-arguments-having-the-same-type">Syntax for arguments having the same type</h3>
+
+<blockquote>
+  <p>As a notational convenience, if two or more arguments have the same type, they can be written together</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">nybble</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">bits</span><span class="w"> </span><span class="o">(</span><span class="no">b0</span><span class="w"> </span><span class="no">b1</span><span class="w"> </span><span class="no">b2</span><span class="w"> </span><span class="no">b3</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bit</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">mult</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w">         </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> 
+</span><span class="k">Fixpoint</span><span class="w"> </span><span class="no">plus</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">m</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> 
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="fixpoint-and-structrual-recursion"><code class="highlighter-rouge">Fixpoint</code> and Structrual Recursion</h2>
+
+<blockquote>
+  <p>This requirement is a fundamental feature of Coq’s design: In particular, it guarantees that every function that can be defined in Coq will terminate on all inputs.</p>
+</blockquote>
+
+<p>However, Coq’s “decreasing analysis” is not very sophisticated. E.g.</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">evenb</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="p">:</span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">O</span><span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">true</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="no">O</span><span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">false</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">n</span><span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">evenb</span><span class="w"> </span><span class="o">(</span><span class="no">pred</span><span class="w"> </span><span class="o">(</span><span class="no">pred</span><span class="w"> </span><span class="no">n</span><span class="o">))</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>will result in a error that basically complains <em>“this structure is not shrinking”</em>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre>Error:
+Recursive definition of evenb is ill-formed.
+
+evenb : nat -&gt; bool
+n : nat
+n0 : nat
+n1 : nat
+
+Recursive call to evenb has principal argument equal to
+"Nat.pred (Nat.pred n)" instead of one of the following variables: "n0" "n1".
+
+Recursive definition is:
+"fun n : nat =&gt;
+ match n with
+ | 0 =&gt; true
+ | 1 =&gt; false
+ | S (S _) =&gt; evenb (Nat.pred (Nat.pred n))
+ end".
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>N.B. the <code class="highlighter-rouge">n0</code> and <code class="highlighter-rouge">n1</code> are sub-terms of <code class="highlighter-rouge">n</code> where <code class="highlighter-rouge">n = S (S _)</code>.</p>
+
+<p>So we have to make the sub-structure explicit to indicate the structure is obviously shrinking:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">evenb</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="p">:</span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">O</span><span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">true</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="no">O</span><span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">false</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="no">n'</span><span class="o">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">evenb</span><span class="w"> </span><span class="no">n'</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now Coq will know this <code class="highlighter-rouge">Fixpoint</code> is performing a structural recursion over the 1st recursion and it guarantees to be terminated since the structure is decreasing:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>evenb is defined
+evenb is recursively defined (decreasing on 1st argument)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="proof-by-case-analysis">Proof by Case Analysis</h2>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">plus_1_neq_0_firsttry</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">,</span><span class="w">
+  </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="o">=?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="c">(* does nothing! *)</span><span class="w">
+</span><span class="no">Abort</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">simpl.</code> does nothing since both <code class="highlighter-rouge">+</code> and <code class="highlighter-rouge">=?</code> have 2 cases.</p>
+
+<p>so we have to <code class="highlighter-rouge">destruct</code> <code class="highlighter-rouge">n</code> as 2 cases: nullary <code class="highlighter-rouge">O</code> and unary <code class="highlighter-rouge">S n'</code>.</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kp">intros</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w"> </span><span class="kp">destruct</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="c">(* O *)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="c">(* S *)</span><span class="w"> </span><span class="no">n'</span><span class="o">]</span><span class="w"> </span><span class="no">eqn</span><span class="p">:</span><span class="no">E</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>the <em>intro pattern</em> <code class="highlighter-rouge">as [ |n']</code> name new bindings.</li>
+  <li><code class="highlighter-rouge">eqn:E</code> annonate the destructed <code class="highlighter-rouge">eqn</code> (equation?) as <code class="highlighter-rouge">E</code> in the premises of proofs. It could be elided if not explicitly used, but useful to keep for the sake of documentation as well.</li>
+</ul>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="no">subgoal</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+  </span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w">
+  </span><span class="no">E</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                          </span><span class="c">(* case 1, n is [O] a.k.a. [0] *)</span><span class="w">
+  </span><span class="o">============================</span><span class="w">
+  </span><span class="o">(</span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=?</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
+
+
+</span><span class="no">subgoal</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+  </span><span class="no">n</span><span class="o">,</span><span class="w"> </span><span class="no">n'</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w">
+  </span><span class="no">E</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="no">n'</span><span class="w">                       </span><span class="c">(* case 2, n is [S n'] *)</span><span class="w">
+  </span><span class="o">============================</span><span class="w">
+  </span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="no">n'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=?</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If there is no need to specify any names, we could omit <code class="highlighter-rouge">as</code> clause or simply write <code class="highlighter-rouge">as [|]</code> or <code class="highlighter-rouge">as []</code>.
+In fact. Any <code class="highlighter-rouge">as</code> clause could be ommited and Coq will fill in random var name auto-magically.</p>
+
+<h3 id="a-small-caveat-on-intro">A small caveat on <code class="highlighter-rouge">intro</code></h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kp">intros</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="pi">.</span><span class="w"> </span><span class="kp">destruct</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="no">eqn</span><span class="p">:</span><span class="no">E</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>By doing this, name <code class="highlighter-rouge">y</code> is shadowed. It’d usually better to use, say <code class="highlighter-rouge">y'</code> for this purpose.</p>
+
+<h2 id="qed"><code class="highlighter-rouge">Qed</code></h2>
+
+<p>standing for Latin words <em>“Quod Erat Demonstrandum”</em>…meaning “that which was to be demonstrated”.</p>
+:ET

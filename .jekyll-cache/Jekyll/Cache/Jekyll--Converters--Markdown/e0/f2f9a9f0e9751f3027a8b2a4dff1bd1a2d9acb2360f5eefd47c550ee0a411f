@@ -1,0 +1,155 @@
+I"�H<h2 id="review-only-in-slide">Review (only in slide)</h2>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">review2</span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">b</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="no">orb</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="no">b</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="pi">.</span><span class="w">
+</span><span class="k">Theorem</span><span class="w"> </span><span class="no">review3</span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">b</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="no">orb</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">true</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Whether or not it can be just <code class="highlighter-rouge">simpl.</code> depending on the definition of <code class="highlighter-rouge">orb</code>.</p>
+
+<p>In <em>Proof Engineering</em>, we probably won’t need to include <code class="highlighter-rouge">review2</code> but need to include <code class="highlighter-rouge">review3</code> in library.</p>
+
+<blockquote>
+  <p>Why we have <code class="highlighter-rouge">simpl.</code> but not <code class="highlighter-rouge">refl.</code> ?</p>
+</blockquote>
+
+<h2 id="proving-0-is-a-neutral-element-for--additive-identity">Proving <code class="highlighter-rouge">0</code> is a “neutral element” for <code class="highlighter-rouge">+</code> (additive identity)</h2>
+
+<h3 id="proving-0--n--n">Proving <code class="highlighter-rouge">0 + n = n</code></h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">plus_O_n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This can be simply proved by <em>simplication</em> bcuz the definition of <code class="highlighter-rouge">+</code> is defined by pattern matching against 1st operand:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">plus</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">m</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="kp">with</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">O</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">m</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="no">n'</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="o">(</span><span class="no">plus</span><span class="w"> </span><span class="no">n'</span><span class="w"> </span><span class="no">m</span><span class="o">)</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We can observe that if <code class="highlighter-rouge">n</code> is <code class="highlighter-rouge">0</code>(<code class="highlighter-rouge">O</code>), no matter <code class="highlighter-rouge">m</code> is, it returns <code class="highlighter-rouge">m</code> as is.</p>
+
+<h3 id="proving-n--0--n">Proving <code class="highlighter-rouge">n + 0 = n</code></h3>
+
+<h4 id="1st-try-simplication">1st try: Simplication</h4>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">plus_O_n_1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">,</span><span class="w">  </span><span class="no">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="c">(* Does nothing! *)</span><span class="w">
+</span><span class="no">Abort</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This cannot be proved by <em>simplication</em> bcuz <code class="highlighter-rouge">n</code> is unknown so <em>unfold</em> the definition <code class="highlighter-rouge">+</code> won’t be able to simplify anything.</p>
+
+<h4 id="2nd-try-case-analysis">2nd try: Case Analysis</h4>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">plus_n_O_2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">n</span><span class="p">:</span><span class="no">nat</span><span class="o">,</span><span class="w">
+  </span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w"> </span><span class="kp">destruct</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="o">[|</span><span class="w"> </span><span class="no">n'</span><span class="o">]</span><span class="w"> </span><span class="no">eqn</span><span class="p">:</span><span class="no">E</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* n = 0 *)</span><span class="w">
+    </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="c">(* so far so good... *)</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* n = S n' *)</span><span class="w">
+    </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="c">(* ...but here we are stuck again *)</span><span class="w">
+</span><span class="no">Abort</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Our 2nd try is to use <em>case analysis</em> (<code class="highlighter-rouge">destruct</code>), but the proof stucks in <em>inductive case</em> since <code class="highlighter-rouge">n</code> can be infinitely large (destructed)</p>
+
+<h4 id="induction-to-the-resucue">Induction to the resucue</h4>
+
+<blockquote>
+  <p>To prove interesting facts about numbers, lists, and other inductively defined sets, we usually need a more powerful reasoning principle: induction.</p>
+</blockquote>
+
+<p>Princeple of induction over natural numbers (i.e. <em>mathematical induction</em>)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="no">P</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="p">∀</span><span class="no">n'</span><span class="w"> </span><span class="no">P</span><span class="o">(</span><span class="no">n'</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">P</span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="no">n'</span><span class="o">)</span><span class="w">  </span><span class="o">====&gt;</span><span class="w">  </span><span class="no">P</span><span class="o">(</span><span class="no">n</span><span class="o">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>In Coq, like <code class="highlighter-rouge">destruct</code>, <code class="highlighter-rouge">induction</code> break <code class="highlighter-rouge">P(n)</code> into 2 subgoals:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">plus_n_O</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">n</span><span class="p">:</span><span class="no">nat</span><span class="o">,</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w"> </span><span class="kp">induction</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="o">[|</span><span class="w"> </span><span class="no">n'</span><span class="w"> </span><span class="no">IHn'</span><span class="o">].</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* n = 0 *)</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* n = S n' *)</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="kp">rewrite</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="no">IHn'</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="proving-n---n--0">Proving <code class="highlighter-rouge">n - n = 0</code></h2>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">minus_diag</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">n</span><span class="o">,</span><span class="w">
+  </span><span class="no">minus</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="c">(* WORKED IN CLASS *)</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w"> </span><span class="kp">induction</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="o">[|</span><span class="w"> </span><span class="no">n'</span><span class="w"> </span><span class="no">IHn'</span><span class="o">].</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* n = 0 *)</span><span class="w">
+    </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* n = S n' *)</span><span class="w">
+    </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="kp">rewrite</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">IHn'</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Noticed that the definition of <code class="highlighter-rouge">minus</code>:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="w">    </span><span class="k">Fixpoint</span><span class="w"> </span><span class="no">minus</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="p">:</span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+      </span><span class="kr">match</span><span class="w"> </span><span class="no">n</span><span class="o">,</span><span class="w"> </span><span class="no">m</span><span class="w"> </span><span class="kp">with</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">O</span><span class="w">   </span><span class="o">,</span><span class="w"> </span><span class="p">_</span><span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">O</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="no">O</span><span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">n</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="no">n'</span><span class="o">,</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="no">m'</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">minus</span><span class="w"> </span><span class="no">n'</span><span class="w"> </span><span class="no">m'</span><span class="w">
+      </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="rewrite"><code class="highlighter-rouge">rewrite</code></h2>
+
+<p><code class="highlighter-rouge">rewrite</code> would do a (DFS) preorder traversal in the syntax tree.</p>
+
+:ET

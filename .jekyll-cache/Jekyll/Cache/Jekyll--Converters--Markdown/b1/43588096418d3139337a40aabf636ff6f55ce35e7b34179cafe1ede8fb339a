@@ -1,0 +1,41 @@
+I"Ñ<h2 id="basic-features-of-proof-search">Basic Features of Proof Search</h2>
+
+<h3 id="strength-of-proof-search">Strength of Proof Search</h3>
+
+<blockquote>
+  <p>four proof-search tactics: <code class="highlighter-rouge">auto</code>, <code class="highlighter-rouge">eauto</code>, <code class="highlighter-rouge">iauto</code> and <code class="highlighter-rouge">jauto</code>.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="how-proof-search-works">How Proof Search Works</h2>
+
+<h3 id="search-depth">Search Depth</h3>
+
+<h3 id="backtracking">Backtracking</h3>
+
+<h3 id="adding-hints">Adding Hints</h3>
+
+<h3 id="integration-of-automation-in-tactics">Integration of Automation in Tactics</h3>
+
+<hr />
+
+<h2 id="example-proofs">Example Proofs</h2>
+
+<hr />
+
+<h2 id="advanced-topics-in-proof-search">Advanced Topics in Proof Search</h2>
+
+<p>###</p>
+
+<hr />
+
+<h2 id="decision-procedures">Decision Procedures</h2>
+
+<h3 id="omega">Omega</h3>
+
+<h3 id="ring">Ring</h3>
+
+<h3 id="congurence">Congurence</h3>
+
+:ET

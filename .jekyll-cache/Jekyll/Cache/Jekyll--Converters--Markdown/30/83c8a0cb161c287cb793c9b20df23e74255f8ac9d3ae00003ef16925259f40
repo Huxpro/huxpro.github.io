@@ -1,0 +1,334 @@
+I"�n<p><a href="https://github.com/GoogleChrome/sw-precache"><em>SW-Precache</em></a> <em>is a great Service Worker tool from Google. It is a node module designed to be</em> <em>integrated</em> <em>into your build process and to generate a service worker for you.</em> <em>Though</em> <em>you can use sw-precache out of the box, you might still wonder what happens under the hood. There you go, this article is written for you!</em></p>
+
+<blockquote>
+  <p>This post was first published at <a href="https://medium.com/@Huxpro/how-does-sw-precache-works-2d99c3d3c725">Medium</a></p>
+</blockquote>
+
+<h2 id="overview">Overview</h2>
+
+<p>The core files involving in sw-precache are mainly three:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>service-worker.tmpl  
+lib/  
+ ├ sw-precache.js  
+ └ functions.js
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">sw-precache.js</code> is the main entry of the module. It reads the configuration, processes parameters, populates the <code class="highlighter-rouge">service-worker.tmpl</code> template and writes the result into specified file. And<code class="highlighter-rouge">functions.js</code> is just a module containing bunch of external functions which would be all injected into the generated service worker file as helpers.</p>
+
+<p>Since the end effect of sw-precache is performed by the generated service worker file in the runtime, a easy way to get an idea of what happens is by checking out source code inside <code class="highlighter-rouge">service-worker.tmpl</code> . It’s not hard to understand the essentials and I will help you.</p>
+
+<h2 id="initialization">Initialization</h2>
+
+<p>The generated service worker file (let’s call it <code class="highlighter-rouge">sw.js</code> for instance) get configuration by text interpolation when <code class="highlighter-rouge">sw-precache.js</code> populating <code class="highlighter-rouge">service-worker.tmpl</code> .</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c1">// service-worker.tmpl  </span>
+<span class="kd">var</span> <span class="nx">precacheConfig</span> <span class="o">=</span> <span class="o">&lt;%=</span> <span class="nx">precacheConfig</span> <span class="o">%&gt;</span><span class="p">;</span>
+
+<span class="c1">// sw.js  </span>
+<span class="kd">var</span> <span class="nx">precacheConfig</span> <span class="o">=</span> <span class="p">[</span>  
+  <span class="p">[</span><span class="dl">"</span><span class="s2">js/a.js</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">3cb4f0</span><span class="dl">"</span><span class="p">],</span>   
+  <span class="p">[</span><span class="dl">"</span><span class="s2">css/b.css</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">c5a951</span><span class="dl">"</span><span class="p">]</span>  
+<span class="p">]</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>It’s not difficult to see that it’s a list of relative urls and MD5 hashes. In fact, one thing that <code class="highlighter-rouge">sw-precache.js</code> do in the build time is to calculate hash of each file that it asked to “precache” from <code class="highlighter-rouge">staticFileGlobs</code> parameter.</p>
+
+<p>In <code class="highlighter-rouge">sw.js</code>, <code class="highlighter-rouge">precacheConfig</code> would be transformed into a ES6 Map with structure <code class="highlighter-rouge">Map {absoluteUrl =&gt; cacheKey}</code> as below. Noticed that I omit the origin part (e.g. <code class="highlighter-rouge">http://localhost</code>) for short.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="o">&gt;</span> <span class="nx">urlToCacheKeys</span>  
+<span class="o">&lt;</span> <span class="nb">Map</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>  
+  <span class="dl">"</span><span class="s2">http.../js/a.js</span><span class="dl">"</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">http.../js/a.js?_sw-precache=3cb4f0</span><span class="dl">"</span><span class="p">,</span>   
+  <span class="dl">"</span><span class="s2">http.../css/b.js</span><span class="dl">"</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">http.../css/b.css?_sw-precache=c5a951</span><span class="dl">"</span>  
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Instead of using raw URL as the cache key, sw-precache append a <code class="highlighter-rouge">_sw-precache=[hash]</code> to the end of each URL when populating, updating its cache and even fetching these subresouces. Those <code class="highlighter-rouge">_sw-precache=[hash]</code> are what we called <strong>cache-busting parameter*</strong>. It can prevent service worker from responding and caching out-of-date responses found in browsers’ HTTP cache indefinitely.</p>
+
+<p>Because each build would re-calculate hashes and re-generate a new <code class="highlighter-rouge">sw.js</code> with new <code class="highlighter-rouge">precacheConfig</code> containing those new hashes, <code class="highlighter-rouge">sw.js</code> can now determine the version of each subresources thus decide what part of its cache needs a update. <strong>This is pretty similar with what we commonly do when realizing long-term caching with webpack or gulp-rev, to do a byte-diff ahead of runtime.</strong></p>
+
+<p>*: Developer can opt out this behaviour with <code class="highlighter-rouge">dontCacheBustUrlsMatching</code> option if they set HTTP caching headers right. More details on <a href="https://jakearchibald.com/2016/caching-best-practices/">Jake’s Post</a>.</p>
+
+<h2 id="on-install">On Install</h2>
+
+<blockquote>
+  <p>ServiceWorker gives you an install event. You can use this to get stuff ready, stuff that must be ready before you handle other events.</p>
+</blockquote>
+
+<p>During the <code class="highlighter-rouge">install</code> lifecycle, <code class="highlighter-rouge">sw.js</code> open the cache and get started to populate its cache. One cool thing that it does for you is its <strong>incremental update</strong> mechanism.</p>
+
+<p>Sw-precache would search each cache key (the values of <code class="highlighter-rouge">urlsToCacheKeys</code>) in the <code class="highlighter-rouge">cachedUrls</code>, a ES6 Set containing URLs of all requests indexed from current version of cache, and only <code class="highlighter-rouge">fetch</code> and <code class="highlighter-rouge">cache.put</code> resources couldn’t be found in cache, i.e, never be cached before, thus reuse cached resources as much as possible.</p>
+
+<p>If you can not fully understand it, don’t worry. We will recap it later, now let’s move on.</p>
+
+<h2 id="on-activate">On Activate</h2>
+
+<blockquote>
+  <p>Once a new ServiceWorker has installed &amp; a previous version isn’t being used, the new one activates, and you get an <code class="highlighter-rouge">activate</code> event. Because the old version is out of the way, it’s a good time to handle schema migrations in IndexedDB and also delete unused caches.</p>
+</blockquote>
+
+<p>During activation phase, <code class="highlighter-rouge">sw.js</code> would compare all existing requests in the cache, named <code class="highlighter-rouge">existingRequests</code> (noticed that it now contains resources just cached on installation phase) with <code class="highlighter-rouge">setOfExpectedUrls</code>, a ES6 Set from the values of <code class="highlighter-rouge">urlsToCacheKeys</code>. And delete any requests not matching from cache.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="c1">// sw.js</span>
+<span class="nx">existingRequests</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">existingRequest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">setOfExpectedUrls</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">existingRequest</span><span class="p">.</span><span class="nx">url</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">cache</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">existingRequest</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="on-fetch">On Fetch</h2>
+
+<p>Although the comments in source code have elaborated everything well, I wanna highlight some points during the request intercepting duration.</p>
+
+<h3 id="should-respond">Should Respond?</h3>
+
+<p>Firstly, we need to determine whether this request was included in our “pre-caching list”. If it was, this request should have been pre-fetched and pre-cached thus we can respond it directly from cache.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="c1">// sw.js*  </span>
+<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span>      
+<span class="nx">shouldRespond</span> <span class="o">=</span> <span class="nx">urlsToCacheKeys</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Noticed that we are matching raw URLs (e.g. <code class="highlighter-rouge">http://localhost/js/a.js</code>) instead of the hashed ones. It prevent us from calculating hashes at runtime, which would have a significant cost. And since we have kept the relationship in <code class="highlighter-rouge">urlToCacheKeys</code> it’s easy to index the hashed one out.</p>
+
+<p><em>* In real cases, sw-precache would take <code class="highlighter-rouge">ignoreUrlParametersMatching</code> and <code class="highlighter-rouge">directoryIndex</code> options into consideration.</em></p>
+
+<h3 id="navigation-fallback">Navigation Fallback</h3>
+
+<p>One interesting feature that sw-precache provided is <code class="highlighter-rouge">navigationFallback</code>(previously <code class="highlighter-rouge">defaultRoute</code>), which detect navigation request and respond a preset fallback HTML document when the URL of navigation request did not exist in <code class="highlighter-rouge">urlsToCacheKeys</code>.</p>
+
+<p>It is presented for SPA using History API based routing, allowing responding arbitrary URLs with one single HTML entry defined in <code class="highlighter-rouge">navigationFallback</code>, kinda reimplementing a Nginx rewrite in service worker*. Do noticed that service worker only intercept document (navigation request) inside its scope (and any resources referenced in those documents of course). So navigation towards outside scope would not be effected.</p>
+
+<p><em>* <code class="highlighter-rouge">navigateFallbackWhitelist</code> can be provided to limit the “rewrite” scope.</em></p>
+
+<h3 id="respond-fromcache">Respond from Cache</h3>
+
+<p>Finally, we get the appropriate cache key (the hashed URL) by raw URL with <code class="highlighter-rouge">urlsToCacheKeys</code> and invoke <code class="highlighter-rouge">event.respondWith()</code> to respond requests from cache directly. Done!</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="c1">// sw.js*</span>
+<span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+  <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">cacheName</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">cache</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">urlsToCacheKeys</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">url</span><span class="p">))</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+      <span class="p">});</span>
+  <span class="p">})</span>
+<span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><em>* The code was “ES6-fied” with error handling part removed.</em></p>
+
+<h2 id="cache-management-recap">Cache Management Recap</h2>
+
+<p>That’s recap the cache management part with a full lifecycle simulation.</p>
+
+<h3 id="the-firstbuild">The first build</h3>
+
+<p>Supposed we are in the very first load, the <code class="highlighter-rouge">cachedUrls</code> would be a empty set thus all subresources listed to be pre-cached would be fetched and put into cache on SW install time.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="c1">// cachedUrls  </span>
+<span class="nb">Set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="c1">// urlToCacheKeys  </span>
+<span class="nb">Map</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>  
+  <span class="dl">"</span><span class="s2">http.../js/a.js</span><span class="dl">"</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">http.../js/a.js?_sw-precache=3cb4f0</span><span class="dl">"</span><span class="p">,</span>   
+  <span class="dl">"</span><span class="s2">http.../css/b.js</span><span class="dl">"</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">http.../css/b.css?_sw-precache=c5a951</span><span class="dl">"</span>  
+<span class="p">}</span>
+
+<span class="c1">// SW Network Logs  </span>
+<span class="p">[</span><span class="nx">sw</span><span class="p">]</span> <span class="nx">GET</span> <span class="nx">a</span><span class="p">.</span><span class="nx">js</span><span class="p">?</span><span class="nx">_sw</span><span class="o">-</span><span class="nx">precache</span><span class="o">=</span><span class="mi">3</span><span class="nx">cb4f0</span>      
+<span class="p">[</span><span class="nx">sw</span><span class="p">]</span> <span class="nx">GET</span> <span class="nx">b</span><span class="p">.</span><span class="nx">css</span><span class="p">?</span><span class="nx">_sw</span><span class="o">-</span><span class="nx">precache</span><span class="o">=</span><span class="nx">c5a951</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>After that, it will start to control the page immediately because the <code class="highlighter-rouge">sw.js</code> would call <code class="highlighter-rouge">clients.claim()</code> by default. It means the <code class="highlighter-rouge">sw.js</code> will start to intercept and try to serve future fetches from caches, so it’s good for performance.</p>
+
+<p>In the second load, all subresouces have been cached and will be served directly from cache. So none requests are sent from <code class="highlighter-rouge">sw.js</code>.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="c1">// cachedUrls  </span>
+<span class="nb">Set</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>  
+  <span class="dl">"</span><span class="s2">http.../js/a.js? _sw-precache=3cb4f0</span><span class="dl">"</span><span class="p">,</span>   
+  <span class="dl">"</span><span class="s2">http.../css/b.css? _sw-precache=c5a951</span><span class="dl">"</span>  
+<span class="p">}</span>
+
+<span class="c1">// urlToCacheKeys  </span>
+<span class="nb">Map</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>  
+  <span class="dl">"</span><span class="s2">http.../js/a.js</span><span class="dl">"</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">http.../js/a.js? _sw-precache=3cb4f0</span><span class="dl">"</span><span class="p">,</span>   
+  <span class="dl">"</span><span class="s2">http.../css/b.js</span><span class="dl">"</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">http.../css/b.css? _sw-precache=c5a951</span><span class="dl">"</span>  
+<span class="p">}</span>
+
+<span class="c1">// SW Network Logs  </span>
+<span class="c1">// Empty</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="the-secondbuild">The second build</h3>
+
+<p>Once we create a byte-diff of our subresouces (e.g., we modify <code class="highlighter-rouge">a.js</code> to a new version with hash value <code class="highlighter-rouge">d6420f</code>) and re-run the build process, a new version of <code class="highlighter-rouge">sw.js</code> would be also generated.</p>
+
+<p>The new <code class="highlighter-rouge">sw.js</code> would run alongside with the existing one, and start its own installation phase.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="c1">// cachedUrls  </span>
+<span class="nb">Set</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>  
+  <span class="dl">"</span><span class="s2">http.../js/a.js? _sw-precache=3cb4f0</span><span class="dl">"</span><span class="p">,</span>   
+  <span class="dl">"</span><span class="s2">http.../css/b.css? _sw-precache=c5a951</span><span class="dl">"</span>  
+<span class="p">}</span>
+
+<span class="c1">// urlToCacheKeys  </span>
+<span class="nb">Map</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>  
+  <span class="dl">"</span><span class="s2">http.../js/a.js</span><span class="dl">"</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">http.../js/a.js? _sw-precache=d6420f</span><span class="dl">"</span><span class="p">,</span>   
+  <span class="dl">"</span><span class="s2">http.../css/b.js</span><span class="dl">"</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">http.../css/b.css? _sw-precache=c5a951</span><span class="dl">"</span>  
+<span class="p">}</span>
+
+<span class="c1">// SW Network Logs  </span>
+ <span class="p">[</span><span class="nx">sw</span><span class="p">]</span> <span class="nx">GET</span> <span class="nx">a</span><span class="p">.</span><span class="nx">js</span><span class="p">?</span><span class="nx">_sw</span><span class="o">-</span><span class="nx">precache</span><span class="o">=</span><span class="nx">d6420f</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This time, <code class="highlighter-rouge">sw.js</code> see that there is a new version of <code class="highlighter-rouge">a.js</code> requested, so it fetch <code class="highlighter-rouge">/js/a.js?_sw-precache=d6420f</code>  and put the response into cache. In fact, we have two versions of <code class="highlighter-rouge">a.js</code> in cache at the same time in this moment.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c1">// what's in cache?</span>
+<span class="nx">http</span><span class="p">...</span><span class="o">/</span><span class="nx">js</span><span class="o">/</span><span class="nx">a</span><span class="p">.</span><span class="nx">js</span><span class="p">?</span><span class="nx">_sw</span><span class="o">-</span><span class="nx">precache</span><span class="o">=</span><span class="mi">3</span><span class="nx">cb4f0</span>
+<span class="nx">http</span><span class="p">...</span><span class="o">/</span><span class="nx">js</span><span class="o">/</span><span class="nx">a</span><span class="p">.</span><span class="nx">js</span><span class="p">?</span><span class="nx">_sw</span><span class="o">-</span><span class="nx">precache</span><span class="o">=</span><span class="nx">d6420f</span>
+<span class="nx">http</span><span class="p">...</span><span class="o">/</span><span class="nx">css</span><span class="o">/</span><span class="nx">b</span><span class="p">.</span><span class="nx">css</span><span class="p">?</span><span class="nx">_sw</span><span class="o">-</span><span class="nx">precache</span><span class="o">=</span><span class="nx">c5a951</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>By default, <code class="highlighter-rouge">sw.js</code> generated by sw-precache would call <code class="highlighter-rouge">self.skipWaiting</code> so it would take over the page and move onto activating phase immediately.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="c1">// existingRequests</span>
+<span class="nx">http</span><span class="p">...</span><span class="o">/</span><span class="nx">js</span><span class="o">/</span><span class="nx">a</span><span class="p">.</span><span class="nx">js</span><span class="p">?</span><span class="nx">_sw</span><span class="o">-</span><span class="nx">precache</span><span class="o">=</span><span class="mi">3</span><span class="nx">cb4f0</span>
+<span class="nx">http</span><span class="p">...</span><span class="o">/</span><span class="nx">js</span><span class="o">/</span><span class="nx">a</span><span class="p">.</span><span class="nx">js</span><span class="p">?</span><span class="nx">_sw</span><span class="o">-</span><span class="nx">precache</span><span class="o">=</span><span class="nx">d6420f</span>
+<span class="nx">http</span><span class="p">...</span><span class="o">/</span><span class="nx">css</span><span class="o">/</span><span class="nx">b</span><span class="p">.</span><span class="nx">css</span><span class="p">?</span><span class="nx">_sw</span><span class="o">-</span><span class="nx">precache</span><span class="o">=</span><span class="nx">c5a951</span>
+
+<span class="c1">// setOfExpectedUrls</span>
+<span class="nb">Set</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">http.../js/a.js?_sw-precache=d6420f</span><span class="dl">"</span><span class="p">,</span> 
+  <span class="dl">"</span><span class="s2">http.../css/b.css?_sw-precache=c5a951</span><span class="dl">"</span>
+<span class="p">}</span>
+
+<span class="c1">// the one deleted</span>
+<span class="nx">http</span><span class="p">...</span><span class="o">/</span><span class="nx">js</span><span class="o">/</span><span class="nx">a</span><span class="p">.</span><span class="nx">js</span><span class="p">?</span><span class="nx">_sw</span><span class="o">-</span><span class="nx">precache</span><span class="o">=</span><span class="mi">3</span><span class="nx">cb4f0</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>By comparing existing requests in the cache with set of expected ones, the old version of <code class="highlighter-rouge">a.js</code> would be deleted from cache. This ensure there is only one version of our site’s resources each time.</p>
+
+<p>That’s it! We finish the simulation successfully.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>As its name implied, sw-precache is designed specifically for the needs of precaching some critical static resources. It only does one thing but does it well. I’d love to give you some opinionated suggestions but you decide whether your requirements suit it or not.</p>
+
+<h3 id="precaching-is-notfree">Precaching is NOT free</h3>
+
+<p>So don’t precached everything. Sw-precache use a <a href="https://jakearchibald.com/2014/offline-cookbook/#on-install-as-a-dependency">“On Install — as a dependency”</a> strategy for your precache configs. A huge list of requests would delay the time service worker finishing installing and, in addition, wastes users’ bandwidth and disk space.</p>
+
+<p>For instance, if you wanna build a offline-capable blogs. You had better not include things like <code class="highlighter-rouge">'posts/*.html</code> in <code class="highlighter-rouge">staticFileGlobs</code>. It would be a huge disaster to data-sensitive people if you have hundreds of posts. Use a Runtime Caching instead.</p>
+
+<h3 id="app-shell">“App Shell”</h3>
+
+<blockquote>
+  <p>A helpful analogy is to think of your App Shell as the code and resources that would be published to an app store for a native iOS or Android application.</p>
+</blockquote>
+
+<p>Though I always consider that the term “App Shell” is too narrow to cover its actual usages now, It is widely used and commonly known. I personally prefer calling them <strong>“Web Installation Package”</strong> straightforward because they can be truly installed into users’ disks and our web app can boot up directly from them in any network environments. The only difference between “Web Installation Package” and iOS/Android App is that we need strive to limit it within a reasonable size.</p>
+
+<p>Precaching is perfect for this kinda resources such as entry html, visual placeholders, offline pages etc., because they can be static in one version, small-sized, and most importantly, part of critical rendering path. We wanna put first meaningful paint ASAP to our user thus we precache them to eliminate HTTP roundtrip time.</p>
+
+<p>BTW, if you are using HTML5 Application Cache before, sw-precache is really a perfect replacement because it can cover nearly all use cases the App Cache provide.</p>
+
+<h3 id="this-is-not-theend">This is not the end</h3>
+
+<p>Sw-precache is just one of awesome tools that can help you build service worker. If you are planing to add some service worker power into your website, Don’t hesitate to checkout sw-toolbox, sw-helper (a new tool Google is working on) and many more from communities.</p>
+
+<p>That’s all. Wish you enjoy!</p>
+:ET

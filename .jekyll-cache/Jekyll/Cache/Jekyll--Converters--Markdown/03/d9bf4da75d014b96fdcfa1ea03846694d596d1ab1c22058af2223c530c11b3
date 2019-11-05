@@ -1,0 +1,47 @@
+I",<p>Emacs tend to provide a good support for functional programming languages. Indeed, many FP language community exclusively use Emacs and give only first-party IDE supports to Emacs, such as Coq, Agda, Standard ML, Clojure, etc.</p>
+
+<p>For the purpose of programming Coq with Proof General, I started to try with Emacs. I quickly found Spacemacs a good alternatives for me…someone had get used to Vim keybindings and want to get some thing useful ASAP w/o configuring a long list as my <code class="highlighter-rouge">.vimrc</code>.</p>
+
+<p>Though the overall experience is pretty smooth, many quirks about Spacemacs are always being forgotten and had to look up again and again, so I decided to open a note for some specific “workflow” that I often used.</p>
+
+<p>Yes this is more like a note publishing online for the purpose of “on-demand accessible”. So don’t expect good writing anyways.</p>
+
+<h3 id="vim-binding">Vim-binding</h3>
+
+<p>Choose <code class="highlighter-rouge">evil</code>!</p>
+
+<h3 id="airline">Airline</h3>
+
+<p>It’s there!</p>
+
+<h3 id="nerd-tree--file-sidebar">Nerd Tree / File Sidebar</h3>
+
+<p><code class="highlighter-rouge">SPC f t</code> for <em>file tree</em>. The keybindings for specific operations are very different w/ Vim NerdTree though.</p>
+
+<h3 id="shell--terminal">Shell / Terminal</h3>
+
+<p>I occasionally use <a href="https://neovim.io/doc/user/nvim_terminal_emulator.html">Neovim’s terminal emulator</a> but in most of the time I just <code class="highlighter-rouge">cmd + D</code> for iTerms splitted window.</p>
+
+<p>I even mappped <code class="highlighter-rouge">:D</code> into split-then-terminal to make the experience on par ;)</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>command<span class="p">!</span> <span class="p">-</span>nargs<span class="p">=</span>* D  <span class="k">belowright</span> split <span class="p">|</span> terminal <span class="p">&lt;</span>args<span class="p">&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Anyways, Spacemacs does provide a <code class="highlighter-rouge">:shell</code> that naturally split a window below for terminal. The experience is not very good though.</p>
+
+<h3 id="tabs--workspaces">Tabs / Workspaces</h3>
+
+<p>I tend to open multiple <em>workspace</em>. Though people might found Vim tabs useful, I am exclusively use iTerm tabs for similar jobs. However Spacemacs is not living in a terminal.</p>
+
+<p><a href="https://www.reddit.com/r/spacemacs/comments/5w5d2s/vimstyle_tabs/">r/spacemacs - Vim-style tabs?</a> gave me a good way to approximate the experience by using <a href="http://spacemacs.org/doc/DOCUMENTATION.html#workspaces">Spacemacs Workspaces</a>: <code class="highlighter-rouge">SPC l w &lt;nth&gt;</code> trigger a so-called “layout transient state” (I have no idea what’s that mean) to open N-th workspaces, and use <code class="highlighter-rouge">gt</code>/<code class="highlighter-rouge">gT</code> to switch between.</p>
+
+<h3 id="fuzz-file-name-search--rg">Fuzz File Name Search / Rg</h3>
+
+<p><code class="highlighter-rouge">SPC f f</code></p>
+
+<h3 id="buffers">Buffers</h3>
+
+<p><code class="highlighter-rouge">SPC b b</code></p>
+
+:ET

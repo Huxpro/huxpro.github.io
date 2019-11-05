@@ -1,0 +1,33 @@
+I"�<blockquote>
+  <p>下滑这里查看更多内容</p>
+</blockquote>
+
+<p>TLDR; It covers lots of cool stuff about Service Worker!</p>
+
+<h3 id="watching-fullscreen--"><a href="https://huangxuan.me/sw-101-gdgdf/">Watching Fullscreen → </a></h3>
+
+<div class="visible-md visible-lg">
+    <img src="//huangxuan.me/sw-101-gdgdf/attach/qrcode.png" width="350" />
+    <small class="img-hint">Scanning on mobile</small>
+</div>
+
+<h3 id="demo-code--"><a href="https://github.com/Huxpro/sw-101-gdgdf">Demo Code → </a></h3>
+
+<ul>
+  <li>Hello World of Service Worker</li>
+  <li>Make your own Offline Dinosaurs</li>
+  <li>Stale/Fastest while revalidate</li>
+</ul>
+
+<h3 id="notes">Notes</h3>
+
+<p>This slides is powered by <a href="http://yanshuo.io">Yanshuo.io (演说.io)</a>, a online software helping you create, store and share web slides.</p>
+
+<p>There are 2 ways that you can fork or contribute this project:</p>
+
+<ol>
+  <li><code class="highlighter-rouge">index.html</code> is the HTML source code exported from <a href="http://yanshuo.io">Yanshuo.io</a>, and many of its dependencis (js, css, fonts) are still linked to CDN of <a href="http://yanshuo.io">Yanshuo.io</a>. You can do any secondary development and host it by yourself.</li>
+  <li>Download the project file under <code class="highlighter-rouge">shuo/</code>, drag it into <a href="http://yanshuo.io">Yanshuo.io</a>, and you are ready to go. You can edit whatever you want, upload it to your account, and even share your distributions.</li>
+</ol>
+
+:ET

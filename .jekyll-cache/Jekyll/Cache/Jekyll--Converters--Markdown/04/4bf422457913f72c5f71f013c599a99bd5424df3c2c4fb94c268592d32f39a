@@ -1,0 +1,25 @@
+I"t<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="c">(* record types *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">RNil</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ty</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">RCons</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">ty</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>we need typecon to identify record…</p>
+
+<p>```coq
+Inductive tm : Type :=
+  | rproj …?  isn’t it as well?
+  (* record terms *)
+  | rnil : tm
+  | rcons : string → tm → tm → tm.
+``</p>
+
+<p>as a list…</p>
+
+<p>for Record, can compiler reorder the fields? (SML and OCaml)</p>
+
+:ET

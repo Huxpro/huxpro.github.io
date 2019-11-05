@@ -1,0 +1,36 @@
+I"�<blockquote>
+  <table>
+    <tbody>
+      <tr>
+        <td><a href="https://en.wikipedia.org/wiki/Peter_Landin">wiki</a></td>
+        <td><a href="https://zh.wikipedia.org/wiki/%E5%BD%BC%E5%BE%97%C2%B7%E5%85%B0%E4%B8%81">维基</a></td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>I was long curious about how does λ calculus become the foundation of formalizaing programming languages. It’s strange that I haven’t look up the answer until today: It’s invented so early by Alonzo Church (whom I will write another post for) as an alternative mathematic foundation in 1930s and its relation with programming language was re-discoverred in 1960s.</p>
+
+<p>From the “Lambda calculus and programming languages” section of wikipedia page:</p>
+
+<blockquote>
+  <p>As pointed out by Peter Landin’s 1965 paper “A Correspondence between ALGOL 60 and Church’s Lambda-notation”</p>
+</blockquote>
+
+<p>I found this name quite familiar since I read his paper “The mechanical evaluation of expressions” before, in which he introduced the first abstract machine for functional programming language, namely <a href="https://en.wikipedia.org/wiki/SECD_machine">SECD machine</a>. This paper also define the term <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">Closure</a> which becomes a prevalent notion in computer programming nowadays.</p>
+
+<p>Besides of that, his contributions also include:</p>
+
+<ul>
+  <li>on ALGO definition</li>
+  <li><a href="https://en.wikipedia.org/wiki/ISWIM">ISWIM</a> programming language</li>
+  <li><a href="https://en.wikipedia.org/wiki/Off-side_rule">off-side rule</a>, known as “indentation-based” syntax nowadays, popularized by Miranda, Haskell, Python, etc.</li>
+  <li>coin the term <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a></li>
+</ul>
+
+<p>He was much influenced by a study of McCarthy’s LISP and taught <a href="https://en.wikipedia.org/wiki/Tony_Hoare">Tony Hoare</a> ALGO with Peter Naur and Edsger W. Dijkstra. (Oh yes, definitely 4 more people to write).</p>
+
+<p>I have just download his old, influential paper “The next 700 programming languages”. 
+I am sure it will be an enjoyable read.</p>
+
+:ET

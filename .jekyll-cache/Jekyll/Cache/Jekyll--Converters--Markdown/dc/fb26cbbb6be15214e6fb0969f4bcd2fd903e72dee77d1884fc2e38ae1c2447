@@ -1,0 +1,4 @@
+I"><div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="no">From</span><span class="w"> </span><span class="no">PLF</span><span class="w"> </span><span class="k">Require</span><span class="w"> </span><span class="k">Import</span><span class="w"> </span><span class="no">LibTactics</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+:ET

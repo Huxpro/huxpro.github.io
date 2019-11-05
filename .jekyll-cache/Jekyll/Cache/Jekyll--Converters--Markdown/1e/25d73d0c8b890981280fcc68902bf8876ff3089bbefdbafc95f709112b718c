@@ -1,0 +1,394 @@
+I"	|<p>this chapter:</p>
+<ul>
+  <li>(change to new syntax…)</li>
+  <li>function abstraction</li>
+  <li>variable binding  – 变量绑定</li>
+  <li>substitution      – 替换</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>“Base Types”, only <code class="highlighter-rouge">Bool</code> for now.   – 基类型
+…again, exactly following TAPL.</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> 
+    </span><span class="o">|</span><span class="w"> </span><span class="no">x</span><span class="w">                         </span><span class="no">variable</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="err">\</span><span class="no">x</span><span class="p">:</span><span class="nn">T1</span><span class="p">.</span><span class="no">t2</span><span class="w">                  </span><span class="no">abstraction</span><span class="w">       </span><span class="o">--</span><span class="w"> </span><span class="no">haskell</span><span class="o">-</span><span class="no">ish</span><span class="w"> </span><span class="no">lambda</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w">                     </span><span class="no">application</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">tru</span><span class="w">                       </span><span class="no">constant</span><span class="w"> </span><span class="no">true</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">fls</span><span class="w">                       </span><span class="no">constant</span><span class="w"> </span><span class="no">false</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">test</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="no">t3</span><span class="w">   </span><span class="no">conditional</span><span class="w">
+
+</span><span class="no">T</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> 
+    </span><span class="o">|</span><span class="w"> </span><span class="no">Bool</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">T</span><span class="w">                     </span><span class="no">arrow</span><span class="w"> </span><span class="no">type</span><span class="w">
+
+</span><span class="o">--</span><span class="w"> </span><span class="no">example</span><span class="w">
+</span><span class="err">\</span><span class="no">x</span><span class="p">:</span><span class="no">Bool</span><span class="pi">.</span><span class="w"> </span><span class="err">\</span><span class="no">y</span><span class="p">:</span><span class="no">Bool</span><span class="pi">.</span><span class="w"> </span><span class="no">x</span><span class="w">
+</span><span class="o">(</span><span class="err">\</span><span class="no">x</span><span class="p">:</span><span class="no">Bool</span><span class="pi">.</span><span class="w"> </span><span class="err">\</span><span class="no">y</span><span class="p">:</span><span class="no">Bool</span><span class="pi">.</span><span class="w"> </span><span class="no">x</span><span class="o">)</span><span class="w"> </span><span class="no">fls</span><span class="w"> </span><span class="no">tru</span><span class="w">
+</span><span class="err">\</span><span class="no">f</span><span class="p">:</span><span class="no">Bool</span><span class="p">→</span><span class="no">Bool</span><span class="pi">.</span><span class="w"> </span><span class="no">f</span><span class="w"> </span><span class="o">(</span><span class="no">f</span><span class="w"> </span><span class="no">tru</span><span class="o">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Some known λ-idioms:</p>
+<blockquote>
+  <p>two-arg functions are higher-order one-arg fun, i.e. curried
+no named functions yet, all “anonymous”  – 匿名函数</p>
+</blockquote>
+
+<h2 id="slide-qa-1">Slide QA 1</h2>
+
+<ol>
+  <li>2</li>
+  <li><code class="highlighter-rouge">Bool</code>, <code class="highlighter-rouge">fls</code></li>
+</ol>
+
+<h2 id="syntax">Syntax</h2>
+
+<p>Formalize syntax.
+things are, as usual, in the <code class="highlighter-rouge">Type</code> level, so we can “check” them w/ dependent type.</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Bool</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ty</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Arrow</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">ty</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">var</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">app</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">abs</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">ty</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">tru</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">fls</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">test</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Noted that, <code class="highlighter-rouge">\x:T.t</code> (formally, <code class="highlighter-rouge">abs x T t</code>), the argument type is explicitly annotated (not inferred.)</p>
+</blockquote>
+
+<p>另外，这里介绍了一个小 trick: 用 <code class="highlighter-rouge">Notation</code> (更接近 宏 ) 而非 <code class="highlighter-rouge">Defintion</code> 使得我们可以使用 <code class="highlighter-rouge">auto</code>…</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c">(** idB = \x:Bool. x **)</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="no">idB</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">abs</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">Bool</span><span class="w"> </span><span class="o">(</span><span class="no">var</span><span class="w"> </span><span class="no">x</span><span class="o">)).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="operational-semantics">Operational Semantics</h2>
+
+<h3 id="values-值">Values 值</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">tru</code> and <code class="highlighter-rouge">fls</code> are values</li>
+  <li>what about function?
+    <ol>
+      <li><code class="highlighter-rouge">\x:T. t</code> is value iff <code class="highlighter-rouge">t</code> value. – Coq</li>
+      <li><code class="highlighter-rouge">\x:T. t</code> is always value         – most FP lang, either CBV or CBN</li>
+    </ol>
+  </li>
+</ul>
+
+<p>Coq 这么做挺奇怪的，不过对 Coq 来说:</p>
+<blockquote>
+  <p>terms can be considered equiv up to the computation VM (在其项化简可以做到的范围内都算相等)
+this rich the notion of Coq’s value (所以 Coq 的值的概念是比一般要大的)</p>
+</blockquote>
+
+<p>Three ways to construct <code class="highlighter-rouge">value</code> (unary relation = predicate)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">v_abs</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">x</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">t</span><span class="o">,</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="o">(</span><span class="no">abs</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">t</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">v_tru</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="no">tru</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">v_fls</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="no">fls</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="stlc-programs-程序的概念也是要定义的">STLC Programs 「程序」的概念也是要定义的</h3>
+
+<ul>
+  <li><em>closed</em>    = term not refer any undefined var = <strong>complete program</strong></li>
+  <li><em>open term</em> = term with <em>free variable</em></li>
+</ul>
+
+<blockquote>
+  <p>Having made the choice not to reduce under abstractions, we don’t need to worry about whether variables are values, since we’ll always be reducing programs “from the outside in,” and that means the step relation will always be working with closed terms.</p>
+</blockquote>
+
+<p>if we could reduce under abstraction and variables are values… What’s the implication here? 始终不懂…</p>
+
+<h3 id="substitution-important-替换">Substitution (IMPORTANT!) 替换</h3>
+
+<blockquote>
+  <p><code class="highlighter-rouge">[x:=s]t</code> and pronounced “substitute s for x in t.”</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>(\x:Bool. test x then tru else x) fls   ==&gt;    test fls then tru else fls
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Important <em>capture</em> example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>[x:=tru] (\x:Bool. x)  ==&gt;  \x:Bool. x     -- x is bound, we need α-conversion here
+                       !=&gt;  \x:Bool. tru
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Informal definition…</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>[x:=s]x               = s
+[x:=s]y               = y                     if x ≠ y
+[x:=s](\x:T11. t12)   = \x:T11. t12
+[x:=s](\y:T11. t12)   = \y:T11. [x:=s]t12     if x ≠ y
+[x:=s](t1 t2)         = ([x:=s]t1) ([x:=s]t2)
+...
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>and formally:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="no">Reserved</span><span class="w"> </span><span class="k">Notation</span><span class="w"> </span><span class="s2">"'[' x ':=' s ']' t"</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">20</span><span class="o">).</span><span class="w">
+</span><span class="k">Fixpoint</span><span class="w"> </span><span class="kp">subst</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">s</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">var</span><span class="w"> </span><span class="no">x'</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">eqb_string</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">x'</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="no">t</span><span class="w">    </span><span class="c">(* &lt;-- computational eqb_string *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">abs</span><span class="w"> </span><span class="no">x'</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">abs</span><span class="w"> </span><span class="no">x'</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="o">(</span><span class="kr">if</span><span class="w"> </span><span class="no">eqb_string</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">x'</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="o">([</span><span class="no">x</span><span class="p">:</span><span class="o">=</span><span class="no">s</span><span class="o">]</span><span class="w"> </span><span class="no">t1</span><span class="o">))</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">app</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">app</span><span class="w"> </span><span class="o">([</span><span class="no">x</span><span class="p">:</span><span class="o">=</span><span class="no">s</span><span class="o">]</span><span class="w"> </span><span class="no">t1</span><span class="o">)</span><span class="w"> </span><span class="o">([</span><span class="no">x</span><span class="p">:</span><span class="o">=</span><span class="no">s</span><span class="o">]</span><span class="w"> </span><span class="no">t2</span><span class="o">)</span><span class="w">
+  </span><span class="o">...</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Computable <code class="highlighter-rouge">Fixpoint</code> means <em>meta-function</em>! (in metalanguage, Coq here)</p>
+</blockquote>
+
+<h3 id="如果我们考虑用于替换掉某个变量的项-s-其本身也含有自由变量-那么定义替换将会变得困难一点">如果我们考虑用于替换掉某个变量的项 s 其本身也含有自由变量， 那么定义替换将会变得困难一点。</h3>
+
+<p>Is <code class="highlighter-rouge">if x ≠ y</code> for function abstraction one sufficient?  – 在 PLT 中我们采取了更严格的定义</p>
+<blockquote>
+  <p>Only safe if we only consider <code class="highlighter-rouge">s</code> is closed term.</p>
+</blockquote>
+
+<p>Prof.Mtf:</p>
+<blockquote>
+  <p>here…it’s not really “<em>defining</em> on closed terms”. Technically, you can still write open terms.
+if we want, we could define the real <code class="highlighter-rouge">closed_term</code>…more works to prove things tho.</p>
+</blockquote>
+
+<p>Prof.Mtf:</p>
+<blockquote>
+  <p>In some more rigorous setting…we might define <code class="highlighter-rouge">well_typed_term</code>
+and the definition itself is the proof of <code class="highlighter-rouge">Preservation</code>!</p>
+</blockquote>
+
+<h3 id="slide-qa-2">Slide QA 2</h3>
+
+<ol>
+  <li>(3)</li>
+</ol>
+
+<h3 id="reduction-beta-reduction-beta-归约">Reduction （beta-reduction） beta-归约</h3>
+
+<p>Should be familar</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre>                value v2
+      ----------------------------                   (ST_AppAbs)   until value, i.e. function  (β-reduction)
+      (\x:T.t12) v2 --&gt; [x:=v2]t12
+
+                t1 --&gt; t1'
+            ----------------                           (ST_App1)   reduce lhs, Function side
+            t1 t2 --&gt; t1' t2
+
+                value v1
+                t2 --&gt; t2'
+            ----------------                           (ST_App2)   reduce rhs, Arg side 
+            v1 t2 --&gt; v1 t2'
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Formally,
+(I was expecting they invents some new syntax for this one…so we only have AST)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="no">Reserved</span><span class="w"> </span><span class="k">Notation</span><span class="w"> </span><span class="s2">"t1 '--&gt;' t2"</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">40</span><span class="o">).</span><span class="w">
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">step</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ST_AppAbs</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">x</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">t12</span><span class="w"> </span><span class="no">v2</span><span class="o">,</span><span class="w">
+         </span><span class="no">value</span><span class="w"> </span><span class="no">v2</span><span class="w"> </span><span class="p">→</span><span class="w">
+         </span><span class="o">(</span><span class="no">app</span><span class="w"> </span><span class="o">(</span><span class="no">abs</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">t12</span><span class="o">)</span><span class="w"> </span><span class="no">v2</span><span class="o">)</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="o">[</span><span class="no">x</span><span class="p">:</span><span class="o">=</span><span class="no">v2</span><span class="o">]</span><span class="no">t12</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ST_App1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t1</span><span class="w"> </span><span class="no">t1'</span><span class="w"> </span><span class="no">t2</span><span class="o">,</span><span class="w">
+         </span><span class="no">t1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t1'</span><span class="w"> </span><span class="p">→</span><span class="w">
+         </span><span class="no">app</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">app</span><span class="w"> </span><span class="no">t1'</span><span class="w"> </span><span class="no">t2</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ST_App2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">v1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="no">t2'</span><span class="o">,</span><span class="w">
+         </span><span class="no">value</span><span class="w"> </span><span class="no">v1</span><span class="w"> </span><span class="p">→</span><span class="w">
+         </span><span class="no">t2</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t2'</span><span class="w"> </span><span class="p">→</span><span class="w">
+         </span><span class="no">app</span><span class="w"> </span><span class="no">v1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">app</span><span class="w"> </span><span class="no">v1</span><span class="w"> </span><span class="no">t2'</span><span class="w">
+</span><span class="o">...</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="slide-qa-3">Slide QA 3</h3>
+
+<ol>
+  <li>(1)  <code class="highlighter-rouge">idBB idB -&gt; idB</code></li>
+  <li>(1)  <code class="highlighter-rouge">idBB (idBB idB) -&gt; idB</code></li>
+  <li>if () ill-typed <code class="highlighter-rouge">idBB (notB tru) -&gt; idBB fls ....</code>
+    <ul>
+      <li>we don’t type check in step</li>
+    </ul>
+  </li>
+  <li>(3)  <code class="highlighter-rouge">idB fls</code></li>
+  <li>NOT…ill-typed one &amp; open term</li>
+</ol>
+
+<h2 id="typing">Typing</h2>
+
+<h3 id="typing-contexts-类型上下文">Typing Contexts 类型上下文</h3>
+
+<p>we need something like environment but for Types.</p>
+
+<blockquote>
+  <p>three-place typing judgment, informally written   – 三元类型断言</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>Gamma ⊢ t ∈ T
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>“under the assumptions in Gamma, the term t has the type T.”</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">context</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">partial_map</span><span class="w"> </span><span class="no">ty</span><span class="pi">.</span><span class="w">
+</span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="p">⊢</span><span class="o">&gt;</span><span class="w"> </span><span class="no">T11</span><span class="o">,</span><span class="w"> </span><span class="no">Gamma</span><span class="o">)</span><span class="w"> 
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Why <code class="highlighter-rouge">partial_map</code> here? 
+IMP can use <code class="highlighter-rouge">total_map</code> because it gave default value for undefined var.</p>
+
+<h3 id="typing-relations">Typing Relations</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre>                          Gamma x = T
+                        ----------------                            (T_Var)   look up
+                        Gamma |- x \in T
+
+               (x |-&gt; T11 ; Gamma) |- t12 \in T12
+               ----------------------------------                   (T_Abs)   type check against context w/ arg
+                Gamma |- \x:T11.t12 \in T11-&gt;T12
+
+                    Gamma |- t1 \in T11-&gt;T12
+                      Gamma |- t2 \in T11
+                     ----------------------                         (T_App)
+                     Gamma |- t1 t2 \in T12
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Example</span><span class="w"> </span><span class="no">typing_example_1</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="no">empty</span><span class="w"> </span><span class="p">⊢</span><span class="w"> </span><span class="no">abs</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">Bool</span><span class="w"> </span><span class="o">(</span><span class="no">var</span><span class="w"> </span><span class="no">x</span><span class="o">)</span><span class="w"> </span><span class="p">∈</span><span class="w"> </span><span class="no">Arrow</span><span class="w"> </span><span class="no">Bool</span><span class="w"> </span><span class="no">Bool</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">apply</span><span class="w"> </span><span class="no">T_Abs</span><span class="pi">.</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">T_Var</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">example_2</code></p>
+<ul>
+  <li><code class="highlighter-rouge">eapply</code></li>
+  <li><code class="highlighter-rouge">A</code> ?? looks like need need another environment to look up <code class="highlighter-rouge">A</code>…</li>
+</ul>
+
+<h3 id="typable--deciable">Typable / Deciable</h3>
+
+<blockquote>
+  <p>decidable type system = decide term if typable or not.
+done by type checker…</p>
+</blockquote>
+
+<blockquote>
+  <p>can we prove…?
+<code class="highlighter-rouge">∀ Γ e, ∃ τ, (Γ ⊢ e : τ) ∨ ¬(Γ ⊢ e : τ)</code> – a type inference algorithm!</p>
+</blockquote>
+
+<blockquote>
+  <p>Provability in Coq witness decidabile operations.</p>
+</blockquote>
+
+<h3 id="show-term-is-not-typeable">show term is “not typeable”</h3>
+
+<p>Keep inversion till the contradiction.</p>
+
+:ET

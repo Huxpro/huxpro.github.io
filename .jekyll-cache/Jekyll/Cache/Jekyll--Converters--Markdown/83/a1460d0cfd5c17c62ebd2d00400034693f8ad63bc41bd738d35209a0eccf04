@@ -1,0 +1,31 @@
+I"Ü<h2 id="adding-records">Adding Records</h2>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                          </span><span class="no">Terms</span><span class="p">:</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">{</span><span class="no">i1</span><span class="o">=</span><span class="no">t1</span><span class="o">,</span><span class="w"> </span><span class="o">...,</span><span class="w"> </span><span class="kr">in</span><span class="o">=</span><span class="no">tn</span><span class="o">}</span><span class="w">         </span><span class="no">record</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="nn">t</span><span class="p">.</span><span class="no">i</span><span class="w">                         </span><span class="no">projection</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+
+</span><span class="no">v</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                          </span><span class="no">Values</span><span class="p">:</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">{</span><span class="no">i1</span><span class="o">=</span><span class="no">v1</span><span class="o">,</span><span class="w"> </span><span class="o">...,</span><span class="w"> </span><span class="kr">in</span><span class="o">=</span><span class="no">vn</span><span class="o">}</span><span class="w">         </span><span class="no">record</span><span class="w"> </span><span class="no">value</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+
+</span><span class="no">T</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w">                          </span><span class="no">Types</span><span class="p">:</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">{</span><span class="no">i1</span><span class="p">:</span><span class="no">T1</span><span class="o">,</span><span class="w"> </span><span class="o">...,</span><span class="w"> </span><span class="kr">in</span><span class="p">:</span><span class="no">Tn</span><span class="o">}</span><span class="w">         </span><span class="no">record</span><span class="w"> </span><span class="no">type</span><span class="w">
+    </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="formalizing-records">Formalizing Records</h2>
+
+:ET

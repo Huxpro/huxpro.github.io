@@ -1,0 +1,186 @@
+I"�W<blockquote>
+  <p>the parser relies on some “monadic” programming idioms</p>
+</blockquote>
+
+<p>basically, <em>parser combinator</em> (But 非常麻烦 in Coq)</p>
+
+<h2 id="lex">Lex</h2>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">chartype</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">white</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">alpha</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">digit</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">other</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">classifyChar</span><span class="w"> </span><span class="o">(</span><span class="no">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ascii</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">chartype</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">if</span><span class="w">      </span><span class="no">isWhite</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">white</span><span class="w">
+  </span><span class="kr">else</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">isAlpha</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">alpha</span><span class="w">
+  </span><span class="kr">else</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">isDigit</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">digit</span><span class="w">
+  </span><span class="kr">else</span><span class="w">                   </span><span class="no">other</span><span class="pi">.</span><span class="w">
+  
+
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">token</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">string</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="syntax">Syntax</h2>
+
+<p>带 error msg 的 <code class="highlighter-rouge">option</code>:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">optionE</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="p">:</span><span class="kr">Type</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">SomeE</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">NoneE</span><span class="w"> </span><span class="o">(</span><span class="no">s</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">).</span><span class="w">       </span><span class="c">(** w/ error msg **)</span><span class="w">
+
+</span><span class="k">Arguments</span><span class="w"> </span><span class="no">SomeE</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="o">}.</span><span class="w">
+</span><span class="k">Arguments</span><span class="w"> </span><span class="no">NoneE</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="o">}.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Monadic:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="k">Notation</span><span class="w"> </span><span class="s2">"' p &lt;- e1 ;; e2"</span><span class="w">
+   </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="kr">match</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="kp">with</span><span class="w">
+       </span><span class="o">|</span><span class="w"> </span><span class="no">SomeE</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">e2</span><span class="w">
+       </span><span class="o">|</span><span class="w"> </span><span class="no">NoneE</span><span class="w"> </span><span class="no">err</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">NoneE</span><span class="w"> </span><span class="no">err</span><span class="w">
+       </span><span class="kr">end</span><span class="o">)</span><span class="w">
+   </span><span class="o">(</span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">,</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="no">pattern</span><span class="o">,</span><span class="w"> </span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">60</span><span class="o">,</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="kp">at</span><span class="w"> </span><span class="no">next</span><span class="w"> </span><span class="no">level</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"'TRY' ' p &lt;- e1 ;; e2 'OR' e3"</span><span class="w">
+   </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="kr">match</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="kp">with</span><span class="w">
+       </span><span class="o">|</span><span class="w"> </span><span class="no">SomeE</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">e2</span><span class="w">
+       </span><span class="o">|</span><span class="w"> </span><span class="no">NoneE</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">e3</span><span class="w">
+       </span><span class="kr">end</span><span class="o">)</span><span class="w">
+   </span><span class="o">(</span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">,</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="no">pattern</span><span class="o">,</span><span class="w">
+    </span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">60</span><span class="o">,</span><span class="w"> </span><span class="no">e1</span><span class="w"> </span><span class="kp">at</span><span class="w"> </span><span class="no">next</span><span class="w"> </span><span class="no">level</span><span class="o">,</span><span class="w"> </span><span class="no">e2</span><span class="w"> </span><span class="kp">at</span><span class="w"> </span><span class="no">next</span><span class="w"> </span><span class="no">level</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">parser</span><span class="w"> </span><span class="o">(</span><span class="no">T</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="no">list</span><span class="w"> </span><span class="no">token</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">optionE</span><span class="w"> </span><span class="o">(</span><span class="no">T</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">token</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kr">newtype</span> <span class="kt">Parser</span> <span class="n">a</span> <span class="o">=</span> <span class="kt">Parser</span> <span class="p">(</span><span class="kt">String</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span><span class="kt">String</span><span class="p">)])</span>
+
+<span class="kr">instance</span> <span class="kt">Monad</span> <span class="kt">Parser</span> <span class="kr">where</span>
+   <span class="c1">-- (&gt;&gt;=) :: Parser a -&gt; (a -&gt; Parser b) -&gt; Parser b</span>
+   <span class="n">p</span> <span class="o">&gt;&gt;=</span> <span class="n">f</span> <span class="o">=</span> <span class="kt">P</span> <span class="p">(</span><span class="nf">\</span><span class="n">inp</span> <span class="o">-&gt;</span> <span class="kr">case</span> <span class="n">parse</span> <span class="n">p</span> <span class="n">inp</span> <span class="kr">of</span>
+                           <span class="kt">[]</span>        <span class="o">-&gt;</span> <span class="kt">[]</span>
+                           <span class="p">[(</span><span class="n">v</span><span class="p">,</span><span class="n">out</span><span class="p">)]</span> <span class="o">-&gt;</span> <span class="n">parse</span> <span class="p">(</span><span class="n">f</span> <span class="n">v</span><span class="p">)</span> <span class="n">out</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="combinator-many">combinator <code class="highlighter-rouge">many</code></h3>
+
+<p>Coq vs. Haskell</p>
+<ol>
+  <li>explicit recursion depth, .e. <em>step-indexed</em></li>
+  <li>explicit exception <code class="highlighter-rouge">optionE</code>  (in Haskell, it’s hidden behind the <code class="highlighter-rouge">Parser</code> Monad as <code class="highlighter-rouge">[]</code>)</li>
+  <li>explicit string state <code class="highlighter-rouge">xs</code>    (in Haskell, it’s hidden behind the <code class="highlighter-rouge">Parser</code> Monad as <code class="highlighter-rouge">String -&gt; String</code>)</li>
+  <li>explicit <code class="highlighter-rouge">acc</code>epted token     (in Haskell, it’s hidden behind the <code class="highlighter-rouge">Parser</code> Monad as <code class="highlighter-rouge">a</code>, argument)</li>
+</ol>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">many_helper</span><span class="w"> </span><span class="o">{</span><span class="no">T</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">p</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">parser</span><span class="w"> </span><span class="no">T</span><span class="o">)</span><span class="w"> </span><span class="no">acc</span><span class="w"> </span><span class="no">steps</span><span class="w"> </span><span class="no">xs</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">steps</span><span class="o">,</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="no">xs</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="o">,</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+      </span><span class="no">NoneE</span><span class="w"> </span><span class="s2">"Too many recursive calls"</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="p">_</span><span class="o">,</span><span class="w"> </span><span class="no">NoneE</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+      </span><span class="no">SomeE</span><span class="w"> </span><span class="o">((</span><span class="no">rev</span><span class="w"> </span><span class="no">acc</span><span class="o">),</span><span class="w"> </span><span class="no">xs</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="no">steps'</span><span class="o">,</span><span class="w"> </span><span class="no">SomeE</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="o">,</span><span class="w"> </span><span class="no">xs'</span><span class="o">)</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+      </span><span class="no">many_helper</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">acc</span><span class="o">)</span><span class="w"> </span><span class="no">steps'</span><span class="w"> </span><span class="no">xs'</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Fixpoint</span><span class="w"> </span><span class="no">many</span><span class="w"> </span><span class="o">{</span><span class="no">T</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">p</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">parser</span><span class="w"> </span><span class="no">T</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">steps</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">parser</span><span class="w"> </span><span class="o">(</span><span class="no">list</span><span class="w"> </span><span class="no">T</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="no">many_helper</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="o">[]</span><span class="w"> </span><span class="no">steps</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="n">manyL</span> <span class="o">::</span> <span class="kt">Parser</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Parser</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="n">manyL</span> <span class="n">p</span> <span class="o">=</span> <span class="n">many1L</span> <span class="n">p</span> <span class="o">&lt;++</span> <span class="n">return</span> <span class="kt">[]</span>   <span class="c1">-- left biased OR</span>
+
+<span class="n">many1L</span> <span class="o">::</span> <span class="kt">Parser</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Parser</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="n">many1L</span> <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="o">:</span><span class="p">)</span> <span class="o">&lt;$&gt;</span> <span class="n">p</span> <span class="o">&lt;*&gt;</span> <span class="n">manyL</span> <span class="n">p</span>
+<span class="c1">-- or</span>
+<span class="n">many1L</span> <span class="n">p</span> <span class="o">=</span> <span class="kr">do</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">p</span>
+              <span class="n">xs</span> <span class="o">&lt;-</span> <span class="n">manyL</span> <span class="n">p</span>
+              <span class="n">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">xs</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="ident"><code class="highlighter-rouge">ident</code></h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">parseIdentifier</span><span class="w"> </span><span class="o">(</span><span class="no">xs</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">token</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">optionE</span><span class="w"> </span><span class="o">(</span><span class="no">string</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">token</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">xs</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="o">[]</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">NoneE</span><span class="w"> </span><span class="s2">"Expected identifier"</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">x</span><span class="p">::</span><span class="no">xs'</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">forallb</span><span class="w"> </span><span class="no">isLowerAlpha</span><span class="w"> </span><span class="o">(</span><span class="no">list_of_string</span><span class="w"> </span><span class="no">x</span><span class="o">)</span><span class="w">
+             </span><span class="kr">then</span><span class="w"> </span><span class="no">SomeE</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="o">,</span><span class="w"> </span><span class="no">xs'</span><span class="o">)</span><span class="w">
+             </span><span class="kr">else</span><span class="w"> </span><span class="no">NoneE</span><span class="w"> </span><span class="o">(</span><span class="s2">"Illegal identifier:'"</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="s2">"'"</span><span class="o">)</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="n">ident</span> <span class="o">::</span> <span class="kt">Parser</span> <span class="kt">String</span>
+<span class="n">ident</span> <span class="o">=</span> <span class="kr">do</span> <span class="n">x</span>  <span class="o">&lt;-</span> <span class="n">lower</span>
+           <span class="n">xs</span> <span class="o">&lt;-</span> <span class="n">many</span> <span class="n">alphanum</span>
+           <span class="n">return</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+:ET

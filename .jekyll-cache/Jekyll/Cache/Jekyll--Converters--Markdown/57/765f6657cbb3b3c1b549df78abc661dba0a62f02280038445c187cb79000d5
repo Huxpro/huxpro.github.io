@@ -1,0 +1,119 @@
+I"�<h2 id="concepts">Concepts</h2>
+
+<h3 id="the-subsumption-rule">The Subsumption Rule</h3>
+
+<h3 id="the-subtype-relation">The Subtype Relation</h3>
+
+<h3 id="slide-qa1">Slide QA1</h3>
+
+<p>Record Subtyping…</p>
+
+<p>row type</p>
+
+<p>index? record impl as list</p>
+
+<p>width/depth/permulation</p>
+<ul>
+  <li>multiple step rules</li>
+</ul>
+
+<hr />
+
+<p>Java</p>
+
+<ol>
+  <li>class - no index (thinking about offset)</li>
+</ol>
+
+<p>having both width/permulation subtyping make impl slow</p>
+<ul>
+  <li>OOP - hmm</li>
+  <li>ML has no permulation - for perf reason (static structure) as C</li>
+</ul>
+
+<p>ML has depth?</p>
+<ul>
+  <li>a little bit by equality</li>
+</ul>
+
+<p>OCaml objection has all three</p>
+
+<h3 id="slide-qa2">Slide QA2</h3>
+
+<p>Looking at Contravariant!</p>
+
+<ol>
+  <li>
+    <p>(2) <code class="highlighter-rouge">{i1:S,i2:T}→U &lt;: {i1:S,i2:T,i3:V}→U</code></p>
+  </li>
+  <li>
+    <p>(4) <code class="highlighter-rouge">{i1:T,i2:V,i3:V} &lt;: {i1:S,i2:U} * {i3:V}</code> is interesting:</p>
+  </li>
+</ol>
+
+<p>the interesting thing is, why don’t we make some subtyping rules for that as well?</p>
+
+<ul>
+  <li>there are definitely <em>code</em> can do that</li>
+  <li>their <em>runtime</em> semantics are different tho they carry same information</li>
+  <li><strong>coercion</strong> can used for that</li>
+</ul>
+
+<p>3 and 4. (5) …</p>
+
+<p>A &lt;: Top   =&gt;   Top -&gt; A &lt;: A -&gt; A  – contravariant</p>
+
+<p>if we only care <code class="highlighter-rouge">(A*T)</code>, can use <code class="highlighter-rouge">T:Top</code></p>
+
+<p>but to type the whole thing <code class="highlighter-rouge">: A</code></p>
+
+<p><code class="highlighter-rouge">Top -&gt; A</code>?
+but noticed that we said <code class="highlighter-rouge">\z:A.z</code></p>
+
+<p>can we pass <code class="highlighter-rouge">A -&gt; A</code> into <code class="highlighter-rouge">Top -&gt; A</code>? 
+      more specific        more general</p>
+
+<p>smallest -&gt; most specific -&gt; <code class="highlighter-rouge">A -&gt; A</code>
+largest  -&gt; most specific -&gt; <code class="highlighter-rouge">Top -&gt; A</code></p>
+
+<ol>
+  <li>“The type Bool has no proper subtypes.” (I.e., the only type smaller than Bool is Bool itself.)
+Ture unless we have Bottom</li>
+</ol>
+
+<p>hmm seems like <code class="highlighter-rouge">Bottom</code> in subtyping is different with Empty/Void, which is closer to logical <code class="highlighter-rouge">Bottom ⊥</code> since Bottom here is subtyping of everything..
+OH they are the same: (nice)</p>
+<blockquote>
+  <p><a href="https://en.wikipedia.org/wiki/Bottom_type">https://en.wikipedia.org/wiki/Bottom_type</a></p>
+</blockquote>
+
+<ol>
+  <li>True</li>
+</ol>
+
+<h3 id="inversion-lemmas-for-subtyping">Inversion Lemmas for Subtyping</h3>
+
+<p><code class="highlighter-rouge">inversion</code> doesn’t lose information, <code class="highlighter-rouge">induction</code> does.</p>
+
+<p>auto rememeber?? — dependent induction
+hetergeous equaltiy</p>
+
+<p>In soundness proof</p>
+
+<ul>
+  <li>subtyping only affects Canonical Forms + T_Sub case in induction</li>
+</ul>
+
+<blockquote>
+  <p>Lemma: If Gamma ⊢ \x:S1.t2 ∈ T, then there is a type S2 such that x⊢&gt;S1; Gamma ⊢ t2 ∈ S2 and S1 → S2 &lt;: T.</p>
+</blockquote>
+
+<p>why <code class="highlighter-rouge">T</code> not arrow? Top…</p>
+
+<p>if including Bottom…many proof becomes hard, canonical form need to say…might be Bottom?</p>
+
+<blockquote>
+  <p>no, no value has type Bottom (Void)…</p>
+</blockquote>
+
+:ET

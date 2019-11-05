@@ -1,0 +1,694 @@
+I"F><h2 id="recall-big-step-pros--cons">Recall Big-step Pros &amp; Cons</h2>
+
+<h2 id="big-step">Big-step</h2>
+
+<blockquote>
+  <p>一步到位 :  <em>eval to its final value (plus final store)</em></p>
+</blockquote>
+
+<h3 id="pros---natural-so-called-natural-semantics-all-in-one-big-step">Pros - natural (so called <em>natural semantics</em>), “all in one big step”</h3>
+
+<h3 id="cons---not-catch-the-essence-of-how-program-behave">Cons - not catch the <em>essence of how program behave</em></h3>
+
+<blockquote>
+  <p>大步语义只是一个 <code class="highlighter-rouge">程序 ↦ 结果</code> 这样的 pair 集合，而「如何一步步处理」才是程序「执行」的本质</p>
+</blockquote>
+
+<p>not just input state get mapped to output state.
+but also <em>intermediate state</em> (which could be observed by <em>concurrent</em> code!)</p>
+
+<h3 id="cons---not-technically-expressive-enough-to-express-exception--crash--non-termination">Cons - not technically expressive enough to express <em>exception / crash / non-termination</em></h3>
+
+<blockquote>
+  <p>比如说，大步语义无法区分「不停机」与「卡住」
+two quite different reasons of “fail to map a given state to any ending state”</p>
+</blockquote>
+
+<ol>
+  <li>不停机 nontermination - we want to allow this (infinite loop is the price paid for usability)</li>
+  <li>卡住 getting stuck / undefiend behaviour 未定义行为  - we want to prevent (wrong)</li>
+</ol>
+
+<ul>
+  <li><code class="highlighter-rouge">WHILE_true_nonterm</code> 仅仅表达了「程序不能再 take step」，无法与「卡住」区分</li>
+  <li><code class="highlighter-rouge">WHILE_true</code> 更是直接让任何「无限循环」的程序都「等价」了…而忽略了中间状态和 effect (作用)</li>
+</ul>
+
+<blockquote>
+  <p>we need <em>a way of presenting semantics that distinguish</em> nontermination from erroneous “stuck states”</p>
+</blockquote>
+
+<h2 id="small-step">Small-step</h2>
+
+<blockquote>
+  <p>更精细化 :  a <em>finer-grained</em> way of defining and reasoning about program behaviors. 
+原子步骤 :  <em>“atomic steps”</em> of computation are performed.</p>
+</blockquote>
+
+<h2 id="a-toy-language">A Toy Language</h2>
+
+<p>Only Constant and Plus</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">C</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="c">(* Constant *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">P</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">tm</span><span class="pi">.</span><span class="w"> </span><span class="c">(* Plus *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="big-step-1">Big-Step</h3>
+
+<p><code class="highlighter-rouge">==&gt;</code> is really <code class="highlighter-rouge">⇓</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>            ---------        (E_Const)
+            C n ==&gt; n
+
+            t1 ==&gt; n1
+            t2 ==&gt; n2
+        -------------------  (E_Plus)
+        P t1 t2 ==&gt; n1 + n2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="small-step-1">Small-Step</h3>
+
+<blockquote>
+  <p>single reduction step
+find leftmost redex</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>  -------------------------------   (ST_PlusConstConst)
+  P (C n1) (C n2) --&gt; C (n1 + n2)
+
+          t1 --&gt; t1'
+      --------------------          (ST_Plus1)
+      P t1 t2 --&gt; P t1' t2
+
+          t2 --&gt; t2'
+  ----------------------------      (ST_Plus2)
+  P (C n1) t2 --&gt; P (C n1) t2'
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="relations">Relations</h2>
+
+<blockquote>
+  <p>Check notes of <code class="highlighter-rouge">rel</code> and <code class="highlighter-rouge">tactics</code> for more details about bi-relation.</p>
+</blockquote>
+
+<h3 id="deterministic-确定性">Deterministic 确定性</h3>
+
+<blockquote>
+  <p>a.k.a Partial Function. 
+in terms of its <em>right uniqueness</em> under mathematical context, not its emphasise on <em>partial</em> under programming context)</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">deterministic</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="no">x</span><span class="w"> </span><span class="no">y1</span><span class="w"> </span><span class="no">y2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">,</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y1</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y2</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">y1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">y2</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">deterministic step</code> can be proved by induction on derivation <code class="highlighter-rouge">x --&gt; y1</code></p>
+<ul>
+  <li>use <code class="highlighter-rouge">generalize dependent y2</code>!</li>
+  <li>in informal proof, we usually just take <code class="highlighter-rouge">∀ y2</code> by default.</li>
+</ul>
+
+<h3 id="ltac-solve_by_inverts-n"><code class="highlighter-rouge">Ltac solve_by_inverts n</code></h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="k">Ltac</span><span class="w"> </span><span class="no">solve_by_inverts</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">goal</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">H</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nv">?T</span><span class="w"> </span><span class="p">⊢</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">type</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">⇒</span><span class="w">
+    </span><span class="ne">solve</span><span class="w"> </span><span class="o">[</span><span class="w">
+      </span><span class="kp">inversion</span><span class="w"> </span><span class="no">H</span><span class="p">;</span><span class="w">
+      </span><span class="kr">match</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="o">(</span><span class="nv">?n'</span><span class="o">))</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="kp">subst</span><span class="p">;</span><span class="w"> </span><span class="no">solve_by_inverts</span><span class="w"> </span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="no">n'</span><span class="o">)</span><span class="w"> </span><span class="kr">end</span><span class="w"> </span><span class="o">]</span><span class="w">
+  </span><span class="kr">end</span><span class="w"> </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="values-值">Values 值</h3>
+
+<h4 id="abstract-machine-抽象机">Abstract Machine 抽象机!</h4>
+
+<blockquote>
+  <p>think of the <code class="highlighter-rouge">--&gt;</code> relation as defining an <em>abstract machine</em>:</p>
+</blockquote>
+
+<ul>
+  <li>term = <em>state</em> of machine 项 = 机器状态</li>
+  <li>step = atomic unit of computation (think as assembly opcode / CPU instructrion)</li>
+  <li><em>halting state</em> = no more computation. 停机状态</li>
+</ul>
+
+<blockquote>
+  <p>execute a term <code class="highlighter-rouge">t</code>:</p>
+</blockquote>
+
+<ul>
+  <li>starting state = <code class="highlighter-rouge">t</code></li>
+  <li>repeatedly use <code class="highlighter-rouge">--&gt;</code></li>
+  <li>when halt, <em>read out</em> the <em>final state</em> as result of execution</li>
+</ul>
+
+<blockquote>
+  <p>Intutively, we call such (final state) terms <em>values</em>.
+Okay so the point is…this language is simple enough (no stuck state).
+and in this lang, value can only be <code class="highlighter-rouge">C</code>onst:</p>
+</blockquote>
+
+<blockquote>
+  <p>在这个语言中，我们「规定」只有 <code class="highlighter-rouge">C</code>onst 是「值」:</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">v_const</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">n</span><span class="o">,</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="no">n</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>and we can write <code class="highlighter-rouge">ST_Plus2</code> more elegant:
+well…in this lang, not really, since only one form of value to write out.
+in cases we have multiple form of value, by doing this we don’t have to write out any cases.</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>         value v1
+        t2 --&gt; t2'
+    --------------------  (ST_Plus2)
+    P v1 t2 --&gt; P v1 t2'
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="strong-progress-and-normal-forms-强可进性和正规式">Strong Progress and Normal Forms 强可进性和正规式</h3>
+
+<blockquote>
+  <p><em>strong progress</em>: every term either is a value or can “make progress”</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">strong_progress</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t</span><span class="o">,</span><span class="w">
+  </span><span class="no">value</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">∨</span><span class="w"> </span><span class="o">(</span><span class="p">∃</span><span class="no">t'</span><span class="o">,</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t'</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>terms that cannot make progress.
+for an arbitrary relation <code class="highlighter-rouge">R</code> over an arbitrary set <code class="highlighter-rouge">X</code></p>
+</blockquote>
+
+<blockquote>
+  <p><em>normal form</em>: term that cannot make progress (take a step)
+其实我个人比较喜欢理解为「常态」或「无能量稳定态」</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">normal_form</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">¬∃</span><span class="no">t'</span><span class="o">,</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">t'</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>theorem: <em>in this language</em>, normal forms and values are actually the same thing.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Lemma</span><span class="w"> </span><span class="no">value_is_nf</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">v</span><span class="o">,</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="no">v</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">normal_form</span><span class="w"> </span><span class="no">step</span><span class="w"> </span><span class="no">v</span><span class="pi">.</span><span class="w">
+</span><span class="k">Lemma</span><span class="w"> </span><span class="no">nf_is_value</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t</span><span class="o">,</span><span class="w"> </span><span class="no">normal_form</span><span class="w"> </span><span class="no">step</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="no">t</span><span class="pi">.</span><span class="w">
+</span><span class="k">Corollary</span><span class="w"> </span><span class="no">nf_same_as_value</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t</span><span class="o">,</span><span class="w"> </span><span class="no">normal_form</span><span class="w"> </span><span class="no">step</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">↔</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="no">t</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="value--normal-form-not-always">Value != Normal Form (not always)</h4>
+
+<blockquote>
+  <p>value       is a <em>syntactic</em> concept : it is defined by looking at the form of a term 
+normal form is a <em>semantic</em>  one     : it is defined by looking at how the term steps.</p>
+</blockquote>
+
+<blockquote>
+  <p>E.g. we can defined term that can take a step as “value”:
+添加一个不是 normal form 的 value</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">v_const</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">n</span><span class="o">,</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="no">n</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">v_funny</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t1</span><span class="w"> </span><span class="no">n2</span><span class="o">,</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="o">(</span><span class="no">P</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="no">n2</span><span class="o">)).</span><span class="w"> </span><span class="c">(* &lt;--- it can actually progress! *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>或者更改 <code class="highlighter-rouge">step</code> 让 value 不是 normal form…</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">step</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">tm</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ST_Funny</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">n</span><span class="o">,</span><span class="w">   
+      </span><span class="no">C</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">P</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="no">n</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w">                </span><span class="c">(* &lt;--- or a weird  *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="multi-step-reduction----多步规约">Multi-Step Reduction <code class="highlighter-rouge">--&gt;*</code> 多步规约</h2>
+
+<blockquote>
+  <p>relation <code class="highlighter-rouge">multi R</code>: <em>multi-step closure of R</em> 
+same as <code class="highlighter-rouge">clos_refl_trans_1n</code> in <code class="highlighter-rouge">Rel</code> chapter.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">multi</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">multi_refl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">),</span><span class="w"> </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">x</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">multi_step</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">),</span><span class="w">
+                    </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="p">→</span><span class="w">
+                    </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="w"> </span><span class="p">→</span><span class="w">
+                    </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">z</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>以上是一种方便的定义，而以下则给了我们两个 helper 定理：</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">multi_R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">),</span><span class="w">
+    </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="p">→</span><span class="w"> 
+    </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Theorem</span><span class="w"> </span><span class="no">multi_trans</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">),</span><span class="w">
+    </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="p">→</span><span class="w">
+    </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="w"> </span><span class="p">→</span><span class="w">
+    </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">z</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="normal-forms-again">Normal Forms Again</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">step_normal_form</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">normal_form</span><span class="w"> </span><span class="no">step</span><span class="pi">.</span><span class="w">  </span><span class="c">(** 这个是一个「性质」 Property : _ -&gt; Prop , 从 polymorphic 的 [normal_form] 以 [step] 实例化而来 **)</span><span class="w"> 
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">normal_form_of</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">tm</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">          </span><span class="c">(** 是两个项之间的（i.e. 定义在 [tm] 集合上的) 二元关系, 即 t' 是 t 的正规式 **)</span><span class="w">
+  </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="o">--&gt;*</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="no">step_normal_form</span><span class="w"> </span><span class="no">t'</span><span class="o">).</span><span class="w">
+  
+</span><span class="k">Theorem</span><span class="w"> </span><span class="no">normal_forms_unique</span><span class="p">:</span><span class="w">                      </span><span class="c">(** single-step reduction is deterministic 可以推出 normal form is unique for a given term **)</span><span class="w">
+  </span><span class="no">deterministic</span><span class="w"> </span><span class="no">normal_form_of</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="normalizing-总是可正规化得---evaluating-to-completion">Normalizing 总是可正规化得  – “Evaluating to completion”</h3>
+
+<blockquote>
+  <p>something stronger is true for this language (though not for all languages)
+reduction of <em>any</em> term <code class="highlighter-rouge">t</code> will eventually reach a normal form (我们知道 STLC 也有这个特性)</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">normalizing</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="no">t</span><span class="o">,</span><span class="w"> </span><span class="p">∃</span><span class="no">t'</span><span class="o">,</span><span class="w">
+    </span><span class="o">(</span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="o">)</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="no">normal_form</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">t'</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>To prove this, we need lemma showing some <em>congruence</em> of <code class="highlighter-rouge">--&gt;*</code>: 
+同余关系，不过这次是定义在 <code class="highlighter-rouge">--&gt;*</code> 这个关系上，again，同余指的是「关系对于结构上的操作保持」</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="k">Lemma</span><span class="w"> </span><span class="no">multistep_congr_1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t1</span><span class="w"> </span><span class="no">t1'</span><span class="w"> </span><span class="no">t2</span><span class="o">,</span><span class="w">
+     </span><span class="no">t1</span><span class="w"> </span><span class="o">--&gt;*</span><span class="w"> </span><span class="no">t1'</span><span class="w"> </span><span class="p">→</span><span class="w"> 
+     </span><span class="no">P</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="o">--&gt;*</span><span class="w"> </span><span class="no">P</span><span class="w"> </span><span class="no">t1'</span><span class="w"> </span><span class="no">t2</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Lemma</span><span class="w"> </span><span class="no">multistep_congr_2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="no">t2'</span><span class="o">,</span><span class="w">
+     </span><span class="no">value</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="p">→</span><span class="w">
+     </span><span class="no">t2</span><span class="w"> </span><span class="o">--&gt;*</span><span class="w"> </span><span class="no">t2'</span><span class="w"> </span><span class="p">→</span><span class="w">
+     </span><span class="no">P</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2</span><span class="w"> </span><span class="o">--&gt;*</span><span class="w"> </span><span class="no">P</span><span class="w"> </span><span class="no">t1</span><span class="w"> </span><span class="no">t2'</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then we can prove…</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">step_normalizing</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="no">normalizing</span><span class="w"> </span><span class="no">step</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="equivalence-of-big-step-and-small-step">Equivalence of Big-Step and Small-Step</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">eval__multistep</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t</span><span class="w"> </span><span class="no">n</span><span class="o">,</span><span class="w">
+  </span><span class="no">t</span><span class="w"> </span><span class="o">==&gt;</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">--&gt;*</span><span class="w"> </span><span class="no">C</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Theorem</span><span class="w"> </span><span class="no">multistep__eval</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">t</span><span class="w"> </span><span class="no">t'</span><span class="o">,</span><span class="w">
+  </span><span class="no">normal_form_of</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="p">∃</span><span class="no">n</span><span class="o">,</span><span class="w"> </span><span class="no">t'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">C</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">==&gt;</span><span class="w"> </span><span class="no">n</span><span class="pi">.</span><span class="w">    </span><span class="c">(* might be better to say value here? *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="additional-combined-language">Additional: Combined Language</h2>
+
+<p>What if we combined the lang <code class="highlighter-rouge">Arith</code> and lang <code class="highlighter-rouge">Boolean</code>?
+Would <code class="highlighter-rouge">step_deterministic</code> and <code class="highlighter-rouge">strong_progress</code> still holds?</p>
+
+<p>Intuition:</p>
+<ul>
+  <li><code class="highlighter-rouge">step_deterministic</code> should still hold</li>
+  <li>but <code class="highlighter-rouge">strong_progress</code> would definitely not!!
+    <ul>
+      <li>now we mixed two <em>types</em> so we will have stuck terms e.g. <code class="highlighter-rouge">test 5</code> or <code class="highlighter-rouge">tru + 4</code>.</li>
+      <li>we will need type check and then we would be able to prove <code class="highlighter-rouge">progress</code> (which require well-typeness)</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">strong_progress</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="o">(</span><span class="kr">forall</span><span class="w"> </span><span class="no">t</span><span class="o">,</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">\/</span><span class="w"> </span><span class="o">(</span><span class="kp">exists</span><span class="w"> </span><span class="no">t'</span><span class="o">,</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t'</span><span class="o">))</span><span class="w"> </span><span class="o">\/</span><span class="w">
+  </span><span class="o">~</span><span class="w"> </span><span class="o">(</span><span class="kr">forall</span><span class="w"> </span><span class="no">t</span><span class="o">,</span><span class="w"> </span><span class="no">value</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">\/</span><span class="w"> </span><span class="o">(</span><span class="kp">exists</span><span class="w"> </span><span class="no">t'</span><span class="o">,</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">t'</span><span class="o">)).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="no">right</span><span class="pi">.</span><span class="w"> </span><span class="kp">intros</span><span class="w"> </span><span class="no">Hcontra</span><span class="pi">.</span><span class="w">
+  </span><span class="no">remember</span><span class="w"> </span><span class="o">(</span><span class="no">P</span><span class="w"> </span><span class="no">tru</span><span class="w"> </span><span class="no">fls</span><span class="o">)</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="no">stuck</span><span class="pi">.</span><span class="w">   </span><span class="c">(** 类似 disprove equiv = 举一个反例就好 **)</span><span class="w">
+  </span><span class="kp">specialize</span><span class="w"> </span><span class="o">(</span><span class="no">Hcontra</span><span class="w"> </span><span class="no">stuck</span><span class="o">).</span><span class="w">
+  </span><span class="kp">destruct</span><span class="w"> </span><span class="no">Hcontra</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="o">[</span><span class="no">Hcvalue</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">Hcprogress</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="kp">subst</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="kp">inversion</span><span class="w"> </span><span class="no">Hcvalue</span><span class="p">;</span><span class="w"> </span><span class="kp">inversion</span><span class="w"> </span><span class="no">H</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="kp">destruct</span><span class="w"> </span><span class="no">Hcprogress</span><span class="pi">.</span><span class="w"> </span><span class="kp">inversion</span><span class="w"> </span><span class="no">H</span><span class="pi">.</span><span class="w"> </span><span class="kp">inversion</span><span class="w"> </span><span class="no">H3</span><span class="pi">.</span><span class="w"> </span><span class="kp">inversion</span><span class="w"> </span><span class="no">H4</span><span class="pi">.</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="small-step-imp">Small-Step IMP</h2>
+
+<p>又到了老朋友 IMP……还好没练习……简单看一下</p>
+
+<p>首先对于定义小步语义，我们需要定义 <code class="highlighter-rouge">value</code> 和 <code class="highlighter-rouge">--&gt;</code> (step)</p>
+
+<h3 id="aexp-bexp"><code class="highlighter-rouge">aexp</code>, <code class="highlighter-rouge">bexp</code></h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">aval</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">av_num</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">n</span><span class="o">,</span><span class="w"> </span><span class="no">aval</span><span class="w"> </span><span class="o">(</span><span class="no">ANum</span><span class="w"> </span><span class="no">n</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">bexp</code> 不需要 <code class="highlighter-rouge">value</code> 因为在这个语言里 <code class="highlighter-rouge">BTrue</code> 和 <code class="highlighter-rouge">BFalse</code> 的 step 总是 disjointed 得，所以并没有任何复用 <code class="highlighter-rouge">value</code> predicate 的时候</p>
+
+<h3 id="--a---b"><code class="highlighter-rouge">--&gt;a</code>, <code class="highlighter-rouge">--&gt;b</code></h3>
+
+<p>这里，我们先为 <code class="highlighter-rouge">aexp</code>, <code class="highlighter-rouge">bexp</code> 定义了它们各自的小步语义，</p>
+
+<blockquote>
+  <p>但是，其实 from PLT we know, 我们其实也可以直接复用 <code class="highlighter-rouge">aexp</code>, <code class="highlighter-rouge">bexp</code> 的大步语义！</p>
+  <ol>
+    <li>大步语义要短得多</li>
+    <li><code class="highlighter-rouge">aexp</code>, <code class="highlighter-rouge">bexp</code> 其实并不会出
+      <ul>
+        <li>「不停机」: 没有 jump 等控制流结构</li>
+        <li>「异常」/「卡住」: 我们在 meta-language 的 AST 里就区分了 <code class="highlighter-rouge">aexp</code> 和 <code class="highlighter-rouge">bexp</code>，相当于主动约束了类型，所以不会出现 <code class="highlighter-rouge">5 || 3</code> 这样 type error 的 AST</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h3 id="cmd---"><code class="highlighter-rouge">cmd</code>, <code class="highlighter-rouge">--&gt;</code></h3>
+
+<blockquote>
+  <p>我们把 <code class="highlighter-rouge">SKIP</code> 当作一个「命令值（command value）」 i.e. 一个已经到达 normal form 的命令。</p>
+  <ul>
+    <li>赋值命令归约到 <code class="highlighter-rouge">SKIP</code> （和一个新的 state）。</li>
+    <li>顺序命令等待其左侧子命令归约到 <code class="highlighter-rouge">SKIP</code>，然后丢弃它，并继续对右侧子命令归约。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <p>对 <code class="highlighter-rouge">WHILE</code> 命令的归约是把 <code class="highlighter-rouge">WHILE</code> 命令变换为条件语句，其后紧跟同一个 <code class="highlighter-rouge">WHILE</code> 命令。</p>
+</blockquote>
+
+<blockquote>
+  <p>这些都与 PLT 是一致的</p>
+</blockquote>
+
+<h2 id="concurrent-imp">Concurrent IMP</h2>
+
+<p>为了展示 小步语义 的能力，let’s enrich IMP with concurrency.</p>
+<ul>
+  <li>unpredictable scheduling (subcommands may be <em>interleaved</em>)</li>
+  <li><em>share same memory</em></li>
+</ul>
+
+<p>It’s slightly confusing here to use <code class="highlighter-rouge">Par</code> (meaning <em>in parallel</em>) 
+I mean, concurrency <em>could</em> be in parallel but it doesn’t have to…</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">com</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">CPar</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">com</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">com</span><span class="pi">.</span><span class="w"> </span><span class="c">(* &lt;--- NEW *)</span><span class="w">
+
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">cstep</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="o">(</span><span class="no">com</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="o">(</span><span class="no">com</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="c">(* New part: *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">CS_Par1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">st</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">c1'</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">st'</span><span class="o">,</span><span class="w">
+      </span><span class="no">c1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">c1'</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="p">→</span><span class="w">
+      </span><span class="o">(</span><span class="no">PAR</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">WITH</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">END</span><span class="o">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="o">(</span><span class="no">PAR</span><span class="w"> </span><span class="no">c1'</span><span class="w"> </span><span class="no">WITH</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">END</span><span class="o">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="no">st'</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">CS_Par2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">st</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">c2'</span><span class="w"> </span><span class="no">st'</span><span class="o">,</span><span class="w">
+      </span><span class="no">c2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">c2'</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="p">→</span><span class="w">
+      </span><span class="o">(</span><span class="no">PAR</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">WITH</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">END</span><span class="o">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="o">(</span><span class="no">PAR</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">WITH</span><span class="w"> </span><span class="no">c2'</span><span class="w"> </span><span class="no">END</span><span class="o">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="no">st'</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">CS_ParDone</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">st</span><span class="o">,</span><span class="w">
+      </span><span class="o">(</span><span class="no">PAR</span><span class="w"> </span><span class="no">SKIP</span><span class="w"> </span><span class="no">WITH</span><span class="w"> </span><span class="no">SKIP</span><span class="w"> </span><span class="no">END</span><span class="o">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="no">SKIP</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="no">st</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="a-small-step-stack-machine--小步栈机">A Small-Step Stack Machine  小步栈机</h2>
+
+<p>啊哈！IMP 章节 Stack Machine，我们之前仅仅定义了 <code class="highlighter-rouge">Fixpoint s_execute</code> 和 <code class="highlighter-rouge">Fixpoint s_compile</code>，这里给出其小步语义</p>
+<blockquote>
+  <p>对于本身就与「小步语义」在精神上更统一的「抽象机」，我怀疑其语义都应该是足够「小」的（即大小步将是一致的？)</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">stack</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">nat</span><span class="pi">.</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">prog</span><span class="w">  </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">sinstr</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">stack_step</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">prog</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="no">stack</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">prog</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="no">stack</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">SS_Push</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">stk</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">p'</span><span class="o">,</span><span class="w">
+    </span><span class="no">stack_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">(</span><span class="no">SPush</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">p'</span><span class="o">,</span><span class="w"> </span><span class="no">stk</span><span class="o">)</span><span class="w">      </span><span class="o">(</span><span class="no">p'</span><span class="o">,</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">stk</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">SS_Load</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">stk</span><span class="w"> </span><span class="no">i</span><span class="w"> </span><span class="no">p'</span><span class="o">,</span><span class="w">
+    </span><span class="no">stack_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">(</span><span class="no">SLoad</span><span class="w"> </span><span class="no">i</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">p'</span><span class="o">,</span><span class="w"> </span><span class="no">stk</span><span class="o">)</span><span class="w">      </span><span class="o">(</span><span class="no">p'</span><span class="o">,</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">i</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">stk</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">SS_Plus</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">stk</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="w"> </span><span class="no">p'</span><span class="o">,</span><span class="w">
+    </span><span class="no">stack_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">(</span><span class="no">SPlus</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">p'</span><span class="o">,</span><span class="w"> </span><span class="no">n</span><span class="p">::</span><span class="no">m</span><span class="p">::</span><span class="no">stk</span><span class="o">)</span><span class="w">  </span><span class="o">(</span><span class="no">p'</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="no">m</span><span class="o">+</span><span class="no">n</span><span class="o">)</span><span class="p">::</span><span class="no">stk</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">SS_Minus</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">stk</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="w"> </span><span class="no">p'</span><span class="o">,</span><span class="w">
+    </span><span class="no">stack_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">(</span><span class="no">SMinus</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">p'</span><span class="o">,</span><span class="w"> </span><span class="no">n</span><span class="p">::</span><span class="no">m</span><span class="p">::</span><span class="no">stk</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">p'</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="no">m</span><span class="o">-</span><span class="no">n</span><span class="o">)</span><span class="p">::</span><span class="no">stk</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">SS_Mult</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">stk</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="w"> </span><span class="no">p'</span><span class="o">,</span><span class="w">
+    </span><span class="no">stack_step</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">(</span><span class="no">SMult</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">p'</span><span class="o">,</span><span class="w"> </span><span class="no">n</span><span class="p">::</span><span class="no">m</span><span class="p">::</span><span class="no">stk</span><span class="o">)</span><span class="w">  </span><span class="o">(</span><span class="no">p'</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="no">m</span><span class="o">*</span><span class="no">n</span><span class="o">)</span><span class="p">::</span><span class="no">stk</span><span class="o">).</span><span class="w">
+    
+</span><span class="c">(** closure of stack_step **)</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">stack_multistep</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">multi</span><span class="w"> </span><span class="o">(</span><span class="no">stack_step</span><span class="w"> </span><span class="no">st</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="compiler-correctness">Compiler Correctness</h3>
+
+<blockquote>
+  <p>「编译器的正确性」= the notion of <em>semantics preservation</em> (in terms of observable behaviours)
+  S  = <code class="highlighter-rouge">e</code>
+  C  = <code class="highlighter-rouge">s_compile e</code>
+B(S) = <code class="highlighter-rouge">aeval st e</code> 
+B(C) = functional <code class="highlighter-rouge">s_execute</code> 
+     | relational <code class="highlighter-rouge">stack_multistep</code></p>
+</blockquote>
+
+<p>之前我们证明过 <em>functional/computational</em> <code class="highlighter-rouge">Fixpoint</code> 的性质</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">s_compile_correct</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">e</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">),</span><span class="w">
+  </span><span class="no">s_execute</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">[]</span><span class="w"> </span><span class="o">(</span><span class="no">s_compile</span><span class="w"> </span><span class="no">e</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">e</span><span class="w"> </span><span class="o">].</span><span class="w">
+
+</span><span class="c">(** 重要的是这个更一般的「描述了 prog 如何与 stack 交互」的定理 **)</span><span class="w">
+</span><span class="k">Theorem</span><span class="w"> </span><span class="no">s_execute_theorem</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">e</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">stack</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">prog</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">sinstr</span><span class="o">),</span><span class="w">
+    </span><span class="no">s_execute</span><span class="w"> </span><span class="no">st</span><span class="w">                  </span><span class="no">stack</span><span class="w">  </span><span class="o">(</span><span class="no">s_compile</span><span class="w"> </span><span class="no">e</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">prog</span><span class="o">)</span><span class="w"> 
+  </span><span class="o">=</span><span class="w"> </span><span class="no">s_execute</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">((</span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">e</span><span class="o">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">stack</span><span class="o">)</span><span class="w">                 </span><span class="no">prog</span><span class="pi">.</span><span class="w">
+
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>现在则是证明 <em>relational</em> <code class="highlighter-rouge">Inductive</code> 的性质，同样我们需要一个更一般的定理（然后原命题作为推论）</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">stack_step_theorem</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">e</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">stack</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">prog</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">sinstr</span><span class="o">),</span><span class="w">
+  </span><span class="no">stack_multistep</span><span class="w"> </span><span class="no">st</span><span class="w">
+                  </span><span class="o">((</span><span class="no">s_compile</span><span class="w"> </span><span class="no">e</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">prog</span><span class="o">),</span><span class="w">                 </span><span class="no">stack</span><span class="o">)</span><span class="w"> 
+                  </span><span class="o">(</span><span class="w">                </span><span class="no">prog</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">e</span><span class="o">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">stack</span><span class="o">).</span><span class="w">      </span><span class="c">(** 这里 prog 和 stack 的交互本质上和上面是一样的 **)</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">unfold</span><span class="w"> </span><span class="no">stack_multistep</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">induction</span><span class="w"> </span><span class="no">e</span><span class="p">;</span><span class="w"> </span><span class="kp">intros</span><span class="p">;</span><span class="w"> </span><span class="kp">simpl</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="o">*</span><span class="p">;</span><span class="w">        </span><span class="c">(** 证明 induction on aexp，然后利用 transivitiy、constructor 与 IH 即可，非常快 **)</span><span class="w">
+    </span><span class="kp">try</span><span class="w"> </span><span class="o">(</span><span class="kp">apply</span><span class="w"> </span><span class="no">multi_R</span><span class="p">;</span><span class="w"> </span><span class="kp">constructor</span><span class="o">)</span><span class="p">;</span><span class="w">
+    </span><span class="kp">try</span><span class="w"> </span><span class="o">(</span><span class="w">
+        </span><span class="kp">repeat</span><span class="w"> </span><span class="o">(</span><span class="kp">rewrite</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="no">app_assoc</span><span class="o">)</span><span class="p">;</span><span class="w">
+        </span><span class="kp">eapply</span><span class="w"> </span><span class="no">multi_trans</span><span class="p">;</span><span class="w"> </span><span class="kp">try</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">IHe1</span><span class="p">;</span><span class="w">
+        </span><span class="kp">eapply</span><span class="w"> </span><span class="no">multi_trans</span><span class="p">;</span><span class="w"> </span><span class="kp">try</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">IHe2</span><span class="p">;</span><span class="w">
+        </span><span class="kp">eapply</span><span class="w"> </span><span class="no">multi_R</span><span class="p">;</span><span class="w"> </span><span class="kp">constructor</span><span class="w">
+      </span><span class="o">).</span><span class="w">
+      
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">compiler_is_correct_statement</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">e</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">),</span><span class="w">
+  </span><span class="no">stack_multistep</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">(</span><span class="no">s_compile</span><span class="w"> </span><span class="no">e</span><span class="o">,</span><span class="w"> </span><span class="o">[])</span><span class="w"> </span><span class="o">([],</span><span class="w"> </span><span class="o">[</span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">e</span><span class="o">]).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="aside-a-normalize-tactic">Aside: A <code class="highlighter-rouge">normalize</code> Tactic</h2>
+
+<p>Even with <code class="highlighter-rouge">eapply</code> and <code class="highlighter-rouge">auto</code>…manual normalization is tedious:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="k">Example</span><span class="w"> </span><span class="no">step_example1'</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="o">(</span><span class="no">P</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">P</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="mi">4</span><span class="o">)))</span><span class="w">
+  </span><span class="o">--&gt;*</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="mi">10</span><span class="o">).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">eapply</span><span class="w"> </span><span class="no">multi_step</span><span class="pi">.</span><span class="w"> </span><span class="kp">auto</span><span class="pi">.</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">eapply</span><span class="w"> </span><span class="no">multi_step</span><span class="pi">.</span><span class="w"> </span><span class="kp">auto</span><span class="pi">.</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">apply</span><span class="w"> </span><span class="no">multi_refl</span><span class="pi">.</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We could write custom <code class="highlighter-rouge">Tactic Notation</code>…(i.e. tactic macros)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="no">Tactic</span><span class="w"> </span><span class="k">Notation</span><span class="w"> </span><span class="s2">"print_goal"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">goal</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="p">⊢</span><span class="w"> </span><span class="nv">?x</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">idtac</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+  
+</span><span class="no">Tactic</span><span class="w"> </span><span class="k">Notation</span><span class="w"> </span><span class="s2">"normalize"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kp">repeat</span><span class="w"> </span><span class="o">(</span><span class="no">print_goal</span><span class="p">;</span><span class="w"> </span><span class="kp">eapply</span><span class="w"> </span><span class="no">multi_step</span><span class="w"> </span><span class="p">;</span><span class="w">
+            </span><span class="o">[</span><span class="w"> </span><span class="o">(</span><span class="kp">eauto</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="no">fail</span><span class="o">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">(</span><span class="kp">instantiate</span><span class="p">;</span><span class="w"> </span><span class="kp">simpl</span><span class="o">)])</span><span class="p">;</span><span class="w">
+  </span><span class="kp">apply</span><span class="w"> </span><span class="no">multi_refl</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">instantiate</code> seems here for intros <code class="highlighter-rouge">∃</code>?</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Example</span><span class="w"> </span><span class="no">step_example1'''</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">exists</span><span class="w"> </span><span class="no">e'</span><span class="o">,</span><span class="w">
+  </span><span class="o">(</span><span class="no">P</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">P</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">C</span><span class="w"> </span><span class="mi">4</span><span class="o">)))</span><span class="w">
+  </span><span class="o">--&gt;*</span><span class="w"> </span><span class="no">e'</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">eapply</span><span class="w"> </span><span class="no">ex_intro</span><span class="pi">.</span><span class="w"> </span><span class="no">normalize</span><span class="pi">.</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>But what surprise me is that we can <code class="highlighter-rouge">eapply ex_intro</code>, which leave the <code class="highlighter-rouge">∃</code> as a hole <code class="highlighter-rouge">?ex</code> (unification variable).</p>
+:ET

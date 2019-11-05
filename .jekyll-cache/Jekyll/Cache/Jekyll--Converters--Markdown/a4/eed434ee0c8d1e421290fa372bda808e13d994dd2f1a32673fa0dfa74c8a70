@@ -1,0 +1,81 @@
+I"<blockquote>
+  <p>Your time is limited, so don’t waste it living someone else’s life.</p>
+</blockquote>
+
+<p>Hi, I am <em>@huxpro</em> (Huang, Xuan), a will-be <a href="https://www.facebook.com/">Facebook</a> software engineer and a professed digital designer. My interests range from programming languages in general (type system, type-based formal verification, compiler construction, runtime system) to indurstial software engineering (web/mobile app development, user interface and UX, developer infra and DX).</p>
+
+<p>In the past, I worked on <a href="https://www.alitrip.com/">Alitrip (Fliggy)</a> mobile and web apps under the <a href="https://en.wikipedia.org/wiki/Alibaba_Group">Alibaba Group</a>, found and lead front-end infrastructure team at a unicorn startup <a href="https://www.crunchbase.com/organization/beijing-weiying-technology">Beijing Weiying (WePiao)</a>, and helped <a href="https://en.wikipedia.org/wiki/Ele.me">Ele.me</a> to upgrade their mobile web into <a href="https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509">the first influential PWA (progressive web app) in China</a>.</p>
+
+<p>I studied BA, Digital Media Art at <a href="https://en.wikipedia.org/wiki/Communication_University_of_China">Communication University of China</a> and MS, Computer Science at <a href="https://en.wikipedia.org/wiki/Rochester_Institute_of_Technology">Rochester Institute of Technology</a>, with a focus on programming languages theory and construction.</p>
+
+<h5 id="my-programming-languages-spectrum">My Programming Languages Spectrum</h5>
+
+<p>I generally prefer languages that are close to ML (“Meta Language”), i.e. <em>mostly functional programming</em>. This should explain most of my picks e.g. JavaScript within dynamically-typed’s, Scala within JVM’s, Rust within unmanaged’s.</p>
+
+<blockquote>
+  <p><strong>Left-right</strong> is how much I prefer it.  <strong>Top-down</strong> is how much I know it. <strong>Versions</strong> are lower bounds.</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>💔️</th>
+      <th>❤️ ️</th>
+      <th>❤️❤️ ️</th>
+      <th>❤️❤️❤️ ️</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>😅</td>
+      <td><code class="highlighter-rouge">PHP</code> <code class="highlighter-rouge">BASIC</code></td>
+      <td><code class="highlighter-rouge">ObjC</code> <code class="highlighter-rouge">Prolog</code> <code class="highlighter-rouge">Hack</code></td>
+      <td><code class="highlighter-rouge">Kotlin</code> <code class="highlighter-rouge">Dart</code></td>
+      <td><code class="highlighter-rouge">Swift</code> <code class="highlighter-rouge">Agda</code> <code class="highlighter-rouge">Idris</code></td>
+    </tr>
+    <tr>
+      <td>🧐</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">Asm</code> <code class="highlighter-rouge">C++</code>  <code class="highlighter-rouge">Lisp*</code></td>
+      <td><code class="highlighter-rouge">C++11</code> <code class="highlighter-rouge">C#</code> <code class="highlighter-rouge">AS3</code></td>
+      <td><code class="highlighter-rouge">Scala</code> <code class="highlighter-rouge">Rust</code></td>
+    </tr>
+    <tr>
+      <td>😏</td>
+      <td><code class="highlighter-rouge">Shell</code></td>
+      <td><code class="highlighter-rouge">C</code> <code class="highlighter-rouge">Java</code> <code class="highlighter-rouge">Python</code></td>
+      <td><code class="highlighter-rouge">Typed JS*</code> <code class="highlighter-rouge">Wasm</code></td>
+      <td><code class="highlighter-rouge">Haskell</code> <code class="highlighter-rouge">Coq</code> <code class="highlighter-rouge">ML*</code></td>
+    </tr>
+    <tr>
+      <td>🤓</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">JavaScript</code></td>
+      <td><code class="highlighter-rouge">ECMAScript6</code></td>
+      <td><code class="highlighter-rouge">λ</code> <code class="highlighter-rouge">Λ</code> <code class="highlighter-rouge">Π</code> <code class="highlighter-rouge">Σ</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong><code class="highlighter-rouge">ML*</code></strong>: <code class="highlighter-rouge">OCaml</code> <code class="highlighter-rouge">ReasonML</code> <code class="highlighter-rouge">Standard ML</code><br />
+<strong><code class="highlighter-rouge">Lisp*</code></strong>: <code class="highlighter-rouge">Clojure</code> <code class="highlighter-rouge">Scheme</code> <code class="highlighter-rouge">Racket</code><br />
+<strong><code class="highlighter-rouge">Typed JS*</code></strong>：<code class="highlighter-rouge">Flow</code> <code class="highlighter-rouge">TypeScript</code></p>
+</blockquote>
+
+<h5 id="talks">Talks</h5>
+
+<ul>
+  <li><a href="//huangxuan.me/jsconfcn2017/">Upgrading to Progressive Web Apps</a> · <a href="http://2017.jsconf.cn/">JSConf China Shanghai 2017</a></li>
+  <li>Building Progressive Web Apps · <a href="http://www.csdisummit.com/">CSDI Guangzhou 2017</a></li>
+  <li>The State of Progressive Web App · GDG IO Redux Beijing 2017</li>
+  <li>PWA Rehashing · Baidu HQ Beijing 2017</li>
+  <li><a href="//huangxuan.me/2016/11/20/sw-101-gdgdf/">Service Worker 101</a> · GDG DevFest Beijing 2016</li>
+  <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/">Progressive Web Apps</a> · QCon Shanghai 2016</li>
+  <li>Progressive Web App in my POV · GDG IO Redux Beijing 2016</li>
+  <li><a href="//huangxuan.me/2015/12/28/css-sucks-2015/">CSS Still Sucks 2015</a> · 2015</li>
+  <li><a href="//huangxuan.me/2015/07/09/js-module-7day/">JavaScript Modularization Journey</a> · 2015</li>
+</ul>
+
+:ET

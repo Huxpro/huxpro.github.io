@@ -1,0 +1,188 @@
+I"�F<h2 id="pair-of-numbers">Pair of Numbers</h2>
+
+<p>Q: Why name <code class="highlighter-rouge">inductive</code>? 
+A: Inductive means <em>building things bottom-up</em>, it doesn’t have to self-referencial (recursive)
+(see below <code class="highlighter-rouge">induction on lists</code> as well.)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">natprod</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">pair</span><span class="w"> </span><span class="o">(</span><span class="no">n1</span><span class="w"> </span><span class="no">n2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"( x , y )"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">pair</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Proof on pair cannot simply <code class="highlighter-rouge">simpl.</code></p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">surjective_pairing_stuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="o">(</span><span class="no">p</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">natprod</span><span class="o">),</span><span class="w">
+  </span><span class="no">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">fst</span><span class="w"> </span><span class="no">p</span><span class="o">,</span><span class="w"> </span><span class="no">snd</span><span class="w"> </span><span class="no">p</span><span class="o">).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="c">(* Doesn't reduce anything! *)</span><span class="w">
+</span><span class="no">Abort</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We have to <em>expose the structure</em>:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">surjective_pairing</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="o">(</span><span class="no">p</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">natprod</span><span class="o">),</span><span class="w">
+  </span><span class="no">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">fst</span><span class="w"> </span><span class="no">p</span><span class="o">,</span><span class="w"> </span><span class="no">snd</span><span class="w"> </span><span class="no">p</span><span class="o">).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">p</span><span class="pi">.</span><span class="w"> </span><span class="kp">destruct</span><span class="w"> </span><span class="no">p</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="o">[</span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="o">**.</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>It only generate <strong>one subgoal</strong>, becasue</p>
+<blockquote>
+  <p>That’s because natprods can only be constructed in one way.</p>
+</blockquote>
+
+<h3 id="my-take-on-destruct">My take on <code class="highlighter-rouge">destruct</code></h3>
+
+<p><code class="highlighter-rouge">destruct</code></p>
+
+<ul>
+  <li>destruct <code class="highlighter-rouge">bool</code> to <code class="highlighter-rouge">true</code> and <code class="highlighter-rouge">false</code></li>
+  <li>destruct <code class="highlighter-rouge">nat</code>  to <code class="highlighter-rouge">O</code> and <code class="highlighter-rouge">S n'</code> (inductively defined)</li>
+  <li>destruct <code class="highlighter-rouge">pair</code> to <code class="highlighter-rouge">(n, m)</code></li>
+</ul>
+
+<p>The <strong>prove by case analysis (exhaustive)</strong> is just an application of the idea of <em>destruction</em>!</p>
+
+<p>the idea simply <em>destruct</em> the data type into its data constructors (representing ways of constructing this data)</p>
+
+<ul>
+  <li>Java class has only 1 way to construct (via its constructor)</li>
+  <li>Scala case class then have multiple way to construct</li>
+</ul>
+
+<h2 id="lists-of-numbers">Lists of Numbers</h2>
+
+<blockquote>
+  <p>Generalizing the definition of pairs</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">natlist</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">nil</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">cons</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">l</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">natlist</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The ability of quosiquotation using <code class="highlighter-rouge">Notation</code> is awesome:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Notation</span><span class="w"> </span><span class="s2">"x :: l"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">cons</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">l</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">60</span><span class="o">,</span><span class="w"> </span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">).</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"[ ]"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">nil</span><span class="pi">.</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"[ x ; .. ; y ]"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">cons</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="o">(</span><span class="no">cons</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">nil</span><span class="o">)</span><span class="w"> </span><span class="o">..).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>It’s exactly like OCaml, even for <code class="highlighter-rouge">;</code>, <code class="highlighter-rouge">at level 60</code> means it’s tightly than <code class="highlighter-rouge">+ at level 50</code> .</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">Notation</span><span class="w"> </span><span class="s2">"x ++ y"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">app</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">right</span><span class="w"> </span><span class="no">associativity</span><span class="o">,</span><span class="w"> </span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">60</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Instead of SML/OCaml’s <code class="highlighter-rouge">@</code>, Coq chooses Haskell’s <code class="highlighter-rouge">++</code>.</p>
+
+<h3 id="hd-with-default"><code class="highlighter-rouge">hd</code> with default</h3>
+
+<p>Coq function (for some reason) has to be <strong>total</strong>, so <code class="highlighter-rouge">hd</code> require a <code class="highlighter-rouge">default</code> value as 1st argument:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">hd</span><span class="w"> </span><span class="o">(</span><span class="no">default</span><span class="p">:</span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">l</span><span class="p">:</span><span class="no">natlist</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">l</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">nil</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">default</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">h</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">t</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">h</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="induction-on-lists">Induction on Lists.</h2>
+
+<p>The definition of <em>inductive defined set</em></p>
+
+<blockquote>
+  <p>Each Inductive declaration defines a set of data values that can be <strong>built up</strong> using the declared constructors:</p>
+  <ul>
+    <li>a boolean can be either true or false;</li>
+    <li>a number can be either O or S applied to another number;</li>
+    <li>a list can be either nil or cons applied to a number and a list.</li>
+  </ul>
+</blockquote>
+
+<p>The reverse: reasoning <em>inductive defined sets</em></p>
+
+<blockquote>
+  <p>Moreover, applications of the declared constructors to one another are the 
+<strong>only</strong> possible shapes that elements of an inductively defined set can have,
+and this fact directly gives rise to a way of reasoning about inductively defined sets:</p>
+  <ul>
+    <li>a number is either O or else it is S applied to some smaller number;</li>
+    <li>a list is either nil or else it is cons applied to some number and some smaller list;</li>
+  </ul>
+</blockquote>
+
+<p>Reasoning lists</p>
+
+<blockquote>
+  <p>if we have in mind some proposition <code class="highlighter-rouge">P</code> that mentions a list <code class="highlighter-rouge">l</code> and we want to argue that <code class="highlighter-rouge">P</code> holds for <em>all</em> lists, 
+we can reason as follows</p>
+  <ol>
+    <li>First, show that <code class="highlighter-rouge">P</code> is <code class="highlighter-rouge">true</code> of <code class="highlighter-rouge">l</code> when <code class="highlighter-rouge">l</code> is <code class="highlighter-rouge">nil</code>.</li>
+    <li>Then show that <code class="highlighter-rouge">P</code> is true of <code class="highlighter-rouge">l</code> when <code class="highlighter-rouge">l</code> is <code class="highlighter-rouge">cons n l'</code> for some number <code class="highlighter-rouge">n</code> and some smaller list <code class="highlighter-rouge">l'</code>, assuming that <code class="highlighter-rouge">P</code> is <code class="highlighter-rouge">true</code> for <code class="highlighter-rouge">l'</code>.</li>
+  </ol>
+</blockquote>
+
+<h2 id="search">Search</h2>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">Search</span><span class="w"> </span><span class="no">rev</span><span class="w">  </span><span class="c">(* list all theorems of [rev] *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="coq-conditionals-if-then-else">Coq Conditionals (<code class="highlighter-rouge">if then else</code>)</h2>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">nth_error'</span><span class="w"> </span><span class="o">(</span><span class="no">l</span><span class="p">:</span><span class="no">natlist</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="p">:</span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">natoption</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">l</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">nil</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">None</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">l'</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">=?</span><span class="w"> </span><span class="no">O</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">Some</span><span class="w"> </span><span class="no">a</span><span class="w">
+                        </span><span class="kr">else</span><span class="w"> </span><span class="no">nth_error'</span><span class="w"> </span><span class="no">l'</span><span class="w"> </span><span class="o">(</span><span class="no">pred</span><span class="w"> </span><span class="no">n</span><span class="o">)</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>One small generalization: since the boolean type in Coq is not built-in. Coq actually supports conditional expr <strong>over any</strong> <em>inductive defined typewith two constructors</em>. First constructor is considered true and false for second.</p>
+
+<h2 id="stuck-in-proof">Stuck in Proof</h2>
+
+<p>could be many cases</p>
+
+<ul>
+  <li>wrong tactics</li>
+  <li>wrong theroem!! (might derive to counterexample)</li>
+  <li>wrong step (most hard to figure out)
+    <ul>
+      <li>induction on wrong things</li>
+    </ul>
+  </li>
+</ul>
+:ET

@@ -1,0 +1,33 @@
+I"B<blockquote>
+  <p>下滑这里查看更多内容</p>
+</blockquote>
+
+<p>7月9日，我在公司内部进行了名为「JavaScript 模块化七日谈」分享，并将该 Slides 分享到了微博上。出乎意料地，这篇微博先后被 @JS小组 @尤小右 @寸志 等近 200 人转发，阅读达到 10w，获得了还不错的评价。</p>
+
+<p>于是，我决定将它重新发到我的博客上，并为它专门制作了适用于 Keynote 展示文稿的新布局。它能自动根据屏幕大小/旋转以一定比例填充屏幕，你也可以直接点击下方链接在新页面打开，来获得更好的、沉浸式的全屏体验</p>
+
+<h3 id="watch-fullscreen-"><a href="https://huangxuan.me/js-module-7day/">Watch Fullscreen →</a></h3>
+
+<div class="visible-md visible-lg">
+<img src="//huangxuan.me/js-module-7day/attach/qrcode.png" width="350" />
+<small class="img-hint">你也可以通过扫描二维码在手机上观看</small>
+</div>
+
+<p>这个 Web Slides 开源在<a href="https://github.com/Huxpro/js-module-7day">我的 Github 上</a>，欢迎你帮助我完善这个展示文稿，你可以给我提 issue，可以 fork &amp; pull request。如果它能帮助到你了，希望你还能不吝啬 star 一下这个项目</p>
+
+<h3 id="catalog">Catalog</h3>
+
+<ul>
+  <li>第一日 上古时期 <strong><em>Module?</em></strong> 从设计模式说起</li>
+  <li>第二日 石器时代 <strong><em>Script Loader</em></strong> 只有封装性可不够，我们还需要加载</li>
+  <li>第三日 蒸汽朋克 <strong><em>Module Loader</em></strong> 模块化架构的工业革命</li>
+  <li>第四日 号角吹响 <strong><em>CommonJS</em></strong> 征服世界的第一步是跳出浏览器</li>
+  <li>第五日 双塔奇兵 <strong><em>AMD/CMD</em></strong> 浏览器环境模块化方案</li>
+  <li>第六日 精灵宝钻 <strong><em>Browserify/Webpack</em></strong> 大势所趋，去掉这层包裹！</li>
+  <li>第七日 王者归来 <strong><em>ES6 Module</em></strong> 最后的战役</li>
+</ul>
+
+<h3 id="thanks">Thanks</h3>
+
+<p><a href="http://lab.hakim.se/reveal-js">Reveal.js</a></p>
+:ET

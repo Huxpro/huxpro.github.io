@@ -1,0 +1,792 @@
+I"?<h2 id="inductively-defined-propositions">Inductively Defined Propositions</h2>
+
+<h3 id="the-3rd-way-to-state-evenness">The 3rd way to state Evenness…</h3>
+
+<p>Besides:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">even_bool_prop</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">n</span><span class="o">,</span><span class="w">
+  </span><span class="no">evenb</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="p">↔</span><span class="w"> </span><span class="p">∃</span><span class="no">k</span><span class="o">,</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">double</span><span class="w"> </span><span class="no">k</span><span class="pi">.</span><span class="w">
+ </span><span class="c">(*bool*)</span><span class="w">                 </span><span class="c">(*prop*)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>we can write an <em>Inductive definition</em> of the <code class="highlighter-rouge">even</code> property!</p>
+
+<h3 id="inference-rules">Inference rules</h3>
+
+<p>In CS, we often uses <em>inference rules</em></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>                    ev n
+---- ev_0       ------------ ev_SS
+ev 0            ev (S (S n))
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>and <em>proof tree</em> (i.e. evidence), there could be multiple premieses to make it more tree-ish.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>---- ev_0
+ev 0
+---- ev_SS
+ev 2
+---- ev_SS
+ev 4
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>So we can literally translate them into a GADT:</p>
+
+<h3 id="inductive-definition-of-evenness">Inductive Definition of Evenness</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ev_0</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">ev_SS</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">n</span><span class="o">,</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="no">n</span><span class="o">)).</span><span class="w"> 
+
+</span><span class="k">Check</span><span class="w"> </span><span class="no">even_SS</span><span class="pi">.</span><span class="w">
+</span><span class="c">(* ==&gt; : forall n : nat, even n -&gt; even (S (S n)) *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>There are two ways to understand the <code class="highlighter-rouge">even</code> here:</p>
+
+<h3 id="1-a-property-of-nat-and-two-theorems-intuitively">1. A Property of <code class="highlighter-rouge">nat</code> and two theorems (Intuitively)</h3>
+
+<blockquote>
+  <p>the thing we are defining is not a <code class="highlighter-rouge">Type</code>, but rather a function <code class="highlighter-rouge">nat -&gt; Prop</code> — i.e., a property of numbers.</p>
+</blockquote>
+
+<p>we have two ways to provide an evidence to show the <code class="highlighter-rouge">nat</code> is <code class="highlighter-rouge">even</code>, either or:</p>
+<ol>
+  <li>it’s <code class="highlighter-rouge">0</code>, we can immediately conclude it’s <code class="highlighter-rouge">even</code>.</li>
+  <li>for any <code class="highlighter-rouge">n</code>, if we can provide a evidence that <code class="highlighter-rouge">n</code> is <code class="highlighter-rouge">even</code>, then <code class="highlighter-rouge">S (S n)</code> is <code class="highlighter-rouge">even</code> as well.</li>
+</ol>
+
+<blockquote>
+  <p>We can think of the definition of <code class="highlighter-rouge">even</code> as defining a Coq property <code class="highlighter-rouge">even : nat → Prop</code>, together with primitive theorems <code class="highlighter-rouge">ev_0 : even 0</code> and <code class="highlighter-rouge">ev_SS : ∀ n, even n → even (S (S n))</code>.</p>
+</blockquote>
+
+<h3 id="2-an-indexed-gadt-and-two-constructors-technically">2. An “Indexed” GADT and two constructors (Technically)</h3>
+
+<blockquote>
+  <p>In an Inductive definition, an argument to the type constructor on the left of the colon is called a “parameter”, whereas an argument on the right is called an “index”. – “Software Foundaton”</p>
+</blockquote>
+
+<p>Considered a “parametrized” ADT such as the polymorphic list,</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="p">:</span><span class="kr">Type</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">nil</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">cons</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">l</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">X</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Check</span><span class="w"> </span><span class="no">list</span><span class="pi">.</span><span class="w"> </span><span class="c">(* ===&gt; list : Type -&gt; Type *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>where we defined type con <code class="highlighter-rouge">list : Type -&gt; Type</code>, by having a type var <code class="highlighter-rouge">X</code> in the left of the <code class="highlighter-rouge">:</code>.
+the <code class="highlighter-rouge">X</code> is called a <em>parameter</em> and would be <em>parametrized i.e. substituted, globally</em>, in constructors.</p>
+
+<p>Here, we write <code class="highlighter-rouge">nat</code> in the right of the <code class="highlighter-rouge">:</code> w/o giving it a name (to refer and to substitute),
+which allows the <code class="highlighter-rouge">nat</code> taking different values in different constructors (as constraints).
+it’s called an <em>index</em> and will form a family of type indexed by <code class="highlighter-rouge">nat</code> (to type check?)</p>
+
+<p>From this perspective, there is an alternative way to write this GADT:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">ev_0</span><span class="w">                         </span><span class="p">:</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">ev_SS</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">H</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="no">n</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="no">n</span><span class="o">)).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>we have two ways to construct the <code class="highlighter-rouge">even</code> type (<code class="highlighter-rouge">Prop &lt;: Type</code>), either or:</p>
+<ol>
+  <li><code class="highlighter-rouge">ev_0</code> takes no argument, so simply instantiate <code class="highlighter-rouge">even</code> with <code class="highlighter-rouge">nat</code> 0</li>
+  <li><code class="highlighter-rouge">ev_SS</code> takes a <code class="highlighter-rouge">nat</code> <code class="highlighter-rouge">n</code> and a <code class="highlighter-rouge">H</code> typed <code class="highlighter-rouge">even n</code>,
+    <ul>
+      <li>the <em>dependency</em> between two arguments thus established!</li>
+      <li>as long as the <em>constraint on same <code class="highlighter-rouge">n</code></em> is fullfilled, we can build type <code class="highlighter-rouge">even</code> with <code class="highlighter-rouge">S (S n)</code></li>
+    </ul>
+  </li>
+</ol>
+
+<p>The take way is that <em>dependent type (Pi-type)</em> allow us to constriant constructors with different values.</p>
+
+<blockquote>
+  <p><em>indexed</em> way is more general. it formed a larger type, and is only used when extra power needed. 
+every parametrized one can be represented as indexed one (it’s just that index happended to be the same)</p>
+</blockquote>
+
+<h3 id="constructor-theorems">“Constructor Theorems”</h3>
+
+<blockquote>
+  <p>Such “constructor theorems” have the same status as proven theorems. In particular, we can use Coq’s <code class="highlighter-rouge">apply</code> tactic with the rule names to prove <code class="highlighter-rouge">even</code> for particular numbers…</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">ev_4</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="mi">4</span><span class="o">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">ev_SS</span><span class="pi">.</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">ev_SS</span><span class="pi">.</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">ev_0</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Proof States Transition:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>even 4
+------ apply ev_SS.
+even 2
+------ apply ev_SS.
+even 0
+------ apply ev_0.
+       Qed.
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>I believed what <code class="highlighter-rouge">apply</code> do is trying to <em>backward reasoning</em>, i.e. matching the goal and leave the “evidence” need to be proved (to conclude the goal).</p>
+
+<p>we can write it as normal function application syntax w/o using tactics like other Dependent-typed PL as well</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">ev_4'</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="mi">4</span><span class="o">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="o">(</span><span class="no">ev_SS</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">(</span><span class="no">ev_SS</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="no">ev_0</span><span class="o">)).</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="using-evidence-in-proofs">Using Evidence in Proofs</h2>
+
+<blockquote>
+  <p>Besides <em>constructing evidence</em> that numbers are even, we can also <em>reason</em> about such evidence.</p>
+</blockquote>
+
+<blockquote>
+  <p>Introducing <code class="highlighter-rouge">even</code> with an <code class="highlighter-rouge">Inductive</code> declaration tells Coq that these two constructors are the <strong>only</strong> ways to build evidence that numbers are <code class="highlighter-rouge">even</code>.</p>
+</blockquote>
+
+<blockquote>
+  <p>In other words, if someone gives us evidence <code class="highlighter-rouge">E</code> for the assertion <code class="highlighter-rouge">even n</code>, then we know that <code class="highlighter-rouge">E</code> must have one of two shapes</p>
+</blockquote>
+
+<blockquote>
+  <p>This suggests that it should be possible to analyze a hypothesis of the form <code class="highlighter-rouge">even n</code> much <em>as we do inductively defined data structures</em>; in particular, it should be possible to argue by <strong>induction</strong> and <strong>case analysis</strong> on such evidence.</p>
+</blockquote>
+
+<p>This starts to get familiar as what we did for many calculi, ranging from Logics to PLT.
+This is called the <strong>Inversion property</strong>.</p>
+
+<h3 id="inversion-on-evidence">Inversion on Evidence</h3>
+
+<p>We can prove the inersion property by ourselves:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">ev_inversion</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="p">∀</span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">),</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="p">→</span><span class="w">
+    </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="p">∨</span><span class="w"> </span><span class="o">(</span><span class="p">∃</span><span class="no">n'</span><span class="o">,</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">S</span><span class="w"> </span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="no">n'</span><span class="o">)</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="no">even</span><span class="w"> </span><span class="no">n'</span><span class="o">).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">E</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">destruct</span><span class="w"> </span><span class="no">E</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">n'</span><span class="w"> </span><span class="no">E'</span><span class="o">].</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* E = ev_0 : even 0 *)</span><span class="w">                  </span><span class="no">left</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* E = ev_SS n', E' : even (S (S n')) *)</span><span class="w"> </span><span class="no">right</span><span class="pi">.</span><span class="w"> </span><span class="p">∃</span><span class="no">n'</span><span class="pi">.</span><span class="w"> </span><span class="kp">split</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">E'</span><span class="pi">.</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>But Coq provide the <code class="highlighter-rouge">inversion</code> tactics that does more! (not always good tho, too automagical)</p>
+
+<blockquote>
+  <p>The inversion tactic does quite a bit of work. When applied to equalities, as a special case, it does the work of both <code class="highlighter-rouge">discriminate</code> and <code class="highlighter-rouge">injection</code>. In addition, it carries out the <code class="highlighter-rouge">intros</code> and <code class="highlighter-rouge">rewrite</code>s</p>
+</blockquote>
+
+<blockquote>
+  <p>Here’s how inversion works in general. Suppose the name <code class="highlighter-rouge">H</code> refers to an assumption <code class="highlighter-rouge">P</code> in the current context, <em>where <code class="highlighter-rouge">P</code> has been defined by an <code class="highlighter-rouge">Inductive</code> declaration</em>. Then, for each of the constructors of <code class="highlighter-rouge">P</code>, <code class="highlighter-rouge">inversion H</code> generates a subgoal in which <code class="highlighter-rouge">H</code> has been replaced by the <em>exact, specific conditions under which this constructor could have been used to prove <code class="highlighter-rouge">P</code></em>. 
+Some of these subgoals will be self-contradictory; inversion throws these away. The ones that are left represent the cases that must be proved to establish the original goal. For those, inversion adds all equations into the proof context that must hold of the arguments given to <code class="highlighter-rouge">P</code> (e.g., <code class="highlighter-rouge">S (S n') = n</code> in the proof of <code class="highlighter-rouge">evSS_ev</code>).
+(<code class="highlighter-rouge">9-proof-object.md</code> has a better explaination on <code class="highlighter-rouge">inversion</code>)</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">inversion</code> is a specific use upon <code class="highlighter-rouge">destruct</code> (both do case analysis on constructors), but many property need <code class="highlighter-rouge">induction</code>!. 
+By <code class="highlighter-rouge">induction (even n)</code>, we have cases and subgoals splitted, and induction hypothesis as well.</p>
+
+<h3 id="induction-on-evidence">Induction on Evidence</h3>
+
+<p>Similar to induction on inductively defined data such as <code class="highlighter-rouge">list</code>:</p>
+<blockquote>
+  <p>To prove a property of (for any <code class="highlighter-rouge">X</code>)                       <code class="highlighter-rouge">list X</code> holds, we can use <code class="highlighter-rouge">induction</code> on <code class="highlighter-rouge">list X</code>.
+To prove a property of <code class="highlighter-rouge">n</code> holds for all numbers for which <code class="highlighter-rouge">even n</code> holds, we can use <code class="highlighter-rouge">induction</code> on <code class="highlighter-rouge">even n</code>.</p>
+</blockquote>
+
+<h4 id="notes-on-induction">Notes on induction</h4>
+
+<p><em>The principle of induction</em> is to prove <code class="highlighter-rouge">P(n-1) -&gt; P(n)</code> (多米诺) for some (well-founded partial order) set of <code class="highlighter-rouge">n</code>.</p>
+
+<p>Here, we are induction over “the set of numbers fullfilling the property <code class="highlighter-rouge">even</code>”. 
+Noticed that we r proving things over this set, meaning we already have it (i.e. a proof, or a evidence) in premises, instead of proving the <code class="highlighter-rouge">even</code>ness of the set.</p>
+
+<h4 id="proof-by-mathematical-induction-is-deductive-reasoning">Proof by Mathematical Induction is Deductive Reasoning</h4>
+
+<blockquote>
+  <p>“Proof by induction,” despite the name, is deductive. The reason is that proof by induction does not simply involve “going from many specific cases to the general case.” Instead, in order for proof by induction to work, we need a deductive proof that each specific case implies the next specific case. Mathematical induction is not philosophical induction.</p>
+</blockquote>
+<p><a href="https://math.stackexchange.com/a/1960895/528269">https://math.stackexchange.com/a/1960895/528269</a></p>
+
+<blockquote>
+  <p>Mathematical induction is an inference rule used in formal proofs. Proofs by mathematical induction are, in fact, examples of deductive reasoning.
+Equivalence with the well-ordering principle: The principle of mathematical induction is usually stated as an axiom of the natural numbers; see Peano axioms. However, it can be proved from the well-ordering principle. Indeed, suppose the following:</p>
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Mathematical_induction">https://en.wikipedia.org/wiki/Mathematical_induction</a></p>
+
+<h4 id="also-structual-induction-is-one-kind-of-math-induction">Also, Structual Induction is one kind of Math. Induction</h4>
+
+<blockquote>
+  <p>和标准的数学归纳法等价于良序原理一样，结构归纳法也等价于良序原理。</p>
+</blockquote>
+
+<blockquote>
+  <p>…A <em>well-founded</em> <em>partial order</em> is defined on the structures…
+…Formally speaking, this then satisfies the premises of an <em>axiom of well-founded induction</em>…</p>
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Structural_induction">https://en.wikipedia.org/wiki/Structural_induction</a></p>
+
+<p>In terms of Well-ordering and Well-founded:</p>
+
+<blockquote>
+  <p>If the set of all structures of a certain kind admits a well-founded partial order, 
+then every nonempty subset must have a minimal element. (This is the definition of “well-founded”.)
+如果某种整个结构的集容纳一个良基偏序， 那么每个非空子集一定都含有最小元素。（其实这也是良基的定义</p>
+</blockquote>
+
+<h2 id="inductive-relations">Inductive Relations</h2>
+
+<p>Just as a single-argument proposition defines a <em>property</em>, 性质
+a two-argument proposition defines a <em>relation</em>. 关系</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">le</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">le_n</span><span class="w"> </span><span class="no">n</span><span class="w">                </span><span class="p">:</span><span class="w"> </span><span class="no">le</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">n</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">le_S</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="w"> </span><span class="o">(</span><span class="no">H</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">le</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">le</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="o">(</span><span class="no">S</span><span class="w"> </span><span class="no">m</span><span class="o">).</span><span class="w">
+
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"n ≤ m"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">le</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>It says that there are two ways to <em>give evidence</em> that one number is less than or equal to another:</p>
+</blockquote>
+
+<ol>
+  <li>either same number</li>
+  <li>or give evidence that <code class="highlighter-rouge">n ≤ m</code> then we can have <code class="highlighter-rouge">n ≤ m + 1</code>.</li>
+</ol>
+
+<p>and we can use the same tactics as we did for properties.</p>
+
+<h2 id="slide-qa---1">Slide Q&amp;A - 1</h2>
+
+<ol>
+  <li>First <code class="highlighter-rouge">destruct</code> <code class="highlighter-rouge">even n</code> into 2 cases, then <code class="highlighter-rouge">discriminate</code> on each.</li>
+</ol>
+
+<p>Another way… 
+rewriting <code class="highlighter-rouge">n=1</code> on <code class="highlighter-rouge">even n</code>. It won’t compute <code class="highlighter-rouge">Prop</code>, but <code class="highlighter-rouge">destruct</code> can do some <code class="highlighter-rouge">discriminate</code> behind the scene.</p>
+
+<h2 id="slide-qa---2">Slide Q&amp;A - 2</h2>
+
+<p><code class="highlighter-rouge">inversion</code> and <code class="highlighter-rouge">rewrite plus_comm</code> (for <code class="highlighter-rouge">n+2</code>)</p>
+
+<h2 id="destruct-vs-inversion-vs-induction"><code class="highlighter-rouge">destruct</code> vs. <code class="highlighter-rouge">inversion</code> vs. <code class="highlighter-rouge">induction</code>.</h2>
+
+<blockquote>
+  <p><code class="highlighter-rouge">destruct</code>, <code class="highlighter-rouge">inversion</code>, <code class="highlighter-rouge">induction</code> (on general thing)… similar/specialized version of each…</p>
+</blockquote>
+
+<p>Trying to internalize this concept better: <em>When to use which?</em></p>
+
+<p>For any inductively defined proposition (<code class="highlighter-rouge">&lt;: Type</code>) in hypothesis:
+meaning from type perspective, it’s already a “proper type” (<code class="highlighter-rouge">::*</code>)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">C1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">P1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">C2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">A2</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">P2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<ol>
+  <li><code class="highlighter-rouge">destruct</code>     case analysis on inductive type</li>
+</ol>
+
+<ul>
+  <li>simply give you each cases, i.e. each constructors.</li>
+  <li>we can destruct on <code class="highlighter-rouge">a =? b</code> since <code class="highlighter-rouge">=?</code> is inductively defined.</li>
+</ul>
+
+<ol>
+  <li><code class="highlighter-rouge">induction</code>    use induction principle</li>
+</ol>
+
+<ul>
+  <li>proving <code class="highlighter-rouge">P</code> holds for all base cases</li>
+  <li>proving <code class="highlighter-rouge">P(n)</code> holds w/ <code class="highlighter-rouge">P(n-1)</code> for all inductive cases
+(<code class="highlighter-rouge">destruct</code> stucks in this case because of no induction hypothesis gained from induction principle)</li>
+</ul>
+
+<ol>
+  <li><code class="highlighter-rouge">inversion</code>    invert the conclusion and give you all cases with premises of that case.</li>
+</ol>
+
+<p>For GADT, i.e. “indexed” <code class="highlighter-rouge">Prop</code> (property/relation), <code class="highlighter-rouge">P</code> could have many shape
+<code class="highlighter-rouge">inversion</code> give you <code class="highlighter-rouge">Ax</code> for shape <code class="highlighter-rouge">P</code> assuming built with <code class="highlighter-rouge">Cx</code></p>
+
+<p><code class="highlighter-rouge">inversion</code> discards cases when shape <code class="highlighter-rouge">P != Px</code>.
+(<code class="highlighter-rouge">destruct</code> stucks in this case because of no equation gained from inversion lemma)</p>
+
+<h2 id="case-study-regular-expressions">Case Study: Regular Expressions</h2>
+
+<h3 id="definition">Definition</h3>
+
+<p><em>Definition of RegExp in formal language can be found in FCT/CC materials</em></p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">reg_exp</span><span class="w"> </span><span class="o">{</span><span class="no">T</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">EmptySet</span><span class="w">                 </span><span class="c">(* ∅ *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">EmptyStr</span><span class="w">                 </span><span class="c">(* ε *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Char</span><span class="w"> </span><span class="o">(</span><span class="no">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">T</span><span class="o">)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">App</span><span class="w"> </span><span class="o">(</span><span class="no">r1</span><span class="w"> </span><span class="no">r2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">reg_exp</span><span class="o">)</span><span class="w">    </span><span class="c">(* r1r2 *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Union</span><span class="w"> </span><span class="o">(</span><span class="no">r1</span><span class="w"> </span><span class="no">r2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">reg_exp</span><span class="o">)</span><span class="w">  </span><span class="c">(* r1 | r2 *)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Star</span><span class="w"> </span><span class="o">(</span><span class="no">r</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">reg_exp</span><span class="o">).</span><span class="w">      </span><span class="c">(* r*  *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Note that this definition is <em>polymorphic</em>. 
+We depart slightly in that <em>we do not require the type <code class="highlighter-rouge">T</code> to be finite</em>. (difference not significant here)</p>
+</blockquote>
+
+<blockquote>
+  <p><code class="highlighter-rouge">reg_exp T</code> describe <em>strings</em> with characters drawn from <code class="highlighter-rouge">T</code> — that is, <strong>lists of elements of <code class="highlighter-rouge">T</code></strong>.</p>
+</blockquote>
+
+<h3 id="matching">Matching</h3>
+
+<p>The matching is somewhat similar to <em>Parser Combinator</em> in Haskell…</p>
+
+<p>e.g.
+<code class="highlighter-rouge">EmptyStr</code> matches <code class="highlighter-rouge">[]</code>
+<code class="highlighter-rouge">Char x</code>   matches <code class="highlighter-rouge">[x]</code></p>
+
+<blockquote>
+  <p>we definied it into an <code class="highlighter-rouge">Inductive</code> relation (can be displayed as <em>inference-rule</em>). 
+somewhat type-level computing !</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="o">{</span><span class="no">T</span><span class="o">}</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">reg_exp</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">MEmpty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="o">[]</span><span class="w"> </span><span class="no">EmptyStr</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">MChar</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="o">[</span><span class="no">x</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="no">Char</span><span class="w"> </span><span class="no">x</span><span class="o">)</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">MApp</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="no">re2</span><span class="w">
+            </span><span class="o">(</span><span class="no">H1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="no">re1</span><span class="o">)</span><span class="w">
+            </span><span class="o">(</span><span class="no">H2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="no">re2</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+            </span><span class="no">exp_match</span><span class="w"> </span><span class="o">(</span><span class="no">s1</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">s2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">App</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="no">re2</span><span class="o">)</span><span class="w">
+</span><span class="c">(** etc. **)</span><span class="w">
+
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"s =~ re"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">exp_match</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="no">re</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">80</span><span class="o">).</span><span class="w">  </span><span class="c">(* the Perl notation! *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="slide-qa---3">Slide Q&amp;A - 3</h2>
+
+<p>The lack of rule for <code class="highlighter-rouge">EmptySet</code> (“negative rule”) give us what we want as PLT</p>
+
+<h3 id="union-and-star"><code class="highlighter-rouge">Union</code> and <code class="highlighter-rouge">Star</code>.</h3>
+
+<blockquote>
+  <p>the informal rules for <code class="highlighter-rouge">Union</code> and <code class="highlighter-rouge">Star</code> correspond to <em>two constructors</em> each.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="o">|</span><span class="w"> </span><span class="no">MUnionL</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="no">re2</span><span class="w">
+              </span><span class="o">(</span><span class="no">H1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="no">re1</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+              </span><span class="no">exp_match</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="o">(</span><span class="no">Union</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="no">re2</span><span class="o">)</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">MUnionR</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="no">re2</span><span class="w">
+              </span><span class="o">(</span><span class="no">H2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="no">re2</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+              </span><span class="no">exp_match</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="o">(</span><span class="no">Union</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="no">re2</span><span class="o">)</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">MStar0</span><span class="w"> </span><span class="no">re</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="o">[]</span><span class="w"> </span><span class="o">(</span><span class="no">Star</span><span class="w"> </span><span class="no">re</span><span class="o">)</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">MStarApp</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="no">re</span><span class="w">
+              </span><span class="o">(</span><span class="no">H1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="no">re</span><span class="o">)</span><span class="w">
+              </span><span class="o">(</span><span class="no">H2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="o">(</span><span class="no">Star</span><span class="w"> </span><span class="no">re</span><span class="o">))</span><span class="w"> </span><span class="p">:</span><span class="w">
+              </span><span class="no">exp_match</span><span class="w"> </span><span class="o">(</span><span class="no">s1</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">s2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">Star</span><span class="w"> </span><span class="no">re</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Thinking about their <em>NFA</em>: they both have non-deterministic branches!
+The recursive occurrences of <code class="highlighter-rouge">exp_match</code> gives as <em>direct argument</em> (evidence) about which branches we goes.</p>
+
+<blockquote>
+  <p>we need some <em>sanity check</em> since Coq simply trust what we declared…
+that’s why there is even Quick Check for Coq.</p>
+</blockquote>
+
+<h3 id="direct-proof">Direct Proof</h3>
+
+<p>In fact, <code class="highlighter-rouge">MApp</code> is also non-deterministic about how does <code class="highlighter-rouge">re1</code> and <code class="highlighter-rouge">re2</code> collaborate…
+So we have to be explicit:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Example</span><span class="w"> </span><span class="no">reg_exp_ex2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">App</span><span class="w"> </span><span class="o">(</span><span class="no">Char</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">Char</span><span class="w"> </span><span class="mi">2</span><span class="o">).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">apply</span><span class="w"> </span><span class="o">(</span><span class="no">MApp</span><span class="w"> </span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="o">[</span><span class="mi">2</span><span class="o">]).</span><span class="w">
+  </span><span class="o">...</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="inversion-on-evidence-1">Inversion on Evidence</h3>
+
+<p>This, if we want to prove via <code class="highlighter-rouge">destruct</code>, 
+we have to write our own <em>inversion lemma</em> (like <code class="highlighter-rouge">ev_inversion</code> for <code class="highlighter-rouge">even</code>).
+Otherwise we have no equation (which we should have) to say <code class="highlighter-rouge">contradiction</code>.</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Example</span><span class="w"> </span><span class="no">reg_exp_ex3</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="o">([</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">Char</span><span class="w"> </span><span class="mi">1</span><span class="o">).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">H</span><span class="pi">.</span><span class="w"> </span><span class="kp">inversion</span><span class="w"> </span><span class="no">H</span><span class="pi">.</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="manual-manipulation">Manual Manipulation</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="k">Lemma</span><span class="w"> </span><span class="no">MStar1</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="kr">forall</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="o">(</span><span class="no">re</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="o">@</span><span class="no">reg_exp</span><span class="w"> </span><span class="no">T</span><span class="o">)</span><span class="w"> </span><span class="o">,</span><span class="w">
+    </span><span class="no">s</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">re</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+    </span><span class="no">s</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">Star</span><span class="w"> </span><span class="no">re</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="no">re</span><span class="w"> </span><span class="no">H</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">rewrite</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">(</span><span class="no">app_nil_r</span><span class="w"> </span><span class="p">_</span><span class="w"> </span><span class="no">s</span><span class="o">).</span><span class="w">  </span><span class="c">(* extra "massaging" to convert [s] =&gt; [s ++ []] *)</span><span class="w">
+  </span><span class="kp">apply</span><span class="w"> </span><span class="o">(</span><span class="no">MStarApp</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="o">[]</span><span class="w"> </span><span class="no">re</span><span class="o">).</span><span class="w">    </span><span class="c">(* to the shape [MStarApp] expected thus can pattern match on *)</span><span class="w">
+
+      </span><span class="c">(* proving [MStarApp] requires [s1 s2 re H1 H2]. By giving [s [] re], we left two evidence *)</span><span class="w">
+      </span><span class="o">|</span><span class="w"> </span><span class="no">MStarApp</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="no">re</span><span class="w">
+          </span><span class="o">(</span><span class="no">H1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="no">re</span><span class="o">)</span><span class="w">
+          </span><span class="o">(</span><span class="no">H2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">exp_match</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="o">(</span><span class="no">Star</span><span class="w"> </span><span class="no">re</span><span class="o">))</span><span class="w"> </span><span class="p">:</span><span class="w">
+          </span><span class="no">exp_match</span><span class="w"> </span><span class="o">(</span><span class="no">s1</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">s2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">Star</span><span class="w"> </span><span class="no">re</span><span class="o">).</span><span class="w">
+
+  </span><span class="o">-</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">H</span><span class="pi">.</span><span class="w">                   </span><span class="c">(* evidence H1 *)</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">MStar0</span><span class="pi">.</span><span class="w">              </span><span class="c">(* evidence H2 *)</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">                           </span><span class="c">(* the fun fact is that we can really think the _proof_
+                                  as providing evidence by _partial application_. *)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="induction-on-evidence-1">Induction on Evidence</h3>
+
+<blockquote>
+  <p>By the recursive nature of <code class="highlighter-rouge">exp_match</code>, proofs will often require induction.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="c">(** Recursively collecting all characters that occur in a regex **)</span><span class="w">
+</span><span class="k">Fixpoint</span><span class="w"> </span><span class="no">re_chars</span><span class="w"> </span><span class="o">{</span><span class="no">T</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">re</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">reg_exp</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">re</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">EmptySet</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="o">[]</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">EmptyStr</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="o">[]</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Char</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="o">[</span><span class="no">x</span><span class="o">]</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">App</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="no">re2</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">re_chars</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">re_chars</span><span class="w"> </span><span class="no">re2</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Union</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="no">re2</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">re_chars</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">re_chars</span><span class="w"> </span><span class="no">re2</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">Star</span><span class="w"> </span><span class="no">re</span><span class="w"> </span><span class="p">⇒</span><span class="w"> </span><span class="no">re_chars</span><span class="w"> </span><span class="no">re</span><span class="w">
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The proof of <code class="highlighter-rouge">in_re_match</code> went through by <code class="highlighter-rouge">inversion</code> on relation <code class="highlighter-rouge">s =~ re</code>. (which gives us all 7 cases.)
+The interesting case is <code class="highlighter-rouge">MStarApp</code>, where the proof tree has two <em>branches</em> (of premises):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>                  s1 =~ re    s2 =~ Star re
+                 ---------------------------            (MStarApp)
+                    s1 ++ s2 =~ Star re
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>So by induction on the relation (rule), we got <em>two induction hypotheses</em>!
+That’s what we need for the proof.</p>
+
+<h2 id="the-remember-tactic-induction-on-evidence-of-a-specific-case">The <code class="highlighter-rouge">remember</code> tactic (Induction on Evidence of A Specific Case)</h2>
+
+<p>One interesting/confusing features is that <code class="highlighter-rouge">induction</code> over a term that’s <em>insuffciently general</em>. e.g.</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Lemma</span><span class="w"> </span><span class="no">star_app</span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">T</span><span class="w"> </span><span class="o">(</span><span class="no">s1</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">T</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">re</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="o">@</span><span class="no">reg_exp</span><span class="w"> </span><span class="no">T</span><span class="o">),</span><span class="w">
+  </span><span class="no">s1</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">Star</span><span class="w"> </span><span class="no">re</span><span class="w"> </span><span class="p">→</span><span class="w">
+  </span><span class="no">s2</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">Star</span><span class="w"> </span><span class="no">re</span><span class="w"> </span><span class="p">→</span><span class="w">
+  </span><span class="no">s1</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">Star</span><span class="w"> </span><span class="no">re</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">T</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="no">s2</span><span class="w"> </span><span class="no">re</span><span class="w"> </span><span class="no">H1</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Here, we know the fact that both <code class="highlighter-rouge">s1</code> and <code class="highlighter-rouge">s2</code> are matching with the form <code class="highlighter-rouge">Star re</code>. 
+But by <code class="highlighter-rouge">induction</code>. it will give us <em>all 7 cases</em> to prove, but <em>5 of them are contradictory</em>!</p>
+
+<p>That’s where we need <code class="highlighter-rouge">remember (Star re) as re'</code> to get this bit of information back to <code class="highlighter-rouge">discriminate</code>.</p>
+
+<h3 id="sidenotes-inversion-vs-induction-on-evidence">Sidenotes: <code class="highlighter-rouge">inversion</code> vs. <code class="highlighter-rouge">induction</code> on evidence</h3>
+
+<p>We might attemp to use <code class="highlighter-rouge">inversion</code>,
+which is best suitted for have a specific conclusion of some rule and inverts back to get its premises.</p>
+
+<p>But for <em>recursive cases</em> (e.g. <code class="highlighter-rouge">Star</code>), we always need <code class="highlighter-rouge">induction</code>.</p>
+
+<p><code class="highlighter-rouge">induction</code> on a specific conclusion then <code class="highlighter-rouge">remember + contradiction</code> is similar with how <code class="highlighter-rouge">inversion</code> solves contradictionary cases. (They both <code class="highlighter-rouge">destruct</code> the inductively defined things for sure)</p>
+
+<h2 id="exercise-5-stars-advanced-pumping">Exercise: 5 stars, advanced (pumping)</h2>
+
+<p>FCT/Wikipedia “proves” <a href="https://en.wikipedia.org/wiki/Pumping_lemma_for_regular_languages">pumping lemma for regex</a> in a non-constructive way.</p>
+
+<p>Here we attempts to give a constructive proof.</p>
+
+<h2 id="case-study-improving-reflection-互映">Case Study: Improving Reflection (互映)</h2>
+
+<blockquote>
+  <p>we often need to relate boolean computations to statements in <code class="highlighter-rouge">Prop</code></p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">reflect</span><span class="w"> </span><span class="o">(</span><span class="no">P</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Prop</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">ReflectT</span><span class="w"> </span><span class="o">(</span><span class="no">H</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">P</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">reflect</span><span class="w"> </span><span class="no">P</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span><span class="o">|</span><span class="w"> </span><span class="no">ReflectF</span><span class="w"> </span><span class="o">(</span><span class="no">H</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">¬</span><span class="no">P</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">reflect</span><span class="w"> </span><span class="no">P</span><span class="w"> </span><span class="no">false</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The <em>only</em> way to construct <code class="highlighter-rouge">ReflectT/F</code> is by showing (a proof) of <code class="highlighter-rouge">P/¬P</code>,
+meaning invertion on <code class="highlighter-rouge">reflect P bool</code> can give us back the evidence.</p>
+
+<p><code class="highlighter-rouge">iff_reflect</code> give us <code class="highlighter-rouge">eqbP</code>.</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Lemma</span><span class="w"> </span><span class="no">eqbP</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="o">,</span><span class="w"> </span><span class="no">reflect</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">m</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="o">=?</span><span class="w"> </span><span class="no">m</span><span class="o">).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">n</span><span class="w"> </span><span class="no">m</span><span class="pi">.</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">iff_reflect</span><span class="pi">.</span><span class="w"> </span><span class="kp">rewrite</span><span class="w"> </span><span class="no">eqb_eq</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This gives us a small gain in convenience: we immediately give the <code class="highlighter-rouge">Prop</code> from <code class="highlighter-rouge">bool</code>, no need to <code class="highlighter-rouge">rewrite</code>.</p>
+<blockquote>
+  <p>Proof Engineering Hacks…</p>
+</blockquote>
+
+<h3 id="ssreflect---small-scale-reflection">SSReflect - small-scale reflection</h3>
+
+<blockquote>
+  <p>a Coq library
+used to prove 4-color theorem…!
+simplify small proof steps with boolean computations. (somewhat automation with decision procedures)</p>
+</blockquote>
+
+<h2 id="extended-exercise-a-verified-regular-expression-matcher">Extended Exercise: A Verified Regular-Expression Matcher</h2>
+
+<blockquote>
+  <p>we have defined a <em>match relation</em> that can <em>prove</em> a regex matches a string.
+but it does not give us a <em>program</em> that can <em>run</em> to determine a match automatically…</p>
+</blockquote>
+
+<blockquote>
+  <p>we hope to translate <em>inductive rules (for constructing evidence)</em> to <em>recursive fn</em>.
+however, since <code class="highlighter-rouge">reg_exp</code> is recursive, Coq won’t accept it always terminates</p>
+</blockquote>
+
+<p>theoritically, the regex = DFA so it is decidable and halt.
+technically, it only halts on finite strings but not infinite strings. 
+(and infinite strings are probably beyond the scope of halting problem?)</p>
+
+<blockquote>
+  <p>Heavily-optimized regex matcher = translating into <em>state machine</em> e.g. NFA/DFA.
+Here we took a <em>derivative</em> approach which operates purely on string.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Require</span><span class="w"> </span><span class="k">Export</span><span class="w"> </span><span class="nn">Coq</span><span class="p">.</span><span class="nn">Strings</span><span class="p">.</span><span class="no">Ascii</span><span class="pi">.</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">string</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">list</span><span class="w"> </span><span class="no">ascii</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Coq 标准库中的 ASCII 字符串也是归纳定义的，不过我们这里为了之前定义的 match relation 用 <code class="highlighter-rouge">list ascii</code>.</p>
+
+<blockquote>
+  <p>to define regex matcher over <code class="highlighter-rouge">list X</code> i.e. polymorphic lists.
+we need to be able to <em>test equality</em> for each <code class="highlighter-rouge">X</code> etc.</p>
+</blockquote>
+
+<h3 id="rules--derivatives">Rules &amp; Derivatives.</h3>
+
+<p>Check paper <a href="">Regular-expression derivatives reexamined - JFP 09</a> as well.</p>
+
+<p><code class="highlighter-rouge">app</code> and <code class="highlighter-rouge">star</code> are the hardest ones.</p>
+
+<h4 id="lets-take-app-as-an-example">Let’s take <code class="highlighter-rouge">app</code> as an example</h4>
+
+<h5 id="1-等价-helper">1. 等价 helper</h5>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Lemma</span><span class="w"> </span><span class="no">app_exists</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="o">(</span><span class="no">s</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="o">)</span><span class="w"> </span><span class="no">re0</span><span class="w"> </span><span class="no">re1</span><span class="o">,</span><span class="w">
+    </span><span class="no">s</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">App</span><span class="w"> </span><span class="no">re0</span><span class="w"> </span><span class="no">re1</span><span class="w"> </span><span class="p">↔</span><span class="w"> </span><span class="p">∃</span><span class="no">s0</span><span class="w"> </span><span class="no">s1</span><span class="o">,</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">s0</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="no">s0</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">re0</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">re1</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>this <em>helper rules</em> is written for the sake of convenience:</p>
+<ul>
+  <li>the <code class="highlighter-rouge">&lt;-</code> is the definition of <code class="highlighter-rouge">MApp</code>.</li>
+  <li>the <code class="highlighter-rouge">-&gt;</code> is the <code class="highlighter-rouge">inversion s =~ App re0 re1</code>.</li>
+</ul>
+
+<h5 id="2-app-对于-a--s-的匹配性质">2. <code class="highlighter-rouge">App</code> 对于 <code class="highlighter-rouge">a :: s</code> 的匹配性质</h5>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Lemma</span><span class="w"> </span><span class="no">app_ne</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="o">(</span><span class="no">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ascii</span><span class="o">)</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="no">re0</span><span class="w"> </span><span class="no">re1</span><span class="o">,</span><span class="w">
+    </span><span class="no">a</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="o">(</span><span class="no">App</span><span class="w"> </span><span class="no">re0</span><span class="w"> </span><span class="no">re1</span><span class="o">)</span><span class="w"> </span><span class="p">↔</span><span class="w">
+    </span><span class="o">([</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">re0</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">re1</span><span class="o">)</span><span class="w"> </span><span class="p">∨</span><span class="w">
+    </span><span class="p">∃</span><span class="no">s0</span><span class="w"> </span><span class="no">s1</span><span class="o">,</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">s0</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">s0</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">re0</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="no">s1</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">re1</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<p>the second rule is more interesting. It states the <em>property</em> of <code class="highlighter-rouge">app</code>:</p>
+<blockquote>
+  <p>App re0 re1 匹配 a::s 当且仅当  (re0 匹配空字符串 且 a::s 匹配 re1)  或  (s=s0++s1，其中 a::s0 匹配 re0 且 s1 匹配 re1)。</p>
+</blockquote>
+
+<p>这两条对后来的证明很有帮助，<code class="highlighter-rouge">app_exists</code> 反演出来的 existential 刚好用在 <code class="highlighter-rouge">app_ne</code> 中.</p>
+<blockquote>
+  <p>https://github.com/jiangsy/SoftwareFoundation/blob/47543ce8b004cd25d0e1769f7444d57f0e26594d/IndProp.v</p>
+</blockquote>
+
+<h5 id="3-定义-derivative-关系">3. 定义 derivative 关系</h5>
+
+<p>the relation <em><code class="highlighter-rouge">re'</code> is a derivative of <code class="highlighter-rouge">re</code> on <code class="highlighter-rouge">a</code></em> is defind as follows:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">is_der</span><span class="w"> </span><span class="no">re</span><span class="w"> </span><span class="o">(</span><span class="no">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ascii</span><span class="o">)</span><span class="w"> </span><span class="no">re'</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="no">s</span><span class="o">,</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">re</span><span class="w"> </span><span class="p">↔</span><span class="w"> </span><span class="no">s</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="no">re'</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h5 id="4-实现-derive">4. 实现 derive</h5>
+
+<p>Now we can impl <code class="highlighter-rouge">derive</code> by follwing <code class="highlighter-rouge">2</code>, the property.
+In paper we have:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>∂ₐ(r · s) = ∂ₐr · s + ν(r) · ∂ₐs       -- subscriprt "a" meaning "respective to a" 
+
+where 
+  ν(r) = nullable(r) ? ε : ∅ 
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>In our Coq implementation, <code class="highlighter-rouge">nullable(r) == match_eps(r)</code>,</p>
+
+<p>Since we know that 
+<code class="highlighter-rouge">∀r, ∅ · r = ∅</code>, 
+<code class="highlighter-rouge">∀r, ε · r = r</code>, 
+we can be more straightforward by expanding out <code class="highlighter-rouge">v(r)</code>:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Fixpoint</span><span class="w"> </span><span class="no">derive</span><span class="w"> </span><span class="o">(</span><span class="no">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">ascii</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">re</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="o">@</span><span class="no">reg_exp</span><span class="w"> </span><span class="no">ascii</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="o">@</span><span class="no">reg_exp</span><span class="w"> </span><span class="no">ascii</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+</span><span class="o">...</span><span class="w">
+ </span><span class="o">|</span><span class="w"> </span><span class="no">App</span><span class="w"> </span><span class="no">r1</span><span class="w"> </span><span class="no">r2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">match_eps</span><span class="w"> </span><span class="no">r1</span><span class="w">                            </span><span class="c">(** nullable(r) ? **)</span><span class="w">
+      </span><span class="kr">then</span><span class="w"> </span><span class="no">Union</span><span class="w"> </span><span class="o">(</span><span class="no">App</span><span class="w"> </span><span class="o">(</span><span class="no">derive</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">r1</span><span class="o">)</span><span class="w"> </span><span class="no">r2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">derive</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">r2</span><span class="o">)</span><span class="w">      </span><span class="c">(**  ∂ₐr · s + ∂ₐs **)</span><span class="w">
+      </span><span class="kr">else</span><span class="w"> </span><span class="no">App</span><span class="w"> </span><span class="o">(</span><span class="no">derive</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">r1</span><span class="o">)</span><span class="w"> </span><span class="no">r2</span><span class="w">                            </span><span class="c">(**  ∂ₐr · s       **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+:ET

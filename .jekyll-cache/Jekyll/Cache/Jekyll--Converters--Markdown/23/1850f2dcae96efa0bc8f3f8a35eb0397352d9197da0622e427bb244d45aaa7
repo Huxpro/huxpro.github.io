@@ -1,0 +1,79 @@
+I"�<blockquote>
+  <p>离开世界之前，一切都是过程。</p>
+</blockquote>
+
+<p>Hi，我是黄玄，前端 Online NPC，编程语言/编译器初心者，<a href="https://www.facebook.com/">Facebook</a> 签约软件工程师，<a href="https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E5%AA%92%E5%A4%A7%E5%AD%A6">广院</a>认证数字设计师。我曾被招募为阿里巴巴 · <a href="http://alitrip.com">阿里旅行（飞猪）</a>· 前端工程师、微影时代 · 微票儿 · 前端基础设施工程团队负责人、<a href="https://ele.me/">饿了么</a> · 大前端团队 · <a href="https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509">PWA 顾问</a> 等。</p>
+
+<p>目前的物理活动范围主要在美帝，分身日常出没于<a href="https://huangxuan.me">博客</a>、<a href="https://weibo.com/huxpro">微博</a>、<a href="https://www.zhihu.com/people/huxpro/pins/posts">知乎</a>、<a href="https://twitter.com/Huxpro/">Twitter</a>、<a href="https://github.com/huxpro">Github</a>、<a href="https://medium.com/@Huxpro">Medium</a>。</p>
+
+<h5 id="编程语言倾向">编程语言倾向</h5>
+
+<p>我倾向于 ML（“Meta Language”）等「函数式编程为主（mostly functional programming）」风格的编程语言，所以也就不难理解我的很多选择了：JavaScript 于动态类型、Scala 于 JVM 语言、Rust 于非托管语言等。</p>
+
+<blockquote>
+  <p><strong>从左到右</strong> 为喜欢程度，<strong>从上到下</strong> 为了解程度，<strong>版本</strong> 表示下界。</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>💔️</th>
+      <th>❤️ ️</th>
+      <th>❤️❤️ ️</th>
+      <th>❤️❤️❤️ ️</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>😅</td>
+      <td><code class="highlighter-rouge">PHP</code> <code class="highlighter-rouge">BASIC</code></td>
+      <td><code class="highlighter-rouge">ObjC</code> <code class="highlighter-rouge">Prolog</code> <code class="highlighter-rouge">Hack</code></td>
+      <td><code class="highlighter-rouge">Kotlin</code> <code class="highlighter-rouge">Dart</code></td>
+      <td><code class="highlighter-rouge">Swift</code> <code class="highlighter-rouge">Agda</code> <code class="highlighter-rouge">Idris</code></td>
+    </tr>
+    <tr>
+      <td>🧐</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">Asm</code> <code class="highlighter-rouge">C++</code>  <code class="highlighter-rouge">Lisp*</code></td>
+      <td><code class="highlighter-rouge">C++11</code> <code class="highlighter-rouge">C#</code> <code class="highlighter-rouge">AS3</code></td>
+      <td><code class="highlighter-rouge">Scala</code> <code class="highlighter-rouge">Rust</code></td>
+    </tr>
+    <tr>
+      <td>😏</td>
+      <td><code class="highlighter-rouge">Shell</code></td>
+      <td><code class="highlighter-rouge">C</code> <code class="highlighter-rouge">Java</code> <code class="highlighter-rouge">Python</code></td>
+      <td><code class="highlighter-rouge">Typed JS*</code> <code class="highlighter-rouge">Wasm</code></td>
+      <td><code class="highlighter-rouge">Haskell</code> <code class="highlighter-rouge">Coq</code> <code class="highlighter-rouge">ML*</code></td>
+    </tr>
+    <tr>
+      <td>🤓</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">JavaScript</code></td>
+      <td><code class="highlighter-rouge">ECMAScript6</code></td>
+      <td><code class="highlighter-rouge">λ</code> <code class="highlighter-rouge">Λ</code> <code class="highlighter-rouge">Π</code> <code class="highlighter-rouge">Σ</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong><code class="highlighter-rouge">ML*</code> 家族</strong>：<code class="highlighter-rouge">OCaml</code> <code class="highlighter-rouge">ReasonML</code> <code class="highlighter-rouge">Standard ML</code><br />
+<strong><code class="highlighter-rouge">Lisp*</code> 家族</strong>：<code class="highlighter-rouge">Clojure</code> <code class="highlighter-rouge">Scheme</code> <code class="highlighter-rouge">Racket</code><br />
+<strong><code class="highlighter-rouge">Typed JS*</code></strong>：<code class="highlighter-rouge">Flow</code> <code class="highlighter-rouge">TypeScript</code></p>
+</blockquote>
+
+<h5 id="演讲与分享">演讲与分享</h5>
+
+<ul>
+  <li><a href="//huangxuan.me/jsconfcn2017/">Upgrading to Progressive Web Apps</a> · <a href="http://2017.jsconf.cn/">JSConf CN 上海 2017</a></li>
+  <li>Building Progressive Web Apps · <a href="http://www.csdisummit.com/">CSDI 广州 2017</a></li>
+  <li>The State of Progressive Web App · GDG IO Redux 北京 2017</li>
+  <li>炒冷饭 · PWA 到底是个什么玩意？· Baidu HQ 北京 2017</li>
+  <li><a href="//huangxuan.me/2016/11/20/sw-101-gdgdf/">Service Worker 101</a> · GDG DevFest 北京 2016</li>
+  <li><a href="//huangxuan.me/2016/10/20/pwa-qcon2016/">Progressive Web App，复兴序章</a> · <a href="http://2016.qconshanghai.com/presentation/3111">QCon 上海 2016</a></li>
+  <li>Progressive Web App 之我见 · GDG IO Redux 北京 2016</li>
+  <li><a href="//huangxuan.me/2015/12/28/css-sucks-2015/">CSS Still Sucks 2015</a> · 2015</li>
+  <li><a href="//huangxuan.me/2015/07/09/js-module-7day/">JavaScript 模块化七日谈</a> · 2015</li>
+</ul>
+
+:ET

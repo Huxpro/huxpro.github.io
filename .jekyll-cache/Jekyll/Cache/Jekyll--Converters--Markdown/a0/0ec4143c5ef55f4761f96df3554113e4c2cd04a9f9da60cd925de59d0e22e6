@@ -1,0 +1,71 @@
+I"x<blockquote>
+  <p>下滑这里查看更多内容</p>
+</blockquote>
+
+<h3 id="watching-fullscreen-"><a href="https://huangxuan.me/pwa-qcon2016/">Watching Fullscreen →</a></h3>
+
+<h3 id="watching-video-"><a href="http://www.infoq.com/cn/presentations/progressive-web-app">Watching Video →</a></h3>
+
+<div class="visible-md visible-lg">
+    <img src="//huangxuan.me/pwa-qcon2016/attach/qrcode.png" width="350" />
+    <small class="img-hint">Scanning on mobile</small>
+</div>
+
+<h3 id="catalog">Catalog</h3>
+
+<ul>
+  <li>The State Of Web</li>
+  <li>Rethinking Hybridzation</li>
+  <li>PWA 101
+    <ul>
+      <li>Definition</li>
+      <li>Add To HomeScreen
+        <ul>
+          <li>Web Manifest</li>
+        </ul>
+      </li>
+      <li>Reliable Experience (Network as PE)
+        <ul>
+          <li>Service Worker
+            <ul>
+              <li>Register SW</li>
+              <li>On Install &amp; Cache API
+                <ul>
+                  <li>ExtendableEvent &amp; SkipWaiting</li>
+                </ul>
+              </li>
+              <li>On Fetch</li>
+              <li>Stale-While-Revalidate &amp; Fallback</li>
+              <li>Updating SW</li>
+              <li>SW LifeCycle</li>
+              <li>On Activate</li>
+              <li>SW Brings Architectural Revolution</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Re-engageable</li>
+    </ul>
+  </li>
+  <li>PWA In Production
+    <ul>
+      <li>User Expectation &amp; Guiding</li>
+      <li>Low Deliver Friction</li>
+    </ul>
+  </li>
+  <li>PWA vs. Others</li>
+  <li>The Belief In Web
+    <ul>
+      <li>One Web</li>
+      <li>Fulfill WWDC 2007</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="notes">Notes</h3>
+
+<p>This slides is powered by <a href="http://yanshuo.io">Yanshuo.io (演说.io)</a>, a online software helping you create, store and share web slides.</p>
+
+<p><code class="highlighter-rouge">index.html</code> is the HTML source code exported from <a href="http://yanshuo.io">Yanshuo.io</a>, and many of its dependencis (js, css, fonts) are still linked to CDN of <a href="http://yanshuo.io">Yanshuo.io</a>. You can do any secondary development and host it by yourself.</p>
+
+:ET

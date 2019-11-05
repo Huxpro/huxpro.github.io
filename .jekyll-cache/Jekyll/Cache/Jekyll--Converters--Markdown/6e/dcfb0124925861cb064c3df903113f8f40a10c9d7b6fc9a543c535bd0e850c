@@ -1,0 +1,283 @@
+I";�<blockquote>
+  <p>relation 与injective/surjective/bijective function 等相关的知识在 <code class="highlighter-rouge">5. Tactics</code> 里，为了避免每次都要 <code class="highlighter-rouge">grep</code> 我在这里写一下。</p>
+</blockquote>
+
+<h2 id="relations">Relations</h2>
+
+<h3 id="recalling-relation">Recalling <a href="https://en.wikipedia.org/wiki/Finitary_relation">Relation</a></h3>
+
+<p>from FCT/TAPL/Wiki…</p>
+<blockquote>
+  <p>a possible connection between the components of a k-tuple.</p>
+</blockquote>
+
+<p>I have been long confused with <em>Unary Relations vs. Binary Relation on the Same Set (homogeneous relation)</em>
+I thought they were same…but turns out they are totally different!</p>
+
+<h4 id="unary1-place-relation-is-predicate-or-property">Unary/1-place relation is <strong>Predicate</strong> or <strong>Property</strong>!</h4>
+
+<p>Either defined via set <code class="highlighter-rouge">X ⊆ P</code> or <code class="highlighter-rouge">x ∈ P</code>,
+or defined via function <code class="highlighter-rouge">P : X -&gt; Bool</code> or <code class="highlighter-rouge">P : X -&gt; {⊥, ⊤}</code>.
+(usually used in Math. Logic)</p>
+
+<p>Property = Indicator Fn = characteristic Fn = Boolean Predicate Fn = Predicate</p>
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Property_(mathematics)">https://en.wikipedia.org/wiki/Property_(mathematics)</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Indicator_function">https://en.wikipedia.org/wiki/Indicator_function</a></li>
+</ul>
+
+<h4 id="binary-relation2-place-relation"><a href="https://en.wikipedia.org/wiki/Binary_relation">Binary Relation/2-place relation</a></h4>
+
+<p>Defined via two sets : <code class="highlighter-rouge">R ⊆ X × Y</code> or <code class="highlighter-rouge">x, y ∈ R</code> or <code class="highlighter-rouge">xRy</code>.  (where <code class="highlighter-rouge">x ∈ X, y ∈ Y</code>.)
+or via function <code class="highlighter-rouge">R: X × Y -&gt; Bool</code>.</p>
+
+<h5 id="homogeneous-relation-同类的关系"><a href="https://en.wikipedia.org/wiki/Binary_relation#Homogeneous_relation">Homogeneous Relation 同类（的）关系</a></h5>
+
+<p>Specifically! when <code class="highlighter-rouge">X = Y</code>, is called a <em>homogeneous relation</em>:</p>
+
+<p>Noticed that we are still concerning relations of <strong>2 elements</strong>!!, but they are from the same Set!
+(while 1-place relation concerning only 1 element.)</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>R ⊆ X × X
+xRy where x ∈ X, y ∈ X
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>it’s written/spoken <em>Binary</em> relation <strong>on/over</strong> Set <code class="highlighter-rouge">X</code>. 
+Properties e.g. <em>reflexive, symmetric, transitive</em>, are all properties of “Homogeneous Relation”!</p>
+
+<h3 id="back-to-coq">Back to Coq</h3>
+
+<p>“relation” is a general idea. but in Coq standard lib it means “binary relation on <em>a</em> set X”</p>
+<blockquote>
+  <p>Coq <code class="highlighter-rouge">identifier</code> relation will always refer to a binary relation between some set and itself.</p>
+</blockquote>
+
+<p>it’s defined as <em>a family of Prop parameterized by two elements of <code class="highlighter-rouge">X</code></em>:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Check</span><span class="w"> </span><span class="no">le</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">nat</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kr">Prop</span><span class="pi">.</span><span class="w">
+</span><span class="k">Check</span><span class="w"> </span><span class="no">le</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">nat</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="basic-properties">Basic Properties</h2>
+
+<blockquote>
+  <p>ways to classifying relations.
+so theorems can be proved generically about certain sorts of relations</p>
+</blockquote>
+
+<p>It’s pretty fun to see all mathematical things defined in Coq!
+(much more constructive)</p>
+
+<h3 id="partial-function"><a href="https://en.wikipedia.org/wiki/Partial_function">Partial Function</a></h3>
+
+<blockquote>
+  <p>function is defined as <em>a special kind of binary relation</em>.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">partial_function</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="no">x</span><span class="w"> </span><span class="no">y1</span><span class="w"> </span><span class="no">y2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">,</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y1</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y2</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">y1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">y2</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>meaning that foreach input <code class="highlighter-rouge">x ∈ X</code>, there is a <em>unique</em> <code class="highlighter-rouge">y ∈ Y</code> corresponded.</p>
+
+<p>But this only establish a <em>partial function</em>. 
+because it doesn’t say anything about <em>totality</em>,
+to define <em>total function</em>, we require <code class="highlighter-rouge">f</code> map every <code class="highlighter-rouge">x ∈ X</code>.</p>
+
+<ul>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/Connex_relation">Total “Relation”</a></p>
+
+    <p>∀x ∀y (x ∈ X ∧ y ∈ X) ⇒ (xRy ∨ yRx).</p>
+  </li>
+</ul>
+
+<p>totally different with <em>total function</em> but ask the binary relation holds between every pair.</p>
+
+<h3 id="reflexive">Reflexive</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">transitive</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="no">a</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">b</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">c</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">c</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="transitive">Transitive</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">transitive</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="no">a</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">b</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">c</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">c</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="symmetric--antisymmetric">Symmetric &amp; Antisymmetric</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">symmetric</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="no">a</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">b</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">a</span><span class="o">).</span><span class="w">
+  
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">antisymmetric</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="no">a</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">b</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">a</span><span class="o">)</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">b</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="antisymmetric-vs-asymmetric-vs-non-symmetric-反对称-vs-非对称-vs-不-对称">Antisymmetric vs Asymmetric vs Non-symmetric (反对称 vs. 非对称 vs. 不-对称)</h4>
+
+<p>A relation is <strong>asymmetric</strong> if and only if it is both antisymmetric and irreflexive
+e.g. <code class="highlighter-rouge">&lt;=</code> is neither symmetric nor asymmetric, but it’s antisymmetric…
+反对称: 可以自反 (只能 reflexive 时对称) <code class="highlighter-rouge">&lt;=</code>
+非对称: 不能自反 <code class="highlighter-rouge">&lt;</code>
+不对称: 不是对称</p>
+
+<h3 id="equivalence">Equivalence</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">equivalence</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="p">:</span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">(</span><span class="no">reflexive</span><span class="w"> </span><span class="no">R</span><span class="o">)</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="o">(</span><span class="no">symmetric</span><span class="w"> </span><span class="no">R</span><span class="o">)</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="o">(</span><span class="no">transitive</span><span class="w"> </span><span class="no">R</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="partial-orders">Partial Orders</h3>
+
+<p>A partial order under which <em>every pair</em> of elements is <em>comparable</em> is called a <strong>total order</strong> or <strong>linear order</strong>
+In the Coq standard library it’s called just <code class="highlighter-rouge">order</code> for short:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">order</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="p">:</span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">(</span><span class="no">reflexive</span><span class="w"> </span><span class="no">R</span><span class="o">)</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="o">(</span><span class="no">antisymmetric</span><span class="w"> </span><span class="no">R</span><span class="o">)</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="o">(</span><span class="no">transitive</span><span class="w"> </span><span class="no">R</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="preorders">Preorders</h3>
+
+<p>a.k.a quasiorder</p>
+
+<p>The <em>subtyping</em> relations are usually preorders.</p>
+<blockquote>
+  <p>(TAPL p185) because of the record permutation rule…there are many pairs of distinct types where each is a subtype of the other.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">preorder</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="p">:</span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">(</span><span class="no">reflexive</span><span class="w"> </span><span class="no">R</span><span class="o">)</span><span class="w"> </span><span class="p">∧</span><span class="w"> </span><span class="o">(</span><span class="no">transitive</span><span class="w"> </span><span class="no">R</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="reflexive-transitive-closure">Reflexive, Transitive Closure</h2>
+
+<blockquote>
+  <p><a href="https://en.wikipedia.org/wiki/Closure_(mathematics)#Binary_relation_closures">Closure</a>
+Closure can be considered as <a href="https://en.wikipedia.org/wiki/Binary_relation#Operations_on_binary_relations">Operations on bin-rel</a></p>
+</blockquote>
+
+<p>As properties such as <em>reflexive, transitive</em>, 
+the <strong>blah blah Closure</strong> are only talking about “homogeneous relations” i.e., Relation on a SINGLE set.</p>
+
+<h3 id="reflexive-closure"><a href="https://en.wikipedia.org/wiki/Reflexive_closure">Reflexive Closure</a></h3>
+
+<p>Def. smallest reflexive relation on <code class="highlighter-rouge">X</code> containing <code class="highlighter-rouge">R</code>.</p>
+
+<p>Operationally, as a <code class="highlighter-rouge">=</code> operator on a binary relation <code class="highlighter-rouge">R</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>R⁼ = R ∪ { (x, x) | x ∈ X }
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>and this obviously satisfy <code class="highlighter-rouge">R⁼ ⊇ R</code>.</p>
+
+<h3 id="transitive-closure"><a href="https://en.wikipedia.org/wiki/Transitive_closure">Transitive Closure</a></h3>
+
+<p>Def. smallest transitive relation on <code class="highlighter-rouge">X</code> containing <code class="highlighter-rouge">R</code>.</p>
+
+<p>Operationally, as a <code class="highlighter-rouge">+</code> operator on a binary relation <code class="highlighter-rouge">R</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>R+ = R ∪ { (x1,xn) | n &gt; 1 ∧ (x1,x2), ..., (xn-1,xn) ∈ R }
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We can also constructively and inductively definition using <code class="highlighter-rouge">R^i</code> where <code class="highlighter-rouge">i = i-transitivity away</code>.</p>
+
+<h3 id="reflexive-transitive-closure-1">Reflexive, Transitive Closure</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>R* = R⁼ ∪ R+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="why-is-it-useful">Why is it useful?</h3>
+
+<blockquote>
+  <p>The idea is that <em>a relation is extended</em> s.t. 
+<em>the derived relation has the (reflexsive and) transitive property.</em> – Prof. Arthur</p>
+</blockquote>
+
+<blockquote>
+  <p>e.g.
+the “descendant” relation is the transitive closure of the “child” relation, 
+the “derives-star (⇒⋆)” relation is the reflexive-transitive closure of the “derives (⇒)” relation.
+the “ε-closure” relation is the reflexive-transitive closure of the “ε-transition” relation.
+the “Kleene-star (Σ⋆)” relation is the reflexive-transitive closure of the “concatentation” relation.</p>
+</blockquote>
+
+<p>Another way is to think them as “set closed under some operation”.</p>
+
+<h3 id="back-to-coq-1">Back to Coq</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">clos_refl_trans</span><span class="w"> </span><span class="o">{</span><span class="no">A</span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">A</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">A</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">rt_step</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="o">(</span><span class="no">H</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">clos_refl_trans</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w">        </span><span class="c">(** original relation **)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">rt_refl</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">clos_refl_trans</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">x</span><span class="w">                      </span><span class="c">(** reflexive  xRx              **)</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">rt_trans</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="w">                                         </span><span class="c">(** transitive xRy ∧ yRz → xRz  **)</span><span class="w">
+        </span><span class="o">(</span><span class="no">Hxy</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">clos_refl_trans</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="o">)</span><span class="w">
+        </span><span class="o">(</span><span class="no">Hyz</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">clos_refl_trans</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+        </span><span class="no">clos_refl_trans</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">z</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The above version will generate 2 IHs in <code class="highlighter-rouge">rt_trans</code> case. (since the proof tree has 2 branches).</p>
+
+<p>Here is a better “linked-list”-ish one. (we will exclusively use this style)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">clos_refl_trans_1n</span><span class="w"> </span><span class="o">{</span><span class="no">A</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">A</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">A</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">A</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">rt1n_refl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">clos_refl_trans_1n</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">x</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">rt1n_trans</span><span class="w"> </span><span class="o">(</span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">A</span><span class="o">)</span><span class="w">
+      </span><span class="o">(</span><span class="no">Hxy</span><span class="w">   </span><span class="p">:</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="o">)</span><span class="w"> 
+      </span><span class="o">(</span><span class="no">Hrest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">clos_refl_trans_1n</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w">
+      </span><span class="no">clos_refl_trans_1n</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">z</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>In later chapter, we will define a decorator <code class="highlighter-rouge">multi</code> that can take any binary relation on a set and return its closure relation:</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">multi</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">multi_refl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">x</span><span class="w">     </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">,</span><span class="w">                         </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">x</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">multi_step</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">,</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">z</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We name it <code class="highlighter-rouge">step</code>, standing for <em>doing one step of this relation</em>, and then we still have the rest (sub-structure) satisfied the closure relation.</p>
+:ET

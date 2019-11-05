@@ -1,0 +1,647 @@
+I"��<h3 id="issues-on-coqc-module-linking">issues on <code class="highlighter-rouge">coqc</code> module linking</h3>
+
+<p>Some module (e.g.<code class="highlighter-rouge">Map</code>) not found
+either maunally <code class="highlighter-rouge">make map.vo</code> or proof general can solve that.</p>
+
+<h2 id="behavioral-equivalence-行为等价">Behavioral Equivalence 行为等价</h2>
+
+<blockquote>
+  <p>How to define <em>the correctness of program transformation</em>, e.g. <code class="highlighter-rouge">optimize_0plus</code> ?</p>
+  <ul>
+    <li>in the setting w/o var (imp w/o var and state) : yield a program the evals to same number as original.</li>
+    <li>in the setting w/ var (full imp w/ assignment) : we need to consider the role of var and state.</li>
+  </ul>
+</blockquote>
+
+<h3 id="definitions">Definitions</h3>
+
+<blockquote>
+  <p>Two <code class="highlighter-rouge">aexps</code> or <code class="highlighter-rouge">bexps</code> are <em>behaviorally equivalent</em> if they evaluate to the same result <strong>in every state</strong>.</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">aequiv</span><span class="w"> </span><span class="o">(</span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">),</span><span class="w"> </span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">a2</span><span class="pi">.</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">bequiv</span><span class="w"> </span><span class="o">(</span><span class="no">b1</span><span class="w"> </span><span class="no">b2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bexp</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">),</span><span class="w"> </span><span class="no">beval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">beval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">b2</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>For commands, We can’t simply say … if they evaluate to the same ending state
+<strong>some commands don’t terminate in any final state at all!</strong></p>
+</blockquote>
+
+<p>So to define, they either or…</p>
+<ol>
+  <li>both diverge 都发散</li>
+  <li>both terminate in the same final state 都在同一个状态停机</li>
+</ol>
+
+<p>A compact way is</p>
+<blockquote>
+  <p>“if the first one terminates in a particular state then so does the second, and vice versa.”</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">cequiv</span><span class="w"> </span><span class="o">(</span><span class="no">c1</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="no">st'</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="o">),</span><span class="w">
+    </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="o">]</span><span class="p">⇒</span><span class="w"> </span><span class="no">st'</span><span class="o">)</span><span class="w"> </span><span class="p">↔</span><span class="w"> </span><span class="o">(</span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="o">]</span><span class="p">⇒</span><span class="w"> </span><span class="no">st'</span><span class="o">).</span><span class="w"> 
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="example-1---simple-but-demonstrated">Example 1 - Simple (but demonstrated)</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">skip_left</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">c</span><span class="o">,</span><span class="w">
+  </span><span class="no">cequiv</span><span class="w"> </span><span class="o">(</span><span class="no">SKIP</span><span class="p">;;</span><span class="w"> </span><span class="no">c</span><span class="o">)</span><span class="w"> </span><span class="no">c</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">intros</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">st'</span><span class="pi">.</span><span class="w"> </span><span class="kp">split</span><span class="p">;</span><span class="w"> </span><span class="kp">intros</span><span class="w"> </span><span class="no">H</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* -&gt; *)</span><span class="w">         
+    </span><span class="kp">inversion</span><span class="w"> </span><span class="no">H</span><span class="p">;</span><span class="w"> </span><span class="kp">subst</span><span class="pi">.</span><span class="w">  </span><span class="c">(* inverse E_Seq   *)</span><span class="w">
+    </span><span class="kp">inversion</span><span class="w"> </span><span class="no">H2</span><span class="pi">.</span><span class="w"> </span><span class="kp">subst</span><span class="pi">.</span><span class="w"> </span><span class="c">(* inverse E_Skip  *)</span><span class="w">
+    </span><span class="ne">assumption</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="c">(* &lt;- *)</span><span class="w">             </span><span class="c">(* reversely *)</span><span class="w">
+    </span><span class="kp">apply</span><span class="w"> </span><span class="no">E_Seq</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="no">st</span><span class="pi">.</span><span class="w"> </span><span class="c">(* apply E_Seq *)</span><span class="w">
+    </span><span class="kp">apply</span><span class="w"> </span><span class="no">E_Skip</span><span class="pi">.</span><span class="w">        </span><span class="c">(* apply E_Skip *)</span><span class="w">
+    </span><span class="ne">assumption</span><span class="pi">.</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Noticed that the <code class="highlighter-rouge">inversion</code> is like use the <em>inverse function</em> of constructors.</p>
+
+<h3 id="example-2---while-true-non-terminating">Example 2 - WHILE true non-terminating</h3>
+
+<p>one interesting theorem is that we can prove <code class="highlighter-rouge">WHILE &lt;things ⇓ true&gt;</code> is not terminating.
+and is equivalent to <em>any other non-terminating program</em>, e.g. <code class="highlighter-rouge">WHILE BTrue DO SKIP END</code>: (因为我们的「等价」只要求同「发散」即可)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">WHILE_true</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">b</span><span class="w"> </span><span class="no">c</span><span class="o">,</span><span class="w">
+  </span><span class="no">bequiv</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="p">→</span><span class="w">
+  </span><span class="no">cequiv</span><span class="w">
+    </span><span class="o">(</span><span class="no">WHILE</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">DO</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">END</span><span class="o">)</span><span class="w">
+    </span><span class="o">(</span><span class="no">WHILE</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="no">DO</span><span class="w"> </span><span class="no">SKIP</span><span class="w"> </span><span class="no">END</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="example-3---loop-unrolling">Example 3 - Loop Unrolling</h3>
+
+<blockquote>
+  <p><em>any number of copies of the body</em> can be “unrolled” without changing meaning</p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">loop_unrolling</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">b</span><span class="w"> </span><span class="no">c</span><span class="o">,</span><span class="w">
+  </span><span class="no">cequiv</span><span class="w">
+    </span><span class="o">(</span><span class="no">WHILE</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">DO</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">END</span><span class="o">)</span><span class="w">         
+    </span><span class="o">(</span><span class="no">TEST</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">THEN</span><span class="w"> </span><span class="o">(</span><span class="no">c</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="no">WHILE</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="no">DO</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="no">END</span><span class="o">)</span><span class="w"> </span><span class="no">ELSE</span><span class="w"> </span><span class="no">SKIP</span><span class="w"> </span><span class="no">FI</span><span class="o">).</span><span class="w">    </span><span class="c">(** 展开一层 **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="example-4---use-of-extenionality-外延性">Example 4 - Use of extenionality 外延性</h3>
+
+<p><code class="highlighter-rouge">x !-&gt; m x ; x</code> is same map with <code class="highlighter-rouge">m</code> by extenionality!</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">identity_assignment</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">x</span><span class="o">,</span><span class="w">
+  </span><span class="no">cequiv</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">x</span><span class="o">)</span><span class="w"> </span><span class="no">SKIP</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="properties-of-behavioral-equivalence-行为等价的性质">Properties of Behavioral Equivalence 行为等价的性质</h2>
+
+<h3 id="等价关系-equivalence">等价关系 (Equivalence)</h3>
+
+<blockquote>
+  <p>自反性（reflexive）、对称性（symmetric）和传递性 （transitive）</p>
+</blockquote>
+
+<h3 id="同余关系congruence">同余关系（Congruence）</h3>
+
+<blockquote>
+  <p>That is, the equivalence of two subprograms implies the equivalence of the larger programs in which they are <em>embedded</em>
+如果两个子程序等价，那么当二者所在的更大的程序中_只有二者不同_时， 这两个更大的程序也等价</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>          aequiv a1 a1'
+  -----------------------------
+  cequiv (x ::= a1) (x ::= a1')
+
+          cequiv c1 c1'
+          cequiv c2 c2'
+     --------------------------
+     cequiv (c1;;c2) (c1';;c2')
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>这个术语应该是来自抽象代数 : 能在运算下保持的等价关系
+…in the sense that algebraic operations done with equivalent elements will yield equivalent elements.
+<a href="https://en.wikipedia.org/wiki/Congruence_relation">Congruence relation</a></p>
+</blockquote>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">CAss_congruence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="no">x</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="no">a1'</span><span class="o">,</span><span class="w">     </span><span class="c">(** cequiv 是集合 commands 上的等价关系 **)</span><span class="w">
+  </span><span class="no">aequiv</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="no">a1'</span><span class="w"> </span><span class="p">→</span><span class="w">
+  </span><span class="no">cequiv</span><span class="w"> </span><span class="o">(</span><span class="no">CAss</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">a1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">CAss</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">a1'</span><span class="o">).</span><span class="w">       </span><span class="c">(** 在 `CAss` 这个 operation 下保持等价 =&gt; 同余 **)</span><span class="w">
+  </span><span class="no">cequiv</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">a1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">a1'</span><span class="o">).</span><span class="w">         </span><span class="c">(** 或，在 `::=` 这个 command 下保持等价 =&gt; 同余 **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>在 commands 上等价但不同余的关系?</p>
+</blockquote>
+
+<p>I guess…“both terminating” relation?
+which is equivalence relation on commands, but the equivalence would not be maintained after, say <code class="highlighter-rouge">C_WHILE</code> operation.</p>
+
+<h3 id="example---using-congruence">Example - Using Congruence</h3>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="rouge-code"><pre><span class="k">Example</span><span class="w"> </span><span class="no">congruence_example</span><span class="p">:</span><span class="w">
+  </span><span class="no">cequiv</span><span class="w">
+    </span><span class="c">(* 程序 1： *)</span><span class="w">
+    </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;;</span><span class="w">
+     </span><span class="no">TEST</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+     </span><span class="no">THEN</span><span class="w">
+       </span><span class="no">Y</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+     </span><span class="no">ELSE</span><span class="w">
+       </span><span class="no">Y</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="w">
+     </span><span class="no">FI</span><span class="o">)</span><span class="w">
+    </span><span class="c">(* 程序 2： *)</span><span class="w">
+    </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;;</span><span class="w">
+     </span><span class="no">TEST</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+     </span><span class="no">THEN</span><span class="w">
+       </span><span class="no">Y</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="c">(* &lt;--- 这里不同 *)</span><span class="w">
+     </span><span class="no">ELSE</span><span class="w">
+       </span><span class="no">Y</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="w">
+     </span><span class="no">FI</span><span class="o">).</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">apply</span><span class="w"> </span><span class="no">CSeq_congruence</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">refl_cequiv</span><span class="pi">.</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">CIf_congruence</span><span class="pi">.</span><span class="w">
+    </span><span class="o">+</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">refl_bequiv</span><span class="pi">.</span><span class="w">
+    </span><span class="o">+</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">CAss_congruence</span><span class="pi">.</span><span class="w">     </span><span class="c">(** &lt;--- 化简到只需要证明 aequiv 0 (X - X) **)</span><span class="w"> 
+      </span><span class="kp">unfold</span><span class="w"> </span><span class="no">aequiv</span><span class="pi">.</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w">
+      </span><span class="o">*</span><span class="w"> </span><span class="kp">symmetry</span><span class="pi">.</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">minus_diag</span><span class="pi">.</span><span class="w">
+    </span><span class="o">+</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">refl_cequiv</span><span class="pi">.</span><span class="w">
+</span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="program-transformations-程序变换">Program Transformations 程序变换</h2>
+
+<blockquote>
+  <p>A program transformation is <em>sound</em> if it preserves the behavior of the original program.
+如果一个程序变换保留了其原始行为，那么它就是_可靠_的</p>
+</blockquote>
+
+<p>我们可以定义在不同集合 <code class="highlighter-rouge">aexp, bexp, com</code> 上的 sound 关系：
+(有趣的是，<code class="highlighter-rouge">Inductive</code> 定义的非 <code class="highlighter-rouge">Prop</code> 的 <code class="highlighter-rouge">Type</code>, 确实就是 <code class="highlighter-rouge">Set</code>, 这是一种 PL 和数学的 Correspondence)</p>
+<ul>
+  <li>当我们的 datatype 是 constructor 时 =&gt; 不交并</li>
+  <li>当我们的 datatype 有 recursive   时 =&gt; 集合的递归定义</li>
+</ul>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">atrans_sound</span><span class="w"> </span><span class="o">(</span><span class="no">atrans</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">aexp</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="o">(</span><span class="no">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="o">),</span><span class="w"> </span><span class="no">aequiv</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="o">(</span><span class="no">atrans</span><span class="w"> </span><span class="no">a</span><span class="o">).</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">btrans_sound</span><span class="w"> </span><span class="o">(</span><span class="no">btrans</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bexp</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">bexp</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="o">(</span><span class="no">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bexp</span><span class="o">),</span><span class="w"> </span><span class="no">bequiv</span><span class="w"> </span><span class="no">b</span><span class="w"> </span><span class="o">(</span><span class="no">btrans</span><span class="w"> </span><span class="no">b</span><span class="o">).</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">ctrans_sound</span><span class="w"> </span><span class="o">(</span><span class="no">ctrans</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">com</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="p">∀</span><span class="o">(</span><span class="no">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="o">),</span><span class="w"> </span><span class="no">cequiv</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="o">(</span><span class="no">ctrans</span><span class="w"> </span><span class="no">c</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="constant-folding-常量折叠">Constant Folding 常量折叠</h3>
+
+<blockquote>
+  <p>An expression is <em>constant</em> when it contains no variable references.
+不引用变量的表达式为_常量_</p>
+</blockquote>
+
+<blockquote>
+  <p>Constant folding is an <em>optimization</em> that finds constant expressions and replaces them by their values.
+常量折叠是一种找到常量表达式并把它们替换为其值的优化方法。</p>
+</blockquote>
+
+<h3 id="soundness-of-constant-folding">Soundness of Constant Folding</h3>
+
+<h4 id="aexp"><code class="highlighter-rouge">aexp</code></h4>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">fold_constants_aexp_sound</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="no">atrans_sound</span><span class="w"> </span><span class="no">fold_constants_aexp</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w">
+  </span><span class="kp">unfold</span><span class="w"> </span><span class="no">atrans_sound</span><span class="pi">.</span><span class="w"> </span><span class="kp">intros</span><span class="w"> </span><span class="no">a</span><span class="pi">.</span><span class="w"> </span><span class="kp">unfold</span><span class="w"> </span><span class="no">aequiv</span><span class="pi">.</span><span class="w"> </span><span class="kp">intros</span><span class="w"> </span><span class="no">st</span><span class="pi">.</span><span class="w">
+  
+</span><span class="c">(** 这个时候的状态：**)</span><span class="w">
+
+  </span><span class="no">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">aexp</span><span class="w">
+  </span><span class="no">st</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">state</span><span class="w">
+  </span><span class="o">============================</span><span class="w">
+  </span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">(</span><span class="no">fold_constants_aexp</span><span class="w"> </span><span class="no">a</span><span class="o">)</span><span class="w">
+  
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="bexp"><code class="highlighter-rouge">bexp</code></h4>
+
+<p>证明 <code class="highlighter-rouge">btrans_sound fold_constants_bexp.</code> 要难一些，因为其中还用到了 <code class="highlighter-rouge">fold_constants_aexp</code>, 所以我们需要一些技巧</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="c">(** 如果不记住而是直接 destruct 的话，这部分信息就丢失了 **)</span><span class="w">
+    </span><span class="no">remember</span><span class="w"> </span><span class="o">(</span><span class="no">fold_constants_aexp</span><span class="w"> </span><span class="no">a1</span><span class="o">)</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="no">a1'</span><span class="w"> </span><span class="no">eqn</span><span class="p">:</span><span class="no">Heqa1'</span><span class="pi">.</span><span class="w">
+    </span><span class="no">remember</span><span class="w"> </span><span class="o">(</span><span class="no">fold_constants_aexp</span><span class="w"> </span><span class="no">a2</span><span class="o">)</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="no">a2'</span><span class="w"> </span><span class="no">eqn</span><span class="p">:</span><span class="no">Heqa2'</span><span class="pi">.</span><span class="w">
+
+</span><span class="c">(** 保留了这部分信息的目的是，使用 aexp 的可靠性定理来建立 aexp 与 值 的关系 **)</span><span class="w">
+    </span><span class="no">replace</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">a1</span><span class="o">)</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">a1'</span><span class="o">)</span><span class="w"> </span><span class="no">by</span><span class="w">
+       </span><span class="o">(</span><span class="kp">subst</span><span class="w"> </span><span class="no">a1'</span><span class="p">;</span><span class="w"> </span><span class="kp">rewrite</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="no">fold_constants_aexp_sound</span><span class="p">;</span><span class="w"> </span><span class="ne">reflexivity</span><span class="o">).</span><span class="w">
+    </span><span class="no">replace</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">a2</span><span class="o">)</span><span class="w"> </span><span class="kp">with</span><span class="w"> </span><span class="o">(</span><span class="no">aeval</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="no">a2'</span><span class="o">)</span><span class="w"> </span><span class="no">by</span><span class="w">
+       </span><span class="o">(</span><span class="kp">subst</span><span class="w"> </span><span class="no">a2'</span><span class="p">;</span><span class="w"> </span><span class="kp">rewrite</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="no">fold_constants_aexp_sound</span><span class="p">;</span><span class="w"> </span><span class="ne">reflexivity</span><span class="o">).</span><span class="w">
+
+</span><span class="c">(** 最后才分类讨论 **)</span><span class="w">
+    </span><span class="kp">destruct</span><span class="w"> </span><span class="no">a1'</span><span class="p">;</span><span class="w"> </span><span class="kp">destruct</span><span class="w"> </span><span class="no">a2'</span><span class="p">;</span><span class="w"> </span><span class="kp">try</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="cmd"><code class="highlighter-rouge">cmd</code></h4>
+
+<p>主要技巧在于配合使用 <code class="highlighter-rouge">Congruence</code> 与 <code class="highlighter-rouge">IH</code> 解决大部分 case，然后分类讨论 <code class="highlighter-rouge">fold_constants_bexp</code> 用 <code class="highlighter-rouge">sound</code> 做替换解决剩余 case.</p>
+
+<h3 id="soundness-of-0--n">Soundness of (0 + n)</h3>
+
+<p>类似，但是接下来我们就可以证明先 ` fold_constants<code class="highlighter-rouge"> 再 </code>optimize_0plus<code class="highlighter-rouge"> 也是 sound 的.
+这里我更 general 得证明了 </code>ctrans` 关系的传递性：</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">Theorem</span><span class="w"> </span><span class="no">trans_ctrans_sound</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">tr1</span><span class="w"> </span><span class="no">tr2</span><span class="o">,</span><span class="w">
+  </span><span class="no">ctrans_sound</span><span class="w"> </span><span class="no">tr1</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
+  </span><span class="no">ctrans_sound</span><span class="w"> </span><span class="no">tr2</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
+  </span><span class="no">ctrans_sound</span><span class="w"> </span><span class="o">(</span><span class="kr">fun</span><span class="w"> </span><span class="no">c</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">tr2</span><span class="w"> </span><span class="o">(</span><span class="no">tr1</span><span class="w"> </span><span class="no">c</span><span class="o">)).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="proving-inequivalence-证明程序不等价">Proving Inequivalence 证明程序不等价</h2>
+
+<p>在这个例子中，<code class="highlighter-rouge">subst_aexp</code> 是 sound 得，被称为 <em>Constant Propagation</em> (常量传播)</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c">(**    [X := 42 + 53](Y + X)  =&gt;  Y + (42 + 53)    **)</span><span class="w">
+</span><span class="k">Example</span><span class="w"> </span><span class="no">subst_aexp_ex</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="no">subst_aexp</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">(</span><span class="mi">42</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">53</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="no">Y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="no">X</span><span class="o">)%</span><span class="no">imp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">Y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="mi">42</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">53</span><span class="o">))%</span><span class="no">imp</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>所以我们断言这么做是 always sound 得：</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">Definition</span><span class="w"> </span><span class="no">subst_equiv_property</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">∀</span><span class="no">x1</span><span class="w"> </span><span class="no">x2</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="o">,</span><span class="w">
+  </span><span class="no">cequiv</span><span class="w"> </span><span class="o">(</span><span class="no">x1</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">a1</span><span class="p">;;</span><span class="w"> </span><span class="no">x2</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">a2</span><span class="o">)</span><span class="w">
+         </span><span class="o">(</span><span class="no">x1</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">a1</span><span class="p">;;</span><span class="w"> </span><span class="no">x2</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">subst_aexp</span><span class="w"> </span><span class="no">x1</span><span class="w"> </span><span class="no">a1</span><span class="w"> </span><span class="no">a2</span><span class="o">).</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>然而如果 <code class="highlighter-rouge">a1</code> 不是常量，副作用很容易让这个转换 unsound
+那么怎么证明 <code class="highlighter-rouge">¬subst_equiv_property</code> (即该性质不成立)? 举一个反例就好</p>
+
+<p>Informal proof</p>
+<ul>
+  <li>provide a witness</li>
+</ul>
+
+<p>Formal</p>
+<ul>
+  <li>give counterexamples via <code class="highlighter-rouge">remember</code>, then show <code class="highlighter-rouge">⊥</code>.</li>
+</ul>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+</pre></td><td class="rouge-code"><pre><span class="c">(** 给出一组反例，使用性质证明他们 cequiv **)</span><span class="w">
+
+  </span><span class="no">remember</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;;</span><span class="w">
+            </span><span class="no">Y</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">X</span><span class="o">)%</span><span class="no">imp</span><span class="w">     </span><span class="kr">as</span><span class="w"> </span><span class="no">c1</span><span class="pi">.</span><span class="w">
+  </span><span class="no">remember</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;;</span><span class="w">
+            </span><span class="no">Y</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">)%</span><span class="no">imp</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="no">c2</span><span class="pi">.</span><span class="w">
+  </span><span class="no">assert</span><span class="w"> </span><span class="o">(</span><span class="no">cequiv</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">c2</span><span class="o">)</span><span class="w"> </span><span class="no">by</span><span class="w"> </span><span class="o">(</span><span class="kp">subst</span><span class="p">;</span><span class="w"> </span><span class="kp">apply</span><span class="w"> </span><span class="no">Contra</span><span class="o">).</span><span class="w">
+  
+</span><span class="c">(* =&gt; *)</span><span class="w">  </span><span class="no">Heqc1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;;</span><span class="w"> </span><span class="no">Y</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">X</span><span class="o">)%</span><span class="no">imp</span><span class="w">
+          </span><span class="no">Heqc2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="no">X</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;;</span><span class="w"> </span><span class="no">Y</span><span class="w"> </span><span class="p">::</span><span class="o">=</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">)%</span><span class="no">imp</span><span class="w">
+          </span><span class="no">H</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">cequiv</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="no">c2</span><span class="w">
+          </span><span class="o">============================</span><span class="w">
+          </span><span class="no">False</span><span class="w">
+    
+    
+</span><span class="c">(** 给出他们将 eval 出不同的 heap **)</span><span class="w">
+
+  </span><span class="no">remember</span><span class="w"> </span><span class="o">(</span><span class="no">Y</span><span class="w"> </span><span class="o">!-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">!-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="no">st1</span><span class="pi">.</span><span class="w">
+  </span><span class="no">remember</span><span class="w"> </span><span class="o">(</span><span class="no">Y</span><span class="w"> </span><span class="o">!-&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="o">!-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="no">st2</span><span class="pi">.</span><span class="w">
+  </span><span class="no">assert</span><span class="w"> </span><span class="o">(</span><span class="no">H1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">empty_st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c1</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="no">st1</span><span class="o">)</span><span class="p">;</span><span class="w">
+  </span><span class="no">assert</span><span class="w"> </span><span class="o">(</span><span class="no">H2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">empty_st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="no">st2</span><span class="o">)</span><span class="p">;</span><span class="w">
+
+  </span><span class="kp">apply</span><span class="w"> </span><span class="no">H</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="no">H1</span><span class="pi">.</span><span class="w"> </span><span class="c">(** 使用 H : cequiv c1 c2 , 我们得到 **)</span><span class="w">
+  
+</span><span class="c">(* =&gt; *)</span><span class="w">  </span><span class="no">H1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">empty_st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="no">st1</span><span class="w">
+          </span><span class="no">H2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">empty_st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="no">st2</span><span class="w">
+          </span><span class="o">============================</span><span class="w">
+          </span><span class="no">False</span><span class="w">
+
+
+</span><span class="c">(** 利用 ceval 的 deterministic **)</span><span class="w">
+
+  </span><span class="no">assert</span><span class="w"> </span><span class="o">(</span><span class="no">Hcontra</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">st1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">st2</span><span class="o">)</span><span class="w">
+    </span><span class="no">by</span><span class="w"> </span><span class="o">(</span><span class="kp">apply</span><span class="w"> </span><span class="o">(</span><span class="no">ceval_deterministic</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="no">empty_st</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="ne">assumption</span><span class="o">).</span><span class="w">
+    
+</span><span class="c">(* =&gt; *)</span><span class="w">  </span><span class="no">Hcontra</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">st1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">st2</span><span class="w">
+          </span><span class="o">============================</span><span class="w">
+          </span><span class="no">False</span><span class="w">
+
+    
+</span><span class="c">(** st1, st2 are map, which are actually function! 
+    这时我们可以反用 functional extenionality，直接 apply Y 然后 discrinminate **)</span><span class="w">
+
+  </span><span class="no">assert</span><span class="w"> </span><span class="o">(</span><span class="no">Hcontra'</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">st1</span><span class="w"> </span><span class="no">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">st2</span><span class="w"> </span><span class="no">Y</span><span class="o">)</span><span class="w">
+    </span><span class="no">by</span><span class="w"> </span><span class="o">(</span><span class="kp">rewrite</span><span class="w"> </span><span class="no">Hcontra</span><span class="p">;</span><span class="w"> </span><span class="ne">reflexivity</span><span class="o">).</span><span class="w">
+  </span><span class="kp">subst</span><span class="pi">.</span><span class="w"> </span><span class="kp">inversion</span><span class="w"> </span><span class="no">Hcontra'</span><span class="pi">.</span><span class="w">  </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="extended-exercise-nondeterministic-imp">Extended Exercise: Nondeterministic Imp</h2>
+
+<blockquote>
+  <p>HAVOC roughly corresponds to an <em>uninitialized variable</em> in a low-level language like C. 
+After the HAVOC, the variable holds a fixed but arbitrary number.</p>
+</blockquote>
+
+<p>我们增加一个 <code class="highlighter-rouge">HAVOC X</code> 语句（大灾难），会为 X 随机赋一个值…类似于「未初始化变量」</p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">com</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">...</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">CHavoc</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">string</span><span class="w"> </span><span class="p">→</span><span class="w"> </span><span class="no">com</span><span class="pi">.</span><span class="w"> </span><span class="c">(* &lt;--- 新增 *)</span><span class="w">
+
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"'HAVOC' l"</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">(</span><span class="no">CHavoc</span><span class="w"> </span><span class="no">l</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kp">at</span><span class="w"> </span><span class="no">level</span><span class="w"> </span><span class="mi">60</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">imp_scope</span><span class="pi">.</span><span class="w">
+  
+
+</span><span class="k">Inductive</span><span class="w"> </span><span class="no">ceval</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">com</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">state</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">state</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kr">Prop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">...</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">E_Havoc</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">forall</span><span class="w"> </span><span class="no">st</span><span class="w"> </span><span class="o">(</span><span class="no">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">nat</span><span class="o">)</span><span class="w"> </span><span class="no">x</span><span class="o">,</span><span class="w">
+      </span><span class="no">st</span><span class="w"> </span><span class="o">=[</span><span class="w"> </span><span class="no">HAVOC</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="o">]=&gt;</span><span class="w"> </span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="o">!-&gt;</span><span class="w"> </span><span class="no">n</span><span class="o">)</span><span class="w">        </span><span class="c">(** can eval to arbitraty heap **)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h1 id="small-step">Small-Step</h1>
+
+<h2 id="deterministic">deterministic</h2>
+
+<p>also the def of partial function?</p>
+
+<p><code class="highlighter-rouge">solve_by_inverts</code></p>
+
+<p>in LTac. (used to generate proof)
+LTac doesn’t have <em>termination check</em>. (might not be able to find…)</p>
+
+<p><code class="highlighter-rouge">match</code> is back-tracking point.</p>
+
+<p>number passing in = depth of the iteration/recursion</p>
+
+<hr />
+
+<p><code class="highlighter-rouge">ST_Plus2</code> need <code class="highlighter-rouge">value v1</code>. not redundant with <code class="highlighter-rouge">ST_Plus1</code>
+we might have things not <code class="highlighter-rouge">value</code> but cannot take step as well.</p>
+
+<hr />
+
+<p>Strong Progress</p>
+
+<p>Normal form</p>
+
+<p>= no relation related to (so cannot step to)</p>
+
+<p>vs Value…</p>
+
+<p><code class="highlighter-rouge">destruct (apply t)</code>. 
+can we do that?</p>
+
+<hr />
+
+<p>Slide Q&amp;A.</p>
+
+<p>value_not_sae_as normal_form</p>
+
+<p>e.g (1+2) + 7
+e.g. 3 + 7</p>
+
+<hr />
+
+<p>One-step</p>
+
+<ul>
+  <li>plus</li>
+  <li>left  + 0</li>
+  <li>right + 0</li>
+</ul>
+
+<p>Inf-step -&gt; Inf terms</p>
+
+<p>go from 3 to <code class="highlighter-rouge">3+0</code></p>
+
+<hr />
+
+<p>Stuck</p>
+
+<p>No StepR</p>
+
+<p>0 term can step into</p>
+
+<hr />
+
+<p>Multi-Step Reduction <code class="highlighter-rouge">-&gt;*</code></p>
+
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">Inductive</span><span class="w"> </span><span class="no">multi</span><span class="w"> </span><span class="o">{</span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="no">R</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="o">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">relation</span><span class="w"> </span><span class="no">X</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">multi_refl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">),</span><span class="w"> </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">x</span><span class="w">
+  </span><span class="o">|</span><span class="w"> </span><span class="no">multi_step</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">∀</span><span class="o">(</span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">X</span><span class="o">),</span><span class="w">
+                    </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="p">→</span><span class="w">
+                    </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">y</span><span class="w"> </span><span class="no">z</span><span class="w"> </span><span class="p">→</span><span class="w">
+                    </span><span class="no">multi</span><span class="w"> </span><span class="no">R</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">z</span><span class="pi">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>can be either defined as a “head + tail” style (or “tail + head” style), or “refl + trans” style (as in <code class="highlighter-rouge">Rel.v</code>).</p>
+
+<p>the <code class="highlighter-rouge">trans</code> relation are underteministic  in terms of the transtive relation using. (you can throw infinitely many <code class="highlighter-rouge">trans</code> constructors in)</p>
+
+<blockquote>
+  <p>having multiple form so we can jump back and forth to pick one easier for proof.</p>
+</blockquote>
+
+<hr />
+
+<p>PLT PM lang</p>
+
+<p>multiple smallstep relation can be markded deepner state.qjw
+er state.</p>
+
+<hr />
+
+<p>IMP</p>
+
+<p><code class="highlighter-rouge">astep</code> no need for <code class="highlighter-rouge">value</code>`</p>
+
+<p>for <code class="highlighter-rouge">If</code>, in PLT we have 2 rules for T/F.
+here we can compute…</p>
+
+<hr />
+
+<p>Par w/o Concurrency is deterministic
+(not vice versa)</p>
+
+<p>suddenly <code class="highlighter-rouge">/ -&gt;* /</code> tuple</p>
+
+:ET
