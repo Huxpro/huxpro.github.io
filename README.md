@@ -1,7 +1,7 @@
 Hux Blog
 ========
 
-### [View Live Hux Blog &rarr;](https://huangxuan.me)  
+### [View alive Hux Blog &rarr;](https://huangxuan.me)  
 
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
@@ -11,13 +11,13 @@ Boilerplate (beta)
 
 **Bolierplate has been serveral verisons outdated. Helps wanted for updating it on par with the main repo.**
 
-Want to clone a boilerplate instead of my buzz blog? Here comes this!  
+Boilerplate provide a clean version of this buzz blog.
 
 ```
 $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 ```
 
-**[View Boilerplate Here &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
+**[View alive Boilerplate &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
 
 
 Porting 
@@ -27,8 +27,8 @@ Porting
 - [**React-SSR**](https://github.com/LucasIcarus/huxpro.github.io/tree/ssr) by @LucasIcarus
 
 
-Translation
------------
+Documents Translation
+---------------------
 
  - ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese (Simplified)**: 感谢 [@BrucZhaoR](https://github.com/BruceZhaoR) 的 [中文翻译 &rarr;](https://github.com/Huxpro/huxpro.github.io/blob/master/README.zh.md)
 
@@ -38,6 +38,8 @@ Releases
 
 #### V1.8.2
 
+- Merged #333, #336 from @JinsYin.
+- Add `Gemfile` due to increasing Bundler using.
 - TODO: `multilingual` could be more automative via configurations and convention.
 - Drop the entire `portfolio` page until a big rewrite of a better `project` page.
 
@@ -351,6 +353,15 @@ For other circumstances, check out existing issues or create a new one!
 
 FAQ
 ---
+
+
+### Errors related with `bundle`
+
+Please follow [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/) to add `jekyll`, then you could exec jekyll with dependencies managed by Bundler.
+
+```sh
+$ bundle exec jekyll serve
+```
 
 ### How can I customize the theme of code block?
 
