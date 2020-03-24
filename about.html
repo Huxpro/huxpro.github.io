@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "About"
-description: "你是我的梦想"
+description: "You still have lots more to work on."
 header-img: "img/about-bg.jpg"
 multilingual: true
 ---
@@ -10,15 +10,34 @@ multilingual: true
 
 <!-- Chinese Version -->
 <div class="zh post-container">
-    {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
-    {{ about_zh | markdownify }}
+
+    <!--copied from markdown -->
+    <blockquote><p>まだまだだね!<br>
+    You Still Have Lots More To Work On!<br>
+    Nobody beats me in tennis.<br>
+    Echizen Ryoma</p></blockquote>
+
+    <p>Hey，我是<strong>杨佳乐(jiale.yang,Young)</strong>，一只python程序猿，算法工程师，坐标上海读研。</p>
+
+    <p>目前在努力实习+发paper+做导师项目+打比赛+刷题+做其他一些想做的事，比如尝试写博客。</p>
+
+    <p>这是我的利用 <a href="https://pages.github.com/">GitHub Pages</a> 与 <a href="http://jekyll.com.cn/">Jekyll</a> 搭建的 个人博客。我在GitHub主页<a href="https://github.com/Julian-young">👉GitHub·Young </a> 。感谢邱柏荧大哥提供的搭建教程以及提供的资料，这是<a href="https://github.com/qiubaiying/qiubaiying.github.io">👉他的git仓库</a>。 如果有什么问题，欢迎联系我提出探讨~</p>
+
+    <p></p>
+    
 </div>
 
+
+<!-- <div class="zh post-container"> -->
+<!--     {% capture about_zh %}{% include about/zh.md %}{% endcapture %} -->
+<!--     {{ about_zh | markdownify }} -->
+<!-- </div> -->
+
 <!-- English Version -->
-<div class="en post-container">
-    {% capture about_en %}{% include about/en.md %}{% endcapture %}
-    {{ about_en | markdownify }}
-</div>
+<!-- <div class="en post-container"> -->
+<!--     {% capture about_en %}{% include about/en.md %}{% endcapture %} -->
+<!--     {{ about_en | markdownify }} -->
+<!-- </div> -->
 
 
 {% if site.disqus_username %}
