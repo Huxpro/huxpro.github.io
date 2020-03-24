@@ -3,8 +3,8 @@ title: EchisenYang Blog
 SEOTitle: 杨佳乐的博客 | echisenyang Blog
 header-img: img/home-bg.jpg
 email: 1102600515@qq.com
-description: "config description test"
-keyword: "config keyword test"
+description: "You still have lots more to work on."
+keyword: "echisenyang, EchisenYang Blog, 佳乐的博客"
 url: "https://echisenyang.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -72,13 +72,13 @@ netease_comment: false
 
 # Google Analytics
 # ga_track_id: 'G-V26VTX64GX'            # Format: UA-xxxxxx-xx
-# ga_domain: huangxuan.me
+ga_domain: auto
 
 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "sidebar-about-description test"
+sidebar-about-description: "You still have lots more to work on."
 sidebar-avatar: /img/avatar-hux-ny.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
@@ -106,31 +106,32 @@ friends: [
     #     title: "Su",
     #     href: "http://su.gallery/"
     # },{
-        title: "乱序",
-        href: "http://mida.re/"
-    },{
-        title: "Sherry Wu",
-        href: "https://xuechundesign.github.io"
-    },{
-        title: "Luke 的自留地",
-        href: "http://hmqk1995.github.io"
-    },{
-        title: "Ebn's Blog",
-        href: "http://ebnbin.com/"
-    },{
-        title: "SmdCn's Blog",
-        href: "http://blog.smdcn.net"
-    },{
-        title: "JiyinYiyong",
-        href: "http://tiye.me/"
-    },{
-        title: "David's Game",
-        href: "https://www.ruoyaowu.com/"
-    },{
-        title: "DHong Say",
-        href: "http://dhong.co"
-    },{
-        title: "尹峰以为",
-        href: "http://ingf.github.io/"
+#         title: "乱序",
+#         href: "http://mida.re/"
+#     },{
+#         title: "Sherry Wu",
+#         href: "https://xuechundesign.github.io"
+#     },{
+#         title: "Luke 的自留地",
+#         href: "http://hmqk1995.github.io"
+#     },{
+#         title: "Ebn's Blog",
+#         href: "http://ebnbin.com/"
+#     },{
+#         title: "SmdCn's Blog",
+#         href: "http://blog.smdcn.net"
+#     },{
+#         title: "JiyinYiyong",
+#         href: "http://tiye.me/"
+#     },{
+#         title: "David's Game",
+#         href: "https://www.ruoyaowu.com/"
+#     },{
+#         title: "DHong Say",
+#         href: "http://dhong.co"
+#     },{
+    {
+        title: "Julian-young",
+        href: "http://Julian-young.github.io"
     }
 ]
