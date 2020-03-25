@@ -4,7 +4,7 @@ title:      Logistic Regression
 subtitle:   逻辑回归
 date:       2020-01-11
 author:     Young
-header-img: img/0*xuDhGc5E9EVQdbQE.png
+header-img: img/bg-post/0*xuDhGc5E9EVQdbQE.png
 catalog: true
 tags:
     - machine learning
