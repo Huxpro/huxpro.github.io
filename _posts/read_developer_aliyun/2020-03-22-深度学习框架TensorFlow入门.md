@@ -134,10 +134,15 @@ def tensorflow_add_demo():
 ```
 
 ### 5. Tensorboard的介绍：可视化学习
-> **step1：数据序列化-events文件**
+> **step1：数据序列化-events文件** 
+
 - `tf.summary.FileWriter(logdir,graph=sess.graph)` Tensorboard通过读取tensorflow的事件文件来运行，需要将数据生成一个序列化的summary protobuf对象。
+
 > step2：启动 Tensorboard
+
 - `tensorboard --logdir="path"`
+
+
 ### 6.Operation介绍
 
 > 数据：Tensor对象
