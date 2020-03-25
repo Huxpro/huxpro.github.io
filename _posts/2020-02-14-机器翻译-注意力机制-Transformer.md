@@ -4,7 +4,7 @@ title:      PyTorch系列之机器翻译｜注意力机制｜Transformer
 subtitle:   机器翻译｜注意力机制｜Transformer
 date:       2020-02-14
 author:     Young
-header-img: img/1*CNzKOooCM4hQgK4Z89sQLQ.png
+header-img: img/bg-post/1*CNzKOooCM4hQgK4Z89sQLQ.png
 catalog: true
 tags:
     - PyTorch

@@ -4,7 +4,7 @@ title:      Machine Learning Overview
 subtitle:   机器学习概览
 date:       2020-01-07
 author:     Young
-header-img: img/robot.jpg
+header-img: img/bg-post/robot.jpg
 catalog: true
 tags:
     - machine learning

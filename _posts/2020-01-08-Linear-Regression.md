@@ -4,7 +4,7 @@ title:      Linear Regression
 subtitle:   线性回归
 date:       2020-01-08
 author:     Young
-header-img: img/1*ScEjBlA2xNW4fflEu7DJCg.png
+header-img: img/bg-post/1*ScEjBlA2xNW4fflEu7DJCg.png
 catalog: true
 tags:
     - machine learning
