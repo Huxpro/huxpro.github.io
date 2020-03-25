@@ -27,7 +27,7 @@ tags:
 
 ### 3.tensorflow结构
 
-- 开启会话的目的：看到具体的值
+> 开启会话的目的：看到具体的值
 
 - tensorflow有两个阶段：构建图阶段与操作图阶段
 
@@ -47,7 +47,8 @@ tags:
 
   - **节点OP** ：提供图中执行的操作（用节点定义操作）
 
-- **数据流图**：
+> **数据流图**：
+
 
 ![](http://www.tensorfly.cn/images/tensors_flowing.gif)
 
@@ -66,11 +67,11 @@ def tensorflow_add_demo():
 
 ### 4.图的介绍
 
-**什么是图结构？**
+> **什么是图结构？**
 
 - 图包含了一组tf.operation代表的**计算单元对象**和tf.tensor代表的**计算单元之间流动的数据** （就是数据tensor对象+操作operation对象）
 
-**图相关的操作**
+> **图相关的操作**
 
 - 默认图（在一开始，如果我们不自己创建图，则数据和操作都会定义在默认图中）
 
@@ -134,19 +135,19 @@ def tensorflow_add_demo():
 
 ### 5. Tensorboard的介绍：可视化学习
 
-**step1：数据序列化-events文件**
+> **step1：数据序列化-events文件**
 
 - ``tf.summary.FileWriter(logdir,graph=sess.graph)` Tensorboard通过读取tensorflow的事件文件来运行，需要将数据生成一个序列化的summary protobuf对象。
 
-step2：启动 Tensorboard
+> step2：启动 Tensorboard
 
 - `tensorboard --logdir="path"`
 
 ### 6.Operation介绍
 
-数据：Tensor对象
+> 数据：Tensor对象
 
-操作：Operation对象-Op
+> 操作：Operation对象-Op
 
 |      类型      |                      实例                      |
 | :------------: | :--------------------------------------------: |
@@ -176,27 +177,27 @@ step2：启动 Tensorboard
 
 ### 7.会话
 
-一个运行的tensorflow operation类，**会话包含以下两种开启方式**：
+> 一个运行的tensorflow operation类，**会话包含以下两种开启方式**：
 
 - `tf.Session()` 用于完整的程序当中，用`sess.run()`查看变量值
 - `tf.InteractiveSession()` 用于交互式上下文，直接用`.eval()`查看值，若不开启`tf.InteractiveSession()`则只能在`tf.Session()` 内部调用`.eval()`查看值
 
-会话掌握资源，用完会话需要回收资源，所以使用上下文管理器方便管理
+> 会话掌握资源，用完会话需要回收资源，所以使用上下文管理器方便管理
 
-**初始化对象时的参数**
+> **初始化对象时的参数**
 
 - `__init__(target="",graph=None,config=None)`
   - `graph=None` 使用默认图，否则传入自定义图
   - `target=None` 参数留空，会话将仅使用本地计算机的资源，可以指定服务器的地址来访问该服务器控制的计算机上的所有设备
   - `config` 可以用来打印设备信息，查看变量都在哪个设备上
 
-**会话的**`run()`
+> **会话的**`run()`
 
 - `run(fetches,feed_dict=None,option=None,run_metadata=None)`
   - fetches：单一的operation，或者列表，元组
   - feed_dict：与tf.placeholder搭配使用
 
-**feed操作**
+> **feed操作**
 
 - InvalidArgumentError: You must feed a value for placeholder tensor 'Placeholder_3' with dtype float
 
@@ -212,23 +213,187 @@ def session_demo():
         print("c_ph_value \n", c_ph_value)
 ```
 
-### 8.张量
+### 8.张量的属性与生成
 
-张量在计算中如何存储？
+> 张量在计算中如何存储？
 
 - 标量：一个数字 1 						（0阶张量）
 - 向量：一维数组 [1,2,3] 	           （1阶张量）
 - 矩阵：二维数组 [[1,2,3],[4,5,6]] （2阶张量）
 - 张量：n维数组                             （n阶张量）
 
-张量的属性
+> 张量的属性
 
 - type：数据类型
 - shape：形状
 
-创建张量：默认float32
+> 创建张量：默认float32
 
 - `tf.zeros()`
 - `tf.ones()`
 - `tf.random_normal()`
+
+### 9.张量的修改与运算
+
+> ndarray属性的修改
+
+- 类型的修改
+
+  `ndarray.astype(type)`
+
+  `ndarray.tostring()`
+
+- 形状的修改
+
+  `ndarray.reshape(shape)`：-1自动计算形状
+
+  `ndarray.resize(shape)`
+
+> 张量的变换
+
+- 类型的修改
+
+  `tf.cast(x,dtype,name=None)`相当于`ndarray.astype(type)`
+
+  不会改变原始的tensor，返回新的改变类型后的tensor
+
+- 形状的修改
+
+  - 静态形状（初始创建张量时的形状）
+
+    `tensor.set_shape(tensor,shape)`：静态形状只能修改/更新其没有完全固定下来的部分，即不能跨阶修改，不能修改已经固定的部分。
+
+
+```python
+def tensor_op_demo():
+    a_tf = tf.placeholder(dtype=tf.float32,shape=[None,None])
+    b_tf = tf.placeholder(dtype=tf.float32,shape=[None,10])
+    c_tf = tf.placeholder(dtype=tf.float32,shape=[2,3])
+    print("a_tf:",a_tf)
+    print("b_tf:",b_tf)
+
+    a_tf.set_shape(shape=[8,8])
+    b_tf.set_shape(shape=[5,10])
+    print("a_tf:",a_tf)
+    print("b_tf:",b_tf)
+
+>>> a_tf: Tensor("Placeholder_18:0", shape=(?, ?), dtype=float32)
+    b_tf: Tensor("Placeholder_19:0", shape=(?, 10), dtype=float32)
+    a_tf: Tensor("Placeholder_18:0", shape=(8, 8), dtype=float32)
+    b_tf: Tensor("Placeholder_19:0", shape=(5, 10), dtype=float32)
+    # 注意1: shape中带 ？的部分即为没有完全固定下来的部分，对于这部分静态形状可以修改或更新  
+    # 注意2: 如果对c_tf进行形状修改会报错 -》raise ValueError("Dimensions %s and %s are not compatible"
+    # 注意3: 会改变原始的tensor
+```
+
+  - 动态形状
+
+    `tf.reshape(tensor,shape)`：不会改变原始的tensor，返回新的改变类型后的tensor；可以任意修改，但是张量元素总个数必须匹配。
+
+```python
+def tensor_op_demo():
+    a_tf = tf.placeholder(dtype=tf.float32,shape=[None,None])
+    b_tf = tf.placeholder(dtype=tf.float32,shape=[None,10])
+    c_tf = tf.placeholder(dtype=tf.float32,shape=[2,3])
+    print("c_tf:",c_tf)
+    
+    c_tf_reshape = tf.reshape(c_tf, shape=[2,3,1])
+    
+    print("c_tf:",c_tf)
+    print("c_tf_reshape:",c_tf_reshape)
+
+>>> c_tf: Tensor("Placeholder_29:0", shape=(2, 3), dtype=float32)
+    c_tf: Tensor("Placeholder_29:0", shape=(2, 3), dtype=float32)
+    c_tf_reshape: Tensor("Reshape:0", shape=(2, 3, 1), dtype=float32)
+    # 注意1: 不会改变原始的tensor，返回新的改变类型后的tensor
+    # 注意2: 张量元素总个数必须匹配
+    # 注意3: 如果变换前后elements总数不匹配会报错 InvalidArgumentError: Cannot reshape a tensor with 6 elements to shape [2,3,2] (12 elements) 
+```
+
+> 张量的数学运算 [**API v2.1**](https://www.tensorflow.org/api_docs/python/tf/math/) 
+
+- 算术运算符
+- 基本数学函数
+- 矩阵运算
+- reduce操作
+- 序列索引操作
+
+### 10.变量的介绍
+
+> tensorflow变量是表示程序处理的共享持久化的最佳方法，变量通过`tf.Variable` OP类进行操作
+
+> 变量的特点
+
+- 存储持久化
+- 可修改值
+- 可指定被训练（变量存储模型参数）
+
+> 创建变量
+
+```python
+tf.Variable(
+    initial_value=None, trainable=None, name=None)
+
+# initial_value：初始化的值
+# trainable：是否被训练
+```
+
+```python
+def variable_demo():
+    # 指定命名空间的好处：代码模块化，用命名空间会显示的更清晰
+    with tf.variable_scope("my_scope"):
+        a_var = tf.Variable(initial_value=40)
+        b_var = tf.Variable(initial_value=50)
+        c_var = a_var + b_var
+    print("a_var:",a_var)
+    print("b_var:",b_var)
+    print("c_var:",c_var)
+    
+    # FailedPreconditionError: Attempting to use uninitialized value Variable
+        # initial_value只是给定初始的值，但是并没有对变量进行初始化
+        
+    init = tf.global_variables_initializer()    
+    
+    with tf.Session() as sess:
+        # 变量需要显示初始化，才能运行值
+        
+        sess.run(init)
+        c_var_value = sess.run([c_var,a_var,b_var])
+    print("c_var_value:",c_var_value)
+    
+>>> a_var: <tf.Variable 'my_scope_1/Variable:0' shape=() dtype=int32_ref>
+    b_var: <tf.Variable 'my_scope_1/Variable_1:0' shape=() dtype=int32_ref>
+    c_var: Tensor("my_scope_1/add:0", shape=(), dtype=int32)
+    c_var_value: [90, 40, 50]
+```
+
+### 11.基础与高级API
+
+> 基础的神经网络组件
+
+`tf.app` 相当于为tensorflow进行的脚本提供了一个main函数的入口，可以指定脚本运行的flags
+
+`tf.image` 图处理操作
+
+`tf.gfile` 文件操作函数
+
+`tf.summary` 用来生成tensorboard可用的统计日志
+
+`tf.python_io` 用来读写TFRecords文件
+
+`tf.train` 提供了一些训练器，与`tf.nn` 组合起来，实现一些网络的优化计算
+
+`tf.nn` 提供了构建神经网络的底层函数，是tenorflow构建网络的核心模块。其中包含了添加各种层的函数，比如卷积层，池化层
+
+> 高级API
+
+`tf.keras` 好用！本来是一个独立的深度学习库，tensorflow将其学习过来，增加这部分模块在于快速构建模型
+
+`tf.layes` 以更高级的概念层来定义一个模型，类似 `tf.keras`
+
+`tf.contrib` tf.contrib.layers提供能够将计算图中的 网络层、正则化、摘要操作 睡构建计算图的高级操作，但是tf.contrib包含不稳定的代码，后续的版本可能会改变
+
+`tf.estimator` 一个estimator相当于 model+training+evaluate的合体，在模块中，已经实现了几种简单的分类和回归器，包括：baseline、learing和dnn，这里的dnn网络只是全连接层，没有提供卷积之类的
+
+![](https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/SwDf6C.jpg)
 
