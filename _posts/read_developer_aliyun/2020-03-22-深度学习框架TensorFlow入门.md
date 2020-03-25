@@ -372,11 +372,17 @@ def variable_demo():
 > 基础的神经网络组件
 
 `tf.app` 相当于为tensorflow进行的脚本提供了一个main函数的入口，可以指定脚本运行的flags
+
 `tf.image` 图处理操作
+
 `tf.gfile` 文件操作函数
+
 `tf.summary` 用来生成tensorboard可用的统计日志
+
 `tf.python_io` 用来读写TFRecords文件
+
 `tf.train` 提供了一些训练器，与`tf.nn` 组合起来，实现一些网络的优化计算
+
 `tf.nn` 提供了构建神经网络的底层函数，是tenorflow构建网络的核心模块。其中包含了添加各种层的函数，比如卷积层，池化层
 
 > 高级API
