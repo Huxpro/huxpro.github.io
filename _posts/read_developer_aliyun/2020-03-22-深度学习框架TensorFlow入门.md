@@ -5,6 +5,7 @@ layout: post
 author: "echisenyang"
 header-style: text
 hidden: true
+catalog: true
 tags:
   - 笔记
   - 人工智能学习路线
