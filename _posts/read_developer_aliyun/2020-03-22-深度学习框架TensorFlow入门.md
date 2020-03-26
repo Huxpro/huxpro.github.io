@@ -397,3 +397,349 @@ def variable_demo():
 
 ![](https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/SwDf6C.jpg)
 
+### 12.案例：自实现线性回归
+
+> 流程分析
+
+```python
+def linear_regression_demo():
+    #1.准备数据
+    x = tf.random_normal(shape=[100,1])
+    y_true = tf.matmul(x,[[0.8]]) + 0.7
+    
+    #2.构建模型
+    weights = tf.Variable(initial_value=tf.random_normal(shape=[1,1]))
+    bias = tf.Variable(initial_value=tf.random_normal(shape=[1,1]))
+    y_predict = tf.matmul(x,weights) + bias
+    
+    #3.构造损失函数
+    err_loss = tf.reduce_mean(tf.square(y_predict - y_true))
+    
+    #4.优化损失
+    optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(err_loss)
+    ## 显示初始化变量
+    init = tf.global_variables_initializer()
+    ## 开启会话
+    with tf.Session() as sess:
+        # 初始化变量
+        sess.run(init)
+        # 查看初始化模型参数后的值
+        print("训练前模型的参数为：权重%f,偏置%f,损失%f" % (weights.eval(),bias.eval(),err_loss.eval()))
+        
+        for i in range(400):
+            sess.run(optimizer)
+            # 打印每次训练的值
+            print("训练前模型的参数为：权重%f,偏置%f,损失%f" % (weights.eval(),bias.eval(),err_loss.eval()))
+            
+>>> 训练前模型的参数为：权重-1.175952,偏置0.759938,损失4.053728
+    训练前模型的参数为：权重-1.137560,偏置0.755754,损失3.646768
+    训练前模型的参数为：权重-1.097856,偏置0.764003,损失2.874465
+    训练前模型的参数为：权重-1.067260,偏置0.765181,损失2.794361
+    ...
+    训练前模型的参数为：权重0.799374,偏置0.699995,损失0.000000
+		训练前模型的参数为：权重0.799386,偏置0.699992,损失0.000000
+```
+
+> 学习率设置、步数的设置与梯度爆炸
+
+在极端情况下，权重的权值变得非常大以至于溢出，导致nan值
+
+如何解决梯度爆炸哦的问题
+
+- 重新设计网络
+- 调整学习率
+- 使用梯度截断（在训练过程中检查和限制梯度的大小）
+- 使用激活函数
+
+```python
+# 设置learning_rate=5的情形
+>>> 
+训练前模型的参数为：权重-0.928330,偏置-2.045089,损失10.530254
+训练前模型的参数为：权重11.713202,偏置22.232876,损失503.227844
+训练前模型的参数为：权重-99.408081,偏置-195.594910,损失50171.000000
+训练前模型的参数为：权重1305.262573,偏置1970.778076,损失5345798.500000
+训练前模型的参数为：权重-12858.165039,偏置-19413.482422,损失525646880.000000
+...
+训练前模型的参数为：权重1238439457430962176.000000,偏置3726078330521255936.000000,损失inf
+训练前模型的参数为：权重-9055882331084029952.000000,偏置-32826618936647745536.000000,损失inf
+训练前模型的参数为：权重117351658884811456512.000000,偏置301370648411355742208.000000,损失inf
+...
+训练前模型的参数为：权重nan,偏置nan,损失nan
+训练前模型的参数为：权重nan,偏置nan,损失nan
+```
+
+```python
+# 定义weights参数时 trainable=False
+>>>
+训练前模型的参数为：权重-0.974608,偏置0.621385,损失2.850980
+训练前模型的参数为：权重-0.974608,偏置0.601612,损失3.234275
+训练前模型的参数为：权重-0.974608,偏置0.669482,损失3.580407
+...
+训练前模型的参数为：权重-0.974608,偏置0.679230,损失2.966820
+训练前模型的参数为：权重-0.974608,偏置0.651485,损失2.860602
+```
+
+### 14.增加其他功能
+
+- ## 功能一：增加变量显示
+
+  - 1.收集变量
+
+    `tf.summary.scalar(name='',tensor)` ：收集对于损失函数和准确率等单值变量
+
+    `tf.summary.histogram(name='',tensor)` ：收集高维度的变量参数，看分布状况
+
+  - 2.合并变量写入事件文件
+
+    `merged = tf.summary.merge_all()`
+
+    运行合并： `summary=sess.run(merged)` 每次迭代都运行
+
+    添加：`FileWriter.add_summary(summary,i)` i表示第几次的值
+
+  > 增加变量显示功能（tensorboard）
+  >
+  > 1）创建事件文件读写器 
+  >
+  > ​      file_writer = tf.summary.FileWriter("./tmp/linear/",graph=sess.graph)
+  > 2）收集变量
+  > ​      tf.summary.scalar("err_loss",err_loss)
+  > ​      tf.summary.histogram("weights",weights)
+  > ​      tf.summary.histogram("bias",bias)
+  > 3）合并变量
+  > ​      merged = tf.summary.merge_all()
+  > 4）运行合并&写入事件文件
+  > ​      summary = sess.run(merged)
+  > ​      file_writer.add_summary(summary,i)
+  > 5）开启localhost:6006
+  > ​      tensorboard --logdir="./tmp/linear/"
+
+```python
+def linear_regression_demo():
+  	"""
+  	增加变量显示功能（tensorboard）
+  	"""
+    #1.准备数据
+    x = tf.random_normal(shape=[100,1])
+    y_true = tf.matmul(x,[[0.8]]) + 0.7
+    
+    #2.构建模型
+    weights = tf.Variable(initial_value=tf.random_normal(shape=[1,1]))
+    bias = tf.Variable(initial_value=tf.random_normal(shape=[1,1]))
+    y_predict = tf.matmul(x,weights) + bias
+    
+    #3.构造损失函数
+    err_loss = tf.reduce_mean(tf.square(y_predict - y_true))
+    
+    #4.优化损失
+    optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(err_loss)
+    
+    ### step2:收集变量
+    tf.summary.scalar("err_loss",err_loss)
+    tf.summary.histogram("weights",weights)
+    tf.summary.histogram("bias",bias)
+    
+    ### step3:合并变量
+    merged = tf.summary.merge_all()
+    
+    init = tf.global_variables_initializer()
+    with tf.Session() as sess:
+        sess.run(init)
+        print("训练前模型的参数为：权重%f,偏置%f,损失%f" % (weights.eval(),bias.eval(),err_loss.eval()))
+        
+        ### step1:创建事件文件读写器
+        file_writer = tf.summary.FileWriter("./tmp/linear/",graph=sess.graph)
+        
+        for i in range(100):
+            sess.run(optimizer)
+            print("训练前模型的参数为：权重%f,偏置%f,损失%f" % (weights.eval(),bias.eval(),err_loss.eval()))
+            ### step4:运行合并&写入事件文件
+            summary = sess.run(merged)
+            file_writer.add_summary(summary,i)
+```
+
+<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/HEbwDe.png" style="zoom:50%;" />
+
+![](https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/uXi3vM.png)
+
+- ## 功能二：增加命名空间+修改指令名称
+
+```python
+def linear_regression_demo():
+  	"""
+  	add function:增加命名空间+修改指令名称
+  	"""
+    with tf.variable_scope("prepare_data"):
+        #1.准备数据
+        x = tf.random_normal(shape=[100,1],name="feature")
+        y_true = tf.matmul(x,[[0.8]]) + 0.7
+    
+    with tf.variable_scope("bulid_model"):
+        #2.构建模型
+        weights = tf.Variable(initial_value=tf.random_normal(shape=[1,1]),name="Weights")
+        bias = tf.Variable(initial_value=tf.random_normal(shape=[1,1]),name="Bias")
+        y_predict = tf.matmul(x,weights) + bias
+    
+    with tf.variable_scope("loss_function"):
+        #3.构造损失函数
+        err_loss = tf.reduce_mean(tf.square(y_predict - y_true))
+    
+    with tf.variable_scope("optimizer"):
+        #4.优化损失
+        optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(err_loss)
+    
+    ### step2:收集变量
+    tf.summary.scalar("err_loss",err_loss)
+    tf.summary.histogram("weights",weights)
+    tf.summary.histogram("bias",bias)
+    
+    ### step3:合并变量
+    merged = tf.summary.merge_all()
+    
+    init = tf.global_variables_initializer()
+    with tf.Session() as sess:
+        sess.run(init)
+        print("训练前模型的参数为：权重%f,偏置%f,损失%f" % (weights.eval(),bias.eval(),err_loss.eval()))
+        
+        ### step1:创建事件文件
+        file_writer = tf.summary.FileWriter("./tmp/linear/",graph=sess.graph)
+        
+        for i in range(100):
+            sess.run(optimizer)
+            print("训练前模型的参数为：权重%f,偏置%f,损失%f" % (weights.eval(),bias.eval(),err_loss.eval()))
+            ### step4:运行合并&写入事件文件
+            summary = sess.run(merged)
+            file_writer.add_summary(summary,i)
+```
+
+<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/RzfKZe.png" style="zoom:50%;" />
+
+- ## 功能三：模型的保存与加载
+
+  `tf.train.Saver(var_list=None,max_to_keep=5)` 
+
+  1.保存和加载模型，文件保存格式为checkpoint文件
+
+  2.var_list 指定将要保存和还原的变量，可以作为一个dict或者列表传递
+
+  3.max_to_keep 指示要保留的最近检查点文件的最大数量，创建新文件时，会删除旧的文件。如果无或0，则保留所有检查点文件。默认为5，即保留最新的5个检查点文件
+
+  > 模型的报错与加载
+  >
+  > 1）实例化 Saver
+  >
+  > 2）保存 `saver.save(sess,path)`  
+  >
+  > ​      ⚠️这里传入的参数是sess，因为模型保存的是参数，参数在sess中可以看到
+  >
+  > 3）加载 `saver.restore(sess,path)`
+
+```python
+def linear_regression_demo():
+    with tf.variable_scope("prepare_data"):
+        #1.准备数据 x y_true
+    
+    with tf.variable_scope("bulid_model"):
+        #2.构建模型 weights bias y_predict
+        
+    with tf.variable_scope("loss_function"):
+        #3.构造损失函数 err_loss
+        
+    with tf.variable_scope("optimizer"):
+        #4.优化损失 optimizer
+        
+    ### step2:收集变量
+    ### step3:合并变量
+   
+    #### 实例化 Saver
+    saver = tf.train.Saver()
+    
+    init = tf.global_variables_initializer()
+    with tf.Session() as sess:
+        sess.run(init)
+        ### step1:创建事件文件
+        
+#         for i in range(100):
+#             sess.run(optimizer)
+#             print("训练前模型的参数为：权重%f,偏置%f,损失%f" % (weights.eval(),bias.eval(),err_loss.eval()))
+#             ### step4:运行合并&写入事件文件
+#             summary = sess.run(merged)
+#             file_writer.add_summary(summary,i)
+            
+#             #### 保存模型
+#             if i%10==0:
+#                 saver.save(sess,"./tmp/model/my_linear.ckpt")
+
+        #### 加载模型
+        if os.path.exists("./tmp/model/checkpoint"):
+            saver.restore(sess,"./tmp/model/my_linear.ckpt")
+            
+        print("训练后模型的参数为：权重%f,偏置%f,损失%f" % (weights.eval(),bias.eval(),err_loss.eval()))
+        
+>>> 训练前模型的参数为：权重-1.062648,偏置0.165306,损失4.385647
+    INFO:tensorflow:Restoring parameters from ./tmp/model/my_linear.ckpt
+    训练后模型的参数为：权重0.800000,偏置0.700000,损失0.000000
+
+```
+
+- ## 功能四：命令行参数
+
+> 命令行参数的使用
+>
+> 1）`tf.app.flags` 支持应用从命令行接受参数，可以用来指定集群配置等
+>
+> tf.app.flags.DEFINE_integer("max_step",0,"训练模型的步骤")
+>
+> tf.app.flags.DEFINE_string("model_dir"," ","模型保存的路径+模型名称")
+>
+> 2）`FLAGS = tf.app.flags.FLAGS` 简化使用
+>
+> 通过FLAGS.max_step调用命令行中传过来的参数
+>
+> 3）通过`tf.app.run()`启动`main(argv)`函数
+
+```python
+tf.app.flags.DEFINE_string("model_dir","./tmp/model/","模型保存的路径+模型名称")
+tf.app.flags.DEFINE_integer("max_step",100,"训练模型的步骤")
+FLAGS = tf.app.flags.FLAGS
+
+# 开启训练
+for i in range(FLAGS.max_step):
+		sess.run(train_op)
+# 保存模型
+saver.save(sess,FLAGS.model_dir)
+```
+
+```python
+# command_line_demo.py
+
+import tensorflow as tf
+# 1)定义命令行参数
+tf.app.flags.DEFINE_integer("max_step",100,"训练模型的步骤")
+tf.app.flags.DEFINE_string("model_dir","unknown","模型保存的路径+模型名称")
+tf.app.flags.DEFINE_string('f', '', 'kernel')
+# 2）简化变量名
+FLAGS = tf.app.flags.FLAGS
+
+def command_line():
+    print("max_step:",FLAGS.max_step)
+    print("model_dir:",FLAGS.model_dir)
+    return None
+  
+def main(argv):
+  	command_line()
+  	ruturn None
+
+if __name__ == "__main__":
+    # command_line()
+    tf.app.run()
+    
+    
+>>> python command_line_demo.py
+>>> max_step: 100
+		model_dir: unknown
+>>> python command_line_demo.py --max_step=200 --model_dir="hello world"
+>>> max_step: 200
+		model_dir: hello world
+```
+
