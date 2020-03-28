@@ -1,5 +1,5 @@
 ---
-title: "「人工智能学习路线」4"
+title: "「人工智能学习路线」5"
 subtitle: "Python科学计算库Numpy"
 layout: post
 author: "echisenyang"
