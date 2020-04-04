@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      github提速方案
-subtitle:   efficient mac
+title:      Neural Machine Translation (seq2seq) Tutorial
+subtitle:   nmt
 date:       2020-03-29
 author:     Young
 header-img: img/bg-post/1*Rqcd5jAPzRSg5gPuRf5T1g.png
