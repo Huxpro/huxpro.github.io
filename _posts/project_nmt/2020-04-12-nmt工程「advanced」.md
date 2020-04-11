@@ -362,13 +362,14 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
       gnmt_v2: similar to gnmt, but use current bottom layer to compute
           attention.\
       """)
-parser.add_argument(
+  parser.add_argument(
       "--pass_hidden_state", type="bool", nargs="?", const=True,
       default=True,
       help="""\
       Whether to pass encoder's hidden state to decoder when using an attention
       based model.\
       """)
+
 
   # optimizer
   parser.add_argument("--optimizer", type=str, default="sgd", help="sgd | adam")
