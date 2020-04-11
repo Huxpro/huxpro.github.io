@@ -426,7 +426,7 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
       target.\
       """)
   
-# Sequence lengths
+  # Sequence lengths
   parser.add_argument("--src_max_len", type=int, default=50,
                       help="Max length of src sequences during training.")
   parser.add_argument("--tgt_max_len", type=int, default=50,
