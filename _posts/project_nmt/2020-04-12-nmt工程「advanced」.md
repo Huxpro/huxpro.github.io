@@ -296,7 +296,7 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
 - all 
 
   - "--**encoder_type**", type=str, default="uni", help="""\
-      uni | bi | gnmt. For bi, we build num_layers/2 bi-directional layers.For
+      uni \ bi \ gnmt. For bi, we build num_layers/2 bi-directional layers.For
           gnmt, we build 1 bi-directional layer, and (num_layers - 1) uni-
       directional layers.\
         """
@@ -304,10 +304,10 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
                       default=False,
                         help="Whether to add residual connections."
   - "--**attention**", type=str, default="", help="""\
-        luong | scaled_luong | bahdanau | normed_bahdanau or set to "" for no
+        luong \ scaled_luong \ bahdanau \ normed_bahdanau or set to "" for no
         attention\
         """
-  - "--**optimizer**", type=str, default="sgd", help="sgd | adam"
+  - "--**optimizer**", type=str, default="sgd", help="sgd\adam"
   - "--**vocab_prefix**", type=str, default=None, expect files with src\tgt suffixes.If None, extract from
           train files. 
   - "--**share_vocab**", type="bool", nargs="?", const=True,
