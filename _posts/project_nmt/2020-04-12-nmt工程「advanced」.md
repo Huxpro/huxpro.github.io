@@ -277,6 +277,8 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
 - default
 
   ```python
+  mkdir /home/jiale/tmp/nmt_attention_model
+  
   CUDA_VISIBLE_DEVICES=0 python -m nmt.nmt \
       --attention=scaled_luong \
       --src=vi --tgt=en \
@@ -322,7 +324,7 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
       decoder with greedy helper.\
         """
   
-  ```python
+```python
   def add_arguments(parser):
   """Build ArgumentParser."""
   parser.register("type", "bool", lambda v: v.lower() == "true")
@@ -370,7 +372,6 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
       based model.\
       """)
 
-
   # optimizer
   parser.add_argument("--optimizer", type=str, default="sgd", help="sgd | adam")
   parser.add_argument("--learning_rate", type=float, default=1.0,
@@ -388,14 +389,14 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
                       default=True,
                       help=("Whether try colocating gradients with "
                             "corresponding op"))
-  
+
   # initializer
   parser.add_argument("--init_op", type=str, default="uniform",
                       help="uniform | glorot_normal | glorot_uniform")
   parser.add_argument("--init_weight", type=float, default=0.1,
                       help=("for uniform init_op, initialize weights "
                            "between [-this, this]."))
-  
+
   # data
   parser.add_argument("--src", type=str, default=None,
                       help="Source suffix, e.g., en.")
@@ -409,7 +410,7 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
                       help="Test prefix, expect files with src/tgt suffixes.")
   parser.add_argument("--out_dir", type=str, default=None,
                       help="Store log/model files.")
-  
+
   # Vocab
   parser.add_argument("--vocab_prefix", type=str, default=None, help="""\
       Vocab prefix, expect files with src/tgt suffixes.If None, extract from
@@ -425,7 +426,7 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
       Whether to use the source vocab and embeddings for both source and
       target.\
       """)
-  
+
   # Sequence lengths
   parser.add_argument("--src_max_len", type=int, default=50,
                       help="Max length of src sequences during training.")
@@ -451,7 +452,7 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
   parser.add_argument("--source_reverse", type="bool", nargs="?", const=True,
                       default=False, help="Reverse source sequence.")
   parser.add_argument("--batch_size", type=int, default=128, help="Batch size.")
-  
+
   parser.add_argument("--steps_per_stats", type=int, default=100,
                       help=("How many training steps to do per stats logging."
                             "Save checkpoint every 10x steps_per_stats"))
@@ -463,7 +464,7 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
   # BPE
   parser.add_argument("--bpe_delimiter", type=str, default=None,
                       help="Set to @@ to activate BPE")
-  
+
   # Misc
   parser.add_argument("--num_gpus", type=int, default=1,
                       help="Number of gpus in each worker.")
@@ -484,7 +485,7 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
                             "hparams values from FLAGS."))
   parser.add_argument("--random_seed", type=int, default=None,
                     help="Random seed (>0, set a specific seed).")
-  
+
   # Inference
   parser.add_argument("--ckpt", type=str, default="",
                       help="Checkpoint file to load a model for inference.")
@@ -508,11 +509,12 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
       """))
   parser.add_argument("--length_penalty_weight", type=float, default=0.0,
                       help="Length penalty for beam search.")
-  
+
   # Job info
   parser.add_argument("--jobid", type=int, default=0,
                       help="Task id of the worker.")
   parser.add_argument("--num_workers", type=int, default=1,
                       help="Number of workers (inference only).")
-  ```
+```
+
 
