@@ -1,2 +1,2 @@
-![mjA4OZ](https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/mjA4OZ.png)
+![c7Be6a](https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/c7Be6a.png)
 
