@@ -1,5 +1,5 @@
 ---
-title: "自然语言处理"
+title: "TensorFlow高层封装"
 subtitle: "TensorFlow：实战Google深度学习框架「10」"
 layout: post
 author: "echisenyang"
@@ -12,8 +12,6 @@ tags:
 ---
 
 
-
-## TensorFlow高层封装
 
 ### TensorFlow 高层封装总览
 
