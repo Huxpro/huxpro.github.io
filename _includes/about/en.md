@@ -6,9 +6,9 @@ In the past, I worked on [Alitrip (Fliggy)](https://www.alitrip.com/) mobile and
 
 I studied BA, Digital Media Art at [Communication University of China](https://en.wikipedia.org/wiki/Communication_University_of_China) and MS, Computer Science with a focus on programming languages theory and construction at [Rochester Institute of Technology](https://en.wikipedia.org/wiki/Rochester_Institute_of_Technology).
 
-##### My PL Spectrum
+##### [My PL Spectrum](https://huangxuan.me/PL-chart/)
 
-<iframe style="border:0; width: 100%; height: 600px" src="https://huangxuan.me/PL-chart/"></iframe>
+<!-- <iframe style="border:0; width: 100%; height: 600px" src="https://huangxuan.me/PL-chart/"></iframe> -->
 
 ##### Appearence
 
