@@ -9,6 +9,7 @@ catalog: true
 tags:
   - 笔记
   - 课程
+  - CS224N
 ---
 
 ## {[word2vec skip-gram+negative sampling tf 实现](https://github.com/echisenyang/word2vec-tensorflow)}
