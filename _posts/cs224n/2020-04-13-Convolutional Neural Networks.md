@@ -8,7 +8,6 @@ hidden: true
 catalog: true
 tags:
   - 笔记
-  - 课程
   - CS224N
 ---
 
