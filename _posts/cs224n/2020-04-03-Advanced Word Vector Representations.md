@@ -62,7 +62,7 @@ tags:
 
 - Increase in size with vocabulary
 - Very high dimensional: require a lot of storage
-- Subsequent classiﬁcaRon models have sparsity issues
+- Subsequent classiﬁcation models have sparsity issues
 
 #### **Solution: Low dimensional vectors**
 
