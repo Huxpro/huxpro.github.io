@@ -16,19 +16,21 @@ tags:
 
 A **sequence-to-sequence model** is a model that takes a sequence of items (words, letters, features of an images…etc) and outputs another sequence of items. A trained model would work like this:
 
-![](https://jalammar.github.io/images/seq2seq_1.mp4)
+
+
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/seq2seq_1.mp4)
 
 In neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:
 
-![](https://jalammar.github.io/images/seq2seq_2.mp4)
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/seq2seq_2.mp4)
 
 The encoder processes each item in the input sequence, it compiles the information it captures into a vector (called the context). After processing the entire input sequence, the encoder sends the context over to the decoder, which begins producing the output sequence item by item.
 
-![](https://jalammar.github.io/images/seq2seq_3.mp4)
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/seq2seq_3.mp4)
 
 The same applies in the case of machine translation.
 
-![](https://jalammar.github.io/images/seq2seq_4.mp4)
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/seq2seq_4.mp4)
 
 
 
@@ -50,7 +52,7 @@ By design, a RNN takes two inputs at each time step: an input (in the case of th
 
 Now that we’ve introduced our main vectors/tensors, let’s recap the mechanics of an RNN and establish a visual language to describe these models:
 
-![](https://jalammar.github.io/images/RNN_1.mp4)
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/RNN_1.mp4)
 
 The next RNN step takes the second input vector and hidden state #1 to create the output of that time step. Later in the post, we’ll use an animation like this to describe the vectors inside a neural machine translation model.
 
@@ -58,7 +60,7 @@ In the following visualization, each pulse for the encoder or decoder is that RN
 
 Let’s look at the hidden states for the encoder. Notice how the last hidden state is actually the context we pass along to the decoder.
 
-![](https://jalammar.github.io/images/seq2seq_5.mp4)
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/seq2seq_5.mp4)
 
 The decoder also maintains a hidden states that it passes from one time step to the next. We just didn’t visualize it in this graphic because we’re concerned with the major parts of the model for now.
 
@@ -66,7 +68,7 @@ Let’s now look at another way to visualize a sequence-to-sequence model. This 
 
 
 
-![](https://jalammar.github.io/images/seq2seq_6.mp4)
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/seq2seq_6.mp4)
 
 
 
@@ -80,7 +82,7 @@ Let’s continue looking at attention models at this high level of abstraction. 
 
 First, the encoder passes a lot more data to the decoder. Instead of passing the last hidden state of the encoding stage, the encoder passes *all* the hidden states to the decoder:
 
-![](https://jalammar.github.io/images/seq2seq_7.mp4)
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/seq2seq_7.mp4)
 
 Second, an attention decoder does an extra step before producing its output. In order to focus on the parts of the input that are relevant to this decoding time step, the decoder does the following:
 
@@ -88,7 +90,7 @@ Second, an attention decoder does an extra step before producing its output. In 
 2. Give each hidden states a score (let’s ignore how the scoring is done for now)
 3. Multiply each hidden states by its softmaxed score, thus amplifying hidden states with high scores, and drowning out hidden states with low scores
 
-![](https://jalammar.github.io/images/attention_process.mp4)
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/attention_process.mp4)
 
 This scoring exercise is done at each time step on the decoder side.
 
@@ -102,11 +104,11 @@ Let us now bring the whole thing together in the following visualization and loo
 6. The output of the feedforward neural networks indicates the output word of this time step.
 7. Repeat for the next time steps
 
-![](https://jalammar.github.io/images/attention_tensor_dance.mp4)
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/attention_tensor_dance.mp4)
 
 This is another way to look at which part of the input sentence we’re paying attention to at each decoding step:
 
-![](https://jalammar.github.io/images/seq2seq_9.mp4)
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/seq2seq_9.mp4)
 
 Note that the model isn’t just mindless aligning the first word at the output with the first word from the input. It actually learned from the training phase how to align words in that language pair (French and English in our example). An example for how precise this mechanism can be comes from the attention papers listed above:
 
