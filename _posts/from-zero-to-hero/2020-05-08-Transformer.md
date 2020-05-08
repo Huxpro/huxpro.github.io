@@ -191,14 +191,19 @@ The encoder start by processing the input sequence. **The output of the top enco
 
 ![transformer_decoding_1](https://jalammar.github.io/images/t/transformer_decoding_1.gif)
 
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/transformer_decoding_1.gif)
+
 <video width="100%" height="auto" loop autoplay controls>
   <source src="https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/transformer_decoding_1.gif" type="video/gif">
 </video>
 
 The following steps repeat the process until a special symbol is reached indicating the transformer decoder has completed its output. The output of each step is fed to the bottom decoder in the next time step, and the decoders bubble up their decoding results just like the encoders did. And just like we did with the encoder inputs, we embed and add positional encoding to those decoder inputs to indicate the position of each word.
 
+
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/transformer_decoding_2.gif)
+
 <video width="100%" height="auto" loop autoplay controls>
-  <source src="https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/transformer_decoding_2.gif" type="video/gif">
+  <source src="https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/transformer_decoding_2.gif" type="video/mp4">
 </video>
 
 The self attention layers in the decoder operate in a slightly different way than the one in the encoder:
