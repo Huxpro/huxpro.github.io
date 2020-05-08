@@ -16,7 +16,9 @@ tags:
 
 A **sequence-to-sequence model** is a model that takes a sequence of items (words, letters, features of an images…etc) and outputs another sequence of items. A trained model would work like this:
 
-
+<video width="100%" height="auto" loop autoplay controls>
+  <source src="https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/seq2seq_1.mp4" type="video/mp4">
+</video>
 
 ![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/seq2seq_1.mp4)
 
