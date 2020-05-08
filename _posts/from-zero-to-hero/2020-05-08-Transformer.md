@@ -189,17 +189,15 @@ This goes for the sub-layers of the decoder as well. If we’re to think of a Tr
 
 The encoder start by processing the input sequence. **The output of the top encoder** is then **transformed into a set of attention vectors K and V**. These are to be **used by each decoder** in its **“encoder-decoder attention” layer** which helps the decoder focus on appropriate places in the input sequence:
 
-![transformer_decoding_1](https://jalammar.github.io/images/t/transformer_decoding_1.gif)
 
-<video width="100%" height="auto" loop autoplay controls>
-  <source src="https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/transformer_decoding_1.gif" type="video/gif">
-</video>
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/transformer_decoding_1.gif)
+
 
 The following steps repeat the process until a special symbol is reached indicating the transformer decoder has completed its output. The output of each step is fed to the bottom decoder in the next time step, and the decoders bubble up their decoding results just like the encoders did. And just like we did with the encoder inputs, we embed and add positional encoding to those decoder inputs to indicate the position of each word.
 
-<video width="100%" height="auto" loop autoplay controls>
-  <source src="https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/transformer_decoding_2.gif" type="video/gif">
-</video>
+
+![](https://gitee.com/echisenyang/GiteeForFileUse/raw/master/gif/transformer_decoding_2.gif)
+
 
 The self attention layers in the decoder operate in a slightly different way than the one in the encoder:
 
@@ -274,11 +272,8 @@ Follow-up works:
 
 Thanks to:
 
-https://jalammar.github.io/illustrated-transformer/
-
 - [The Illustrated GPT-2 (Visualizing Transformer Language Models)](https://jalammar.github.io/illustrated-gpt2/)
-
+- [jalammar](https://jalammar.github.io/illustrated-transformer/)
 - 这里强行插入一段简单提下Transformer，尽管上面提到了，但是说的还不完整，补充两句。首先，Transformer是个叠加的“自注意力机制（Self Attention）”构成的深度网络，是目前NLP里最强的特征提取器，注意力这个机制在此被发扬光大，从任务的配角不断抢戏，直到Transformer一跃成为踢开RNN和CNN传统特征提取器，荣升头牌，大红大紫。你问了：什么是注意力机制？这里再插个广告，对注意力不了解的可以参考鄙人16年出品17年修正的下文：“[深度学习中的注意力模型](https://zhuanlan.zhihu.com/p/37601161)”，补充下相关基础知识，如果不了解注意力机制你肯定会落后时代的发展。而介绍Transformer比较好的文章可以参考以下两篇文章：一个是Jay Alammar可视化地介绍Transformer的博客文章[The Illustrated Transformer](https://link.zhihu.com/?target=https%3A//jalammar.github.io/illustrated-transformer/) ，非常容易理解整个机制，建议先从这篇看起；然后可以参考哈佛大学NLP研究组写的“[The Annotated Transformer.](https://link.zhihu.com/?target=http%3A//nlp.seas.harvard.edu/2018/04/03/attention.html) ”，代码原理双管齐下，讲得非常清楚。我相信上面两个文章足以让你了解Transformer了，所以这里不展开介绍。
-
 - 其次，我的判断是Transformer在未来会逐渐替代掉RNN成为主流的NLP工具，RNN一直受困于其并行计算能力，这是因为它本身结构的序列性依赖导致的，尽管很多人在试图通过修正RNN结构来修正这一点，但是我不看好这种模式，因为给马车换轮胎不如把它升级到汽车，这个道理很好懂，更何况目前汽车的雏形已经出现了，干嘛还要执着在换轮胎这个事情呢？是吧？再说CNN，CNN在NLP里一直没有形成主流，CNN的最大优点是易于做并行计算，所以速度快，但是在捕获NLP的序列关系尤其是长距离特征方面天然有缺陷，不是做不到而是做不好，目前也有很多改进模型，但是特别成功的不多。综合各方面情况，很明显Transformer同时具备并行性好，又适合捕获长距离特征，没有理由不在赛跑比赛中跑不过RNN和CNN。
 
