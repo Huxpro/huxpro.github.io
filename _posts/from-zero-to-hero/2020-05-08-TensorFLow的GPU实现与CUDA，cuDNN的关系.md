@@ -29,6 +29,36 @@ CUDA的官方文档是这么介绍CUDA的：a general purpose parallel computing
 
 - 如果在一个TensorFlow程序中只需要使用部分GPU，可以通过设置CUDA_VISIBLE_DEVICES环境变量来控制。`CUDA_VISIBLE_DEVICES=O,l python demo_code.py` , TensorFlow也支持在程序中设置环境变量 `os.environ["CUDA_VISIBLE_DEVICES"]="2"` , 也支持动态分配 GPU 的显存 `config.gpu_ options.allow_growth = True` `config.gpu_options.per_process_gpu_memory_fraction = 0.4` 
 
+- nohup命令
+
+```python
+CUDA_VISIBLE_DEVICES=0,1 nohup python -u -m nmt.nmt \
+--attention=scaled_luong \
+--src=szh --tgt=tzh \
+--vocab_prefix=/home/jiale/tmp/nmt_933491_data/vocab  \
+--train_prefix=/home/jiale/tmp/nmt_933491_data/train_st \
+--dev_prefix=/home/jiale/tmp/nmt_933491_data/val_st  \
+--test_prefix=/home/jiale/tmp/nmt_933491_data/test_st \
+--out_dir=/home/jiale/tmp/nmt_933491_model \
+--num_train_steps=120000 \
+--steps_per_stats=100 \
+--num_layers=2 \
+--num_units=128 \
+--dropout=0.2 \
+--metrics=bleu \
+> /home/jiale/tmp/nmt_933491_model/nohup.out 2>&1 &
+
+# tail -f nohup.out -n 30
+```
+
+- kill nohup的进程
+
+```python
+# 筛选需要kill的进程pid
+ps -aux|grep "process name"
+kill -9 pid
+```
+
 
 
 ### cuDNN
