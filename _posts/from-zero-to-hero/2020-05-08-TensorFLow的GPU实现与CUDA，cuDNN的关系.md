@@ -1,6 +1,6 @@
 ---
-title: "GPU CUDA cuDNN"
-subtitle: "gpt、bert先导知识点"
+title: "GPU、CUDA和cuDNN的关系"
+subtitle: "GPU vs CUDA vs cuDNN"
 layout: post
 author: "echisenyang"
 header-style: text
