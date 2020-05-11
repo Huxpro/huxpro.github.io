@@ -78,7 +78,7 @@ ga_domain: auto
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "尽自己所能，逃离平庸重力的拉扯。"
+sidebar-about-description: "尽自己所能 \n 逃离平庸重力的拉扯"
 sidebar-avatar: /img/avatar-hux-ny.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
