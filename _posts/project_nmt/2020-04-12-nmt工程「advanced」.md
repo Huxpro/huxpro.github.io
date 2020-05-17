@@ -295,226 +295,75 @@ backward_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
       --metrics=bleu
   ```
 
-- all 
+- Standard HParams
 
-  - "--**encoder_type**", type=str, default="uni", help="""\
-      uni \ bi \ gnmt. For bi, we build num_layers/2 bi-directional layers.For
-          gnmt, we build 1 bi-directional layer, and (num_layers - 1) uni-
-      directional layers.\
-        """
-  - "--**residual**", type="bool", nargs="?", const=True,
-                      default=False,
-                        help="Whether to add residual connections."
-  - "--**attention**", type=str, default="", help="""\
-        luong \ scaled_luong \ bahdanau \ normed_bahdanau or set to "" for no
-        attention\
-        """
-  - "--**optimizer**", type=str, default="sgd", help="sgd\adam"
-  - "--**vocab_prefix**", type=str, default=None, expect files with src\tgt suffixes.If None, extract from
-          train files. 
-  - "--**share_vocab**", type="bool", nargs="?", const=True,
-                        default=False,
-                        help="""\
-        Whether to use the source vocab and embeddings for both source and
-        target.\
-        """
-  - "--**beam_width**", type=int, default=0,
-                        help=("""\
-        beam width when using beam search decoder. If 0 (default), use standard
-      decoder with greedy helper.\
-        """
-  
 ```python
-  def add_arguments(parser):
-  """Build ArgumentParser."""
-  parser.register("type", "bool", lambda v: v.lower() == "true")
-  
-  # network
-  parser.add_argument("--num_units", type=int, default=32, help="Network size.")
-  parser.add_argument("--num_layers", type=int, default=2,
-                      help="Network depth.")
-  parser.add_argument("--encoder_type", type=str, default="uni", help="""\
-      uni | bi | gnmt. For bi, we build num_layers/2 bi-directional layers.For
-      gnmt, we build 1 bi-directional layer, and (num_layers - 1) uni-
-      directional layers.\
-      """)
-  parser.add_argument("--residual", type="bool", nargs="?", const=True,
-                      default=False,
-                      help="Whether to add residual connections.")
-  parser.add_argument("--time_major", type="bool", nargs="?", const=True,
-                      default=True,
-                      help="Whether to use time-major mode for dynamic RNN.")
-  parser.add_argument("--num_embeddings_partitions", type=int, default=0,
-                      help="Number of partitions for embedding vars.")
-
-  # attention mechanisms
-  parser.add_argument("--attention", type=str, default="", help="""\
-      luong | scaled_luong | bahdanau | normed_bahdanau or set to "" for no
-      attention\
-      """)
-  parser.add_argument(
-      "--attention_architecture",
-      type=str,
-      default="standard",
-      help="""\
-      standard | gnmt | gnmt_v2.
-      standard: use top layer to compute attention.
-      gnmt: GNMT style of computing attention, use previous bottom layer to
-          compute attention.
-      gnmt_v2: similar to gnmt, but use current bottom layer to compute
-          attention.\
-      """)
-  parser.add_argument(
-      "--pass_hidden_state", type="bool", nargs="?", const=True,
-      default=True,
-      help="""\
-      Whether to pass encoder's hidden state to decoder when using an attention
-      based model.\
-      """)
-
-  # optimizer
-  parser.add_argument("--optimizer", type=str, default="sgd", help="sgd | adam")
-  parser.add_argument("--learning_rate", type=float, default=1.0,
-                      help="Learning rate. Adam: 0.001 | 0.0001")
-  parser.add_argument("--start_decay_step", type=int, default=0,
-                      help="When we start to decay")
-  parser.add_argument("--decay_steps", type=int, default=10000,
-                      help="How frequent we decay")
-  parser.add_argument("--decay_factor", type=float, default=0.98,
-                      help="How much we decay.")
-  parser.add_argument(
-      "--num_train_steps", type=int, default=12000, help="Num steps to train.")
-  parser.add_argument("--colocate_gradients_with_ops", type="bool", nargs="?",
-                    const=True,
-                      default=True,
-                      help=("Whether try colocating gradients with "
-                            "corresponding op"))
-
-  # initializer
-  parser.add_argument("--init_op", type=str, default="uniform",
-                      help="uniform | glorot_normal | glorot_uniform")
-  parser.add_argument("--init_weight", type=float, default=0.1,
-                      help=("for uniform init_op, initialize weights "
-                           "between [-this, this]."))
-
-  # data
-  parser.add_argument("--src", type=str, default=None,
-                      help="Source suffix, e.g., en.")
-  parser.add_argument("--tgt", type=str, default=None,
-                    help="Target suffix, e.g., de.")
-  parser.add_argument("--train_prefix", type=str, default=None,
-                      help="Train prefix, expect files with src/tgt suffixes.")
-  parser.add_argument("--dev_prefix", type=str, default=None,
-                      help="Dev prefix, expect files with src/tgt suffixes.")
-  parser.add_argument("--test_prefix", type=str, default=None,
-                      help="Test prefix, expect files with src/tgt suffixes.")
-  parser.add_argument("--out_dir", type=str, default=None,
-                      help="Store log/model files.")
-
-  # Vocab
-  parser.add_argument("--vocab_prefix", type=str, default=None, help="""\
-      Vocab prefix, expect files with src/tgt suffixes.If None, extract from
-    train files.\
-      """)
-  parser.add_argument("--sos", type=str, default="<s>",
-                      help="Start-of-sentence symbol.")
-  parser.add_argument("--eos", type=str, default="</s>",
-                      help="End-of-sentence symbol.")
-  parser.add_argument("--share_vocab", type="bool", nargs="?", const=True,
-                      default=False,
-                      help="""\
-      Whether to use the source vocab and embeddings for both source and
-      target.\
-      """)
-
-  # Sequence lengths
-  parser.add_argument("--src_max_len", type=int, default=50,
-                      help="Max length of src sequences during training.")
-  parser.add_argument("--tgt_max_len", type=int, default=50,
-                      help="Max length of tgt sequences during training.")
-  parser.add_argument("--src_max_len_infer", type=int, default=None,
-                      help="Max length of src sequences during inference.")
-  parser.add_argument("--tgt_max_len_infer", type=int, default=None,
-                    help="""\
-      Max length of tgt sequences during inference.  Also use to restrict the
-      maximum decoding length.\
-      """)
-
-  # Default settings works well (rarely need to change)
-  parser.add_argument("--unit_type", type=str, default="lstm",
-                      help="lstm | gru | layer_norm_lstm")
-  parser.add_argument("--forget_bias", type=float, default=1.0,
-                      help="Forget bias for BasicLSTMCell.")
-  parser.add_argument("--dropout", type=float, default=0.2,
-                      help="Dropout rate (not keep_prob)")
-  parser.add_argument("--max_gradient_norm", type=float, default=5.0,
-                      help="Clip gradients to this norm.")
-  parser.add_argument("--source_reverse", type="bool", nargs="?", const=True,
-                      default=False, help="Reverse source sequence.")
-  parser.add_argument("--batch_size", type=int, default=128, help="Batch size.")
-
-  parser.add_argument("--steps_per_stats", type=int, default=100,
-                      help=("How many training steps to do per stats logging."
-                            "Save checkpoint every 10x steps_per_stats"))
-  parser.add_argument("--max_train", type=int, default=0,
-                      help="Limit on the size of training data (0: no limit).")
-  parser.add_argument("--num_buckets", type=int, default=5,
-                      help="Put data into similar-length buckets.")
-
-  # BPE
-  parser.add_argument("--bpe_delimiter", type=str, default=None,
-                      help="Set to @@ to activate BPE")
-
-  # Misc
-  parser.add_argument("--num_gpus", type=int, default=1,
-                      help="Number of gpus in each worker.")
-  parser.add_argument("--log_device_placement", type="bool", nargs="?",
-                      const=True, default=False, help="Debug GPU allocation.")
-  parser.add_argument("--metrics", type=str, default="bleu",
-                      help=("Comma-separated list of evaluations "
-                            "metrics (bleu,rouge,accuracy)"))
-  parser.add_argument("--steps_per_external_eval", type=int, default=None,
-                      help="""\
-      How many training steps to do per external evaluation.  Automatically set
-      based on data if None.\
-      """)
-  parser.add_argument("--scope", type=str, default=None,
-                      help="scope to put variables under")
-  parser.add_argument("--hparams_path", type=str, default=None,
-                      help=("Path to standard hparams json file that overrides"
-                            "hparams values from FLAGS."))
-  parser.add_argument("--random_seed", type=int, default=None,
-                    help="Random seed (>0, set a specific seed).")
-
-  # Inference
-  parser.add_argument("--ckpt", type=str, default="",
-                      help="Checkpoint file to load a model for inference.")
-  parser.add_argument("--inference_input_file", type=str, default=None,
-                      help="Set to the text to decode.")
-  parser.add_argument("--inference_list", type=str, default=None,
-                      help=("A comma-separated list of sentence indices "
-                            "(0-based) to decode."))
-  parser.add_argument("--infer_batch_size", type=int, default=32,
-                      help="Batch size for inference mode.")
-  parser.add_argument("--inference_output_file", type=str, default=None,
-                      help="Output file to store decoding results.")
-  parser.add_argument("--inference_ref_file", type=str, default=None,
-                      help=("""\
-      Reference file to compute evaluation scores (if provided).\
-      """))
-  parser.add_argument("--beam_width", type=int, default=0,
-                      help=("""\
-      beam width when using beam search decoder. If 0 (default), use standard
-      decoder with greedy helper.\
-      """))
-  parser.add_argument("--length_penalty_weight", type=float, default=0.0,
-                      help="Length penalty for beam search.")
-
-  # Job info
-  parser.add_argument("--jobid", type=int, default=0,
-                      help="Task id of the worker.")
-  parser.add_argument("--num_workers", type=int, default=1,
-                      help="Number of workers (inference only).")
+python -m nmt.nmt \
+    --src=de --tgt=en \
+    --hparams_path=nmt/standard_hparams/wmt16_gnmt_4_layer.json \
+    --out_dir=/tmp/deen_gnmt \
+    --vocab_prefix=/tmp/wmt16/vocab.bpe.32000 \
+    --train_prefix=/tmp/wmt16/train.tok.clean.bpe.32000 \
+    --dev_prefix=/tmp/wmt16/newstest2013.tok.bpe.32000 \
+    --test_prefix=/tmp/wmt16/newstest2015.tok.bpe.32000
 ```
+
+- paraphrase
+
+```python
+CUDA_VISIBLE_DEVICES=2 nohup python -u -m nmt.nmt \
+--attention="normed_bahdanau" \
+--src=szh --tgt=tzh \
+--vocab_prefix=/home/jiale/tmp/nmt_925271_data/vocab  \
+--train_prefix=/home/jiale/tmp/nmt_925271_data/train_st \
+--dev_prefix=/home/jiale/tmp/nmt_925271_data/val_st  \
+--test_prefix=/home/jiale/tmp/nmt_925271_data/test_st \
+--out_dir=/home/jiale/tmp/nmt_925271_model \
+--num_train_steps=340000 \
+--decay_scheme="luong234" \
+--steps_per_stats=100 \
+--num_units=512 \
+--num_encoder_layers=4 \
+--num_decoder_layers=4 \
+--src_max_len=70 \
+--tgt_max_len=70 \
+--encoder_type="bi" \
+--dropout=0.2 \
+--beam_width=10 \
+--metrics="bleu" \
+> /home/jiale/tmp/nmt_925271_model/nohup.out 2>&1 &
+```
+
+- 参数设置对比
+
+|          参数          | default  |                        iwslt15[133K]                         |     wmt16[4.6M]     |
+| :--------------------: | :------: | :----------------------------------------------------------: | :-----------------: |
+|       num_units        |    32    |                           **512**                            |        1024         |
+|       num_layers       |    2     |                                                              |                     |
+|   num_encoder_layers   |   None   |                              2                               |        **4**        |
+|   num_decoder_layers   |   None   |                              2                               |        **4**        |
+|      encoder_type      |   uni    |                              bi                              |       **bi**        |
+|        residual        |  False   |                            false                             |        false        |
+|       time_major       |   true   |                             true                             |        true         |
+|       attention        |    ""    |                         scaled_luong                         | **normed_bahdanau** |
+| attention_architecture | standard |                           standard                           |      standard       |
+|       optimizer        |   sgd    |                             sgd                              |         sgd         |
+|     learning_rate      |   1.0    |                             1.0                              |         1.0         |
+|      decay_scheme      |    ""    |                         **luong234**                         |       luong10       |
+|    num_train_steps     |  12000   |                            12000                             |     **340000**      |
+|      src_max_len       |    50    |                              50                              |         50          |
+|      tgt_max_len       |    50    |                              50                              |         50          |
+|   src_max_len_infer    |   None   |                             None                             |        None         |
+|   tgt_max_len_infer    |   None   |                             None                             |        None         |
+|       unit_type        |   lstm   |                             lstm                             |        lstm         |
+|      forget_bias       |   1.0    |                             1.0                              |         1.0         |
+|        dropout         |   0.2    |                             0.2                              |         0.2         |
+|       batch_size       |   128    |                             128                              |         128         |
+|    steps_per_stats     |   100    |                             100                              |         100         |
+|     subword_option     |    ""    |                              ""                              |         bpe         |
+|    **hparams_path**    |   None   | Path to standard hparams json file that overrides hparams values from FLAGS. |                     |
+|       beam_width       |    0     |                              10                              |       **10**        |
+
+
 
 
