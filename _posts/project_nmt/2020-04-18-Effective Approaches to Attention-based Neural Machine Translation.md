@@ -1,5 +1,5 @@
 ---
-title: "读paper「nmt02」"
+title: "读paper「nmt03」"
 subtitle: "Effective Approaches to Attention-based Neural Machine Translation, manning 2015"
 layout: post
 author: "echisenyang"

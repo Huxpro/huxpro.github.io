@@ -1,5 +1,5 @@
 ---
-title: "读paper「nmt01」"
+title: "读paper「nmt02」"
 subtitle: "NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE, Bengio 2015"
 layout: post
 author: "echisenyang"
