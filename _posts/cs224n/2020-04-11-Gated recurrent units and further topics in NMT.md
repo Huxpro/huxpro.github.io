@@ -69,7 +69,7 @@ gru的最后一步，we might want to prune away some of the past stuff adaptive
 
 <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/p70Fwt.png" alt="p70Fwt" style="zoom:25%;" />
 
-### 3. Machine translation evaluation
+### 3. Machine translation evaluation（BLEU）
 
 <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/I4orVk.png" alt="I4orVk" style="zoom: 25%;" />
 
