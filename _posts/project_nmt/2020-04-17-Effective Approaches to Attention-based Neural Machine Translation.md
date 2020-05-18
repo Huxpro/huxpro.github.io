@@ -83,7 +83,7 @@ $$
 
 <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/qq6AGH.png" alt="qq6AGH" style="zoom:50%;" />
 
-Global attention 通过遍历每一个encoder层的隐状态 $\overline{\boldsymbol{h}}_{s}$，来获得与当前decoder层状态打分函数值，这个值代表了某种程度上的关联性。 从而，the context vector $c_t$ is computed as the weighted average over all the source hidden states  $\overline{\boldsymbol{h}}_{s}$.  
+Global attention 通过遍历每一个encoder层的隐状态 $\overline{h_{s}}$，来获得与当前decoder层状态打分函数值，这个值代表了某种程度上的关联性。 从而，the context vector $c_t$ is computed as the weighted average over all the source hidden states  $\overline{\boldsymbol{h}}_{s}$.  
 
 <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/BPoOHa.png" alt="BPoOHa" style="zoom:50%;" />
 
