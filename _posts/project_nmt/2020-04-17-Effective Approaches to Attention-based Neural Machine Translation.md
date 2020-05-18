@@ -49,16 +49,16 @@ This paper **examines two simple and effective classes of attentional mechanism*
 
 ### Neural Machine Translation
 
-A neural machine translation system is a neural network that directly **models the conditional probability $p(y|x)$ of translating a source sentence, $x_1 , . . . , x_n$ , to a target sentence, $y_1 , . . . , y_m$.**
+A neural machine translation system is a neural network that directly **models the conditional probability $p(y \mid x)$ of translating a source sentence, $x_1 , . . . , x_n$ , to a target sentence, $y_1 , . . . , y_m$.**
 
 two components:
 
 - an ***encoder*** which computes a representation **s** for each source sentence
-- a ***decoder*** which generates one target word at a time and hence **decomposes the conditional probability** as: $\log p(y | x)=\sum_{j=1}^{m} \log p\left(y_{j} | y_{<j}, \boldsymbol{s}\right)$ 
+- a ***decoder*** which generates one target word at a time and hence **decomposes the conditional probability** as: $\log p(y  \mid  x)=\sum_{j=1}^{m} \log p\left(y_{j}  \mid  y_{<j}, \boldsymbol{s}\right)$ 
   - In more detail, one can **parameterize the probability of decoding each word** $y_j$ as:
 
     $$
-p\left(y_{j} | y_{<j}, \boldsymbol{s}\right)=\operatorname{softmax}\left(g\left(\boldsymbol{h}_{j}\right)\right)
+p\left(y_{j}  \mid  y_{<j}, \boldsymbol{s}\right)=\operatorname{softmax}\left(g\left(\boldsymbol{h}_{j}\right)\right)
     $$
     
   - where **f** **computes the current hidden state** given the previous hidden state and can be *either a vanilla RNN unit, a GRU, or an LSTM unit*.
@@ -72,7 +72,7 @@ p\left(y_{j} | y_{<j}, \boldsymbol{s}\right)=\operatorname{softmax}\left(g\left(
   - Our training objective is formulated as follows:
 
 $$
-J_{t}=\sum_{(x, y) \in \mathbb{D}}-\log p(y | x)
+J_{t}=\sum_{(x, y) \in \mathbb{D}}-\log p(y  \mid  x)
 $$
 
 
