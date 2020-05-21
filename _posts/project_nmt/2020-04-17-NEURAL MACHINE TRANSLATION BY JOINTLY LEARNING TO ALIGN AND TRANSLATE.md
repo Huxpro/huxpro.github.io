@@ -17,6 +17,7 @@ tags:
 
 - SMT (statistical machine translation)
   - 以 phrase-based translation system 为例，which **consists of many small sub-components that are tuned separately**. 
+  - traditional phrase-based translation systems performed their task by breaking up source sentences into multiple chunks and then translated them phrase-by-phrase. This led to disfluency in the translation outputs and was not quite like how we, humans, translate.
 - NMT (neural machine translation) 
   - aims at building a single neural network that can be **jointly tuned** to maximize the translation performance.
 
