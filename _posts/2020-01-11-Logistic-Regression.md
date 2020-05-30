@@ -63,6 +63,7 @@ tags:
 ### Theory
 
 - **Decision boundary**
+  
   <p align="center">
     <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/1bLM2Q.jpg" style="zoom:80%" />
   </p>
@@ -79,23 +80,22 @@ tags:
   </p>
 
 - Logistic regression cost function
-  <p align="center">
+  
   $$
   cost\left(h_{\theta}(x), y\right)=\left\{\begin{array}{ll}{-\log \left(h_{\theta}  
   (x)\right)} & {\text { if } y=1} \\ {-\log \left(1-h_{\theta}(x)\right)} & {\text { if } y=0}\end{array}\right.
   $$
-  </p>
+  
   即，$cost\left(h_{\theta}(x), y\right)=-y \log \left(h_{\theta}(x)\right)-(1-y) \log \left(1-h_{\theta}(x)\right)$
   
 - With the optimization in place, the logistic regression cost function can be rewritten as:
-  <p align="center">
+
   $$
   \begin{aligned} J(\theta) &=\frac{1}{m} \sum_{i=1}^{m} 
   cost\left(h_{\theta}\left(x^{(i)}\right), y^{(i)}\right) \\ &=-\frac{1}{m}\left[\sum_{i=1}^{m} y^{(i)} \log    
   \left(h_{\theta}\left(x^{(i)}\right)\right)+\left(1-y^{(i)}\right) \log \left(1-h_{\theta}\left(x^{(i)}\right)\right)\right]   \end{aligned}
   $$
-  </p>
-
+  
 - **$\frac{\partial}{\partial \theta_{j}} J(\theta)=\frac{1}{m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) x_{j}^{(i)}$[推导过程](https://stats.stackexchange.com/questions/278771/how-is-the-cost-function-from-logistic-regression-derivated)**
 <p align="center">
   <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/BYYvPc.jpg" style="zoom:80%" />
