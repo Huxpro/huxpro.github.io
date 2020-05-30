@@ -300,6 +300,7 @@ tags:
     
     - **复杂度度量**
       - **偏差与方差**
+        
         - **What is bias?**
           - Bias is the difference between the average prediction of our model and the correct value which we are trying to predict
         - **What is variance?**
@@ -317,6 +318,7 @@ tags:
         </p> 
       
     - **可避免偏差&可避免方差**
+      
       <p align="center">
         <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/nEFoaZ.jpg" style="zoom:100%" />
       </p>
