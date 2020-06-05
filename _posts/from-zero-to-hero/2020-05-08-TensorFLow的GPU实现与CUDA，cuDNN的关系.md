@@ -4,7 +4,7 @@ subtitle: "GPU vs CUDA vs cuDNN"
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: false
+hidden: true
 catalog: true
 tags:
   - tools

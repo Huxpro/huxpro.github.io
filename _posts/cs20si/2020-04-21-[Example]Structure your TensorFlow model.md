@@ -4,7 +4,7 @@ subtitle: "CS 20SI「04」"
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: true
+hidden: false
 catalog: true
 tags:
   - 笔记
