@@ -4,7 +4,7 @@ subtitle: "transformer先导知识点"
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: true
+hidden: false
 catalog: true
 tags:
   - 输出计划
