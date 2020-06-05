@@ -4,7 +4,7 @@ subtitle: "ID3/C4.5/CART/Random Forest/Adaboost/GBDT/Xgboost/LightGBM"
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: true
+hidden: false
 catalog: true
 tags:
   - 输出计划

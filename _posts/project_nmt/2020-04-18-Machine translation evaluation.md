@@ -4,7 +4,7 @@ subtitle: "bleu & ppl"
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: true
+hidden: false
 catalog: true
 tags:
   - nmt
