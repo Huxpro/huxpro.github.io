@@ -4,7 +4,7 @@ subtitle: "CS224N 284「10」"
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: true
+hidden: false
 catalog: true
 tags:
   - 笔记

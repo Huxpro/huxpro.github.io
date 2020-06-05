@@ -4,7 +4,7 @@ subtitle: "追溯RNN的发展历程"
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: false
+hidden: true
 catalog: true
 tags:
   - 输出计划

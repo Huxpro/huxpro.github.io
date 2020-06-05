@@ -4,7 +4,7 @@ subtitle: "NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: true
+hidden: false
 catalog: true
 tags:
   - nmt

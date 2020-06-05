@@ -4,7 +4,7 @@ subtitle: "gpt、bert先导知识点"
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: false
+hidden: true
 catalog: true
 tags:
   - 输出计划
