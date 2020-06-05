@@ -108,6 +108,7 @@ tags:
   - **策略**
     - 从假设空间中学习最优模型的方法,称为策略
       衡量模型好与不好需要一些指标,这时引入风险函数和损失函数来衡量。预测值和真实值通常是不想等的,我们用损失函数或代价函数来度量预测错误的程度,记作 L(Y,f(x))
+      
       - *0~1损失函数*
         <p align="center">
         $$
@@ -197,6 +198,7 @@ tags:
         </p>
     
     - **模型评估指标**  
+      
       - MSE(Mean Squared Error)
         <p align="center">
         $$
@@ -234,8 +236,8 @@ tags:
       - **Confusion Matrix**
         <p align="center">
           <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/0si77j.jpg" style="zoom:100%" />
-        </p>
-
+  </p>
+      
         - 真正例(True Positive, TP):You predicted positive and it’s true
         - 假负例(False Negative, FN): You predicted negative and it’s false
         - 假正例(False Positive, FP): You predicted positive and it’s false 
@@ -296,8 +298,8 @@ tags:
         <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/EcvSPI.jpg" width="300"/>|<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/YXyRx1.jpg" width="170"/>
         <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/FXnkFg.jpg" width="300"/>|<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/t7pFvH.jpg" width="170"/>
         <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/49mVHa.jpg" width="300"/>|<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/UPnTK1.jpg" width="170"/>
-        <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/5srjuZ.jpg" width="300"/>|<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/JwICnI.jpg" width="170"/>
-    
+      <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/5srjuZ.jpg" width="300"/>|<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/JwICnI.jpg" width="170"/>
+      
     - **复杂度度量**
       - **偏差与方差**
         
