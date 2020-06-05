@@ -4,7 +4,7 @@ subtitle: "TF EXAMPLES「2.4」"
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: false
+hidden: true
 catalog: true
 tags:
   - TensorFlow
