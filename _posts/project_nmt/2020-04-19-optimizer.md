@@ -4,7 +4,7 @@ subtitle: "SGD & "
 layout: post
 author: "echisenyang"
 header-style: text
-hidden: false
+hidden: true
 catalog: true
 tags:
   - nmt
