@@ -37,8 +37,8 @@ tags:
 
 2. 一系列的学术研究表明 NMT 可以 directly learn this conditional distribution.
 3. RNN Encoder–Decoder的运作方式：
-   - encoder把输入句子 $x=\{x_{1}, \cdots, x_{T_{x}}\}$ 转换为 $c=q\{\left\{h_{1}, \cdots, h_{T_{x}}\right\}\}$ 
-   - decoder根据 **context vector** $c$ 和 **all the previously predicted words** $\{\{y_{1}, \cdots, y_{t-1}\}$ 来预测下一个词，$p(y=\prod_{t=1}^{T} p\{y_{t}  \mid \{y_{1}, \cdots, y_{t-1}\}, c\}$. 
+   - encoder把输入句子 $x=\left(x_{1}, \cdots, x_{T_{x}}\right)$ 转换为 $c=q\left(\{h_{1}, \cdots, h_{T_{x}}\}\right)$ 
+   - decoder根据 **context vector** $c$ 和 **all the previously predicted words** $\{y_{1}, \cdots, y_{t-1}\}$ 来预测下一个词，$p(y)=\prod_{t=1}^{T} p\left(y_{t}  \mid \left\{y_{1}, \cdots, y_{t-1}\right\}, c\right)$.
 
 
 
