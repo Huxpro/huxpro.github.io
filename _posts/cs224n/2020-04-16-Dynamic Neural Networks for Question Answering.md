@@ -19,7 +19,9 @@ tags:
 
 - Major Obstacle
 
-<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/WQsQsV.png" alt="WQsQsV" style="zoom:25%;" />![tAiq4s](https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/tAiq4s.png)
+<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/WQsQsV.png" alt="WQsQsV" style="zoom:25%;" />
+
+![tAiq4s](https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/tAiq4s.png)
 
 ![tAiq4s](https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/tAiq4s.png)
 
