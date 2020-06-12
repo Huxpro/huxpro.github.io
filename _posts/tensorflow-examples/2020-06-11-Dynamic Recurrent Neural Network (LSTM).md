@@ -247,6 +247,8 @@ def dynamicRNN(x, seqlen, weights, biases):
     return tf.matmul(outputs, weights['out']) + biases['out']
 ```
 
+![Jfq7qZ](https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/Jfq7qZ.png)
+
 ```python
 pred = dynamicRNN(x, seqlen, weights, biases)
 
