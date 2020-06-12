@@ -70,13 +70,17 @@ $w_t$ 为one-hot向量，矩阵w为hidden layer相当于一个lookup table，隐
 ### [Distributed Representations of Words and Phrases and their Compositionality, Mikolov, etc]
 
 The training objective is to learn word vector representations that are good at predicting the nearby words. More formally, given a sequence of training words $w_1 , w_2 , w_3 , . . . , w_T$ , the objective of the Skip-gram model is to maximize the average log probability
+
 $$
 \frac{1}{T} \sum_{t=1}^{T} \sum_{c \leq j \leq c, j \neq 0} \log p\left(w_{t+j} \mid w_{t}\right)
 $$
+
 The basic Skip-gram formulation deﬁnes $p(w_{t+j} \mid w_t )$ using the softmax function:
+
 $$
 p\left(w_{O} \mid w_{I}\right)=\frac{\exp \left(v_{w_{O}}^{\prime} \bar{v}_{w_{I}}\right)}{\sum_{w=1}^{W} \exp \left({v_{w}^{\prime}}^{\top} v_{w_{I}}\right)}
 $$
+
 This formulation is impractical because the cost of computing $∇ log p(w_O \mid w_I )$ is proportional to W, which is often large ($10^5 –10^7$ terms). 
 
 - 结论：采用softmax效率太低！！！
@@ -88,17 +92,21 @@ This formulation is impractical because the cost of computing $∇ log p(w_O \mi
 - 改进二：Noise Contrastive Estimation (NCE)
 
   An alternative to the hierarchical softmax, which is used to replace every $log P(w_O \mid w_I )$ term in the Skip-gram objective. 
+  
   $$
   \log \sigma{\left({v_{w_{O}}^{\prime}}^{\top} v_{w_{I}}\right)}+ \sum_{i=1}^{k} {\mathbb{E}_{w_{i} \sim P_{n}(w)}\left[\log \sigma\left(-v_{w_{i}}^{\prime \top} v_{w_{I}}\right)\right]}
   $$
+  
   Our experiments indicate that values of k in the range 5–20 are useful for small training datasets, while for large datasets the k can be as small as 2–5.
 
 - 改进三：Subsampling of Frequent Words
 
   To counter the imbalance between the rare and frequent words（the vector representations of frequent words do not change signiﬁcantly after training on several million examples）
+  
   $$
   P\left(w_{i}\right)=1-\sqrt{\frac{t}{f\left(w_{i}\right)}}
   $$
+  
   where $f(w_i )$ is the frequency of word w i and t is a chosen threshold, typically around $10^{−5}$ . We chose this subsampling formula because it aggressively subsamples words whose frequency is greater than t while preserving the ranking of the frequencies.
 
 ### Implementing word2vec skip-gram
@@ -114,40 +122,56 @@ In the skip-gram model, to get the vector representations of words, we train a s
  As we need labels to perform our binary classification task, we designate all correct words $w_i$ given their **context** $c_i$ as **true** ($y=1$) and **all noise samples** $\tilde{w}_{i k}$ as **false** ($y=0$).
 
 We can now use logistic regression **to minimize the negative log-likelihood**, i.e. cross-entropy of our training examples against the noise
+
 $$
 J_{\theta}=-\sum_{w_{i} \in V}\left[\log P\left(y=1 \mid  w_{i}, c_{i}\right)+k \mathbb{E}_{\tilde{w}_{i k} \sim Q}\left[\log P\left(y=0 \mid  \tilde{w}_{i j}, c_{i}\right)\right]\right]
 $$
+
 **Instead of computing the expectation** $\mathbb{E}_{\tilde{w}_{i k} \sim Q}$ of our noise samples, which would still require summing over all words in VV to predict the normalised probability of a negative label, we can again **take the mean with the Monte Carlo approximation**:
+
 $$
 J_{\theta}=-\sum_{w_{i} \in V}\left[\log P\left(y=1 \mid  w_{i}, c_{i}\right)+k \sum_{j=1}^{k} \frac{1}{k} \log P\left(y=0 \mid  \tilde{w}_{i j}, c_{i}\right)\right]
 $$
+
 which reduces to:
+
 $$
 J_{\theta}=-\sum_{w_{i} \in V}\left[\log P\left(y=1 \mid  w_{i}, c_{i}\right)+\sum_{j=1}^{k} \log P\left(y=0 \mid  \tilde{w}_{i j}, c_{i}\right)\right]
 $$
+
 By generating $k$ noise samples for every genuine word $w_i$ given its context $c$, we are effectively sampling words from **two different distributions**: **Correct** words are sampled from the empirical distribution of the **training** set $P_{train}$ and depend on their context $c$, whereas **noise samples** come from the **noise distribution** $Q$. We can thus represent **the probability of sampling either a positive or a noise sample as a mixture of those two distributions**, which are weighted based on the number of samples that come from each:
+
 $$
 P(y, w \mid  c)=\frac{1}{k+1} P_{\text {train }}(w \mid  c)+\frac{k}{k+1} Q(w)
 $$
+
 Given this mixture, we can now calculate the probability that a sample came from the training $P_{train}$ distribution as a conditional probability of $y$ given ww and $c$:
+
 $$
 P(y=1 \mid  w, c)=\frac{\frac{1}{k+1} P_{\operatorname{train}}(w \mid  c)}{\frac{1}{k+1} P_{\operatorname{train}}(w \mid  c)+\frac{k}{k+1} Q(w)}
 $$
+
 which can be simplified to:
+
 $$
 P(y=1 \mid  w, c)=\frac{P_{\operatorname{train}}(w \mid  c)}{P_{\operatorname{train}}(w \mid  c)+k Q(w)}
 $$
+
 As we don't know $P_{train}$  (which is what we would like to calculate), we replace $P_{train}$  with the probability of our model $P$
+
 $$
 P(y=1 \mid  w, c)=\frac{P(w \mid  c)}{P(w \mid  c)+k Q(w)}
 $$
 
 Note that computing $P(w \mid c)$, i.e. the probability of a word ww given its context $c$ is essentially the definition of our softmax:
+
 $$
 P(w \mid c)=\frac{\exp \left(h^{\top} v_{w}^{\prime}\right)}{\sum_{w_{i} \in V} \exp \left(h^{\top} v_{w_{i}}^{\prime}\right)}=\frac{\exp \left(h^{\top} v_{w}^{\prime}\right)}{Z(c)}
 $$
+
 Having to compute $P(w \mid c)$ means that -- again -- we need to compute $Z(c)$, which **requires us to sum over the probabilities of all words** in $V$. In the case of NCE, there exists **a neat trick to circumvent this issue**: We can treat the normalisation denominator $Z(c)$ as a parameter that the model can learn.
 Mnih and Teh (2012) and Vaswani et al. (2013) [[16\]](https://ruder.io/word-embeddings-softmax/index.html#fn16) actually keep $Z(c)$ **fixed at 1, which they report does not affect the model's performance**. This assumption has the nice side-effect of reducing the model's parameters, while ensuring that the model self-normalises by not depending on the explicit normalisation in $Z(c)$. Indeed, Zoph et al. (2016) [[17\]](https://ruder.io/word-embeddings-softmax/index.html#fn17) find that even when learned, $Z(c)$ is **close to 1 and has low variance**.
+
 $$
 P(w \mid  c)=\exp \left(h^{\top} v_{w}^{\prime}\right)
 $$
