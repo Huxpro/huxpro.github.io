@@ -6,8 +6,10 @@
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
 
-Getting Started
----------------
+[User Manual 👉](doc/Manual.md)
+--------------------------------------------------
+
+### Getting Started
 
 1. You will need [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) to use [Jekyll](https://jekyllrb.com/). Following [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/) to fullfill the enviromental requirement.
 
@@ -23,11 +25,7 @@ $ bundle install
 $ bundle exec jekyll serve  # alternatively, npm start
 ```
 
-A detailed [Manual](doc/Manual.md) can be found here.
-
-
-Development / Customization
----------------------------
+### Development (Build From Source)
 
 To modify the theme, you will need [Grunt](https://gruntjs.com/). There are numbers of tasks you can find in the `Gruntfile.js`, includes minifing JavaScript, compiling `.less` to `.css`, adding banners to keep the Apache 2.0 license intact, watching for changes, etc. 
 
@@ -38,8 +36,11 @@ Critical Jekyll-related code are located in `_include/` and `_layouts/`. Most of
 This theme uses the default code syntax highlighter of jekyll, [Rouge](http://rouge.jneen.net/), which is compatible with Pygments theme so just pick any pygments theme css (e.g. from [here](http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html) and replace the content of `highlight.less`.
 
 
-Misc
----------
+### Interesting to know more? Checkout full [User Manual](doc/Manual.md)!
+
+
+Other Resources
+---------------
 
 Ports
 - [**Hexo**](https://github.com/Kaijun/hexo-theme-huxblog) by @kaijun
@@ -52,20 +53,11 @@ Translation
 - [🇨🇳 (somewhat outdated)](https://github.com/Huxpro/huxpro.github.io/blob/master/doc/README.zh.md)
 
 
-Support
--------
-
-- **Feel free to fork**. 
-- I'll appreciate it if you keep the OG author and github link at footer.
-- **Star** the repo if you like it.
-- **Open issues** so people could help you.
-
-
 License
 -------
 
 Apache License 2.0.
-Copyright (c) 2015-2020 Huxpro
+Copyright (c) 2015-present Huxpro
 
 Hux Blog is derived from [Clean Blog Jekyll Theme (MIT License)](https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll/)
 Copyright (c) 2013-2016 Blackrock Digital LLC.
