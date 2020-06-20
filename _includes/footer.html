@@ -30,6 +30,9 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
 
+<!-- script pointing to jekyll-search.js -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
 <!-- Service Worker -->
 {% if site.service-worker %}
 <script src="{{ "/js/snackbar.js " | prepend: site.baseurl }}"></script>
@@ -78,7 +81,7 @@
 
     $(document).ready(function () {
         var $chart = document.querySelector("#chart");
-        $chart.onload = function(){
+        $chart.onload = function () {
             resizeIframe($chart)
         }
         window.addEventListener("resize", () => {
@@ -267,3 +270,15 @@
     _render();
 </script>
 {% endif %}
+
+<!-- Search Settings -->
+<script>
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json',
+        searchResultTemplate: '<li><a href="{url}">{title}</a></li>',
+        noResultsText: 'No results found',
+        fuzzy: true
+    });
+</script>

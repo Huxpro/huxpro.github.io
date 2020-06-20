@@ -30,6 +30,9 @@
                     </li>
                     {% endif %}
                     {% endfor %}
+                    <li class="search-icon">
+                        <a href="javascript:void(0)" class="fa fa-search"></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -37,6 +40,22 @@
     </div>
     <!-- /.container -->
 </nav>
+<!-- Search Box -->
+<div class="search-box">
+  <div class="wrapper">
+    <div class="search-grid">
+      <form class="search-form">
+        <div id="search-container">
+          <input type="text" id="search-input" class="search" placeholder="Search">
+        </div>
+      </form>
+      <ul id="results-container" class="results-search"></ul>
+      <div class="icon-close-container">
+        <span class="search-icon-close"><i class="fa fa-times" aria-hidden="true"></i></span>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
     // Drop Bootstarp low-performance Navbar
     // Use customize navbar with high-quality material design animation
