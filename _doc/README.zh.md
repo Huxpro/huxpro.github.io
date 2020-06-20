@@ -113,6 +113,14 @@ tags:
 
 ```
 
+在引入[Rake](https://github.com/ruby/rake)工具之后，我们可以使用命令：
+
+```
+rake post title="Hello 2015" subtitle="Hello World, Hello Blog"
+```
+
+来自动生成上面的文章模板。
+
 #### SideBar
 
 看右边:
