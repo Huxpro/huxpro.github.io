@@ -292,9 +292,12 @@
         // a hack to get escaped subtitle unescaped. for some reason, 
         // post.subtitle w/o escape filter nuke entire search.
         templateMiddleware: function (prop, value, template) {
-            if (prop === 'subtitle') {
-                console.log(prop, value)
-                return htmlDecode(value);
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
             }
         }
     });
