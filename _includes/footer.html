@@ -288,7 +288,7 @@
         searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
         noResultsText: 'No results',
         limit: 50,
-        fuzzy: true,
+        fuzzy: false,
         // a hack to get escaped subtitle unescaped. for some reason, 
         // post.subtitle w/o escape filter nuke entire search.
         templateMiddleware: function (prop, value, template) {
