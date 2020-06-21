@@ -124,10 +124,10 @@
 }
 .side-catalog .catalog-body .active {
   border-radius: 4px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 .side-catalog .catalog-body .active a {
-  color: #0085a1!important;
+  color: #0085a1 !important;
 }
 @media (max-width: 1200px) {
   .side-catalog {
@@ -247,12 +247,12 @@
   color: #fff;
 }
 .paper-button[disabled] {
-  background-color: #EAEAEA !important;
-  color: #A8A8A8 !important;
+  background-color: #eaeaea !important;
+  color: #a8a8a8 !important;
   cursor: auto;
 }
 .paper-button:hover {
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
 }
 .paper-button.raised-button.colored:hover {
   background-color: #3367d6;
@@ -1521,7 +1521,7 @@ img::-moz-selection {
 #tag_cloud a.tag-button--all,
 #tag_cloud .tag.tag-button--all {
   font-weight: 700;
-  color: #0085a1!important;
+  color: #0085a1 !important;
 }
 #tag_cloud a.tag-button--all:hover,
 #tag_cloud .tag.tag-button--all:hover,

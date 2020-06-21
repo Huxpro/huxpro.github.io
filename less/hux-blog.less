@@ -102,10 +102,11 @@ select {
 }
 
 // override table style in bootstrap
-table{
+table {
   margin-top: 10px;
 }
-table.table > tbody, table.table > thead {
+table.table > tbody,
+table.table > thead {
   th,
   td {
     border: 1px solid #eee !important;
@@ -186,7 +187,8 @@ samp {
       margin-top: 10px;
     }
   }
-  h5, h6 {
+  h5,
+  h6 {
     font-size: 20px;
     font-weight: 600;
     color: gray;
@@ -196,11 +198,22 @@ samp {
   }
   // downscale the font a little bit in mobile
   @media screen and (max-width: 768px) {
-    h1 { font-size: 30px; }
-    h2 { font-size: 22px; }
-    h3 { font-size: 20px; }
-    h4 { font-size: 19px; }
-    h5, h6 { font-size: 18px; }
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 22px;
+    }
+    h3 {
+      font-size: 20px;
+    }
+    h4 {
+      font-size: 19px;
+    }
+    h5,
+    h6 {
+      font-size: 18px;
+    }
   }
   ul,
   ol {
@@ -257,7 +270,7 @@ samp {
   }
   .anchorjs-link {
     // I can not understand this but this made anchor always in the same line as title
-    position: absolute; 
+    position: absolute;
     text-decoration: none !important;
   }
 }
@@ -414,7 +427,7 @@ samp {
       &:active {
         background-color: rgba(0, 0, 0, 0.05);
       }
-      .icon-bar{
+      .icon-bar {
         background-color: @gray-dark;
       }
     }
@@ -498,12 +511,13 @@ samp {
     .page-heading {
       padding: 85px 0 20px;
       color: @gray-dark;
-      .subheading{
+      .subheading {
         margin-bottom: 15px;
       }
     }
     .tags {
-      a, .tag {
+      a,
+      .tag {
         border-color: @gray-dark;
         color: @gray-dark;
         &:hover,
@@ -837,11 +851,13 @@ img::-moz-selection {
 .tags {
   margin-bottom: -5px;
   &.tags-sup {
-    a, .tag {
+    a,
+    .tag {
       padding: 0 10px 0 12px;
     }
   }
-  a, .tag {
+  a,
+  .tag {
     display: inline-block;
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 999em;
@@ -895,13 +911,16 @@ img::-moz-selection {
     &.focus {
       background-color: #0085a1 !important;
     }
-    &.focus{
-      box-shadow: rgba(0,0,0,.117647) 0 1px 6px, rgba(0,0,0,.239216) 0 1px 4px;
+    &.focus {
+      box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px,
+        rgba(0, 0, 0, 0.239216) 0 1px 4px;
     }
     &.tag-button--all {
       font-weight: 700;
-      color: #0085a1!important;
-      &:hover, &:active, &.focus{
+      color: #0085a1 !important;
+      &:hover,
+      &:active,
+      &.focus {
         background-color: #e4e4e4 !important;
       }
     }
@@ -1005,7 +1024,6 @@ img::-moz-selection {
   }
 }
 
-
 /* Hux customize Style for navBar button */
 
 .navbar-default .navbar-toggle {
@@ -1076,7 +1094,7 @@ img::-moz-selection {
 }
 
 // MathJax Overflow
-.MathJax_SVG_Display{
+.MathJax_SVG_Display {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
