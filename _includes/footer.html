@@ -275,10 +275,37 @@
 <script>
 SimpleJekyllSearch({
     searchInput: document.getElementById('search-input'),
-    resultsContainer: document.getElementById('results-container'),
+    resultsContainer: document.getElementById('search-results'),
     json: '/search.json',
     searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
     noResultsText: 'No results',
+    limit: 50,
     fuzzy: true
+});
+
+$(document).ready(function() {
+  var $searchPage = $('.search-page');
+  var $searchOpen = $('.search-icon');
+  var $searchClose = $('.search-icon-close');
+  var $searchInput = $('#search-input');
+  var $body = $('body');
+
+  $searchOpen.on('click', function(e){
+    e.preventDefault();
+    $searchPage.toggleClass('search-active');
+    var prevClasses = $body.attr('class') || '';
+    setTimeout(function(){
+        $body.addClass('no-scroll');
+    }, 400)
+
+    if ($searchPage.hasClass('search-active')) {
+      $searchClose.on('click', function(e){
+        e.preventDefault();
+        $searchPage.removeClass('search-active');
+        $body.attr('class', prevClasses);  // from closure 
+      });
+      $searchInput.focus();
+    }
+  });
 });
 </script>

@@ -1,6 +1,4 @@
-
-.search-box {
-  padding-top: 80px;
+.search-page {
   position: fixed;
   top: 0;
   right: 0;
@@ -8,50 +6,65 @@
   left: 0;
   z-index: 100;
   background: #fff;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.25s ease-in-out;
-  -webkit-transform: translate(0, 100%); 
-  -ms-transform: translate(0, 100%); 
-  transform: translate(0, 100%); 
-}
+  -webkit-transition: all 400ms cubic-bezier(0.32, 1, 0.23, 1);
+  transition: all 400ms cubic-bezier(0.32, 1, 0.23, 1); 
+  -webkit-transform: translate(0, 100%);
+  -ms-transform: translate(0, 100%);
+  transform: translate(0, 100%);
+  opacity: 0;
 
-
-#search-input {
-  width: 100%;
-  border:none;
-  outline: none;
-  font-size: 26px;
-  font-weight: bold;
-  color: #3e3e40;
-}
-
-.results-search {
-  list-style: none;
-  overflow: auto;
-  height: 90vh;
-  margin: 0;
-  padding: 0;
-}
-
-.search-box.search-active {
-  -webkit-transform: translate(0, 0) scale(1, 1);
-  -ms-transform: translate(0, 0) scale(1, 1);
-  transform: translate(0, 0) scale(1, 1);
-}
-
-.icon-close-container {
-  position: absolute;
-  padding: 16px;
-  top: 0;
-  right: 2px;
-  i {
-    font-size: 20px;
+  &.search-active {
+    opacity: 1;
+    -webkit-transform: translate(0, 0) scale(1, 1);
+    -ms-transform: translate(0, 0) scale(1, 1);
+    transform: translate(0, 0) scale(1, 1);
+    #search-input { 
+      opacity: 1;
+    }
   }
-}
 
-.search-icon-container {
-  width: 25%;
-  text-align: right;
+  .search-main {
+    padding-top: 80px;
+    height: 100%;
+    .row,
+    .row > div {
+      height: 100%
+    }
+  }
+
+  .search-icon-close-container {
+    position: absolute;
+    z-index: 1;
+    padding: 16px;
+    top: 0;
+    right: 2px;
+    i {
+      font-size: 20px;
+    }
+  }
+
+  #search-input {
+    .monospace;
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    color: #3e3e40;
+    border: none;
+    outline: none;
+    opacity: 0;
+    -webkit-transition: all 400ms cubic-bezier(0.32, 1, 0.23, 1) 250ms; 
+    transition: all 400ms cubic-bezier(0.32, 1, 0.23, 1) 250ms; 
+    @media only screen and (min-width: 768px) {
+      margin-left: 20px;
+    }
+  }
+
+  #search-results {
+    overflow: auto;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 80px;
+  }
 }
 
 .search-icon a,
