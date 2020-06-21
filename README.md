@@ -6,7 +6,7 @@
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
 
-[User Manual 👉](doc/Manual.md)
+[User Manual 👉](_doc/Manual.md)
 --------------------------------------------------
 
 ### Getting Started
@@ -36,7 +36,7 @@ Critical Jekyll-related code are located in `_include/` and `_layouts/`. Most of
 This theme uses the default code syntax highlighter of jekyll, [Rouge](http://rouge.jneen.net/), which is compatible with Pygments theme so just pick any pygments theme css (e.g. from [here](http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html) and replace the content of `highlight.less`.
 
 
-### Interesting to know more? Checkout full [User Manual](doc/Manual.md)!
+### Interesting to know more? Checkout the [full user manual](_doc/Manual.md)!
 
 
 Other Resources
@@ -50,7 +50,7 @@ Ports
 - Out of date. Helps wanted for updating it on par with the main repo
 
 Translation
-- [🇨🇳 (somewhat outdated)](https://github.com/Huxpro/huxpro.github.io/blob/master/doc/README.zh.md)
+- [🇨🇳 (somewhat outdated)](https://github.com/Huxpro/huxpro.github.io/blob/master/_doc/README.zh.md)
 
 
 License
