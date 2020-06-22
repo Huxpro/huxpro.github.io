@@ -1,6 +1,6 @@
 ---
 title: "Data Representation - Integer"
-subtitle: "「数据表示」整型"
+subtitle: "「数据表示」整数"
 layout: post
 author: "Hux"
 header-style: text
@@ -12,10 +12,12 @@ tags:
   - C++
 ---
 
-Integers, or _whole number_ are _fixed-point numbers_, contrast to _floating-point numbers_.   
-Computers treat them very differently.
+Integers, or _whole number_ from elemental mathematics, are the most common and 
+fundamental numbers used in the computers. It's represented as 
+_fixed-point numbers_, contrast to _floating-point numbers_ in the machine. 
+Today we are going to learn a whole bunch of way to encode it.
 
-Two properties that distinguish an integer representation: 
+There are mainly two properties to make a integer representation different:
 
 1. **Size, of the number of bits used**.  
 usually the power of 2. e.g. 8-bit, 16-bit, 32-bit, 64-bit. 
@@ -23,32 +25,33 @@ usually the power of 2. e.g. 8-bit, 16-bit, 32-bit, 64-bit.
 2. **Signed or unsigned**.  
 there are also multiple schemas to encode a signed integers.
 
-Some terminologies we will used:
+We are also gonna use the below terminologies throughout the post:
 
 - _MSB_: Most Significant Bit
 - _LSB_: Least Significant Bit
 
 
-Prerequisite - `printf` Recap (Integers)
+Prerequisite - `printf` Recap
 ----------------------------------------
+
+We will quickly recap the integers subset of usages of `printf`.
+Basically, we used _format specifier_ to interpolate values into strings:
 
 ### [Format Specifier](http://www.cplusplus.com/reference/cstdio/printf/)
 
 > `%[flags][width][.precision][length]specifier`
 
-specificier
-- `d`, `i` : signed decimal
-- `u` : unsigned decimal
-- `c` : char
-- `p`: pointer addr
-- `x` / `X` : lower/upper unsigned hex
-
-length
-- `l` : long (at least 32) 
-- `ll` : long long (at least 64)
-- `h` : short (usually 16)
-- `hh` : short short (usually 8)
-
+- `specifier`
+  - `d`, `i` : signed decimal
+  - `u` : unsigned decimal
+  - `c` : char
+  - `p`: pointer addr
+  - `x` / `X` : lower/upper unsigned hex
+- `length`
+  - `l` : long (at least 32) 
+  - `ll` : long long (at least 64)
+  - `h` : short (usually 16)
+  - `hh` : short short (usually 8)
 
 ```cpp
 using namespace std; 
@@ -293,11 +296,15 @@ printf("%"PRIxPTR "\n", (uintptr_t)s8);  // ffffffffffffff80
 ```
 
 
-Char
+Char & [ASCII](https://en.wikipedia.org/wiki/ASCII)
 -----------------
 
-Traditionally, `char` is represented in the computer as 8 bits as well. It's 
-more complicated in nowadays Unicode era but we'll ignore that for future posts.
+Traditionally, `char` is represented in the computer as 8 bits as well. And 
+really, ASCII is only defined between `0` and `127` and require 7 bits. 
+(8-bit Extended ASCII is not quite well popularized and supported.)
+
+It's more complicated in extension such as _Unicode_ nowadays, but we'll ignore 
+it for future posts dedicated for char and string representation.
 
 So how is a `char` different with a _byte_?
 
@@ -305,6 +312,9 @@ Well, the answer is whether a `char` is a `signed char` (backed by `int8_t`)
 or a `unsigned char` (backed by `uint8_t`) is... _implementaton-defined_. 
 And most systems made it _signed_ since most types (e.g. `int`) were signed 
 by default.
+
+N.B. `int` is standard-defined to be equivalent to `signed int`. This is
+not the case of `char`.
 
 That's why you often see such `typedef` such as:
 
