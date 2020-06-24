@@ -177,37 +177,36 @@ Representation of Non-Numbers
 There are more in the IEEE-754!
 
 Real numbers doesn't satisfy [closure property](https://en.wikipedia.org/wiki/Closure_(mathematics))
-as integers: notably, the set of real numbers is NOT closed under division! It 
-could produce non-numbers results such as **infinity** (`1/0`) or even 
-**NaN (Not-a-Number)** (taking a sqrt of a negative number).
+as integers does. Notably, the set of real numbers is NOT closed under the 
+division! It could produce non-number results such as **infinity** (e.g. `1/0`) 
+and [**NaN (Not-a-Number)**](https://en.wikipedia.org/wiki/NaN) (e.g. taking 
+a square root of a negative number).
 
-- [NaN](https://en.wikipedia.org/wiki/NaN)
+It would be algebraically ideal if the set of floating-point numbers can be 
+closed under all floating-point arithmetics. That would made many people's life
+easier. So the IEEE made it so! Non-numeber values are squeezed in.
 
-It would be wanted if the set of floating-point numbers can close under any 
-floating-point arithmetics. That streamline the machine representation a lot.
-So the IEEE made it so and squeeze those non-numebers value into the same
-representation.
-
-We will also include _zero_ in the table since it's special (the only two
-used `0x00` exponent).
+We will also include the two zeros (`+0`/`-0`) into the comparison here, 
+since they are also special by being the only two demanding an `0x00` exponent:
 
 ```cpp
-    (binary)                           (hex)
-0 00000000 00000000000000000000000 = 0000 0000 = 0
+             binary                |    hex    | 
+--------------------------------------------------------
+0 00000000 00000000000000000000000 = 0000 0000 = +0
 1 00000000 00000000000000000000000 = 8000 0000 = −0
 
-0 11111111 00000000000000000000000 = 7f80 0000 = infinity
+0 11111111 00000000000000000000000 = 7f80 0000 = +infinity
 1 11111111 00000000000000000000000 = ff80 0000 = −infinity
 
-_ 11111111 10000000000000000000001 = ffc0 0001 = qNaN (on x86 and ARM processors)
-_ 11111111 00000000000000000000001 = ff80 0001 = sNaN (on x86 and ARM processors)
+_ 11111111 10000000000000000000001 = ffc0 0001 = qNaN
+_ 11111111 00000000000000000000001 = ff80 0001 = sNaN
 ```
 
 ```cpp
       (8 bits)  (23 bits)
 sign  exponent  fraction 
-  0      00     0 ...0 0  = -0 
-  1      00     0 ...0 0  = +0
+  0      00     0 ...0 0  = +0 
+  1      00     0 ...0 0  = -0
   0      FF     0 ...0 0  = +infinity
   1      FF     0 ...0 0  = -infinity 
   _      FF     1 ...0 1  = qNaN
@@ -216,31 +215,31 @@ sign  exponent  fraction
 
 Encodings of qNaN and sNaN are not specified in IEEE 754 and implemented 
 differently on different processors. Luckily, both x86 and ARM family use the
-"most significant bit of fraction" to indicate quiteness.
+"most significant bit of fraction" to indicate whether it's quite.
 
 ### More on NaN
 
 If we look carefully into the IEEE 754-2008 spec, in the _page35, 6.2.1_, it 
-actually defined anything with exponent `FF` and not infinity (i.e. with 
-trailing bit of fraction being `0`), a NaN!
+actually defined anything with exponent `FF` and not a infinity (i.e. with 
+all the fraction bits being `0`), a NaN!
 
 > All binary NaN bit strings have all the bits of the biased exponent field E set to 1 (see 3.4). A quiet NaN bit string should be encoded with the first bit (d1) of the trailing significand field T being 1. A signaling NaN bit string should be encoded with the first bit of the trailing significand field being 0.
 
-That means, we actually have `2 ** 24 - 2` of NaNs in a 32-bits floats!
-The `24` came from the `1` sign bit plus `23` fractions and the `2` came from
-the `+/- inf`. 
+That implies, we actually had `2 ** 24 - 2` of NaNs in a 32-bits float!
+The `24` came from the `1` sign bit plus `23` fractions and the `2` excluded 
+were the `+/- inf`. 
 
-The contingious 22 bits inside the fraction looks quite a waste, and there
-would be 51 bits of them in the `double`! We will see how to made them useful 
+The continuous 22 bits inside the fraction looks quite a waste, and there
+would be even 51 bits of them in the `double`! We will see how to made them useful 
 in later episodes (spoiler: they are known as _NaN payload_).
 
-It's also worth nothing that It's weird to use the MSB instead of sign bit for 
-NaN quiteness/signalness:
+It's also worth noting that it's weird that the IEEE choose to use the MSB 
+instead of the sign bit for NaN quiteness/signalness:
 
 > It seems strange to me that the bit which signifies whether or not the NaN is signaling is the top bit of the mantissa rather than the sign bit; perhaps something about how floating point pipelines are implemented makes it less natural to use the sign bit to decide whether or not to raise a signal.
 > -- <https://anniecherkaev.com/the-secret-life-of-nan>
 
-I guess it might be something related to CPU pipeline. 
+I guess it might be something related to the CPU pipeline? I don't know yet.
 
 
 
