@@ -4,6 +4,7 @@
 @import "side-catalog.less";
 @import "snackbar.less";
 @import "highlight.less";
+@import "search.less";
 
 // Global Components
 
@@ -101,10 +102,11 @@ select {
 }
 
 // override table style in bootstrap
-table{
+table {
   margin-top: 10px;
 }
-table.table > tbody, table.table > thead {
+table.table > tbody,
+table.table > thead {
   th,
   td {
     border: 1px solid #eee !important;
@@ -138,7 +140,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+  .monospace;
 }
 
 // In the list of posts
@@ -185,7 +187,8 @@ samp {
       margin-top: 10px;
     }
   }
-  h5, h6 {
+  h5,
+  h6 {
     font-size: 20px;
     font-weight: 600;
     color: gray;
@@ -195,11 +198,22 @@ samp {
   }
   // downscale the font a little bit in mobile
   @media screen and (max-width: 768px) {
-    h1 { font-size: 30px; }
-    h2 { font-size: 22px; }
-    h3 { font-size: 20px; }
-    h4 { font-size: 19px; }
-    h5, h6 { font-size: 18px; }
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 22px;
+    }
+    h3 {
+      font-size: 20px;
+    }
+    h4 {
+      font-size: 19px;
+    }
+    h5,
+    h6 {
+      font-size: 18px;
+    }
   }
   ul,
   ol {
@@ -248,7 +262,7 @@ samp {
     > a {
       width: 100%;
       > span {
-        color: @gray;
+        color: @brand-gray;
         font-weight: normal;
         letter-spacing: 0.5px;
       }
@@ -256,7 +270,7 @@ samp {
   }
   .anchorjs-link {
     // I can not understand this but this made anchor always in the same line as title
-    position: absolute; 
+    position: absolute;
     text-decoration: none !important;
   }
 }
@@ -413,7 +427,7 @@ samp {
       &:active {
         background-color: rgba(0, 0, 0, 0.05);
       }
-      .icon-bar{
+      .icon-bar {
         background-color: @gray-dark;
       }
     }
@@ -497,12 +511,13 @@ samp {
     .page-heading {
       padding: 85px 0 20px;
       color: @gray-dark;
-      .subheading{
+      .subheading {
         margin-bottom: 15px;
       }
     }
     .tags {
-      a, .tag {
+      a,
+      .tag {
         border-color: @gray-dark;
         color: @gray-dark;
         &:hover,
@@ -513,7 +528,7 @@ samp {
     }
   }
   background: no-repeat center center;
-  background-color: @gray;
+  background-color: @brand-gray;
   background-attachment: scroll;
   .background-cover;
   // NOTE: Background images are set within the HTML using inline CSS!
@@ -644,7 +659,7 @@ samp {
   }
   > .post-meta {
     .serif;
-    color: @gray;
+    color: @brand-gray;
     font-size: 16px;
     font-style: italic;
     margin-top: 0;
@@ -679,7 +694,7 @@ samp {
 .post-content-preview {
   font-size: 13px;
   font-style: italic;
-  color: #a3a3a3;
+  color: @brand-gray;
   &:hover {
     color: @brand-primary;
   }
@@ -728,67 +743,6 @@ footer {
     }
   }
 }
-
-// Contact Form Styles
-
-.floating-label-form-group {
-  font-size: 14px;
-  position: relative;
-  margin-bottom: 0;
-  padding-bottom: 0.5em;
-  border-bottom: 1px solid @gray-light;
-  input,
-  textarea {
-    z-index: 1;
-    position: relative;
-    padding-right: 0;
-    padding-left: 0;
-    border: none;
-    border-radius: 0;
-    font-size: 1.5em;
-    background: none;
-    box-shadow: none !important;
-    resize: none;
-  }
-  label {
-    display: block;
-    z-index: 0;
-    position: relative;
-    top: 2em;
-    margin: 0;
-    font-size: 0.85em;
-    line-height: 1.764705882em;
-    vertical-align: middle;
-    vertical-align: baseline;
-    opacity: 0;
-    -webkit-transition: top 0.3s ease, opacity 0.3s ease;
-    -moz-transition: top 0.3s ease, opacity 0.3s ease;
-    -ms-transition: top 0.3s ease, opacity 0.3s ease;
-    transition: top 0.3s ease, opacity 0.3s ease;
-  }
-  &::not(:first-child) {
-    padding-left: 14px;
-    border-left: 1px solid @gray-light;
-  }
-}
-
-.floating-label-form-group-with-value {
-  label {
-    top: 0;
-    opacity: 1;
-  }
-}
-
-.floating-label-form-group-with-focus {
-  label {
-    color: @brand-primary;
-  }
-}
-
-form .row:first-child .floating-label-form-group {
-  border-top: 1px solid @gray-light;
-}
-
 // Button Styles
 
 .btn {
@@ -859,7 +813,7 @@ form .row:first-child .floating-label-form-group {
     > a:hover,
     > a:focus,
     > span {
-      color: @gray;
+      color: @brand-gray;
       background-color: @gray-dark;
       cursor: not-allowed;
     }
@@ -897,11 +851,13 @@ img::-moz-selection {
 .tags {
   margin-bottom: -5px;
   &.tags-sup {
-    a, .tag {
+    a,
+    .tag {
       padding: 0 10px 0 12px;
     }
   }
-  a, .tag {
+  a,
+  .tag {
     display: inline-block;
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 999em;
@@ -955,13 +911,16 @@ img::-moz-selection {
     &.focus {
       background-color: #0085a1 !important;
     }
-    &.focus{
-      box-shadow: rgba(0,0,0,.117647) 0 1px 6px, rgba(0,0,0,.239216) 0 1px 4px;
+    &.focus {
+      box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px,
+        rgba(0, 0, 0, 0.239216) 0 1px 4px;
     }
     &.tag-button--all {
       font-weight: 700;
-      color: #0085a1!important;
-      &:hover, &:active, &.focus{
+      color: #0085a1 !important;
+      &:hover,
+      &:active,
+      &.focus {
         background-color: #e4e4e4 !important;
       }
     }
@@ -1065,7 +1024,6 @@ img::-moz-selection {
   }
 }
 
-
 /* Hux customize Style for navBar button */
 
 .navbar-default .navbar-toggle {
@@ -1084,55 +1042,6 @@ img::-moz-selection {
   .icon-bar + .icon-bar {
     margin-top: 3px;
   }
-}
-
-/* Hux customize Style for Duoshuo */
-.comment {
-  margin-top: 20px;
-  #ds-thread {
-    #ds-reset {
-      a.ds-like-thread-button {
-        border: 1px solid #ddd;
-        border-radius: 0px;
-        background: white;
-        box-shadow: none;
-        text-shadow: none;
-      }
-      a.ds-thread-liked {
-      }
-      li.ds-tab a.ds-current {
-        border: 1px solid #ddd;
-        border-radius: 0px;
-        background: white;
-        box-shadow: none;
-        text-shadow: none;
-      }
-      .ds-textarea-wrapper {
-        //border:1px solid #ddd;
-        background: none;
-      }
-      .ds-gradient-bg {
-        background: none;
-      }
-      .ds-post-options {
-        border-bottom: 1px solid #ccc;
-      }
-      .ds-post-button {
-        border-bottom: 1px solid #ccc;
-      }
-      //v1.6 flatten button
-      .ds-post-button {
-        background: white;
-        box-shadow: none;
-        &:hover {
-          background: @gray-light;
-        }
-      }
-    }
-  }
-}
-#ds-smilies-tooltip ul.ds-smilies-tabs li a {
-  background: white !important;
 }
 
 // Hux fullscreen mode in 404.html
@@ -1185,7 +1094,11 @@ img::-moz-selection {
 }
 
 // MathJax Overflow
-.MathJax_SVG_Display{
+.MathJax_SVG_Display {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.no-scroll {
+  overflow-y: hidden;
 }
