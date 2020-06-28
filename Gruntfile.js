@@ -21,7 +21,18 @@ module.exports = function(grunt) {
             minified: {
                 options: {
                     paths: ["css"],
-                    cleancss: true
+                    // Below code doesn't work from grunt-contrib-less plugin.
+                    // jaynism assume that it is a problem with less plugin's version confiction.
+                    // So jaynism removed this for fixing issue.
+                    // cleancss: true
+
+                    // But we still need minified function for '.less' files
+                    // so jaynism added below 'plugins' code instead of above 'cleancss: true' code
+                    // note: this new plugin requires specific version of dependencies such as clean-css and more.
+                    // so jaynism also updated package.json & package-lock.json files for reference. You can match your environment by typing '$npm install'.
+                    plugins: [
+                        new (require('less-plugin-clean-css'))({advanced: true})
+                    ]
                 },
                 files: {
                     "css/<%= pkg.name %>.min.css": "less/<%= pkg.name %>.less"
@@ -69,5 +80,5 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['uglify', 'less', 'usebanner']);
-
+    
 };
