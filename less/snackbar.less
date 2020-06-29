@@ -3,7 +3,8 @@
 */
 
 .paper-snackbar {
-  transition-property: opacity, bottom, left, right, width, margin, border-radius;
+  transition-property: opacity, bottom, left, right, width, margin,
+    border-radius;
   transition-duration: 0.5s;
   transition-timing-function: ease;
   /*font-family: RobotoDraft;*/
@@ -20,7 +21,6 @@
   padding: 18px 24px;
   bottom: 0px;
   opacity: 0;
-
 }
 
 @media (min-width: 640px) {
@@ -42,13 +42,12 @@
     border-radius: 2px;
     margin: 24px;
     bottom: -100px;
-    
   }
 }
 
 @media (max-width: 640px) {
   .paper-snackbar {
-  /*
+    /*
   Mobile:
     Single-line snackbar height: 48 dp
     Multi-line snackbar height: 80 dp
@@ -74,9 +73,6 @@
   outline: 0px;
 }
 
-
-
-
 /* Everything from here down is actually just for the demo - the material buttons and card, and various other pieces of styling */
 
 /* Variables */
@@ -91,38 +87,39 @@
 
 /* Buttons */
 .paper-button {
-    position: relative;
-    padding: 4px 0;
-    margin: 1em;
-    width: @button-width;
-    overflow: hidden;
-    user-select: none;
-    color: @black;
-    text-transform: uppercase;
-    border-radius: 3px;
-    outline-color: @gray;
-  
-    &:hover {
-        cursor: pointer;
-    }
+  position: relative;
+  padding: 4px 0;
+  margin: 1em;
+  width: @button-width;
+  overflow: hidden;
+  user-select: none;
+  color: @black;
+  text-transform: uppercase;
+  border-radius: 3px;
+  outline-color: @brand-gray;
 
-    // we don't leverage ripple
-    // .ripple {
-    //     position: absolute;
-    //     width: @button-width * 2;
-    //     height: @button-width * 2;
-    //     //background-color: rgba(@gray, 0.5);
-    //     left: 0;
-    //     top: 0;
-    //     border-radius: 50%;
-    //     margin-left: - @button-width;
-    //     margin-top: - @button-width;
-    //     transform: scaleX(0) scaleY(0);
-    //     z-index: 9000;
-    // }
+  &:hover {
+    cursor: pointer;
+  }
+
+  // we don't leverage ripple
+  // .ripple {
+  //     position: absolute;
+  //     width: @button-width * 2;
+  //     height: @button-width * 2;
+  //     //background-color: rgba(@gray, 0.5);
+  //     left: 0;
+  //     top: 0;
+  //     border-radius: 50%;
+  //     margin-left: - @button-width;
+  //     margin-top: - @button-width;
+  //     transform: scaleX(0) scaleY(0);
+  //     z-index: 9000;
+  // }
 }
 
-.paper-button button, .paper-button input[type="submit"] {
+.paper-button button,
+.paper-button input[type="submit"] {
   background: inherit;
   border: none;
   display: block;
@@ -134,7 +131,8 @@
   text-transform: uppercase;
 }
 
-.paper-button.colored, .paper-button.colored button {
+.paper-button.colored,
+.paper-button.colored button {
   color: @blue;
 }
 
@@ -151,33 +149,33 @@
 // }
 
 .paper-button.raised-button.colored {
-   background-color: @blue;
+  background-color: @blue;
 }
 
-.paper-button .raised-button{
+.paper-button .raised-button {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
-.paper-button.raised-button.colored{
+.paper-button.raised-button.colored {
   background: #4285f4;
   color: #fff;
 }
 
 .paper-button[disabled] {
-    background-color: #EAEAEA !important;
-    color: #A8A8A8 !important;
-    cursor: auto;
+  background-color: #eaeaea !important;
+  color: #a8a8a8 !important;
+  cursor: auto;
 }
 
-.paper-button:hover{
-  background-color: #EAEAEA;
+.paper-button:hover {
+  background-color: #eaeaea;
 }
-.paper-button.raised-button.colored:hover{
+.paper-button.raised-button.colored:hover {
   background-color: #3367d6;
 }
 
 button.paper-button {
-  border:0;
+  border: 0;
   /*font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;*/
   font-size: 1em;
   line-height: 25px;
@@ -185,12 +183,12 @@ button.paper-button {
 }
 
 .paper-button input[type="submit"] {
-  outline-color: @gray;  
+  outline-color: @brand-gray;
 }
 
 .paper-button.colored.raised-button input[type="submit"] {
   color: @white;
-} 
+}
 
 /** Shadows **/
 .paper-shadow-animated.paper-shadow {
@@ -225,17 +223,12 @@ button.paper-button {
   box-shadow: 0 25px 55px 0 rgba(0, 0, 0, 0.21);
 }
 
-
-
 /** Card **/
 .card {
- background: white;
+  background: white;
   width: 300px;
   height: 300px;
   position: relative;
   margin: 16px;
-  border-radius: 2px; 
+  border-radius: 2px;
 }
-
-
-
