@@ -4,7 +4,6 @@ subtitle: "「数据表示」整数"
 layout: post
 author: "Hux"
 header-style: text
-hidden: true
 tags:
   - 笔记
   - 基础

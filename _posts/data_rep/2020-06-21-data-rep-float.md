@@ -4,7 +4,6 @@ subtitle: "「数据表示」浮点数"
 layout: post
 author: "Hux"
 header-style: text
-hidden: true
 tags:
   - 笔记
   - 基础
@@ -170,6 +169,20 @@ float f = 0x1.2p3;  // 1.2 by 2^3
 std::cout << f;     // 9
 ```
 
+That's try with another direction:
+
+```cpp
+#include <iostream>
+#include <stdint.h>
+#include <inttypes.h>
+
+int main() {
+  double qNan = std::numeric_limits<double>::quiet_NaN();
+  printf("0x%" PRIx64 "\n", *reinterpret_cast<uint64_t*>(&qNan)); 
+  // 0x7ff8000000000000, the canonical qNaN!
+}
+```
+
 
 Representation of Non-Numbers
 -----------------------------
@@ -198,8 +211,8 @@ since they are also special by being the only two demanding an `0x00` exponent:
 0 11111111 00000000000000000000000 = 7f80 0000 = +infinity
 1 11111111 00000000000000000000000 = ff80 0000 = −infinity
 
-_ 11111111 10000000000000000000001 = ffc0 0001 = qNaN
-_ 11111111 00000000000000000000001 = ff80 0001 = sNaN
+_ 11111111 10000000000000000000000 = _fc0 0000 = qNaN (canonical)
+_ 11111111 00000000000000000000001 = _f80 0001 = sNaN (one of them)
 ```
 
 ```cpp
@@ -209,8 +222,8 @@ sign  exponent  fraction
   1      00     0 ...0 0  = -0
   0      FF     0 ...0 0  = +infinity
   1      FF     0 ...0 0  = -infinity 
-  _      FF     1 ...0 1  = qNaN
-  _      FF     0 ...0 1  = sNaN
+  _      FF     1 ...0 0  = qNaN (canonical)
+  _      FF     0 ...0 1  = sNaN (one of them)
 ```
 
 Encodings of qNaN and sNaN are not specified in IEEE 754 and implemented 
