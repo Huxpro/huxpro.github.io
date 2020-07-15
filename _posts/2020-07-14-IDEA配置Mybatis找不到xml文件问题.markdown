@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "IDEA 配置 MyBatis 后无法找到 mapper 的xml文件"
+title:      "IDEA 配置 MyBatis 后无法找到 mapper 的 xml 文件"
 subtitle:   ""
 date:       2020-07-14 16:43:00
 author:     "lvjb"
@@ -42,12 +42,12 @@ tags:
  ![](../img/in-post/post-idea-mybatis/post-mybatis-pom-build.jpg)
  
 ### 拓展
-&emsp;&emsp;一般来说这个报错是由于 xml 文件和相应的 interface 文件没有对应上导致的。首先排查 xml 文件的 namespace，其次应检查
+&emsp;&emsp;一般来说这个报错是由于 xml 文件和相应的 interface 文件没有对应上导致的。首先排查 xml 文件的 namespace ，其次应检查
 函数名是否一一对应。这样应该能解决绝大多数此问题。
 
 ### 思考总结
 &emsp;&emsp;这次的问题是超出我平时的解决的问题范围外的，整理了下解决思路，碰到问题首先排查了该框架（MyBatis）本身限制可能导致的问题，
-如无法解决，就应该考虑更深一层，比如这次问题排除掉代码本身的问题，应该从整个工程的角度考虑，比如编译、maven配置等等。另一方面，后面如果碰到找不到文件等问题，
+如无法解决，就应该考虑更深一层，比如这次问题排除掉代码本身的问题，应该从整个工程的角度考虑，比如编译、 maven 配置等等。另一方面，后面如果碰到找不到文件等问题，
 我会考虑编译器本身 feature 的影响，如果有碰到，我会继续整理更新。
 
  
