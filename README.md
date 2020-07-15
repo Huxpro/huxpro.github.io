@@ -1,4 +1,4 @@
-# Hux Blog
+# Lvjb Blog
 
 ### [View Live Lvjb Blog &rarr;](https://truemanlv.github.io/)
 
