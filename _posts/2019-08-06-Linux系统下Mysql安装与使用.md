@@ -39,13 +39,13 @@ sudo mysqladmin -p -u root version;    检查版本信息
 
 ### 修改表信息
 
-1.修改表名 
+1.修改表名
 
 ```sql
 alter table 原表名 rename to 新表名;
 ```
 
- 2.修改表注释   
+ 2.修改表注释
 
 ```sql
 alter table 表名 comment '系统信息表';
@@ -65,7 +65,7 @@ alter table 表名  modify 字段名 varchar(20) COMMENT '应用的名称';
 alter table 表名  modify 字段名 类型;
 ```
 
-3.单独修改字段注释 
+3.单独修改字段注释
 
 ```text
 目前没发现有单独修改字段注释的命令语句。
@@ -80,19 +80,19 @@ alter table 表名  modify 字段名 varchar(255) null COMMENT '描述';
  5.增加一个字段
 
 ```sql
-alert table 表名 add 字段名 varchar(255) not null COMMENT '注释';  
+alert table 表名 add 字段名 varchar(255) not null COMMENT '注释';
 ```
 
- 6.增加主键 
+ 6.增加主键
 
 ```sql
-alter table 表名 add 字段名 int(5) not null ,add primary key (字段名);  
+alter table 表名 add 字段名 int(5) not null ,add primary key (字段名);
 ```
 
 7.增加自增主键
 
 ```sql
-alter table 表名 add 字段名 int(5) not null auto_increment ,add primary key (字段名); 
+alter table 表名 add 字段名 int(5) not null auto_increment ,add primary key (字段名);
 ```
 
 8.修改为自增主键
@@ -110,16 +110,16 @@ alter table 表名 change 原字段名 新字段名 varchar(20) not null;
 10.删除字段
 
 ```sql
-alter table 表名 drop 字段名; 
+alter table 表名 drop 字段名;
 ```
 
 11.在某个字段后增加字段
 
 ```sql
-alter table 表名 add 字段名1 int  not null default 0 AFTER 字段名2； #(在哪个字段后面添加)  
+alter table 表名 add 字段名1 int  not null default 0 AFTER 字段名2； #(在哪个字段后面添加)
 ```
 
-12.调整字段顺序 
+12.调整字段顺序
 
 ```sql
 alter table 表名  change 字段名1 字段名1 int not null after 字段名2 ; #(注意字段名1出现了2次)
