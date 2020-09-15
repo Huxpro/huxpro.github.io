@@ -1,6 +1,6 @@
 # JavaScript HTML DOM
 
-> 通过 HTML DOM，可访问 JavaScript HTML 文档的所有元素。
+[TOC]
 
 ## HTML DOM (文档对象模型)
 

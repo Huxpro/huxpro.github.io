@@ -1,14 +1,11 @@
 SpringBoot 注解验证参数
 =================
 
-废话不多说，直接上表格说明：
-
 <table border="0"><tbody><tr><td>注解</td><td>作用类型</td><td>解释</td></tr><tr><td>@NotNull</td><td>任何类型</td><td>属性不能为 null</td></tr><tr><td>@NotEmpty</td><td>集合</td><td>集合不能为 null，且 size 大于 0</td></tr><tr><td>@NotBlanck</td><td>字符串、字符</td><td>字符类不能为 null，且去掉空格之后长度大于 0</td></tr><tr align="center" valign="middle"><td>@AssertTrue</td><td align="center" valign="middle">Boolean、boolean</td><td>布尔属性必须是 true</td></tr><tr align="center" valign="middle"><td>@Min</td><td align="center" valign="middle">数字类型（原子和包装）</td><td>限定数字的最小值（整型）</td></tr><tr align="center" valign="middle"><td>@Max</td><td align="center" valign="middle">同 @Min</td><td>限定数字的最大值（整型）</td></tr><tr align="center" valign="middle"><td>@DecimalMin</td><td align="center" valign="middle">同 @Min</td><td>限定数字的最小值（字符串，可以是小数）</td></tr><tr align="center" valign="middle"><td>@DecimalMax</td><td align="center" valign="middle">同 @Min</td><td>限定数字的最大值（字符串，可以是小数）</td></tr><tr align="center" valign="middle"><td>@Range</td><td align="center" valign="middle">数字类型（原子和包装）</td><td>限定数字范围（长整型）</td></tr><tr align="center" valign="middle"><td>@Length</td><td align="center" valign="middle">字符串</td><td>限定字符串长度</td></tr><tr align="center" valign="middle"><td>@Size</td><td align="center" valign="middle">集合</td><td>限定集合大小</td></tr><tr align="center" valign="middle"><td>@Past</td><td align="center" valign="middle">时间、日期</td><td>必须是一个过去的时间或日期</td></tr><tr align="center" valign="middle"><td>@Future</td><td align="center" valign="middle">时期、时间</td><td>必须是一个未来的时间或日期</td></tr><tr align="center" valign="middle"><td>@Email</td><td align="center" valign="middle">字符串</td><td>必须是一个邮箱格式</td></tr><tr align="center" valign="middle"><td>@Pattern</td><td align="center" valign="middle">字符串、字符</td><td>正则匹配字符串</td></tr></tbody></table>
 以上注解用到要验证参数的封装类中的属性上：
 
 ```
 public class Test {
-
     @NotNull(message = "ID不能为空")
     @Range(min = 1, max = 100, message = "ID必须在1到100之间")
     private Integer id;
@@ -58,7 +55,3 @@ public class Test {
 这样使用注解来验证参数就很方便了，不用再写代码去验证入参了
 
 但是有一个问题，@Pattern 注解中的正则只能写死到注解里面，没法提取出来，现在还不知道怎么解决
-
-希望知道解决方法的大佬评论解答一下 O(∩_∩)O
-
-> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 https://www.cnblogs.com/javafucker/p/9935095.html

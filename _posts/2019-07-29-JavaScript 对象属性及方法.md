@@ -1,8 +1,12 @@
-# JavaScript 字符串
+# javascript内置对象
+
+[TOC]
+
+## JavaScript 字符串
 
 > JavaScript 字符串用于存储和处理文本。 
 
-## 字符串可以是对象
+### 字符串可以是对象
 
 - 通常， JavaScript 字符串是原始值，可以使用字符创建： **var firstName = "John"**
 
@@ -14,7 +18,7 @@
   (x === y) // 结果为 false，因为 x 是字符串，y 是对象
   ```
 
-## 字符串属性和方法
+### 字符串属性和方法
 
 #### 字符串属性
 
@@ -24,7 +28,7 @@
 |   length    |      返回字符串的长度      |
 |  prototype  | 允许您向对象添加属性和方法 |
 
-## 字符串方法
+#### 字符串方法
 
 更多方法实例可以参见：[JavaScript String 对象](https://www.runoob.com/jsref/jsref-obj-string.html)。
 
@@ -52,11 +56,9 @@
 |       trim()        |                      移除字符串首尾空白                      |
 |      valueOf()      |                  返回某个字符串对象的原始值                  |
 
-# JavaScript 正则表达式
+## JavaScript 正则表达式
 
-## 正则表达式修饰符
-
-#### **修饰符** 
+### **修饰符** 
 
 可以在全局搜索中不区分大小写:
 
@@ -66,7 +68,7 @@
 |   g    | 执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。 |
 |   m    |                      执行多行匹配。                      |
 
-#### 方括号
+### 方括号
 
 方括号用于查找某个范围内的字符：
 
@@ -82,7 +84,7 @@
 |                           [^adgk]                            | 查找给定集合外的任何字符。         |
 |                      (red\|blue\|green)                      | 查找任何指定的选项。               |
 
-#### 元字符
+### 元字符
 
 元字符（Metacharacter）是拥有特殊含义的字符：
 
@@ -107,7 +109,7 @@
 |  [\xdd](https://www.runoob.com/jsref/jsref-regexp-hex.html)  |      查找以十六进制数 dd 规定的字符。       |
 | [\uxxxx](https://www.runoob.com/jsref/jsref-regexp-unicode-hex.html) | 查找以十六进制数 xxxx 规定的 Unicode 字符。 |
 
-#### 量词
+### 量词
 
 |                             量词                             |                             描述                             |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
@@ -122,7 +124,7 @@
 | [?=n](https://www.runoob.com/jsref/jsref-regexp-nfollow.html) |           匹配任何其后紧接指定字符串 n 的字符串。            |
 | [?!n](https://www.runoob.com/jsref/jsref-regexp-nfollow-not.html) |         匹配任何其后没有紧接指定字符串 n 的字符串。          |
 
-#### RegExp 对象方法
+### RegExp 对象方法
 
 |                             方法                             |                        描述                        |
 | :----------------------------------------------------------: | :------------------------------------------------: |
@@ -130,9 +132,9 @@
 | [test](https://www.runoob.com/jsref/jsref-test-regexp.html)  |     检索字符串中指定的值。返回 true 或 false。     |
 | [toString](https://www.runoob.com/jsref/jsref-regexp-tostring.html) |              返回正则表达式的字符串。              |
 
-# JavaScript Number 对象
+## JavaScript Number 对象
 
-## Number 对象属性
+### Number 对象属性
 
 |                             属性                             |                  描述                  |
 | :----------------------------------------------------------: | :------------------------------------: |
@@ -144,7 +146,7 @@
 | [POSITIVE_INFINITY](https://www.runoob.com/jsref/jsref-positive-infinity.html) |       正无穷大，溢出时返回该值。       |
 | [prototype](https://www.runoob.com/jsref/jsref-prototype-num.html) |       允许向对象添加属性和方法。       |
 
-## Number 对象方法
+### Number 对象方法
 
 |                             方法                             |                         描述                         |
 | :----------------------------------------------------------: | :--------------------------------------------------: |
@@ -156,13 +158,13 @@
 | [toString()](https://www.runoob.com/jsref/jsref-tostring-number.html) |         把数字转换为字符串，使用指定的基数。         |
 | [valueOf()](https://www.runoob.com/jsref/jsref-valueof-number.html) |          返回一个 Number 对象的基本数字值。          |
 
-# JavaScript Math 对象
+## JavaScript Math 对象
 
 > Math 对象用于执行数学任务。
 >
 > Math 对象并不像 Date 和 String 那样是对象的类，因此没有构造函数 Math()。
 
-## Math 对象属性
+### Math 对象属性
 
 |                            属性                            |                          描述                           |
 | :--------------------------------------------------------: | :-----------------------------------------------------: |
@@ -175,7 +177,7 @@
 | [SQRT1_2](https://www.runoob.com/jsref/jsref-sqrt1-2.html) |         返回 2 的平方根的倒数（约等于 0.707）。         |
 |   [SQRT2](https://www.runoob.com/jsref/jsref-sqrt2.html)   |            返回 2 的平方根（约等于 1.414）。            |
 
-## Math 对象方法
+### Math 对象方法
 
 |                             方法                             |                             描述                             |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
@@ -198,9 +200,9 @@
 |   [sqrt(x)](https://www.runoob.com/jsref/jsref-sqrt.html)    |                       返回数的平方根。                       |
 |    [tan(x)](https://www.runoob.com/jsref/jsref-tan.html)     |                        返回角的正切。                        |
 
-# JavaScript Array 对象
+## JavaScript Array 对象
 
-## 数组属性
+### 数组属性
 
 |                             属性                             |               描述               |
 | :----------------------------------------------------------: | :------------------------------: |
@@ -208,7 +210,7 @@
 | [length](https://www.runoob.com/jsref/jsref-length-array.html) |    设置或返回数组元素的个数。    |
 | [prototype](https://www.runoob.com/jsref/jsref-prototype-array.html) | 允许你向数组对象添加属性或方法。 |
 
-## Array 对象方法
+### Array 对象方法
 
 |                             方法                             |                         描述                         |
 | :----------------------------------------------------------: | :--------------------------------------------------: |
@@ -248,9 +250,9 @@
 | [unshift()](https://www.runoob.com/jsref/jsref-unshift.html) |   向数组的开头添加一个或更多元素，并返回新的长度。   |
 | [valueOf()](https://www.runoob.com/jsref/jsref-valueof-array.html) |                返回数组对象的原始值。                |
 
-# JavaScript Date 对象
+## JavaScript Date 对象
 
-## 创建 Date 对象：
+### 创建 Date 对象：
 
 ```js
 var d = new Date();
@@ -259,14 +261,14 @@ var d = new Date(dateString);
 var d = new Date(year, month, day, hours, minutes, seconds, milliseconds);
 ```
 
-## Date 对象属性
+### Date 对象属性
 
 |                             属性                             |                 描述                 |
 | :----------------------------------------------------------: | :----------------------------------: |
 | [constructor](https://www.runoob.com/jsref/jsref-constructor-date.html) | 返回对创建此对象的 Date 函数的引用。 |
 | [prototype](https://www.runoob.com/jsref/jsref-prototype-date.html) |   使您有能力向对象添加属性和方法。   |
 
-## Date 对象方法
+### Date 对象方法
 
 | 方法                                                         | 描述                                                         |
 | :----------------------------------------------------------- | :----------------------------------------------------------- |
