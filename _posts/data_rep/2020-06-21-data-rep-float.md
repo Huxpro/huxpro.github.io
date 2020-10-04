@@ -255,6 +255,41 @@ instead of the sign bit for NaN quiteness/signalness:
 I guess it might be something related to the CPU pipeline? I don't know yet.
 
 
+### Equality of NaNs and Zeros.
+
+The spec defined a comparison with NaNs to return an **unordered result**, that 
+means any comparison operation except `!=`, i.e. `>=, <=, >, <, =` between a 
+NaN and any other floating-point number would return `false`.
+
+No surprised that most (if not every) language implemented such behaviours, e.g.
+in JavaScript:
+
+```js
+NaN !== NaN   // true
+NaN === NaN   // false
+NaN >  1      // false
+NaN <  1      // false
+```
+
+Position and negative zeros, however, are defined to be equal!
+
+```js
++0 === -0  // true, using the traditional JS equality
+Object.is(+0, -0)  // false, using the "SameValue" equality
+```
+
+In Cpp, we can tell them apart by looking at its sign bit:
+
+```cpp
+#include <cmath>   // signbit
+
+cout << (+0.0f == -0.0f);     // 1
+cout << std::signbit(-0.0f);  // 1
+cout << std::signbit(+0.0f);  // 0
+```
+
+
+
 
 IEEE-754 64-bits Double-Precision Floats
 ----------------------------------------
