@@ -236,7 +236,7 @@ tags:
       - **Confusion Matrix**
         <p align="center">
           <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/0si77j.jpg" style="zoom:100%" />
-  </p>
+    </p>
       
         - 真正例(True Positive, TP):You predicted positive and it’s true
         - 假负例(False Negative, FN): You predicted negative and it’s false
@@ -365,6 +365,7 @@ tags:
         - 泛化能力通俗来讲就是指学习到的模型对未知数据的预测能力
         - 提高泛化能力的方式大致有三种：1.增加数据量。2.正则化。3.凸优化。
       - **正则化**
+        
         <p align="center">
           <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/0BytVF.jpg" style="zoom:100%" />
         </p>
@@ -397,7 +398,7 @@ tags:
           
           L2                         |  L1
           :-------------------------:|:-------------------------:
-          <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/b12znL.jpg" width="300"/>|<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/oDmrKP.jpg" width="300"/>
+        <img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/b12znL.jpg" width="300"/>|<img src="https://gitee.com/echisenyang/GiteeForUpicUse/raw/master/uPic/oDmrKP.jpg" width="300"/>
       
     - **模型选择**
     
