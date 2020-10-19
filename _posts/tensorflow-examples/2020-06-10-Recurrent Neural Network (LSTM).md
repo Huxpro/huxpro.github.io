@@ -79,8 +79,8 @@ def RNN(x, weights, biases):
           output, state = cell(input_, state)
           outputs.append(output)
         return (outputs, state)
-      ```
-      
+```
+
     Args:
         cell: An instance of RNNCell.
         inputs: A length T list of inputs, each a `Tensor` of shape
@@ -93,12 +93,10 @@ def RNN(x, weights, biases):
               tuple of such elements.
             - state is the final state
     """
-
+    
     # Linear activation, using rnn inner loop last output
     # 因为是分类任务，所以只用最后一个outputs
     return tf.matmul(outputs[-1], weights['out']) + biases['out']
-```
-
 ```python
 logits = RNN(X, weights, biases)
 prediction = tf.nn.softmax(logits)
