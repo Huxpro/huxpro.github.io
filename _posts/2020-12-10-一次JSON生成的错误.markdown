@@ -4,7 +4,7 @@ title:      "一次JSON生成错误的总结"
 subtitle:   ""
 date:       2020-12-10 10:21:00
 author:     "lvjb"
-header-img: "img/json-exception/json-exception.png"
+header-img: "img/post-bg-unix-linux.jpg"
 catalog: true
 tags:
     - JSON
@@ -15,7 +15,7 @@ tags:
 #### 问题
 公司有部分代码是将一个 JSONObject 对象使用 FreeMarker 转换后生成 JSON ，但使用 new JSONTokener()
 构造时，报下列错误：
-<img src="/img/json-exception/json-exception.png" style="height:400px">
+<img src="/img/json-exception/json-exception.png" style="height: 68px;width: 1500px;">
 
 #### 分析
   一般控制台打印 ``` Expected a ',' or '}'``` 错误的可考虑字符串格式不合法的问题。根据对字符串的分析，确定是某
@@ -39,7 +39,7 @@ tags:
 #### 总结
    - 标准化JSON对象
       <br>标准的 JSON 格式对象中，键值中不应出现转义字符，特殊符号应在字符前加\，避免解析失败等。所以这个问题本应由前台解决，在传入后台时就将
-      数据格式化为标准数据，而非在后台取数据时进行转义处理。（这样有可能造成注入安全问题）
+      数据格式化为标准数据，而非在后台取数据时进行转义处理。（这样有可能造成注入等安全问题）
    - 正则表达式
       <br> ?<=xxx 表示捕获以 xxx 开头的字符串
       <br> ?=xxx 表示捕获以 xxx 结尾的字符串
