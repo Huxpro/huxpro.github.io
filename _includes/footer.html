@@ -161,9 +161,13 @@
 
         // interop with multilangual 
         if ('{{ page.multilingual }}' == 'true') {
-            _containerSelector = 'div.post-container.active'
+            _containerSelector = 'div.post-container.active';
         } else {
-            _containerSelector = 'div.post-container'
+            _containerSelector = 'div.post-container';
+        }
+
+        if (!$(_containerSelector).length) {
+            _containerSelector = 'div.post-container';
         }
 
         // init
