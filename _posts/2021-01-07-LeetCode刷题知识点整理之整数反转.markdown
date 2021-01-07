@@ -1,0 +1,50 @@
+---
+layout:     post
+title:      "LeetCode刷题整理（1） --- 整数反转"
+subtitle:   ""
+date:       2021-01-07 14:43:00
+author:     "lvjb"
+header-img: "img/post-bg-unix-linux.jpg"
+catalog: true
+tags:
+    - LeetCode
+    - 编程
+    - JAVA
+---
+
+#### 前言
+&emsp;&emsp;不知不觉已经是2021年了，新的一年要有新气象，最近开始改变自己的作息习惯，早起做早餐，感觉相当不错。计划以后每天早上起来做一道
+leetcode 的题目，今天是第一篇整理。
+
+
+#### 题目
+ ![](/img/leetcode/number-reverse.jpg)
+#### 题解
+&emsp;&emsp;题目将数字末位和最高位反转，很容易想到用除法、余数等的解题思路，整理清晰后，代码如下：
+
+``` class Solution {
+        public int reverse(int x) {
+            int result=0;
+            int temp;
+            while(x!=0){
+                temp = result;
+                result = result*10+x%10;
+                x=x/10;
+                if(result/10 != temp){
+                    return 0;
+                }
+            }
+            return result;
+        }
+    }
+```  
+&emsp;&emsp;只要每次将原本的 result 乘上10并加上x除以10的余数，就能一位一位的构建x的反转数字。
+这里可能产生 result 不在 int 数据范围的问题，此时，result/10=0，所以只要每次循环保存处理前的 result，result 进位后除以10与
+原有的数据相等则表明未溢出，若不相等，说明数据溢出，返回0。
+
+&emsp;&emsp;在网站上我还看到一种解法，相当巧妙，思路相似，区别是是用 long 来存储 result，最后强转为 int 类型，如果和原本result相等，说明
+数据未溢出，如果不相等，说明数据溢出，返回0。
+
+#### 要点
+1）一般来说，long 的字节是 int 的两倍，在64位编译系统中， int 为4字节，占32位，取值范围为：-2^32到2^32-1，long 占位64位，取值范围为：-2^64 到2^64 -1。
+2）在 jdk8 的环境下，一个数据溢出int类型数据的取值范围，会被转换为0。
