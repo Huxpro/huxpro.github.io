@@ -78,7 +78,7 @@ ga_domain: huangxuan.me
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "For the next quantum leap<br>离开世界之前，一切都是过程"
+sidebar-about-description: "黄玄，前端娱乐圈 NPC，编程语言/编译器初心者 <br> An UI/Frontend dev & designer accidentally growing into a compiler/PL hacker."
 sidebar-avatar: /img/avatar-hux-ny.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
@@ -106,26 +106,23 @@ friends: [
     #     title: "Su",
     #     href: "http://su.gallery/"
     # },{
-        title: "乱序",
+        title: "乱序（Midare）",
         href: "http://mida.re/"
     },{
-        title: "Sherry Wu",
-        href: "https://xuechundesign.github.io"
+        title: "Sherry Woo",
+        href: "https://sherrywoo.me/"
     },{
-        title: "Luke 的自留地",
-        href: "http://hmqk1995.github.io"
+        title: "Kun Qian",
+        href: "http://kunq.me"
     },{
-        title: "Ebn's Blog",
+        title: "Ebn Zhang",
         href: "http://ebnbin.com/"
     },{
-        title: "SmdCn's Blog",
+        title: "SmdCn",
         href: "http://blog.smdcn.net"
     },{
         title: "JiyinYiyong",
         href: "http://tiye.me/"
-    },{
-        title: "David's Game",
-        href: "https://www.ruoyaowu.com/"
     },{
         title: "DHong Say",
         href: "http://dhong.co"
