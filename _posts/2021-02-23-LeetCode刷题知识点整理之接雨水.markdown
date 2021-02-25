@@ -57,3 +57,33 @@ class Solution {
  &emsp;&emsp;这个逻辑非常清晰易理解。解题要点在于每个柱子的存水量都与两侧高于本柱的柱子的最小值有关，这样是不是很容易联想到线性规划的思想。网上的确有些用 dp 解决的题解，思路是构建两个数组分别存储当前节点左右两侧最高点，其中当前节点的左侧最高点只与当前左侧最高点与左侧节点的高度有关，右侧同理可得。
 后面碰到类似的统一整理线性规划思想。  
  &emsp;&emsp;这个题目被 leetcode 放在了栈的 tag 下，确实可以用栈的方式来解决，需要了解下知识点 ---- 单调栈。
+ 
+#### 拓展
+&emsp;&emsp;这两天研究了下单调栈，在算法题中主要用于获取某个节点左右最大最小值的问题，比如求最大矩形面积等。。例如本题可分割为获取某节点两侧最大值的问题，以此套用单调栈解决。根据这道题题意可知，需要出栈等处理的触发机制是当前节点高度大于栈顶节点高度。可写代码如下：
+```
+    class Solution {
+            public int trap(int[] height) {
+                int result = 0;
+                Stack<Integer> stack = new Stack<Integer>();
+                for(int i=0;i<height.length;i++){
+                       //找到右侧最大值之后，就要一直向左遍历，计算每个节点的存水量
+                    while(stack.isEmpty()&& height[i]>height[stack.peek()]){
+                        //获取前一个节点的高度后，将该节点pop()，目的是向左获取正在计算的节点左侧最大值
+                        int h = height[stack.peek()];
+                        stack.pop();
+                        //若只有墙，无法储水
+                        if(stack.isEmpty()){
+                            break;
+                        }
+                        //节点存水量跟左右节点的最低点相关
+                        int min = Math.min(height[i],height[stack.peek()]);
+                        //此处的 (min-h)只有左墙高于当前墙才能储水,(i-stack.peek()-1)此时栈顶是左墙，所以还需要-1
+                        result += (min-h)*(i-stack.peek()-1);
+                    }
+                    stack.push(i);
+                }
+                return result;
+            }
+            
+    }
+```
