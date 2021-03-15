@@ -19,7 +19,7 @@ tags:
     ![](/img/springboot/template-loader.png)
    搜了一下是 Spring Framework 4.3+ 后就不再支持 velocity，把 SpringMVC 降到原工程的 3.2.9 报 NoClassDefFoundError 的错误。
        ![](/img/springboot/no-class-define.jpg)    
-   故搜索各框架相对应版本，供搭建工程选取版本参考。
+   故搜索各框架相对应版本，供搭建工程选取版本参考，其中可支持 velocity 的 SpringBoot 版本为 1.4.0 及以下。
 
 
 
