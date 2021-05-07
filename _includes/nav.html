@@ -23,7 +23,8 @@
                         <li>
                             <a href="{{ site.baseurl }}/">Home</a>
                         </li>
-                        {% for page in site.pages %}
+                        {% assign sorted_pages = site.pages | sort: "weight" %}
+                        {% for page in sorted_pages %}
                         {% if page.title and page.hide-in-nav != true %}
                         <li>
                             <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
