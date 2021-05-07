@@ -161,9 +161,13 @@
 
         // interop with multilangual 
         if ('{{ page.multilingual }}' == 'true') {
-            _containerSelector = 'div.post-container.active'
+            _containerSelector = 'div.post-container.active';
         } else {
-            _containerSelector = 'div.post-container'
+            _containerSelector = 'div.post-container';
+        }
+
+        if (!$(_containerSelector).length) {
+            _containerSelector = 'div.post-container';
         }
 
         // init
@@ -238,19 +242,19 @@
     function _render() {
         var lang = getLang()
         // en
-        if (lang == "en") {
+        if (lang == "en" && $en) {
             $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $en.classList.add("active");
-            $zh.style.display = "none";
-            $zh.classList.remove("active");
+            $en && ($en.style.display = "block");
+            $en && ($en.classList.add("active"));
+            $zh && ($zh.style.display = "none");
+            $zh && ($zh.classList.remove("active"));
             // default to zh-cn
         } else {
             $select.selectedIndex = 0;
-            $zh.style.display = "block";
-            $zh.classList.add("active");
-            $en.style.display = "none";
-            $en.classList.remove("active");
+            $zh && ($zh.style.display = "block");
+            $zh && ($zh.classList.add("active"));
+            $en && ($en.style.display = "none");
+            $en && ($en.classList.remove("active"));
         }
         // interop with catalog 
         generateCatalog(".catalog-body");
