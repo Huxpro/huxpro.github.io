@@ -64,6 +64,12 @@ disqus_username: hux
 # Netease settings
 netease_comment: false
 
+#gitalk:
+#    owner: 你
+#    repo: 评论仓库名称
+#    clientID: 申请的ID
+#    clientSecret: 申请的clientSecret
+#    admin: 名称
 
 
 # Analytics settings
