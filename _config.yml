@@ -64,7 +64,12 @@ disqus_username: hux
 # Netease settings
 netease_comment: false
 
-
+# utteranc settings
+# utteranc:
+#   enable: true   
+#   repo: [username]/[repo]
+#   issue-term: pathname
+#   theme: github-light
 
 # Analytics settings
 # Baidu Analytics 
