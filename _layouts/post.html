@@ -56,6 +56,12 @@ layout: default
                 <!-- disqus 评论框 end -->
                 {% endif %}
 
+                {% if site.gitalk_username %}
+                <!-- Gitalk start -->
+                <div id="gitalk-container"></div>
+                <!-- Gitalk end -->
+                {% endif %}
+
                 {% if site.netease_comment %}
                 <!-- 网易云跟帖 评论框 start -->
                 <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
@@ -133,6 +139,26 @@ layout: default
     })();
 </script>
 <!-- disqus 公共JS代码 end -->
+{% endif %}
+
+<!-- add support for gitalk by ZewanHuang -->
+{% if site.gitalk_username %}
+<!-- Gitalk start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> 
+<script>
+    var gitalk  = new Gitalk ({
+        id: window.location.pathname,   // Ensure uniqueness and length less than 50
+        clientID: '{{site.comment_gitalk_clientId}}',
+        clientSecret: '{{site.comment_gitalk_clientSecret}}',
+        repo: '{{site.comment_gitalk_repo}}',
+        owner: '{{site.gitalk_username}}',
+        admin: ['{{site.gitalk_username}}'],
+		    distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script> 
+<!-- Gitalk end -->
 {% endif %}
 
 

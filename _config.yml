@@ -61,6 +61,13 @@ kramdown:
 # Disqus settings
 disqus_username: hux
 
+# Gitalk settings
+# Add gitalk comment by ZewanHuang
+comment_gitalk_clientId: 43e7cb1dba7325556586
+comment_gitalk_clientSecret: c4ec06b9fa752ce5a786e3f0b2e93fef3a8f8df4
+comment_gitalk_repo: zewan-blog
+gitalk_username: ZewanHuang
+
 # Netease settings
 netease_comment: false
 
