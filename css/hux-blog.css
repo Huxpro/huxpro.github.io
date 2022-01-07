@@ -1,10 +1,12 @@
 @media (min-width: 1200px) {
   .post-container,
+  .gitalk-container,
   .sidebar-container {
     padding-right: 5%;
   }
 }
 @media (min-width: 768px) {
+  .gitalk-container
   .post-container {
     padding-right: 5%;
   }
@@ -772,6 +774,9 @@ kbd,
 pre,
 samp {
   font-family: "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.gitalk-container img {
+  margin: 0 !important;
 }
 .postlist-container {
   margin-bottom: 15px;
