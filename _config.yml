@@ -79,7 +79,7 @@ ba_track_id: 8f7692bc92c67871d0e12ebd99a7304d
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "百大DJ第一百零一名"
-sidebar-avatar: /img/avatar # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/avatar.jpeg # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
