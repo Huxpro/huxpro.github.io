@@ -1,0 +1,132 @@
+---
+layout:     post
+title:      "避免直接修改父组件传递的props"
+subtitle:   ""
+date:       2022-05-10
+author:     "YorkWong"
+tags:
+    - Vue
+---
+## 报错背景
+
+在使用Vue组件化开发程序的时候，会遇到下面这样的报错信息；
+
+> **Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. 
+Instead, use a data or computed property based on the prop's value.**
+> 
+
+## 怎么造成的？
+
+这个错误是由于直接修改了从父组件传递过来的prop值导致的；
+
+## 错误代码
+
+首先来看一下我自定义的某个子组件，里面有三个不同数据类型的prop。
+
+```jsx
+export default {
+  props: {
+    movies: Array,
+    user: Object,
+    searchQuery: String,
+  },
+  methods: {
+    **sortMovies() {
+      this.movies = this.movies.sort();
+    },
+    search(query) {
+      this.searchQuery = query;
+    },
+    addToFavourites(movie) {
+      this.user.favourites.push(movie);
+    }
+  }**
+}
+```
+
+上述里面三个方法**sortMovies，search()，addToFavourites()**都在直接修改prop。
+
+我们很容易就这样去做，这是一个容易犯的错误，有时候你甚至不知道自己在去修改一个prop。
+
+不过好消息是，VUE会给你发出报错信息。
+
+## 说明
+
+### 1)子组件中直接修改props是一种“反模式”。
+
+在Vue中，我们使用props将数据向下传递组件树。父组件使用props来将数据向下传递给自己的子组件们，这些组件又将数据向下传递给下一层，以此类推。然后，我们使用events将数据在组件数中向上传递。
+
+这样做可以确保每一个组件和组件相互间是独立的。所以我们可以确定：
+
+- 只有组件自己可以改变自己的数据状态。
+- 只有父组件可以改变这个props的值。
+
+保持这些规则，可以让我们的组件更简单，更容易去追踪数据的流转。
+
+但是如果我们直接修改props，我们就破坏了这个规则。
+
+### 2)Vue重新渲染时会覆盖props
+
+这是另一个需要记住的事情。
+
+当Vue重新渲染你的组件的时候，它会覆盖你对props所作的所有更改。意味着即使你尝试在本地更改prop，Vue也会继续覆盖这些更改。
+
+## 解决它
+
+问题来了，很多情况下我们需要修改父组件传递过来的props。可能是对props中的数组重新排列，又或者是对props中的数值进行汇总或计算。
+
+```jsx
+<template>
+  <ul>
+    <li v-for="item in list" />
+  </ul>
+</template>
+
+export default {
+  name: 'ReversedList',
+  props: {
+    list: {
+      type: Array,
+      required: true,
+    }
+  },
+  created() {
+    // Mutating the prop :(
+    this.list = this.list.reverse();
+  }
+};
+```
+
+看上面代码，这是一个错误办法。
+
+他只会反转父组件传递的初始list数组。如果父组件中的列表更新，那它就不会发生反转；
+
+我们可以使用computed来解决。代码如下：
+
+```jsx
+<template>
+  <ul>
+    <li v-for="item in reversedList" />
+  </ul>
+</template>
+
+export default {
+  name: 'ReversedList',
+  props: {
+    list: {
+      type: Array,
+      required: true,
+    }
+  },
+  computed: {
+    reversedList() {
+      return this.list.reverse(); 
+    }
+  }
+};
+```
+
+上面代码中，我们设置一个计算属性reversedList。
+
+reversedList在每次list更新时都会进行重新计算。
+

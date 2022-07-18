@@ -1,0 +1,59 @@
+---
+layout:     post
+title:      "一分钟搞定BFC"
+subtitle:   ""
+date:       2022-05-10
+author:     "YorkWong"
+tags:
+    - CSS
+---
+# 什么是BFC？
+
+block formating content 块级格式化上下文
+
+特点：
+
+1. bfc的容器内部无论如何翻江倒海，都不会影响外部的布局；
+2. 同一个BFC容器中的元素的外边距（margin）会发生重叠；如果不想发生这样的情况，就要把他们放在不同的BFC容器中；
+
+如何触发BFC：
+
+- body根元素
+- float： 除了none
+- display:flex;display:inline-block;display:table-cell;
+- overflow:hidden/scroll/auto
+- position： absolute/fixed
+
+```jsx
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .left {
+            width: 100px;
+            height: 300px;
+            background-color: aqua;
+            float: left;
+        }
+        .right {//关键是不要给右边的盒子加width
+            height: 400px;
+            background-color: blueviolet;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <!-- BFC：自适应两栏布局 -->
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+</body>
+</html>
+```

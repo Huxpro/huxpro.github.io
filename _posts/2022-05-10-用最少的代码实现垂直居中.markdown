@@ -1,0 +1,75 @@
+---
+layout:     post
+title:      "用最少的代码实现垂直居中"
+subtitle:   ""
+date:       2022-05-10
+author:     "YorkWong"
+tags:
+    - CSS
+---
+
+# 如何用最少的代码实现垂直居中呢？
+ **不多说，上代码**
+### 基础html代码结构
+
+```html
+<div class="box">        
+    <div class="a"></div>    
+</div>
+```
+### 方法一：flex布局
+```css
+.box{            
+    width: 300px;            
+    height: 300px;           
+    background-color: #ccc;            
+    display: flex;            
+    display: -webkit-flex;            
+    justify-content: center;            
+    align-items: center;        
+}        
+.box .a{            
+    width: 100px;            
+    height: 100px;            
+    background-color: blue;        
+}    
+```
+
+
+---
+### 方法二：position （元素已知宽度）
+```css
+ .box{            
+        width: 300px;            
+        height: 300px;            
+        background-color: red;            
+        position: relative;       
+    }        
+    .box .a{            
+        width: 100px;            
+        height: 100px;            
+        background-color: blue;           
+        position: absolute;         
+        left: 50%;            
+        top: 50%;            
+        margin: -50px 0 0 -50px;      
+    } 
+```
+---
+
+### 方法三：osition transform （元素未知宽度）
+```css
+ .box{            
+        width: 300px;            
+        height: 300px;            
+        background-color: red;            
+        position: relative;        
+    }        
+    .box .a{            
+        background-color: blue;            
+        position: absolute;            
+        top: 50%;            
+        left: 50%;            
+        transform: translate(-50%, -50%);        
+    }
+```

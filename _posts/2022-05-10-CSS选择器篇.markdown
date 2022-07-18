@@ -1,0 +1,43 @@
+---
+layout:     post
+title:      "CSS选择器"
+subtitle:   ""
+date:       2022-05-10
+author:     "YorkWong"
+tags:
+    - CSS
+---
+
+# CSS选择器
+
+## 简单选择器
+
+- 标签选择器
+- **Class选择器**
+- 通用选择器 *
+- ID选择器 使用哈希符#
+- 组合选择器
+    - **A , B**匹配满足A（和/或）B的任意元素
+    - **A B**匹配任意元素.条件：B是A的后代结点（B是A的子节点，或者A的子节点的子节点）
+    - **A > B**匹配任意元素，条件：B是A的直接子节点
+    - **A + B**匹配任意元素，条件：B是紧跟在A后面的下一个兄弟节点（AB有相同的父结点）
+    - **A ~ B**匹配任意元素，满足条件：B是A**之后**的兄弟节点中的任意一个（AB有相同的父节点，B在A之后，但不一定是紧挨着A）
+
+下面是一些扩展
+## 属性选择器
+
+ [属性选择器 - 学习 Web 开发  MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Attribute_selectors)
+
+## 伪类和伪元素
+
+### 伪类 :
+
+类似于普通的类，你可以在一个选择器中同时一起写多个伪类。
+
+ [伪类 - CSS（层叠样式表）  MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-classes)
+
+### 伪元素 ::
+
+一个选择器中只能使用一个伪元素。伪元素必须紧跟在语句中的简单选择器/基础选择器之后。
+
+ [伪元素 - CSS（层叠样式表） MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-elements)

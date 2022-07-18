@@ -1,0 +1,86 @@
+---
+layout:     post
+title:      "uniapp一键登录app"
+subtitle:   "使用uniapp实现一键获取手机号"
+date:       2022-05-10
+author:     "YorkWong"
+tags:
+    - SKILL
+---
+
+# 原理流程：
+
+1. 用户统一运营商sdk弹出的授权手机号弹窗
+2. sdk底层访问运营商网关鉴定权利，获取当前设备的access_token等
+3. 通过uniCloud的云函数，将access_token-->手机号码，然后服务器直接入库，不传递至前端
+
+# 主要代码
+```jsx
+      loginPhone() {
+			uni.preLogin({
+				provider: 'univerify',
+				success(res) {
+					//预登录成功
+					// 显示一键登录选项
+					console.log(res);
+					console.log('999', 2222);
+					uni.login({
+						provider: 'univerify',
+						
+						},
+						success(res) {
+							// 登录成功
+							// {openid:'deviceIDlength+deviceID+gyuid',access_token:'接口返回的 token'}
+							this.openid = res.authResult.openid;
+							this.access_token = res.authResult.access_token;
+							console.log(res.authResult); 
+							console.log(this.openid);
+							console.log('access_token', this.access_token);
+							// 客户端(调用云函数)  调用云函数来实现整个业务逻辑
+							// 在得到access_token后，通过callfunction调用云函数
+							uniCloud
+								.callFunction({
+									name: 'login', // 你的云函数名称
+									data: {
+										access_token: this.access_token, // 客户端一键登录接口返回的access_token
+										openid: this.openid // 客户端一键登录接口返回的openid
+									}
+								})
+								.then(res => {
+									console.log('获取成功');
+									console.log(res);
+									// 获取用户的手机号
+									this.phoneNumber =
+										res.result.data.phoneNumber;
+									console.log(this.phoneNumber);
+									// res.result = {
+									//   code: '',
+									//   message: ''
+									// }
+									// 登录成功，可以关闭一键登陆授权界面了
+								})
+								.catch(err => {
+									// 处理错误
+									console.log('获取失败');
+									console.log(err);
+								});
+						},
+						fail(res) {
+							// 登录失败
+							// console.log('失败',2222);
+							console.log(res.errCode);
+							console.log(res.errMsg);
+						}
+					});
+				},
+				fail(res) {
+					// 预登录失败
+					// 不显示一键登录选项（或置灰）
+					// 根据错误信息判断失败原因，如有需要可将错误提交给统计服务器
+					console.log('失败', 2222);
+					console.log(res.errCode);
+					console.log(res.errMsg);
+				}
+			});
+		},
+```
