@@ -4,7 +4,7 @@ title:      "202207"
 subtitle:   "40度的7月"
 date:       2022-07-01
 author:     "YorkWong"
-header-img: "img/post-bg-js-module.jpg"
+header-img: "img/about-bg.jpg"
 tags:
 - Daily Record
 ---
