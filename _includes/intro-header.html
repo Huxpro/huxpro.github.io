@@ -3,7 +3,7 @@
     @param {boolean} short
 {% endcomment %}
 
-{% if include.type == 'post' %}
+{% if include.type == 'post' or include.type == 'page' %}
 <style type="text/css">
     header.intro-header{
         position: relative;
@@ -20,6 +20,9 @@
     }
     {% endif %}
 </style>
+{% endif %}
+
+{% if include.type == 'post' %}
 {% if page.header-style == 'text' %}
 <header class="intro-header style-text" >
 {% else %}
@@ -58,7 +61,7 @@
         overflow: hidden;
     }
     header.intro-header .container{
-        visibility: hidden; 
+        visibility: hidden;
     }
     header iframe{
         width: 100%;
@@ -92,6 +95,7 @@
 
 {% if include.type == 'page' %}
 <header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
+  <div class="header-mask"></div>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">

@@ -5,17 +5,18 @@ date:       2017-06-24 12:00:00
 author:     "Hux"
 header-style: text
 catalog: false
+published: false
 tags:
   - 被夹
 ---
 
-> 在知乎被删帖，我理解知乎。  
-> 你说你们做不了什么，我也理解你们。  
+> 在知乎被删帖，我理解知乎。
+> 你说你们做不了什么，我也理解你们。
 > <br/>
-> 只是，总要有人，还敢说点反对的声音吧？    
-> 只是，不想让这一切，看起来都变得如此理所应当吧？  
+> 只是，总要有人，还敢说点反对的声音吧？
+> 只是，不想让这一切，看起来都变得如此理所应当吧？
 > <br/>
-> 你说，你们也抗争了  
+> 你说，你们也抗争了
 > 那就站出来，让我们相信，你们还在吧？
 
 我甚至都不需要写出「刘国梁」这三个顶天立地的大字，你们便知道我今天要说什么了。
@@ -58,10 +59,10 @@ tags:
 
 我是一个程序员，从小就是。在几家公司打过酱油，做过一些小分享。很多人说程序员都是农民，天天干一些重复的事情，加班多，死得早。可是没办法，我就是喜欢，喜欢互联网这个崇尚自由与平等的地方，欣赏那些用互联网让世界变得更加美好的人们。我不是为了谋生而选择了这个职业，我是为了自由与骄傲。
 
-> We will not go quietly into the night!   
-> We will not vanish without a fight!   
-> We're going to live on!   
-> We're going to survive!   
-> Today, we celebrate our Independence Day!  
+> We will not go quietly into the night!
+> We will not vanish without a fight!
+> We're going to live on!
+> We're going to survive!
+> Today, we celebrate our Independence Day!
 
 **国乒，愿有属于你们的独立日。**

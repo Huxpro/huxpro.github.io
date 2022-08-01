@@ -5,6 +5,7 @@ subtitle:   "The Systematic Failure of Higher Education in China"
 date:       2021-01-19 12:00:00
 author:     "Hux"
 catalog: false
+published: false
 header-style: text
 tags:
   - 被夹
@@ -29,4 +30,3 @@ tags:
 只要所处系统里的大部分个体都已经默许了这个游戏规则，无论迟先生是「凡尔赛」还是「理想主义」，改变赛道规则就会被其他个体认为侵害到利益。小孩才分对错，成年人的屁股都是歪得，都是各取所需。
 
 **都是这个时代的缩影。**
-
