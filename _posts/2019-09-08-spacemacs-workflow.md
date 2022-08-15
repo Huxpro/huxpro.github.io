@@ -4,6 +4,7 @@ title: "My Spacemacs Workflow"
 subtitle: 'From Vim to Spacemacs'
 author: "Hux"
 header-style: text
+published: false
 tags:
   - Vim
   - Emacs
@@ -61,10 +62,3 @@ I tend to open multiple _workspace_. Though people might found Vim tabs useful, 
 ### Buffers
 
 `SPC b b`
-
-
-
-
-
-
-

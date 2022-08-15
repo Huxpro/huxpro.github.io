@@ -4,6 +4,7 @@ subtitle: "「数据表示」浮点数"
 layout: post
 author: "Hux"
 header-style: text
+hidden: true
 tags:
   - 笔记
   - 基础
@@ -12,22 +13,22 @@ tags:
 ---
 
 In the last episode we talked about the data representation of integer, a kind
-of fixed-point numbers. Today we're going to learn about floating-point numbers. 
+of fixed-point numbers. Today we're going to learn about floating-point numbers.
 
-Floating-point numbers are used to _approximate_ real numbers. Because of the 
-fact that all the stuffs in computers are, eventually, just a limited sequence 
-of bits. The representation of floating-point number had to made trade-offs 
+Floating-point numbers are used to _approximate_ real numbers. Because of the
+fact that all the stuffs in computers are, eventually, just a limited sequence
+of bits. The representation of floating-point number had to made trade-offs
 between _ranges_ and _precision_.
 
-Due to its computational complexities, CPU also have a dedicated set of 
-instructions to accelerate on floating-point arithmetics. 
+Due to its computational complexities, CPU also have a dedicated set of
+instructions to accelerate on floating-point arithmetics.
 
 
 Terminologies
 -------------
 
-The terminologies of floating-point number is coming from the 
-[_scientific notation_](https://en.wikipedia.org/wiki/Scientific_notation), 
+The terminologies of floating-point number is coming from the
+[_scientific notation_](https://en.wikipedia.org/wiki/Scientific_notation),
 where a real number can be represented as such:
 
 ```
@@ -56,35 +57,35 @@ IEEE-754 32-bits Single-Precision Floats 单精度浮点数
 
 - <https://en.wikipedia.org/wiki/Single-precision_floating-point_format>
 
-It was called **single** back to IEEE-754-1985 and now **binary32** in the 
+It was called **single** back to IEEE-754-1985 and now **binary32** in the
 relatively new IEEE-754-2008 standard.
 
 ```cpp
        (8 bits)             (23 bits)
-sign   exponent             fraction 
+sign   exponent             fraction
   0   011 1111 1    000 0000 0000 0000 0000 0000
 
  31   30 .... 23    22 ....................... 0
 ```
 
-- The _sign_ part took 1 bit to indicate the sign of the floats. (`0` for `+` 
+- The _sign_ part took 1 bit to indicate the sign of the floats. (`0` for `+`
 and `1` for `-`. This is the same treatment as the [sign magnitute](2020-06-19-data-rep-int.md##sign-magnitude-原码).
-- The _exponent_ part took 8 bits and used [_offset-binary (biased) form_](2020-06-19-data-rep-int.md#offset-binary-移码) to represent a signed integer. 
-It's a variant form since it took out the `-127` (all 0s) for zero and `+128` 
-(all 1s) for non-numbers, thus it ranges only `[-126, 127]` instead of 
-`[-127, 128]`. Then, it choose the zero offset of `127` in these 254 bits (like 
+- The _exponent_ part took 8 bits and used [_offset-binary (biased) form_](2020-06-19-data-rep-int.md#offset-binary-移码) to represent a signed integer.
+It's a variant form since it took out the `-127` (all 0s) for zero and `+128`
+(all 1s) for non-numbers, thus it ranges only `[-126, 127]` instead of
+`[-127, 128]`. Then, it choose the zero offset of `127` in these 254 bits (like
 using `128` in _excess-128_), a.k.a the _exponent bias_ in the standard.
 - The _fraction_ part took 23 bits with an _implicit leading bit_ `1` and
-represent the actual _significand_ in total precision of 24-bits. 
+represent the actual _significand_ in total precision of 24-bits.
 
-Don't be confused by why it's called _fraction_ instead of _significand_! 
-It's all because that the 23 bits in the representation is indeed, representing 
+Don't be confused by why it's called _fraction_ instead of _significand_!
+It's all because that the 23 bits in the representation is indeed, representing
 the fraction part of the real significand in the scientific notation.
 
 The floating-point version of "scientific notation" is more like:
 
 ```cpp
-(leading 1) 
+(leading 1)
    1. fraction  ×  2 ^ exponent   ×  sign
       (base-2)           (base-2)
 ```
@@ -96,7 +97,7 @@ S     F   ×  E  =  R
 +  1.(0)  ×  0  =  1
 ```
 
-Aha! It's the real number `1`! 
+Aha! It's the real number `1`!
 Recall that the `E = 0b0111 1111 = 0` because it used a biased representation!
 
 We will add more non-trivial examples later.
@@ -106,8 +107,8 @@ Demoing Floats in C/C++
 -----------------------
 
 Writing sample code converting between binaries (in hex) and floats are not
-as straightforward as it for integers. Luckily, there are still some hacks to 
-perform it: 
+as straightforward as it for integers. Luckily, there are still some hacks to
+perform it:
 
 ### C - Unsafe Cast
 
@@ -158,7 +159,7 @@ float a = *reinterpret_cast<float*>(&u);
 std::cout << a;  // 3.14159
 ```
 
-N.B. it still need to be a conversion between pointers, 
+N.B. it still need to be a conversion between pointers,
 see <https://en.cppreference.com/w/cpp/language/reinterpret_cast>.
 
 Besides, C++ 17 does add a floating point literal that can take hex, but it
@@ -178,7 +179,7 @@ That's try with another direction:
 
 int main() {
   double qNan = std::numeric_limits<double>::quiet_NaN();
-  printf("0x%" PRIx64 "\n", *reinterpret_cast<uint64_t*>(&qNan)); 
+  printf("0x%" PRIx64 "\n", *reinterpret_cast<uint64_t*>(&qNan));
   // 0x7ff8000000000000, the canonical qNaN!
 }
 ```
@@ -190,20 +191,20 @@ Representation of Non-Numbers
 There are more in the IEEE-754!
 
 Real numbers doesn't satisfy [closure property](https://en.wikipedia.org/wiki/Closure_(mathematics))
-as integers does. Notably, the set of real numbers is NOT closed under the 
-division! It could produce non-number results such as **infinity** (e.g. `1/0`) 
-and [**NaN (Not-a-Number)**](https://en.wikipedia.org/wiki/NaN) (e.g. taking 
+as integers does. Notably, the set of real numbers is NOT closed under the
+division! It could produce non-number results such as **infinity** (e.g. `1/0`)
+and [**NaN (Not-a-Number)**](https://en.wikipedia.org/wiki/NaN) (e.g. taking
 a square root of a negative number).
 
-It would be algebraically ideal if the set of floating-point numbers can be 
+It would be algebraically ideal if the set of floating-point numbers can be
 closed under all floating-point arithmetics. That would made many people's life
 easier. So the IEEE made it so! Non-numeber values are squeezed in.
 
-We will also include the two zeros (`+0`/`-0`) into the comparison here, 
+We will also include the two zeros (`+0`/`-0`) into the comparison here,
 since they are also special by being the only two demanding an `0x00` exponent:
 
 ```cpp
-             binary                |    hex    | 
+             binary                |    hex    |
 --------------------------------------------------------
 0 00000000 00000000000000000000000 = 0000 0000 = +0
 1 00000000 00000000000000000000000 = 8000 0000 = −0
@@ -217,36 +218,36 @@ _ 11111111 00000000000000000000001 = _f80 0001 = sNaN (one of them)
 
 ```cpp
       (8 bits)  (23 bits)
-sign  exponent  fraction 
-  0      00     0 ...0 0  = +0 
+sign  exponent  fraction
+  0      00     0 ...0 0  = +0
   1      00     0 ...0 0  = -0
   0      FF     0 ...0 0  = +infinity
-  1      FF     0 ...0 0  = -infinity 
+  1      FF     0 ...0 0  = -infinity
   _      FF     1 ...0 0  = qNaN (canonical)
   _      FF     0 ...0 1  = sNaN (one of them)
 ```
 
-Encodings of qNaN and sNaN are not specified in IEEE 754 and implemented 
+Encodings of qNaN and sNaN are not specified in IEEE 754 and implemented
 differently on different processors. Luckily, both x86 and ARM family use the
 "most significant bit of fraction" to indicate whether it's quite.
 
 ### More on NaN
 
-If we look carefully into the IEEE 754-2008 spec, in the _page35, 6.2.1_, it 
-actually defined anything with exponent `FF` and not a infinity (i.e. with 
+If we look carefully into the IEEE 754-2008 spec, in the _page35, 6.2.1_, it
+actually defined anything with exponent `FF` and not a infinity (i.e. with
 all the fraction bits being `0`), a NaN!
 
 > All binary NaN bit strings have all the bits of the biased exponent field E set to 1 (see 3.4). A quiet NaN bit string should be encoded with the first bit (d1) of the trailing significand field T being 1. A signaling NaN bit string should be encoded with the first bit of the trailing significand field being 0.
 
 That implies, we actually had `2 ** 24 - 2` of NaNs in a 32-bits float!
-The `24` came from the `1` sign bit plus `23` fractions and the `2` excluded 
-were the `+/- inf`. 
+The `24` came from the `1` sign bit plus `23` fractions and the `2` excluded
+were the `+/- inf`.
 
 The continuous 22 bits inside the fraction looks quite a waste, and there
-would be even 51 bits of them in the `double`! We will see how to made them useful 
+would be even 51 bits of them in the `double`! We will see how to made them useful
 in later episodes (spoiler: they are known as _NaN payload_).
 
-It's also worth noting that it's weird that the IEEE choose to use the MSB 
+It's also worth noting that it's weird that the IEEE choose to use the MSB
 instead of the sign bit for NaN quiteness/signalness:
 
 > It seems strange to me that the bit which signifies whether or not the NaN is signaling is the top bit of the mantissa rather than the sign bit; perhaps something about how floating point pipelines are implemented makes it less natural to use the sign bit to decide whether or not to raise a signal.
@@ -257,8 +258,8 @@ I guess it might be something related to the CPU pipeline? I don't know yet.
 
 ### Equality of NaNs and Zeros.
 
-The spec defined a comparison with NaNs to return an **unordered result**, that 
-means any comparison operation except `!=`, i.e. `>=, <=, >, <, =` between a 
+The spec defined a comparison with NaNs to return an **unordered result**, that
+means any comparison operation except `!=`, i.e. `>=, <=, >, <, =` between a
 NaN and any other floating-point number would return `false`.
 
 No surprised that most (if not every) language implemented such behaviours, e.g.
@@ -301,8 +302,8 @@ matter of scale:
 
 ```cpp
        (11 bits)            (52 bits)
-sign   exponent             fraction 
-  0                 
+sign   exponent             fraction
+  0
 
  63   62 .... 52    51 ....................... 0
 ```
@@ -311,7 +312,7 @@ sign   exponent             fraction
 IEEE-754-2008 16-bits Short Floats
 ----------------------------------------
 
-The 2008 edition of IEEE-754 also standardize the `short float`, which is 
+The 2008 edition of IEEE-754 also standardize the `short float`, which is
 neither in C or C++ standard. Though compiler extension might include it.
 
 It looks like:

@@ -7,7 +7,7 @@ header-img: "img/post-bg-web.jpg"
 header-mask: 0.4
 tags:
   - Web
-  - Wechat
+  - 微信
 ---
 
 > 本文首发于我的知乎专栏 [The Little Programmer](https://zhuanlan.zhihu.com/p/22561084)，转载请保留链接 ;)

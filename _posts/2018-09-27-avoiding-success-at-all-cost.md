@@ -8,7 +8,7 @@ lang: en
 tags:
   - Haskell
   - 笔记
-  - 🇬🇧
+  - En
 ---
 
 "Avoiding success at all cost" is the informal motto behinds [Haskell](https://www.haskell.org/). It could be parenthesized in two ways, either "Avoiding (success at all cost)" or "(Avoiding sucess) (at all cost)". 
@@ -53,5 +53,3 @@ So it's not not obvious that Haskell, also chose its own unique process to suit 
 To be fair, Haskell has alreay been very "successful" nowdays, in particular academia (for education, sexy type laboratory etc.) but also industry, either being used in real business or being very reputable among programmers (as being both hard and fun).
 
 I am not confident and qualified to say Haskell is success in the right degree at the right time. But it's great to see it, after more than 20 and now almost 30 yrs, slowly figure out its very own way, to "Escape from the Ivory Tower", and keep going beyond.
-
-

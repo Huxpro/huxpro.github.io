@@ -1,9 +1,10 @@
 ---
 layout:     post
-title:      "「知乎」如何评价 2015 年 3 月 9 日 Apple 春季发布会？"
+title:      "如何评价 2015 年 3 月 9 日 Apple 春季发布会？"
 subtitle:   "聊聊科技与新式奢侈品"
 date:       2015-03-10 12:00:00
 author:     "Hux"
+hidden: true
 header-img: "img/post-bg-apple-event-2015.jpg"
 tags:
     - 知乎
@@ -56,7 +57,3 @@ tags:
     <br>
     <br>有人说 Apple Watch 简直是 Jony Ive 这个一心向往做奢侈品设计的天才将 Apple 引入了歧途里，而我却觉得<b>科技与时尚的结合为何就不是一件美丽的事情？</b>
 </div>
-
-
-
-

@@ -7,7 +7,7 @@ header-img: ""
 header-bg-css: "linear-gradient(to right, #24b94a, #38ef7d);"
 tags:
   - Web
-  - Wechat
+  - 微信
   - UX/UI
 ---
 

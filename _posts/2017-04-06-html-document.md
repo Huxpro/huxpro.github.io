@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 「知乎」如何理解 <code>document</code> 对象是 <code>HTMLDocument</code> 的实例？
+title: 如何理解 <code>document</code> 对象是 <code>HTMLDocument</code> 的实例？
 subtitle: Why is <code>document</code> an instance of <code>HTMLDocument</code>?
 author: "Hux"
 header-style: text
@@ -26,7 +26,7 @@ document instanceof HTMLDocument // true
 // document 的 [[prototype]] 指向 HTMLDocument 的原型
 document.__proto__ === HTMLDocument.prototype // true
 
-// HTMLDocument 伪类继承于 Document 
+// HTMLDocument 伪类继承于 Document
 HTMLDocument.prototype instanceof Document // true
 HTMLDocument.prototype.__proto__ === Document.prototype // true
 ```

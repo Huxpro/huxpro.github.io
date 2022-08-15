@@ -17,7 +17,7 @@
         "grunt-contrib-watch": "^1.1.0"
     },
     "scripts": {
-        "start": "bundle exec jekyll serve -w -l --host 0.0.0.0",
+        "start": "bundle exec jekyll serve",
         "dev": "grunt watch & npm run start",
         "boil": "git push boilerplate boilerplate:master",
         "push": "git push origin master --tag"

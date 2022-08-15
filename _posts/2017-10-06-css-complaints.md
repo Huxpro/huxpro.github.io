@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "「知乎」为什么 CSS 这么难学？"
+title: "为什么 CSS 这么难学？"
 subtitle: "Why I dislike CSS as a programming language"
 author: "Hux"
 header-img: "img/post-bg-css.jpg"
@@ -10,16 +10,17 @@ header-mask: 0.4
 tags:
   - Web
   - CSS
+  - 知乎
 ---
 
 > 这篇文章转载自[我在知乎上的回答](https://www.zhihu.com/question/66167982/answer/240434582)
 
 对我来说，CSS 难学以及烦人是因为它**「出乎我意料之外的复杂」**且让我觉得**「定位矛盾」**。
-  
+
 [@方应杭](//www.zhihu.com/people/b90c7eb6d3d5a4e2ce453dd8ad377672) 老师的答案我赞了：CSS 的属性互不正交，大量的依赖与耦合难以记忆。
 
 [@顾轶灵](//www.zhihu.com/people/596c0a5fdd9b36cea06bac348d418824) [@王成](//www.zhihu.com/people/c02ec74a44ee4a6784d002c33e293652) 说得也没错：CSS 的很多规则是贯彻整个体系的，而且都记在规范里了，是有规律的，你应该好好读文档而不是去瞎试。
-  
+
 
 「**CSS是一门正儿八经的编程语言，请拿出你学C++或者Java的态度对待它**」
 
@@ -36,7 +37,7 @@ tags:
 
 这种不上不下的感觉就让我觉得很「矛盾」，你既没法把 CSS 当一个很简单的布局标记语言去使用，又没办法把它作为一个像样的编程语言去学习和使用。
 
-  
+
 在写 CSS 和 debug CSS 的时候我经常处在一种「MD 就这样吧反正下次还要改」和「MD 这里凭什么是这样的我要研究下」的精分状态，可是明明我写 CSS 最有成就感的时候是看到漂亮的 UI 啊。
 
 以上。

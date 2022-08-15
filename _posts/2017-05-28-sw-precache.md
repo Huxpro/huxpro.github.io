@@ -7,7 +7,7 @@ lang: en
 tags:
   - Web
   - PWA
-  - 🇬🇧
+  - En
 ---
 
 [_SW-Precache_](https://github.com/GoogleChrome/sw-precache) _is a great Service Worker tool from Google. It is a node module designed to be_ _integrated_ _into your build process and to generate a service worker for you._ _Though_ _you can use sw-precache out of the box, you might still wonder what happens under the hood. There you go, this article is written for you!_
