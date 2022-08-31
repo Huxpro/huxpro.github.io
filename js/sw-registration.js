@@ -23,7 +23,7 @@ function handleRegistration(registration){
       } else {
         console.log('A Visit without previous SW');
         createSnackbar({
-          message: '博客加本地加载完毕',
+          message: '已是最新内容',
           duration: 3000
         })
       }
