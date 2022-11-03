@@ -7,7 +7,8 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');
+        /*background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');*/
+        background-image: url('{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');
         background: {{ page.header-bg-css }};
     }
 
@@ -58,7 +59,7 @@
         overflow: hidden;
     }
     header.intro-header .container{
-        visibility: hidden; 
+        visibility: hidden;
     }
     header iframe{
         width: 100%;
