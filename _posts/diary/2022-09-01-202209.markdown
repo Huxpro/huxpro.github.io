@@ -4,7 +4,7 @@ title:      "202209"
 subtitle:   "开始降温的9月"
 date:       2022-09-01
 author:     "YorkWong"
-header-img: "https://pic1.imgdb.cn/item/636373ff16f2c2beb1806ad6.jpg"
+header-img: "img/home-bg.jpg"
 tags:
 - Daily Record
 ---

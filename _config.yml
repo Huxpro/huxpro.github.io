@@ -1,7 +1,7 @@
 # Site settings
 title: YorkWong Station
 SEOTitle: YorkWong Station
-header-img: https://pic1.imgdb.cn/item/636373ff16f2c2beb1806ad6.jpg
+header-img: img/home-bg.jpg
 email: wangyue11.22@icloud.com
 description: "欢迎来到York Wong的频道"
 keyword: "王粤,York Wong, 个人网站, 互联网, Web, JavaScript, 前端, 设计"
@@ -30,7 +30,7 @@ paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:
-#timezone: CN
+#timezone: CN  
 
 
 
@@ -67,7 +67,7 @@ netease_comment: false
 
 
 # Analytics settings
-# Baidu Analytics
+# Baidu Analytics 
 # ba_track_id: [your track id]
 
 # Google Analytics
