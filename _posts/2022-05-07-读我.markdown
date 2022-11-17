@@ -4,10 +4,11 @@ title:      "读我"
 subtitle:   "快读我"
 date:       2022-05-07
 author:     "YorkWong"
+header-img: 'https://pic1.imgdb.cn/item/6363713d16f2c2beb17bdcd0.jpg'
 tags:
     - LIFE
 ---
-![](https://pic1.imgdb.cn/item/6363713d16f2c2beb17bdcd0.jpg)
+
 # 前言
 ### 这个博客网站搭建起来主要有几个目的
 1. 给自己存储一些技术知识
