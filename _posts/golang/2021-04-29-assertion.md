@@ -1,19 +1,6 @@
 ---
-layout: default
-title: Golang Assertion
-parent: Golang
----
-
-*2021-04-29*
-# Golang Assertion
-{: .no_toc }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
+layout: post
+title: "Assertion"
 ---
 
 ## 术语解释
