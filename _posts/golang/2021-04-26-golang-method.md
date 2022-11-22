@@ -1,19 +1,14 @@
 ---
-layout: default
+layout:     post
 title: 学习笔记
-parent: Golang
----
-
-*2021-04-26*
-# 方法
-{: .no_toc }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
+subtitle:   "method"
+date:       2021-04-26 12:00:00
+author:     "Jay"
+catalog: false
+published: false
+header-style: text
+tags:
+  - 被夹
 ---
 
 ## sort排序方法的设计心得
