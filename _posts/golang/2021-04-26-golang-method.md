@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: 学习笔记
+title: "学习笔记"
 subtitle:   "method"
 date:       2021-04-26 12:00:00
 author:     "Jay"
