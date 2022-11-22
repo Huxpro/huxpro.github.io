@@ -1,6 +1,11 @@
 ---
 layout: post
 title: "Assertion"
+author:     "Jay"
+catalog: true
+header-style: text
+tags:
+  - golang
 ---
 
 ## 术语解释
