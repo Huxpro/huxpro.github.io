@@ -1,24 +1,12 @@
 ---
-layout: default
+layout:     post
 title: master-worker
-parent: Nginx Architecture
-grand_parent: Nginx
-nav_order: 1
-# permalink: docs/nginx/architecture/
+author:     "Jay"
+catalog: true
+header-style: text
+tags:
+  - Nginx
 ---
-
-*2021-03-08*
-# ngx_http_request_body.c
-{: .no_toc }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
----
-
 ## master-worker
 
 master责任：

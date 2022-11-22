@@ -1,22 +1,11 @@
 ---
-layout: default
+layout:     post
 title: request 请求体获取过程
-parent: Nginx Architecture
-grand_parent: Nginx
-nav_order: 10
-# permalink: docs/nginx/modules/
----
-
-*2021-03-08*
-# ngx_http_request_body.c
-{: .no_toc }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
+author:     "Jay"
+catalog: true
+header-style: text
+tags:
+  - Nginx
 ---
 
 

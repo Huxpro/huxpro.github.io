@@ -1,20 +1,12 @@
 ---
-layout: default
+layout:     post
 title: Nginx Connection 连接过程
-parent: Nginx Architecture
-grand_parent: Nginx
-nav_order: 2
-# permalink: docs/nginx/architecture/
+author:     "Jay"
+catalog: true
+header-style: text
+tags:
+  - Nginx
 ---
-*2021-03-08*
-# Connection 连接过程
-{: .no_toc }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
 
 ## 监听与连接
 在Nginx main函数的ngx_init_cycle()方法中，调用了ngx_open_listening_sockets函数，这个函数负责将创建的监听套接字进行套接字选项的设置（比如非阻塞、接受发送的缓冲区、绑定、监听处理）
