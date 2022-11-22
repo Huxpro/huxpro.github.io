@@ -20,7 +20,7 @@ ngx_event_process_init函数中，会将接收客户端连接的事件，设置�
 也就是说，当客户端连接上来，第一次事件循环的read事件会调用回调函数：ngx_event_accept函数；而后续的read事件的handler已经被ngx_http_init_connection方法修改掉，改成了ngx_http_wait_request_handler函数了。所以客户端的读取事件都会走ngx_http_wait_request_handler函数。
 ngx_http_wait_request_handler函数也是整个HTTP模块的数据处理的入口函数了。
 如下图表格：
-![connection](/assets/images/nginx/connection.png
+![connection](/_post/nginx/images/connection.png)
 
 
 ## 问题疑难点

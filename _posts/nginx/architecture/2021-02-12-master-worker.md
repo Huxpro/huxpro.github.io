@@ -18,4 +18,4 @@ master管理监控worker，那么master与worker直接需要通信，假定我�
 
 
 ## Master进程
-![main](/assets/images/nginx/main.png)
+![main](/_post/nginx/images/main.png)
