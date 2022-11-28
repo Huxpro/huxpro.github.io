@@ -12,13 +12,13 @@ baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 future: true
 
 # SNS settings
-RSS: false
-weibo_username: 5678128896
+RSS: true
+weibo_username: 6480938058
 zhihu_username: xu-xiao-qian-18-36
 github_username: Jiasheng2000
 twitter_username: 4pX2U0kUyQiLELi
 #facebook_username:  huxpro
-#linkedin_username:  firstname-lastname-idxxxx
+linkedin_username:  Jiasheng-Wu-idACoAADVv_XUBtgrk3pTkt-gUWnLmF8o72i2ZgR0
 
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
