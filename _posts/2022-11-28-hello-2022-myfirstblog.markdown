@@ -43,8 +43,11 @@ GitHub上不需要云服务器。
 我先学了怎么在本地使用github（我先注册了github账号、在windows电脑上安装了Git、Node.js、Hexo）
 然后学了一下怎么将本地的代码和github上的代码进行同步等基本操作（和我这里搭建的博客也没有关系）...
 主要内容都在csdn，csdn的很多文章非常乱...非常难以复现...
-基本上照着上面某个教程弄，弄到一半发现莫名其妙的问题，然后就弄不下去了，大概是说要在**Github Pages**这里找到一个链接![image](https://user-images.githubusercontent.com/119298299/204282276-ef685bc3-5431-4a9c-98e4-5f47928cfa9f.png)
-
+基本上照着上面某个教程弄，弄到一半发现莫名其妙的问题，然后就弄不下去了，大概是说要在**Github Pages**这里找到一个链接
+![image](https://user-images.githubusercontent.com/119298299/204282276-ef685bc3-5431-4a9c-98e4-5f47928cfa9f.png)
+我发现我跟着这些教程走，完全没有这个选项，我的github代码进入setting后，连option都没有
+我的是general
+![image](https://user-images.githubusercontent.com/119298299/204282568-86bafcf9-0388-4d80-82a1-396f6d971beb.png)
 
 接下来说说搭建这个博客的技术细节。  
 
