@@ -39,7 +39,7 @@ GitHub我不会用...今日之前的水平仅限于download zip（每错，我�
 然后看了另外一个[搭建个人网站的视频](https://www.bilibili.com/video/BV1rU4y1J785)，讲可以租一个云服务器然后把网页利用云服务器发布，并且还推荐了一个模块化跟搭积木一样做博客的网页，实际上和我这里搭建的博客也没啥关系，我这个博客完全在
 GitHub上不需要云服务器。
 #### 2.在百度搜索如何搭建个人博客
-![image-20221128151027434](Jiasheng2000.github.io/img/in-post/img2022.11.28/baidublog.jpg)
+![image-20221128151027434](./img/in-post/img2022.11.28/baidublog.jpg)
 ![image-20221128151027434](http://jiasheng2000.github.io/img/in-post/img2022.11.28/baidublog.jpg)
 主要内容都在csdn，csdn的很多文章非常乱...非常难以复现...
 基本上照着上面某个教程弄，弄到一半发现莫名其妙的问题，然后就弄不下去了
