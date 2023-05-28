@@ -25,6 +25,7 @@ twitter_username: huxpro
 highlighter: rouge
 permalink: pretty
 paginate: 10
+theme: minima
 exclude:
   [
     "less",
