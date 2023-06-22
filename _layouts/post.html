@@ -47,6 +47,23 @@ layout: default
                     {% endif %}
                 </ul>
                 <hr style="visibility: hidden;">
+                
+                <!-- giscus -->
+                <script src="https://giscus.app/client.js"
+                        data-repo="Jake-00/Jake-00.github.io"
+                        data-repo-id="R_kgDOJwlomw"
+                        data-category="Announcements"
+                        data-category-id="DIC_kwDOJwlom84CXYse"
+                        data-mapping="pathname"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-emit-metadata="0"
+                        data-input-position="bottom"
+                        data-theme="light"
+                        data-lang="zh-CN"
+                        crossorigin="anonymous"
+                        async>
+                </script>
 
                 {% if site.disqus_username %}
                 <!-- disqus 评论框 start -->
@@ -116,7 +133,6 @@ layout: default
 </script>
 <!-- 网易云跟帖JS代码 end -->
 {% endif %}
-
 
 {% if site.disqus_username %}
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
