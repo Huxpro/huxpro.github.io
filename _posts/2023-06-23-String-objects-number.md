@@ -1,6 +1,6 @@
 ---
 layout:       post
-title:        "炒冷面一：String s = new String("Hello");创建了多少个String实例"
+title:        "How many instances of String are created?"
 author:       "Jake"
 header-style: text
 catalog:      true
@@ -10,6 +10,8 @@ tags:
     - Interview
     - 炒冷面
 ---
+
+# 炒冷面一：String s = new String("Hello");创建了多少个String实例
 
 ## 前言
 本篇开始将会连载关于面试题相关的文章，赐御名**炒冷面**系列，就此开始第一话。
