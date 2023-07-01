@@ -16,7 +16,8 @@ tags:
 ## 前言
 TS 不能直接在浏览器或者 node 中运行，除非使用 Deno ，因为它是同时支持 TS 和 JS 的运行时。
 
-> 大多数情况下，如果要执行 TS 代码，必须先转成 JS 代码，这里就需要赫赫有名的转义器 TSC
+> 大多数情况下，如果要执行 TS 代码，必须先转成 JS 代码，这里就需要赫赫有名的转义器 TSC  
+
 ---
 目前 TSC 已经被废弃了（depreciated），必须要下载 typescript。但是用 npm 命令 `npm i -g typescript` 下载会发现进度条到一般不走，尝试了以下方法：
 1. 修改镜像为淘宝镜像 `npm config set registry https://registry.npm.taobao.org --location=global`
@@ -151,7 +152,8 @@ let dice: 1 | 2 | 3 | 4 | 5 | 6;
 
 ## 接口（Interface）
 限制对象的类型，可以用 interface 来定义一个接口，接口中定义了属性极其类型。
-> 对象必须严格遵守接口定义，如果接口对象缺少了属性或者多了属性，将会报错。
+> 对象必须严格遵守接口定义，如果接口对象缺少了属性或者多了属性，将会报错。 
+
 ```ts
 interface User {
     name: string;
@@ -173,7 +175,8 @@ const user: User = {
 
 ## 函数类型（Function Type）
 在 TS 中，我们同样可以指定一个函数的签名，也就是说可以限定函数必须具有特定的参数和返回值。
-> 对于回调函数（call-back）极其好用
+> 对于回调函数（call-back）极其好用  
+
 ```ts
 function getUserName(callback: (data: string) => void) {
     // ...
@@ -201,7 +204,7 @@ function getUserID(userID: UserID) {
 ## 加餐：开发小技巧
 ### noImplicitAny
 在 tsconfig 中配置一个额外的选项：noImplicitAny，让编译器更加严格地审核代码。
-> 可以提醒我们写出 not any api
+> 可以提醒我们写出 not any api  
 ```ts
 let s: string;
 s = null;       // Type 'null' is not assignable to type
@@ -210,7 +213,7 @@ s = undefined;  // Type 'undefined' is not
 
 ### strictNullChecks
 默认情况下，编译器是孕允许给任意类型的变量赋予空值 null 或者 undefined，开启这个选项后，如果不明确该变量可谓空，则会报错。
-> 可以提醒我们写出 no null api
+> 可以提醒我们写出 no null api  
 ```ts
 let s: string;
 s = null;       // Type 'null' is not assignable to type
