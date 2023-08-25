@@ -56,7 +56,7 @@ kramdown:
       start_line: 1
 
 # Disqus settings
-disqus_username: hazelblog233
+disqus_username: https-hazel233-github-io
 
 # Netease settings
 netease_comment: false
