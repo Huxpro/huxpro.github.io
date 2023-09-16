@@ -84,6 +84,7 @@ friends:
   [
     { title: "Back Blog", href: "https://tqgx.github.io/" },
     { title: "XGQT Blog", href: "https://xgqt.gitlab.io/" },
+    { title: "IVON Blog", href: "https://ivonblog.com/" },
     { title: "Github", href: "https://github.com/tqgx" },
     { title: "Piped", href: "https://piped.video/trending" },
     { title: "invidious", href: "https://yewtu.be/" },
