@@ -84,4 +84,8 @@ friends:
   [
     { title: "Back Blog", href: "https://tqgx.github.io/" },
     { title: "XGQT Blog", href: "https://xgqt.gitlab.io/" },
+    { title: "Github", href: "https://github.com/tqgx" },
+    { title: "Piped", href: "https://piped.video/trending" },
+    { title: "invidious", href: "https://yewtu.be/" },
+    { title: "Bitdefender 30Days Trial", href: "https://central.bitdefender.com/devices?service=add_trial&code=34291885-79d4-4ba6-bf01-30b0d6bdd0a1" },
   ]
