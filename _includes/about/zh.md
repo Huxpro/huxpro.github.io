@@ -13,7 +13,7 @@ Hey，我是黄玄（a.k.a. Hux, _@huxpro_），一个略懂计算机科学与�
 - [React Without Memo][11] · [React Conf 2021](https://conf.reactjs.org/)
 - [Toward Hermes being the Default][11] · React Native Blog · 2021
 - React Native 0.64 with Hermes for iOS · [The RN Show Podcast Ep #5](https://www.callstack.com/podcast-react-native-show) · 2021
-- [Upgrading to Progressive Web Apps][9] · [JSConf CN 上海 2017](http://2017.jsconf.cn/)
+- [Upgrading to Progressive Web Apps][9] · [Youtube](https://www.youtube.com/watch?v=RWzMF-1fjJ8&t=1s) · [JSConf CN 上海 2017](http://2017.jsconf.cn/)
 - Building Progressive Web Apps · [CSDI 广州 2017](http://www.csdisummit.com/)
 - The State of Progressive Web App · GDG IO Redux 北京 2017
 - 炒冷饭 · PWA 到底是个什么玩意？· Baidu HQ 北京 2017
@@ -27,7 +27,7 @@ Hey，我是黄玄（a.k.a. Hux, _@huxpro_），一个略懂计算机科学与�
 ##### 媒体关注
 
 - [Hux 黄玄：从全局视角看 React 生态][14] · 直播 · 图灵 8 点半 · 2023
-- [2022 中国开源先锋 33 人]【18】 · SegmentFault · 2023
+- [2022 中国开源先锋 33 人][18] · SegmentFault · 2023
 - [React 黄玄：不懂艺术的 B-Boy 不是 Swag 的程序员][16] · Gitee 封面人物 · 2022
 - [在硅谷当程序员是怎样的体验？][17] · 知乎[《我所向往的职业啊》](https://movie.douban.com/subject/36015036/) · 2022
 
