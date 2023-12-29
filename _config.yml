@@ -3,7 +3,7 @@ title: eckoldigress
 SEOTitle: Locke's Blog
 header-img: img/home-bg.jpg
 email: yangyuewang123@gmail.com
-description: "Welcome to Locke's blog | "
+description: "Welcome to Locke's blog"
 keyword: "Locke, Yangyue Wang, Blog, Robotics, ROS, Philosophy, Computer Science, Systems Engineering"
 url: "https://locke0.github.io" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
