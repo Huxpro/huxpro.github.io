@@ -1,3 +1,9 @@
+
+# remote_theme: pages-themes/hacker@v0.2.0
+# plugins:
+# - jekyll-remote-theme # add this line to the plugins list if you already have one
+# theme: minima
+
 # Site settings
 title: eckoldigress
 SEOTitle: Locke's Blog
@@ -5,8 +11,8 @@ header-img: img/home-bg.jpg
 email: yangyuewang123@gmail.com
 description: "Welcome to Locke's blog"
 keyword: "Locke, Yangyue Wang, Blog, Robotics, ROS, Philosophy, Computer Science, Systems Engineering"
-url: "https://locke0.github.io" # your host, for absolute URL
-baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
+url: "https://locke0.github.io/eckoldigress" # your host, for absolute URL
+baseurl: "/locke0.github.io/eckoldigress" # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
 future: true
@@ -32,7 +38,6 @@ exclude:
     "Gruntfile.js",
     "package.json",
     "README.md",
-    #"README.zh.md",
   ]
 anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:
@@ -42,7 +47,7 @@ anchorjs: true # if you want to customize anchor. check out line:181 of `post.ht
 # from PR#40, to support local preview for Jekyll 3.0
 # make sure you have this gem installed
 # `$ gem install jekyll-paginate`
-plugins: [jekyll-paginate]
+# plugins: [jekyll-paginate]
 
 # Markdown settings
 # replace redcarpet to kramdown,
