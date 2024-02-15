@@ -44,14 +44,15 @@ SELECT ARRAY[1, 2, 3][1];
 ```
 
 ## 2. 同样功能函数名不同
-| 函数作用                      | Presto SQL 函数名称                              | Hive SQL 函数名称                            |
-| ----------------------------- | ------------------------------------------------ | -------------------------------------------- |
-| null 转换                     | coalesce()                                       | nvl() / coalesce()                           |
-| 获取数组或者字典长度          | cardinality()                                    | size() / coalesce()                          |
+
+|           函数作用            |               Presto SQL 函数名称                |              Hive SQL 函数名称               |
+| :---------------------------: | :----------------------------------------------: | :------------------------------------------: |
+|           null 转换           |                    coalesce()                    |              nvl() / coalesce()              |
+|     获取数组或者字典长度      |                  cardinality()                   |                    size()                    |
 | 提取 Json 串中指定 key 对应值 | json_extract_scalar('{"key": "value"}', '$.key') | json_get_object('{"key": "value"}', '$.key') |
 
 ToDo：
-测试 count(distinct one_field) 能否成功
+count(distinct one_arg) 只有一个输入参数的情况下，hive 和 presto 的结果是一样的！
 
 
 ## 3. 计算返回结果不同
