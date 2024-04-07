@@ -1,7 +1,7 @@
 [Hux Blog](https://huangxuan.me)
 ================================
 
-> I never expect this becomes popular.
+> I never expected this to become popular.
 
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
