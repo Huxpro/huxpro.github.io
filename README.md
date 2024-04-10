@@ -1,63 +1,32 @@
-[Hux Blog](https://huangxuan.me)
-================================
+# Shashi KS Website
 
-> I never expected this to become popular.
+This is the Official Home Page Website for the Shashi KS YouTube Channel, where you can read blogs, access my test packages and do a bit more!
 
-![](http://huangxuan.me/img/blog-desktop.jpg)
+## Who am I?
 
+I am Shashikala, an educational content creator who puts videos on topics like Python, Java, CNS, Operating Systems, and lots more.
 
-[User Manual 👉](_doc/Manual.md)
---------------------------------------------------
+We also publish videos regarding specific competitive examinations and update about them regularly.
 
-### Getting Started
+I created this website to connect with you all and also increase our versatility in providing content.
 
-1. You will need [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) to use [Jekyll](https://jekyllrb.com/). Following [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/) to fullfill the enviromental requirement.
+### Here's a magnified view of the many topics on which I post content.
 
-2. Installed dependencies in the `Gemfile`:
+- Content on Operating Systems, C Programming, Java & J2EE, Data Structures, Compiler Design, System Software, etc.
+- Content on useful software applications
+- Preparatory Materials, Solved Question Papers for GATE, TRB, UGC NET, PGTRB, PGT CS Exam.
+- Important and Reliable Educational updates /Social Awareness Content.
 
-```sh
-$ bundle install 
-```
+## Social Media Links
 
-3. Serve the website (`localhost:4000` by default):
+Official Website: https://shashiks.netlify.app <br/>
+YouTube: https://www.youtube.com/c/shashiks <br/>
+Twitter: https://twitter.com/shashiksishere <br/>
+Gmail: shashiks2732020@gmail.com <br/>
+Telegram Group: https://tinyurl.com/shashiks-telegram-group <br/>
+Telegram Channel: https://t.me/shashikschannel <br/>
+Our Forum: https://github.com/vishalscodes/shashiks/discussions
 
-```sh
-$ bundle exec jekyll serve  # alternatively, npm start
-```
+## Credits
 
-### Development (Build From Source)
-
-To modify the theme, you will need [Grunt](https://gruntjs.com/). There are numbers of tasks you can find in the `Gruntfile.js`, includes minifing JavaScript, compiling `.less` to `.css`, adding banners to keep the Apache 2.0 license intact, watching for changes, etc. 
-
-Yes, they were inherited and are extremely old-fashioned. There is no modularization and transpilation, etc.
-
-Critical Jekyll-related code are located in `_include/` and `_layouts/`. Most of them are [Liquid](https://github.com/Shopify/liquid/wiki) templates.
-
-This theme uses the default code syntax highlighter of jekyll, [Rouge](http://rouge.jneen.net/), which is compatible with Pygments theme so just pick any pygments theme css (e.g. from [here](http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html) and replace the content of `highlight.less`.
-
-
-### Interesting to know more? Checkout the [full user manual](_doc/Manual.md)!
-
-
-Other Resources
----------------
-
-Ports
-- [**Hexo**](https://github.com/Kaijun/hexo-theme-huxblog) by @kaijun
-- [**React-SSR**](https://github.com/LucasIcarus/huxpro.github.io/tree/ssr) by @LucasIcarus
-
-[Starter/Boilerplate](https://github.com/huxpro/huxblog-boilerplate)
-- Out of date. Helps wanted for updating it on par with the main repo
-
-Translation
-- [🇨🇳  中文文档（有点过时）](https://github.com/Huxpro/huxpro.github.io/blob/master/_doc/README.zh.md)
-
-
-License
--------
-
-Apache License 2.0.
-Copyright (c) 2015-present Huxpro
-
-Hux Blog is derived from [Clean Blog Jekyll Theme (MIT License)](https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll/)
-Copyright (c) 2013-2016 Blackrock Digital LLC.
+This website is based on the [Hux Blog](https://huangxuan.me/) template.
