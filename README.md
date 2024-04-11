@@ -23,8 +23,7 @@ Official Website: https://shashiks.netlify.app <br/>
 YouTube: https://www.youtube.com/c/shashiks <br/>
 Gmail: shashiks2732020@gmail.com <br/>
 Telegram Group: https://tinyurl.com/shashiks-telegram-group <br/>
-Telegram Channel: https://t.me/shashikschannel <br/>
-Our Forum: https://github.com/vishalscodes/shashiks/discussions
+Telegram Channel: https://t.me/shashikschannel
 
 ## Credits
 
