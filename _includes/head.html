@@ -101,15 +101,4 @@
     async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
   ></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", (user) => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  </script>
 </head>
