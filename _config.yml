@@ -1,10 +1,10 @@
 # Site settings
 title: Shashi KS Blog
-SEOTitle: Shashi KS - The Blog
+SEOTitle: Shashi KS - The Website
 header-img: img/home-bg.jpg
 email: shashiks2732020@gmail.com
 description: "This is the official website of the Shashi KS YouTube Channel - This is an educational site for competitive exams, news updates and more."
-keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, Web, JavaScript, React, React Native, 前端, 设计"
+keyword: "Shashi KS, Cyber Security, VTU, Anna University, Zoom, Google Meet, GMeet, TRB, Competitve Exams, Operating Systems, Teachers Recruitment Board, Visvesvaraya Technological University, Tutorials, Computers, Education"
 url: "https://vishalscodes.github.io" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -14,7 +14,10 @@ future: true
 # SNS settings
 RSS: false
 youtube_username: ShashiKS
-twitter_username: shashiksishere
+#telegram_username: shashiksyt
+telegram_group_username: joinchat/AyU4RtrVE-82Njc1
+telegram_channel_username: shashikschannel
+#twitter_username: shashiksishere
 #facebook_username:  huxpro
 #linkedin_username:  firstname-lastname-idxxxx
 
@@ -69,7 +72,7 @@ ga_domain: huangxuan.me
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
-sidebar-about-description: "Learn, Unlearn and Relearn. <br> Owner, Shashi KS Channel"
+sidebar-about-description: "TOGETHER WE CAN <br> Owner, Shashi KS Channel"
 sidebar-avatar: "shashi ks logo_out.png" # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # Featured Tags
