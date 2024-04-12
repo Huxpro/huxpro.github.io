@@ -9,6 +9,9 @@ collections:
     folder: "_posts/"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    filter:
+      field: language
+      value: en
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "string" }
