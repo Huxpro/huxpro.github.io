@@ -21,5 +21,9 @@
         "dev": "grunt watch & npm run start",
         "boil": "git push boilerplate boilerplate:master",
         "push": "git push origin master --tag"
+    },
+    "dependencies": {
+        "decap-cms-app": "^3.1.9",
+        "react": "^18.2.0"
     }
 }
