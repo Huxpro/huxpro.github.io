@@ -89,7 +89,7 @@ service-worker: true
 page-mathjax: false
 
 # Friends
-friends:false
+# friends:false
   [
     { title: "尹峰以为", href: "http://ingf.github.io/" },
   ]
