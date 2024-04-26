@@ -1,14 +1,14 @@
 {
-    "name": "hux-blog",
-    "title": "Hux Blog",
-    "author": "Hux <huxpro@gmail.com>",
+    "name": "Lio-blog",
+    "title": "Lio Blog",
+    "author": "Lio <Liohiii4@outlook.com>",
     "version": "1.8.2",
-    "homepage": "http://huxpro.github.io",
+    "homepage": "http://Lioooooo123.github.io",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Huxpro/huxpro.github.io"
+        "url": "https://github.com/Lioooooo123/Lioooooo123.github.io"
     },
-    "bugs": "https://github.com/Huxpro/huxpro.github.io/issues",
+    "bugs": "https://github.com/Lioooooo123/Lioooooo123.github.io/issues",
     "devDependencies": {
         "grunt": ">=1.3.0",
         "grunt-banner": "~0.2.3",
