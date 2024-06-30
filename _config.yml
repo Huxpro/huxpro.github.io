@@ -2,10 +2,10 @@
 title: Hujiaohuxue Blog
 SEOTitle: hujiaohuxue
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
+email: moyiqian88@outlook.com
 description: "这发现更大的世界 | 要做一个有 swag 的程序员"
 keyword: "wu"
-url: "hujiaohuxue.gthub.io" # your host, for absolute URL
+url: "hujiaohuxue.github.io" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
