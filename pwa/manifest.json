@@ -1,7 +1,7 @@
 {
-  "name": "Hux Blog",
-  "short_name": "Hux Blog",
-  "description": "About an engineer & designer who loves web.",
+  "name": "CodeWater Blog",
+  "short_name": "CodeWater",
+  "description": "CodeWater517 的个人博客。",
   "icons": [{
     "src": "icons/128.png",
     "sizes": "128x128",

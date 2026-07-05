@@ -27,6 +27,20 @@ layout: default
 
 				{{ content }}
 
+                {% if page.revision_history and page.revision_history.size > 0 %}
+                <section class="revision-history">
+                    <h2>修改记录</h2>
+                    <ul>
+                        {% for revision in page.revision_history %}
+                        <li>
+                            <time>{{ revision.time | date: "%Y-%m-%d %H:%M" }}</time>
+                            <span>{{ revision.description }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                {% endif %}
+
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     {% if page.previous.url %}

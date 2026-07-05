@@ -40,7 +40,9 @@
                 <div class="post-heading">
                     <div class="tags">
                         {% for tag in page.tags %}
-                        <a class="tag" href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}" title="{{ tag }}">{{ tag }}</a>
+                        {% assign tag_name = tag %}
+                        {% assign tag_color = site.data.tag_colors[tag_name] | default: 'default' %}
+                        <a class="tag tag-pill tag-pill--{{ tag_color }}" href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}" title="{{ tag }}">{{ tag }}</a>
                         {% endfor %}
                     </div>
                     <h1>{{ page.title }}</h1>
@@ -78,7 +80,9 @@
                 <div class="post-heading">
                     <div class="tags">
                         {% for tag in page.tags %}
-                        <a class="tag" href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}" title="{{ tag }}">{{ tag }}</a>
+                        {% assign tag_name = tag %}
+                        {% assign tag_color = site.data.tag_colors[tag_name] | default: 'default' %}
+                        <a class="tag tag-pill tag-pill--{{ tag_color }}" href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}" title="{{ tag }}">{{ tag }}</a>
                         {% endfor %}
                     </div>
                     <h1>{{ page.title }}</h1>

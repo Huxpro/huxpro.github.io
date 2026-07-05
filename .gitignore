@@ -1,6 +1,8 @@
 _site
+.bundle
 _posts/_draft
 _posts/_archive
+_posts/.obsidian/
 _archive
 node_modules
 .vscode

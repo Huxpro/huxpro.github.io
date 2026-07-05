@@ -68,6 +68,16 @@
     </a>
   </li>
   {% endif %}
+  {% if site.douyin_url %}
+  <li>
+    <a target="_blank" rel="noopener" href="{{ site.douyin_url }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-stack-1x fa-inverse sns-douyin-glyph">抖</i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
   {% if site.linkedin_username %}
   <li>
     <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">

@@ -25,8 +25,10 @@ https://github.com/kitian616/jekyll-TeXt-theme
 
 				{% capture tags %}
 				{% for tag in site.tags %}
+				{% assign tag_name = tag[0] %}
+				{% assign tag_color = site.data.tag_colors[tag_name] | default: 'default' %}
 				<a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
-					data-encode="{{ tag[0] | strip | url_encode }}" class="tag-button" title="{{ tag[0] }}"
+					data-encode="{{ tag[0] | strip | url_encode }}" class="tag-button tag-pill tag-pill--{{ tag_color }}" title="{{ tag[0] }}"
 					rel="{{ tag[1].size }}">
 					{{ tag[0] }}
 					<sup>{{tag[1].size}}</sup>
@@ -76,6 +78,8 @@ https://github.com/kitian616/jekyll-TeXt-theme
 							</h3>
 							{% endif %}
 						</a>
+						{%- assign article_last_modified_at = _article.last_modified_at | default: _article.date -%}
+						<p class="post-last-modified archive-last-modified">Last modified on {{ article_last_modified_at | date: "%B %-d, %Y" }}</p>
 						<hr>
 					</div>
 					{%- if forloop.last -%}
