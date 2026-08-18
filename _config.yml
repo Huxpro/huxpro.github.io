@@ -1,7 +1,7 @@
 # Site settings
 title: FangTangWei Blog
 SEOTitle: 方糖味的博客 | FangTangWei Blog
-header-img: https://avatars.githubusercontent.com/u/272256029?v=4&size=64
+header-img: img/home-bg.jpg
 email: fangtangwei@example.com  # 请替换为你自己的邮箱
 description: "这里是 @FangTangWei 的高中生博客，记录学习、生活与成长 | 保持好奇，持续进步"
 keyword: "方糖味, FangTangWei, 高中生博客, 个人博客, 学习笔记, 编程, Web, 前端, 生活记录"
