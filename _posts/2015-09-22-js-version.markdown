@@ -63,5 +63,4 @@ JavaScript 有着很奇怪的命名史。
 #### 著作权声明
 
 本文译自 [ES5, ES6, ES2016, ES.Next: What's going on with JavaScript versioning?](http://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)   
-译者 [黄玄](http://weibo.com/huxpro)，首次发布于 [Hux Blog](http://huangxuan.me)，转载请保留以上链接
-
+译者 [黄玄](http://weibo.com/huxpro)，首次发布于 [Hux Blog](https://huxpro.github.io)，转载请保留以上链接

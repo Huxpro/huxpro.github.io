@@ -1,7 +1,7 @@
 
 
 > 很荣幸在今年 2 月到 5 月的时间里，以顾问的身份加入饿了么，参与 PWA 的相关工作。这篇文章其实最初是在以英文写作发表在 medium 上的：[Upgrading Ele.me to Progressive Web Apps](https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)，获得了一定的关注。所以也决定改写为中文版本再次分享出来，希望能对你有所帮助 ;) <br><br>
-> 本文首发于 [CSDN](http://geek.csdn.net/news/detail/210535) 与《程序员》2017 年 7 月刊，同步发布于 [饿了么前端 - 知乎专栏](https://zhuanlan.zhihu.com/ElemeFE)、[Hux Blog](https://huangxuan.me)，转载请保留链接。
+> 本文首发于 [CSDN](http://geek.csdn.net/news/detail/210535) 与《程序员》2017 年 7 月刊，同步发布于 [饿了么前端 - 知乎专栏](https://zhuanlan.zhihu.com/ElemeFE)、[Hux Blog](https://huxpro.github.io)，转载请保留链接。
 
 
 自 Vue.js 官方推特第一次[公开][1]到现在，我们就一直在进行着将[饿了么移动端网站](https://h5.ele.me/msite/#pwa=true)升级为 [Progressive Web App][2] 的工作。直到近日在 Google I/O 2017 上[登台亮相](https://m.weibo.cn/status/4109332495285652)，才终于算告一段落。我们非常荣幸能够发布全世界第一个专门面向国内用户的 PWA，但更荣幸的是能与 Google、UC 以及腾讯合作，一起推动国内 web 与浏览器生态的发展。
@@ -144,7 +144,7 @@ HTML 文件中有标签并不意味着这些标签就能立刻被绘制到屏幕
 
 ![](/img/in-post/post-eleme-pwa/nextTick-&-Load.png)
 
-当当！首次渲染瞬间就被提前了。如果你熟悉浏览器的**事件循环模型（event loop）**的话，这招 Hack 其实是通过 setTimeout 的回调把 DOM 操作放到了事件循环的任务队列中以避免它在当前循环执行，这样浏览器就得以在主线程空闲时喘息一下（更新一下渲染）了。如果你想亲手试试 MMPWA 的话，你可以访问 [github.com/Huxpro/mmpwa](https://github.com/Huxpro/mmpwa) 或 [huangxuan.me/mmpwa/](https://huangxuan.me/mmpwa) 访问代码与 Demo。我把 UI 设计为了 A/B Test 的形式并改为渲染 5000 个列表项来让效果更夸张一些。
+当当！首次渲染瞬间就被提前了。如果你熟悉浏览器的**事件循环模型（event loop）**的话，这招 Hack 其实是通过 setTimeout 的回调把 DOM 操作放到了事件循环的任务队列中以避免它在当前循环执行，这样浏览器就得以在主线程空闲时喘息一下（更新一下渲染）了。如果你想亲手试试 MMPWA 的话，你可以访问 [github.com/Huxpro/mmpwa](https://github.com/Huxpro/mmpwa) 或 [huxpro.github.io/mmpwa/](https://huxpro.github.io/mmpwa) 访问代码与 Demo。我把 UI 设计为了 A/B Test 的形式并改为渲染 5000 个列表项来让效果更夸张一些。
 
 回到饿了么 PWA 上，我们同样试着把 `new Vue()` 放到了 `setTimeout` 中。果然，黑魔法再次显灵，骨架屏在每次跳转后都能立刻被渲染。这时的 Profile 看起来是这样的：
 
@@ -204,4 +204,3 @@ PWA 作为[下一代 Web 应用模型](https://zhuanlan.zhihu.com/p/25167289)，
 [11]: https://medium.com/@Huxpro/how-does-sw-precache-works-2d99c3d3c725
 [12]: https://developers.google.com/web/updates/2015/11/app-shell
 [13]: https://googlechrome.github.io/sw-toolbox/
-

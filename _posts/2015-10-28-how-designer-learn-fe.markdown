@@ -63,7 +63,7 @@ p { color: red;}
 <br>
 <br>对于书，我<b>非常不推荐</b>上来就去看各种厚厚的入门/指南书，没必要！这一个阶段应该快速上手，培养兴趣，培养成就感。先做出可以看的东西再说，掌握常用的 HTML/CSS 就够用了
 <br>
-<br>如果完成的好，这个阶段过后你大概就可以写出一些简单又好看的“静态网页”了，比如这个作品集/简历：<a href="//link.zhihu.com/?target=http%3A//huangxuan.me/portfolio/" class=" wrap external" target="_blank" rel="nofollow noreferrer">Portfolio - 黄玄的博客<i class="icon-external"></i></a> （好久没更新了…丢人现眼）
+<br>如果完成的好，这个阶段过后你大概就可以写出一些简单又好看的“静态网页”了，比如这个作品集/简历：<a href="//link.zhihu.com/?target=https%3A//huxpro.github.io/portfolio/" class=" wrap external" target="_blank" rel="nofollow noreferrer">Portfolio - 黄玄的博客<i class="icon-external"></i></a> （好久没更新了…丢人现眼）
 <br>
 <br>
 <br>
@@ -97,7 +97,7 @@ $('.className').click(function(){
 <br>
 <br>如果学习得顺利，你还可以尝试使用各种丰富的 jQuery 插件，你会发现写出支持用户交互的网站也没有那么困难～很多看上去很复杂的功能（比如轮播图、灯箱、下拉菜单），搜一搜然后看看文档（教程）、改改示例代码就好了。
 <br>
-<br>比如说，配合 <a href="//link.zhihu.com/?target=https%3A//github.com/Huxpro/jquery.HSlider" class=" wrap external" target="_blank" rel="nofollow noreferrer">Huxpro/jquery.HSlider · GitHub<i class="icon-external"></i></a> 这样的轮播图插件，你可以很轻松的写出 <a href="//link.zhihu.com/?target=http%3A//huangxuan.me/jquery.HSlider/" class=" wrap external" target="_blank" rel="nofollow noreferrer">HSlider | Demo<i class="icon-external"></i></a> 这样的网页相册或者 <a href="//link.zhihu.com/?target=http%3A//huangxuan.me/jquery.HSlider/demo-weather-app/" class=" wrap external" target="_blank" rel="nofollow noreferrer">HSlider | Weather<i class="icon-external"></i></a> 这样的手机端 App 原型～
+<br>比如说，配合 <a href="//link.zhihu.com/?target=https%3A//github.com/Huxpro/jquery.HSlider" class=" wrap external" target="_blank" rel="nofollow noreferrer">Huxpro/jquery.HSlider · GitHub<i class="icon-external"></i></a> 这样的轮播图插件，你可以很轻松的写出 <a href="//link.zhihu.com/?target=https%3A//huxpro.github.io/jquery.HSlider/" class=" wrap external" target="_blank" rel="nofollow noreferrer">HSlider | Demo<i class="icon-external"></i></a> 这样的网页相册或者 <a href="//link.zhihu.com/?target=https%3A//huxpro.github.io/jquery.HSlider/demo-weather-app/" class=" wrap external" target="_blank" rel="nofollow noreferrer">HSlider | Weather<i class="icon-external"></i></a> 这样的手机端 App 原型～
 <br>
 <br>最后，我想推荐下 <a href="//link.zhihu.com/?target=http%3A//getbootstrap.com/" class=" wrap external" target="_blank" rel="nofollow noreferrer">Bootstrap · The world's most popular mobile-first and respons<i class="icon-external"></i></a> ，这是世界上最知名的前端 UI 框架之一，提供了大量 CSS 样式与 jQuery 插件。它非常容易学习并且中英文教程都非常健全，你并不需要理解它背后的工作原理就能很好的使用它，让你快速达到“可以建站的水平”。有余力的话，你不但可以学习如何使用它，还可以学习它背后的设计思想。
 <br>
@@ -117,7 +117,7 @@ $('.className').click(function(){
 <br>
 <br>如果你还掌握了 <b>入门篇（JavaScript/jQuery）</b>的知识，那么<b>恭喜你！你已经可以做出很多有趣的网页了！</b>很多 minisite 或者微信上的“H5” 小广告，这个程度的你已经可以轻松完成了！
 <br>
-<br>配合上你的设计功力，你可以开始尝试创作一些好玩的东西，比如这种富含交互和动画的网站 <a href="//link.zhihu.com/?target=http%3A//huangxuan.me/senova/" class=" wrap external" target="_blank" rel="nofollow noreferrer">绅宝 SENOVA<i class="icon-external"></i></a> ，它仍然是基于 <a href="//link.zhihu.com/?target=https%3A//github.com/Huxpro/jquery.HSlider" class=" wrap external" target="_blank" rel="nofollow noreferrer">Huxpro/jquery.HSlider · GitHub<i class="icon-external"></i></a> 实现的！或者给自己做个小小的个人网站试试
+<br>配合上你的设计功力，你可以开始尝试创作一些好玩的东西，比如这种富含交互和动画的网站 <a href="//link.zhihu.com/?target=https%3A//huxpro.github.io/senova/" class=" wrap external" target="_blank" rel="nofollow noreferrer">绅宝 SENOVA<i class="icon-external"></i></a> ，它仍然是基于 <a href="//link.zhihu.com/?target=https%3A//github.com/Huxpro/jquery.HSlider" class=" wrap external" target="_blank" rel="nofollow noreferrer">Huxpro/jquery.HSlider · GitHub<i class="icon-external"></i></a> 实现的！或者给自己做个小小的个人网站试试
 <br>
 <br>
 <br>
@@ -139,7 +139,7 @@ $('.className').click(function(){
 </ul>
 <br>如果你能顺利得渡过了这个阶段，我想你已经能做出很多令你自豪的网站了！试着向身边的工程师朋友询问如何购买域名、配置简单的静态服务器，或者搜搜“Github Pages”，然后把你的作品挂在网络上让大家欣赏吧！
 <br>
-<br>你还可以试着用 JavaScript 写写小游戏，这不但能锻炼你的编程水平还非常有趣～比如这是我刚学 JS 不久后 hack 一晚的产物 —— 用 DOM 实现的打飞机：<a href="//link.zhihu.com/?target=http%3A//huangxuan.me/aircraft" class=" wrap external" target="_blank" rel="nofollow noreferrer">Hux - Aircraft<i class="icon-external"></i></a> （不支持手机）
+<br>你还可以试着用 JavaScript 写写小游戏，这不但能锻炼你的编程水平还非常有趣～比如这是我刚学 JS 不久后 hack 一晚的产物 —— 用 DOM 实现的打飞机：<a href="//link.zhihu.com/?target=https%3A//huxpro.github.io/aircraft" class=" wrap external" target="_blank" rel="nofollow noreferrer">Hux - Aircraft<i class="icon-external"></i></a> （不支持手机）
 <br>
 <br>
 <br>
@@ -156,7 +156,7 @@ $('.className').click(function(){
 <br>
 <br><b>你需要学习使用进阶的 CSS</b>，包括熟悉 CSS 3，使用 Scss/Less 等编译到 CSS 的语言，使用 autoprefixer 等 PostCSS 工具，了解 CSS 在 Scope/Namespace 上的缺陷，你还可以学习 CSS Modules、CSS in JS 这些有趣的新玩意
 <br>
-<br><b>你需要非常了解前端的模块化规范</b>，可能在你学习到这里的时候，Require.js/AMD 已经再见了，但是 CommonJS 与 ES6 Modules 你必须要了解。（你可以观看我的分享《<a href="//link.zhihu.com/?target=http%3A//huangxuan.me/js-module-7day/%23/" class=" wrap external" target="_blank" rel="nofollow noreferrer">JavaScript Modularization Seven Day<i class="icon-external"></i></a>》 来学习 JS 模块化的历史）
+<br><b>你需要非常了解前端的模块化规范</b>，可能在你学习到这里的时候，Require.js/AMD 已经再见了，但是 CommonJS 与 ES6 Modules 你必须要了解。（你可以观看我的分享《<a href="//link.zhihu.com/?target=https%3A//huxpro.github.io/js-module-7day/%23/" class=" wrap external" target="_blank" rel="nofollow noreferrer">JavaScript Modularization Seven Day<i class="icon-external"></i></a>》 来学习 JS 模块化的历史）
 <br>
 <br><b>你需要熟悉 Git 与 Shell 的使用</b>，包括基于 git 的版本管理、分支管理与团队协作，包括简单的 Linux/Unix 命令、你要知道大部分程序员的工作可以通过 shell 更快更酷的完成，并且很多“软件”只能通过 shell 来使用。你还可以把你的代码放到 github 上与人分享，并且学习 github 上其他优秀的开源代码
 <br>

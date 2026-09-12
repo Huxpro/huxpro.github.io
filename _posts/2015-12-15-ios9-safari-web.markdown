@@ -85,7 +85,7 @@ Force Touch API 为我们添加了两个新东西：
 
 [@Marcel Freinbichler](https://twitter.com/fr3ino) 第一个在 Twitter 上晒出了自己的 [Demo](http://freinbichler.me/apps/3dtouch)。在 6s 或 new Macbook 的 Safari（目前仅 Safari 支持）上访问就可以看到圆圈会随着压力放大。墙内的小伙伴可以直接试试下面这个圆圈，体验下 3D/Force Touch 带来的的奇妙体验。
 
-<iframe src="//huangxuan.me/forcify/" style="
+<iframe src="//huxpro.github.io/forcify/" style="
     width:100%;
     height:500px;
     border: 0;
@@ -93,7 +93,7 @@ Force Touch API 为我们添加了两个新东西：
 
 如果你不巧在用不支持 3D/Force Touch 的设备，发现尼玛用力按下去之后居然圆圈也有反映！？
 
-放心，这真的不是你的设备突然习得了“感应压力”这项技能，而是因为 [Forcify](http://huangxuan.me/forcify) 是一个用于在所有设备上 polyfill 3D/Force Touch API 的 JS 库……它不但封装了 OSX/iOS 两个平台之间 API 的差异，还使用"长按"来模拟了 `force` 值的变化……
+放心，这真的不是你的设备突然习得了“感应压力”这项技能，而是因为 [Forcify](https://huxpro.github.io/forcify) 是一个用于在所有设备上 polyfill 3D/Force Touch API 的 JS 库……它不但封装了 OSX/iOS 两个平台之间 API 的差异，还使用"长按"来模拟了 `force` 值的变化……
 
 
 
@@ -337,4 +337,4 @@ Bug 通常都要在几周之后才会显露出来，我也会持续跟进并更�
 ## 著作权声明
 
 本文译自 [iOS 9, Safari and the Web: 3D Touch, new Responsive Web Design, Native integration and HTML5 APIs --- Breaking the Mobile Web](http://www.mobilexweb.com/blog/ios9-safari-for-web-developers)   
-译者 [黄玄](http://weibo.com/huxpro)，首次发布于 [Hux Blog](http://huangxuan.me)，转载请保留以上链接
+译者 [黄玄](http://weibo.com/huxpro)，首次发布于 [Hux Blog](https://huxpro.github.io)，转载请保留以上链接
