@@ -1,9 +1,9 @@
-[Hux Blog](https://huangxuan.me)
+[Hux Blog](https://huxpro.github.io)
 ================================
 
-> I never expected this to become popular.
+> The original Jekyll blog and theme, preserved at [huxpro.github.io](https://huxpro.github.io). For Hux's current website, visit [hux.pro](https://hux.pro).
 
-![](http://huangxuan.me/img/blog-desktop.jpg)
+![](https://huxpro.github.io/img/blog-desktop.jpg)
 
 
 [User Manual 👉](_doc/Manual.md)

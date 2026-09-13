@@ -14,7 +14,7 @@ tags:
 
 
 > 今年 9 月份的时候，《程序员》杂志社就邀请我写一篇关于 PWA 的文章。后来花式拖稿，拖过了 10 月的 QCon，11 月的 GDG DevFest，终于在 12 月把这篇长文熬了出来。几次分享的不成熟，这次的结构算是比较满意了。「 可能是目前中文世界里对 PWA 最全面详细的长文了」，希望你能喜欢。<br><br>
-> 本文首发于 [CSDN](http://geek.csdn.net/news/detail/135595) 与《程序员》2017 年 2 月刊，同步发布于 [Hux Blog](https://huangxuan.me)、[前端外刊评论 - 知乎专栏](https://zhuanlan.zhihu.com/FrontendMagazine)，转载请保留链接 ;)
+> 本文首发于 [CSDN](http://geek.csdn.net/news/detail/135595) 与《程序员》2017 年 2 月刊，同步发布于 [Hux Blog](https://huxpro.github.io)、[前端外刊评论 - 知乎专栏](https://zhuanlan.zhihu.com/FrontendMagazine)，转载请保留链接 ;)
 
 
 ## 下一代 Web 应用？
@@ -409,7 +409,7 @@ PWA 作为一个涵盖性术语，与过往的这些或多或少通过私有平�
 
 [20]: https://msdn.microsoft.com/en-us/library/dn320426%28v=vs.85%29.aspx "Browser configuration schema reference - MSDN"
 
-[21]: https://huangxuan.me "Hux Blog"
+[21]: https://huxpro.github.io "Hux Blog"
 
 [22]: https://www.html5rocks.com/en/tutorials/notifications/quick/ "Using the Notification API"
 
@@ -502,14 +502,14 @@ PWA 作为一个涵盖性术语，与过往的这些或多或少通过私有平�
 [i4]: https://twitter.com/adityapunjani
 
 
-[q37]: https://huangxuan.me/pwa-qcon2016/#/37 "PWA@QCon2016 #37"
+[q37]: https://huxpro.github.io/pwa-qcon2016/#/37 "PWA@QCon2016 #37"
 
-[q17]: https://huangxuan.me/pwa-qcon2016/#/17 "PWA@QCon2016 #17"
+[q17]: https://huxpro.github.io/pwa-qcon2016/#/17 "PWA@QCon2016 #17"
 
-[q97]: https://huangxuan.me/pwa-qcon2016/#/99 "PWA@QCon2016 #97"
+[q97]: https://huxpro.github.io/pwa-qcon2016/#/99 "PWA@QCon2016 #97"
 
-[s12]: https://huangxuan.me/sw-101-gdgdf/#/12 "SW-101@DevFest #12"
+[s12]: https://huxpro.github.io/sw-101-gdgdf/#/12 "SW-101@DevFest #12"
 
-[s13]: https://huangxuan.me/sw-101-gdgdf/#/13 "SW-101@DevFest #13"
+[s13]: https://huxpro.github.io/sw-101-gdgdf/#/13 "SW-101@DevFest #13"
 
-[b0]: https://huangxuan.me/2016/11/20/sw-101-gdgdf/
+[b0]: https://huxpro.github.io/2016/11/20/sw-101-gdgdf/

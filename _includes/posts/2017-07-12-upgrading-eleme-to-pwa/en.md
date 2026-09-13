@@ -146,7 +146,7 @@ We indeed encountered this problem when testing our new beautiful Skeleton Scree
 ![](/img/in-post/post-eleme-pwa/nextTick-&-Load.png)
 
 
-I think you may curious about how this change performs in the wild, so I have refined MMPWA by rendering 5000 list items rather 1000 to make the differences more obvious, and by designing it in an A/B testing manner. The code is on [Github](https://github.com/Huxpro/mmpwa) and the demo is live on [huangxuan.me/mmpwa/](https://huangxuan.me/mmpwa). Here is also a video for loungers.
+I think you may curious about how this change performs in the wild, so I have refined MMPWA by rendering 5000 list items rather 1000 to make the differences more obvious, and by designing it in an A/B testing manner. The code is on [Github](https://github.com/Huxpro/mmpwa) and the demo is live on [huxpro.github.io/mmpwa/](https://huxpro.github.io/mmpwa). Here is also a video for loungers.
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3Ws7XBHrPD8" frameborder="0" allowfullscreen></iframe>

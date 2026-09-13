@@ -1,0 +1,114 @@
+@font-face {
+  font-family: 'Hux Wordmark';
+  src: url('../fonts/jetbrains-mono-400.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+.navbar-custom .new-site-link {
+  --badge-expand: 1;
+  --wordmark-opacity: 1;
+  --wordmark-transform: translateY(0) scale(1);
+  --label-opacity: 0;
+  --label-transform: translateY(4px) scale(.96);
+  --arrow-shift: 0px;
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  width: 88px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  color: #f0f3f5;
+  text-decoration: none;
+}
+/* Glass and labels morph around fixed centres; neighbouring navigation stays put. */
+.new-site-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(240, 246, 250, .06);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
+  transform: scaleX(var(--badge-expand));
+  transform-origin: center;
+  transition: transform 280ms cubic-bezier(.22, 1, .36, 1);
+}
+.new-site-wordmark,
+.new-site-label {
+  position: absolute;
+  inset-block: 0;
+  /* Both labels share a fixed optical centre, compensated for the arrow. */
+  right: 18px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Hux Wordmark', monospace;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  transform-origin: center;
+  transition: opacity 180ms ease-out, transform 280ms cubic-bezier(.22, 1, .36, 1);
+}
+.new-site-wordmark {
+  font-size: 15px;
+  letter-spacing: .02em;
+  opacity: var(--wordmark-opacity);
+  transform: var(--wordmark-transform);
+}
+.new-site-label {
+  font-size: 11px;
+  letter-spacing: 0;
+  opacity: var(--label-opacity);
+  transform: var(--label-transform);
+}
+.new-site-link svg {
+  position: absolute;
+  /* Superscript placement: close to the text, inset from the glass edge. */
+  right: 15px;
+  top: 7px;
+  opacity: .8;
+  transform: translateX(var(--arrow-shift));
+  transition: transform 280ms cubic-bezier(.22, 1, .36, 1);
+}
+.navbar-custom .new-site-link:hover,
+.navbar-custom .new-site-link:focus { color: #f0f3f5; }
+.navbar-custom.invert .new-site-link,
+.navbar-custom.is-fixed .new-site-link { color: #26343b; }
+.navbar-custom.invert .new-site-link::before,
+.navbar-custom.is-fixed .new-site-link::before { background: rgba(38, 52, 59, .05); }
+.navbar-custom .new-site-link:focus-visible {
+  outline: 2px solid #7facbf;
+  outline-offset: 4px;
+  /* 88px → 100px: 6px on each side, without shifting the badge centre. */
+  --badge-expand: 1.13636364;
+  --wordmark-opacity: 0;
+  --wordmark-transform: translateY(-4px) scale(.96);
+  --label-opacity: 1;
+  --label-transform: translateY(0) scale(1);
+  --arrow-shift: 6px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .navbar-custom .new-site-link:hover {
+    --badge-expand: 1.13636364;
+    --wordmark-opacity: 0;
+    --wordmark-transform: translateY(-4px) scale(.96);
+    --label-opacity: 1;
+    --label-transform: translateY(0) scale(1);
+    --arrow-shift: 6px;
+  }
+}
+@media (min-width: 768px) {
+  .navbar-custom > .container-fluid { padding-right: 138px; }
+}
+@media (max-width: 767px) {
+  .navbar-custom .new-site-link { top: 10px; right: 64px; }
+  .new-site-wordmark { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .new-site-link::before,
+  .new-site-link svg,
+  .new-site-wordmark,
+  .new-site-label { transition: none; }
+}

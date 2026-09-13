@@ -2,7 +2,7 @@
 layout:     keynote
 title:      "Progressive Web Apps，复兴序章「QCon 上海 2016」"
 subtitle:   "🎞  Slides:Progressive Web Apps, Make Web Great Again. (QCon Shanghai 2016)"
-iframe:     "//huangxuan.me/pwa-qcon2016/"
+iframe:     "//huxpro.github.io/pwa-qcon2016/"
 navcolor:   "invert"
 date:       2016-10-20
 author:     "Hux"
@@ -16,12 +16,12 @@ tags:
 > 下滑这里查看更多内容
 
 
-### [Watching Fullscreen →](https://huangxuan.me/pwa-qcon2016/)
+### [Watching Fullscreen →](https://huxpro.github.io/pwa-qcon2016/)
 
 ### [Watching Video →](http://www.infoq.com/cn/presentations/progressive-web-app)
 
 <div class="visible-md visible-lg">
-    <img src="//huangxuan.me/pwa-qcon2016/attach/qrcode.png" width="350" />
+    <img src="//huxpro.github.io/pwa-qcon2016/attach/qrcode.png" width="350" />
     <small class="img-hint">Scanning on mobile</small>
 </div>
 
@@ -60,5 +60,3 @@ tags:
 This slides is powered by [Yanshuo.io (演说.io)](http://yanshuo.io), a online software helping you create, store and share web slides. 
 
 `index.html` is the HTML source code exported from [Yanshuo.io](http://yanshuo.io), and many of its dependencis (js, css, fonts) are still linked to CDN of [Yanshuo.io](http://yanshuo.io). You can do any secondary development and host it by yourself.
-
-

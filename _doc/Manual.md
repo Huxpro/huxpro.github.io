@@ -74,7 +74,7 @@ Most of them are very descriptive so feel brave to dive into code directly as we
 Posts are simply just Markdown files in the `_posts/`. 
 Metadata of posts are listed in a YAML style _front-matter_.
 
-For instance, [Hello 2015])(https://huangxuan.me/2015/01/29/hello-2015/) has the front-matter of this:
+For instance, [Hello 2015](https://huxpro.github.io/2015/01/29/hello-2015/) has the front-matter of this:
 
 ```yml
 ---
@@ -103,7 +103,7 @@ This command will automatially generate a sample post similar as above under the
 
 There are a bunch of _advanced_ configs:
 
-1. a _text style_ header like [this](https://huangxuan.me/2019/09/08/spacemacs-workflow/) with
+1. a _text style_ header like [this](https://huxpro.github.io/2019/09/08/spacemacs-workflow/) with
 
 ```yml
 header-style: text 
@@ -126,7 +126,7 @@ Etc.
 
 ### SideBar
 
-![](http://huangxuan.me/img/blog-sidebar.jpg)
+![](https://huxpro.github.io/img/blog-sidebar.jpg)
 
 **SideBar** provides possible modules to show off more personal information.
 
@@ -183,7 +183,7 @@ friends: [
 
 ### Keynote Layout
 
-![](http://huangxuan.me/img/blog-keynote.jpg)
+![](https://huxpro.github.io/img/blog-keynote.jpg)
 
 There is a increased trend to use Open Web technology for keynotes and presentations via Reveal.js, Impress.js, Slides, Prezi etc. I consider a modern blog should have first-class support to embed these HTML based presentation so **Keynote layout** are made.
 
@@ -192,7 +192,7 @@ To use, in the **front-matter**:
 ```yml
 ---
 layout:     keynote
-iframe:     "http://huangxuan.me/js-module-7day/"
+iframe:     "https://huxpro.github.io/js-module-7day/"
 ---
 ```
 
@@ -231,7 +231,7 @@ ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
 
 # Google Analytics
 ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_domain: huxpro.github.io
 ```
 
 Just checkout the code offered by Google/Baidu, and copy paste here, all the rest is already done for you.
@@ -273,7 +273,7 @@ Releases
 
 #### V1.8
 
-- Brand new [Archive](https://huangxuan.me/archive/) page! It combines previous Archive and Tag page and it's backward-cmpatible.
+- Brand new [Archive](https://huxpro.github.io/archive/) page! It combines previous Archive and Tag page and it's backward-cmpatible.
 Shout out to [@kitian616/jekyll-TeXt-theme](https://github.com/kitian616/jekyll-TeXt-theme) of bringing this idea. 
 - Improve engineering by extracting duplicated liquid templates into reuseable includes. This was proposed in #74 by @Kaijun but postponed for entirely 2.5 years! I wasn't able to merge his PR directly because of long-time divegence but the credit is belonging to @Kaijun.
 - Improved code block. Long-wanted line number are supported out of the box (thanks for @SmilingParadise's help from Sina Weibo), the default theme is updated to Atom One Dark as well (checkout FQA for how to change to your farovite theme)
@@ -318,7 +318,7 @@ Shout out to [@kitian616/jekyll-TeXt-theme](https://github.com/kitian616/jekyll-
 
 - Big Improvement to the **Navigation Menu** *(especially in Android)*:  Dropping the old, stuttering, low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse),  replaced with an own wrote, [jank free](http://jankfree.org/) navbar menu in a pretty high-performance implementation of [Google Material Design](https://www.google.com/design/spec/material-design/introduction.html).
 
-<img src="http://huangxuan.me/img/blog-md-navbar.gif" width="320" />
+<img src="https://huxpro.github.io/img/blog-md-navbar.gif" width="320" />
 
 
 #### V1.2

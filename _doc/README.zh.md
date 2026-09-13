@@ -1,6 +1,8 @@
 # Hux blog 模板
 
-### [我的博客在这里 &rarr;](http://huxpro.github.io)
+### [Hux Blog 旧版归档 &rarr;](https://huxpro.github.io)
+
+Hux 的新版个人官网位于 [hux.pro](https://hux.pro)。
 
 
 ### 关于收到"Page Build Warning"的email
@@ -27,7 +29,7 @@
 $ git clone git@github.com:Huxpro/huxblog-boilerplate.git
 ```
 
-**[在这里预览模板 &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
+**[在这里预览模板 &rarr;](https://huxpro.github.io/huxblog-boilerplate/)**
 
 ## 各版本特性
 
@@ -124,7 +126,7 @@ rake post title="Hello 2015" subtitle="Hello World, Hello Blog"
 #### SideBar
 
 看右边:
-![](http://huangxuan.me/img/blog-sidebar.jpg)
+![](https://huxpro.github.io/img/blog-sidebar.jpg)
 
 设置是在 `_config.yml`文件里面的`Sidebar settings`那块。
 ```
@@ -182,7 +184,7 @@ friends: [
 
 HTML5幻灯片的排版：
 
-![](http://huangxuan.me/img/blog-keynote.jpg)
+![](https://huxpro.github.io/img/blog-keynote.jpg)
 
 这部分是用于占用html格式的幻灯片的，一般用到的是 Reveal.js, Impress.js, Slides, Prezi 等等.我认为一个现代化的博客怎么能少了放html幻灯的功能呢~
 
@@ -191,7 +193,7 @@ HTML5幻灯片的排版：
 ```
 ---
 layout:     keynote
-iframe:     "http://huangxuan.me/js-module-7day/"
+iframe:     "https://huxpro.github.io/js-module-7day/"
 ---
 ```
 
@@ -229,7 +231,7 @@ ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
 
 # Google Analytics
 ga_track_id: 'UA-49627206-1'            # 你用Google账号去注册一个就会给你一个这样的id
-ga_domain: huangxuan.me			# 默认的是 auto, 这里我是自定义了的域名，你如果没有自己的域名，需要改成auto。
+ga_domain: huxpro.github.io		# 默认的是 auto, 这里我是自定义了的域名，你如果没有自己的域名，需要改成auto。
 ```
 
 #### Customization
@@ -261,6 +263,3 @@ JavaScript 的压缩混淆、Less 的编译、Apache 2.0 许可通告的添加�
 2. 感谢[@BrucZhaoR](https://github.com/BruceZhaoR)的中文翻译 
 
 3. 感谢 Jekyll、Github Pages 和 Bootstrap!
-
-
-
