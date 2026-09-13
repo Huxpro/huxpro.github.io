@@ -5,70 +5,110 @@
   font-display: swap;
 }
 .navbar-custom .new-site-link {
+  --badge-expand: 1;
+  --wordmark-opacity: 1;
+  --wordmark-transform: translateY(0) scale(1);
+  --label-opacity: 0;
+  --label-transform: translateY(4px) scale(.96);
+  --arrow-shift: 0px;
   position: absolute;
   top: 12px;
   right: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
+  width: 88px;
   height: 36px;
-  padding: 0 13px;
   border: 0;
   border-radius: 999px;
-  background: rgba(20, 31, 39, .72);
-  background-image: linear-gradient(150deg, rgba(230,242,255,.12), transparent 65%);
-  -webkit-backdrop-filter: blur(16px) saturate(135%);
-  backdrop-filter: blur(16px) saturate(135%);
-  box-shadow: inset 0 1px 0 rgba(235,245,255,.22), inset 0 -1px 0 rgba(235,245,255,.06), 0 2px 8px rgba(0,0,0,.12);
-  color: #e9eff5;
+  color: #f0f3f5;
   text-decoration: none;
-  transition: background-color 160ms ease;
+}
+/* Glass and labels morph around fixed centres; neighbouring navigation stays put. */
+.new-site-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(240, 246, 250, .06);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
+  transform: scaleX(var(--badge-expand));
+  transform-origin: center;
+  transition: transform 280ms cubic-bezier(.22, 1, .36, 1);
+}
+.new-site-wordmark,
+.new-site-label {
+  position: absolute;
+  inset-block: 0;
+  /* Both labels share a fixed optical centre, compensated for the arrow. */
+  right: 18px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Hux Wordmark', monospace;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  transform-origin: center;
+  transition: opacity 180ms ease-out, transform 280ms cubic-bezier(.22, 1, .36, 1);
 }
 .new-site-wordmark {
-  font-family: 'Hux Wordmark', monospace;
   font-size: 15px;
-  font-weight: 400;
   letter-spacing: .02em;
-  line-height: 1;
+  opacity: var(--wordmark-opacity);
+  transform: var(--wordmark-transform);
 }
 .new-site-label {
-  color: #c1d9d8;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: .08em;
-  line-height: 1;
+  font-size: 11px;
+  letter-spacing: 0;
+  opacity: var(--label-opacity);
+  transform: var(--label-transform);
 }
-.new-site-link svg { color: #c1ced8; flex-shrink: 0; }
-.navbar-custom .new-site-link:hover { color: #f3f6fa; background-color: rgba(35,53,66,.88); }
-.navbar-custom .new-site-link:focus-visible { outline: 2px solid #7facbf; outline-offset: 4px; }
-.new-site-tooltip {
+.new-site-link svg {
   position: absolute;
-  top: 53px;
-  right: 20px;
-  z-index: 5;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: #202c35;
-  color: #e9eff5;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1.7;
-  visibility: hidden;
+  /* Superscript placement: close to the text, inset from the glass edge. */
+  right: 15px;
+  top: 7px;
+  opacity: .8;
+  transform: translateX(var(--arrow-shift));
+  transition: transform 280ms cubic-bezier(.22, 1, .36, 1);
 }
-.new-site-tooltip span { display: block; }
-.new-site-link:focus-visible + .new-site-tooltip,
-.new-site-tooltip:hover { visibility: visible; }
-@media (hover: hover) {
-  .new-site-link:hover + .new-site-tooltip { visibility: visible; }
+.navbar-custom .new-site-link:hover,
+.navbar-custom .new-site-link:focus { color: #f0f3f5; }
+.navbar-custom.invert .new-site-link,
+.navbar-custom.is-fixed .new-site-link { color: #26343b; }
+.navbar-custom.invert .new-site-link::before,
+.navbar-custom.is-fixed .new-site-link::before { background: rgba(38, 52, 59, .05); }
+.navbar-custom .new-site-link:focus-visible {
+  outline: 2px solid #7facbf;
+  outline-offset: 4px;
+  /* 88px → 100px: 6px on each side, without shifting the badge centre. */
+  --badge-expand: 1.13636364;
+  --wordmark-opacity: 0;
+  --wordmark-transform: translateY(-4px) scale(.96);
+  --label-opacity: 1;
+  --label-transform: translateY(0) scale(1);
+  --arrow-shift: 6px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .navbar-custom .new-site-link:hover {
+    --badge-expand: 1.13636364;
+    --wordmark-opacity: 0;
+    --wordmark-transform: translateY(-4px) scale(.96);
+    --label-opacity: 1;
+    --label-transform: translateY(0) scale(1);
+    --arrow-shift: 6px;
+  }
 }
 @media (min-width: 768px) {
-  .navbar-custom > .container-fluid { padding-right: 164px; }
+  .navbar-custom > .container-fluid { padding-right: 138px; }
 }
 @media (max-width: 767px) {
-  .navbar-custom .new-site-link { top: 10px; right: 64px; gap: 8px; padding: 0 12px; }
+  .navbar-custom .new-site-link { top: 10px; right: 64px; }
   .new-site-wordmark { font-size: 14px; }
-  .new-site-tooltip { right: 20px; top: 51px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .navbar-custom .new-site-link { transition: none; }
+  .new-site-link::before,
+  .new-site-link svg,
+  .new-site-wordmark,
+  .new-site-label { transition: none; }
 }
