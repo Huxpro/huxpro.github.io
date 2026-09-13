@@ -1,0 +1,54 @@
+/* Keep the new-site link visible outside the collapsible navigation. */
+.navbar-custom .new-site-link {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+.navbar-custom .new-site-link:hover { background: rgba(255,255,255,.12); }
+.navbar-custom .new-site-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+.navbar-custom.invert .new-site-link,
+.navbar-custom.is-fixed .new-site-link { color: #404040; }
+.navbar-custom.invert .new-site-link:hover,
+.navbar-custom.is-fixed .new-site-link:hover { background: rgba(0,0,0,.05); }
+.new-site-tooltip {
+  position: absolute;
+  top: 55px;
+  right: 20px;
+  z-index: 5;
+  padding: 10px 12px;
+  border-radius: 4px;
+  background: #25292b;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.7;
+  visibility: hidden;
+}
+.new-site-tooltip span { display: block; }
+.new-site-link:focus-visible + .new-site-tooltip,
+.new-site-tooltip:hover { visibility: visible; }
+@media (hover: hover) {
+  .new-site-link:hover + .new-site-tooltip { visibility: visible; }
+}
+@media (min-width: 768px) {
+  .navbar-custom > .container-fluid { padding-right: 133px; }
+}
+@media (max-width: 767px) {
+  .navbar-custom .new-site-link { top: 8px; right: 66px; }
+  .new-site-tooltip { right: 66px; top: 52px; }
+}
