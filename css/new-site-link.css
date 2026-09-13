@@ -1,39 +1,55 @@
-/* Keep the new-site link visible outside the collapsible navigation. */
+@font-face {
+  font-family: 'Hux Wordmark';
+  src: url('../fonts/jetbrains-mono-400.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
 .navbar-custom .new-site-link {
   position: absolute;
-  top: 10px;
+  top: 12px;
   right: 20px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-height: 40px;
-  padding: 0 12px;
-  border: 1px solid currentColor;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
+  gap: 9px;
+  height: 36px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(20, 31, 39, .72);
+  background-image: linear-gradient(150deg, rgba(230,242,255,.12), transparent 65%);
+  -webkit-backdrop-filter: blur(16px) saturate(135%);
+  backdrop-filter: blur(16px) saturate(135%);
+  box-shadow: inset 0 1px 0 rgba(235,245,255,.22), inset 0 -1px 0 rgba(235,245,255,.06), 0 2px 8px rgba(0,0,0,.12);
+  color: #e9eff5;
   text-decoration: none;
+  transition: background-color 160ms ease;
 }
-.navbar-custom .new-site-link:hover { background: rgba(255,255,255,.12); }
-.navbar-custom .new-site-link:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 4px;
+.new-site-wordmark {
+  font-family: 'Hux Wordmark', monospace;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: .02em;
+  line-height: 1;
 }
-.navbar-custom.invert .new-site-link,
-.navbar-custom.is-fixed .new-site-link { color: #404040; }
-.navbar-custom.invert .new-site-link:hover,
-.navbar-custom.is-fixed .new-site-link:hover { background: rgba(0,0,0,.05); }
+.new-site-label {
+  color: #c1d9d8;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  line-height: 1;
+}
+.new-site-link svg { color: #c1ced8; flex-shrink: 0; }
+.navbar-custom .new-site-link:hover { color: #f3f6fa; background-color: rgba(35,53,66,.88); }
+.navbar-custom .new-site-link:focus-visible { outline: 2px solid #7facbf; outline-offset: 4px; }
 .new-site-tooltip {
   position: absolute;
-  top: 55px;
+  top: 53px;
   right: 20px;
   z-index: 5;
   padding: 10px 12px;
-  border-radius: 4px;
-  background: #25292b;
-  color: #fff;
+  border-radius: 8px;
+  background: #202c35;
+  color: #e9eff5;
   font-size: 12px;
   font-weight: 400;
   line-height: 1.7;
@@ -46,9 +62,13 @@
   .new-site-link:hover + .new-site-tooltip { visibility: visible; }
 }
 @media (min-width: 768px) {
-  .navbar-custom > .container-fluid { padding-right: 133px; }
+  .navbar-custom > .container-fluid { padding-right: 164px; }
 }
 @media (max-width: 767px) {
-  .navbar-custom .new-site-link { top: 8px; right: 66px; }
-  .new-site-tooltip { right: 66px; top: 52px; }
+  .navbar-custom .new-site-link { top: 10px; right: 64px; gap: 8px; padding: 0 12px; }
+  .new-site-wordmark { font-size: 14px; }
+  .new-site-tooltip { right: 20px; top: 51px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .navbar-custom .new-site-link { transition: none; }
 }
